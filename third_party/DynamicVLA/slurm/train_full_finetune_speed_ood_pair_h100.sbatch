@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#SBATCH --job-name=dvla-ff-h100
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=64
+#SBATCH --gres=gpu:h100:8
+#SBATCH --time=72:00:00
+#SBATCH --mem=256GB
+#SBATCH --output=runs/slurm_logs/%x-%j.out
+#SBATCH --error=runs/slurm_logs/%x-%j.err
+
+set -euo pipefail
+
+cd /scratch/aparame/Dynamic_VLA/third_party/DynamicVLA
+mkdir -p runs/slurm_logs
+
+export NCCL_DEBUG=${NCCL_DEBUG:-WARN}
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-4}
+export TOKENIZERS_PARALLELISM=${TOKENIZERS_PARALLELISM:-false}
+export MALLOC_ARENA_MAX=${MALLOC_ARENA_MAX:-4}
+export DVLA_N_WORKERS=${DVLA_N_WORKERS:-4}
+export DVLA_DATALOADER_PREFETCH_FACTOR=${DVLA_DATALOADER_PREFETCH_FACTOR:-2}
+export DVLA_PERSISTENT_WORKERS=${DVLA_PERSISTENT_WORKERS:-true}
+
+export NPROC_PER_NODE=${NPROC_PER_NODE:-8}
+export AUTO_RESUME=${AUTO_RESUME:-1}
+export DVLA_BATCH_SIZE=${DVLA_BATCH_SIZE:-32}
+export DVLA_GRAD_ACCUM_STEPS=${DVLA_GRAD_ACCUM_STEPS:-8}
+export RUN_PREFETCH=${RUN_PREFETCH:-0}
+export RUN_TRAIN=${RUN_TRAIN:-1}
+
+bash scripts/train_full_finetune_speed_ood_pair.sh

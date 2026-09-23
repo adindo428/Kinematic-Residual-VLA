@@ -1,0 +1,82 @@
+# Full-parameter DOM speed-OOD fine-tuning config.
+# Uses the full cached DOM episode index span by default.
+# The speed split keeps train <= 0.12 m/s and held-out test >= 0.13 m/s.
+CONST:
+  EXP_NAME: dynamicvla_dom_full_finetune_speed_ood_0p12_0p13
+  N_WORKERS: 1
+  CKPT:
+
+DATASET:
+  NAME: hzxie/DOM
+  PIN_MEMORY: false
+  USE_DELTA_ACTION: true
+  IMG_SIZE:
+  TRAIN_EPISODE_RANGE: [0, 207305]
+  TEST_EPISODE_RANGE: [0, 207305]
+  SPEED_SPLIT:
+    ENABLED: true
+    VELOCITY_KEY: observation.environment_state
+    VELOCITY_SLICE: [6, 9]
+    SPEED_STAT: mean
+    TRAIN_MAX_MPS: 0.12
+    TEST_MIN_MPS: 0.13
+  DELTA_TIMESTAMPS:
+    observation: [-2, 0]
+  REQUIRED_FEATURES:
+    - observation.images.opst_cam
+    - observation.images.wrist_cam
+    - observation.state
+    - observation.environment_state
+    - action
+
+POLICY:
+  TYPE: dynamicvla
+  CHECKPOINT: hzxie/dynamic-vla-DOM
+  N_OBS_STEPS: 2
+  CHUNK_SIZE: 50
+  N_ACTION_STEPS: 20
+  RESIZE_IMGS_WITH_PADDING: [384, 384]
+  ATTENTION_MODE: cross_attn
+  VLM_MODEL_NAME: HuggingFaceTB/SmolLM2-360M
+  NUM_VLM_LAYERS: 16
+  NUM_EXPERT_SKIP_LAYERS: 0
+  TEMPORAL_FUSION: attn
+  FREEZE_VISION_MODEL: false
+  FREEZE_CONNECTOR: false
+  FREEZE_TEXT_MODEL: false
+  ENABLE_RESIDUAL_FLOW: false
+  USE_CHECKPOINT_NORMALIZATION: true
+
+DIR:
+  OUTPUT: ./runs
+
+WANDB:
+  ENABLED: true
+  PROJECT: Kinematic-Residual-VLA
+  ENTITY: aparame-clemson-university
+  MODE: online
+  RUN_ID: null
+  LOG_CODE: true
+  SYNC_TENSORBOARD: false
+
+TRAIN:
+  N_EPOCHS: 5
+  BATCH_SIZE: 16
+  GRAD_ACCUM_STEPS: 16
+  EVAL_TEST_DURING_TRAIN: false
+  CKPT_SAVE_FREQ:
+    EPOCH: 1
+    BATCH: 0
+  OPTIMIZER:
+    LR: 1.0e-5
+    EPS: 1.0e-8
+    WEIGHT_DECAY: 1.0e-10
+    BETAS: [0.9, 0.95]
+  LR_SCHEDULER:
+    NAME: cosine
+    N_WARMUP_STEPS: 1000
+  IMAGE_TRANSFORMS:
+    BRIGHTNESS: [0.8, 1.2]
+    CONTRAST: [0.8, 1.2]
+    SATURATION: [0.5, 1.5]
+    HUE: [-0.05, 0.05]

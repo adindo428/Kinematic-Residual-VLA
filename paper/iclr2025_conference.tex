@@ -1,0 +1,869 @@
+
+\documentclass{article} % For LaTeX2e
+\usepackage{iclr2025_conference,times}
+
+% Optional math commands from https://github.com/goodfeli/dlbook_notation.
+\input{math_commands.tex}
+
+\usepackage{hyperref}
+\usepackage{url}
+\newcommand{\EditAP}[1]{{\color{blue} #1}}
+\newcommand{\EditYW}[1]{{\color{red} #1}}
+\newcommand{\EditNL}[1]{{\color{green} #1}}
+
+\title{Kinematic Residual Flow Matching for Vision-Language-Action Policies}
+
+% Authors must not appear in the submitted version. They should be hidden
+% as long as the \iclrfinalcopy macro remains commented out below.
+% Non-anonymous submissions will be rejected without review.
+
+\author{Aditya Parameshwaran, Nianyi Li \& Yue Wang \thanks{ Use footnote for providing further information
+about author (webpage, alternative address)---\emph{not} for acknowledging
+funding agencies.  Funding acknowledgements go at the end of the paper.} \\
+Department of Mechanical Engineering\\
+Clemson University\\
+Clemson, SC 29634, USA \\
+\texttt{\{aparame,nianyil,yue\}@clemson.edu} \\
+\AND
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email}
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+%\iclrfinalcopy % Uncomment for camera-ready version, but NOT for submission.
+\begin{document}
+
+
+\maketitle
+
+\begin{abstract}
+Vision-language-action (VLA) policies generate actions from current observations, making them brittle for dynamic manipulation where objects move during execution. We propose \emph{Kinematic-Residual-VLA}, which decomposes action generation into an analytic kinematic branch and a learned residual branch. The kinematic branch projects estimated object velocity into the robot's action space to account for predictable target displacement; a Flow Matching network then learns only the residual manipulation behavior. We call this \emph{Kinematic Residual Flow Matching}. The key insight is that object velocity is not an arbitrary conditioning variable; it is a physical factor whose first-order effect on actions can be computed analytically and factored out of the learning problem. We formalize this decomposition using optimal transport: under a local additive velocity model, residualization aligns all velocity-conditioned action distributions to a common Wasserstein barycenter, strictly reduces target variance, and removes the transport cost of the velocity-induced displacement from the learned flow.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Robots that manipulate moving objects must solve two coupled problems: understanding \emph{what} action is appropriate, and predicting \emph{where the target will be} at contact time. Standard VLA policies address the first problem by conditioning on the current image, language instruction, and robot state \citep{brohan2023rt1,zitkovich2023rt2,kim2024openvla}. This works well in quasi-static scenes, but in tasks such as conveyor-belt picking, catching, or handovers, the observation can already be stale by the time the robot executes the decoded action. Minor latency issues in the VLA can cause task failure, thus making dynamic manipulation even more challenging than static ones.
+
+Current VLA research have attempted to solve the problem of stochasticity in the environment by developing asynchornous inference methods and applying changes to model architecture, that prefer speed over accuracy. A natural response is to provide the policy with predictive information: target velocity, future position estimates, or optical-flow features. However, enriching the input does not simplify the output distribution. We want to seek methods that understand the physical meaning of the object's instrinsics as they try and predict the actions to take so. By simply sending object instrinsics as priviliged input information, we are still not really disentagling its physical meaning within the VLA. 
+Majority of the VLA methods out there focus primiarily on static object scenes, or object scenes with simplistic stochasticity. Sometimes, the stochasticity is inherently generated due the VLA's prediction itself, which demands corrective actions by the next action chunk. The solution to most of these methods lies in transforming the model architectures in one way or the other, or finding innovative methods to conduct higher frequency inference.  
+
+A major aspect of our idea is to treat the object instrinsics as a guided residual/disturbance in the flow of the action predicted by the VLA. We want to disenta
+
+The central idea of this paper is to treat object velocity as a \emph{structured nuisance factor} rather than an opaque conditioning token. Over a short action-chunk horizon, object velocity induces a first-order displacement in the desired action that can be projected into the robot's action space via a kinematic map. \emph{Kinematic Residual VLA} removes this projected displacement from the training target, trains a Flow Matching network on the residual $\widetilde{\mathbf x}_1$, and adds the displacement back at inference time. The neural network models residual grasping behavior; the analytic branch handles predictable target motion.
+
+\paragraph{Contributions.}
+\begin{itemize}
+    \item We introduce \emph{Kinematic Residual Flow Matching} (KRFM), a conditional action-generation method that removes projected velocity displacement from the Flow Matching target and restores it via an analytic drift at inference.
+    \item We prove that, under a local additive velocity model, residualization collapses all velocity-conditioned action distributions to a common Wasserstein barycenter and strictly reduces action-target variance (Theorem~\ref{thm:velocity_residualization_reduces_variation}).
+
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Vision--language--action policies.}
+Large robot policies increasingly use vision-language pretraining and action-token decoding to transfer semantic knowledge into robotic control. RT-1 demonstrated large-scale transformer policies for real-world robot control \citep{brohan2023rt1}. RT-2 framed actions as tokens in a VLA model and showed transfer from web-scale vision-language data to manipulation \citep{zitkovich2023rt2}. OpenVLA provides an open-source VLA trained on broad robot datasets \citep{kim2024openvla}. ProactiveVLA is complementary to these systems: it does not require a new backbone, but changes the action expert so that predictable target motion is handled outside the neural residual generator.
+
+\paragraph{Generative action policies.}
+Diffusion Policy models visuomotor control as conditional denoising over action sequences \citep{chi2023diffusionpolicy}. Flow Matching trains continuous normalizing flows by regressing vector fields along probability paths \citep{lipman2023flow}. Conditional Flow Matching and minibatch optimal-transport variants connect simulation-free vector-field learning with transport paths between source and target distributions \citep{tong2024improving}. Rectified Flow emphasizes straight transport paths and fast generation \citep{liu2023rectified}. We build on this view by treating action generation as transport from a base action distribution to a demonstration action distribution. The difference is that our target distribution is first expressed in a moving, velocity-disentangled action frame.
+
+\paragraph{Predictive perception for dynamic manipulation.}
+The perception interface can be implemented with modern video and geometric modules. Monocular depth estimation provides metric cues \citep{yang2024depthanythingv2}; video segmentation provides target masks \citep{ravi2024sam2}; dense point tracking provides temporal correspondences \citep{karaev2024cotracker}; Lucas--Kanade optical flow and Kalman filtering provide lightweight velocity estimation and uncertainty propagation \citep{lucas1981iterative,kalman1960filtering}. Our theory assumes that such a module produces an estimated target velocity and covariance; it does not depend on a specific tracker.
+
+\paragraph{Optimal transport and variability reduction.}
+Wasserstein barycenters define central distributions for probability measures in optimal-transport geometry \citep{agueh2011barycenters,villani2009optimal,peyre2019computational}. Variability reduction with optimal transport uses transport maps to remove nuisance-factor variation by aligning conditional distributions to a common barycenter \citep{hung2022variability}. The dynamic Benamou--Brenier formulation identifies the squared $2$-Wasserstein distance with the minimum kinetic action of a mass-preserving probability flow \citep{benamou2000computational,ambrosio2008gradient}. We specialize these tools to a VLA-specific nuisance factor: target velocity.
+
+
+\section{Preliminaries: Flow Matching for Action Generation}
+\label{sec:prelim}
+
+Vision--language--action models condition on visual observations, language
+instructions, and robot state to predict continuous actions. Following recent
+flow-based VLA architectures \citep{black2025pi0}, we model the policy as a
+Conditional Flow Matching (CFM) generator over action chunks.
+
+Let the robot context be
+$\mathbf c=(\mathcal I,\ell,\mathbf q)$, where $\mathcal I$ denotes the
+visual observation, $\ell$ is the language instruction,
+and $\mathbf q$ is proprioception. The policy predicts a horizon-$H$ action
+chunk
+$\mathbf a_{1:H}\in\mathbb R^{H\times d_a}$.
+For the CFM formulation, we work with the flattened
+representation $\mathbf x\in\mathbb R^d$, where $d=H d_a$.
+
+CFM learns a time-dependent vector field
+$\mathbf u_\theta(\mathbf x_s,s,\mathbf c)$ that transports a base
+distribution $p_0$ (typically Gaussian) to the conditional action distribution.
+Given
+$\mathbf x_0\sim p_0$, $\mathbf x_1\sim p_{\mathrm{data}}(\cdot\mid\mathbf c)$,
+and $s\sim\mathcal U[0,1]$, the linear interpolation path is
+$\mathbf x_s=(1-s)\mathbf x_0+s\mathbf x_1$,
+with target vector field $\dot{\mathbf x}_s=\mathbf x_1-\mathbf x_0$.
+The CFM training objective is
+\begin{equation}
+    \mathcal L_{\mathrm{FM}}(\theta)
+    =
+    \mathbb E
+    \left[
+        \left\|
+            \mathbf u_\theta(\mathbf x_s,s,\mathbf c)
+            -
+            (\mathbf x_s-\mathbf x_0)
+        \right\|_2^2
+    \right],
+    \label{eq:fm_loss}
+\end{equation}
+where the expectation is over
+$\mathbf x_0\sim p_0$, $\mathbf x_1\sim p_{\mathrm{data}}(\cdot\mid\mathbf c)$,
+and $s\sim\mathcal U[0,1]$ \citep{lipman2023flow,tong2023conditional}.
+At inference, one samples $\mathbf x_0\sim p_0$ and integrates
+$d\mathbf x_s/ds=\mathbf u_\theta(\mathbf x_s,s,\mathbf c)$ from $s=0$ to
+$s=1$ to obtain the action chunk.
+
+
+\section{Kinematic Residual Flow Matching}
+\label{sec:method}
+
+We now present our method. Section~\ref{subsec:problem_setting} defines the
+dynamic manipulation setting and our core modeling assumption.
+Sections~\ref{subsec:kinematic_projection}--\ref{subsec:residual_target}
+introduce the kinematic velocity projection and the residual training target.
+Section~\ref{subsec:variance_reduction} gives the variance-reduction analysis,
+and Section~\ref{subsec:inference} describes inference.
+
+\subsection{Problem Setting}
+\label{subsec:problem_setting}
+
+We consider manipulation tasks where the target object may move during
+execution. In addition to the standard VLA context $\mathbf c$, each training
+demonstration includes an object velocity estimate $\mathbf v^{o}$ and an
+expert action chunk. The dataset is
+\[
+    \mathcal D = \left\{
+        \left(\mathbf c^{(i)},\, \mathbf v^{o(i)},\, \mathbf x_1^{(i)}\right)
+    \right\}_{i=1}^N,
+\]
+where $\mathbf x_1^{(i)}$ is the flattened action chunk from demonstration $i$.
+The supervised target is drawn from a velocity-conditioned distribution
+$p_{\mathrm{data}}(\mathbf x \mid \mathbf c, \mathbf v^{o})$.
+
+A standard Flow Matching VLA treats $\mathbf v^{o}$ as part of the conditioning
+and learns a vector field from $p_0$ to
+$p_{\mathrm{data}}(\mathbf x \mid \mathbf c, \mathbf v^{o})$. This is
+expressive but requires the network to explain two distinct sources of
+variation: the residual manipulation behavior (grasp geometry, approach
+direction, contact strategy) and the predictable displacement from object
+motion. Because the same grasp can produce different action chunks at different
+object velocities, this velocity variation inflates the target distribution
+unnecessarily.
+
+We collect $\mathbf v^{o}$ as explicit side information because it is a
+\emph{structured explanatory variable}: it accounts for a predictable source of
+variation in the demonstrated actions. Rather than treating it as an opaque
+conditioning token, we use it to transform the training target directly
+\citep{vapnik2009lupi,chen2020learningbycheating}.
+
+\paragraph{Modeling assumption.}
+Over a short action-chunk horizon, we model the effect of object velocity as an
+additive displacement in the action space. For a fixed context $\mathbf c$:
+\begin{equation}
+    p_{\mathrm{data}}(\mathbf x \mid \mathbf c, \mathbf v^{o})
+    \approx
+    \left(\tau_{d_{\mathbf c}(\mathbf v^{o})}\right)_{\#}
+    p_{\mathrm{res}}(\mathbf x \mid \mathbf c),
+    \qquad
+    \tau_{\mathbf b}(\mathbf x) = \mathbf x + \mathbf b,
+    \label{eq:velocity_pushforward_model}
+\end{equation}
+where $p_{\mathrm{res}}(\mathbf x \mid \mathbf c)$ is the residual action
+distribution in a locally static frame, and
+$d_{\mathbf c}(\mathbf v^{o}) \in \mathbb R^d$ is the action-space displacement
+induced by object velocity. The residual distribution may be multimodal (e.g.,
+multiple grasp modes). The role of this model is not to remove such
+multimodality, but to prevent the same residual modes from appearing
+artificially spread across different object velocities.
+
+\subsection{Kinematic Velocity Projection}
+\label{subsec:kinematic_projection}
+
+The object velocity $\mathbf v^{o}$ is measured in an object, camera, or world
+frame, while the Flow Matching target $\mathbf x_1$ lives in the flattened
+action-chunk space. We define a context-dependent projection
+$\Phi_{\mathbf c}:\mathbb R^{d_o}\rightarrow\mathbb R^d$ that maps object
+velocity into the coordinates of the action chunk. The exact form depends on the
+action representation.
+
+For Cartesian end-effector actions, $\Phi_{\mathbf c}$ can be implemented as a
+horizon-lifted map that repeats or schedules the desired end-effector
+compensation across the chunk. For joint-space actions, a local Jacobian model
+gives
+\begin{equation}
+    \Phi_{\mathbf c}(\mathbf v^{o})
+    =
+    L_H J^\dagger(\mathbf q) R_{\mathbf c}\mathbf v^{o},
+    \label{eq:kinematic_projection}
+\end{equation}
+where $R_{\mathbf c}$ maps the object velocity into the desired end-effector
+compensation frame, $J^\dagger(\mathbf q)$ is the manipulator Jacobian
+pseudoinverse, and $L_H$ lifts an instantaneous joint velocity into an
+$H$-step action chunk \citep{nakamura1991advanced,siciliano2009robotics}. The
+projection is local: it is intended to be accurate over the short horizon of an
+action chunk, not over an entire long-horizon manipulation episode.
+
+We convert this projected velocity into an action-space displacement using a
+scalar schedule $\lambda(s)$ along the generative flow time:
+\begin{equation}
+    d_{\mathbf c}(\mathbf v^{o})
+    =
+    \Lambda \Phi_{\mathbf c}(\mathbf v^{o}),
+    \qquad
+    \Lambda=\int_0^1 \lambda(s)\,ds .
+    \label{eq:integrated_velocity_displacement}
+\end{equation}
+The scale factors needed to convert physical velocity into chunk displacement,
+such as the control period or horizon duration, are absorbed into
+$\Phi_{\mathbf c}$ or $\Lambda$. This keeps the notation independent of whether
+the action chunk is represented as Cartesian deltas, joint deltas, velocities,
+or normalized action tokens.
+
+\subsection{Residual Training Target}
+\label{subsec:residual_target}
+
+For a fixed context $\mathbf c$, let $\mathbf V^{o}$ denote the random object
+velocity in the dataset. We center the kinematic displacement as
+\[
+    \bar d_{\mathbf c}
+    =
+    \mathbb E[d_{\mathbf c}(\mathbf V^{o})\mid\mathbf c],
+    \qquad
+    \Delta_{\mathbf c}(\mathbf v^{o})
+    =
+    d_{\mathbf c}(\mathbf v^{o})-\bar d_{\mathbf c}.
+\]
+The residual training target is then
+\begin{equation}
+    \widetilde{\mathbf x}_1
+    =
+    \mathbf x_1-\Delta_{\mathbf c}(\mathbf v^{o})
+    =
+    \mathbf x_1-d_{\mathbf c}(\mathbf v^{o})+\bar d_{\mathbf c}.
+    \label{eq:residual_target}
+\end{equation}
+The centering term $\bar d_{\mathbf c}$ is not required to construct a valid
+residual target: in practice, one may simply train on
+$\mathbf x_1-d_{\mathbf c}(\mathbf v^o)$, which already removes the
+velocity-dependent displacement from the supervision signal. Its role is instead
+statistical. If the average kinematic displacement is nonzero under context
+$\mathbf c$, subtracting $d_{\mathbf c}(\mathbf v^o)$ alone shifts the
+conditional mean of the target distribution:
+\[
+    \mathbb E[\mathbf x_1-d_{\mathbf c}(\mathbf V^o)\mid \mathbf c]
+    =
+    \mathbb E[\mathbf x_1\mid \mathbf c]
+    -
+    \mathbb E[d_{\mathbf c}(\mathbf V^o)\mid \mathbf c].
+\]
+Adding back $\bar d_{\mathbf c}$ makes the residualization mean-preserving,
+since
+\[
+    \mathbb E[\widetilde{\mathbf x}_1\mid \mathbf c]
+    =
+    \mathbb E[\mathbf x_1\mid \mathbf c].
+\]
+Thus, centering removes the velocity-induced fluctuation
+$d_{\mathbf c}(\mathbf V^o)-\bar d_{\mathbf c}$ while keeping the residual
+target at the same conditional barycenter as the original action distribution.
+This is desirable statistically because the learned flow models a lower-variance
+residual distribution without being forced to compensate for an artificial mean
+shift. When the velocity-induced displacement is already centered within a task,
+or when estimating $\bar d_{\mathbf c}$ is inconvenient, setting
+$\bar d_{\mathbf c}=0$ remains a valid and simple implementation choice.
+
+The residual Flow Matching path uses the same base sample $\mathbf x_0\sim p_0$
+as the standard VLA objective, but it connects $\mathbf x_0$ to
+$\widetilde{\mathbf x}_1$ rather than to the raw target $\mathbf x_1$:
+\[
+    \widetilde{\mathbf x}_s
+    =
+    (1-s)\mathbf x_0+s\widetilde{\mathbf x}_1,
+    \qquad
+    s\sim\mathcal U[0,1].
+\]
+The Kinematic Residual Flow Matching loss is
+\begin{equation}
+    \mathcal L_{\mathrm{KRFM}}(\theta)
+    =
+    \mathbb E
+    \left[
+        \left\|
+            \mathbf u_\theta(\widetilde{\mathbf x}_s,s,\mathbf c)
+            -
+            (\widetilde{\mathbf x}_s-\mathbf x_0)
+        \right\|_2^2
+    \right].
+    \label{eq:krfm_loss}
+\end{equation}
+Compared with direct Flow Matching on $\mathbf x_1$, this objective changes the
+target distribution rather than merely adding another conditioning variable. The
+network is trained to model the residual action distribution, while the
+kinematic branch accounts for the predictable object-motion displacement.
+
+\subsection{Inference}
+\label{subsec:inference}
+
+At inference time, the model samples a residual action in the
+velocity-disentangled frame. Starting from $\mathbf x_0\sim p_0$, we integrate
+\[
+    \frac{d\widetilde{\mathbf x}_s}{ds}
+    =
+    \mathbf u_\theta(\widetilde{\mathbf x}_s,s,\mathbf c),
+    \qquad
+    \widetilde{\mathbf x}_{s=0}=\mathbf x_0,
+\]
+and obtain $\widehat{\widetilde{\mathbf x}}_1$ at $s=1$. The final action chunk
+is recovered by adding back the centered kinematic displacement:
+\begin{equation}
+    \widehat{\mathbf x}_1
+    =
+    \widehat{\widetilde{\mathbf x}}_1
+    +
+    \Delta_{\mathbf c}(\mathbf v^{o})
+    =
+    \widehat{\widetilde{\mathbf x}}_1
+    +
+    d_{\mathbf c}(\mathbf v^{o})
+    -
+    \bar d_{\mathbf c}.
+    \label{eq:residual_to_raw_inference}
+\end{equation}
+The result is unflattened into an action chunk and executed in a
+receding-horizon manner. The neural vector field evolves the residual
+coordinate, while the kinematic branch places the generated action back into
+the original coordinates using the observed object velocity.
+
+
+
+\subsection{Variance Reduction Analysis}
+\label{subsec:variance_reduction}
+
+We now formalize the variance-reduction effect of kinematic residualization.
+The analysis is local: it is not intended as a global model of manipulation
+dynamics, but rather as a short-horizon approximation over one action chunk. In
+this regime, constant-velocity prediction and local kinematic projection provide
+a first-order description of how object motion shifts the expert action target.
+
+\begin{assumption}[Local residual-plus-kinematic action model]
+\label{ass:local_residual_kinematic_model}
+Fix a context value $\mathbf c$. The raw expert action target admits the
+decomposition
+\begin{equation}
+    \mathbf X_1
+    =
+    \mathbf R_{\mathbf c}
+    +
+    d_{\mathbf c}(\mathbf V^{o}),
+    \label{eq:local_residual_kinematic_model}
+\end{equation}
+where $\mathbf R_{\mathbf c}$ is a residual action random variable,
+$d_{\mathbf c}(\mathbf V^{o})$ is the projected object-velocity displacement in
+the action space, both terms have finite second moments, and
+\[
+    \mathbf R_{\mathbf c}
+    \perp\!\!\!\perp
+    \mathbf V^{o}
+    \mid
+    \mathbf c.
+\]
+\end{assumption}
+
+Assumption~\ref{ass:local_residual_kinematic_model} states that, conditioned on
+the context, the raw action target consists of two components: a residual
+manipulation component and a predictable kinematic displacement induced by
+object velocity. The residual component may still be complex and multimodal; it
+may encode different grasps, contact strategies, approach directions, or other
+task-dependent choices. The assumption only requires that object velocity acts
+locally as an additive shift of the action chunk after projection through
+$d_{\mathbf c}(\cdot)$. Thus, the same residual manipulation modes should not
+need to be relearned as separate action modes for every observed object
+velocity.
+
+For a generic action target $\mathbf Y$, let
+\[
+    \eta_{\mathbf v^{o}}^{\mathbf Y}
+    :=
+    \mathcal L(\mathbf Y \mid \mathbf V^{o}=\mathbf v^{o},\mathbf c)
+\]
+denote its velocity-conditioned law. Following Wasserstein barycenters and
+optimal-transport variability reduction
+\citep{agueh2011barycenters,villani2009optimal,hung2022variability}, define the
+velocity-induced OT variability of $\mathbf Y$ as
+\begin{equation}
+    \mathcal V_{\mathrm{OT}}(\mathbf Y;\mathbf V^{o}\mid\mathbf c)
+    :=
+    \inf_{\nu\in\mathcal P_2(\mathbb R^d)}
+    \mathbb E
+    \left[
+        W_2^2
+        \left(
+            \eta_{\mathbf V^{o}}^{\mathbf Y},
+            \nu
+        \right)
+        \mid \mathbf c
+    \right].
+    \label{eq:velocity_ot_variability}
+\end{equation}
+This quantity measures how far the conditional action distribution moves as the
+object velocity changes.
+
+\begin{theorem}[Object-velocity residualization reduces target variation]
+\label{thm:velocity_residualization_reduces_variation}
+Under Assumption~\ref{ass:local_residual_kinematic_model}, define the
+residualized target
+\begin{equation}
+    \widetilde{\mathbf X}_1
+    =
+    \mathbf X_1
+    -
+    d_{\mathbf c}(\mathbf V^{o})
+    +
+    \bar d_{\mathbf c},
+    \qquad
+    \bar d_{\mathbf c}
+    =
+    \mathbb E
+    [
+        d_{\mathbf c}(\mathbf V^{o})
+        \mid
+        \mathbf c
+    ].
+    \label{eq:residualized_target_variance_analysis}
+\end{equation}
+Then all velocity-conditioned residual target laws are identical:
+\begin{equation}
+    \mathcal L
+    \left(
+        \widetilde{\mathbf X}_1
+        \mid
+        \mathbf V^{o}=\mathbf v^{o},
+        \mathbf c
+    \right)
+    =
+    \mathcal L
+    \left(
+        \mathbf R_{\mathbf c}
+        +
+        \bar d_{\mathbf c}
+        \mid
+        \mathbf c
+    \right)
+    \quad
+    \text{for all } \mathbf v^{o}.
+    \label{eq:residual_laws_identical}
+\end{equation}
+Consequently,
+\begin{equation}
+    \mathcal V_{\mathrm{OT}}
+    (
+        \widetilde{\mathbf X}_1;
+        \mathbf V^{o}
+        \mid
+        \mathbf c
+    )
+    =
+    0.
+    \label{eq:residual_ot_zero}
+\end{equation}
+In contrast, the raw target satisfies
+\begin{equation}
+    \mathcal V_{\mathrm{OT}}
+    (
+        \mathbf X_1;
+        \mathbf V^{o}
+        \mid
+        \mathbf c
+    )
+    =
+    \mathbb E
+    \left[
+        \left\|
+            d_{\mathbf c}(\mathbf V^{o})
+            -
+            \bar d_{\mathbf c}
+        \right\|_2^2
+        \mid
+        \mathbf c
+    \right].
+    \label{eq:ot_variability_value}
+\end{equation}
+Moreover, the residualized target covariance satisfies
+\begin{equation}
+    \operatorname{tr}
+    \operatorname{Cov}
+    (
+        \widetilde{\mathbf X}_1
+        \mid
+        \mathbf c
+    )
+    =
+    \operatorname{tr}
+    \operatorname{Cov}
+    (
+        \mathbf X_1
+        \mid
+        \mathbf c
+    )
+    -
+    \operatorname{tr}
+    \operatorname{Cov}
+    (
+        d_{\mathbf c}(\mathbf V^{o})
+        \mid
+        \mathbf c
+    ).
+    \label{eq:covariance_reduction}
+\end{equation}
+Thus, whenever the projected object-velocity displacement has nonzero
+conditional covariance, the residualized target has strictly smaller total
+variance than the raw action target.
+\end{theorem}
+
+\paragraph{Interpretation.}
+The baseline VLA is trained on raw expert actions $\mathbf X_1$, whose
+variation reflects both residual manipulation choices and object-motion
+compensation. Under Assumption~\ref{ass:local_residual_kinematic_model}, object
+velocity creates translated copies of the same residual action distribution.
+Kinematic residualization subtracts the velocity-specific displacement
+$d_{\mathbf c}(\mathbf V^{o})$ and adds back its conditional mean
+$\bar d_{\mathbf c}$, thereby aligning these translated distributions at a
+common center. The residualized target therefore removes variation that is
+explained by first-order object motion, while preserving the residual
+manipulation distribution that the policy must still learn. For a Flow Matching
+VLA, this means that the terminal action distribution used for training has less
+velocity-induced spread; the learned generative velocity field no longer needs
+to model repeated, velocity-shifted copies of the same manipulation modes.
+
+\begin{proof}
+Let
+\[
+    \mathbf D_{\mathbf c}
+    :=
+    d_{\mathbf c}(\mathbf V^{o}).
+\]
+By Assumption~\ref{ass:local_residual_kinematic_model},
+\[
+    \mathbf X_1
+    =
+    \mathbf R_{\mathbf c}
+    +
+    \mathbf D_{\mathbf c}.
+\]
+Substituting this expression into
+Eq.~\eqref{eq:residualized_target_variance_analysis} gives
+\[
+    \widetilde{\mathbf X}_1
+    =
+    \mathbf R_{\mathbf c}
+    +
+    \mathbf D_{\mathbf c}
+    -
+    \mathbf D_{\mathbf c}
+    +
+    \bar d_{\mathbf c}
+    =
+    \mathbf R_{\mathbf c}
+    +
+    \bar d_{\mathbf c}.
+\]
+Since
+$\mathbf R_{\mathbf c}\perp\!\!\!\perp \mathbf V^{o}\mid\mathbf c$, the
+conditional law of $\mathbf R_{\mathbf c}$ does not depend on the realized
+velocity value $\mathbf v^{o}$. Hence, for every $\mathbf v^{o}$,
+\[
+    \mathcal L
+    \left(
+        \widetilde{\mathbf X}_1
+        \mid
+        \mathbf V^{o}=\mathbf v^{o},
+        \mathbf c
+    \right)
+    =
+    \mathcal L
+    \left(
+        \mathbf R_{\mathbf c}
+        +
+        \bar d_{\mathbf c}
+        \mid
+        \mathbf c
+    \right),
+\]
+which proves Eq.~\eqref{eq:residual_laws_identical}. Since all
+velocity-conditioned residual laws are identical, choosing this common law as
+the barycenter in Eq.~\eqref{eq:velocity_ot_variability} yields
+Eq.~\eqref{eq:residual_ot_zero}.
+
+It remains to compute the OT variability of the raw target. Let
+\[
+    \rho_{\mathbf c}
+    :=
+    \mathcal L(\mathbf R_{\mathbf c}\mid\mathbf c).
+\]
+For each velocity value $\mathbf v^{o}$, the raw conditional law is
+\[
+    \mathcal L
+    (
+        \mathbf X_1
+        \mid
+        \mathbf V^{o}=\mathbf v^{o},
+        \mathbf c
+    )
+    =
+    (T_{d_{\mathbf c}(\mathbf v^{o})})_{\#}\rho_{\mathbf c},
+\]
+where $T_{\mathbf a}(\mathbf z)=\mathbf z+\mathbf a$ denotes translation by
+$\mathbf a$. Thus, the raw velocity-conditioned laws are translations of the
+same residual law. Taking
+\[
+    \nu^\star
+    =
+    (T_{\bar d_{\mathbf c}})_{\#}\rho_{\mathbf c}
+\]
+gives the upper bound
+\[
+    W_2^2
+    \left(
+        (T_{d_{\mathbf c}(\mathbf v^{o})})_{\#}\rho_{\mathbf c},
+        (T_{\bar d_{\mathbf c}})_{\#}\rho_{\mathbf c}
+    \right)
+    \le
+    \left\|
+        d_{\mathbf c}(\mathbf v^{o})
+        -
+        \bar d_{\mathbf c}
+    \right\|_2^2.
+\]
+This bound is tight because the optimal coupling between two translated copies
+of the same distribution is obtained by applying the corresponding translation.
+Therefore,
+\[
+    \mathcal V_{\mathrm{OT}}
+    (
+        \mathbf X_1;
+        \mathbf V^{o}
+        \mid
+        \mathbf c
+    )
+    \le
+    \mathbb E
+    \left[
+        \left\|
+            d_{\mathbf c}(\mathbf V^{o})
+            -
+            \bar d_{\mathbf c}
+        \right\|_2^2
+        \mid
+        \mathbf c
+    \right].
+\]
+Conversely, for any $\nu\in\mathcal P_2(\mathbb R^d)$ with mean
+$m_{\nu}$, the Wasserstein distance lower bounds the squared distance between
+means:
+\[
+    W_2^2
+    \left(
+        (T_{d_{\mathbf c}(\mathbf V^{o})})_{\#}\rho_{\mathbf c},
+        \nu
+    \right)
+    \ge
+    \left\|
+        m_{\rho_{\mathbf c}}
+        +
+        d_{\mathbf c}(\mathbf V^{o})
+        -
+        m_{\nu}
+    \right\|_2^2,
+\]
+where $m_{\rho_{\mathbf c}}$ is the mean of $\rho_{\mathbf c}$. Minimizing the
+right-hand side over $m_{\nu}$ yields
+$m_{\nu}=m_{\rho_{\mathbf c}}+\bar d_{\mathbf c}$ and gives the lower bound
+\[
+    \mathbb E
+    \left[
+        \left\|
+            d_{\mathbf c}(\mathbf V^{o})
+            -
+            \bar d_{\mathbf c}
+        \right\|_2^2
+        \mid
+        \mathbf c
+    \right].
+\]
+The matching upper and lower bounds prove
+Eq.~\eqref{eq:ot_variability_value}.
+
+Finally, using the additive decomposition and conditional independence,
+\[
+    \operatorname{Cov}
+    (
+        \mathbf X_1
+        \mid
+        \mathbf c
+    )
+    =
+    \operatorname{Cov}
+    (
+        \mathbf R_{\mathbf c}
+        \mid
+        \mathbf c
+    )
+    +
+    \operatorname{Cov}
+    (
+        d_{\mathbf c}(\mathbf V^{o})
+        \mid
+        \mathbf c
+    ).
+\]
+On the other hand,
+\[
+    \widetilde{\mathbf X}_1
+    =
+    \mathbf R_{\mathbf c}
+    +
+    \bar d_{\mathbf c},
+\]
+and $\bar d_{\mathbf c}$ is constant conditioned on $\mathbf c$, so
+\[
+    \operatorname{Cov}
+    (
+        \widetilde{\mathbf X}_1
+        \mid
+        \mathbf c
+    )
+    =
+    \operatorname{Cov}
+    (
+        \mathbf R_{\mathbf c}
+        \mid
+        \mathbf c
+    ).
+\]
+Subtracting these two identities and taking traces gives
+Eq.~\eqref{eq:covariance_reduction}. Since covariance matrices are positive
+semidefinite, a nonzero
+$\operatorname{Cov}(d_{\mathbf c}(\mathbf V^{o})\mid\mathbf c)$ has positive
+trace, yielding strict reduction in total variance.
+\end{proof}
+
+
+\section{Experiments}
+\label{sec:experiments}
+
+This draft does not report unmeasured results. Instead, it specifies the experiment structure needed for an ICLR-style empirical section. The evaluation should test whether the theoretical simplification produces measurable gains in dynamic manipulation.
+
+\subsection{Tasks and datasets}
+
+The core tasks should isolate target-motion generalization.
+\begin{itemize}
+    \item \textbf{Conveyor grasping:} objects move laterally at held-out speeds; success requires predicting contact position.
+    \item \textbf{Dynamic handover:} a human or moving platform changes target pose during robot reach.
+    \item \textbf{Interception/catching:} the robot must meet an object at a future point under time constraints.
+    \item \textbf{Quasi-static control:} a control setting with near-zero velocity, used to verify that the analytic drift does not degrade standard manipulation.
+\end{itemize}
+
+Training and test splits should separate object identity, language instruction templates, and velocity magnitudes. The most important split is a held-out velocity split: train on one range of speeds and evaluate on slower, faster, and out-of-distribution speeds.
+
+\subsection{Baselines}
+
+\begin{table}[H]
+\centering
+\caption{Recommended baselines. The key comparison is whether velocity is only given as an input token or also used to transform the action target.}
+\label{tab:baselines}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth}>{\raggedright\arraybackslash}p{0.62\linewidth}@{}}
+\toprule
+Baseline & Purpose \\
+\midrule
+Current-frame VLA & Tests the cost of ignoring target motion. \\
+Belief-token VLA & Receives future belief tokens but trains on raw $\vect A_1$; tests whether conditioning alone is enough. \\
+Velocity-conditioned Flow Matching & Concatenates $\vect v$ to the Flow Matching context but does not residualize targets. \\
+Oracle-velocity ProactiveVLA & Uses ground-truth velocity in $\Phi_c(\vect v)$; isolates action-expert performance from perception noise. \\
+Estimated-velocity ProactiveVLA & Uses the full predictive perception stack; measures end-to-end performance. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Metrics}
+
+The main metrics should be success rate, contact-time position error, time-to-contact error, gripper miss rate, collision rate, action smoothness, and inference latency. Because the method is motivated by target-distribution simplification, the experiments should also report diagnostic statistics:
+\begin{equation}
+    \widehat{\Tr\Cov}(\vect A_1),
+    \qquad
+    \widehat{\Tr\Cov}(\widetilde{\vect A}_1),
+    \qquad
+    \widehat{\E}\|d_c(\vect V)-\bar d_c\|_2^2.
+    \label{eq:empirical_diagnostics}
+\end{equation}
+These diagnostics connect the empirical section to Theorem~\ref{thm:velocity_residualization_reduces_variation}.
+
+\subsection{Ablations}
+
+The ablations should test each modeling choice rather than only the full system.
+\begin{itemize}
+    \item Remove residualization but keep velocity conditioning.
+    \item Remove the analytic drift at inference time.
+    \item Use uncentered drift $d_c(\vect v)$ rather than centered drift $\Delta_c(\vect v)$.
+    \item Replace Jacobian projection with a learned MLP projection.
+    \item Vary the velocity noise injected into $\vect v_t $ to test robustness to perception errors.
+    \item Remove the uncertainty-aware gripper loss.
+\end{itemize}
+The expected failure mode is specific: models trained on raw $\vect A_1$ should degrade more strongly under held-out velocity magnitudes because their learned transport must extrapolate the velocity-induced component.
+
+\section{Limitations}
+\label{sec:limitations}
+
+The local additive model $\vect A_1=\vect A^{\mathrm{res}}+d_c(\vect V)$ is an approximation. It is most appropriate for short-horizon motion where target velocity is nearly constant and the manipulator Jacobian does not change sharply. It can fail when acceleration, rolling dynamics, deformable objects, occlusion-induced identity switches, joint limits, collision constraints, or contact-rich dynamics dominate the action target.
+
+The independence assumption in Assumption~\ref{ass:local_residual_kinematic_model} is also idealized. High velocity can change the preferred grasp timing, approach direction, and safety margin. In that case, velocity is not purely a nuisance factor. The residual neural field can still model velocity-dependent residual effects if velocity or predicted beliefs are provided as auxiliary context, but the exact zero-variability conclusion should be interpreted as a clean limiting case rather than an unconditional guarantee.
+
+Finally, ProactiveVLA depends on velocity estimation. If the perception module is biased, the analytic drift can move the sampled action in the wrong direction. This motivates the oracle-velocity and estimated-velocity comparisons in Section~\ref{sec:experiments}, along with robustness tests under velocity noise.
+
+\section{Reproducibility Statement}
+\label{sec:reproducibility}
+
+The paper specifies all random variables, action-space transformations, Flow Matching losses, and sampling equations in Sections~\ref{sec:prelim}--\ref{sec:method}. The theoretical assumptions and theorem statements are in Section~\ref{sec:method}, with complete proofs in Appendix~\ref{app:proofs}. The empirical protocol, baselines, metrics, and ablations are specified in Section~\ref{sec:experiments}. A final submission should add dataset details, hyperparameters, random seeds, compute budget, and code for the perception and action modules.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+ProactiveVLA reframes dynamic VLA control as action generation in a moving action frame. Instead of asking a neural generator to learn both residual grasping behavior and predictable target motion, the method projects velocity $\vect v$ into action space and injects it as an analytic drift, while Flow Matching learns the residual target $\widetilde{\vect A}_1$. The optimal-transport analysis clarifies why this should help: residualization aligns velocity-conditioned action distributions at a common barycenter, reduces target covariance, and removes the corresponding Benamou--Brenier kinetic action from the learned transport. The resulting paper structure makes the main claim testable: if target velocity is observable and locally projectable into the robot action space, then factoring it out should improve generalization to unseen target speeds.
+
+\subsubsection*{Author Contributions}
+If you'd like to, you may include  a section for author contributions as is done
+in many journals. This is optional and at the discretion of the authors.
+
+\subsubsection*{Acknowledgments}
+Use unnumbered third level headings for the acknowledgments. All
+acknowledgments, including those to funding agencies, go at the end of the paper.
+
+
+\bibliography{iclr2025_conference}
+\bibliographystyle{iclr2025_conference}
+
+\appendix
+\section{Appendix}
+You may include other additional sections here.
+
+
+\end{document}
