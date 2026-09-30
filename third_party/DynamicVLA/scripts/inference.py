@@ -449,6 +449,26 @@ def get_test_stats(test_results):
     return stats
 
 
+def save_test_results(test_results, output_dir, alias):
+    if output_dir is None:
+        return
+    os.makedirs(output_dir, exist_ok=True)
+    results = {
+        "variant": alias,
+        "environments": {
+            env: {
+                "trials": len(trials),
+                "successes": sum(bool(trial["success"]) for trial in trials),
+                "success_rate": sum(bool(trial["success"]) for trial in trials) / len(trials),
+            }
+            for env, trials in test_results.items()
+            if trials
+        },
+    }
+    with open(os.path.join(output_dir, "closed_loop_results.json"), "w") as fp:
+        json.dump(results, fp, indent=2, sort_keys=True)
+
+
 def main(
     vla_weights,
     vla_alias,
@@ -509,6 +529,7 @@ def main(
     )
     logging.info("Evaluation completed. Total tests run: %d" % n_tests)
     logging.info("Test results: %s" % get_test_stats(test_results))
+    save_test_results(test_results, output_dir, vla_alias or os.path.basename(vla_weights))
 
 
 if __name__ == "__main__":

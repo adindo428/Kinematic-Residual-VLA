@@ -617,6 +617,7 @@ def main(simulation_app, args):
 
         # Say goodbye to the VLA client
         obs_socket.send_pyobj({"vla": vla_name, "success_rates": success_rates})
+        break
 
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ class SummaryWriter(object):
             for k, v in scalars.items():
                 self.writer.add_scalar(k, v, step)
         else:
-            self.writer.log(scalars)
+            self.writer.log(scalars, step=step)
 
     def _get_tb_image(self, image):
         # Related to: utils.helpers.tensor_to_image

@@ -7,13 +7,12 @@
 #SBATCH --gres=gpu:h100:8
 #SBATCH --time=72:00:00
 #SBATCH --mem=512GB
-#SBATCH --output=runs/slurm_logs/%x-%j.out
-#SBATCH --error=runs/slurm_logs/%x-%j.err
+#SBATCH --output=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.out
+#SBATCH --error=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.err
 
 set -euo pipefail
 
-cd "${SLURM_SUBMIT_DIR:?Submit from the DynamicVLA project root}"
-mkdir -p runs/slurm_logs
+cd /home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA
 
 if ! command -v nvidia-smi >/dev/null 2>&1; then
   echo "[paired-velocity] nvidia-smi is required for GPU auto-tuning." >&2

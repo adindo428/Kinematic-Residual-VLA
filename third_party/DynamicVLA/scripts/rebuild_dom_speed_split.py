@@ -26,7 +26,21 @@ def main():
     parser.add_argument('--workers', type=int, default=8)
     args = parser.parse_args()
     if args.output.exists():
-        raise SystemExit(f'Refusing to overwrite existing split: {args.output}')
+        existing = json.loads(args.output.read_text())
+        metadata = existing.get('metadata', {})
+        train, test = existing.get('train', []), existing.get('test', [])
+        if (
+            metadata.get('train_max_mps') != 0.10
+            or metadata.get('test_min_mps') != 0.18
+            or len(train) != 3810
+            or len(test) != 119778
+            or len(set(train)) != len(train)
+            or len(set(test)) != len(test)
+            or not set(train).isdisjoint(test)
+        ):
+            raise SystemExit(f'Existing split failed validation: {args.output}')
+        print(f'Validated existing split: {args.output}: train={len(train)} test={len(test)}')
+        return
     if args.workers < 1:
         parser.error('--workers must be positive')
     jobs = [(i, args.root / 'data' / f'chunk-{i//1000:03d}' / f'episode_{i:06d}.parquet') for i in range(207306)]

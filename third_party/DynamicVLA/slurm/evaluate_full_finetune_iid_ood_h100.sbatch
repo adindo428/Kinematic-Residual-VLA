@@ -6,35 +6,25 @@
 #SBATCH --gres=gpu:h100:1
 #SBATCH --time=72:00:00
 #SBATCH --mem=256GB
-#SBATCH --output=runs/slurm_logs/%x-%j.out
-#SBATCH --error=runs/slurm_logs/%x-%j.err
+#SBATCH --output=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.out
+#SBATCH --error=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.err
 
 set -euo pipefail
 
-cd /scratch/aparame/Dynamic_VLA/third_party/DynamicVLA
-mkdir -p runs/slurm_logs runs/proactive_vla/offline_compare
-
-if command -v module >/dev/null 2>&1; then
-  module load cuda/12.3.0 || true
-  module load gcc/12.3.0 || true
-fi
-
-if command -v conda >/dev/null 2>&1; then
-  # shellcheck disable=SC1091
-  source "$(conda info --base)/etc/profile.d/conda.sh"
-  conda activate dynamicvla
-fi
+cd /home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA
+source scripts/palmetto_env.sh
+mkdir -p "${DVLA_OUTPUT_ROOT}/proactive_vla/offline_compare"
 
 export OMP_NUM_THREADS=${OMP_NUM_THREADS:-8}
 export TOKENIZERS_PARALLELISM=${TOKENIZERS_PARALLELISM:-false}
 export MALLOC_ARENA_MAX=${MALLOC_ARENA_MAX:-4}
 export DVLA_N_WORKERS=${DVLA_N_WORKERS:-4}
 
-EVAL_CFG=${EVAL_CFG:-configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p12_0p13.yaml}
-BASELINE_CKPT=${BASELINE_CKPT:-runs/checkpoints/dynamicvla_dom_full_finetune_speed_ood_0p12_0p13}
-RESIDUAL_CKPT=${RESIDUAL_CKPT:-runs/checkpoints/residual_dynamicvla_dom_full_finetune_speed_ood_0p12_0p13}
-EVAL_OUTPUT=${EVAL_OUTPUT:-runs/proactive_vla/offline_compare/full_finetune_iid_ood_report.json}
-EVAL_SPLITS=${EVAL_SPLITS:-iid ood}
+EVAL_CFG=${EVAL_CFG:-configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml}
+BASELINE_CKPT=${BASELINE_CKPT:-${DVLA_OUTPUT_ROOT}/checkpoints/dynamicvla_dom_full_finetune_speed_ood_0p10_0p18}
+RESIDUAL_CKPT=${RESIDUAL_CKPT:-${DVLA_OUTPUT_ROOT}/checkpoints/residual_dynamicvla_dom_full_finetune_speed_ood_0p10_0p18}
+EVAL_OUTPUT=${EVAL_OUTPUT:-${DVLA_OUTPUT_ROOT}/proactive_vla/offline_compare/full_finetune_iid_ood_report.json}
+EVAL_SPLITS=${EVAL_SPLITS:-iid_eval ood_val}
 EVAL_BATCH_SIZE=${EVAL_BATCH_SIZE:-1}
 # Set MAX_BATCHES here, or override at submit time:
 #   MAX_BATCHES=500 sbatch slurm/evaluate_full_finetune_iid_ood_h100.sbatch

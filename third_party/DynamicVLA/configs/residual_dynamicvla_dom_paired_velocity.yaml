@@ -55,7 +55,7 @@ POLICY:
   USE_CHECKPOINT_NORMALIZATION: false
 
 DIR:
-  OUTPUT: ./runs
+  OUTPUT: /scratch/aparame/Dynamic_VLA/runs
 
 WANDB:
   ENABLED: true

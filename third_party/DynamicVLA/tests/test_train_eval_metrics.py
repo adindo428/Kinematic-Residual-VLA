@@ -129,4 +129,5 @@ def test_eval_metric_totals_match_concatenated_per_rank_samples():
     assert metrics["action_mse"] == 3.0
     assert metrics["ee_tracking_mse"] == 5.0
     assert metrics["final_object_distance"] == 3.0
-    assert metrics["final_success_rate"] == 1.0 / 3.0
+    assert metrics["final_ee_object_proximity_rate_5cm"] == 1.0 / 3.0
+    assert "final_success_rate" not in metrics

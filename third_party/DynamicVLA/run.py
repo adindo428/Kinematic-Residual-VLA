@@ -181,6 +181,7 @@ def main():
     with open(args.cfg_file) as fp:
         cfg = yaml.load(fp, Loader=yaml.FullLoader)
         cfg = easydict.EasyDict(cfg)
+    cfg.DIR.OUTPUT = os.environ.get("DVLA_OUTPUT_ROOT", cfg.DIR.OUTPUT)
 
     # Parse runtime arguments
     if args.gpus is not None:
