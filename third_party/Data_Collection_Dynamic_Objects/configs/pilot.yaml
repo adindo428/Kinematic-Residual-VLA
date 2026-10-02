@@ -1,0 +1,59 @@
+# Paths are relative to this file, never to the shell working directory.
+assets:
+  scenes: ../../DOM-3D-Scenes
+  objects: ../../DOM-3D-Objects/objects
+  benchmark: ../../DOM-Test
+  manifest: ../manifests/assets.json
+scene:
+  # Set by inspect-scene --assemble; no guessed table or robot placement.
+  layout: ../manifests/layout.json
+  robot_usd: null  # null uses Isaac Lab's Franka Panda asset
+  device: cuda:0
+  headless: true
+collection:
+  output: ../runs/pilot
+  episodes: 100
+  seconds: 10.0
+  seed: 42
+  physics_hz: 200
+  fps: 25
+  future_frames: 5
+  warmup_seconds: 3.0
+  max_attempts: 500
+  candidates: 64
+  raw_format: parquet
+  balance_tolerance: 0.05
+  purpose: training
+controller:
+  kp: 4.0
+  kd: 0.5
+  orientation_kp: 8.0
+  enter_speed: 0.05
+  exit_speed: 0.03
+  hover_height: 0.10
+  max_linear_speed: 0.30
+  max_angular_speed: 1.5707963267948966
+  damping: 0.03
+  joint_margin: 0.02
+  observation_offset: [0.0, 0.0, 0.1034]
+  action_offset: [0.0, 0.0, 0.107]
+  down_quaternion: [0.0, 1.0, 0.0, 0.0] # wxyz; tool +Z points downward
+trajectory:
+  center: [0.45, 0.0, 0.16] # object root in robot-base frame
+  half_extents: [0.10, 0.15, 0.075]
+  workspace_margin: 0.01 # reserve room for physical tracking transients
+  max_speed: 0.15
+  max_acceleration: 0.30
+  frequency_range: [0.10, 0.28]
+  kind: random # random, stationary, positive, negative, neutral, switch
+camera:
+  width: 480
+  height: 360
+  codec: libsvtav1
+quality:
+  rmse: 0.02
+  max_error: 0.05
+  orientation_degrees: 5.0
+  transition_seconds: 0.75
+  contact_force: 0.5
+  min_visible_fraction: 0.95

@@ -1,0 +1,19 @@
+{
+  "anonymous_access_verified": true,
+  "checked_downloads": [
+    "checksums.json",
+    "meta/info.json",
+    "meta/tasks.jsonl",
+    "meta/episodes.jsonl",
+    "data/chunk-000/episode_000000.parquet",
+    "videos/chunk-000/observation.images.wrist_cam/episode_000000.mp4",
+    "videos/chunk-000/observation.images.opst_cam/episode_000000.mp4",
+    "videos/chunk-000/observation.images.side_cam/episode_000000.mp4"
+  ],
+  "checked_remote_files": 711,
+  "checksums_sha256": "1e1c6b1d717a894861d616e8bf3cd5c37abbad1409dc173821e25d6c5d83ba91",
+  "private": false,
+  "repo_id": "adi2440/dom-franka-tracking",
+  "revision": "5c46a9f26b5f85edafa53885187cc03fa8706219",
+  "url": "https://huggingface.co/datasets/adi2440/dom-franka-tracking/tree/5c46a9f26b5f85edafa53885187cc03fa8706219"
+}

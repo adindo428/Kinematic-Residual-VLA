@@ -1,0 +1,15 @@
+--- a/utils/instruction_generator.py
++++ b/utils/instruction_generator.py
+@@ -16,6 +16,12 @@
+     def generate_instruction(inst_metadata):
+         if isinstance(inst_metadata, str):
+             inst_metadata = json.loads(inst_metadata)
++
++        if inst_metadata["task"] == "track":
++            instruction = inst_metadata.get("instruction")
++            if not isinstance(instruction, str) or not instruction.strip():
++                raise ValueError("Tracking tasks require a non-empty instruction")
++            return instruction.strip()
+ 
+         tmpl = InstructionGenerator._get_instruction_template(inst_metadata["task"])
+         object_desc = random.choice(inst_metadata.get("objects", [""]))

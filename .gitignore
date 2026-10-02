@@ -17,3 +17,11 @@ videos/
 datasets/
 .cache/
 paper/*.zip
+
+# Keep new workspace additions scoped to the collector.
+# Existing tracked research/training files remain tracked and unchanged.
+/*
+!/.gitignore
+!/third_party/
+/third_party/*
+!/third_party/Data_Collection_Dynamic_Objects/

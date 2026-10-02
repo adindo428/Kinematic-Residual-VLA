@@ -1,0 +1,9 @@
+# Isolate this from both Isaac Lab and the Palmetto training environment.
+# v0.3.3's CODEBASE_VERSION is v2.1. Later releases may require migration.
+lerobot==0.3.3
+datasets==3.6.0
+av>=14.2,<15
+numpy>=1.26,<3
+scipy>=1.12,<2
+PyYAML>=6,<7
+pyarrow>=14

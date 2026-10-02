@@ -1,0 +1,138 @@
+{
+  "upstream_commit": "434dc7105cf6d559018d15af5fecbcdad44f036e",
+  "source_sha256": {
+    "utils/instruction_generator.py": "2cd0a741445efabc0d707b3fed566e973d30c934ee0a693ea90a12360b968e18",
+    "utils/datasets.py": "da02cdd91bbcd08cf919774fa8387bbd5be87ecf70cb8813c6600d9829a0b1f6",
+    "simulations/simulate.py": "e073ce04af7222b77ca981bd7a51f02c359d572a3247751524f57d35f06e249f",
+    "simulations/configs/sim_cfg.yaml": "cdd167c0ab8f627f2b3e8a214f815ba4d9f190017ad6cd0b3c80e34bdbf5034a",
+    "simulations/configs/env_cfg.py": "b7b7f458a962f84e6c4a500b059a8c527383714573e9e4ef922795c6e1b14e21",
+    "simulations/configs/termination_cfg.py": "6182b86d5f04ce5f4fb70a123ac7e1b692f7394851c6f989e01327890c577a63",
+    "scripts/translate_dataset_seq.py": "bb26ea4a4b70542527b1431add27d46f641e1aea06efbcaa8a42ae9ab3a9fa1b",
+    "scripts/create_lerobot_dataset.py": "5e319190dd13ba6a5bef3d38b02bf46f4c84e9b7c2807ca290517214b1b82d7c",
+    "utils/memcached.py": "2029e26cc357acf708244095153a444aa031147e0b9eab2c9b69b1e635e9a749"
+  },
+  "dataset": "/home/adi2440/Desktop/Dynamic_VLA/third_party/Data_Collection_Dynamic_Objects/exports/pilot-v1",
+  "instructions": {
+    "0": "Hover above the moving object and tilt according to its lateral velocity."
+  },
+  "checksums_sha256": "1e1c6b1d717a894861d616e8bf3cd5c37abbad1409dc173821e25d6c5d83ba91",
+  "full_loader_checked": true,
+  "samples": [
+    {
+      "split": "train",
+      "episode": 0,
+      "frame": 0,
+      "delta_action": false
+    },
+    {
+      "split": "train",
+      "episode": 0,
+      "frame": 125,
+      "delta_action": false
+    },
+    {
+      "split": "train",
+      "episode": 0,
+      "frame": 249,
+      "delta_action": false
+    },
+    {
+      "split": "train",
+      "episode": 0,
+      "frame": 0,
+      "delta_action": true
+    },
+    {
+      "split": "train",
+      "episode": 0,
+      "frame": 125,
+      "delta_action": true
+    },
+    {
+      "split": "train",
+      "episode": 0,
+      "frame": 249,
+      "delta_action": true
+    },
+    {
+      "split": "validation",
+      "episode": 6,
+      "frame": 0,
+      "delta_action": false
+    },
+    {
+      "split": "validation",
+      "episode": 6,
+      "frame": 125,
+      "delta_action": false
+    },
+    {
+      "split": "validation",
+      "episode": 6,
+      "frame": 249,
+      "delta_action": false
+    },
+    {
+      "split": "validation",
+      "episode": 6,
+      "frame": 0,
+      "delta_action": true
+    },
+    {
+      "split": "validation",
+      "episode": 6,
+      "frame": 125,
+      "delta_action": true
+    },
+    {
+      "split": "validation",
+      "episode": 6,
+      "frame": 249,
+      "delta_action": true
+    },
+    {
+      "split": "test",
+      "episode": 8,
+      "frame": 0,
+      "delta_action": false
+    },
+    {
+      "split": "test",
+      "episode": 8,
+      "frame": 125,
+      "delta_action": false
+    },
+    {
+      "split": "test",
+      "episode": 8,
+      "frame": 249,
+      "delta_action": false
+    },
+    {
+      "split": "test",
+      "episode": 8,
+      "frame": 0,
+      "delta_action": true
+    },
+    {
+      "split": "test",
+      "episode": 8,
+      "frame": 125,
+      "delta_action": true
+    },
+    {
+      "split": "test",
+      "episode": 8,
+      "frame": 249,
+      "delta_action": true
+    }
+  ],
+  "versions": {
+    "lerobot": "0.3.3",
+    "datasets": "3.6.0",
+    "torch": "2.10.0",
+    "torchvision": "0.25.0",
+    "torchcodec": "0.10.0"
+  },
+  "valid": true
+}
