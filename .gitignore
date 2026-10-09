@@ -35,3 +35,6 @@ paper/*.zip
 *.egg-info/
 .venv/
 venv/
+
+# Linux workstation paths and credentials stay local
+/workstation/env.local.sh

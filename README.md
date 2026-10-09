@@ -13,6 +13,8 @@ Training and closed-loop evaluation code for DynamicVLA and our kinematic residu
 | Dataset collection and offline checkpoint evaluation | [Collector](third_party/Data_Collection_Dynamic_Objects/README.md) |
 | Palmetto and DeltaAI deployment | [Cluster guide](docs/CLUSTERS.md) |
 
+**For the Linux RTX PRO 6000 machine, use the [workstation setup and VS Code guide](workstation/README.md).** It selects CUDA 12.8 for Blackwell, keeps policy/simulator environments separate, and includes [the research handoff](workstation/HANDOFF.md) and portable grasp diagnostics.
+
 ## Get the code
 
 ```bash

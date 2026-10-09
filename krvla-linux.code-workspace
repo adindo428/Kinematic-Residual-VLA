@@ -1,0 +1,106 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.terminal.activateEnvironment": true
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "KRVLA: policy check",
+        "type": "process",
+        "command": "bash",
+        "args": [
+          "-c",
+          "source workstation/env.local.sh && \"$POLICY_PYTHON\" workstation/preflight.py --output \"$KRVLA_WORK/checks/policy.json\""
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        }
+      },
+      {
+        "label": "KRVLA: simulator check",
+        "type": "process",
+        "command": "bash",
+        "args": [
+          "-c",
+          "source workstation/env.local.sh && \"$ISAACLAB\" -p \"$KRVLA_REPO/workstation/sim_probe.py\" --headless --enable_cameras --device cuda:0 --output \"$KRVLA_WORK/checks/simulator.json\""
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        }
+      },
+      {
+        "label": "KRVLA: DOM prepare",
+        "type": "process",
+        "command": "bash",
+        "args": [
+          "-c",
+          "source workstation/env.local.sh && bash workstation/dom.sh prepare"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        }
+      },
+      {
+        "label": "KRVLA: DOM pilot command preview",
+        "type": "process",
+        "command": "bash",
+        "args": [
+          "-c",
+          "source workstation/env.local.sh && bash workstation/dom.sh pilot --dry-run"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        }
+      },
+      {
+        "label": "KRVLA: DOM pilot",
+        "type": "process",
+        "command": "bash",
+        "args": [
+          "-c",
+          "source workstation/env.local.sh && bash workstation/dom.sh pilot"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        }
+      }
+    ]
+  }
+}

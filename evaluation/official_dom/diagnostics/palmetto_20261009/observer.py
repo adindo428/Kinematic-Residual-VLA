@@ -10,9 +10,15 @@ import sys
 
 def instrument(main, app, args, namespace):
     from isaacsim.core.version import get_version
-    versions = {'isaacsim_runtime': list(get_version()),
-                'isaacsim_version_file': Path('/isaac-sim/VERSION').read_text().strip(),
-                'isaaclab_version_file': Path('/opt/IsaacLab/VERSION').read_text().strip()}
+    versions = {'isaacsim_runtime': list(get_version())}
+    for key, path in (
+        ('isaacsim_version_file', '/isaac-sim/VERSION'),
+        ('isaaclab_version_file', '/opt/IsaacLab/VERSION'),
+    ):
+        if Path(path).is_file():
+            versions[key] = Path(path).read_text().strip()
+    if versions['isaacsim_runtime'][0] != '5.1.0':
+        raise RuntimeError('The gripper diagnostic is calibrated for Isaac Sim 5.1.0')
     for package in ('isaacsim', 'isaaclab'):
         try: versions[package+'_package'] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError: pass

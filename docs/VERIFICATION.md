@@ -26,3 +26,13 @@ Python compilation and launcher `--help` are checked. Cluster shell scripts are 
 The local workstation pilot is still required: this Mac cannot execute NVIDIA CUDA/Isaac simulation, and the RTX 3080's combined policy/camera memory and runtime behavior have not been tested. Official evaluation records actual GPU identity, separate policy inference VRAM peaks, and sampled total-device usage during the pilot. Underlying simulator assets and runtime compatibility are validated by the real pilot rather than inferred from CPU tests.
 
 The official benchmark keeps upstream source/test/checkpoint revisions and streaming execution. Its Table 1 differences are descriptive; a different GPU or latency may affect outcomes. The tracking stress suite uses synchronous simulation paused during inference, one room and declared tracking proxies. Its occupancy scores are not manipulation success percentages and cannot be compared directly to the paper's Table 1.
+
+## Linux RTX PRO workstation preparation
+
+The October 9 workstation update adds CUDA 12.8 setup scripts, explicit simulator-environment selection, a VS Code workspace, policy/simulator probes, and a portable three-arm grasp diagnostic. Run:
+
+```bash
+python -m pytest -q workstation/tests evaluation/official_dom/tests
+```
+
+**17 tests passed**: six workstation checks plus the eleven existing official/local checks. New checks cover preservation of the pinned baseline while creating diagnostic copies, refusal to overwrite runs, source/config drift rejection, durable preflight failures, path handling with spaces, and explicit simulator-environment selection. The shell launchers passed syntax checks; new Python and the adapted diagnostic scripts compiled. GPU probes and Linux package installers have not been executed on the target RTX PRO machine. The simulator probe is an actual-startup check to run there, not a result already obtained on this Mac.

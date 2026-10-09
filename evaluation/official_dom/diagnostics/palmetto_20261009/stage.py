@@ -39,13 +39,13 @@ ALIGNED_METHOD = '''    @torch.no_grad()
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
-def prepare(base, stage, root):
+def prepare(base, stage, root, protocol_path=None, scripts_dir=None):
     stage.mkdir(parents=True, exist_ok=False)
     root.mkdir(parents=True, exist_ok=False)
     (stage/'scripts').mkdir()
     (stage/'checkpoint').symlink_to(base/'checkpoint', target_is_directory=True)
     for name in ('prepare.py', 'report.py', 'probe_policy.py'):
-        shutil.copy2(base/'scripts'/name, stage/'scripts'/name)
+        shutil.copy2((scripts_dir or base/'scripts')/name, stage/'scripts'/name)
     for name in ('run.py', 'observer.py'):
         shutil.copy2(Path(__file__).parent/name, stage/'scripts'/name)
     variants = {}
@@ -106,7 +106,8 @@ def prepare(base, stage, root):
                 changed[str(relative)] = {'upstream_sha256': sha(upstream), 'diagnostic_sha256': sha(file)}
         variants[label] = {'gripper_fix': gripper, 'align_actions': aligned,
                            'source': str(source), 'changed_files': changed}
-    protocol = json.loads((Path('/home/aparame/Research/Dynamic_VLA/RESULTS/official_dom_table1/20261009')/'protocol.json').read_text())
+    protocol_path = protocol_path or Path('/home/aparame/Research/Dynamic_VLA/RESULTS/official_dom_table1/20261009/protocol.json')
+    protocol = json.loads(protocol_path.read_text())
     selected = [
         next(t for t in protocol['tests'] if t['name'].startswith('1-1_place_franka_apple')),
         next(t for t in protocol['tests'] if t['name'].startswith('1-1_place_franka_wbottle')),
