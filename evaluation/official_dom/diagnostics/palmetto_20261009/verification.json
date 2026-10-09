@@ -1,0 +1,12 @@
+{
+  "action_timing_behavior_checks": 4,
+  "passed": true,
+  "checks": [
+    "Skip stale queued actions after an observation-index jump",
+    "Replace overlapping chunks with commands for current/future indices",
+    "Preserve useful queue when received chunk is entirely expired",
+    "Do not execute future-index commands early"
+  ],
+  "python_scripts_parse": true,
+  "shell_syntax_passed": true
+}
