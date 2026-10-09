@@ -85,7 +85,8 @@ def test_sim_wrapper_selects_environment_without_shell_interpolation(tmp_path):
                     env['ISAACLAB_ROOT']+'/isaaclab.sh', '-p', 'a file.py', '--headless']
 
 
-def test_portable_preparation_uses_local_protocol_and_preserves_baseline(tmp_path, monkeypatch):
+@pytest.mark.parametrize('contact_sweep', [False, True])
+def test_portable_preparation_uses_local_protocol_and_preserves_baseline(tmp_path, monkeypatch, contact_sweep):
     diagnostic = module('diagnostic')
     base = tmp_path/'official'; source = base/'source'
     for directory in ('simulations/robots', 'policies/dynamicvla', 'scripts'):
@@ -110,10 +111,15 @@ def test_portable_preparation_uses_local_protocol_and_preserves_baseline(tmp_pat
     monkeypatch.setattr(diagnostic.subprocess, 'check_output', lambda argv, **kw:
                         diagnostic.local.SOURCE_COMMIT+'\n' if 'rev-parse' in argv else '')
     args = SimpleNamespace(base=base, stage=tmp_path/'diagnostic', root=tmp_path/'diagnostic results', official_root=official_root)
+    if contact_sweep:
+        args.finger_friction = [1.0, 2.0]
     diagnostic.prepare(args)
     assert all(Path(p).read_bytes() == value for p, value in before.items())
     protocol = json.loads((args.root/'protocol.json').read_text())
-    assert len(protocol['tests']) == 3 and len(protocol['variants']) == 3
+    assert len(protocol['tests']) == 3 and len(protocol['variants']) == (5 if contact_sweep else 3)
+    if contact_sweep:
+        assert protocol['variants']['contact_mu2']['finger_contact_coefficient'] == 2.0
+        assert 'apply_contact_friction' in (args.stage/'scripts/observer.py').read_text()
     assert (args.root/'test-envs.txt').read_text().splitlines() == [str(tmp_path/(n+'.json')) for n in names]
     assert Path(protocol['checkpoint']).resolve() == (base/'checkpoint').resolve()
     for relative, expected in protocol['source_hashes'].items():

@@ -59,3 +59,9 @@ Their current status was not refreshed for this handoff. Do not cancel these job
 Published repository: [Kinematic-Residual-VLA](https://github.com/adindo428/Kinematic-Residual-VLA). Start the new conversation with: “Read workstation/HANDOFF.md and workstation/README.md; continue the DOM grasp diagnostics on this Linux RTX PRO 6000 machine.” Then inspect the actual environment and current Git status. Preserve local edits and previous results. Keep code in Git and machine-specific paths in ignored `workstation/env.local.sh`; weights/assets/results stay outside Git.
 
 This handoff contains the experiment context needed for continuation. It does not transfer an active chat or running process. Inspect Palmetto statuses when needed; job states can change after the timestamp above.
+
+## Contact friction follow-up
+
+The user subsequently requested increased gripper friction and another VLA test. We are testing **finger–object contact friction**, distinct from the earlier joint-friction calibration. New Palmetto evaluation **16899593** has a fresh unchanged-contact control plus finger static/dynamic coefficients 1.0 and 2.0, using the corrected/aligned configuration and one shared L40S for all arms. Three cases × two repeats × three conditions = 18 trials. At submission it was pending priority; check current status before reporting results. Archive job 16899599 follows it. Results are `RESULTS/official_dom_friction/20261009`.
+
+The physics helper checks native readback before/after each trial and preserves object materials, restitution, nonfinger materials, combine modes and joint parameters. [Friction diagnostic guide](../evaluation/official_dom/diagnostics/friction_20261009/README.md) includes the Linux continuation commands (`--finger-friction 1 2` during preparation). No learned-policy benefit has been established at submission.

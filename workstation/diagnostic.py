@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import shutil
 import subprocess
 import sys
 import time
@@ -50,6 +51,15 @@ def prepare(args):
                                'Sim 5.1.0 / Lab 2.3.2 differ from the paper Sim 4.5 / Lab 2.2.1.',
                                'Simulation and policy share one visible GPU.',
                                'Observation-index noise seeding and telemetry are shared across all variants.']
+    if getattr(args, 'finger_friction', None):
+        for coefficient in args.finger_friction:
+            label = f'contact_mu{int(coefficient)}'
+            source = args.stage/'sources'/label
+            shutil.copytree(args.stage/'sources/gripper_aligned', source)
+            protocol['variants'][label] = dict(protocol['variants']['gripper_aligned'],
+                                               source=str(source), finger_contact_coefficient=coefficient)
+        add_contact_observer(args.stage)
+        protocol['contact_friction_scope'] = 'Only finger collision static/dynamic friction; object, joints, restitution and combine modes retained.'
     protocol['source_hashes'] = {
         str(path.relative_to(args.stage)): sha256(path)
         for path in (args.stage/'sources').rglob('*') if path.is_file()
@@ -59,6 +69,31 @@ def prepare(args):
         for path in (args.stage/'scripts').glob('*.py')
     }
     write_json(args.root/'protocol.json', protocol)
+
+
+def add_contact_observer(stage):
+    helper = REPO/'evaluation/official_dom/diagnostics/friction_20261009/friction.py'
+    shutil.copy2(helper, stage/'scripts/friction.py')
+    observer = stage/'scripts/observer.py'
+    text = observer.read_text()
+    needle = "        robot = env.unwrapped.scene['robot']"
+    assert text.count(needle) == 1
+    text = text.replace(needle, needle+'''
+        from friction import apply as apply_contact_friction
+        coefficient = os.environ.get('DOM_FINGER_CONTACT_FRICTION', 'unchanged')
+        coefficient = None if coefficient == 'unchanged' else float(coefficient)
+        friction_report = apply_contact_friction(env, coefficient)
+''')
+    needle = "        n_steps = len(result['ee_path'])"
+    assert text.count(needle) == 1
+    text = text.replace(needle, '''        after_report = apply_contact_friction(env, None)
+        if after_report['finger_materials_after'] != friction_report['finger_materials_after']:
+            raise RuntimeError('Finger contact friction changed during the trial')
+'''+needle)
+    needle = "            with destination.open('a') as f: f.write(json.dumps(row)+'\\n')"
+    assert text.count(needle) == 1
+    text = text.replace(needle, "            row['finger_contact_friction'] = friction_report\n"+needle)
+    observer.write_text(text)
 
 
 def validate(args, protocol):
@@ -94,6 +129,7 @@ def run(args):
         environment = dict(os.environ, DOM_OFFICIAL_SOURCE=str(source),
                            DOM_TRIAL_RESULTS=str(folder/'trial_results.jsonl'),
                            DOM_CLIENT_TRACE=str(folder/'client_trace.jsonl'), TOKENIZERS_PARALLELISM='false')
+        environment['DOM_FINGER_CONTACT_FRICTION'] = str(protocol['variants'][label].get('finger_contact_coefficient', 'unchanged'))
         gpu = subprocess.check_output(['nvidia-smi', '--query-gpu=name,uuid,driver_version,memory.total',
                                        '--format=csv,noheader'], text=True)
         folder.mkdir()
@@ -138,10 +174,12 @@ def main():
     prepare_parser = sub.add_parser('prepare')
     for name in ('base', 'official-root', 'stage', 'root'):
         prepare_parser.add_argument('--'+name, type=Path, required=True)
+    prepare_parser.add_argument('--finger-friction', type=float, nargs='+', choices=[1.0, 2.0],
+                                help='Add isolated contact_mu1/2 variants based on gripper_aligned')
     run_parser = sub.add_parser('run')
     for name in ('stage', 'root', 'assets', 'isaaclab', 'policy-python'):
         run_parser.add_argument('--'+name, type=Path, required=True)
-    run_parser.add_argument('--labels', nargs='+', choices=['original', 'gripper', 'gripper_aligned'],
+    run_parser.add_argument('--labels', nargs='+', choices=['original', 'gripper', 'gripper_aligned', 'contact_mu1', 'contact_mu2'],
                             default=['original', 'gripper', 'gripper_aligned'])
     run_parser.add_argument('--port', type=int, default=28000)
     args = p.parse_args()

@@ -36,3 +36,5 @@ python -m pytest -q workstation/tests evaluation/official_dom/tests
 ```
 
 **17 tests passed**: six workstation checks plus the eleven existing official/local checks. New checks cover preservation of the pinned baseline while creating diagnostic copies, refusal to overwrite runs, source/config drift rejection, durable preflight failures, path handling with spaces, and explicit simulator-environment selection. The shell launchers passed syntax checks; new Python and the adapted diagnostic scripts compiled. GPU probes and Linux package installers have not been executed on the target RTX PRO machine. The simulator probe is an actual-startup check to run there, not a result already obtained on this Mac.
+
+The subsequent contact-friction update passed **20 combined workstation/official CPU tests**. Added cases verify that contact updates affect only mapped finger collision shapes, preserve restitution and other robot materials, reject decreasing friction, and stage the optional sweep without modifying the pinned baseline. The native PhysX checks and VLA outcomes are pending evaluation job 16899593; CPU passes do not establish grasp improvement.

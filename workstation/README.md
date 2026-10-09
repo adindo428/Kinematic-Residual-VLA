@@ -116,3 +116,5 @@ For ongoing DOM100 coding/training, follow [the training guide](../docs/TRAINING
 ## Validation scope
 
 The preparation was performed on the Mac, using CPU tests, command previews and shell/Python syntax checks. CUDA wheel installation, Linux rendering and RTX PRO inference remain to be verified on the lab machine. If a check fails, preserve its JSON/log and fix the environment before interpreting evaluation scores.
+
+The [contact-friction follow-up](../evaluation/official_dom/diagnostics/friction_20261009/README.md) adds optional `--finger-friction 1 2` conditions based on the corrected/aligned gripper, with native material readback. Use its separate comparison commands to investigate object slip without changing joint friction.
