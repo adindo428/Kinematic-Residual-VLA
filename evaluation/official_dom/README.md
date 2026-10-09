@@ -2,6 +2,10 @@
 
 Use this workflow on the lab Linux PC to test the public DOM-trained baseline **without retraining**. It runs the real manipulation tests and compares with DynamicVLA's Table 1. The tracking occupancy metric is not used here.
 
+**Reproduction limitation confirmed October 9, 2026:** the author states in [upstream issue #29](https://github.com/hzxie/DynamicVLA/issues/29) that Table 1 used Linux, Isaac Sim 4.5.0 / Isaac Lab 2.2.1, and separate RTX A6000 GPUs for simulation and inference. The current upstream README's 5.1.0 / 2.3.2 setup has not reproduced those numbers according to that clarification. This launcher pins the newer upstream source and shares one GPU; its scores are results for that configuration, not a verified reproduction of the paper environment.
+
+The newer Franka configuration limits finger velocity to 0.05 m/s rather than the reference 0.2 m/s and changes joint friction. [Open PR #30](https://github.com/hzxie/DynamicVLA/pull/30) proposes a calibrated fix, validated with scripted grasps but not full learned-policy evaluation. Keep any fix in a separate diagnostic source/result directory. Verify actual finger motion, grasp timing, and observation/action indices before interpreting failed manipulation trials as a checkpoint-quality result. A pilot passing the checks below confirms loading and trial accounting; it does not establish physical grasp correctness or reproduction of Table 1.
+
 ## 1. Install two environments
 
 The pinned upstream code recommends Python 3.10 for the policy and Python 3.11 with **Isaac Sim 5.1.0 / Isaac Lab 2.3.2** for simulation. Install the NVIDIA driver and Isaac runtime using the [Isaac Lab 2.3.2 installation guide](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/setup/installation/index.html). Use Linux; these commands target an NVIDIA workstation, not this Mac.
