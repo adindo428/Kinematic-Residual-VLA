@@ -68,6 +68,7 @@ TRAIN:
     BETAS: [0.9, 0.95]
   LR_SCHEDULER:
     NAME: cosine
+    STEP_MODE: optimizer
     N_WARMUP_STEPS: 1000
   IMAGE_TRANSFORMS:
     BRIGHTNESS: [0.8, 1.2]

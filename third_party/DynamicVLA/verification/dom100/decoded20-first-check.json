@@ -1,0 +1,145 @@
+{
+  "complete": true,
+  "diagnostic_only": true,
+  "manifest": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+  "variants": [
+    {
+      "complete": true,
+      "execution_horizon": 20,
+      "finite_loss": 0.05231527239084244,
+      "full_finetuning": true,
+      "future_inputs_ignored": true,
+      "gpu_key": "9d30e6dd6cef64ca",
+      "gradient_norm": 4.910058975219727,
+      "manifest": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+      "prediction_horizon": 20,
+      "profile": "97b5f5172579667cb1b93f64af9eaa63db25d671f6b59dbbc5876d7d4d3c6090",
+      "runtime": {
+        "fused": false,
+        "microbatch": 2,
+        "pin_memory": true,
+        "precision": "fp32",
+        "prefetch": 2,
+        "sampling": "frames",
+        "workers": 0
+      },
+      "strict_reload": true,
+      "variant": "dom100"
+    },
+    {
+      "complete": true,
+      "execution_horizon": 20,
+      "finite_loss": 0.07438090443611145,
+      "full_finetuning": true,
+      "future_inputs_ignored": true,
+      "gpu_key": "9d30e6dd6cef64ca",
+      "gradient_norm": 5.14567756652832,
+      "manifest": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+      "prediction_horizon": 20,
+      "profile": "97b5f5172579667cb1b93f64af9eaa63db25d671f6b59dbbc5876d7d4d3c6090",
+      "runtime": {
+        "fused": false,
+        "microbatch": 2,
+        "pin_memory": true,
+        "precision": "fp32",
+        "prefetch": 2,
+        "sampling": "frames",
+        "workers": 0
+      },
+      "strict_reload": true,
+      "variant": "kr100"
+    },
+    {
+      "complete": true,
+      "execution_horizon": 20,
+      "finite_loss": 0.09326171875,
+      "full_finetuning": true,
+      "future_inputs_ignored": true,
+      "gpu_key": "9d30e6dd6cef64ca",
+      "gradient_norm": 6.002807140350342,
+      "manifest": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+      "prediction_horizon": 20,
+      "profile": "97b5f5172579667cb1b93f64af9eaa63db25d671f6b59dbbc5876d7d4d3c6090",
+      "runtime": {
+        "fused": false,
+        "microbatch": 2,
+        "pin_memory": true,
+        "precision": "fp32",
+        "prefetch": 2,
+        "sampling": "frames",
+        "workers": 0
+      },
+      "strict_reload": true,
+      "variant": "domv100"
+    },
+    {
+      "complete": true,
+      "execution_horizon": 20,
+      "finite_loss": 0.13448083400726318,
+      "full_finetuning": true,
+      "future_inputs_ignored": true,
+      "gpu_key": "9d30e6dd6cef64ca",
+      "gradient_norm": 6.741796493530273,
+      "manifest": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+      "prediction_horizon": 20,
+      "profile": "97b5f5172579667cb1b93f64af9eaa63db25d671f6b59dbbc5876d7d4d3c6090",
+      "runtime": {
+        "fused": false,
+        "microbatch": 2,
+        "pin_memory": true,
+        "precision": "fp32",
+        "prefetch": 2,
+        "sampling": "frames",
+        "workers": 0
+      },
+      "strict_reload": true,
+      "variant": "krv100"
+    },
+    {
+      "complete": true,
+      "execution_horizon": 20,
+      "finite_loss": 0.07438090443611145,
+      "full_finetuning": true,
+      "future_inputs_ignored": true,
+      "gpu_key": "9d30e6dd6cef64ca",
+      "gradient_norm": 5.14567756652832,
+      "manifest": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+      "prediction_horizon": 20,
+      "profile": "97b5f5172579667cb1b93f64af9eaa63db25d671f6b59dbbc5876d7d4d3c6090",
+      "runtime": {
+        "fused": false,
+        "microbatch": 2,
+        "pin_memory": true,
+        "precision": "fp32",
+        "prefetch": 2,
+        "sampling": "frames",
+        "workers": 0
+      },
+      "strict_reload": true,
+      "variant": "krp100"
+    },
+    {
+      "complete": true,
+      "execution_horizon": 20,
+      "finite_loss": 0.13448083400726318,
+      "full_finetuning": true,
+      "future_inputs_ignored": true,
+      "gpu_key": "9d30e6dd6cef64ca",
+      "gradient_norm": 6.741796493530273,
+      "manifest": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+      "prediction_horizon": 20,
+      "profile": "97b5f5172579667cb1b93f64af9eaa63db25d671f6b59dbbc5876d7d4d3c6090",
+      "runtime": {
+        "fused": false,
+        "microbatch": 2,
+        "pin_memory": true,
+        "precision": "fp32",
+        "prefetch": 2,
+        "sampling": "frames",
+        "workers": 0
+      },
+      "strict_reload": true,
+      "variant": "krvp100"
+    }
+  ]
+}

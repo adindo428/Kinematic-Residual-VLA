@@ -680,7 +680,7 @@ def train(cfg):
     train_dataset = utils.datasets.get_dataset(
         cfg.DATASET.NAME,
         split="train",
-        pin_memory=cfg.DATASET.PIN_MEMORY,
+        pin_memory=bool(cfg.DATASET.get("USE_MEMCACHED", False)),
         delta_action=cfg.DATASET.USE_DELTA_ACTION,
         required_features=cfg.DATASET.REQUIRED_FEATURES,
         episodes=train_episodes,
@@ -714,6 +714,8 @@ def train(cfg):
     train_data_loader = torch.utils.data.DataLoader(
         dataset=train_dataset,
         sampler=train_sampler,
+        shuffle=train_sampler is None,
+        generator=torch.Generator().manual_seed(int(cfg.CONST.get("SEED", 42))),
         **dataloader_kwargs,
     )
 
@@ -726,7 +728,7 @@ def train(cfg):
             eval_dataset = utils.datasets.get_dataset(
                 cfg.DATASET.NAME,
                 split=eval_split,
-                pin_memory=cfg.DATASET.PIN_MEMORY,
+                pin_memory=bool(cfg.DATASET.get("USE_MEMCACHED", False)),
                 delta_action=cfg.DATASET.USE_DELTA_ACTION,
                 required_features=cfg.DATASET.REQUIRED_FEATURES,
                 episodes=eval_episode_map[eval_split],

@@ -1,0 +1,61 @@
+{
+  "canonical_source_and_manifest_unchanged": true,
+  "completed_profiles_retained": [
+    {
+      "gpu_key": "d85389bf17ff282b",
+      "hardware": {
+        "capability": [
+          8,
+          0
+        ],
+        "cuda": "12.6",
+        "name": "NVIDIA A100 80GB PCIe",
+        "torch": "2.7.1+cu126",
+        "total_memory": 85093777408
+      },
+      "job_id": "16844385",
+      "profile_fingerprint": "9d317ed6bc3ff7a83438241493532bd8035c173232b5f6cb34d51500243f896a",
+      "runtime": {
+        "fused": true,
+        "microbatch": 44,
+        "pin_memory": true,
+        "precision": "bf16",
+        "prefetch": 2,
+        "sampling": "blocks",
+        "workers": 4
+      }
+    },
+    {
+      "gpu_key": "9d30e6dd6cef64ca",
+      "hardware": {
+        "capability": [
+          9,
+          0
+        ],
+        "cuda": "12.6",
+        "name": "NVIDIA H100 80GB HBM3",
+        "torch": "2.7.1+cu126",
+        "total_memory": 85017493504
+      },
+      "job_id": "16844386",
+      "profile_fingerprint": "9c68e70edb3ed4a8bf2e89da39a7fb76ab647cc790edb62109905525e4d65fc6",
+      "runtime": {
+        "fused": true,
+        "microbatch": 44,
+        "pin_memory": true,
+        "precision": "bf16",
+        "prefetch": 2,
+        "sampling": "blocks",
+        "workers": 4
+      }
+    }
+  ],
+  "date": "2026-10-09",
+  "maximum_workers": 4,
+  "stalled_jobs_cancelled": [
+    "16844384",
+    "16844387"
+  ],
+  "submission_record": "/scratch/aparame/Dynamic_VLA/dom100-h20-r2/recovery/20261009/submissions.json",
+  "trial_watchdog_seconds": 600
+}

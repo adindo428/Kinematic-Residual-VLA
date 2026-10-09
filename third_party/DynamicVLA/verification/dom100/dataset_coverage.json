@@ -1,0 +1,65 @@
+{
+  "episode_fraction": 0.9707051411922472,
+  "excluded_episodes": 6073,
+  "excluded_frames": 723258,
+  "frame_fraction": 0.9692912985643772,
+  "missing_or_empty_files": 12099,
+  "published_episodes": 207306,
+  "published_frames": 23552217,
+  "retained_episodes": 201233,
+  "retained_frames": 22828959,
+  "task_speed_coverage": {
+    "[\"long_horizon\", 0]": {
+      "excluded": 0,
+      "retained": 88
+    },
+    "[\"long_horizon\", 1]": {
+      "excluded": 0,
+      "retained": 1236
+    },
+    "[\"long_horizon\", 2]": {
+      "excluded": 0,
+      "retained": 4428
+    },
+    "[\"long_horizon\", 3]": {
+      "excluded": 0,
+      "retained": 129
+    },
+    "[\"pick\", 1]": {
+      "excluded": 0,
+      "retained": 950
+    },
+    "[\"pick\", 2]": {
+      "excluded": 0,
+      "retained": 32036
+    },
+    "[\"pick\", 3]": {
+      "excluded": 0,
+      "retained": 31692
+    },
+    "[\"pick\", 4]": {
+      "excluded": 0,
+      "retained": 3796
+    },
+    "[\"place\", 0]": {
+      "excluded": 0,
+      "retained": 85
+    },
+    "[\"place\", 1]": {
+      "excluded": 0,
+      "retained": 1451
+    },
+    "[\"place\", 2]": {
+      "excluded": 2574,
+      "retained": 44680
+    },
+    "[\"place\", 3]": {
+      "excluded": 3132,
+      "retained": 72769
+    },
+    "[\"place\", 4]": {
+      "excluded": 367,
+      "retained": 7893
+    }
+  }
+}

@@ -1,0 +1,25 @@
+# Install torch/torchvision/torchcodec from the CUDA 12.6 index first (README).
+easydict
+h5py
+imageio
+lerobot==0.3.3
+num2words
+numpy==1.26.4
+nvidia-ml-py
+opencv-python-headless<4.12
+pylibmc
+psutil
+pytest
+PyYAML
+pyzmq==26.4.0
+scipy
+safetensors
+tensorboard
+timm==1.0.27
+tqdm
+transformers==5.2.0
+wandb
+huggingface-hub
+matplotlib
+pyarrow==19.0.1
+av==17.0.1

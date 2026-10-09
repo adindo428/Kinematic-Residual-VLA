@@ -19,7 +19,7 @@ RUN_OFFLINE_COMPARE=${RUN_OFFLINE_COMPARE:-0}
 OFFLINE_COMPARE_OUTPUT=${OFFLINE_COMPARE_OUTPUT:-${DVLA_OUTPUT_ROOT:-/scratch/aparame/Dynamic_VLA/runs}/proactive_vla/offline_compare/speed_ood_0p10_0p18_full_finetune_report.json}
 PROGRESS_EVERY=${PROGRESS_EVERY:-100}
 
-source "${SCRIPT_DIR}/palmetto_env.sh"
+source "${DVLA_ENV_SCRIPT:-${SCRIPT_DIR}/palmetto_env.sh}"
 mkdir -p "${DVLA_OUTPUT_ROOT}/proactive_vla/offline_compare"
 python scripts/rebuild_dom_speed_split.py
 
@@ -28,6 +28,7 @@ echo "[full-finetune-speed-ood] NPROC_PER_NODE=${NPROC_PER_NODE} AUTO_RESUME=${A
 checkpoint_for_exp() {
   local exp_name=$1
   local explicit_ckpt=$2
+  local variant=$3
   local ckpt_dir="${DVLA_OUTPUT_ROOT}/checkpoints/${exp_name}"
 
   if [[ -n "${explicit_ckpt}" ]]; then
@@ -37,6 +38,12 @@ checkpoint_for_exp() {
     fi
     printf '%s\n' "${explicit_ckpt}"
     return 0
+  fi
+  if [[ -n "${DVLA_HF_CHECKPOINT_REPO:-}" && "${AUTO_RESUME}" == "1" ]]; then
+    if ! python scripts/hub_checkpoints.py restore --repo "${DVLA_HF_CHECKPOINT_REPO}" --variant "${variant}" --checkpoint "${ckpt_dir}" >&2; then
+      echo "Hub restore failed; refusing to start ${variant} without verifying remote state." >&2
+      return 2
+    fi
   fi
   if [[ "${AUTO_RESUME}" == "1" && -f "${ckpt_dir}/config.json" && -f "${ckpt_dir}/model.safetensors" && -f "${ckpt_dir}/training_state.pt" ]]; then
     printf '%s\n' "${ckpt_dir}"
@@ -51,16 +58,25 @@ run_torchrun_train() {
   local exp_name=$3
   local explicit_ckpt=$4
   local ckpt
-  ckpt=$(checkpoint_for_exp "${exp_name}" "${explicit_ckpt}")
+  ckpt=$(checkpoint_for_exp "${exp_name}" "${explicit_ckpt}" "${label}")
+  if [[ -n "${ckpt}" ]]; then
+    local saved_epoch target_epochs
+    saved_epoch=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["epoch"])' "${ckpt}/config.json")
+    target_epochs=$(python -c 'import sys,yaml; print(yaml.safe_load(open(sys.argv[1]))["TRAIN"]["N_EPOCHS"])' "${cfg}")
+    if (( saved_epoch >= target_epochs )); then
+      echo "[full-finetune-speed-ood] ${label} already complete: epoch ${saved_epoch}/${target_epochs}"
+      return 0
+    fi
+  fi
 
-  local -a cmd=(torchrun --standalone --nnodes=1 "--nproc_per_node=${NPROC_PER_NODE}" run.py --cfg "${cfg}" --exp "${exp_name}")
+  local -a cmd=(python -m torch.distributed.run --standalone --nnodes=1 "--nproc_per_node=${NPROC_PER_NODE}" run.py --cfg "${cfg}" --exp "${exp_name}")
   if [[ -n "${ckpt}" ]]; then
     echo "[full-finetune-speed-ood] Resuming ${label} from ${ckpt}"
     cmd+=(--ckpt "${ckpt}")
   else
     echo "[full-finetune-speed-ood] Starting ${label} from config checkpoint"
   fi
-  "${cmd[@]}"
+  DVLA_HF_VARIANT="${label}" "${cmd[@]}"
 }
 
 if [[ "${RUN_PREFETCH}" == "1" ]]; then
@@ -73,8 +89,8 @@ fi
 
 if [[ "${RUN_TRAIN}" == "1" ]]; then
   python scripts/check_train_readiness.py --config "${BASELINE_CFG}"
-  run_torchrun_train "baseline full-parameter VLA" "${BASELINE_CFG}" "${BASELINE_EXP}" "${BASELINE_CKPT}"
-  run_torchrun_train "kinematic residual full-parameter VLA" "${RESIDUAL_CFG}" "${RESIDUAL_EXP}" "${RESIDUAL_CKPT}"
+  run_torchrun_train "residual" "${RESIDUAL_CFG}" "${RESIDUAL_EXP}" "${RESIDUAL_CKPT}"
+  run_torchrun_train "baseline" "${BASELINE_CFG}" "${BASELINE_EXP}" "${BASELINE_CKPT}"
 else
   echo "[full-finetune-speed-ood] RUN_TRAIN=0; skipping GPU training."
 fi

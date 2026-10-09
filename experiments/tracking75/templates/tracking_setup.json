@@ -1,0 +1,127 @@
+{
+  "config": {
+    "assets": {},
+    "camera": {
+      "codec": "libsvtav1",
+      "height": 360,
+      "width": 480
+    },
+    "collection": {
+      "balance_tolerance": 0.05,
+      "candidates": 64,
+      "episodes": 100,
+      "fps": 25,
+      "future_frames": 5,
+      "max_attempts": 500,
+      "output": "unused_during_evaluation",
+      "physics_hz": 200,
+      "purpose": "evaluation",
+      "raw_format": "parquet",
+      "seconds": 10.0,
+      "seed": 42,
+      "warmup_seconds": 3.0
+    },
+    "controller": {
+      "action_offset": [
+        0.0,
+        0.0,
+        0.107
+      ],
+      "damping": 0.03,
+      "down_quaternion": [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "enter_speed": 0.05,
+      "exit_speed": 0.03,
+      "hover_height": 0.1,
+      "joint_margin": 0.02,
+      "kd": 0.5,
+      "kp": 4.0,
+      "max_angular_speed": 1.5707963267948966,
+      "max_linear_speed": 0.3,
+      "observation_offset": [
+        0.0,
+        0.0,
+        0.1034
+      ],
+      "orientation_kp": 8.0
+    },
+    "quality": {
+      "contact_force": 0.5,
+      "max_error": 0.05,
+      "min_visible_fraction": 0.95,
+      "orientation_degrees": 5.0,
+      "rmse": 0.02,
+      "transition_seconds": 0.75
+    },
+    "scene": {
+      "device": "cuda:0",
+      "headless": true,
+      "layout": "unused_frozen_layout_embedded_below",
+      "robot_usd": null
+    },
+    "trajectory": {
+      "center": [
+        0.45,
+        0.0,
+        0.16
+      ],
+      "frequency_range": [
+        0.1,
+        0.28
+      ],
+      "half_extents": [
+        0.1,
+        0.15,
+        0.075
+      ],
+      "kind": "random",
+      "max_acceleration": 0.3,
+      "max_speed": 0.15,
+      "workspace_margin": 0.01
+    }
+  },
+  "layout": {
+    "audit_sha256": "7cf3fa02838b84337c8e0631b8a9a4782b0ee26547860f9a18815e6b55554af5",
+    "dependencies": {
+      "assets": 17,
+      "layers": 1
+    },
+    "object_usd": "apple01.usd",
+    "object_usd_sha256": "9377c9e8b6d1333ce6741c3f01e6078db16d24fce1c95712aea4a69e7d374b96",
+    "robot_position": [
+      -2.0552499999999996,
+      -2.3096800256607923,
+      0.7496902346611023
+    ],
+    "robot_quaternion": [
+      0.7071067811865476,
+      0.0,
+      0.0,
+      0.7071067811865475
+    ],
+    "scene_usd": "00004f89-9aa5-43c2-ae3c-129586be8aaa.usd",
+    "scene_usd_sha256": "446b6052be05970545afd61f524687c985cb306b2d2a39eda420fde363aa6ee8",
+    "status": "assembled-awaiting-physics-validation",
+    "table_bounds": [
+      [
+        -2.830259989738464,
+        -2.3896800256607924,
+        -8.179526171772973e-08
+      ],
+      [
+        -1.2802400102615352,
+        -1.6396799999999978,
+        0.7496899401186674
+      ]
+    ],
+    "table_height": 0.7496902346611023,
+    "table_prim": "/World/InspectionHouse/furniture/Table_00166"
+  },
+  "train_max_speed_mps": 0.149987131357193,
+  "collector_commit": "9a5f7db1881a6d74c9a965f5c65a83f98b48d58d",
+  "dataset_revision": "5c46a9f26b5f85edafa53885187cc03fa8706219"
+}

@@ -1,0 +1,470 @@
+{
+  "dataset_revision": "5c46a9f26b5f85edafa53885187cc03fa8706219",
+  "config": {
+    "assets": {
+      "benchmark": "/home/adi2440/Desktop/Dynamic_VLA/third_party/DOM-Test",
+      "manifest": "/home/adi2440/Desktop/Dynamic_VLA/third_party/Data_Collection_Dynamic_Objects/manifests/assets.json",
+      "objects": "/home/adi2440/Desktop/Dynamic_VLA/third_party/DOM-3D-Objects/objects",
+      "scenes": "/home/adi2440/Desktop/Dynamic_VLA/third_party/DOM-3D-Scenes"
+    },
+    "camera": {
+      "codec": "libsvtav1",
+      "height": 360,
+      "width": 480
+    },
+    "collection": {
+      "balance_tolerance": 0.05,
+      "candidates": 64,
+      "episodes": 100,
+      "fps": 25,
+      "future_frames": 5,
+      "max_attempts": 500,
+      "output": "/home/adi2440/Desktop/Dynamic_VLA/third_party/Data_Collection_Dynamic_Objects/runs/pilot",
+      "physics_hz": 200,
+      "purpose": "evaluation",
+      "raw_format": "parquet",
+      "seconds": 10.0,
+      "seed": 42,
+      "warmup_seconds": 3.0
+    },
+    "controller": {
+      "action_offset": [
+        0.0,
+        0.0,
+        0.107
+      ],
+      "damping": 0.03,
+      "down_quaternion": [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "enter_speed": 0.05,
+      "exit_speed": 0.03,
+      "hover_height": 0.1,
+      "joint_margin": 0.02,
+      "kd": 0.5,
+      "kp": 4.0,
+      "max_angular_speed": 1.5707963267948966,
+      "max_linear_speed": 0.3,
+      "observation_offset": [
+        0.0,
+        0.0,
+        0.1034
+      ],
+      "orientation_kp": 8.0
+    },
+    "quality": {
+      "contact_force": 0.5,
+      "max_error": 0.05,
+      "min_visible_fraction": 0.95,
+      "orientation_degrees": 5.0,
+      "rmse": 0.02,
+      "transition_seconds": 0.75
+    },
+    "scene": {
+      "device": "cuda:0",
+      "headless": true,
+      "layout": "/home/adi2440/Desktop/Dynamic_VLA/third_party/Data_Collection_Dynamic_Objects/manifests/layout.json",
+      "robot_usd": null
+    },
+    "trajectory": {
+      "center": [
+        0.45,
+        0.0,
+        0.16
+      ],
+      "frequency_range": [
+        0.1,
+        0.28
+      ],
+      "half_extents": [
+        0.1,
+        0.15,
+        0.075
+      ],
+      "kind": "random",
+      "max_acceleration": 0.3,
+      "max_speed": 0.15,
+      "workspace_margin": 0.01
+    }
+  },
+  "layout": {
+    "audit_sha256": "7cf3fa02838b84337c8e0631b8a9a4782b0ee26547860f9a18815e6b55554af5",
+    "dependencies": {
+      "assets": 17,
+      "layers": 1
+    },
+    "object_usd": "/scratch/aparame/Dynamic_VLA/dom_benchmark/objects/apple/apple01.usd",
+    "object_usd_sha256": "9377c9e8b6d1333ce6741c3f01e6078db16d24fce1c95712aea4a69e7d374b96",
+    "robot_position": [
+      -2.0552499999999996,
+      -2.3096800256607923,
+      0.7496902346611023
+    ],
+    "robot_quaternion": [
+      0.7071067811865476,
+      0.0,
+      0.0,
+      0.7071067811865475
+    ],
+    "scene_usd": "/scratch/aparame/Dynamic_VLA/assets/DOM-3D-Scenes/00004f89-9aa5-43c2-ae3c-129586be8aaa.usd",
+    "scene_usd_sha256": "446b6052be05970545afd61f524687c985cb306b2d2a39eda420fde363aa6ee8",
+    "status": "assembled-awaiting-physics-validation",
+    "table_bounds": [
+      [
+        -2.830259989738464,
+        -2.3896800256607924,
+        -8.179526171772973e-08
+      ],
+      [
+        -1.2802400102615352,
+        -1.6396799999999978,
+        0.7496899401186674
+      ]
+    ],
+    "table_height": 0.7496902346611023,
+    "table_prim": "/World/InspectionHouse/furniture/Table_00166"
+  },
+  "episodes": [
+    {
+      "episode": 8,
+      "trajectory": {
+        "amplitude": [
+          0.05038261183212994,
+          0.12879057386582535,
+          0.056948723558145495
+        ],
+        "center": [
+          0.45888391707151865,
+          -0.0025669864052613837,
+          0.15682936293863084
+        ],
+        "omega": [
+          1.1745506225113036,
+          0.6417896836204294,
+          1.1318903689355853
+        ],
+        "phase": [
+          0.47907657062028886,
+          2.18247463657615,
+          -0.8718826634596075
+        ]
+      }
+    },
+    {
+      "episode": 12,
+      "trajectory": {
+        "amplitude": [
+          0.0669938411667242,
+          0.06794202669267009,
+          0.037074929518504746
+        ],
+        "center": [
+          0.4507091882336702,
+          -0.010177610086147397,
+          0.1461297385836302
+        ],
+        "omega": [
+          1.7190540885603356,
+          1.112964008715532,
+          1.5999999354382912
+        ],
+        "phase": [
+          1.7376875043929836,
+          -1.2023146223546959,
+          2.642238503347955
+        ]
+      }
+    },
+    {
+      "episode": 13,
+      "trajectory": {
+        "amplitude": [
+          0.06648577654039099,
+          0.09683754551519481,
+          0.04499346281006392
+        ],
+        "center": [
+          0.4517748875713599,
+          0.002240837128947717,
+          0.15392222063477892
+        ],
+        "omega": [
+          1.4555529244305307,
+          0.9347479716693945,
+          1.5623151335255683
+        ],
+        "phase": [
+          -1.9323461154343506,
+          -2.9411799218899866,
+          0.4708073374540245
+        ]
+      }
+    },
+    {
+      "episode": 14,
+      "trajectory": {
+        "amplitude": [
+          0.06364240865297316,
+          0.1116676747163292,
+          0.04230300802903909
+        ],
+        "center": [
+          0.45642362893521526,
+          0.003761616396627972,
+          0.16122631690200903
+        ],
+        "omega": [
+          1.4816691358669667,
+          0.6892725034678963,
+          1.2482610409342114
+        ],
+        "phase": [
+          1.5479355239868404,
+          -2.124652050247959,
+          -0.056616996606559944
+        ]
+      }
+    },
+    {
+      "episode": 36,
+      "trajectory": {
+        "amplitude": [
+          0.07109947301204424,
+          0.08369519337219211,
+          0.05207801254097228
+        ],
+        "center": [
+          0.4502909481508504,
+          -0.018455566705780618,
+          0.16548229008120416
+        ],
+        "omega": [
+          0.9861846298139326,
+          0.9836180105041535,
+          0.8703856216457624
+        ],
+        "phase": [
+          2.536366469735415,
+          -3.1110196573029674,
+          -2.562702619173811
+        ]
+      }
+    },
+    {
+      "episode": 47,
+      "trajectory": {
+        "amplitude": [
+          0.05752388721377109,
+          0.07090721004683541,
+          0.04974955499882315
+        ],
+        "center": [
+          0.46444143182860315,
+          0.015068612418799003,
+          0.16252440278186364
+        ],
+        "omega": [
+          1.7374079382231735,
+          1.026940676688923,
+          1.7066789654605143
+        ],
+        "phase": [
+          1.624695449674122,
+          -3.1096385994943625,
+          0.9756551461502685
+        ]
+      }
+    },
+    {
+      "episode": 53,
+      "trajectory": {
+        "amplitude": [
+          0.084359104376981,
+          0.11566232561566271,
+          0.03592373969358102
+        ],
+        "center": [
+          0.4484869578562289,
+          0.0008729109527094706,
+          0.16405804006869082
+        ],
+        "omega": [
+          1.376623249231005,
+          0.6331669790597988,
+          1.5677784206916687
+        ],
+        "phase": [
+          0.950595899582118,
+          -2.8577029258853575,
+          -1.0874922306643526
+        ]
+      }
+    },
+    {
+      "episode": 65,
+      "trajectory": {
+        "amplitude": [
+          0.05138424654184838,
+          0.12914216150379565,
+          0.038667163309983245
+        ],
+        "center": [
+          0.46512935585212833,
+          0.005341262770350775,
+          0.1640777588915579
+        ],
+        "omega": [
+          1.3848757342234328,
+          0.6424338342772985,
+          0.821416111179773
+        ],
+        "phase": [
+          0.47532711404599803,
+          -2.892459300147156,
+          -0.9678062496813138
+        ]
+      }
+    },
+    {
+      "episode": 66,
+      "trajectory": {
+        "amplitude": [
+          0.05079288394017831,
+          0.13061925448006267,
+          0.05424934045129738
+        ],
+        "center": [
+          0.4459510184752979,
+          -0.0028783183334674966,
+          0.15719756250832992
+        ],
+        "omega": [
+          0.9777005399988477,
+          0.7175145668645314,
+          1.137334216304561
+        ],
+        "phase": [
+          0.8376068900083493,
+          1.559181003498983,
+          -1.9352581426993243
+        ]
+      }
+    },
+    {
+      "episode": 77,
+      "trajectory": {
+        "amplitude": [
+          0.05033903815513522,
+          0.0951076147057094,
+          0.05407755802137777
+        ],
+        "center": [
+          0.46567690325220396,
+          0.022145197811045982,
+          0.15855983255259615
+        ],
+        "omega": [
+          1.203334761553451,
+          0.8636045911585853,
+          1.5596855844449573
+        ],
+        "phase": [
+          2.1668251238503657,
+          -2.5678449756013837,
+          2.828746126742786
+        ]
+      }
+    }
+  ],
+  "speed_multipliers": [
+    1.0,
+    1.5,
+    2.0
+  ],
+  "train_max_speed_mps": 0.149987131357193,
+  "baseline": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_baseline_16623336",
+  "residual": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_residual_16623337",
+  "collector_commit": "9a5f7db1881a6d74c9a965f5c65a83f98b48d58d",
+  "models": {
+    "baseline": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_baseline_16623336",
+    "velocity": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_velocity/checkpoints/tracking_dom75_full20_velocity_16680047",
+    "residual": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_residual_16623337",
+    "coordinate": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/resume_outputs/checkpoints/tracking_dom75_full20_coordinate_16623338",
+    "coordinate_velocity": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/checkpoints/tracking_dom75_full20_coordinate_velocity_16748131"
+  },
+  "model_labels": {
+    "baseline": "DOM-VLA",
+    "velocity": "DOM-VLA+Velocity",
+    "residual": "KR-VLA-Field",
+    "coordinate": "KR-VLA-Coordinate",
+    "coordinate_velocity": "KR-VLA-Coordinate+Velocity"
+  },
+  "checkpoint_metadata": {
+    "baseline": {
+      "weights_sha256": "61a50e3dbc917fd2863625c28ac9b5291304122c814915f9d236bfc90b17faed",
+      "config_sha256": "db82c1f10dfcc874795dfc12f59870bd336c50f12a68fc5d28d607ef7cb58d0d",
+      "chunk_size": 20,
+      "selected_weights": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_baseline_16623336/model.best_validation_action_mse.safetensors"
+    },
+    "velocity": {
+      "weights_sha256": "615822cf01eb1d1f075f1c9327739344eaf75ed5671543a0632357c9dc213ad7",
+      "config_sha256": "b79a5967a1f0b192aca0ff5c3add313ad9f4c316ccd4dab5a3a5fcd9238da3ba",
+      "chunk_size": 20,
+      "selected_weights": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_velocity/checkpoints/tracking_dom75_full20_velocity_16680047/model.best_validation_action_mse.safetensors"
+    },
+    "residual": {
+      "weights_sha256": "578e1ab885c3ab284b4d60f098701c05509cecd8bc820b1e80024cbd0f0519ad",
+      "config_sha256": "cd109e5b25de09f8e0a5a2b66bfda0a6cb3a5e41b88a21badc58b7a440ea8598",
+      "chunk_size": 20,
+      "selected_weights": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_residual_16623337/model.best_validation_action_mse.safetensors"
+    },
+    "coordinate": {
+      "weights_sha256": "0af6e261eba3f41cbf37af51b13094146656195a911a75b9277ca96e132d33a2",
+      "config_sha256": "28e0faec5185049e13cdabe73dfb63c9eaa17fca14b270241ff7c2a11d2920a5",
+      "chunk_size": 20,
+      "selected_weights": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/resume_outputs/checkpoints/tracking_dom75_full20_coordinate_16623338/model.best_validation_action_mse.safetensors"
+    },
+    "coordinate_velocity": {
+      "weights_sha256": "a9c0ca56e4e51b2dba39cdf02309d4df030782f19883ba350bf0f9514ed727aa",
+      "config_sha256": "b6f463cd6d2c3fbdc08676726115fae6f96ddee1c1c1a49b87b41576bab9d973",
+      "chunk_size": 20,
+      "selected_weights": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/checkpoints/tracking_dom75_full20_coordinate_velocity_16748131/model.best_validation_action_mse.safetensors",
+      "neural_velocity_conditioning": true
+    }
+  },
+  "note": "OOD time scaling increases velocity by s and acceleration by s squared; identical spatial paths.",
+  "reused_evaluation": {
+    "job_id": 16741254,
+    "manifest_sha256": "53c1fcb183fcf7672fa19581c967429a0bbf2ab05e422c20c5ddda8e62fa52be",
+    "runtime_sha256": "85841a5ac5603f84205fca24e8c695c829d2e28d106d2da53c3b0553f6448fe9",
+    "collector_source_sha256": "d32c73621f1f144cc62bd0334806b2d42fc6f16fdd532f031fd262da199b0ba1",
+    "models": [
+      "baseline",
+      "velocity",
+      "residual",
+      "coordinate"
+    ],
+    "new_rollouts_only": 30,
+    "original_path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_NOT_Conditioned_Velocity/live_tracking",
+    "retained_rollouts_path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing",
+    "original_manifest_path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/provenance/source_evaluations/16741254/manifest.json",
+    "original_runtime_path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/provenance/source_evaluations/16741254/runtime.json"
+  },
+  "rollout_sources": {
+    "baseline": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing",
+    "velocity": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing",
+    "residual": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing",
+    "coordinate": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing",
+    "coordinate_velocity": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing"
+  },
+  "historical_rollout_sources": {
+    "baseline": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_NOT_Conditioned_Velocity/live_tracking",
+    "velocity": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_NOT_Conditioned_Velocity/live_tracking",
+    "residual": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_NOT_Conditioned_Velocity/live_tracking",
+    "coordinate": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_NOT_Conditioned_Velocity/live_tracking",
+    "coordinate_velocity": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/live_tracking"
+  }
+}

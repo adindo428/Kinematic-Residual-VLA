@@ -8,6 +8,7 @@
 # @Email:  root@haozhexie.com
 
 import argparse
+from collections import deque
 import json
 import logging
 import os
@@ -27,6 +28,7 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir)
 )
 import utils.helpers
+from proactive_vla.phase_gate import CausalPhaseGate, PhaseGateConfig, gate_from_state
 
 
 def get_vla_model(pretrained_model, use_delta_action, streaming):
@@ -140,7 +142,8 @@ def run_tests(
     test_results = {}
     instruction = None
     actions = []
-    observations = []
+    observations = deque(maxlen=1-min(vla_cfg["delta_timestamps"]))
+    episode_token = None
     while True:
         observation = get_latest_observation(obs_socket)
         if observation is None:
@@ -178,7 +181,9 @@ def run_tests(
             act_socket.send_pyobj({"ack": n_tests}, flags=zmq.NOBLOCK)
             continue
 
-        if "task" in observation:
+        new_episode = observation.get("episode_token") is not None and observation["episode_token"] != episode_token
+        if "task" in observation and (new_episode or "observation.state" not in observation):
+            episode_token = observation.get("episode_token")
             instruction = observation["task"]
             logging.info(
                 "[Test%02d] Received new task: %s" % (n_tests, instruction.strip())
@@ -186,8 +191,9 @@ def run_tests(
             # Reset the model with the new instruction
             action = None
             actions = []
-            observations = []
+            observations = deque(maxlen=1-min(vla_cfg["delta_timestamps"]))
             vla_model.reset()
+            setattr(vla_model, "_dom_phase_trackers", [])
             setattr(_get_action, "states", [])
             if hasattr(_get_action, "count"):
                 delattr(_get_action, "count")
@@ -196,6 +202,10 @@ def run_tests(
         else:
             continue
 
+        if "observation.state" not in observation:
+            continue
+        if getattr(vla_model.config, "residual_phase_gate_mode", "constant") == "causal_rules":
+            _update_live_phase_gate(vla_model, observation)
         observations.append(observation)
         # Generate and send an action
         action = _get_action(
@@ -283,9 +293,12 @@ def _get_action(vla_model, observations, rotation, use_delta_action, debug=False
         or not vla_model.config.enable_streaming
         else "cpu"
     )
+    phase_gate = observations[-1].get("dynamic_object.phase_gate")
     observations = _get_transformed_observations(
         observations, rotation, vla_model.config.input_features, device
     )
+    if phase_gate is not None:
+        observations[vla_model.config.residual_phase_gate_key] = torch.from_numpy(phase_gate).to(device)
 
     # print(observations["index"], _count)
     # Update the state every chunk_size steps
@@ -362,7 +375,7 @@ def _get_transformed_observation(observation, rotation, feat_cfg, device="cuda")
         "task": [observation["task"]],
     }
     environment_state = _get_environment_state_vector(observation, rotation)
-    if environment_state is not None and "observation.environment_state" in feat_cfg:
+    if environment_state is not None:
         _validate_feature_width(
             "observation.environment_state",
             environment_state,
@@ -374,6 +387,29 @@ def _get_transformed_observation(observation, rotation, feat_cfg, device="cuda")
         ).to(device)
 
     return tr_observation
+
+
+def _update_live_phase_gate(policy, observation):
+    required = ("timestamp", "previous_gripper_command", "observation.environment_state")
+    if any(key not in observation for key in required):
+        raise ValueError("Phase policy requires simulator time, object state, and the previously applied command")
+    environment = _get_environment_state_vector(observation, "euler")
+    ee = np.asarray(observation["observation.state"]["end_effector"]["pos"])
+    quat = observation["observation.state"]["end_effector"].get("quat")
+    rotation = None if quat is None else utils.helpers.get_rotation_vector(np.asarray(quat), "euler")
+    commands = observation["previous_gripper_command"]
+    trackers = getattr(policy, "_dom_phase_trackers", [])
+    if not trackers:
+        trackers = [CausalPhaseGate(PhaseGateConfig(**policy.config.residual_phase_gate_config)) for _ in ee]
+        policy._dom_phase_trackers = trackers
+    if len(trackers) != len(ee):
+        raise ValueError("Environment count changed without an episode reset")
+    compact = [gate.observe(observation["timestamp"], ee[i], environment[i, :3], environment[i, 6:9],
+                           None if commands is None else np.asarray(commands).reshape(-1)[i],
+                           ee_rotation_xyz=None if rotation is None else rotation[i])
+               for i, gate in enumerate(trackers)]
+    observation[policy.config.residual_phase_gate_key] = np.stack([
+        gate_from_state(state, policy.config.chunk_size, policy.config.residual_action_dt) for state in compact])
 
 
 def _validate_feature_width(name, value, feat_cfg, rotation):
@@ -421,6 +457,17 @@ def _get_environment_state_vector(observation, rotation):
     ).astype(np.float32)
 
 
+def _final_object_distance(trial):
+    if "object_path" not in trial:
+        return None
+    ee_path = np.asarray(trial["ee_path"])
+    object_path = np.asarray(trial["object_path"])
+    n_steps = min(len(ee_path), len(object_path))
+    if n_steps == 0:
+        return None
+    return float(np.linalg.norm(ee_path[n_steps - 1] - object_path[n_steps - 1]))
+
+
 def get_test_stats(test_results):
     stats = {}
     for env, results in test_results.items():
@@ -428,6 +475,11 @@ def get_test_stats(test_results):
         n_actions = 0
         n_success_trials = 0
         path_length = []
+        final_distances = [
+            distance
+            for distance in (_final_object_distance(tr) for tr in results)
+            if distance is not None
+        ]
         for tr in results:
             if tr["success"]:
                 n_success_trials += 1
@@ -445,14 +497,38 @@ def get_test_stats(test_results):
             "avg_actions": n_actions / len(results),
             "avg_path_length": np.mean(path_length).item() if path_length else 0,
         }
+        if final_distances:
+            stats[env]["avg_final_object_distance"] = float(np.mean(final_distances))
 
     return stats
+
+
+def _split_summary(trials):
+    if not trials:
+        return None
+    distances = [
+        distance
+        for distance in map(_final_object_distance, trials)
+        if distance is not None
+    ]
+    summary = {
+        "trials": len(trials),
+        "successes": sum(bool(trial["success"]) for trial in trials),
+        "success_rate": sum(bool(trial["success"]) for trial in trials) / len(trials),
+    }
+    if distances:
+        summary["avg_final_object_distance"] = float(np.mean(distances))
+    return summary
 
 
 def save_test_results(test_results, output_dir, alias):
     if output_dir is None:
         return
     os.makedirs(output_dir, exist_ok=True)
+    split_trials = {"iid": [], "ood": []}
+    for trials in test_results.values():
+        for trial in trials:
+            split_trials.setdefault(trial.get("split", "iid"), []).append(trial)
     results = {
         "variant": alias,
         "environments": {
@@ -463,6 +539,14 @@ def save_test_results(test_results, output_dir, alias):
             }
             for env, trials in test_results.items()
             if trials
+        },
+        "splits": {
+            split: summary
+            for split, summary in (
+                (split, _split_summary(trials))
+                for split, trials in split_trials.items()
+            )
+            if summary is not None
         },
     }
     with open(os.path.join(output_dir, "closed_loop_results.json"), "w") as fp:
@@ -529,7 +613,9 @@ def main(
     )
     logging.info("Evaluation completed. Total tests run: %d" % n_tests)
     logging.info("Test results: %s" % get_test_stats(test_results))
-    save_test_results(test_results, output_dir, vla_alias or os.path.basename(vla_weights))
+    save_test_results(
+        test_results, output_dir, vla_alias or os.path.basename(vla_weights)
+    )
 
 
 if __name__ == "__main__":

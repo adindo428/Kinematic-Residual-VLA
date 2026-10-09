@@ -1,0 +1,24 @@
+{
+  "dataset_cache_preserved": true,
+  "dataset_selection_mode": "available_only",
+  "local_tests_passed": 64,
+  "old_job_id": "16821555",
+  "old_pending_jobs_cancelled": true,
+  "reason": "User authorized bypassing remaining DOM downloads and using complete cached two-camera episodes.",
+  "replacement_job_id": "16822429",
+  "replacement_jobs": {
+    "16821555": "16822429",
+    "16821566": "16822430",
+    "16821567": "16822431",
+    "16821568": "16822432",
+    "16821569": "16822433",
+    "16821570": "16822434",
+    "16821571": "16822435",
+    "16821572": "16822436",
+    "16821573": "16822437",
+    "16821574": "16822438",
+    "16821575": "16822439",
+    "16821576": "16822440"
+  },
+  "source_sha256": "69b9f0f4fe9df79d41b71c1e344dd9f97df4e1f67f3f5a67f2b50501efb242f5"
+}

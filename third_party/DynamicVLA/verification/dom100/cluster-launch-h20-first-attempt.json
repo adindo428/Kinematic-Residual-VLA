@@ -1,0 +1,268 @@
+{
+  "account": "cuuser_yue6_vae_verification",
+  "dataset_coverage_observed": {
+    "episode_fraction": 0.9707051411922472,
+    "excluded_episodes": 6073,
+    "excluded_frames": 723258,
+    "frame_fraction": 0.9692912985643772,
+    "retained_episodes": 201233,
+    "retained_frames": 22828959,
+    "task_totals": {
+      "long_horizon": {
+        "excluded": 0,
+        "retained": 5881
+      },
+      "pick": {
+        "excluded": 0,
+        "retained": 68474
+      },
+      "place": {
+        "excluded": 6073,
+        "retained": 126878
+      }
+    }
+  },
+  "dataset_selection_authorization": "User authorized bypassing remaining DOM downloads and using complete cached two-camera episodes.",
+  "dataset_selection_mode": "available_only",
+  "derived_from": {
+    "execution_horizon": 20,
+    "old_prediction_horizon": 50,
+    "parent_family": "/scratch/aparame/Dynamic_VLA/dom100",
+    "parent_fingerprint": "d44ebed8cb9550824184eef39f4183bc728986f44b3bba57bc055cf74e60e1b0",
+    "parent_source_sha256": "69b9f0f4fe9df79d41b71c1e344dd9f97df4e1f67f3f5a67f2b50501efb242f5",
+    "prediction_horizon": 20,
+    "reason": "User requested matching the paper with 20 predicted and executed actions.",
+    "reused_artifacts": {
+      "dataset_coverage.json": "f2ccfe56bc575b02e420a69502ec0a25306c6ba46f4299e77308c67b84ea94fe",
+      "dataset_selection.json": "6eafe596da0b1697ef1db3784427cf8571cdd468e1d4f746fc573822a4d2228c",
+      "episodes.json": "54c05acc563ff95904305681b94f6ec77825aa96258b31e288adf57c99b884c6",
+      "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c",
+      "parquet_hashes.json": "7a4ed0caf4c817e9ed6eec8f7fe67594f333b11e23879d891f0bd2ccfae8061b",
+      "phase_hashes.json": "803035bd133f89c36cd321719fa35668212e3fd11ae4d8261a91a9941f010492",
+      "pilot_episodes.json": "8faecfe8062cba78881f4411d62c8c12a686678b6f483e0a21dea2b253b07c86",
+      "test_cases.json": "3fca5ff097b8216d0cc1aaedc0235af172709a6520a72f05001e7dc3795c9fba",
+      "validation_anchors.json": "089d22058f2337cba93a25333c5b7b97994f6c6faefefc33a53187914f9fea63",
+      "validation_cases.json": "d0a5f98549dc8923091a0ffd999d9dc82573b2cc39f2ec83862fe151d9727961",
+      "video_hashes.json": "64f70f8b0282bbf12c9366483cddd0d5076347f6d85c2db3a14203840863ca35"
+    }
+  },
+  "diagnostic_job": "16836838",
+  "diagnostic_only": true,
+  "execution_horizon": 20,
+  "family": "/scratch/aparame/Dynamic_VLA/dom100-h20",
+  "manifest_fingerprint": "4baf19c029809b0f3eb2923a8b4948020bcb460ba3dd882000ac77e7fe5d42de",
+  "optional_gpu_approval_jobs": [
+    {
+      "constraint": "gpu_a100_40gb",
+      "gpu": "a100",
+      "job_id": "16836847"
+    },
+    {
+      "constraint": null,
+      "gpu": "h100",
+      "job_id": "16836848"
+    },
+    {
+      "constraint": null,
+      "gpu": "h200",
+      "job_id": "16836849"
+    }
+  ],
+  "pilots_job": "16836843",
+  "prediction_horizon": 20,
+  "preparation_completed": true,
+  "preparation_job": "16822429",
+  "preparation_recoveries": [
+    {
+      "dataset_cache_preserved": true,
+      "dependency_updates": "Palmetto disallows scontrol job modification; pending dependent jobs replaced.",
+      "download_timeout_seconds": 60,
+      "download_transport": "HTTP; HF_HUB_DISABLE_XET=1",
+      "metadata_timeout_seconds": 30,
+      "old_job_id": "16795404",
+      "old_jobs_cancelled": true,
+      "profiling_jobs": [
+        "16795406",
+        "16795407",
+        "16795408",
+        "16795409"
+      ],
+      "reason": "Download log stalled for approximately nine hours; restart from verified existing cache.",
+      "replacement_job_id": "16821555",
+      "replacement_jobs": {
+        "16795404": "16821555",
+        "16795406": "16821566",
+        "16795407": "16821567",
+        "16795408": "16821568",
+        "16795409": "16821569",
+        "16795424": "16821570",
+        "16795425": "16821571",
+        "16795426": "16821572",
+        "16795443": "16821573",
+        "16795472": "16821574",
+        "16795473": "16821575",
+        "16795474": "16821576"
+      }
+    },
+    {
+      "dataset_cache_preserved": true,
+      "dataset_selection_mode": "available_only",
+      "local_tests_passed": 64,
+      "old_job_id": "16821555",
+      "old_pending_jobs_cancelled": true,
+      "reason": "User authorized bypassing remaining DOM downloads and using complete cached two-camera episodes.",
+      "replacement_job_id": "16822429",
+      "replacement_jobs": {
+        "16821555": "16822429",
+        "16821566": "16822430",
+        "16821567": "16822431",
+        "16821568": "16822432",
+        "16821569": "16822433",
+        "16821570": "16822434",
+        "16821571": "16822435",
+        "16821572": "16822436",
+        "16821573": "16822437",
+        "16821574": "16822438",
+        "16821575": "16822439",
+        "16821576": "16822440"
+      },
+      "source_sha256": "69b9f0f4fe9df79d41b71c1e344dd9f97df4e1f67f3f5a67f2b50501efb242f5"
+    }
+  ],
+  "preparation_reused_from": "/scratch/aparame/Dynamic_VLA/dom100",
+  "production_jobs": [],
+  "production_release_job": "16836846",
+  "profiling_jobs": [
+    {
+      "constraint": "gpu_a100_40gb",
+      "gpu": "a100",
+      "job_id": "16836839"
+    },
+    {
+      "constraint": "gpu_a100_80gb",
+      "gpu": "a100",
+      "job_id": "16836840"
+    },
+    {
+      "constraint": null,
+      "gpu": "h100",
+      "job_id": "16836841"
+    },
+    {
+      "constraint": null,
+      "gpu": "h200",
+      "job_id": "16836842"
+    }
+  ],
+  "project": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-20261008",
+  "recipe_job": "16836844",
+  "separate_validation": {
+    "candidate_cases": 150,
+    "collection_status": "/scratch/aparame/Dynamic_VLA/data/dom_grasp_place_speed_holdout_v2/collection_status.json",
+    "collection_status_note": "Producer status file still says queued; scheduler and all ten source reports confirm completed smoke checks. No active collection job or production output was found.",
+    "complete_three_speed_groups": 1,
+    "dataset_root": "/scratch/aparame/Dynamic_VLA/data/dom_grasp_place_speed_holdout_v2",
+    "evaluation_timing": "after_training",
+    "intended_repo_id": "adi2440/dom-grasp-place-speed-holdout",
+    "job_name": "dom-mild-validate",
+    "job_scope": "Expert replay and recording smoke checks: 10 source scenes, 3 speeds per scene.",
+    "last_observed_elapsed": "00:07:09",
+    "last_observed_exit_code": "0:0",
+    "last_observed_state": "COMPLETED",
+    "manifest": "/scratch/aparame/Dynamic_VLA/dom_mild_holdout_v2/manifest.json",
+    "manifest_status": "unvalidated_candidates",
+    "note": "Collection metadata only; does not change training data, recipe fingerprints, or job dependencies.",
+    "observed_at": "2026-10-08",
+    "production_collection_submitted": false,
+    "smoke_episodes": 30,
+    "smoke_successes": 7,
+    "suite_root": "/scratch/aparame/Dynamic_VLA/dom_mild_holdout_v2",
+    "uploaded": false,
+    "validation_job_id": "16794853",
+    "validation_output": "/scratch/aparame/Dynamic_VLA/data/dom_grasp_place_speed_holdout_v2/smoke"
+  },
+  "simulator_evaluation_mode": "after_training",
+  "smoke_job": "16836845",
+  "source_sha256": "0781b3812409bc1968682d7e008262cbf092844729a6c97c961e0aedcfed00f0",
+  "superseded_diagnostic_job": "16795363",
+  "superseded_diagnostic_jobs": [
+    "16795423",
+    "16795446"
+  ],
+  "superseded_horizon50_jobs": {
+    "optional_gpu_approval_jobs": [
+      {
+        "constraint": "gpu_a100_40gb",
+        "gpu": "a100",
+        "job_id": "16822438"
+      },
+      {
+        "constraint": null,
+        "gpu": "h100",
+        "job_id": "16822439"
+      },
+      {
+        "constraint": null,
+        "gpu": "h200",
+        "job_id": "16822440"
+      }
+    ],
+    "pilots_job": "16822434",
+    "production_release_job": "16822437",
+    "profiling_jobs": [
+      {
+        "constraint": "gpu_a100_40gb",
+        "dependency": "afterok:16822429",
+        "gpu": "a100",
+        "job_id": "16822430"
+      },
+      {
+        "constraint": "gpu_a100_80gb",
+        "dependency": "afterok:16822429",
+        "gpu": "a100",
+        "job_id": "16822431"
+      },
+      {
+        "constraint": null,
+        "dependency": "afterok:16822429",
+        "gpu": "h100",
+        "job_id": "16822432"
+      },
+      {
+        "constraint": null,
+        "dependency": "afterok:16822429",
+        "gpu": "h200",
+        "job_id": "16822433"
+      }
+    ],
+    "recipe_job": "16822435",
+    "smoke_job": "16822436"
+  },
+  "superseded_preparation_job": "16795334",
+  "superseded_profiling_jobs": [
+    {
+      "constraint": "gpu_a100_40gb",
+      "dependency": "afterok:16795334",
+      "gpu": "a100",
+      "job_id": "16795335"
+    },
+    {
+      "constraint": "gpu_a100_80gb",
+      "dependency": "afterok:16795334",
+      "gpu": "a100",
+      "job_id": "16795336"
+    },
+    {
+      "constraint": null,
+      "dependency": "afterok:16795334",
+      "gpu": "h100",
+      "job_id": "16795337"
+    },
+    {
+      "constraint": null,
+      "dependency": "afterok:16795334",
+      "gpu": "h200",
+      "job_id": "16795338"
+    }
+  ]
+}

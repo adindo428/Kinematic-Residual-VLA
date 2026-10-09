@@ -1,0 +1,6 @@
+{
+  "passed": 94,
+  "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+  "early_stop_collective_test": "passed; interrupted resume, final optimizer preservation, successful exit, explicit continuation",
+  "gpu_smoke": "pending allocation"
+}

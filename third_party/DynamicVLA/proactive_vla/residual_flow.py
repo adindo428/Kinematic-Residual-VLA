@@ -311,6 +311,7 @@ def centered_action_drift(
     action_std: Optional[torch.Tensor] = None,
     drift_mean: Optional[torch.Tensor | list | tuple] = None,
     center_drift: bool = True,
+    phase_gate: Optional[torch.Tensor] = None,
     drift_scale: float = 1.0,
     drift_mode: str = "trajectory",
     action_dt: float = 1.0 / 25.0,
@@ -348,8 +349,20 @@ def centered_action_drift(
             device=drift.device,
             dtype=drift.dtype,
         )
-        return drift - mean, drift
-    return drift, drift
+        centered = drift - mean
+    else:
+        centered = drift
+    # Analytic correction never affects orientation, gripper, or padded channels.
+    centered = centered.clone()
+    centered[..., 3:] = 0
+    if phase_gate is not None:
+        gate = torch.as_tensor(phase_gate, device=drift.device, dtype=drift.dtype)
+        if gate.shape != (*drift.shape[:2], 1):
+            raise ValueError("phase_gate must have shape [batch, horizon, 1]")
+        if not torch.isfinite(gate).all() or (gate < 0).any() or (gate > 1).any():
+            raise ValueError("phase_gate must be finite and within [0, 1]")
+        centered = centered * gate
+    return centered, drift
 
 
 def residualize_actions(
@@ -362,6 +375,7 @@ def residualize_actions(
     action_std: Optional[torch.Tensor] = None,
     drift_mean: Optional[torch.Tensor | list | tuple] = None,
     center_drift: bool = True,
+    phase_gate: Optional[torch.Tensor] = None,
     drift_scale: float = 1.0,
     drift_mode: str = "trajectory",
     action_dt: float = 1.0 / 25.0,
@@ -378,6 +392,7 @@ def residualize_actions(
         action_std=action_std,
         drift_mean=drift_mean,
         center_drift=center_drift,
+        phase_gate=phase_gate,
         drift_scale=drift_scale,
         drift_mode=drift_mode,
         action_dt=action_dt,
@@ -399,6 +414,7 @@ def restore_residual_actions(
     action_std: Optional[torch.Tensor] = None,
     drift_mean: Optional[torch.Tensor | list | tuple] = None,
     center_drift: bool = True,
+    phase_gate: Optional[torch.Tensor] = None,
     drift_scale: float = 1.0,
     drift_mode: str = "trajectory",
     action_dt: float = 1.0 / 25.0,
@@ -415,6 +431,7 @@ def restore_residual_actions(
         action_std=action_std,
         drift_mean=drift_mean,
         center_drift=center_drift,
+        phase_gate=phase_gate,
         drift_scale=drift_scale,
         drift_mode=drift_mode,
         action_dt=action_dt,
@@ -463,6 +480,7 @@ def scheduled_residual_drift(
     action_std: Optional[torch.Tensor] = None,
     drift_mean: Optional[torch.Tensor | list | tuple] = None,
     center_drift: bool = True,
+    phase_gate: Optional[torch.Tensor] = None,
     drift_scale: float = 1.0,
     drift_mode: str = "trajectory",
     action_dt: float = 1.0 / 25.0,
@@ -496,6 +514,7 @@ def scheduled_residual_drift(
         action_std=action_std,
         drift_mean=drift_mean,
         center_drift=center_drift,
+        phase_gate=phase_gate,
         drift_scale=drift_scale,
         drift_mode=drift_mode,
         action_dt=action_dt,

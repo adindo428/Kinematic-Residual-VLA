@@ -18,10 +18,20 @@ datasets/
 .cache/
 paper/*.zip
 
-# Keep new workspace additions scoped to the collector.
-# Existing tracked research/training files remain tracked and unchanged.
-/*
-!/.gitignore
-!/third_party/
-/third_party/*
-!/third_party/Data_Collection_Dynamic_Objects/
+# Runtime artifacts and local-only transfer bundles
+/results/
+/maintenance/
+/vendor/
+/experiments/**/runtime/
+.DS_Store
+._*
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.mp4
+*.avi
+*.so
+*.egg-info/
+.venv/
+venv/

@@ -1,5 +1,15 @@
 # Project knowledge base
 
+**Current training state (September 22, 2026).** Palmetto source lives at
+`/home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA`; large dataset
+caches live in `/scratch/aparame/.cache/huggingface`, checkpoints in
+`/scratch/aparame/Dynamic_VLA/runs`, and Slurm/W&B logs in
+`/home/aparame/Research/Dynamic_VLA/logs`. The reconstructed 0.10/0.18 split is
+present and validated for counts and disjointness (3,810/119,778). Full-finetune
+launchers use explicit split configs and the home checkout. Read
+`third_party/DynamicVLA/RECOVERY.md` for submission order and cautions; no
+GPU training has yet validated this recovered workflow.
+
 This document separates the paper's research claim from the recovered implementation and the historical run notes. It reflects files inspected on September 22, 2026; it is not a record of a successful rerun.
 
 ## Sources of truth
@@ -47,15 +57,14 @@ The stage script defaults to `AUTO_RESUME=0`; `RESUME_RESIDUAL_ONLY=1` skips bas
 
 ## Data, outputs, and storage
 
-The recovered guide reports 207,306 DOM episode parquet files under `/scratch/aparame/.cache/huggingface/lerobot/hzxie/DOM`; video and pretrained weights were **not** fully verified. It describes a reconstructable speed split with train/IID mean speed at most 0.10 m/s and test/OOD at least 0.18 m/s, but the split file itself is absent from this copy. Historical README sections also mention 0.12/0.13 m/s splits: do not conflate the experiments. The recovered guide says `iid_eval` draws from training-distribution episodes, not a held-out IID test set.
+The DOM cache is under `/scratch/aparame/.cache/huggingface/lerobot/hzxie/DOM`. The reconstructed 0.10/0.18 split is present; all 3,810 training parquets and required two-camera MP4 files passed an existence preflight. Video decoding, pretrained weights, and GPU training are not yet validated. Historical README sections mention 0.12/0.13 m/s splits but are no longer active. `iid_eval` draws from training episodes, not a held-out IID test set.
 
 Keep source, manuscript, configurations, and irreplaceable summaries in this Git repository and on backed-up storage. Keep large caches, datasets, and checkpoints on scratch for active work, but back up trained weights elsewhere because Palmetto scratch is purged and not a durable archive. This repository excludes generated runs, weights, and secrets via `.gitignore`. No lost trained weights were recovered.
 
 ## Open issues before rerunning
 
-- Recover or regenerate the DOM split and validate all required data/video and pretrained model assets.
-- Fix the compute-node environment (`libnppicc.so.12` was missing on the recovery host), then run an import smoke test and CPU tests. The recovery notes report 14 CPU tests passing with video-decoder stubs, but no GPU run.
-- Reconcile hard-coded scratch paths with the permanent source location; select an explicit location for outputs and periodic durable checkpoint backups.
+- Validate real video decoding and pretrained model load on an allocated compute node, then a small GPU batch before a full submission.
+- Back up checkpoints to durable storage; scratch is not archival.
 - Verify W&B project/account settings, Slurm partition/account, resource limits, and run flags before submission.
 - Resolve the paper's truncated introduction, legacy “ProactiveVLA” naming, placeholder text, and apparent CFM loss discrepancy (`x_s-x_0` versus the stated path derivative `x_1-x_0`).
 - Run empirical baseline/residual comparisons before claiming improved success or speed generalization.

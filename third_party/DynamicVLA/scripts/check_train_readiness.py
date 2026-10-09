@@ -3,6 +3,7 @@
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 import yaml
@@ -17,10 +18,13 @@ def main():
     parser.add_argument(
         "--cache",
         type=Path,
-        default=Path("/scratch/aparame/.cache/huggingface/lerobot/hzxie/DOM"),
+        default=Path(os.environ.get("HF_LEROBOT_HOME", "/scratch/aparame/.cache/huggingface/lerobot")) / "hzxie/DOM",
     )
     args = parser.parse_args()
     config = yaml.safe_load(Path(args.config).read_text())
+    metadata = args.cache / "meta" / "info.json"
+    if not metadata.is_file():
+        raise SystemExit(f"Missing DOM metadata: {metadata}")
     split_path = Path(config["DATASET"]["EPISODE_SPLIT_FILE"])
     derived = json.loads(split_path.read_text())
     source = json.loads((split_path.parent / derived["source_file"]).read_text())
