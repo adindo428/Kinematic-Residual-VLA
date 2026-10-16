@@ -24,12 +24,12 @@ def write_json(path,value):
     tmp=path.with_name(path.name+'.tmp')
     tmp.write_text(json.dumps(value,indent=2,allow_nan=False)+'\n');tmp.replace(path)
 
-def prepare(stage,root,assets,gpu_label="L40S"):
+def prepare(stage,root,assets,gpu_label="L40S",source_commit='434dc7105cf6d559018d15af5fecbcdad44f036e'):
     stage,root,assets=map(Path,(stage,root,assets))
     root.mkdir(parents=True,exist_ok=True)
     source=stage/'source';ckpt=stage/'checkpoint'
     commit=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()
-    assert commit=='434dc7105cf6d559018d15af5fecbcdad44f036e'
+    assert commit==source_commit
     assert not subprocess.check_output(['git','-C',str(source),'diff','--name-only'],text=True).strip()
     cfg=json.loads((ckpt/'config.json').read_text())
     assert cfg['type']=='dynamicvla' and cfg['delta_timestamps']['observation']==[-2,0]
@@ -69,6 +69,9 @@ def prepare(stage,root,assets,gpu_label="L40S"):
         'checkpoint_revision':'c9609d94c5940eb42436a31927d7e80ae454279e','checkpoint':str(ckpt),
         'checkpoint_config_sha256':sha256(ckpt/'config.json'),'checkpoint_weights_sha256':sha256(ckpt/'model.safetensors'),
         'official_repository':'https://github.com/hzxie/DynamicVLA','official_source_commit':commit,
+        'requested_runtime':({'isaacsim':'4.5.0','isaaclab':'2.2.1'}
+                             if commit=='a27a06d2ca74d0e987a5e552e01013073e93cfd8'
+                             else {'isaacsim':'5.1.0','isaaclab':'2.3.2'}),
         'paper':'https://arxiv.org/abs/2601.22153','paper_version':'2601.22153v2',
         'paper_reference':PAPER,'requested_gpu':gpu_label,'gpu_label':gpu_label,'expected_trials':1800,'trials_per_configuration':20,
         'configurations':90,'dimension_order':list(DIMENSIONS.values()),'configurations_per_dimension':10,
@@ -80,7 +83,7 @@ def prepare(stage,root,assets,gpu_label="L40S"):
         'time_definition':'Simulation time from motion onset to termination, including successful completion and failed trials. Recorded as simulator step count times actual step_dt.',
         'seed_policy':'Unmodified official reset and instruction randomization; released per-configuration seed retained.',
         'recording':'Thin observer wraps simulator calls to record status, step count and time after each trial; policy, physics, actions and termination logic remain upstream code.',
-        'limitations':[f'{gpu_label} rather than the paper RTX A6000; online inference latency can change outcomes.',
+        'limitations':['Online inference latency can change outcomes; compare the recorded GPU/runtime configuration with the paper.',
                        'No claim that the released weights must exactly reproduce the paper; report all per-dimension deviations.',
                        'Twenty repeats retain the upstream reset seed behavior; repeat independence is not assumed.']}
     write_json(root/'protocol.json',protocol)
@@ -93,7 +96,7 @@ def prepare(stage,root,assets,gpu_label="L40S"):
         'Final table1_comparison.csv, table1_comparison.md, table1_comparison.png and summary.json appear here after all trials verify.\n\n'
         'Success is actual manipulation completion. Time includes failed trials, using simulation time. '
         'Reference: Table 1, arXiv 2601.22153v2: 47.06% overall success, 8.53 s mean time. '
-        f'{gpu_label} hardware differs from the paper RTX A6000; streaming remains enabled. See protocol.json for exact revisions and provenance.\n')
+        'Streaming remains enabled. See protocol.json for hardware, exact revisions and provenance.\n')
     print(json.dumps({'prepared':True,'source_commit':commit,'tests':90,'scenes':len(scenes),'root':str(root)},indent=2))
 
 if __name__=='__main__':

@@ -1,4 +1,4 @@
-"""Four/eight-GPU DOM training with a single global sample cursor."""
+"""DOM distributed training with a single global sample cursor."""
 import contextlib
 import json
 import logging

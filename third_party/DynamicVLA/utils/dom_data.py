@@ -144,7 +144,11 @@ class DOMData(torch.utils.data.Dataset):
             cache_key = (episode["_dom_episode_id"], key)
             decoder = self.decoders.pop(cache_key, None)
             if decoder is None:
-                decoder = torchcodec.decoders.VideoDecoder(episode[key], seek_mode="approximate", num_ffmpeg_threads=1)
+                try:
+                    decoder = torchcodec.decoders.VideoDecoder(episode[key], seek_mode="approximate", num_ffmpeg_threads=1)
+                except RuntimeError as error:
+                    path = self.base.root/self.meta.get_video_file_path(episode["_dom_episode_id"], key)
+                    raise RuntimeError(f"Cannot decode DOM video {path} ({len(episode[key])} bytes): {error}") from error
             self.decoders[cache_key] = decoder
             while len(self.decoders) > 8:
                 self.decoders.popitem(last=False)

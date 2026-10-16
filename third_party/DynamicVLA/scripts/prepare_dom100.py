@@ -73,7 +73,55 @@ def coverage_summary(records, excluded, published_episodes, published_frames):
             "episode_fraction": len(records)/published_episodes,
             "frame_fraction": frames/published_frames,
             "missing_or_empty_files": sum(len(r["missing_or_empty_files"]) for r in excluded),
+            "invalid_video_files": sum(len(r.get("invalid_video_files", [])) for r in excluded),
             "task_speed_coverage": dict(sorted(strata.items()))}
+
+
+def approved_invalid_episodes(path, data, info, metadata, revision):
+    """Exclude only explicitly approved files with recorded immutable evidence."""
+    evidence = json.loads(Path(path).read_text())
+    if not evidence.get("user_authorized_exclusions") or evidence["dataset_revision"] != revision:
+        raise ValueError("Invalid or unauthorized DOM exclusion record")
+    excluded, seen = [], set()
+    for entry in evidence["episodes"]:
+        ep = entry["episode_index"]
+        if not isinstance(ep, int) or ep not in metadata or ep in seen:
+            raise ValueError("Invalid or duplicate approved episode exclusion")
+        seen.add(ep)
+        allowed = {str(p.relative_to(data)) for p in episode_paths(data, info, ep)[1:]}
+        invalid = entry["invalid_videos"]
+        if not invalid:
+            raise ValueError("An excluded episode needs invalid-video evidence")
+        for video in invalid:
+            name = video["path"]
+            if name not in allowed:
+                raise ValueError("Exclusion evidence names a different episode/camera")
+            actual = Path(data)/name
+            if actual.stat().st_size != video["bytes"] or file_digest(actual) != video["sha256"]:
+                raise ValueError(f"Approved invalid video changed: {name}")
+            # Recheck the approved defect; a repaired recording must not be
+            # discarded merely because an old exclusion record names it.
+            from torchcodec.decoders import VideoDecoder
+            if "decoded_frames" in video:
+                decoder = VideoDecoder(actual, seek_mode="exact", num_ffmpeg_threads=1)
+                expected_frames = int(metadata[ep]["length"])
+                if (len(decoder) != video["decoded_frames"]
+                        or video.get("expected_frames") != expected_frames
+                        or not 0 < len(decoder) < expected_frames):
+                    raise ValueError(f"Approved short-video evidence differs: {name}")
+            else:
+                try:
+                    VideoDecoder(actual.read_bytes(), seek_mode="exact", num_ffmpeg_threads=1)
+                except RuntimeError:
+                    pass
+                else:
+                    raise ValueError(f"Approved video is now decodable: {name}")
+        excluded.append({"episode_index": ep, "length": int(metadata[ep]["length"]),
+                         "missing_or_empty_files": [], "invalid_video_files": invalid,
+                         "reason": evidence["reason"]})
+    if not excluded:
+        raise ValueError("The approved exclusion record is empty")
+    return excluded
 
 
 def repo_file_matches(path, entry):
@@ -162,8 +210,11 @@ def prepare(args):
     if (out/"manifest.json").exists():
         raise FileExistsError("Family is already frozen; choose a new family root to rebuild")
     model_revision = HfApi().model_info("hzxie/dynamic-vla-DOM", revision=args.model_revision).sha
-    dataset_revision = HfApi().dataset_info("hzxie/DOM", revision=args.dataset_revision).sha
+    dataset_revision = HfApi().dataset_info("hzxie/DOM", revision=args.dataset_revision, expand=["sha"]).sha
     available_only = getattr(args, "available_only", False)
+    exclusions_path = getattr(args, "approved_exclusions", None)
+    if available_only and exclusions_path:
+        raise ValueError("Approved exact exclusions cannot be combined with --available-only")
     if available_only and args.prefetch:
         raise ValueError("--available-only cannot be combined with --prefetch")
     if args.prefetch:
@@ -184,12 +235,20 @@ def prepare(args):
         raise ValueError("Episode metadata differs from published dataset totals")
     selected, excluded = (inventory_cached_episodes(data, info, episodes, progress=True)
                           if available_only else (list(range(info["total_episodes"])), []))
+    if exclusions_path:
+        excluded = approved_invalid_episodes(exclusions_path, data, info, episodes, dataset_revision)
+        excluded_ids = {row["episode_index"] for row in excluded}
+        selected = [ep for ep in selected if ep not in excluded_ids]
+        (out/"approved_exclusions.json").write_bytes(Path(exclusions_path).read_bytes())
+    selection_mode = ("full_minus_approved_invalid_episodes" if exclusions_path
+                      else "available_only" if available_only else "full")
     if not selected:
         raise ValueError("No complete two-camera DOM episodes are cached")
-    atomic_json(out/"dataset_selection.json", {"mode": "available_only" if available_only else "full",
-        "reason": "User requested bypassing remaining downloads" if available_only else "Full published dataset",
+    selection_record = {"mode": selection_mode,
+        "reason": "User-approved exclusions of published invalid videos" if exclusions_path else
+                  "User requested bypassing remaining downloads" if available_only else "Full published dataset",
         "published_episodes": info["total_episodes"], "published_frames": info["total_frames"],
-        "episode_ids": selected, "excluded": excluded})
+        "episode_ids": selected, "excluded": excluded}
     print(f"Preparing {len(selected)}/{info['total_episodes']} complete episodes; "
           f"excluded {len(excluded)}", flush=True)
     # Missing recordings can be concentrated in particular tasks/speeds. Keep
@@ -207,6 +266,16 @@ def prepare(args):
     records, files, phase_files, videos = [], {}, {}, {}
     out.joinpath("phase_cache").mkdir(exist_ok=True)
     phase_cfg = PhaseGateConfig()
+    reuse = getattr(args, "reuse_phase_family", None)
+    if reuse:
+        from core.dom_training import load_family
+        reuse = Path(reuse).resolve()
+        prior = load_family(reuse, check_source=False)
+        if (prior["dataset_revision"] != dataset_revision or prior["dataset_root"] != str(data)
+                or prior["phase_config"] != vars(phase_cfg)):
+            raise ValueError("Phase-cache reuse differs from the frozen data/configuration")
+        prior_parquets = json.loads((reuse/"parquet_hashes.json").read_text())
+        prior_phases = json.loads((reuse/"phase_hashes.json").read_text())
     for index, ep in enumerate(selected):
         parquet = data/info["data_path"].format(episode_chunk=ep//info["chunks_size"], episode_index=ep)
         table = pq.read_table(parquet, columns=["observation.state", "observation.environment_state", "action", "timestamp", "task_index"])
@@ -232,9 +301,16 @@ def prepare(args):
             "speed_bin": int(np.searchsorted([.05, .10, .18, .30], mean_speed, side="right")),
             "mean_speed": mean_speed, "duplicate_id": duplicate})
         files[str(ep)] = file_digest(parquet)
-        compact, phases = replay_prefix_states(arrays["observation.state"], arrays["observation.environment_state"],
-                                                arrays["action"], arrays["timestamp"].reshape(-1), phase_cfg)
-        np.savez_compressed(out/"phase_cache"/f"{ep:06d}.npz", state=compact, phase=phases)
+        phase_path = out/"phase_cache"/f"{ep:06d}.npz"
+        if reuse:
+            old_phase = reuse/"phase_cache"/phase_path.name
+            if files[str(ep)] != prior_parquets[str(ep)] or file_digest(old_phase) != prior_phases[str(ep)]:
+                raise ValueError(f"Frozen phase-cache inputs changed for episode {ep}")
+            os.link(old_phase, phase_path)
+        else:
+            compact, phases = replay_prefix_states(arrays["observation.state"], arrays["observation.environment_state"],
+                                                    arrays["action"], arrays["timestamp"].reshape(-1), phase_cfg)
+            np.savez_compressed(phase_path, state=compact, phase=phases)
         phase_files[str(ep)] = file_digest(out/"phase_cache"/f"{ep:06d}.npz")
         if index % 1000 == 0 or index+1 == len(selected):
             print(f"Prepared {index+1}/{len(selected)} episodes (DOM episode {ep})", flush=True)
@@ -242,6 +318,7 @@ def prepare(args):
     if any(r["length"] != int(episodes[r["episode_index"]]["length"]) for r in records):
         raise ValueError("Cached episode lengths differ from published metadata")
     coverage = coverage_summary(records, excluded, info["total_episodes"], info["total_frames"])
+    atomic_json(out/"dataset_selection.json", selection_record)
     atomic_json(out/"dataset_coverage.json", coverage)
     if not split["validation"] or not split["test"]:
         raise ValueError("Empty held-out split")
@@ -271,7 +348,7 @@ def prepare(args):
         "source_sha256": source_digest(Path(__file__).resolve().parents[1]),
         "split_sha256": file_digest(out/"split.json"), "parquets_sha256": digest(files),
         "frames": coverage["retained_frames"], "episodes": coverage["retained_episodes"],
-        "dataset_selection_mode": "available_only" if available_only else "full",
+        "dataset_selection_mode": selection_mode,
         "published_frames": info["total_frames"], "published_episodes": info["total_episodes"],
         "coverage": coverage,
         "prediction_horizon": PREDICTION_HORIZON, "execution_horizon": EXECUTION_HORIZON,
@@ -286,6 +363,8 @@ def prepare(args):
         "episodes.json", "pilot_episodes.json", "validation_anchors.json", "validation_cases.json", "test_cases.json",
         "parquet_hashes.json", "video_hashes.json", "phase_hashes.json", "initialization/config.json",
         "dataset_selection.json", "dataset_coverage.json")}
+    if exclusions_path:
+        manifest["artifacts"]["approved_exclusions.json"] = file_digest(out/"approved_exclusions.json")
     manifest["fingerprint"] = digest(manifest)
     atomic_json(out/"manifest.json", manifest)
     print(json.dumps({"prepared": str(out), "counts": manifest["counts"]}, indent=2))
@@ -297,6 +376,10 @@ def main():
     parser.add_argument("--dataset-root", type=Path, default=Path("/scratch/aparame/.cache/huggingface/lerobot/hzxie/DOM"))
     parser.add_argument("--model-revision", default="main")
     parser.add_argument("--dataset-revision", default="main")
+    parser.add_argument("--approved-exclusions", type=Path,
+                        help="Explicit user-approved invalid-video evidence; all other episodes remain required")
+    parser.add_argument("--reuse-phase-family", type=Path,
+                        help="Reuse immutable phase files after checking prior manifest, parquet and phase hashes")
     selection = parser.add_mutually_exclusive_group()
     selection.add_argument("--prefetch", action="store_true", help="Fetch missing data and both cameras at the pinned revision")
     selection.add_argument("--available-only", action="store_true", help="Freeze complete cached episodes; exclude missing/empty parquet or either camera, without downloading DOM data")

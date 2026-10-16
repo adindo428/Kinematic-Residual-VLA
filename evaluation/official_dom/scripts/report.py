@@ -64,27 +64,30 @@ def summarize(root):
     write_json(root/'summary.json',{'complete':True,'verified_trials':1800,'protocol':p,'observed':observed,'comparison':rows})
     with (root/'table1_comparison.csv').open('w') as f:
         writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
-    md='Official DynamicVLA DOM manipulation benchmark: Table 1 comparison\n\n'
+    method=p.get('method_label',f'Released checkpoint · {gpu_label}')
+    md=p.get('benchmark','Official DynamicVLA DOM manipulation benchmark')+': Table 1 comparison\n\n'
     md+=f'| Metric | Paper | {gpu_label} evaluation | Difference |\n|---|---:|---:|---:|\n'
     for r in rows:
         unit=' s' if r['Metric']=='Time' else '%'
         delta_unit=' s' if r['Metric']=='Time' else ' pp'
         md+=f"| {r['Metric']} | {r['Published']:.2f}{unit} | {r['Observed']:.2f}{unit} | {r['Difference']:+.2f}{delta_unit} |\n"
     md+='\n1800 verified trials, 20 per released configuration. Success is instructed manipulation completion. Time averages successful and failed trials. No tracking-distance criterion is applied.\n\n'
-    md+='Official checkpoint revision: '+p['checkpoint_revision']+'; upstream code: '+p['official_source_commit']+'.\n\n'
-    md+=f'Hardware differs from the paper RTX A6000. The official simulator and continuous inference/latency-aware action streaming are retained. Released configurations and reset seeds are unchanged. Numerical deviations are reported without claiming statistical equivalence or independent randomized repeats.\n'
+    md+='Checkpoint: '+p['checkpoint_revision']+'; simulator source: '+p['official_source_commit']+'.\n\n'
+    if p.get('checkpoint_kind')=='locally_trained':
+        md+='Method: '+method+'. Current simulator object pose/velocity are additional policy inputs; policy source and trained checkpoint hashes are recorded in protocol.json.\n\n'
+    md+='See the recorded hardware and runtime configuration in protocol.json and each runtime.json. The official simulator and continuous inference/latency-aware action streaming are retained. Released configurations and reset seeds are unchanged. Numerical deviations are reported without claiming statistical equivalence or independent randomized repeats.\n'
     (root/'table1_comparison.md').write_text(md)
     import matplotlib;matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     keys=[*p['dimension_order'],'Success','Time']
     fig,ax=plt.subplots(figsize=(14,3));ax.axis('off')
     cells=[['Published DynamicVLA',*[f"{p['paper_reference'][k]:.2f}" for k in keys]],
-           [f'Released checkpoint · {gpu_label}',*[f"{observed[k]:.2f}" for k in keys]]]
+           [method,*[f"{observed[k]:.2f}" for k in keys]]]
     table=ax.table(cellText=cells,colLabels=['Method',*p['dimension_order'],'Success\n(%) ↑','Time\n(s) ↓'],
                    loc='center',cellLoc='center',colWidths=[.27]+[.062]*9+[.08,.08])
     table.auto_set_font_size(False);table.set_fontsize(10);table.scale(1,1.8)
-    ax.set_title('Official DOM manipulation benchmark: Table 1 reproduction',pad=22)
-    fig.text(.06,.03,f'1,800 manipulation trials. Original test configurations and streaming execution; {gpu_label} hardware differs from paper RTX A6000.',fontsize=9)
+    ax.set_title('DOM manipulation benchmark: Table 1 comparison',pad=22)
+    fig.text(.06,.03,f'1,800 manipulation trials. Original test configurations and streaming execution; hardware: {gpu_label}.',fontsize=9)
     fig.savefig(root/'table1_comparison.png',dpi=180,bbox_inches='tight');plt.close(fig)
     print(json.dumps(observed,indent=2))
 

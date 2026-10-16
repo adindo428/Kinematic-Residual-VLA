@@ -1,9 +1,5 @@
-%% File: `iclr2024.bst'
-%% A copy of iclm2010.bst, which is a modification of `plainnl.bst' for use with natbib package 
-%%
-%% Copyright 2010 Hal Daum\'e III
-%% Modified by J. Fürnkranz
-%% - Changed labels from (X and Y, 2000) to (X & Y, 2000)
+%% File: `abbrvnat.bst'
+%% A modification of `abbrv.bst' for use with natbib package 
 %%
 %% Copyright 1993-2007 Patrick W Daly
 %% Max-Planck-Institut f\"ur Sonnensystemforschung
@@ -18,7 +14,7 @@
 %% version 1 of the License, or any later version.
 %%
  % Version and source file information:
- % \ProvidesFile{icml2010.mbs}[2007/11/26 1.93 (PWD)]
+ % \ProvidesFile{natbst.mbs}[2007/11/26 1.93 (PWD)]
  %
  % BibTeX `plainnat' family
  %   version 0.99b for BibTeX versions 0.99a or later,
@@ -223,7 +219,8 @@ FUNCTION {format.names}
   s num.names$ 'numnames :=
   numnames 'namesleft :=
     { namesleft #0 > }
-    { s nameptr "{ff~}{vv~}{ll}{, jj}" format.name$ 't :=
+    % Formerly { s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ 't :=
+    { s nameptr "{ff }{vv }{ll}{, jj}" format.name$ 't :=
       nameptr #1 >
         { namesleft #1 >
             { ", " * t * }
@@ -265,8 +262,8 @@ FUNCTION {format.editors}
     { "" }
     { editor format.names
       editor num.names$ #1 >
-        { " (eds.)" * }
-        { " (ed.)" * }
+        { ", editors" * }
+        { ", editor" * }
       if$
     }
   if$
@@ -275,28 +272,32 @@ FUNCTION {format.editors}
 FUNCTION {format.isbn}
 { isbn empty$
     { "" }
-    { new.block "ISBN " isbn * }
+%    { new.block "ISBN " isbn * }
+    { "" }
   if$
 }
 
 FUNCTION {format.issn}
 { issn empty$
     { "" }
-    { new.block "ISSN " issn * }
+%    { new.block "ISSN " issn * }
+    { "" }
   if$
 }
 
 FUNCTION {format.url}
 { url empty$
     { "" }
-    { new.block "URL \url{" url * "}" * }
+%    { new.block "URL \url{" url * "}" * }
+    { "" }
   if$
 }
 
 FUNCTION {format.doi}
 { doi empty$
     { "" }
-    { new.block "\doi{" doi * "}" * }
+%    { new.block "\doi{" doi * "}" * }
+    { "" }
   if$
 }
 
@@ -424,12 +425,13 @@ FUNCTION {format.date}
        pop$ "" }
     'skip$
   if$
-  month empty$
-    'skip$
-    { month
-      " " * swap$ *
-    }
-  if$
+%% CR: Leave out months.
+%  month empty$
+%    'skip$
+%    { month
+%      " " * swap$ *
+%    }
+%  if$
   extra.label *
 }
 
@@ -455,20 +457,24 @@ FUNCTION {either.or.check}
 FUNCTION {format.bvolume}
 { volume empty$
     { "" }
-    { "volume" volume tie.or.space.connect
-      series empty$
-        'skip$
-        { " of " * series emphasize * }
-      if$
-      "volume and number" number either.or.check
-    }
+%% CR: Don't show "volume 1234 of LNCS" etc.
+%    { "volume" volume tie.or.space.connect
+%      series empty$
+%        'skip$
+%        { " of " * series emphasize * }
+%      if$
+%      "volume and number" number either.or.check
+%    }
+    { "" }
   if$
 }
 
 FUNCTION {format.number.series}
 { volume empty$
     { number empty$
-        { series field.or.null }
+%% CR: Leave out series information.
+%        { series field.or.null }
+        { "" }
         { output.state mid.sentence =
             { "number" }
             { "Number" }
@@ -522,8 +528,8 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { pages multi.page.check
-        { "pp.\ " pages n.dashify tie.or.space.connect }
-        { "pp.\ " pages tie.or.space.connect }
+        { "pages" pages n.dashify tie.or.space.connect }
+        { "page" pages tie.or.space.connect }
       if$
     }
   if$
@@ -597,11 +603,13 @@ FUNCTION {format.chapter.pages}
 FUNCTION {format.in.ed.booktitle}
 { booktitle empty$
     { "" }
-    { editor empty$
-        { "In " booktitle emphasize * }
-        { "In " format.editors * ", " * booktitle emphasize * }
-      if$
-    }
+%% CR: Leave out editors even if the information is available.
+%    { editor empty$
+%        { "In " booktitle emphasize * }
+%        { "In " format.editors * ", " * booktitle emphasize * }
+%      if$
+%    }
+    { "In " booktitle emphasize * }
   if$
 }
 
@@ -1016,13 +1024,13 @@ FUNCTION {unpublished}
 FUNCTION {default.type} { misc }
 
 
-MACRO {jan} {"January"}
+MACRO {jan} {"Jan."}
 
-MACRO {feb} {"February"}
+MACRO {feb} {"Feb."}
 
-MACRO {mar} {"March"}
+MACRO {mar} {"Mar."}
 
-MACRO {apr} {"April"}
+MACRO {apr} {"Apr."}
 
 MACRO {may} {"May"}
 
@@ -1030,58 +1038,58 @@ MACRO {jun} {"June"}
 
 MACRO {jul} {"July"}
 
-MACRO {aug} {"August"}
+MACRO {aug} {"Aug."}
 
-MACRO {sep} {"September"}
+MACRO {sep} {"Sept."}
 
-MACRO {oct} {"October"}
+MACRO {oct} {"Oct."}
 
-MACRO {nov} {"November"}
+MACRO {nov} {"Nov."}
 
-MACRO {dec} {"December"}
+MACRO {dec} {"Dec."}
 
 
 
-MACRO {acmcs} {"ACM Computing Surveys"}
+MACRO {acmcs} {"ACM Comput. Surv."}
 
-MACRO {acta} {"Acta Informatica"}
+MACRO {acta} {"Acta Inf."}
 
-MACRO {cacm} {"Communications of the ACM"}
+MACRO {cacm} {"Commun. ACM"}
 
-MACRO {ibmjrd} {"IBM Journal of Research and Development"}
+MACRO {ibmjrd} {"IBM J. Res. Dev."}
 
-MACRO {ibmsj} {"IBM Systems Journal"}
+MACRO {ibmsj} {"IBM Syst.~J."}
 
-MACRO {ieeese} {"IEEE Transactions on Software Engineering"}
+MACRO {ieeese} {"IEEE Trans. Softw. Eng."}
 
-MACRO {ieeetc} {"IEEE Transactions on Computers"}
+MACRO {ieeetc} {"IEEE Trans. Comput."}
 
 MACRO {ieeetcad}
- {"IEEE Transactions on Computer-Aided Design of Integrated Circuits"}
+ {"IEEE Trans. Comput.-Aided Design Integrated Circuits"}
 
-MACRO {ipl} {"Information Processing Letters"}
+MACRO {ipl} {"Inf. Process. Lett."}
 
-MACRO {jacm} {"Journal of the ACM"}
+MACRO {jacm} {"J.~ACM"}
 
-MACRO {jcss} {"Journal of Computer and System Sciences"}
+MACRO {jcss} {"J.~Comput. Syst. Sci."}
 
-MACRO {scp} {"Science of Computer Programming"}
+MACRO {scp} {"Sci. Comput. Programming"}
 
-MACRO {sicomp} {"SIAM Journal on Computing"}
+MACRO {sicomp} {"SIAM J. Comput."}
 
-MACRO {tocs} {"ACM Transactions on Computer Systems"}
+MACRO {tocs} {"ACM Trans. Comput. Syst."}
 
-MACRO {tods} {"ACM Transactions on Database Systems"}
+MACRO {tods} {"ACM Trans. Database Syst."}
 
-MACRO {tog} {"ACM Transactions on Graphics"}
+MACRO {tog} {"ACM Trans. Gr."}
 
-MACRO {toms} {"ACM Transactions on Mathematical Software"}
+MACRO {toms} {"ACM Trans. Math. Softw."}
 
-MACRO {toois} {"ACM Transactions on Office Information Systems"}
+MACRO {toois} {"ACM Trans. Office Inf. Syst."}
 
-MACRO {toplas} {"ACM Transactions on Programming Languages and Systems"}
+MACRO {toplas} {"ACM Trans. Prog. Lang. Syst."}
 
-MACRO {tcs} {"Theoretical Computer Science"}
+MACRO {tcs} {"Theoretical Comput. Sci."}
 
 
 READ
@@ -1112,7 +1120,7 @@ FUNCTION {format.lab.names}
         'skip$
         { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { " et~al." * }
-            { " \& " * s #2 "{vv~}{ll}" format.name$ * }
+            { " and " * s #2 "{vv~}{ll}" format.name$ * }
           if$
         }
       if$
@@ -1216,7 +1224,7 @@ FUNCTION {sort.format.names}
   numnames 'namesleft :=
     { namesleft #0 > }
     {
-      s nameptr "{vv{ } }{ll{ }}{  ff{ }}{  jj{ }}" format.name$ 't :=
+      s nameptr "{vv{ } }{ll{ }}{  f{ }}{  jj{ }}" format.name$ 't :=
       nameptr #1 >
         {
           "   "  *

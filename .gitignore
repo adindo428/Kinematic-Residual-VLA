@@ -17,6 +17,15 @@ videos/
 datasets/
 .cache/
 paper/*.zip
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.brf
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
 
 # Runtime artifacts and local-only transfer bundles
 /results/

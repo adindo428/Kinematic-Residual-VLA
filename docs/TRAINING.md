@@ -55,6 +55,11 @@ The 3080 is primarily the evaluation target. Training batch 8 may not fit; chang
 
 ## DOM training: 100 epochs
 
+For the SSD workstation's queued full-DOM `krv100` run, use the
+[workstation training instructions](../workstation/README.md#full-dom-and-krvla--velocity-training).
+The two-A6000 launcher requires a new full-data family and actual decoded
+distributed checks; it does not reuse an A100/H100/H200 approval.
+
 Source: `third_party/DynamicVLA`. The current trainer supports these six matched methods:
 
 | Variant | Neural velocity | Coordinate correction |

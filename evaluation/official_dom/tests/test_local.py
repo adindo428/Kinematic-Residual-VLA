@@ -38,3 +38,22 @@ def test_existing_pilot_cannot_be_overwritten(tmp_path):
     (a.root/'protocol.json').write_text(json.dumps({'checkpoint':str(a.stage/'checkpoint'),'dimension_order':['CR']}))
     with pytest.raises(FileExistsError):local.run_one(a,'pilot')
     assert sentinel.read_text()=='previous evidence'
+
+
+def test_separate_gpu_selection_preserves_ssd_cache_paths(tmp_path,monkeypatch):
+    a=args(tmp_path);a.sim_gpu=0;a.policy_gpu=1
+    monkeypatch.setenv('HF_HOME',str(tmp_path/'ssd-cache'))
+    monkeypatch.setenv('CUDA_VISIBLE_DEVICES','2')
+    original,server,client=local.process_environments(a,tmp_path/'run')
+    assert server['CUDA_VISIBLE_DEVICES']=='0'
+    assert client['CUDA_VISIBLE_DEVICES']=='1'
+    assert original['CUDA_VISIBLE_DEVICES']=='2'
+    assert server['HF_HOME']==client['HF_HOME']==str(tmp_path/'ssd-cache')
+    assert server['DOM_OFFICIAL_SOURCE']==client['DOM_OFFICIAL_SOURCE']==str(a.stage/'source')
+
+
+def test_portable_kit_settings_reach_simulator_only(tmp_path):
+    a=args(tmp_path);a.kit_args='--portable --portable-root=/ssd/kit'
+    server,client=local.commands(a,tmp_path/'list.txt',tmp_path/'run',20)
+    assert server[server.index('--kit_args')+1]==a.kit_args
+    assert '--kit_args' not in client

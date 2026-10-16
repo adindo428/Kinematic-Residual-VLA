@@ -1,0 +1,10 @@
+# Sim 4.5 / Lab 2.2.1 reproduction on Ampere; CUDA wheels installed separately.
+torch==2.7.1
+torchvision==0.22.1
+numpy==1.26.4
+pillow==11.2.1
+transformers==4.57.1
+warp-lang==1.7.0
+imageio==2.38.0
+imageio-ffmpeg==0.6.0
+num2words==0.5.14

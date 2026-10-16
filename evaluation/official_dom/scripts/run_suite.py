@@ -13,9 +13,12 @@ from report import verify_folder
 def stop_group(process):
     if process is None:return
     try:os.killpg(process.pid,signal.SIGTERM)
-    except ProcessLookupError:return
+    except ProcessLookupError:pass
     try:process.wait(timeout=20)
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired:pass
+    finally:
+        # A shell launcher can exit while its simulator child is still alive.
+        # Always reap the entire session, including those remaining children.
         try:os.killpg(process.pid,signal.SIGKILL)
         except ProcessLookupError:pass
         process.wait()
