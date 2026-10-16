@@ -1,0 +1,9 @@
+{
+  "camera_serial": "REPLACE_WITH_FIXED_CAMERA_SERIAL",
+  "arm": "right",
+  "static_camera": true,
+  "camera_points_m": [],
+  "base_points_m": [],
+  "validation_camera_points_m": [],
+  "validation_base_points_m": []
+}

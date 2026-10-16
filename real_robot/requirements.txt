@@ -1,0 +1,4 @@
+# Separate CPU perception environment only. Do not install into DOM training envs.
+numpy>=1.26,<3
+opencv-contrib-python>=4.8,<5
+pyrealsense2>=2.56,<3
