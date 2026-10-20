@@ -1,0 +1,18 @@
+{
+  "repository": "https://github.com/hzxie/DynamicVLA",
+  "commit": "434dc7105cf6d559018d15af5fecbcdad44f036e",
+  "audited_on": "2026-09-30",
+  "files": {
+    "utils/instruction_generator.py": "f2fe13b5161e428a2ae28f5bbe934a06a93df6a8977dce7e8dfd74359f61ec03",
+    "utils/datasets.py": "da02cdd91bbcd08cf919774fa8387bbd5be87ecf70cb8813c6600d9829a0b1f6",
+    "simulations/simulate.py": "e073ce04af7222b77ca981bd7a51f02c359d572a3247751524f57d35f06e249f",
+    "simulations/configs/sim_cfg.yaml": "cdd167c0ab8f627f2b3e8a214f815ba4d9f190017ad6cd0b3c80e34bdbf5034a",
+    "simulations/configs/env_cfg.py": "b7b7f458a962f84e6c4a500b059a8c527383714573e9e4ef922795c6e1b14e21",
+    "simulations/configs/termination_cfg.py": "6182b86d5f04ce5f4fb70a123ac7e1b692f7394851c6f989e01327890c577a63",
+    "scripts/translate_dataset_seq.py": "bb26ea4a4b70542527b1431add27d46f641e1aea06efbcaa8a42ae9ab3a9fa1b",
+    "scripts/create_lerobot_dataset.py": "5e319190dd13ba6a5bef3d38b02bf46f4c84e9b7c2807ca290517214b1b82d7c",
+    "utils/memcached.py": "d0c0ca19d4450b0c7239ac37ba22155efcabec78f3a952ff6c5a1fa6178dd77e"
+  },
+  "patched_instruction_sha256": "2cd0a741445efabc0d707b3fed566e973d30c934ee0a693ea90a12360b968e18",
+  "patched_memcached_sha256": "2029e26cc357acf708244095153a444aa031147e0b9eab2c9b69b1e635e9a749"
+}

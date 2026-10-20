@@ -1,0 +1,32 @@
+--- a/utils/memcached.py
++++ b/utils/memcached.py
+@@ -14,7 +14,10 @@
+ import pathlib
+ import time
+ 
+-import pylibmc
++try:
++    import pylibmc
++except ImportError:
++    pylibmc = None
+ 
+ 
+ class MCClient:
+@@ -23,6 +26,8 @@
+         enabled: bool = False,
+         servers: list[str] = ["127.0.0.1"],
+     ) -> None:
++        if enabled and pylibmc is None:
++            raise ImportError("Install pylibmc to enable MemCached; pin_memory=False uses disk I/O")
+         self.ttl = 86400  # 1 day
+         self.chunk_size = 512 * 1024  # 512 KB
+         self.mc_cfg = (
+@@ -42,7 +47,7 @@
+         with open(path, "rb") as fp:
+             return fp.read()
+ 
+-    def _get_mc_client(self) -> pylibmc.ClientPool:
++    def _get_mc_client(self) -> "pylibmc.ClientPool":
+         assert self.mc_cfg is not None
+         if self.mc_client is None or self.pid != os.getpid():
+             self.pid = os.getpid()

@@ -1,0 +1,13 @@
+{
+  "checksums_sha256": "1e1c6b1d717a894861d616e8bf3cd5c37abbad1409dc173821e25d6c5d83ba91",
+  "episodes": 100,
+  "frames": 25000,
+  "loader": {
+    "codebase_version": "v2.1",
+    "tested_rows": 3,
+    "version": "0.3.3"
+  },
+  "loader_checked": true,
+  "smoke_only": false,
+  "valid": true
+}
