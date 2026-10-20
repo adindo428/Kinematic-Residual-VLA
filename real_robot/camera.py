@@ -1,5 +1,6 @@
 """RealSense adapter, imported only for hardware commands. Does not reset devices."""
 import time
+import importlib.metadata
 import numpy as np
 
 
@@ -58,6 +59,7 @@ class RGBDCamera:
         intr = depth.profile.as_video_stream_profile().get_intrinsics()
         metadata = {
             'camera_serial': self.serial,
+            'pyrealsense2_version': importlib.metadata.version('pyrealsense2'),
             'sensor_timestamp_s': depth.get_timestamp() / 1000,
             'color_timestamp_s': color.get_timestamp() / 1000,
             'timestamp_domain': str(depth.get_frame_timestamp_domain()),

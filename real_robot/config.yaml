@@ -1,0 +1,43 @@
+schema: right_arm_tracking_v1
+
+perception:
+  rig: scratch/real_robot/front-side-calibration-20261020-01/rig.json
+  # null: select the tape in each live view at startup; avoids stale prompts.
+  seed_session: null
+  output_root: scratch/real_robot/tracking
+  seconds: 1800
+  max_skew_s: 0.035
+  observation_max_age_s: 0.20
+  save_every: 30
+  preview: true
+
+arm:
+  output_root: scratch/real_robot/tracking
+  seconds: 120
+
+# Continuous tracker used by `tracking_session follow --execute`.
+# Workspace bounds describe the TCP target, in the right-arm base frame.
+servo:
+  workspace_min_m: [0.20, -0.30, 0.09]
+  workspace_max_m: [0.58, 0.30, 0.35]
+  hover_height_m: 0.05
+  surface_top_offset_m: 0.042
+  kp: 2.0
+  ki: 0.0
+  kd: 0.0
+  integral_limit_m_s: 0.02
+  max_tcp_speed_mps: 0.5
+  # null removes pilot limits; existing motor velocity limits still apply.
+  max_tcp_acceleration_mps2: null
+  max_joint_speed_deg_s: null
+  max_command_lead_m: null
+  tool_pitch_deg: 60.0
+  tool_pitch_rate_deg_s: 4.0
+  max_following_error_deg: 12.0
+  # Use existing motor current limits, hardware faults and temperature checks.
+  experimental_current_guard: false
+  max_observation_age_s: 0.20
+  target_smoothing_s: 0.12
+  control_hz: 30
+  seconds: 600
+  collision_model: scratch/real_robot/right-handeye/hover-plan/offline-collision-model.xml

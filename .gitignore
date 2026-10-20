@@ -44,6 +44,7 @@ paper/*.synctex.gz
 *.egg-info/
 .venv/
 venv/
+/third_party/EfficientTAM/
 
 # Linux workstation paths and credentials stay local
 /workstation/env.local.sh

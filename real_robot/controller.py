@@ -15,6 +15,33 @@ def _limit(value, maximum):
     return value * min(1., maximum / max(norm, 1e-12))
 
 
+def hover_preview_target(track, height_m=0.05, horizon_s=0.10):
+    """Visual target only, including provisional base frames; never a robot action.
+
+    Height is along base +Z, measured from the visible tape surface proxy.
+    A prediction during occlusion is deliberately not exposed as a target.
+    """
+    if (not np.isfinite([height_m, horizon_s]).all()
+            or not 0 < height_m <= .30 or not 0 <= horizon_s <= .25):
+        raise ValueError('Preview height must be in (0, .30] m and horizon in [0, .25] s')
+    result = {'mode': 'preview_only', 'motion_sent': False, 'target_m': None,
+              'height_m': height_m, 'prediction_horizon_s': horizon_s,
+              'position_semantics': 'visible_surface_proxy_plus_base_z'}
+    if track is None or not track.ready or not track.accepted or track.measurement_age_s > .12:
+        return {**result, 'reason': 'missing_or_unready_track'}
+    if track.frame not in ('robot_base', 'right_base_estimate', 'left_base_estimate'):
+        return {**result, 'reason': 'base_frame_required'}
+    projection = np.c_[np.eye(3), horizon_s * np.eye(3)]
+    covariance = projection @ track.covariance @ projection.T
+    if (not np.isfinite(covariance).all()
+            or np.sqrt(max(0., np.linalg.eigvalsh(covariance).max())) > .025):
+        return {**result, 'reason': 'prediction_uncertain'}
+    target = track.position_m + horizon_s * track.velocity_mps + [0, 0, height_m]
+    if not np.isfinite(target).all():
+        return {**result, 'reason': 'nonfinite_target'}
+    return {**result, 'reason': None, 'target_m': target.tolist()}
+
+
 @dataclass
 class HoverLimits:
     workspace_min_m: list

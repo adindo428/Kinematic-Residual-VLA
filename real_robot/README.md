@@ -1,11 +1,151 @@
 # Real-robot dynamic-object collection: CPU prototype and implementation plan
 
-This module starts the SO101-to-ALOHA collection effort without using the GPUs
-running DOM training. It implements **stationary-camera RGB-D object tracking,
+For the current workstation startup, commands, tuning and shutdown procedure,
+use [the right-arm tracking runbook](README_TRACKING.md).
+
+The original CPU path starts the SO101-to-ALOHA collection effort without using
+the GPUs running DOM training. The optional EfficientTAM path explicitly uses
+GPU inference on the current workstation. The module implements **stationary-camera RGB-D object tracking,
 causal velocity estimation, calibration utilities, and a model-based hover
-controller evaluated in shadow mode**. It has no robot-command backend.
+controller evaluated in shadow mode**. The perception CLI has no robot-command
+backend. Separate right-ALOHA calibration capture and single-hover verification
+modules can send explicitly enabled motor goals. The separate continuous
+right-arm servo follows object positions using Cartesian PID and analytic IK.
 Camera-only captures and synthetic demos are explicitly marked `expert_episode:
 false`; they cannot be counted as grasp demonstrations.
+
+## Continuous tracking: current workflow
+
+Use two terminals from `/home/ailab/Desktop/Kinematic-Residual-VLA`:
+
+```bash
+# Terminal 1: EfficientTAM, front/side 3D fusion and object velocity.
+DISPLAY=:1 .venv/bin/python -m real_robot.tracking_session perception --config real_robot/config.yaml
+
+# Terminal 2: right-arm continuous position following.
+DISPLAY=:1 .venv/bin/python -m real_robot.tracking_session follow --config real_robot/config.yaml --execute
+```
+
+No motion-plan JSON is needed for `follow`. The launcher selects the latest
+perception session automatically. `--observation /path/to/observation.json`
+overrides that choice. Omit `--execute` for read-only arm feedback and preview.
+With the default `seed_session: null`, draw a box around the tape and press
+Enter in each camera window at startup. To deliberately reuse prompts, set
+`seed_session` to a prior successful session directory. Explicit paired
+`--front-seed-box X Y W H --side-seed-box X Y W H` flags also work.
+The follower must already be holding with healthy torque; only one process
+may own its serial port. The leader-to-held-follower startup is described below.
+
+Edit the **`servo:`** section of [`config.yaml`](config.yaml): `kp`, `ki`, `kd`,
+`max_tcp_speed_mps`, `max_joint_speed_deg_s`, `target_smoothing_s`, workspace
+bounds and run duration. The current YAML uses P control (`kp=2`, I/D zero), a
+**0.5 m/s TCP command ceiling** and a ten-minute session. The pilot joint-rate,
+acceleration and command-lead caps are disabled (`null`); joint rates use the
+existing motor velocity/profile limits read at startup. Workspace bounds apply
+to the TCP in right-base coordinates; analytic IK also checks reach and joint
+limits, so the entire bounding box is not necessarily reachable. The desired
+TCP is 5 cm above the estimated visible object top. Masked depth provides the
+top height; a configurable proxy-to-top offset is the fallback. Base calibration
+and the 160 mm fingertip offset remain provisional.
+
+Each cycle uses `v = kp*error + ki*integral - kd*measured_TCP_velocity`, bounds
+velocity, converts the next position to analytic IK,
+and bounds joint increments and FK displacement. Startup preserves the existing
+hardware goals, including gravity sag. Position control uses fresh associated
+3D observations independently of velocity-filter readiness, with target smoothing
+across contributing-view changes. A faster object can leave the arm behind;
+it does not itself trigger the old pilot speed/3 cm displacement stop.
+
+Stale/unreachable/out-of-workspace targets hold and automatically resume when
+valid again. Joint following errors, hardware faults, temperature/current guards
+and measured geometry violations stop the session. `Q` in the arm window stops
+new goals and retains torque; the camera window is independent. The controller
+checks robot self/table geometry and requires a clear physical workspace; it
+does not implement arbitrary obstacle avoidance or automatic powered parking.
+
+Motor gains, modes, torque and hardware current/shutdown limits are unchanged.
+`experimental_current_guard: false` removes the pilot's software current
+thresholds; existing motor current limits, hardware faults and the 55°C
+temperature check remain active. A 12° following-error guard detects severe
+tracking divergence. The tool points 60° downward to reduce static shoulder
+load while following the fingertip midpoint; this is position tracking.
+
+DynamicVLA's real-world object release range is 0.2–0.8 m/s; it does not provide
+a drop-in VX300 controller/PID preset. These are our controller settings, with
+the requested 0.5 m/s command ceiling. Physical speed and tracking accuracy at
+that ceiling have not been validated. Base calibration and fingertip geometry
+remain provisional; the controller uses their FK estimate for speed limiting.
+An encoder/FK speed watchdog stops new goals if measured speed exceeds the
+configured ceiling. It reacts after a measured excursion and cannot guarantee
+an instantaneous physical speed bound. In the first uncapped trial, estimated
+physical speed briefly reached 0.63 m/s despite the 0.5 m/s command ceiling;
+this prompted the additional readback watchdog. That trial ended at the 55°C
+shoulder temperature guard, with holding torque retained.
+
+## Legacy small-workspace pilot with an explicit plan
+
+The earlier `arm` mode below is retained for explicit trajectory experiments.
+It is separate from the continuous `follow` mode above. Its `control` settings
+use internal conservative defaults unless a YAML `control:` section is supplied.
+Edit [`config.yaml`](config.yaml) for the camera rig, initial target prompts,
+run duration and software Cartesian PID. The PID computes
+`v = kp*position_error + ki*integral - kd*TCP_velocity`; the default is P control
+(`kp=1.5`, `ki=kd=0`). These gains do not change Dynamixel motor registers.
+Speeds use m/s, acceleration m/s², joint speed degrees/s. The current pilot
+rejects settings above 0.015 m/s TCP speed, 3°/s joint speed or 0.05 m/s object
+speed. Its desired hover is 50 mm above the estimated visible object top.
+Absolute base calibration and fingertip offset remain provisional.
+
+From the project directory, terminal 1 starts **camera-only** EfficientTAM,
+fusion and velocity reporting, using the previously selected blue-tape prompts:
+
+```bash
+cd /home/ailab/Desktop/Kinematic-Residual-VLA
+DISPLAY=:1 .venv/bin/python -m real_robot.tracking_session perception --config real_robot/config.yaml
+```
+
+Each launch prints its unique output directory and `observation.json` path.
+A fresh scene-reviewed arm plan must reference that exact live observation
+file, matching rig hash, current arm pose, collision model and workspace.
+Plans expire after five minutes and cannot survive a computer reboot.
+Editing a plan's approval flags alone does not constitute reviewing a fresh
+scene or checking the path.
+
+Terminal 2 first validates a fresh plan offline, with no motor access:
+
+```bash
+.venv/bin/python -m real_robot.tracking_session arm --config real_robot/config.yaml --plan /absolute/path/to/reviewed-plan.json
+```
+
+Then, with the right follower already holding its position and teleoperation
+stopped, the explicit execution command is:
+
+```bash
+DISPLAY=:1 .venv/bin/python -m real_robot.tracking_session arm --config real_robot/config.yaml --plan /absolute/path/to/reviewed-plan.json --execute-held-start
+```
+
+Only one process may own the right follower serial port. For routine startup,
+use the existing LeRobot leader teleoperation to lift the resting follower,
+then stop it with Ctrl+C. The inspected LeRobot disconnect closes serial ports
+without disabling follower torque. An October 20 hardware check verified all
+nine motors stayed enabled and fault-free after this handoff. LeRobot's
+**connect** does briefly disable torque, so do not restart that command with
+an unsupported elevated follower. The tracking executor's held-start path
+preserves existing holding goals and does not change torque or motor modes.
+Normal tracking stop retains the last goals and torque. A powered parking
+trajectory still needs a fresh scene check and physical validation; fault or
+power-loss recovery may require support.
+
+The preview shows estimated XYZ velocity, total speed in m/s and cm/s, and
+[DynamicVLA v2 Appendix D](https://arxiv.org/html/2601.22153v2)'s real-world
+release range of **0.2–0.8 m/s** (evaluation configurations 0.3/0.5/0.7 m/s).
+That paper range is a perception reference; the arm pilot is much slower.
+Velocity is a causal Kalman estimate of a visible-surface proxy, rather than
+independent centroid ground truth. Its covariance excludes shape bias and
+unmeasured latency. Unsynchronized camera span is capped at 35 ms for the
+slow pilot (up to 1.75 mm displacement at 0.05 m/s); this does not validate
+fast DynamicVLA-speed collection. Stale feed, workspace exit, following error,
+current or hardware faults stop new tracking progression.
 
 ## What DynamicVLA actually releases
 
@@ -54,6 +194,10 @@ Relevant local code to inspect/reuse conceptually:
 
 Read-only device queries and short camera captures found:
 
+The table records the earlier machine inventory. The October 20 `/home/ailab`
+workstation instead reports one 24 GB RTX 4090; its free memory was checked
+before running the optional EfficientTAM model. Existing GPU jobs were not stopped.
+
 | Item | Observation | Consequence |
 |---|---|---|
 | GPUs | Two RTX A6000, 96–99% utilization, about 35 GiB used each at inspection | No CUDA model, Isaac Sim, or new training job in this prototype |
@@ -62,9 +206,10 @@ Read-only device queries and short camera captures found:
 | Robot USB | Four CH34x serial adapters under `/dev/serial/by-id` | Serial numbers alone do not identify leader/follower or left/right |
 | Calibration files | Existing SO101 follower and leader files, including left/right IDs | Reuse only after matching physical arm, port, units and motor zeroes |
 
-The observed local cameras are **D455**, not D405. The user's D405 designation
-may refer to the remote ALOHA PC. Inspect that PC separately; “D405-113” is not
-used as a model identifier in code. The [D405 product documentation](https://www.realsenseai.com/products/stereo-depth-camera-d405/)
+The original survey above predates the current workstation setup. The October
+19–20 workstation has a front D455 and three D405 cameras, identified below by
+serial number. “D405-113” is not used as a model identifier in code.
+The [D405 product documentation](https://www.realsenseai.com/products/stereo-depth-camera-d405/)
 lists an ideal 7–50 cm range, so a distant front-facing D405 needs a placement
 check. Do not copy camera intrinsics/extrinsics or depth limits between models.
 
@@ -74,6 +219,381 @@ and recordings are not added to version control. GPU training was not stopped,
 reconfigured, or imported by the prototype.
 
 ## First runnable test: perception only
+
+### Blue-tape hover target preview on the current workstation
+
+The tracking CLI can display a target **5 cm along base +Z above the detected
+visible tape surface**, with a 0.10 s constant-velocity prediction. XYZ depth
+changes are tracked, rather than assuming the object remains on the table.
+Missing, ambiguous, rejected or unready measurements produce no target. This is
+a camera-only preview: it does not open motor ports or send goals, perform IK,
+or establish that a target is reachable or collision-free. Camera/USB transit
+latency is unmeasured. The ChArUco fit remains explicitly provisional.
+
+```bash
+DISPLAY=:1 PYTHONPATH=. .venv/bin/python -m real_robot track \
+  --serial 234222300865 --fixed-camera --detector blue_tape \
+  --candidate-calibration scratch/real_robot/right-handeye/session-20261019-03/candidate-calibration.json \
+  --hover-height 0.05 --hover-lookahead 0.10 --disable-stationary-update \
+  --fps 15 --seconds 300 --preview --live-frame \
+  --output scratch/real_robot/blue-hover-next
+```
+
+Use a new output directory for each run. Q closes the preview. The full image
+is retained; the operator can supply their own `--roi X Y W H`. JSONL records
+separate `hover_preview.target_m` from `action: null` and `motion_sent: false`.
+The yellow cross uses an approximate pinhole projection. `live_frame.jpg` is
+updated once a second for external inspection.
+
+Before the supported restart on October 19, both shoulder motors (IDs 2 and 3) reported hardware
+error 32 with torque disabled after the grid-check overload. The read-only
+snapshot is in `scratch/real_robot/blue-hover-20261019-01/motor-health-readonly.json`.
+No faults were cleared or motors re-enabled. Live robot following remains
+blocked pending physical support, overload diagnosis and recovery, and a fresh
+motion plan. A displayed target is not evidence of robot-following execution.
+
+### Supervised single tape hover after fault recovery
+
+`python -m real_robot.aloha_tape_hover --plan PLAN.json --output NEW_DIRECTORY`
+validates a separately checked right-arm path without opening hardware. Adding
+`--execute-supported-start` enables holding torque only after verifying a healthy,
+fully torque-off, user-supported arm, fresh matching arm/tape positions, operating
+modes, paired encoders and local holding-goal readbacks. The observed torque-off
+goal register follows each motor's own encoder, including one-count fluctuations;
+the check allows two counts, rather than requiring a shadow motor's register to
+equal its master's encoder. The hardware probe and first rejected preflight are
+preserved under `scratch/real_robot/blue-hover-20261019-04`.
+
+This executor approaches one static tape target at at most 3 degrees/s nominal,
+with bounded feedback compensation (1.5 degrees) and a 3.5 degrees/s goal slew
+limit. It checks all nine motor currents, hardware faults, torque state and
+temperature; joint error; the mesh model including camera housing; camera
+freshness; and the tape remaining within 15 mm of the checked target. Both
+shoulder motors are monitored independently. Software current thresholds are
+conservative abort choices, not measured safe operating envelopes or changes to
+the motors' protection settings. No reboot, gain, mode or protection-limit writes
+are performed. The separate perception CLI still has no motor backend.
+
+The original 2-degree parked-pose allowance is retained. The first post-restart
+pose exceeded it (model elbow 94.13 degrees versus a 92-degree upper limit), so
+no torque activation was attempted from that pose; the operator slightly
+unfolded and supported the arm before replanning. Scene checks document robot
+self observations separately from a nearby fixed mount which the initial path
+moves away from. Omitted self pixels do not certify free space. The calibration
+and 160 mm fingertip offset remain approximate, with the prior R3C3 visual check
+recorded as supporting evidence rather than a declaration of exact calibration.
+
+Q stops generating new goals and retains the last bounded goal. A fault can
+independently disable torque. The controller does not automatically release a
+loaded arm or replay a trajectory after a fault. It records `status.json`, joint
+and current telemetry, `reached.json` only after settling, and live/final images.
+After reaching, monitoring continues for up to five minutes. This is a single
+hover verification, **not moving-object following** or an expert grasp episode.
+
+For a separately checked continuation from a healthy loaded hold,
+`--execute-held-start` preserves torque and initializes the servo from the
+existing hardware goal and its load compensation. It never replaces that goal
+with measured position on restart. The two execution flags are mutually
+exclusive. A plan may select the calibrated right wrist camera; the observation
+transform is then `FK(current_joints) @ T_gripper_wrist_camera`, updated from live
+feedback, rather than treating a wrist camera as fixed. Joint state is recent
+host feedback, not hardware-synchronized to camera exposure; latency remains
+unmeasured.
+
+The front approach was stopped when its partial view shifted the tape's proxy.
+The wrist camera saw the complete roll, but its default saturation threshold
+also selected a blue-tinted tabletop reflection after auto-exposure settled.
+The wrist-specific plan uses HSV `(90,150,45)` through `(135,255,255)`; a stationary
+180-frame check accepted all 180 depth measurements. This does not alter the
+front detector or apply a crop. `perception.jsonl` retains camera metadata,
+quality, joint state used for compensation and filtered estimates. A resumed
+loaded hold is tested specifically to retain its existing goal; a synthetic
+moving-wrist test checks that a stationary object stays stationary in base
+coordinates after compensation.
+
+### Current workstation: SDK and ChArUco capture
+
+#### Additional side view for collection (surveyed October 19)
+
+The connected table-level **D405 `218722271409`** sees the tape from the side.
+A camera-only survey obtained a unique mask with 100% valid depth within that
+mask, median range 0.38285 m and depth MAD 0.00495 m. This is one stationary
+snapshot, not a measured accuracy improvement. D405 `218622274583` provides a
+higher view and did not yield a unique tape detection in its snapshot. The
+right wrist remains `218622278247`; the front D455 remains `234222300865`.
+Images, aligned arrays, metadata and the survey report are preserved under
+`scratch/real_robot/side-camera-survey-20261019-01`. These sequential snapshots
+are explicitly not synchronized pairs. No robot settings or goals were changed
+by the survey.
+
+The October 20 side-only test (`side-test-20261020-01`) accepted tape depth in
+1339/1339 frames at approximately 15 FPS. Stationary XYZ standard deviations
+were 0.65, 1.02 and 1.05 mm, at median range 0.383 m. These measure stationary
+repeatability, not absolute accuracy or moving-target performance.
+
+`multiview_calibrate` captures nine distinct, steady ChArUco board poses in both
+fixed cameras. A joint ray fit uses the first six poses, reserving three for
+held-out relative-transform and reprojection checks. Board corners are converted
+to rays with the native RealSense deprojection model. The board is 6×6 squares,
+50 mm per square, with inverted DICT_4X4_50 markers; the inferred 37.5 mm marker
+size remains provisional. Keep camera mounts and the right base fixed:
+
+```bash
+DISPLAY=:1 PYTHONPATH=. .venv/bin/python -m real_robot.multiview_calibrate \
+  --output scratch/real_robot/front-side-calibration-next --auto --poses 9 \
+  --seconds 900 \
+  --base-candidate scratch/real_robot/right-handeye/session-20261019-03/candidate-calibration.json
+```
+
+Only supply `--base-candidate` after confirming that the front camera and right
+base have not moved since that reference. Move the board 5–10 cm or tilt it
+10–20 degrees after each save, then hold still. Both panels need at least 12
+detected corners. Q ends capture; `--fit-only` can refit its saved pose files.
+`rig.json` separately records relative validation and the still-provisional
+base reference. Its convention is `T_front_side`, mapping side optical XYZ into
+front optical XYZ; `T_base_side = T_base_front @ T_front_side`. Passing relative
+checks does not validate absolute base XYZ or a physical robot contact point.
+
+The October 20 capture `front-side-calibration-20261020-01` contains nine saved
+poses. Static background matching identified a side-camera rotation between
+poses 2 and 3: median side-image shift was 17.28 px, with zero median shift in
+the front image. The full-set fit failed and is preserved as
+`rig-all-poses-rejected.json`. The documented stable segment uses poses 3–7 for
+fitting and 8–9 for checking: fit per-axis residual 0.225 px; held-out side ray
+RMSE 0.478 and 1.369 px; relative translation differences 2.36 and 3.71 mm.
+Its `rig.json` passes the relative checks while retaining a provisional base.
+Capture exclusions require explicit zero-based `--exclude-poses` and an
+`--exclusion-reason`; they are never selected automatically to improve a fit.
+
+The separate camera-only fusion preview requires a rig that passed its held-out
+checks:
+
+```bash
+DISPLAY=:1 PYTHONPATH=. .venv/bin/python -m real_robot.multiview_track \
+  --rig scratch/real_robot/front-side-calibration-next/rig.json \
+  --output scratch/real_robot/front-side-fusion-next --side-hsv-low 90 60 30 \
+  --seconds 90 --preview
+```
+
+No crop is applied unless the operator supplies `--front-roi X Y W H` and/or
+`--side-roi X Y W H`. Each camera has independent HSV settings. The side depth
+range is 7–50 cm. Accepted pairs span at most 25 ms across all four RGB/depth
+timestamps by default. Each sample is consumed once. The preview rejects
+cross-view proxy disagreement above 6 cm, explicitly labels single-view
+fallback, and removes displayed/published coordinates after 0.5 seconds without
+a fresh pair. The side-specific minimum brightness of 30 captures the dark
+ring body; the default 45 selected mainly its lit upper rim in this setup.
+Blue regions are associated using a unique cross-view 3D match, rather than
+selecting the largest blue region independently in each image. Multiple valid
+matches remain ambiguous. After acquisition, a single view can continue only
+within 60 mm plus 0.5 m/s times the elapsed capture time of the previous accepted
+position; after a 0.5 s observation gap, both views must confirm reacquisition.
+This rejects a far-away blue background feature during tape occlusion without
+changing the operator's image crop. It records per-view qualities, timestamps, raw measurements,
+fusion and filter outputs; sampled paired RGB-D arrays are saved by default.
+The causal velocity filter resets when the contributing camera set changes.
+These modules do not open motor ports or send robot commands.
+Live SDK, resolution, distortion and principal point must match the calibration
+profile. Small focal variations up to 0.5% are permitted using native per-frame
+rays and recorded in every observation; this bounds the lateral effect at the
+configured front depth limit below the heuristic 15 mm uncertainty floor.
+
+#### EfficientTAM visual tracking
+
+The HSV movement trials still lost the narrow dark tape and sometimes selected
+blue background regions. The optional `--mask-tracker efficienttam` path uses
+the [official EfficientTAM](https://github.com/yformer/EfficientTAM) Tiny 512 model,
+at source revision `abcd061ebd3cc6e7527d152d75b890126aaa53f6`. One GPU model serves
+separate front/side memory states. Select a tight object box once in each view;
+these are prompts, not image crops. Subsequent masks use learned temporal
+propagation without HSV thresholds. No future frames are read by the adapter.
+It retains the original prompt plus 32 recent non-conditioning outputs and one
+current image per view, preventing history growth during long captures.
+
+The optional inference installation in the workspace `.venv` reuses its existing
+PyTorch 2.6.0/CUDA 12.4 and torchvision 0.21.0; it does not modify the LeRobot
+environment. Reproduce with the pinned official source and minimal inference
+dependencies (the upstream demo-app requirements are not needed):
+
+```bash
+git clone https://github.com/yformer/EfficientTAM.git third_party/EfficientTAM
+git -C third_party/EfficientTAM checkout abcd061ebd3cc6e7527d152d75b890126aaa53f6
+.venv/bin/python -m pip install -r real_robot/requirements-efficienttam.txt
+Efficient_Track_Anything_BUILD_CUDA=0 .venv/bin/python -m pip install --no-deps --no-build-isolation -e third_party/EfficientTAM
+curl -L --fail -o third_party/EfficientTAM/checkpoints/efficienttam_ti_512x512.pt https://huggingface.co/yunyangx/efficient-track-anything/resolve/main/efficienttam_ti_512x512.pt
+DISPLAY=:1 PYTHONPATH=. .venv/bin/python -m real_robot.multiview_track \
+  --rig scratch/real_robot/front-side-calibration-20261020-01/rig.json \
+  --output scratch/real_robot/efficienttam-next --mask-tracker efficienttam \
+  --seconds 300 --preview
+```
+
+Draw a rectangle around the tape in the front selection window and press Enter,
+then repeat in the side window, keeping the object still during both prompts.
+Explicit `--front-seed-box X Y W H` / `--side-seed-box X Y W H` support repeatable
+offline tests. Model boxes and seed images are saved, with checkpoint SHA-256,
+configuration and native camera timestamps. Model object-presence scores are
+logged; these are not calibrated probabilities of correct target identity.
+Low object score or tiny masks produce no depth observation. Green model masks
+can remain visible while a rejected depth/cross-view estimate produces no XYZ.
+
+If one view loses the model mask or valid depth while the other retains a strong
+object score and usable depth, recovery projects that observation into the lost
+view using the rig and native lens deprojection. It proposes a new box prompt at
+most once per second, scaled from the initial object box. The proposal must have
+at least 30% blue pixels and agree with the other view's 3D surface proxy within
+60 mm. This appearance check only validates recovery; it does not threshold or
+propagate the model mask. Rejected trials leave the original memory intact.
+Recovery preserves the original manual prompt plus one latest recovery prompt
+and bounded recent history. It cannot recover from both cameras being occluded.
+
+For a restart with the same target and unchanged camera mounts,
+`--seed-session scratch/real_robot/efficienttam-live-20261020-01` reuses the saved
+manual target images/boxes and records their source, without selecting new boxes.
+Keep the tape visible in both views initially so metric association can initialize.
+
+A 20-pair sampled replay on this workstation's RTX 4090 produced median two-view
+model time 26.6 ms (95th percentile 31.0 ms), with the tube hole preserved in the
+inspected masks. This is a saved-frame smoke test, not live latency or accuracy
+validation. Evidence is under `scratch/real_robot/efficienttam-offline-20261020-01`.
+The metric fusion, timestamp limits and provisional-base status still apply.
+
+The two-minute stationary live test `efficienttam-live-20261020-02` fused all
+1258 accepted pairs, with 38.1 ms processing at the 95th percentile. Median view
+disagreement was 19.6 mm; stationary XYZ standard deviations were 0.22, 0.30 and
+0.37 mm. Pair span remained below 25 ms. These are repeatability/consistency
+measurements, not absolute accuracy. The preceding movement test exposed the
+occlusion recovery issue described above. A real-model saved-RGB-D recovery
+probe, with one observation deliberately withheld, accepted the projected box
+at 19.1 mm cross-view disagreement and 77% blue mask pixels. Its evidence is under
+`scratch/real_robot/efficienttam-recovery-probe-20261020-01`.
+
+The operator then performed a physical side-camera hand-cover test in
+`efficienttam-live-20261020-03`. The front model retained the stationary tape
+throughout; side absence spanned frames 1048–1065 and front-only tracking
+continued for those 18 accepted pairs. Two-view fusion resumed at frame 1066.
+The missing interval was 1.867 seconds including the physical cover; it is not
+a latency measurement from hand removal. Model reacquisition handled this
+first cover, while geometry-guided proposals during the cover were rejected.
+Later movement produced accepted side recovery proposals at frames 1803, 2021
+and 2086, with respective cross-view differences of 19.2, 39.3 and 18.0 mm.
+Wider movement still produced periods without usable shared visibility/depth;
+this is not a demonstration of uninterrupted dynamic manipulation. See
+`occlusion-verification.json` and `occlusion-verification.jpg` in that session
+for the source indices, hand-cover images and recovery checks. No motor goals
+were sent in any of these tests.
+
+For collection, use native capture times and measured cross-view skew; common
+`global_time` timestamps do not establish synchronized exposures. Reject pairs
+whose skew is too large for the allowed motion error, and evaluate moving-object
+latency and dropouts before enabling fused control. Retain per-view observations,
+quality/occlusion flags, source timestamps, frame/calibration identifiers and
+fused position/velocity/covariance. Any online estimate must use only samples
+that have already arrived. The fusion path is a separate CLI from the existing
+single-camera tracker and has no robot-control backend.
+
+Front and side visible-surface proxies can refer to different physical points.
+For a shared geometric centroid, define a consistent object center, using a
+multi-view shape fit for the tape roll or corresponding features where valid;
+evaluate systematic view bias before claiming centroid accuracy. The current
+fusion is explicitly a visible-surface position proxy, with a heuristic 15 mm
+uncertainty floor plus view spread, excluding absolute base uncertainty. The side camera
+can support the collection expert separately from the policy observation design.
+If KR-VLA consumes fused velocity at inference, its deployment observation
+source and latency must also be specified and matched during training.
+
+On the current `/home/ailab` workstation, use the repository `.venv` for
+perception. The historical `/home/ailab-students` paths below belong to an earlier
+machine. Install `real_robot/requirements.txt` in the isolated environment.
+The LeRobot environment's RealSense SDK 2.55 reports a different D405 color focal
+length at 640×480 than SDK 2.59 (435.62 versus 393.08 pixels on camera
+`218622278247`); the recorded ChArUco images independently favor the latter.
+Do not fit the current wrist-camera recordings using the older SDK intrinsics.
+Camera metadata now includes SDK version; raw historical recordings are retained.
+
+`aloha_charuco_capture` owns the right leader/follower serial ports and wrist
+camera in one process. Do not run a second teleoperation process beside it.
+It requires SDK >=2.59 plus the existing LeRobot dependencies; the current local
+`.venv` can read dependencies from the LeRobot environment without modifying it.
+
+```bash
+PYTHONPATH=/home/ailab/lerobot:. .venv/bin/python -m real_robot.aloha_charuco_capture \
+  --output scratch/real_robot/right-handeye/NEW-SESSION
+```
+
+The window starts paused. `T` toggles leader following using a separate 30 Hz
+loop and the usual five-degree relative-target limit. `S` saves a stationary
+observation without pausing following; `Q` closes the collector. Initial leader
+and follower poses should be close, as for normal teleoperation. The collector
+does not change torque settings and requires follower torque already enabled
+to follow. Exit retains torque settings and the last commanded position.
+It rejects saves with fewer than 12 ChArUco corners or recent arm motion.
+Raw joint ticks, software calibration files/hashes, RGB-D, detected corners,
+timestamps and measured control rate are preserved. Saved observations do not
+establish validated kinematics or camera-to-base transforms. The marker length
+defaults to a provisional 37.5 mm and must be physically checked before fitting.
+
+The first current-table dataset has 15 poses in
+`scratch/real_robot/right-handeye/session-20261019-03`. Its unvalidated candidate
+transforms and diagnostics are saved separately from original pose metadata.
+Correcting the wrist RGB intrinsics reduces reprojection errors, but reserved
+pose consistency still has a worst position residual of about 21 mm. Physical
+grid measurements and independent base-frame checks remain required. Depth
+aligned by the older SDK is excluded from the camera-to-base fit. Do not feed
+the candidate transforms to a robot controller.
+
+### Supervised right-ALOHA hover verification
+
+`aloha_hover_check` is a separate actuator adapter for an explicitly supervised
+calibration test. It does not override `ShadowHoverController`'s calibration
+checks or make the candidate transform validated. The current executor is
+restricted to the reviewed R3C3 hover with a provisional 160 mm gripper-frame
+fingertip offset, as measured by the operator. It requires an offline sampled
+path, working camera preview, matching initial feedback, correct motor models,
+torque already enabled, and verified paired-motor secondary IDs. It writes only
+six right-arm master-joint goal positions, leaving gripper, torque, modes, and
+gains unchanged. Other arm fixtures and the mobile base are not actuated.
+
+The sampled move limits commanded joint speed to 3 degrees/s, checks feedback
+and motor faults, and supports Q to stop generating setpoints. A nearby fixed
+hover can use bounded outer feedback (`--settle-only`): at most three degrees of
+goal correction, two degrees/s slew, and 15 seconds. This compensates load-related
+position error without changing motor gains. Settling requires less than 0.7
+degrees error at every joint. On exit, retain the last bounded motor goal and
+torque settings; replacing a compensated goal with the measured position would
+remove its holding effort. The arm remains powered and holding after exit.
+
+The first test's initial settling failure and correction are retained in
+`scratch/real_robot/right-handeye/hover-first-*`. The final R3C3 check reached
+0.61 degrees maximum joint error, with a model-estimated fingertip standoff of
+73.8 mm against an 80 mm target. This is not an independent measurement of
+absolute accuracy. The operator accepted R3C3 X-Y alignment as negligible for
+current purposes and reported about 85 mm physical height. This single
+approximate observation is recorded separately from model estimates and does
+not justify a global vertical correction.
+
+`aloha_grid_check` extends the supervised check to a reviewed 36-square route.
+The route starts at the accepted R3C3 pose and visits each remaining square
+through neighboring centers. Offline checks include bounded IK, table
+clearance, and modeled self contacts. The control loop retains bounded load
+compensation across transitions, caps nominal path speed at two degrees/s and
+total command speed at three degrees/s, checks joint following error and model
+standoff, and stops on motor faults or a stale preview. Each target must settle
+before an inspection dwell. P pauses progression while retaining the hold
+controller; Q stops new setpoints, leaving the last bounded goal and torque
+settings in place. Images and joint/goal logs are saved per square. These
+records do not constitute quantitative absolute calibration or autonomous
+dynamic-object manipulation.
+
+**Current hardware incident:** the first grid sweep reached 12 centers including
+R3C3, then stopped near R1C5 with overload shutdown (hardware error 0x20) on both
+shoulder motors, IDs 2 and 3. Their torque was automatically disabled; reported
+temperatures were 42/41°C and voltage about 12.2 V. The root cause has not been
+established. Logs, completed-point images and the read-only fault audit are in
+`scratch/real_robot/right-handeye/grid-check-01/`. The existing hover/grid plan
+files are marked execution-blocked pending mechanical support and recovery/load
+assessment. Do not rerun the same sweep or clear/re-enable the shoulder motors
+without addressing this incident. Software ceasing setpoints cannot preserve
+active holding when actuator protection disables torque.
 
 The selected pilot uses a **blue tape roll, stationary front/downward camera, and the right
 SO101 follower** for eventual manipulation. Current live capture only observes

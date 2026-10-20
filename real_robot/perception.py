@@ -12,7 +12,9 @@ def hsv_bounds(kind, low=None, high=None):
 
 
 def detect_mask(bgr, kind='aruco', marker_id=0, hsv_low=None,
-                hsv_high=None, roi=None, min_area_px=80):
+                hsv_high=None, roi=None, min_area_px=80, all_candidates=False):
+    if all_candidates and kind != 'blue_tape':
+        raise ValueError('Candidate masks are supported only for blue tape')
     height, width = bgr.shape[:2]
     region = np.zeros((height, width), np.uint8)
     if roi is None:
@@ -54,6 +56,17 @@ def detect_mask(bgr, kind='aruco', marker_id=0, hsv_low=None,
                 if x > rx and y > ry and x+w < rx+rw and y+h < ry+rh:
                     candidates.append(contour)
             contours = candidates
+            if all_candidates:
+                # Multi-view association, rather than largest-area selection,
+                # decides which of these blue regions belongs to the object.
+                masks = []
+                if len(contours) > 64: return []  # Crowded scene: no arbitrary truncation.
+                for contour in contours:
+                    candidate = np.zeros_like(mask)
+                    cv2.drawContours(candidate, [contour], -1, 255, -1)
+                    candidate = cv2.erode(cv2.bitwise_and(candidate, mask), np.ones((3, 3), np.uint8))
+                    if np.count_nonzero(candidate) >= min_area_px: masks.append(candidate)
+                return masks
         if kind == 'orange_ball':
             candidates = []
             rx, ry, rw, rh = (0, 0, width, height) if roi is None else map(int, roi)

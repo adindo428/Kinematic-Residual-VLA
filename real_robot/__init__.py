@@ -1,4 +1,5 @@
-"""CPU-only perception and shadow control for dynamic-object collection.
+"""CPU perception, shadow control, and supervised right-ALOHA calibration tools.
 
-This package has no motor-command backend. Run from the repository root.
+The perception CLI does not command motors. Separate ALOHA capture/hover modules
+can send explicitly enabled right-arm goals. Run from the repository root.
 """

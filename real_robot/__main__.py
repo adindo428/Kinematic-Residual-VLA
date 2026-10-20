@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from .geometry import fit_rigid_transform, transform_point, validate_transform
 from .tracking import VelocityTracker
-from .controller import HoverLimits, ShadowHoverController
+from .controller import HoverLimits, ShadowHoverController, hover_preview_target
 
 
 def write_json(path, data):
@@ -55,6 +55,23 @@ def provisional_calibration_for(path, serial, arm):
     return transform, report
 
 
+def candidate_calibration_for(path, serial, arm):
+    """Load the ChArUco fit for display without promoting it to validated control."""
+    import hashlib
+    raw = Path(path).read_bytes()
+    data = json.loads(raw)
+    if (data.get('schema') != 'aloha_handeye_candidate_v1'
+            or data.get('front_camera_serial') != serial or arm != 'right'
+            or data.get('arm') != arm or data.get('destination_frame') != 'right_base_estimate'
+            or data.get('calibration_validated') is not False):
+        raise ValueError('Require a matching provisional right-arm ChArUco/front-camera candidate')
+    transform = validate_transform(data['T_right_base_front_camera_candidate'])
+    report = {**data, 'T_base_camera': transform.tolist(),
+              'source_sha256': hashlib.sha256(raw).hexdigest(),
+              'usage': 'Visualization only; camera and base must remain fixed since capture.'}
+    return transform, report
+
+
 def track(args):
     import cv2
     from .camera import RGBDCamera
@@ -71,6 +88,14 @@ def track(args):
         transform, provisional = provisional_calibration_for(args.provisional_landmarks, args.serial, args.arm)
         print(f"UNVALIDATED display frame: {provisional['destination_frame']}; "
               f"maximum landmark fit error {1000*max(provisional['fit_errors_m']):.1f} mm.", flush=True)
+    if args.candidate_calibration:
+        transform, provisional = candidate_calibration_for(args.candidate_calibration, args.serial, args.arm)
+        print('UNVALIDATED ChArUco frame: right_base_estimate. Preview only.', flush=True)
+    if args.hover_height is not None:
+        # Validate parameters before opening a camera or creating an output run.
+        hover_preview_target(None, args.hover_height, args.hover_lookahead)
+        if transform is None:
+            raise ValueError('Hover preview requires a base-frame calibration or explicit estimate')
     args.hsv_low, args.hsv_high = hsv_bounds(args.detector, args.hsv_low, args.hsv_high)
     frame = provisional['destination_frame'] if provisional else ('robot_base' if transform is not None else 'camera_optical')
     tracker = VelocityTracker(frame=frame, stationary_updates=not args.disable_stationary_update)
@@ -89,6 +114,7 @@ def track(args):
         write_json(root / 'frame_estimate.json', provisional)
     camera, last_view, complete = None, None, False
     accepted = ready = frames = 0
+    hover_targets = 0
     process_times = []
     start = time.monotonic()
     timestamp_origin = last_timestamp = clock_domain = None
@@ -113,6 +139,13 @@ def track(args):
                 if point is not None and transform is not None:
                     point = transform_point(transform, point)
                 state = tracker.update(timestamp - timestamp_origin, point)
+                hover = (None if args.hover_height is None else
+                         hover_preview_target(state, args.hover_height, args.hover_lookahead))
+                if hover is not None:
+                    # Host arrival excludes unknown camera/USB transit latency.
+                    if time.monotonic() - timing['host_arrival_monotonic_s'] > .12:
+                        hover = {**hover, 'target_m': None, 'reason': 'host_processing_stale'}
+                    hover_targets += int(hover['target_m'] is not None)
                 processing = time.monotonic() - begin
                 process_times.append(processing)
                 frames += 1
@@ -122,13 +155,19 @@ def track(args):
                           'measurement_m': None if point is None else point.tolist(),
                           'quality': quality, 'track': None if state is None else state.as_dict(),
                           'action': None, 'motion_sent': False}
+                if hover is not None:
+                    record['hover_preview'] = hover
                 if args.save_rgbd:
                     name = f'frame_{frames - 1:06d}.npz'
                     np.savez_compressed(root / name, bgr=bgr, depth_m=depth.astype(np.float32))
                     record['rgbd_file'] = name
                 log.write(json.dumps(record, allow_nan=False) + '\n')
                 last_view = overlay.draw(bgr, mask, quality, state, timing, processing,
-                                         transform, args.roi, frame=frame)
+                                         transform, args.roi, frame=frame, hover=hover)
+                if args.live_frame and frames % max(1, args.fps) == 0:
+                    # Atomic publication lets an external viewer inspect the latest image.
+                    cv2.imwrite(str(root / 'live_frame.tmp.jpg'), last_view)
+                    (root / 'live_frame.tmp.jpg').replace(root / 'live_frame.jpg')
                 if args.preview:
                     cv2.imshow('CPU tracking only - no robot motion', last_view)
                     if cv2.waitKey(1) & 0xff == ord('q'):
@@ -143,6 +182,7 @@ def track(args):
             cv2.imwrite(str(root / 'last_frame.jpg'), last_view)
         summary = {'complete': complete, 'frames': frames, 'accepted_measurements': accepted,
                    'ready_frames': ready, 'elapsed_s': time.monotonic() - start,
+                   'hover_preview_targets': hover_targets,
                    'processing_p50_ms': None if not process_times else float(1000 * np.median(process_times)),
                    'processing_p95_ms': None if not process_times else float(1000 * np.percentile(process_times, 95)),
                    'expert_episode': False, 'gpu_used': False, 'motion_sent': False}
@@ -237,6 +277,10 @@ def main():
     frame_options = p.add_mutually_exclusive_group()
     frame_options.add_argument('--calibration', help='Validated static camera-to-base JSON')
     frame_options.add_argument('--provisional-landmarks', help='Operator landmarks for an explicitly unvalidated base-frame display estimate; camera mounting must be unchanged')
+    frame_options.add_argument('--candidate-calibration', help='Provisional right-arm ChArUco fit, visualization only')
+    p.add_argument('--hover-height', type=float, help='Preview target this many meters above object along base +Z; no motor commands')
+    p.add_argument('--hover-lookahead', type=float, default=.10, help='Causal target prediction horizon, seconds')
+    p.add_argument('--live-frame', action='store_true', help='Publish live_frame.jpg once per second in output directory')
     p.add_argument('--preview', action='store_true')
     p.add_argument('--disable-stationary-update', action='store_true', help='Disable inferred zero-velocity updates for comparison')
     p.add_argument('--save-rgbd', action='store_true', help='Save aligned arrays for replay; adds CPU/disk overhead')

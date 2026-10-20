@@ -13,7 +13,7 @@ class TrackingOverlay:
         self.previous_time = None
 
     def draw(self, bgr, mask, quality, state, timing, processing_s,
-             transform=None, roi=None, frame='camera_optical'):
+             transform=None, roi=None, frame='camera_optical', hover=None):
         view = bgr.copy()
         height, width = view.shape[:2]
         now = timing['sensor_timestamp_s']
@@ -88,9 +88,30 @@ class TrackingOverlay:
             ('*Approximate pinhole projection', (150, 150, 150)),
             ('Q: close preview', (220, 220, 220)),
         ]
+        spacing = min(23, (height-35) / max(1, len(lines)-1))
         for i, (label, ink) in enumerate(lines):
-            cv2.putText(panel, label, (12, 25+i*23), cv2.FONT_HERSHEY_SIMPLEX,
+            cv2.putText(panel, label, (12, int(25+i*spacing)), cv2.FONT_HERSHEY_SIMPLEX,
                         .47, ink, 1, cv2.LINE_AA)
         cv2.putText(view, 'Tracking only | no robot motion', (10, 24),
                     cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 255, 255), 1, cv2.LINE_AA)
+        if hover is not None:
+            target = hover['target_m']
+            if target is not None and transform is not None:
+                p = transform[:3, :3].T @ (np.asarray(target)-transform[:3, 3])
+                if p[2] > 0:
+                    intr = timing['intrinsics']
+                    pixel = (int(round(intr['fx']*p[0]/p[2]+intr['ppx'])),
+                             int(round(intr['fy']*p[1]/p[2]+intr['ppy'])))
+                    if 0 <= pixel[0] < width and 0 <= pixel[1] < height:
+                        cv2.drawMarker(view, pixel, (0, 255, 255), cv2.MARKER_CROSS, 22, 2)
+            footer = np.full((92, width+panel.shape[1], 3), 24, np.uint8)
+            labels = [f"PREVIEW ONLY: +{100*hover['height_m']:g} cm base Z | robot motion disabled",
+                      ('Target XYZ (m): '+', '.join(f'{v:+.3f}' for v in target)) if target is not None
+                      else 'Target unavailable: '+hover['reason'],
+                      'Yellow cross: predicted hover target (approximate projection); frame remains unvalidated'
+                      if frame.endswith('_base_estimate') else 'Yellow cross: predicted hover target (approximate projection)']
+            for i, label in enumerate(labels):
+                cv2.putText(footer, label, (12, 24+27*i), cv2.FONT_HERSHEY_SIMPLEX,
+                            .49, (0, 225, 255), 1, cv2.LINE_AA)
+            return np.concatenate([np.concatenate([view, panel], axis=1), footer], axis=0)
         return np.concatenate([view, panel], axis=1)

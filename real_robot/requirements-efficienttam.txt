@@ -1,0 +1,8 @@
+# Optional GPU inference dependencies; keep separate from CPU perception.
+# Install the official pinned source with --no-deps (README), without demo apps.
+torch>=2.5.1,<3
+torchvision>=0.20.1,<1
+hydra-core==1.3.2
+iopath==0.1.10
+pillow>=9.4,<13
+tqdm>=4.66.1,<5
