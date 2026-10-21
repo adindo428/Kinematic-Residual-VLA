@@ -309,6 +309,22 @@ class PerceptionTests(unittest.TestCase):
             p, _ = depth_measurement(mask, depth, lambda pixel, z: [0, 0, z])
             self.assertIsNone(p)
 
+    def test_side_depth_range_accepts_sixty_cm_without_accepting_bad_depth(self):
+        mask = np.full((30, 30), 255, np.uint8)
+        project = lambda pixel, z: [0, 0, z]
+        depth = np.full((30, 30), .60)
+        point, quality = depth_measurement(mask, depth, project, .07, .50)
+        self.assertIsNone(point)
+        self.assertEqual(quality['valid_fraction'], 0)
+        self.assertAlmostEqual(quality['nonzero_depth_median_m'], .60)
+        self.assertEqual(quality['accepted_depth_range_m'], [.07, .50])
+        point, quality = depth_measurement(mask, depth, project, .07, .80)
+        self.assertAlmostEqual(point[2], .60)
+        for bad in (np.zeros((30,30)), np.full((30,30), .9),
+                    np.vstack([np.full((15,30), .55), np.full((15,30), .75)])):
+            point, _ = depth_measurement(mask, bad, project, .07, .80)
+            self.assertIsNone(point)
+
     def test_marker_identity(self):
         marker = cv2.aruco.generateImageMarker(cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50), 7, 100)
         image = np.full((150, 150), 255, np.uint8); image[25:125, 25:125] = marker

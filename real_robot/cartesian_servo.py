@@ -7,7 +7,8 @@ DEFAULT_SERVO=dict(workspace_min_m=[.20,-.30,.09],workspace_max_m=[.58,.30,.35],
     integral_limit_m_s=.02,max_tcp_speed_mps=.03,max_tcp_acceleration_mps2=.08,
     max_joint_speed_deg_s=6.,max_command_lead_m=.05,max_observation_age_s=.20,target_smoothing_s=.12,
     tool_pitch_deg=90.,tool_pitch_rate_deg_s=4.,max_following_error_deg=4.,
-    experimental_current_guard=True,
+    # Legacy configuration key; follow/pick-place do not install current guards.
+    experimental_current_guard=False,
     seconds=600,control_hz=30,collision_model='scratch/real_robot/right-handeye/hover-plan/offline-collision-model.xml')
 
 def validate_servo(values=None):

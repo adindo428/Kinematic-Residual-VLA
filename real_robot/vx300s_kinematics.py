@@ -58,6 +58,25 @@ def inverse(target, seed, tcp_offset_m):
     return result.x
 
 
+def jacobian(q, tcp_offset_m):
+    """Geometric TCP Jacobian, [base-frame XYZ; base-frame angular velocity]."""
+    endpoint = forward(q, tcp_offset_m)[:3, 3]
+    transform = np.eye(4)
+    origins, axes = [], []
+    for angle, axis, origin in zip(q, AXES, ORIGINS):
+        axis = np.asarray(axis, float)
+        origins.append(transform[:3, 3]+transform[:3, :3]@origin)
+        axes.append(transform[:3, :3]@axis)
+        skew = np.array([[0., -axis[2], axis[1]], [axis[2], 0., -axis[0]],
+                         [-axis[1], axis[0], 0.]])
+        joint = np.eye(4)
+        joint[:3, 3] = origin
+        joint[:3, :3] = np.eye(3)+np.sin(angle)*skew+(1-np.cos(angle))*(skew@skew)
+        transform = transform@joint
+    return np.vstack((np.column_stack([np.cross(a, endpoint-o) for a, o in zip(axes, origins)]),
+                      np.column_stack(axes)))
+
+
 def inverse_downward(position, seed, tcp_length_m=.16):
     """Analytic IK for a vertical downward VX300s tool, preserving world yaw.
 

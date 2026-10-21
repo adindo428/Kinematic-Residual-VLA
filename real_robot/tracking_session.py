@@ -24,6 +24,8 @@ def main():
     parser.add_argument('--plan',help='Override scene-reviewed plan path')
     parser.add_argument('--observation',help='Override live observation path for continuous following')
     parser.add_argument('--execute',action='store_true',help='Enable continuous-follow motor goals')
+    parser.add_argument('--record-rgbd', action='store_true',
+                        help='Perception: save every processed front/side RGB-D pair for grasp recording')
     parser.add_argument('--front-seed-box',type=int,nargs=4,metavar=('X','Y','W','H'))
     parser.add_argument('--side-seed-box',type=int,nargs=4,metavar=('X','Y','W','H'))
     starts=parser.add_mutually_exclusive_group()
@@ -33,13 +35,18 @@ def main():
     if args.mode=='perception':
         if args.execute_held_start or args.execute_supported_start or args.plan or args.execute or args.observation:
             parser.error('Arm flags cannot be used with camera-only perception')
-        section=config['perception']; allowed={'rig','seed_session','output_root','seconds','max_skew_s','save_every','preview','observation_max_age_s'}
+        section=config['perception']; allowed={'rig','seed_session','output_root','seconds','max_skew_s','save_every','preview','observation_max_age_s','front_depth_range_m','side_depth_range_m'}
         if set(section)-allowed: raise ValueError('Unknown perception setting')
         output=output_path(section,'perception')
         argv=['--rig',str(resolve(section['rig'])),'--output',str(output),
               '--mask-tracker','efficienttam',
               '--seconds',str(section['seconds']),'--max-skew',str(section['max_skew_s']),
               '--save-every',str(section['save_every']),'--observation-max-age',str(section.get('observation_max_age_s',.20))]
+        if args.record_rgbd:
+            argv[argv.index('--save-every')+1] = '1'
+        for role in ('front', 'side'):
+            if role+'_depth_range_m' in section:
+                argv += ['--'+role+'-depth-range', *map(str, section[role+'_depth_range_m'])]
         if args.front_seed_box is not None or args.side_seed_box is not None:
             if args.front_seed_box is None or args.side_seed_box is None:parser.error('Provide both seed boxes')
             argv+=['--front-seed-box',*map(str,args.front_seed_box),'--side-seed-box',*map(str,args.side_seed_box)]
@@ -53,6 +60,7 @@ def main():
         pointer.with_suffix('.tmp').replace(pointer)
         from .multiview_track import main as run
     elif args.mode=='follow':
+        if args.record_rgbd: parser.error('--record-rgbd belongs to perception mode')
         if args.front_seed_box is not None or args.side_seed_box is not None:parser.error('Seed boxes belong to perception mode')
         if args.plan or args.execute_held_start or args.execute_supported_start:parser.error('Continuous follow does not use approach-plan flags')
         if args.observation:observation=resolve(args.observation)
@@ -68,6 +76,7 @@ def main():
         print('Continuous tracker output:',output,flush=True)
         from .aloha_object_servo import main as run
     else:
+        if args.record_rgbd: parser.error('--record-rgbd belongs to perception mode')
         if args.execute or args.observation:parser.error('Use follow mode for --execute / --observation')
         section=config['arm']
         if set(section)-{'plan','output_root','seconds'}: raise ValueError('Unknown arm setting')

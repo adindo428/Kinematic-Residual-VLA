@@ -11,7 +11,8 @@ Training and closed-loop evaluation code for DynamicVLA and our kinematic residu
 | Tracking training: baseline, velocity, Coordinate, Coordinate+Velocity | [Training guide](docs/TRAINING.md#tracking-training-75-epochs) |
 | DOM training: six matched variants, single GPU and 4/8 GPU DDP | [Training guide](docs/TRAINING.md#dom-training-100-epochs) and [DOM100 details](third_party/DynamicVLA/DOM100.md) |
 | Dataset collection and offline checkpoint evaluation | [Collector](third_party/Data_Collection_Dynamic_Objects/README.md) |
-| Real-robot CPU tracking, shadow control, and SO101-to-ALOHA collection plan | [Real-robot prototype](real_robot/README.md) |
+| Real-robot EfficientTAM tracking | [Tracking commands](real_robot/README_TRACKING.md) |
+| Real-robot grasp capture and stationary pick-and-place | [Manipulation commands](real_robot/README_MANIPULATION.md) |
 | Palmetto and DeltaAI deployment | [Cluster guide](docs/CLUSTERS.md) |
 
 **For the Linux RTX PRO 6000 machine, use the [workstation setup and VS Code guide](workstation/README.md).** It selects CUDA 12.8 for Blackwell, keeps policy/simulator environments separate, and includes [the research handoff](workstation/HANDOFF.md) and portable grasp diagnostics.

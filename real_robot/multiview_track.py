@@ -16,6 +16,7 @@ from .perception import detect_mask, depth_measurement
 from .tracking import VelocityTracker
 from .velocity_report import velocity_report
 from .visible_extent import visible_top
+from .rgbd_archive import RGBDArchiveWriter
 
 
 def load_rig(path):
@@ -79,6 +80,8 @@ def main(argv=None):
     parser.add_argument('--max-skew', type=float, default=.025,
                         help='Maximum timestamp span over BOTH cameras and RGB/depth streams')
     parser.add_argument('--max-disagreement', type=float, default=.06)
+    parser.add_argument('--front-depth-range', type=float, nargs=2, default=[.10, 1.50], metavar=('MIN_M', 'MAX_M'))
+    parser.add_argument('--side-depth-range', type=float, nargs=2, default=[.07, .50], metavar=('MIN_M', 'MAX_M'))
     parser.add_argument('--front-hsv-low', type=int, nargs=3, default=[90, 60, 45])
     parser.add_argument('--side-hsv-low', type=int, nargs=3, default=[90, 60, 45])
     parser.add_argument('--front-roi', type=int, nargs=4)
@@ -95,6 +98,10 @@ def main(argv=None):
     parser.add_argument('--velocity-max-speed', type=float, default=1.2, help='Perception reporting limit only; does not set any robot speed')
     parser.add_argument('--observation-max-age',type=float,default=.20,help='Maximum host arrival age for exported arm observations')
     args = parser.parse_args(argv)
+    for role in ('front', 'side'):
+        bounds = getattr(args, role+'_depth_range')
+        if not np.isfinite(bounds).all() or not .01 <= bounds[0] < bounds[1] <= 3:
+            parser.error(f'{role} depth range must satisfy 0.01 <= min < max <= 3 meters')
     if not .05<=args.observation_max_age<=.25:raise ValueError('Invalid exported observation age')
     if (not np.isfinite([args.seconds, args.max_skew, args.max_disagreement]).all()
             or not 0 < args.seconds <= 1800 or not 0 < args.max_skew <= .05
@@ -130,6 +137,8 @@ def main(argv=None):
                 'covariance_note': 'Reported observation covariance includes a heuristic 15 mm floor and view spread, excludes absolute base-calibration uncertainty.'}
     manifest['profile_note'] = 'SDK, resolution, principal point and distortion must match calibration; focal length may vary at most 0.5%, using native per-frame rays. Every live profile is recorded.'
     manifest['association_note'] = 'Acquire from a unique 3D match among blue candidates. Single-view continuity gate: 60 mm plus 0.5 m/s times elapsed capture time. After 0.5 s without an associated observation, require both views to reacquire.'
+    manifest['rgbd_storage'] = ('background uncompressed NPZ; bounded queue, atomic file publication'
+                                if args.save_every == 1 else 'sampled compressed NPZ')
     if mask_model is not None: manifest['mask_model'] = mask_model.provenance
     (root/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
     cameras = CameraPair(max_skew_s=args.max_skew).start()
@@ -140,12 +149,17 @@ def main(argv=None):
     statuses = {}; skews = []; processing = []; last_view = None
     complete = False; error = None; last_publish_s = 0.; last_pair_host_s = None
     paired_views = {}; paired_masks = {}; paired_qualities = {}
+    latest_rgbd = None
     latest_fusion = {'status': 'waiting_for_paired_frames', 'position_output_m': None}
     latest_track = None; latest_timing = None; last_observation_write = 0.
     cv2.setNumThreads(1)
+    archive = None
     try:
+        if args.save_every == 1:
+            archive = RGBDArchiveWriter(root)
         with (root/'fusion.jsonl').open('w', buffering=1) as log:
             while time.monotonic()-start < args.seconds:
+                if archive is not None: archive.check()
                 pair = cameras.poll()
                 views = cameras.views(); masks = {}; qualities = {}; track = None
                 if pair is not None:
@@ -181,8 +195,7 @@ def main(argv=None):
                         candidates[role] = []
                         for candidate_index, mask in enumerate(detected):
                             point, quality = depth_measurement(mask, frame['depth'], frame['deproject'],
-                                                               .1 if role == 'front' else .07,
-                                                               1.5 if role == 'front' else .5)
+                                                               *getattr(args, role+'_depth_range'))
                             candidates[role].append({'point': point, 'quality': quality, 'mask': mask, 'candidate_index': candidate_index})
                     if mask_model is not None:
                         mask_model.recover_pair({'front': front, 'side': side}, candidates, model_tracking, fs)
@@ -246,11 +259,18 @@ def main(argv=None):
                               'processing_s': duration, 'host_processed_monotonic_s': time.monotonic(),
                               'action': None, 'motion_sent': False}
                     if args.save_every and (count-1) % args.save_every == 0:
-                        record['rgbd_files'] = {}
-                        for role, frame in [('front', front), ('side', side)]:
-                            name = f'pair_{count-1:06d}_{role}.npz'
-                            np.savez_compressed(root/name, bgr=frame['bgr'], depth_m=frame['depth'].astype(np.float32))
-                            record['rgbd_files'][role] = name
+                        record['rgbd_files'] = {role: f'pair_{count-1:06d}_{role}.npz' for role in ('front', 'side')}
+                        frames_to_save = {'front': front, 'side': side}
+                        if archive is not None:
+                            archive.submit(record['rgbd_files'], frames_to_save)
+                        else:
+                            for role, name in record['rgbd_files'].items():
+                                frame = frames_to_save[role]
+                                np.savez_compressed(root/name, bgr=frame['bgr'], depth_m=frame['depth'].astype(np.float32))
+                    latest_rgbd = {'pair_index': count-1, 'pair': timing,
+                        'views': {role: {'timing': frame['timing'], 'quality': qualities[role]}
+                                  for role, frame in [('front', front), ('side', side)]},
+                        'files': record.get('rgbd_files', {}), 'save_every': args.save_every}
                     log.write(json.dumps(record, allow_nan=False)+'\n')
                     views = {'front': front, 'side': side}
                     last_pair_host_s = time.monotonic()
@@ -264,6 +284,7 @@ def main(argv=None):
                 if pair is not None or time.monotonic()-last_observation_write > .05:
                     observation = {'schema': 'front_side_observation_v1', 'running': True,
                         'rig_sha256': digest, 'output_frame': output_frame, 'timing': latest_timing,
+                        'rgbd': latest_rgbd,
                         'host_published_monotonic_s': time.monotonic(), 'stale': observation_stale,
                         'fusion': published, 'track': None if latest_track is None or observation_stale else latest_track.as_dict(),
                         'velocity_report': speed_report, 'motion_sent': False}
@@ -314,7 +335,19 @@ def main(argv=None):
     except BaseException as exc:
         error = str(exc); raise
     finally:
-        cameras.close()
+        cleanup_error = None
+        try:
+            cameras.close()
+        except BaseException as exc:
+            cleanup_error = exc
+        if archive is not None:
+            try:
+                archive.close()
+            except BaseException as exc:
+                cleanup_error = cleanup_error or exc
+        if cleanup_error is not None:
+            complete = False
+            error = error or str(cleanup_error)
         if args.preview: cv2.destroyAllWindows()
         if last_view is not None: cv2.imwrite(str(root/'last_frame.jpg'), last_view)
         summary = {'complete': complete, 'error': error, 'pairs': count, 'statuses': statuses,
@@ -335,6 +368,7 @@ def main(argv=None):
             'velocity_report': velocity_report(None, True), 'motion_sent': False})+'\n')
         (root/'observation.tmp.json').replace(root/'observation.json')
         (root/'summary.json').write_text(json.dumps(summary, indent=2)+'\n'); print(json.dumps(summary, indent=2))
+        if cleanup_error is not None: raise cleanup_error
 
 
 if __name__ == '__main__': main()

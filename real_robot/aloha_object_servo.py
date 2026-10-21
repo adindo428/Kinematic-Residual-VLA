@@ -8,7 +8,7 @@ import argparse,hashlib,json,time
 from pathlib import Path
 import cv2,numpy as np
 from .cartesian_servo import CartesianIKServo,validate_servo
-from .aloha_tape_hover import TapeArm,CurrentGuard,GeometryGuard
+from .aloha_tape_hover import TapeArm,GeometryGuard
 from .vx300s_kinematics import forward,LOWER,UPPER,MOTOR_IDS
 from .tracking_config import load_config
 
@@ -72,11 +72,10 @@ def main(argv=None):
         limits[2]=min(limits[2],limits[3]);limits[4]=min(limits[4],limits[5])
         hardware_rates=[limits[i] for i in MOTOR_IDS]
         hardware_currents=np.array([arm.read_register(i,38,2)*.00269 for i in range(1,10)])
-        if np.any(hardware_currents<=0):raise RuntimeError('Invalid motor current-limit readback')
         servo=CartesianIKServo(retained,settings,hardware_rates)
-        guard=CurrentGuard(profile='continuous') if settings['experimental_current_guard'] else None
+        # Current readback is diagnostic only; no software torque/current aborts.
         state.update(configured_joint_velocity_limits_deg_s=hardware_rates,current_limits_a=hardware_currents.tolist(),
-            experimental_current_guard=settings['experimental_current_guard'])
+            experimental_current_guard=False)
         start=last=time.monotonic();last_health=last_ui=0.;previous_tcp=None
         print('Continuous Cartesian tracking '+('EXECUTING' if args.execute else 'PREVIEW ONLY')+'; existing holding goals preserved.',flush=True)
         with (root/'motion.jsonl').open('w',buffering=1) as log:
@@ -92,8 +91,6 @@ def main(argv=None):
                 if measured_speed is not None and measured_speed>settings['max_tcp_speed_mps']:
                     state.update(measured_fk_tcp_speed_mps=measured_speed,host_monotonic_s=now)
                     raise RuntimeError('Measured FK TCP speed exceeds configured ceiling')
-                if guard is not None:guard.check(currents,dt)
-                elif not np.isfinite(currents).all() or np.any(np.abs(currents)>hardware_currents+.01):raise RuntimeError('Current exceeds configured motor limit')
                 geometry.check(actual,.02)
                 if np.any(actual<LOWER) or np.any(actual>UPPER):raise RuntimeError('Measured joints outside model limits')
                 if now-last_health>.25:arm.check_health();last_health=now

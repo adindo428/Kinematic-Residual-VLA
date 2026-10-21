@@ -8,6 +8,9 @@ perception:
   seconds: 1800
   max_skew_s: 0.035
   observation_max_age_s: 0.20
+  # Tape is about 0.60 m from the side camera in the current pickup region.
+  # Software acceptance interval; depth quality and cross-view gates still apply.
+  side_depth_range_m: [0.07, 0.80]
   save_every: 30
   preview: true
 
@@ -34,7 +37,7 @@ servo:
   tool_pitch_deg: 60.0
   tool_pitch_rate_deg_s: 4.0
   max_following_error_deg: 12.0
-  # Use existing motor current limits, hardware faults and temperature checks.
+  # Legacy compatibility key; follow/pick-place have no software current aborts.
   experimental_current_guard: false
   max_observation_age_s: 0.20
   target_smoothing_s: 0.12

@@ -110,7 +110,11 @@ def depth_measurement(mask, depth_m, deproject, min_depth_m=0.1, max_depth_m=1.5
     valid = np.isfinite(values) & (values >= min_depth_m) & (values <= max_depth_m)
     fraction = float(valid.mean())
     if valid.sum() < 20 or fraction < min_valid_fraction:
-        return None, {'reason': 'insufficient_depth', 'valid_fraction': fraction}
+        positive = values[np.isfinite(values) & (values > 0)]
+        return None, {'reason': 'insufficient_depth', 'valid_fraction': fraction,
+                      'accepted_depth_range_m': [min_depth_m, max_depth_m],
+                      'nonzero_depth_fraction': float(len(positive)/len(values)),
+                      'nonzero_depth_median_m': float(np.median(positive)) if len(positive) else None}
     xs, ys, values = xs[valid], ys[valid], values[valid]
     median = float(np.median(values))
     mad = float(np.median(np.abs(values - median)))

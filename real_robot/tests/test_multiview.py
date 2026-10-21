@@ -125,11 +125,13 @@ class FusionTests(unittest.TestCase):
                   (None, {}), (np.array([0, 0, .3]), {})]
         with tempfile.TemporaryDirectory() as d:
             path = Path(d)/'rig.json'; path.write_text(json.dumps(rig)); output = Path(d)/'capture'
-            argv = ['fusion', '--rig', str(path), '--output', str(output), '--seconds', '.08', '--save-every', '0']
+            argv = ['fusion', '--rig', str(path), '--output', str(output), '--seconds', '.08', '--save-every', '0',
+                    '--side-depth-range', '.07', '.80']
             with patch('sys.argv', argv), patch.object(multiview_track, 'CameraPair', return_value=camera), \
                     patch.object(multiview_track, 'detect_mask', return_value=[np.zeros((480, 640), np.uint8)]), \
-                    patch.object(multiview_track, 'depth_measurement', side_effect=points), patch('builtins.print'):
+                    patch.object(multiview_track, 'depth_measurement', side_effect=points) as measure, patch('builtins.print'):
                 multiview_track.main()
+            self.assertEqual(measure.call_args_list[1].args[-2:], (.07, .80))
             rows = [json.loads(line) for line in (output/'fusion.jsonl').read_text().splitlines()]
             self.assertEqual([r['fusion']['status'] for r in rows], ['fused', 'single_view'])
             self.assertTrue(all(r['action'] is None and r['motion_sent'] is False for r in rows))
