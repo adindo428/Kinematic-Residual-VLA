@@ -23,7 +23,7 @@ def manipulation_motion(template, values=None, scale=1.5):
         'release': {'joint_rate_deg_s':8., 'tcp_rate_m_s':.040, 'angular_rate_deg_s':20.},
         'acceleration_m_s2':.30, 'position_kp':4., 'rotation_kp':4.,
         'release_height_tolerance_m':.010, 'release_lateral_speed_m_s':.015,
-        'carry_orientation':True}
+        'carry_orientation':True, 'approach_rotation_scale':2.}
     values = {} if values is None else values
     if not isinstance(values,dict) or set(values)-set(defaults):
         raise ValueError('Unknown manipulation setting')
@@ -193,6 +193,11 @@ class TapeDemonstrator:
         return self.core.stage in (Stage.LIFT_OBJECT,Stage.VERIFY_LIFT,
             Stage.APPROACH_ABOVE_TARGET,Stage.APPROACH_TARGET)
 
+    @property
+    def approach_rotation_scale(self):
+        return (self.motion['approach_rotation_scale'] if self.core.stage in
+            (Stage.APPROACH_ABOVE_OBJECT,Stage.ALIGN_GRASP,Stage.APPROACH_OBJECT) else 1.)
+
     def flags(self): return self.core.action.geometry_flags()
 
     def motion_profile(self, tcp_pose):
@@ -238,7 +243,7 @@ class TapeDemonstrator:
             self.aligner.update(now,q,wrist,approach,grasp,fraction=fraction,
                 capture_camera=self.object_estimator.capture_pose,
                 velocity=obj.velocity_m_s,prediction_s=horizon,
-                roll_rate_deg_s=self.motion['alignment_wrist_roll_rate_deg_s'])
+                roll_rate_deg_s=self.motion['alignment_wrist_roll_rate_deg_s']*self.approach_rotation_scale)
         elif old_stage in (*self.core.PRECOMMIT, Stage.GRASP_OBJECT):
             self.aligner.complete = False
             self.aligner.target,self.aligner.grasp = self.core.alignment_targets(obj)

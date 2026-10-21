@@ -467,11 +467,13 @@ def run(args):
                                     # retain slower relative contact corrections.
                                     blend=min(1.,target_speed/.03)
                                     joint_rates+=(np.asarray(hardware_rates)-joint_rates)*blend
+                                rotation_scale=machine.approach_rotation_scale
+                                joint_rates[3:]*=rotation_scale
                                 if machine.stage in ('APPROACH_ABOVE_OBJECT','ALIGN_GRASP','APPROACH_OBJECT','GRASP_OBJECT'):
-                                    joint_rates[-1]=rates['alignment_wrist_roll_rate_deg_s']
+                                    joint_rates[-1]=rates['alignment_wrist_roll_rate_deg_s']*rotation_scale
                                 command=servo.step(action.tcp_pose,q,control_dt,
                                     tcp_rate_m_s=tcp_rate,joint_rate_deg_s=joint_rates,
-                                    angular_rate_deg_s=profile['angular_rate_deg_s'],
+                                    angular_rate_deg_s=profile['angular_rate_deg_s']*rotation_scale,
                                     acceleration_m_s2=rates['acceleration_m_s2'],
                                     target_velocity_m_s=action.target_velocity_m_s,
                                     relative_tcp_rate_m_s=relative_rate)
@@ -509,6 +511,7 @@ def run(args):
                                 state.update(status=machine.stage,motion_sent=True,roll_gain=machine.roll_gain,
                                     wrist_alignment_phase=machine.aligner.phase,gripper_target_raw=gripper_goal,
                                     goal_q_rad=command.tolist(),motion_profile=profile_name,
+                                    approach_rotation_scale=rotation_scale,
                                     target_tcp_pose=action.tcp_pose.tolist(),differential_ik=servo.diagnostics,
                                     teacher={'object_state':machine.teacher_state,'gripper_action':action.gripper,
                                              'target_velocity_m_s':action.target_velocity_m_s.tolist(),
