@@ -16,7 +16,6 @@ perception:
 
 arm:
   output_root: scratch/real_robot/tracking
-  seconds: 120
 
 # Continuous tracker used by `tracking_session follow --execute`.
 # Workspace bounds describe the TCP target, in the right-arm base frame.

@@ -18,7 +18,7 @@ from .geometry import validate_transform, transform_point
 from .grasp_prior import fresh_observation
 from .automatic_demonstrator import DemonstratorConfig
 from .demonstrator_adapters import prior_from_template
-from .stationary_pick import PickGeometry, inside_polygon, clearance_center, pose_error
+from .pick_geometry import PickGeometry, inside_polygon, clearance_center, pose_error
 from .tracking_config import load_config
 from .vx300_demonstrator import TapeDemonstrator, VX300DifferentialIK
 from .vx300s_kinematics import forward
@@ -309,7 +309,7 @@ def run(args):
         'estimated_object_states_are_policy_inputs':False,
         'time_note':'Native camera timestamps and joint host timestamps are recorded; not hardware-synchronized exposures.'})
     child_env=os.environ.copy()
-    # aloha_tape_hover disables CUDA at import. Start the camera-only process
+    # aloha_arm disables CUDA at import. Start the camera-only process
     # first so it retains the actual GPU visibility of the workstation session.
     child=subprocess.Popen([sys.executable,'-u','-m','real_robot.wrist_pick_view',
         '--template',str(resolve(args.template)),'--output',str(output/'wrist'),'--device',args.device,
@@ -334,7 +334,7 @@ def run(args):
                             f"age={info.get('age_s')}s, processing={info.get('processing_state')}, "
                             f"reason={info.get('reason')}")
     try:
-        from .aloha_tape_hover import TapeArm
+        from .aloha_arm import TapeArm
         arm=TapeArm();arm.check_health()
         actual,currents,raw=arm.telemetry();retained=arm.goals()
         if forward(actual,template['tcp_offset_m'])[2,3]<.10:

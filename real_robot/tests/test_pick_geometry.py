@@ -1,15 +1,13 @@
-"""Offline image-servo, state-machine, and contact-guard tests. No devices."""
-import json
+"""Existing wrist image-servo and pick-geometry checks. No devices."""
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
 
 import cv2
 import numpy as np
 
-from real_robot.stationary_pick import StationaryPick, PoseServo, PickGeometry, inside_polygon, pose_error
-from real_robot.vx300s_kinematics import forward, inverse
+from real_robot.pick_geometry import PickGeometry
+from real_robot.vx300s_kinematics import forward
 from real_robot.wrist_alignment import blue_seed, tape_feature, line_error, corrections, roll_step
 
 
@@ -70,68 +68,6 @@ class WristTests(unittest.TestCase):
         new=np.linalg.inv(moved)@world
         pixel=np.array([intr['fx']*new[0]/new[2]+intr['ppx'],intr['fy']*new[1]/new[2]+intr['ppy']])
         self.assertLess(np.linalg.norm(pixel-ref['center_px']),np.linalg.norm(np.array(feature['center_px'])-ref['center_px']))
-
-
-class ServoTests(unittest.TestCase):
-    def test_retained_holding_effort_and_command_rate(self):
-        _,_,q=fixture();held=q+np.deg2rad([.2,1,-.5,0,.5,0])
-        servo=PoseServo(q,held)
-        np.testing.assert_allclose(servo.step(q,q,1/30),held)
-        old=servo.goal.copy();command=servo.step(q+.1,q,1/30)
-        self.assertLessEqual(np.max(np.abs(command-old)),np.deg2rad(3)/30+1e-10)
-        with self.assertRaises(RuntimeError):servo.step(q,q-.3,1/30)
-
-
-class StateMachineTests(unittest.TestCase):
-    def run_attempt(self,drop=False,placement_visible=True,probe_gain=-.9):
-        p,box,q0=fixture();q=q0.copy();machine=StationaryPick(p,box,p['object_reference_m'],q,0.)
-        seen=[]
-        for k in range(2000):
-            now=k*.1
-            q=machine.target_q.copy() if machine.target_q is not None else inverse(machine.target_pose,q,p['tcp_offset_m'])
-            f=dict(p['wrist_reference']);f['axis_rad']+=probe_gain*(q[5]-q0[5]);raw=3104;current=.05
-            if machine.stage in ('CLOSE','LIFT','VERIFY_LIFT','TRANSPORT','ABOVE_BOX') or (machine.stage=='RELEASE' and machine.gripper_target!=machine.open_raw):
-                raw=2645;current=-.52;f.update(depth_m=.095,center_px=[380,390])
-            if drop and machine.stage=='VERIFY_LIFT':f.update(depth_m=.24)
-            intr={'fx':393.,'fy':393.,'ppx':323.,'ppy':240.}
-            if machine.stage in ('VERIFY_RELEASE','RETREAT'):
-                camera=forward(q)@np.array(p['T_gripper_wrist_camera'])
-                point=np.linalg.inv(camera)@np.array([*box['release_xy_m'],.025,1])
-                f.update(depth_m=float(point[2]),center_px=[intr['fx']*point[0]/point[2]+intr['ppx'],intr['fy']*point[1]/point[2]+intr['ppy']])
-                if not placement_visible:f=None
-            machine.update(now,q,raw,current,{'feature':f,'timing':{'sensor_timestamp_s':now,'intrinsics':intr}})
-            if not seen or seen[-1]!=machine.stage:seen.append(machine.stage)
-            if machine.done:return machine,seen
-        raise AssertionError('State machine did not finish or fail')
-
-    def test_full_feedback_driven_attempt(self):
-        m,seen=self.run_attempt()
-        self.assertTrue(m.done)
-        self.assertEqual(seen,['OPEN','PREGRASP','PROBE','ALIGN','DESCEND','CLOSE','LIFT',
-            'VERIFY_LIFT','TRANSPORT','ABOVE_BOX','RELEASE','VERIFY_RELEASE','RETREAT','COMPLETE'])
-        self.assertAlmostEqual(m.roll_gain,-.9)
-
-    def test_drop_prevents_transport(self):
-        with self.assertRaisesRegex(RuntimeError,'Lift verification failed'):self.run_attempt(drop=True)
-
-    def test_release_timer_cannot_fabricate_placement_success(self):
-        with self.assertRaisesRegex(RuntimeError,'placement could not be visually verified'):
-            self.run_attempt(placement_visible=False)
-
-    def test_wrong_wrist_response_aborts_before_descent(self):
-        with self.assertRaisesRegex(RuntimeError,'response not verified'):self.run_attempt(probe_gain=.9)
-
-    def test_empty_closed_gripper_is_not_object_contact(self):
-        p,box,q=fixture();m=StationaryPick(p,box,p['object_reference_m'],q,0.)
-        m.stage='CLOSE';f=p['wrist_reference']
-        with self.assertRaisesRegex(RuntimeError,'No supported gripper contact'):
-            for k in range(90):m.update(k*.1,q,2475,-.53,{'feature':f,'timing':{'sensor_timestamp_s':k}})
-
-    def test_moving_object_and_unreliable_alignment_abort(self):
-        p,box,q=fixture();m=StationaryPick(p,box,p['object_reference_m'],q,0.)
-        with self.assertRaisesRegex(RuntimeError,'Tape moved'):m.update(.1,q,3104,.05,{},False)
-        m.stage='ALIGN'
-        with self.assertRaisesRegex(RuntimeError,'axis/depth lost'):m.update(.2,q,3104,.05,{'feature':None})
 
 
 class ContactGeometryTests(unittest.TestCase):

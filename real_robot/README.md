@@ -30,3 +30,11 @@ Neither active controller adds software torque/current abort thresholds.
 Existing motor firmware protections and the current table/geometry, motor-health
 and feedback checks remain in place. These commands preserve existing holding
 torque; they do not enable it automatically.
+
+## Code layout
+
+- `tracking_session.py`: perception/follow launcher.
+- `automatic_demonstrator.py`, `vx300_demonstrator.py`: task stages and wrist alignment.
+- `aloha_arm.py`: shared follower serial I/O.
+- `collision.py`, `pick_geometry.py`: shared geometry checks.
+- `aloha_charuco_capture.py`, `multiview_calibrate.py`: calibration tools.

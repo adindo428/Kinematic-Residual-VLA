@@ -3,76 +3,10 @@ import numpy as np
 import cv2
 from real_robot.geometry import validate_transform, transform_point, fit_rigid_transform
 from real_robot.tracking import VelocityTracker
-from real_robot.controller import HoverLimits, ShadowHoverController, damped_joint_velocity
 from real_robot.perception import detect_mask, depth_measurement
-from real_robot.__main__ import calibration_for, provisional_calibration_for
-from real_robot.calibration_capture import clicked_point, landmark_document, prepare_landmark_session
-import tempfile
-import json
-from pathlib import Path
 
 
 class GeometryTests(unittest.TestCase):
-    def test_resume_preserves_original_points_partitions_and_images(self):
-        with tempfile.TemporaryDirectory() as d:
-            source = Path(d)/'source'; source.mkdir()
-            np.savez_compressed(source/'first.npz', depth_m=np.ones((3,3)))
-            records = [{'partition':'validation', 'camera_point_m':[0,0,1],
-                        'base_point_m':[.1,0,0], 'rgbd_file':'first.npz'}]
-            original = landmark_document('abc', records, 'right')
-            path = source/'landmarks.json'; path.write_text(json.dumps(original))
-            before = path.read_bytes()
-            copied, provenance = prepare_landmark_session(Path(d)/'new','abc','right',path)
-            self.assertEqual(copied, records)
-            self.assertEqual(provenance['resumed_observations'],1)
-            self.assertEqual((Path(d)/'new'/'first.npz').read_bytes(), (source/'first.npz').read_bytes())
-            self.assertEqual(path.read_bytes(),before)
-            with self.assertRaises(ValueError):
-                prepare_landmark_session(Path(d)/'wrong','abc','left',path)
-            self.assertFalse((Path(d)/'wrong').exists())
-            original['validation_base_points_m']=[[.9,0,0]]
-            path.write_text(json.dumps(original))
-            with self.assertRaises(ValueError):
-                prepare_landmark_session(Path(d)/'inconsistent','abc','right',path)
-
-    def test_three_point_preview_is_explicitly_unvalidated_and_arm_specific(self):
-        camera = [[0, 0, 1], [.2, 0, 1], [0, .2, 1]]
-        base = [[.4, -.2, .8], [.4, 0, .8], [.2, -.2, .8]]
-        with tempfile.TemporaryDirectory() as d:
-            path = Path(d)/'landmarks.json'
-            path.write_text(json.dumps({'camera_serial': 'abc', 'arm': 'right',
-                                        'static_camera': True, 'camera_points_m': camera,
-                                        'base_points_m': base}))
-            transform, report = provisional_calibration_for(path, 'abc', 'right')
-            np.testing.assert_allclose(transform[:3,:3]@[.1,0,0], [0,.1,0], atol=1e-12)
-            self.assertFalse(report['calibration_validated'])
-            self.assertEqual(report['destination_frame'], 'right_base_estimate')
-            path.write_text(json.dumps(report))
-            with self.assertRaises(ValueError): calibration_for(path, 'abc', 'right')
-            with self.assertRaises(ValueError): provisional_calibration_for(path, 'abc', 'left')
-        # The normal calibration fit still requires four points.
-        with self.assertRaises(ValueError): fit_rigid_transform(camera, base)
-
-    def test_clicked_landmark_rejects_holes_and_edges(self):
-        depth = np.full((20, 20), .75)
-        project = lambda pixel, z: [pixel[0] / 100, pixel[1] / 100, z]
-        np.testing.assert_allclose(clicked_point(depth, [10, 10], project), [.1, .1, .75])
-        depth[10, 10] = 0
-        with self.assertRaises(ValueError): clicked_point(depth, [10, 10], project)
-        depth[10, 10] = 1.0
-        with self.assertRaises(ValueError): clicked_point(depth, [10, 10], project)
-        with self.assertRaises(ValueError): clicked_point(depth, [0, 0], project)
-
-    def test_capture_separates_heldout_from_fit(self):
-        records = [{'partition': 'fit', 'camera_point_m': [0, 0, 1], 'base_point_m': [0, 0, 0]},
-                   {'partition': 'validation', 'camera_point_m': [1, 0, 1], 'base_point_m': [1, 0, 0]}]
-        document = landmark_document('new-mount', records)
-        self.assertEqual(document['camera_points_m'], [[0, 0, 1]])
-        self.assertEqual(document['validation_base_points_m'], [[1, 0, 0]])
-        self.assertFalse(document['calibration_validated'])
-        self.assertEqual(document['arm'], 'right')
-        self.assertEqual(landmark_document('same-camera', records, 'left')['arm'], 'left')
-
     def test_rigid_fit_recovers_rotation_and_translation(self):
         points = np.array([[0, 0, 0], [.2, 0, 0], [0, .2, 0], [.2, .2, 0], [.1, .1, .1]])
         t = np.array([[0, -1, 0, .3], [1, 0, 0, -.1], [0, 0, 1, .2], [0, 0, 0, 1.]])
@@ -96,23 +30,6 @@ class GeometryTests(unittest.TestCase):
             state = tracker.update(i / 30, transform_point(t, camera_point))
         self.assertTrue(state.ready)
         np.testing.assert_allclose(state.velocity_mps, 0, atol=1e-12)
-
-    def test_calibration_must_match_serial_and_be_validated(self):
-        with tempfile.TemporaryDirectory() as d:
-            p = Path(d) / 'calibration.json'
-            data = {'camera_serial': 'abc', 'destination_frame': 'robot_base',
-                    'static_camera': True, 'calibration_validated': False,
-                    'T_base_camera': np.eye(4).tolist()}
-            p.write_text(json.dumps(data))
-            with self.assertRaises(ValueError): calibration_for(p, 'abc')
-            data['calibration_validated'] = True; p.write_text(json.dumps(data))
-            with self.assertRaises(ValueError): calibration_for(p, 'different')
-            np.testing.assert_allclose(calibration_for(p, 'abc'), np.eye(4))
-            with self.assertRaises(ValueError): calibration_for(p, 'abc', 'right')
-            data['arm'] = 'left'; p.write_text(json.dumps(data))
-            with self.assertRaises(ValueError): calibration_for(p, 'abc', 'right')
-            data['arm'] = 'right'; p.write_text(json.dumps(data))
-            np.testing.assert_allclose(calibration_for(p, 'abc', 'right'), np.eye(4))
 
 
 class TrackingTests(unittest.TestCase):
@@ -331,45 +248,6 @@ class PerceptionTests(unittest.TestCase):
         bgr = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
         self.assertIsNotNone(detect_mask(bgr, marker_id=7))
         self.assertIsNone(detect_mask(bgr, marker_id=0))
-
-
-class ControllerTests(unittest.TestCase):
-    def setUp(self):
-        self.limits = HoverLimits([0, -.2, 0], [.5, .2, .4])
-        self.controller = ShadowHoverController(self.limits)
-        tracker = VelocityTracker(frame='robot_base')
-        for i in range(60): self.state = tracker.update(i / 30, [.25, 0, .04])
-
-    def test_candidate_is_bounded_and_never_sent(self):
-        result = self.controller.step(self.state, [.2, 0, .1], self.state.timestamp_s, 1/30)
-        self.assertEqual(result['status'], 'candidate')
-        self.assertFalse(result['motion_sent'])
-        velocity = np.array(result['candidate_velocity_mps'])
-        self.assertLessEqual(np.linalg.norm(velocity), self.limits.max_speed_mps)
-        self.assertLessEqual(np.linalg.norm(velocity), self.limits.max_acceleration_mps2/30 + 1e-10)
-
-    def test_stale_future_missing_and_wrong_frame_hold(self):
-        t = self.state.timestamp_s
-        for now in [t + .5, t - .1]:
-            self.assertEqual(self.controller.step(self.state, [.2, 0, .1], now, 1/30)['status'], 'hold')
-        self.assertEqual(self.controller.step(None, [.2, 0, .1], t, 1/30)['status'], 'hold')
-        self.state.frame = 'camera_optical'
-        self.assertEqual(self.controller.step(self.state, [.2, 0, .1], t, 1/30)['status'], 'hold')
-
-    def test_workspace_and_covariance_checks(self):
-        t = self.state.timestamp_s
-        self.assertEqual(self.controller.step(self.state, [2, 0, .1], t, 1/30)['reason'], 'end_effector_outside_workspace')
-        self.state.position_m[0] = 1
-        self.assertEqual(self.controller.step(self.state, [.2, 0, .1], t, 1/30)['reason'], 'predicted_target_outside_workspace')
-        self.state.position_m[0] = .2
-        self.state.covariance *= 100000
-        self.assertEqual(self.controller.step(self.state, [.2, 0, .1], t, 1/30)['reason'], 'prediction_uncertain')
-
-    def test_dls_handles_singularity_and_limits(self):
-        j = np.array([[1, 0, 0], [0, 0, 0], [0, 0, 1.]])
-        velocity = damped_joint_velocity(j, [1, 2, 3], .05, .1)
-        self.assertTrue(np.isfinite(velocity).all())
-        self.assertLessEqual(max(abs(velocity)), .1 + 1e-12)
 
 
 if __name__ == '__main__':

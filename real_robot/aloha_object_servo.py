@@ -8,7 +8,8 @@ import argparse,hashlib,json,time
 from pathlib import Path
 import cv2,numpy as np
 from .cartesian_servo import CartesianIKServo,validate_servo
-from .aloha_tape_hover import TapeArm,GeometryGuard
+from .aloha_arm import TapeArm
+from .collision import GeometryGuard
 from .vx300s_kinematics import forward,LOWER,UPPER,MOTOR_IDS
 from .tracking_config import load_config
 

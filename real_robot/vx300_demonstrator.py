@@ -8,7 +8,7 @@ import numpy as np
 from .automatic_demonstrator import AutomaticDemonstrator, DemonstratorConfig, Observation, Stage
 from .demonstrator_adapters import EstimatedObjectAdapter, prior_from_template, release_from_registration
 from .geometry import validate_transform
-from .stationary_pick import inside_polygon, pose_error, rx
+from .pick_geometry import inside_polygon, pose_error, rx
 from .vx300s_kinematics import forward, jacobian, LOWER, UPPER
 from .wrist_alignment import corrections, line_error
 

@@ -4,23 +4,9 @@ import numpy as np
 from real_robot.cartesian_servo import CartesianIKServo,validate_servo
 from real_robot.vx300s_kinematics import inverse_downward,forward,LOWER,UPPER
 from real_robot.aloha_object_servo import read_target
-from real_robot.aloha_tape_hover import CurrentGuard
 from real_robot.visible_extent import visible_top
 
 class CartesianServoTests(unittest.TestCase):
-    def test_continuous_current_profile_preserves_peak_and_other_joint_guards(self):
-        currents=np.zeros(9);currents[1:3]=[1.,1.15]
-        guard=CurrentGuard(profile='continuous')
-        for _ in range(60):guard.check(currents,.05)
-        currents[2]=1.3
-        with self.assertRaises(RuntimeError):
-            for _ in range(20):guard.check(currents,.05)
-        currents[2]=1.6
-        with self.assertRaises(RuntimeError):CurrentGuard(profile='continuous').check(currents,.03)
-        currents[:]=0;currents[3]=1.
-        with self.assertRaises(RuntimeError):
-            guard=CurrentGuard(profile='continuous')
-            for _ in range(20):guard.check(currents,.05)
 
     def test_visible_top_rejects_missing_depth_and_background_outliers(self):
         yy,xx=np.mgrid[:100,:100];mask=(((xx-50)**2+(yy-50)**2)<30**2).astype(np.uint8)*255
