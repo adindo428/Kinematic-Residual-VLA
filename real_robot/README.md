@@ -34,6 +34,7 @@ torque; they do not enable it automatically.
 ## Code layout
 
 - `tracking_session.py`: perception/follow launcher.
+- `task_space_servo.py`: shared Cartesian feedback/feedforward and differential IK.
 - `automatic_demonstrator.py`, `vx300_demonstrator.py`: task stages and wrist alignment.
 - `aloha_arm.py`: shared follower serial I/O.
 - `collision.py`, `pick_geometry.py`: shared geometry checks.

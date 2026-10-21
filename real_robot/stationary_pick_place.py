@@ -20,7 +20,8 @@ from .automatic_demonstrator import DemonstratorConfig
 from .demonstrator_adapters import prior_from_template
 from .pick_geometry import PickGeometry, inside_polygon, clearance_center, pose_error
 from .tracking_config import load_config
-from .vx300_demonstrator import TapeDemonstrator, VX300DifferentialIK
+from .vx300_demonstrator import TapeDemonstrator, manipulation_motion
+from .task_space_servo import PoseVelocityServo
 from .vx300s_kinematics import forward
 from .wrist_alignment import blue_seed, line_error, tape_feature
 from .wrist_feed import read_wrist_observation, WristMaskStartup
@@ -151,7 +152,7 @@ def prepare(args):
     prior=prior_from_template(result)
     result['automatic_demonstrator']={'schema':'automatic_demonstrator_v1',
         'core':'real_robot.automatic_demonstrator.AutomaticDemonstrator',
-        'robot_backend':'vx300_differential_ik','config':asdict(DemonstratorConfig()),
+        'robot_backend':'shared_pose_velocity_servo','config':asdict(DemonstratorConfig()),
         'prior':{'T_object_approach':prior.T_object_approach.tolist(),
                  'T_object_grasp':prior.T_object_grasp.tolist(),'origin_semantics':prior.semantics},
         'object_rotation_source':'collection heading prior plus wrist-camera alignment',
@@ -263,13 +264,9 @@ def run(args):
     if not np.isfinite(args.speed_scale) or args.speed_scale <= 0:
         raise ValueError('Speed scale must be finite and positive')
     template=read_json(resolve(args.template)); box=read_json(resolve(args.box_registration))
-    rates = {'joint_rate_deg_s':template['limits']['joint_rate_deg_s']*args.speed_scale,
-             'tcp_rate_m_s':template['limits']['tcp_rate_m_s']*args.speed_scale,
-             'angular_rate_deg_s':15.*args.speed_scale,
-             'alignment_wrist_roll_rate_deg_s':template['limits'].get('alignment_wrist_roll_rate_deg_s',6.)*args.speed_scale,
-             'gripper_rate_raw_s':250.*args.speed_scale}
     config_path=resolve(args.config)
-    load_config(config_path)
+    config=load_config(config_path)
+    rates=manipulation_motion(template,config.get('manipulation'),args.speed_scale)
     # No software torque/current aborts in this executor. Current is recorded
     # and used for gripper contact sensing; existing motor firmware handles limits.
     if template.get('schema')!='stationary_tape_pick_template_v1' or box.get('schema')!='fixed_box_registration_v1':
@@ -300,7 +297,7 @@ def run(args):
         'boot_id':Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
         'created_at_utc':datetime.now(timezone.utc).isoformat(),
         'demonstrator':'real_robot.automatic_demonstrator.AutomaticDemonstrator',
-        'robot_backend':'vx300_differential_ik','stationary_only':True,
+        'robot_backend':'shared_pose_velocity_servo','stationary_only':True,
         'config_file':str(config_path),'experimental_current_guard':False,
         'speed_scale':args.speed_scale,'motion_rates':rates,
         'fixed_observation_file':str(observation_file),'wrist_rgbd_recording':args.execute,
@@ -319,7 +316,7 @@ def run(args):
     stop=threading.Event();start=threading.Event();done=threading.Event()
     state={'running':True,'status':'preview / SPACE starts one attempt','motion_sent':False,
            'success':False,'error':None,'torque_writes':False,'execute':args.execute,
-           'demonstrator':'automatic_demonstrator_v1','robot_backend':'vx300_differential_ik',
+           'demonstrator':'automatic_demonstrator_v1','robot_backend':'shared_pose_velocity_servo',
            'teacher_states_are_policy_inputs':False,'measured_speed_guard_enabled':False,
            'experimental_current_guard':False,
            'speed_scale':args.speed_scale,'motion_rates':rates}
@@ -339,14 +336,18 @@ def run(args):
         actual,currents,raw=arm.telemetry();retained=arm.goals()
         if forward(actual,template['tcp_offset_m'])[2,3]<.10:
             raise ValueError('Prepare an existing held pose with TCP at least 0.10m above table using the leader first')
-        servo=VX300DifferentialIK(actual,retained,template['tcp_offset_m'],
-            joint_rate_deg_s=rates['joint_rate_deg_s'],tcp_rate_m_s=rates['tcp_rate_m_s'],
-            angular_rate_deg_s=rates['angular_rate_deg_s'])
+        hardware_rates=arm.joint_velocity_limits_deg_s()
+        def make_servo(actual_q,retained_q):
+            return PoseVelocityServo(actual_q,retained_q,template['tcp_offset_m'],
+                kp=rates['position_kp'],rotation_kp=rates['rotation_kp'],
+                hardware_joint_rates_deg_s=hardware_rates)
+        servo=make_servo(actual,retained)
         geometry=PickGeometry(template['collision_model'],actual,box)
         geometry.check(actual)
         gripper_goal=arm.read_register(9,116,4)
         hardware_currents=np.array([arm.read_register(i,38,2)*.00269 for i in range(1,10)])
         state['hardware_current_limits_a']=hardware_currents.tolist()
+        state['hardware_joint_velocity_limits_deg_s']=hardware_rates
         state['initial_actual_q_rad']=actual.tolist()
         state['initial_retained_goal_q_rad']=retained.tolist()
         print('Software torque/current aborts: disabled',
@@ -355,7 +356,7 @@ def run(args):
         def control():
             nonlocal gripper_goal
             machine=None;last=time.monotonic();health=last
-            previous_feedback=None;last_stage=None;point_history=[]
+            previous_feedback=None;last_stage=None;point_history=[];tcp_velocity=np.zeros(3)
             wrist_startup=WristMaskStartup(timeout_s=5.)
             try:
                 with (output/'motion.jsonl').open('x',buffering=1) as log:
@@ -372,7 +373,11 @@ def run(args):
                         # Diagnostic only: speed is not an abort condition.
                         if previous_feedback is not None:
                             stamp,position=previous_feedback
-                            state['measured_tcp_speed_m_s']=float(np.linalg.norm(pose[:3,3]-position)/(feedback_stamp-stamp))
+                            measured_velocity=(pose[:3,3]-position)/(feedback_stamp-stamp)
+                            elapsed=feedback_stamp-stamp
+                            tcp_velocity+=elapsed/(.12+elapsed)*(measured_velocity-tcp_velocity)
+                            state['measured_tcp_speed_m_s']=float(np.linalg.norm(measured_velocity))
+                        state['filtered_tcp_velocity_m_s']=tcp_velocity.tolist()
                         previous_feedback=(feedback_stamp,pose[:3,3].copy())
                         state['measured_speed_guard_enabled']=False
                         if now-health>.25:arm.check_health();health=time.monotonic()
@@ -400,10 +405,8 @@ def run(args):
                                 raise ValueError('Wait for stationary tape history before SPACE')
                             if np.max(np.ptp([p for _,p in point_history],axis=0))>.012:
                                 raise ValueError('Tape/reference is not stationary within 12mm')
-                            machine=TapeDemonstrator(template,box,fixed_point,q,time.monotonic())
-                            servo=VX300DifferentialIK(q,arm.goals(),template['tcp_offset_m'],
-                                joint_rate_deg_s=rates['joint_rate_deg_s'],tcp_rate_m_s=rates['tcp_rate_m_s'],
-                                angular_rate_deg_s=rates['angular_rate_deg_s'])
+                            machine=TapeDemonstrator(template,box,fixed_point,q,time.monotonic(),motion=rates)
+                            servo=make_servo(q,arm.goals())
                         if machine is not None:
                             if machine.needs_object:
                                 if fixed_point is None:raise RuntimeError('Fixed-camera target lost before grasp commitment')
@@ -426,13 +429,21 @@ def run(args):
                             else:
                                 if wrist is None:raise wrist_error('during pick')
                                 action=machine.update(time.monotonic(),q,raw[9],currents[-1],wrist,
-                                    object_record=fixed if fixed_point is not None else None)
+                                    object_record=fixed if fixed_point is not None else None,
+                                    tcp_velocity_m_s=tcp_velocity)
                                 flags=machine.flags()
                                 geometry.check(q,**flags)
                                 previous_goal=servo.goal.copy()
+                                profile_name=machine.motion_profile(pose)
+                                profile=rates[profile_name]
+                                joint_rates=np.full(6,profile['joint_rate_deg_s'])
+                                if machine.stage=='ALIGN_GRASP':
+                                    joint_rates[-1]=rates['alignment_wrist_roll_rate_deg_s']
                                 command=servo.step(action.tcp_pose,q,min(dt,1/30),
-                                    wrist_roll_rate_deg_s=(rates['alignment_wrist_roll_rate_deg_s']
-                                        if machine.stage=='ALIGN_GRASP' else None))
+                                    tcp_rate_m_s=profile['tcp_rate_m_s'],joint_rate_deg_s=joint_rates,
+                                    angular_rate_deg_s=profile['angular_rate_deg_s'],
+                                    acceleration_m_s2=rates['acceleration_m_s2'],
+                                    target_velocity_m_s=action.target_velocity_m_s)
                                 # Check both actual-to-command and goal-to-command
                                 # segments, including retained holding compensation.
                                 # Drop containment applies to the measured TCP,
@@ -454,15 +465,17 @@ def run(args):
                                 if not template['gripper']['empty_closed_raw']<=goal<=template['gripper']['calibrated_open_raw']:
                                     raise RuntimeError('Gripper target outside taught calibration bounds')
                                 arm.goal(command)
+                                servo.accept(command)
                                 if goal!=gripper_goal:
                                     comm,error=arm.packet.write4ByteTxRx(arm.port,9,116,int(goal)&0xffffffff)
                                     if comm!=arm.dxl.COMM_SUCCESS or error:raise RuntimeError('Gripper goal communication failed')
                                     gripper_goal=goal
                                 state.update(status=machine.stage,motion_sent=True,roll_gain=machine.roll_gain,
                                     wrist_alignment_phase=machine.aligner.phase,gripper_target_raw=gripper_goal,
-                                    goal_q_rad=command.tolist(),
+                                    goal_q_rad=command.tolist(),motion_profile=profile_name,
                                     target_tcp_pose=action.tcp_pose.tolist(),differential_ik=servo.diagnostics,
                                     teacher={'object_state':machine.teacher_state,'gripper_action':action.gripper,
+                                             'target_velocity_m_s':action.target_velocity_m_s.tolist(),
                                              'optional_object_feedback_rejection':machine.object_feedback_reason,
                                              'alignment_reference_stamp_s':action.metadata.get('alignment_reference_stamp_s'),
                                              'wrist_only_alignment':action.metadata.get('wrist_only_alignment',False),
@@ -540,7 +553,7 @@ def main(argv=None):
     p.add_argument('--template',required=True);p.add_argument('--box-registration',required=True)
     p.add_argument('--config',default='real_robot/config.yaml',help='Tracking configuration to validate and snapshot')
     p.add_argument('--speed-scale',type=float,default=1.5,
-                   help='Multiply template joint/TCP, angular and gripper motion rates (default: 1.5)')
+                   help='Multiply phase joint/TCP, angular and gripper motion rates (default: 1.5)')
     p.add_argument('--output');p.add_argument('--execute',action='store_true');p.add_argument('--device',default='cuda')
     args=parser.parse_args(argv)
     try:

@@ -1,6 +1,7 @@
-"""Hardware-free Cartesian PID + analytic IK for continuous object following."""
+"""Following target adapter around the shared Cartesian pose/velocity servo."""
 import numpy as np
-from .vx300s_kinematics import forward, inverse_tool_pitch, LOWER, UPPER
+from .vx300s_kinematics import forward, inverse_tool_pitch
+from .task_space_servo import PoseVelocityServo
 
 DEFAULT_SERVO=dict(workspace_min_m=[.20,-.30,.09],workspace_max_m=[.58,.30,.35],
     hover_height_m=.05,surface_top_offset_m=.042,kp=2.,ki=0.,kd=0.,
@@ -32,71 +33,67 @@ def validate_servo(values=None):
     return c
 
 class CartesianIKServo:
-    def __init__(self,retained_goal,settings=None,joint_velocity_limits_deg_s=None):
-        self.c=validate_servo(settings); self.q=np.asarray(retained_goal,float).copy()
-        if self.q.shape!=(6,) or not np.isfinite(self.q).all() or np.any(self.q<LOWER) or np.any(self.q>UPPER):
-            raise ValueError('Invalid retained motor goals')
-        self.velocity=np.zeros(3);self.integral=np.zeros(3);self.previous_actual=None;self.measured_velocity=np.zeros(3)
-        self.filtered_target=None
-        hardware=None if joint_velocity_limits_deg_s is None else np.asarray(joint_velocity_limits_deg_s,float)
-        if hardware is not None and (hardware.shape!=(6,) or not np.isfinite(hardware).all() or np.any(hardware<=0) or np.any(hardware>360)):
-            raise ValueError('Invalid configured motor velocity limits')
-        if self.c['max_joint_speed_deg_s'] is None:
-            if hardware is None:raise ValueError('Read motor velocity limits before disabling the pilot joint-rate limit')
-            limits=hardware
-        else:limits=np.full(6,self.c['max_joint_speed_deg_s']) if hardware is None else np.minimum(hardware,self.c['max_joint_speed_deg_s'])
-        self.joint_rate_rad_s=np.deg2rad(limits)
+    """Retain the follow CLI/configuration while sharing its servo with picking."""
+    def __init__(self, retained_goal, settings=None, joint_velocity_limits_deg_s=None, actual=None):
+        self.c = validate_servo(settings)
+        retained = np.asarray(retained_goal, float)
+        self.joint_rates = joint_velocity_limits_deg_s if self.c['max_joint_speed_deg_s'] is None else self.c['max_joint_speed_deg_s']
+        if self.joint_rates is None:
+            raise ValueError('Read motor velocity limits before disabling the pilot joint-rate limit')
+        self.core = PoseVelocityServo(retained if actual is None else actual, retained, [.16,0,0],
+            kp=self.c['kp'], ki=self.c['ki'], kd=self.c['kd'], integral_limit=self.c['integral_limit_m_s'],
+            max_following_error_deg=self.c['max_following_error_deg'],
+            hardware_joint_rates_deg_s=joint_velocity_limits_deg_s)
+        self.filtered_target = None
+        self.pitch_reference = None
+
+    @property
+    def q(self): return self.core.goal
+
+    @property
+    def diagnostics(self): return self.core.diagnostics
 
     def hold(self):
-        self.velocity[:]=0;self.integral[:]=0;self.previous_actual=None;self.measured_velocity[:]=0
-        self.filtered_target=None
-        return self.q.copy()
+        self.filtered_target = None
+        self.pitch_reference = None
+        return self.core.hold()
 
-    def step(self,target,actual,dt):
-        c=self.c;target=np.asarray(target,float);actual=np.asarray(actual,float)
-        if not 0<dt<=.15 or target.shape!=(3,) or not np.isfinite(target).all(): raise ValueError('Invalid servo target/timing')
-        if np.any(target<c['workspace_min_m']) or np.any(target>c['workspace_max_m']):
+    def step(self, target, actual, dt, target_velocity_m_s=None):
+        c = self.c
+        target, actual = np.asarray(target,float), np.asarray(actual,float)
+        if (not 0 < dt <= .15 or target.shape != (3,) or not np.isfinite(target).all()
+                or actual.shape != (6,) or not np.isfinite(actual).all()):
+            raise ValueError('Invalid servo target/timing')
+        velocity = np.zeros(3) if target_velocity_m_s is None else np.asarray(target_velocity_m_s,float)
+        if velocity.shape != (3,) or not np.isfinite(velocity).all():
+            raise ValueError('Expected finite target velocity XYZ')
+        if np.any(target < c['workspace_min_m']) or np.any(target > c['workspace_max_m']):
             raise ValueError('Target outside configured TCP workspace')
-        inverse_tool_pitch(target,self.q,c['tool_pitch_deg'])
-        if self.filtered_target is None:self.filtered_target=target.copy()
-        else:self.filtered_target+=(1-np.exp(-dt/max(c['target_smoothing_s'],1e-8)))*(target-self.filtered_target)
-        target=self.filtered_target
-        measured=forward(actual,[.16,0,0])[:3,3];reference=forward(self.q,[.16,0,0])[:3,3]
-        error=target-measured
-        if self.previous_actual is not None:
-            raw=(measured-self.previous_actual)/dt;alpha=dt/(.10+dt)
-            self.measured_velocity+=alpha*(raw-self.measured_velocity)
-        self.previous_actual=measured.copy()
-        self.integral=np.clip(self.integral+dt*error,-c['integral_limit_m_s'],c['integral_limit_m_s'])
-        requested=c['kp']*error+c['ki']*self.integral-c['kd']*self.measured_velocity
-        requested*=min(1.,c['max_tcp_speed_mps']/max(np.linalg.norm(requested),1e-12))
-        change=requested-self.velocity
-        if c['max_tcp_acceleration_mps2'] is None:self.velocity=requested
-        else:self.velocity+=change*min(1.,c['max_tcp_acceleration_mps2']*dt/max(np.linalg.norm(change),1e-12))
-        lead=reference-measured
-        if c['max_command_lead_m'] is not None and np.linalg.norm(lead)>c['max_command_lead_m'] and np.dot(self.velocity,lead)>0:
-            self.hold();return self.q.copy()
-        position=reference+self.velocity*dt
-        position=np.clip(position,c['workspace_min_m'],c['workspace_max_m'])
-        current_pitch=np.rad2deg(self.q[1]+self.q[2]+self.q[4])
-        pitch=current_pitch+np.clip(c['tool_pitch_deg']-current_pitch,-c['tool_pitch_rate_deg_s']*dt,c['tool_pitch_rate_deg_s']*dt)
-        solution=inverse_tool_pitch(position,self.q,float(np.clip(pitch,20,90)))
-        delta=solution-self.q
-        delta*=min(1.,float(np.min(self.joint_rate_rad_s*dt/np.maximum(np.abs(delta),1e-12))))
-        # Joint interpolation during initial orientation alignment can change
-        # TCP speed; bound the actual nonlinear FK step as well.
-        for _ in range(4):
-            distance=np.linalg.norm(forward(self.q+delta,[.16,0,0])[:3,3]-reference)
-            if distance<=c['max_tcp_speed_mps']*dt+1e-10:break
-            delta*=c['max_tcp_speed_mps']*dt/distance
-        candidate=self.q+delta;point=forward(candidate,[.16,0,0])[:3,3]
-        if np.linalg.norm(point-reference)>c['max_tcp_speed_mps']*dt+1e-9:
-            raise ValueError('Proposed TCP command exceeds speed ceiling')
-        if np.any(point<np.array(c['workspace_min_m'])-1e-8) or np.any(point>np.array(c['workspace_max_m'])+1e-8):
+        inverse_tool_pitch(target, self.q, c['tool_pitch_deg'])
+        if self.filtered_target is None:
+            self.filtered_target = target.copy()
+        else:
+            self.filtered_target += velocity*dt
+            self.filtered_target += (1-np.exp(-dt/max(c['target_smoothing_s'],1e-8)))*(target-self.filtered_target)
+        self.filtered_target = np.clip(self.filtered_target,c['workspace_min_m'],c['workspace_max_m'])
+        if self.pitch_reference is None:
+            self.pitch_reference = float(np.rad2deg(actual[1]+actual[2]+actual[4]))
+        self.pitch_reference += np.clip(c['tool_pitch_deg']-self.pitch_reference,
+            -c['tool_pitch_rate_deg_s']*dt,c['tool_pitch_rate_deg_s']*dt)
+        orientation_q = inverse_tool_pitch(self.filtered_target, actual, float(np.clip(self.pitch_reference,20,90)))
+        pose = forward(orientation_q,[.16,0,0])
+        pose[:3,3] = self.filtered_target
+        measured = forward(actual,[.16,0,0])[:3,3]
+        lead = forward(self.q,[.16,0,0])[:3,3]-measured
+        drive = c['kp']*(self.filtered_target-measured)+velocity
+        if c['max_command_lead_m'] is not None and np.linalg.norm(lead)>c['max_command_lead_m'] and np.dot(drive,lead)>0:
+            return self.hold()
+        candidate = self.core.step(pose,actual,dt,tcp_rate_m_s=c['max_tcp_speed_mps'],
+            joint_rate_deg_s=self.joint_rates,angular_rate_deg_s=90.,
+            acceleration_m_s2=c['max_tcp_acceleration_mps2'],target_velocity_m_s=velocity)
+        point = forward(candidate,[.16,0,0])[:3,3]
+        if np.any(point < np.asarray(c['workspace_min_m'])-1e-8) or np.any(point > np.asarray(c['workspace_max_m'])+1e-8):
             raise ValueError('Proposed command outside TCP workspace')
-        if np.max(np.abs(candidate-actual))>np.deg2rad(c['max_following_error_deg']):
-            raise RuntimeError('Joint following error exceeds configured stall bound')
         return candidate
 
-    def accept(self,candidate):
-        self.q=np.array(candidate,float).copy()
+    def accept(self,candidate): self.core.accept(candidate)

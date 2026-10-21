@@ -1,4 +1,4 @@
-"""Continuous right-arm object following: Cartesian PID -> analytic IK -> goals.
+"""Continuous right-arm following through the shared pose/velocity servo.
 
 Starts from existing healthy holding torque; no torque/mode/gain/limit writes.
 Requires a clear tabletop workspace. Checks robot/table/self geometry, not
@@ -10,7 +10,7 @@ import cv2,numpy as np
 from .cartesian_servo import CartesianIKServo,validate_servo
 from .aloha_arm import TapeArm
 from .collision import GeometryGuard
-from .vx300s_kinematics import forward,LOWER,UPPER,MOTOR_IDS
+from .vx300s_kinematics import forward,LOWER,UPPER
 from .tracking_config import load_config
 
 def read_target(path,rig_sha256,settings,now):
@@ -35,9 +35,16 @@ def read_target(path,rig_sha256,settings,now):
         # A partially occluded mask can expose only the lower half of the
         # object. Do not lower toward it more than 8mm below the proxy fallback.
         target[2]=max(top,point[2]+settings['surface_top_offset_m']-.008)+settings['hover_height_m']
+    velocity=np.zeros(3)
+    if (track and track.get('frame')=='right_base_estimate' and track.get('ready')
+            and track.get('accepted') and not track.get('stationary_assumed',False)):
+        proposed=np.asarray(track.get('velocity_mps',[0,0,0]),float)
+        if proposed.shape==(3,) and np.isfinite(proposed).all():velocity=proposed
+    target=target+velocity*age
     if np.any(target<settings['workspace_min_m']) or np.any(target>settings['workspace_max_m']):
         return None,'target outside configured TCP workspace'
     return dict(target_m=target,object_proxy_m=point,velocity_report=record.get('velocity_report'),
+                target_velocity_m_s=velocity,
                 observation_age_s=age,source_timestamp_s=(track or {}).get('timestamp_s')),None
 
 def main(argv=None):
@@ -66,14 +73,9 @@ def main(argv=None):
         geometry=GeometryGuard(str(resolve(settings['collision_model'])),actual)
         geometry.check(actual,.025);geometry.check(retained,.025)
         # Read existing motor settings; never write velocity/current limits.
-        limits={i:arm.read_register(i,44,4)*.229*6 for i in range(1,10)}
-        profiles={i:arm.read_register(i,112,4)*.229*6 for i in range(1,10)}
-        for i,value in profiles.items():
-            if value>0:limits[i]=min(limits[i],value)
-        limits[2]=min(limits[2],limits[3]);limits[4]=min(limits[4],limits[5])
-        hardware_rates=[limits[i] for i in MOTOR_IDS]
+        hardware_rates=arm.joint_velocity_limits_deg_s()
         hardware_currents=np.array([arm.read_register(i,38,2)*.00269 for i in range(1,10)])
-        servo=CartesianIKServo(retained,settings,hardware_rates)
+        servo=CartesianIKServo(retained,settings,hardware_rates,actual=actual)
         # Current readback is diagnostic only; no software torque/current aborts.
         state.update(configured_joint_velocity_limits_deg_s=hardware_rates,current_limits_a=hardware_currents.tolist(),
             experimental_current_guard=False)
@@ -102,7 +104,8 @@ def main(argv=None):
                     state.update(target_m=observation['target_m'].tolist(),object_proxy_m=observation['object_proxy_m'].tolist(),
                         velocity_report=observation['velocity_report'],observation_age_s=observation['observation_age_s'])
                     try:
-                        candidate=servo.step(observation['target_m'],actual,dt)
+                        candidate=servo.step(observation['target_m'],actual,dt,
+                            target_velocity_m_s=observation['target_velocity_m_s'])
                         geometry.check(candidate,.03)
                     except ValueError as exc:
                         servo.hold();state['status']='holding: '+str(exc)
@@ -113,6 +116,7 @@ def main(argv=None):
                         if args.execute:arm.goal(candidate);servo.accept(candidate);state['motion_sent']=True
                         state['status']='following' if args.execute else 'preview; no motor commands'
                 state.update(actual_q_rad=actual.tolist(),goal_q_rad=servo.q.tolist(),currents_a=currents.tolist(),
+                    task_space_servo=servo.diagnostics,
                     model_tcp_m=measured_tcp.tolist(),measured_fk_tcp_speed_mps=measured_speed,
                     host_monotonic_s=now,elapsed_s=now-start)
                 log.write(json.dumps(state)+'\n');save()

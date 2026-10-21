@@ -9,78 +9,45 @@ from .automatic_demonstrator import AutomaticDemonstrator, DemonstratorConfig, O
 from .demonstrator_adapters import EstimatedObjectAdapter, prior_from_template, release_from_registration
 from .geometry import validate_transform
 from .pick_geometry import inside_polygon, pose_error, rx
-from .vx300s_kinematics import forward, jacobian, LOWER, UPPER
+from .vx300s_kinematics import forward
 from .wrist_alignment import corrections, line_error
 
 
-class VX300DifferentialIK:
-    """Damped least-squares TCP tracking with retained gravity compensation.
-
-    Smooth trajectory rates shape commands; measured speed is diagnostic only.
-    There is no iterative whole-pose optimizer or whole-target joint interpolation.
-    """
-    def __init__(self, actual, retained, tcp_offset, *, joint_rate_deg_s=3., tcp_rate_m_s=.020,
-                 angular_rate_deg_s=15.):
-        self.nominal = np.asarray(actual, float).copy()
-        self.goal = np.asarray(retained, float).copy()
-        self.offset = np.asarray(tcp_offset, float)
-        forward(self.nominal, self.offset)
-        if self.goal.shape != (6,) or not np.isfinite(self.goal).all():
-            raise ValueError('Expected six retained joint goals')
-        self.compensation = self.goal-self.nominal
-        if np.max(np.abs(self.compensation)) > np.deg2rad(3):
-            raise ValueError('Existing holding compensation exceeds three degrees')
-        if (not np.isfinite([joint_rate_deg_s, tcp_rate_m_s, angular_rate_deg_s]).all()
-                or min(joint_rate_deg_s, tcp_rate_m_s, angular_rate_deg_s) <= 0):
-            raise ValueError('Command trajectory rates must be finite and positive')
-        self.joint_rate = np.deg2rad(joint_rate_deg_s)
-        self.tcp_rate = tcp_rate_m_s
-        self.angular_rate = np.deg2rad(angular_rate_deg_s)
-        self.diagnostics = {}
-
-    def step(self, target_pose, actual, dt, *, wrist_roll_rate_deg_s=None):
-        target = validate_transform(target_pose)
-        actual = np.asarray(actual, float)
-        if actual.shape != (6,) or not np.isfinite(actual).all() or not 0 < dt <= .15:
-            raise ValueError('Invalid joint feedback or control interval')
-        joint_rates = np.full(6, self.joint_rate)
-        if wrist_roll_rate_deg_s is not None:
-            if not np.isfinite(wrist_roll_rate_deg_s) or wrist_roll_rate_deg_s <= 0:
-                raise ValueError('Wrist roll trajectory rate must be finite and positive')
-            joint_rates[-1] = np.deg2rad(wrist_roll_rate_deg_s)
-        if np.max(np.abs(self.goal-actual)) > np.deg2rad(6):
-            raise RuntimeError('Following error exceeds six degrees')
-        pose = forward(self.nominal, self.offset)
-        translation = target[:3, 3]-pose[:3, 3]
-        rotation = cv2.Rodrigues(target[:3, :3]@pose[:3, :3].T)[0].ravel()
-        translation *= min(1., self.tcp_rate*dt/max(np.linalg.norm(translation), 1e-12))
-        rotation *= min(1., self.angular_rate*dt/max(np.linalg.norm(rotation), 1e-12))
-        j = jacobian(self.nominal, self.offset)
-        # Express angular error in equivalent meters for DLS conditioning.
-        weighted = j.copy(); weighted[3:] *= .1
-        error = np.r_[translation, .1*rotation]
-        singular_values = np.linalg.svd(weighted, compute_uv=False)
-        damping = .01+max(0., .025-singular_values[-1])
-        delta = weighted.T@np.linalg.solve(weighted@weighted.T+damping*damping*np.eye(6), error)
-        delta *= min(1., float(np.min(joint_rates*dt/np.maximum(np.abs(delta), 1e-12))))
-        candidate = np.clip(self.nominal+delta, LOWER+1e-6, UPPER-1e-6)
-        distance = np.linalg.norm(forward(candidate, self.offset)[:3, 3]-pose[:3, 3])
-        if distance > self.tcp_rate*dt:
-            candidate = self.nominal+(candidate-self.nominal)*(self.tcp_rate*dt/distance)
-        self.nominal = candidate
-        self.compensation = np.clip(self.compensation+.4*(self.nominal-actual)*dt,
-                                    -np.deg2rad(3), np.deg2rad(3))
-        requested = self.nominal+self.compensation
-        self.goal += np.clip(requested-self.goal, -joint_rates*dt, joint_rates*dt)
-        if np.any(self.goal < LOWER) or np.any(self.goal > UPPER):
-            raise RuntimeError('Differential IK goal outside joint limits')
-        self.diagnostics = {'damping': float(damping), 'minimum_singular_value': float(singular_values[-1]),
-            'position_error_m': float(np.linalg.norm(target[:3, 3]-pose[:3, 3])),
-            'actual_position_error_m': float(np.linalg.norm(target[:3, 3]-forward(actual,self.offset)[:3,3])),
-            'nominal_q_rad': self.nominal.tolist(), 'holding_compensation_rad': self.compensation.tolist(),
-            'following_error_rad': (self.goal-actual).tolist(),
-            'joint_trajectory_rates_deg_s': np.rad2deg(joint_rates).tolist()}
-        return self.goal.copy()
+def manipulation_motion(template, values=None, scale=1.5):
+    """Resolve phase motion targets; values are rates, not measured-speed stops."""
+    defaults = {
+        'precision': {'joint_rate_deg_s':template['limits']['joint_rate_deg_s'],
+                      'tcp_rate_m_s':template['limits']['tcp_rate_m_s'], 'angular_rate_deg_s':15.},
+        'travel': {'joint_rate_deg_s':12., 'tcp_rate_m_s':.080, 'angular_rate_deg_s':30.},
+        'release': {'joint_rate_deg_s':8., 'tcp_rate_m_s':.040, 'angular_rate_deg_s':20.},
+        'acceleration_m_s2':.30, 'position_kp':4., 'rotation_kp':4.,
+        'release_height_tolerance_m':.010, 'release_lateral_speed_m_s':.015,
+        'carry_orientation':True}
+    values = {} if values is None else values
+    if not isinstance(values,dict) or set(values)-set(defaults):
+        raise ValueError('Unknown manipulation setting')
+    if not np.isfinite(scale) or scale <= 0:
+        raise ValueError('Speed scale must be finite and positive')
+    result = {}
+    for name,default in defaults.items():
+        value = values.get(name,default)
+        if isinstance(default,dict):
+            if not isinstance(value,dict) or set(value)-set(default):
+                raise ValueError('Unknown manipulation motion profile setting: '+name)
+            profile = {**default,**value}
+            if any(isinstance(v,bool) or not isinstance(v,(int,float)) or not np.isfinite(v) or v<=0 for v in profile.values()):
+                raise ValueError('Manipulation trajectory rates must be positive')
+            result[name] = {k:v*scale for k,v in profile.items()}
+        elif isinstance(default,bool):
+            if not isinstance(value,bool):raise ValueError(name+' must be boolean')
+            result[name] = value
+        else:
+            if isinstance(value,bool) or not isinstance(value,(int,float)) or not np.isfinite(value) or value<=0:
+                raise ValueError(name+' must be positive')
+            result[name] = value
+    result['alignment_wrist_roll_rate_deg_s'] = template['limits'].get('alignment_wrist_roll_rate_deg_s',6.)*scale
+    result['gripper_rate_raw_s'] = 250.*scale
+    return result
 
 
 class WristGraspAligner:
@@ -172,13 +139,17 @@ class WristGraspAligner:
 
 class TapeDemonstrator:
     """Real estimated-state/feedback adapter around AutomaticDemonstrator."""
-    def __init__(self, template, box, object_point, actual, now):
+    def __init__(self, template, box, object_point, actual, now, motion=None):
         self.template, self.box = template, box
+        self.motion = manipulation_motion(template) if motion is None else motion
         shift = np.asarray(object_point)-template['object_reference_m']
         if np.linalg.norm(shift[:2]) > .15 or abs(shift[2]) > .025:
             raise ValueError('Tape outside the demonstrated neighborhood (150mm XY / 25mm Z)')
         self.object_adapter = EstimatedObjectAdapter(template)
-        config = DemonstratorConfig(**template.get('automatic_demonstrator', {}).get('config', {}))
+        config_values = dict(template.get('automatic_demonstrator', {}).get('config', {}))
+        config_values.update(carry_orientation=self.motion['carry_orientation'],
+            release_height_tolerance_m=self.motion['release_height_tolerance_m'])
+        config = DemonstratorConfig(**config_values)
         if not config.stationary:
             raise ValueError('The VX300 entry point currently supports stationary tape only')
         self.core = AutomaticDemonstrator(prior_from_template(template),
@@ -209,6 +180,16 @@ class TapeDemonstrator:
 
     def flags(self): return self.core.action.geometry_flags()
 
+    def motion_profile(self, tcp_pose):
+        if self.core.stage in (Stage.APPROACH_ABOVE_OBJECT, Stage.APPROACH_ABOVE_TARGET,
+                               Stage.RETREAT, Stage.RETURN_HOME):
+            return 'travel'
+        if self.core.stage == Stage.LIFT_OBJECT and tcp_pose[2,3] > self.core.grasp[2,3]+.05:
+            return 'travel'
+        if self.core.stage in (Stage.APPROACH_TARGET, Stage.PLACE_OBJECT, Stage.VERIFY_PLACE):
+            return 'release'
+        return 'precision'
+
     def _placed(self, q, feature, wrist):
         if feature is None or feature.get('depth_m') is None or self.closed_feature is None:
             return False
@@ -220,7 +201,7 @@ class TapeDemonstrator:
             and -.015 <= point[2] <= self.box['rim_z_base_m']+.04
             and z > self.closed_feature['depth_m']+.025)
 
-    def update(self, now, q, raw_gripper, current, wrist, *, object_record=None):
+    def update(self, now, q, raw_gripper, current, wrist, *, object_record=None, tcp_velocity_m_s=None):
         obj = None
         self.object_feedback_reason = None
         if object_record is not None:
@@ -254,13 +235,18 @@ class TapeDemonstrator:
             and abs(feature['depth_m']-self.closed_feature['depth_m']) < .035
             and np.linalg.norm(np.asarray(feature['center_px'])-self.closed_feature['center_px']) < 65)
         tcp_pose = forward(q, self.template['tcp_offset_m'])
+        velocity = None if tcp_velocity_m_s is None else np.asarray(tcp_velocity_m_s,float)
+        drop_ready = bool(inside_polygon(tcp_pose[:2,3], self.box['interior_polygon_xy_m'], .035)
+            and abs(tcp_pose[2,3]-self.core.release[2,3]) < self.motion['release_height_tolerance_m']
+            and velocity is not None and velocity.shape==(3,) and np.isfinite(velocity).all()
+            and np.linalg.norm(velocity[:2]) < self.motion['release_lateral_speed_m_s'])
         observation = Observation(now, tcp_pose, obj,
             gripper_open=bool(raw_gripper >= self.open_raw-12 and abs(current) < .12),
             grasp_contact=contact, holding=held, placed=self._placed(q, feature, wrist),
             confirmation_stamp=wrist['timing']['sensor_timestamp_s'],
             alignment_complete=self.aligner.phase == 'DONE', alignment_target=self.aligner.target,
             aligned_grasp=self.aligner.grasp,
-            release_ready=inside_polygon(tcp_pose[:2,3], self.box['interior_polygon_xy_m'], .035),
+            release_ready=drop_ready,
             pregrasp_ready=bool(feature is not None and feature.get('axis_reliable')
                                and feature.get('depth_m') is not None))
         action = self.core.step(observation)

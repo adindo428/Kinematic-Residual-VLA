@@ -34,17 +34,25 @@ above box → release/verify → retreat → return to the starting pose.
 
 | Current setting | Value |
 |---|---|
-| General motion at `--speed-scale 1.5` | `4.5°/s` joints, `30 mm/s` TCP |
+| Travel/reset at `--speed-scale 1.5` | `18°/s` joints, `120 mm/s` TCP |
+| Alignment/contact/first 50 mm of lift | `4.5°/s` joints, `30 mm/s` TCP |
+| Final box approach | `12°/s` joints, `60 mm/s` TCP |
 | Wrist roll during alignment | `9°/s`; corrections up to `3°` |
 | Pregrasp handoff | `5 mm / 3°` plus reliable wrist tracking |
 | Current box | Right-side `box_2`, measured `90 × 165 mm`, rim `65 mm` |
 | Release TCP height | Approximately `185 mm` above the tabletop |
 
-The default speed scale is **1.5**; use `--speed-scale 1` for the template's
-baseline general rates. Fresh wrist tracking can carry alignment and descent
+Following and manipulation share one pose/velocity servo. Edit `manipulation:`
+in [`config.yaml`](config.yaml) for phase rates and gains. The default speed
+scale is **1.5**; `--speed-scale 1` uses the baseline rates in that section.
+Motor velocity/profile readbacks also apply. Fresh wrist tracking carries alignment and descent
 through fixed-camera occlusion after pregrasp. Optional expired fixed estimates
-do not stop lift/transport. Release waits for the measured TCP to reach the drop
-pose with 35 mm interior clearance. There are no software torque/current abort caps.
+do not stop lift/transport. The gripper keeps its grasp orientation relative to
+the arm's radial heading during transport, avoiding the taught drop wrist twist.
+Release requires 35 mm interior clearance, height within 10 mm of the target,
+and filtered lateral speed below 15 mm/s for 0.2 s; it keeps converging until ready.
+There are no software torque/current abort caps. This entry point remains for
+stationary tape; moving-object grasping is the next integration step.
 The camera/base, wrist and fingertip transforms remain provisional.
 
 ## Teach additional grasps

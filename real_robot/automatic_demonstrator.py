@@ -78,13 +78,19 @@ class DemonstratorConfig:
     stage_timeout_s: float = 100.
     attempt_timeout_s: float = 360.
     return_home: bool = True
+    carry_orientation: bool = True
+    waypoint_position_tolerance_m: float = .012
+    release_settle_s: float = .20
+    release_height_tolerance_m: float = .010
 
     def __post_init__(self):
         positive = [self.max_prediction_m, self.object_max_age_s, self.stationary_tolerance_m,
                     self.position_tolerance_m, self.rotation_tolerance_rad,
                     self.pregrasp_position_tolerance_m, self.pregrasp_rotation_tolerance_rad, self.lift_m,
                     self.transport_z_m, self.above_target_m, self.retreat_m,
-                    self.stage_timeout_s, self.attempt_timeout_s]
+                    self.stage_timeout_s, self.attempt_timeout_s,
+                    self.waypoint_position_tolerance_m, self.release_settle_s,
+                    self.release_height_tolerance_m]
         if not np.isfinite(positive).all() or min(positive) <= 0:
             raise ValueError('Demonstrator distances, tolerances and timeouts must be positive')
         if not np.isfinite(self.prediction_horizon_s) or self.prediction_horizon_s < 0:
@@ -120,16 +126,19 @@ class Action:
     over_box: bool = False
     done: bool = False
     metadata: dict = field(default_factory=dict)
+    target_velocity_m_s: np.ndarray = field(default_factory=lambda: np.zeros(3))
 
     def geometry_flags(self):
         return dict(contact=self.contact, carrying=self.carrying, over_box=self.over_box)
 
 
-def pose_reached(actual, target, config, *, pregrasp=False):
+def pose_reached(actual, target, config, *, pregrasp=False, tolerances=None):
     translation = np.linalg.norm(actual[:3, 3]-target[:3, 3])
     cosine = np.clip((np.trace(target[:3, :3].T@actual[:3, :3])-1)/2, -1., 1.)
     position_tolerance = config.pregrasp_position_tolerance_m if pregrasp else config.position_tolerance_m
     rotation_tolerance = config.pregrasp_rotation_tolerance_rad if pregrasp else config.rotation_tolerance_rad
+    if tolerances is not None:
+        position_tolerance, rotation_tolerance = tolerances
     return translation < position_tolerance and np.arccos(cosine) < rotation_tolerance
 
 
@@ -162,18 +171,30 @@ class AutomaticDemonstrator:
         self.alignment_reference = None
         self.alignment_reference_stamp_s = None
         self.grasp = self.lift = self.retreat = None
+        self.carry_rotation = self.carry_heading = None
         self.action = Action(self.stage, self.home.copy(), 'OPEN')
 
     def grasp_targets(self, obj):
         if obj.semantics != self.prior.semantics:
             raise ValueError('Object-state origin does not match the grasp-prior origin')
         predicted = obj.pose.copy()
-        lead = np.zeros(3) if self.config.stationary else obj.velocity_m_s*self.config.prediction_horizon_s
+        age = 0. if self.last_now is None else max(0., self.last_now-obj.stamp_s)
+        lead = np.zeros(3) if self.config.stationary else obj.velocity_m_s*(age+self.config.prediction_horizon_s)
         length = np.linalg.norm(lead)
         if length > self.config.max_prediction_m:
             lead *= self.config.max_prediction_m/length
         predicted[:3, 3] += lead
         return predicted@self.prior.T_object_approach, predicted@self.prior.T_object_grasp
+
+    def _carry_pose(self, pose):
+        result = pose.copy()
+        if self.config.carry_orientation and self.carry_rotation is not None:
+            # Keep the grasp's orientation relative to the arm's radial heading.
+            # The overhead drop has no taught world-yaw/roll requirement.
+            angle = np.arctan2(result[1,3],result[0,3])-self.carry_heading
+            c, s = np.cos(angle), np.sin(angle)
+            result[:3,:3] = np.array([[c,-s,0],[s,c,0],[0,0,1]])@self.carry_rotation
+        return result
 
     def alignment_targets(self, obj):
         # The stationary reference was established from a fresh object estimate
@@ -286,22 +307,33 @@ class AutomaticDemonstrator:
                 self._advance(Stage.GRASP_OBJECT, now)
             elif stage == Stage.GRASP_OBJECT:
                 if self._settled(obs.grasp_contact, now):
+                    self.carry_rotation = tcp[:3,:3].copy()
+                    self.carry_heading = float(np.arctan2(tcp[1,3],tcp[0,3]))
+                    self.release = self._carry_pose(self.release)
+                    self.above_target = self._carry_pose(self.above_target)
                     self.lift = self.grasp.copy()
                     self.lift[2, 3] = max(self.lift[2, 3]+self.config.lift_m,
                         self.above_target[2, 3], self.config.transport_z_m)
+                    self.lift = self._carry_pose(self.lift)
                     self._advance(Stage.LIFT_OBJECT, now)
                 elif now-self.stage_started > 8:
                     raise RuntimeError('Grasp failed: no supported gripper contact')
-            elif stage == Stage.LIFT_OBJECT and self._settled(arrived, now):
+            elif stage == Stage.LIFT_OBJECT and self._settled(
+                    np.linalg.norm(tcp[:3,3]-target[:3,3]) < self.config.waypoint_position_tolerance_m, now, .1):
                 self._advance(Stage.VERIFY_LIFT, now)
             elif stage == Stage.VERIFY_LIFT:
                 if self._confirmed(obs.holding, obs) and now-self.stage_started > .4:
                     self._advance(Stage.APPROACH_ABOVE_TARGET, now)
                 elif now-self.stage_started > 5:
                     raise RuntimeError('Lift verification failed')
-            elif stage == Stage.APPROACH_ABOVE_TARGET and self._settled(arrived, now):
+            elif stage == Stage.APPROACH_ABOVE_TARGET and self._settled(
+                    np.linalg.norm(tcp[:3,3]-target[:3,3]) < self.config.waypoint_position_tolerance_m, now, .1):
                 self._advance(Stage.APPROACH_TARGET, now)
-            elif stage == Stage.APPROACH_TARGET and self._settled(arrived and obs.release_ready, now):
+            elif stage == Stage.APPROACH_TARGET and self._settled(
+                    obs.release_ready and
+                    np.linalg.norm(tcp[:2,3]-target[:2,3]) < self.config.waypoint_position_tolerance_m and
+                    abs(tcp[2,3]-target[2,3]) < self.config.release_height_tolerance_m,
+                    now, self.config.release_settle_s):
                 self._advance(Stage.PLACE_OBJECT, now)
             elif stage == Stage.PLACE_OBJECT and self._settled(obs.gripper_open, now):
                 self._advance(Stage.VERIFY_PLACE, now)
@@ -312,9 +344,11 @@ class AutomaticDemonstrator:
                     self._advance(Stage.RETREAT, now)
                 elif now-self.stage_started > 10:
                     raise RuntimeError('Object released; placement is visually unverified')
-            elif stage == Stage.RETREAT and self._settled(arrived, now):
+            elif stage == Stage.RETREAT and self._settled(
+                    np.linalg.norm(tcp[:3,3]-target[:3,3]) < self.config.waypoint_position_tolerance_m, now, .1):
                 self._advance(Stage.RETURN_HOME if self.config.return_home else Stage.COMPLETE, now)
-            elif stage == Stage.RETURN_HOME and self._settled(arrived, now):
+            elif stage == Stage.RETURN_HOME and self._settled(
+                    pose_reached(tcp, target, self.config, tolerances=(.008,np.deg2rad(5))), now, .2):
                 self._advance(Stage.COMPLETE, now)
 
         stage = self.stage
@@ -329,5 +363,8 @@ class AutomaticDemonstrator:
             done=stage == Stage.COMPLETE,
             metadata={'stationary': self.config.stationary, 'teacher_states_only': True,
                       'alignment_reference_stamp_s': self.alignment_reference_stamp_s,
-                      'wrist_only_alignment': stage == Stage.ALIGN_GRASP and obs.object is None})
+                      'wrist_only_alignment': stage == Stage.ALIGN_GRASP and obs.object is None},
+            target_velocity_m_s=(obs.object.velocity_m_s.copy() if not self.config.stationary
+                and stage in (Stage.APPROACH_ABOVE_OBJECT, Stage.ALIGN_GRASP, Stage.APPROACH_OBJECT)
+                and obs.object is not None else np.zeros(3)))
         return self.action

@@ -98,6 +98,17 @@ def signed(value, bits):
 
 
 class TapeArm(RightArm):
+    def joint_velocity_limits_deg_s(self):
+        """Read existing arm velocity/profile limits; never change registers."""
+        limits = {i:self.read_register(i,44,4)*.229*6 for i in range(1,9)}
+        for i in limits:
+            profile = self.read_register(i,112,4)*.229*6
+            if profile > 0:
+                limits[i] = min(limits[i],profile)
+        limits[2] = min(limits[2],limits[3])
+        limits[4] = min(limits[4],limits[5])
+        return [limits[i] for i in MOTOR_IDS]
+
     def __init__(self):
         super().__init__(require_torque=False)
         try:

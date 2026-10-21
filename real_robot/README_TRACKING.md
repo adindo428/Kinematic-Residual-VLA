@@ -41,6 +41,8 @@ The arm must already be holding with torque on. The command selects the latest
 perception session automatically. Omit `--execute` for feedback/preview only.
 Once the arm reaches the stationary tape, start rolling it inside the shared view.
 Following holds the fingertips above the object; it does not close the gripper.
+Following and manipulation now use the same Cartesian pose/velocity servo.
+Fresh accepted object velocity supplies feedforward in addition to position feedback.
 
 ## Settings
 
