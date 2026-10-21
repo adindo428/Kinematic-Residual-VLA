@@ -10,7 +10,8 @@ import numpy as np
 from .camera import RGBDCamera
 from .efficienttam_tracker import EfficientTAMTracker
 from .rgbd_archive import RGBDArchiveWriter
-from .wrist_alignment import blue_seed, tape_feature
+from .wrist_alignment import tape_feature
+from .wrist_detection import read_hint, tape_prompt, associated_mask
 
 
 def publish(root, record):
@@ -40,6 +41,13 @@ def main(argv=None):
         if args.record_rgbd:
             archive = RGBDArchiveWriter(root)
         seeded = False
+        failures = 0
+        generation = 0
+        last_prompt_attempt = -float('inf')
+        active_prompt_id = None
+        handled_prompt_id = None
+        manual_override = args.seed_box is not None
+        initial_box = args.seed_box
         last_stamp = None
         index = 0
         with (root/'observations.jsonl').open('x', buffering=1) as log:
@@ -54,27 +62,77 @@ def main(argv=None):
                 reason = None
                 info = None
                 mask = None
-                if not seeded:
+                hint = read_hint(root/'target_hint.json',timing,template)
+                candidate = None
+                candidate_box = None
+                detection = None
+                try:
+                    candidate_box,candidate,detection = tape_prompt(image,depth,timing,template,
+                        None if manual_override else hint)
+                except ValueError as exc:
+                    reason = str(exc)
+                request = None
+                try:
+                    value = json.loads((root/'prompt_request.json').read_text())
+                    if value['request_id'] != handled_prompt_id:
+                        request = value
+                        handled_prompt_id = value['request_id']
+                        active_prompt_id = handled_prompt_id
+                        manual_override = True
+                except (OSError,ValueError,KeyError):
+                    pass
+                seed_box = request['box_xywh'] if request is not None else (initial_box or candidate_box)
+                prompt_due = request is not None or (not seeded and seed_box is not None
+                    and time.monotonic()-last_prompt_attempt>=.75)
+                if prompt_due:
                     try:
-                        box = args.seed_box or blue_seed(image, template['wrist_reference']['center_px'])[0]
+                        last_prompt_attempt = time.monotonic()
                         publish(root, {'schema': 'wrist_pick_observation_v1', 'running': True,
                             'timing': timing, 'feature': None, 'tracker': None,
                             'processing_state': 'seeding',
-                            'reason': 'Initializing the first EfficientTAM wrist mask',
+                            'reason': 'Prompting EfficientTAM on the associated wrist tape',
                             'host_published_monotonic_s': time.monotonic()})
-                        mask, info = tracker.seed('wrist', image, stamp, box)
+                        seed_image,seed_stamp = image,stamp
+                        if request is not None and request.get('frame_file'):
+                            filename = Path(request['frame_file']).name
+                            with np.load(root/filename) as frame:
+                                seed_image = frame['bgr'].copy()
+                            seed_stamp = float(request['sensor_timestamp_s'])
+                        mask, info = tracker.seed('wrist', seed_image, seed_stamp, seed_box)
+                        if seed_stamp < stamp:
+                            mask,info = tracker.track('wrist',image,stamp)
+                        generation += 1
+                        initial_box = None
                         seeded = True
-                    except ValueError as exc:
+                        failures = 0
+                        reason = None
+                        detection = {'source':'manual_prompt','box_xywh':seed_box} if manual_override else detection
+                    except (OSError,ValueError,KeyError) as exc:
+                        seeded = False
                         reason = str(exc)
-                else:
+                elif seeded:
                     mask, info = tracker.track('wrist', image, stamp)
                 if mask is not None:
                     try:
+                        associated,why = associated_mask(mask,None if manual_override else candidate,
+                            None if manual_override else hint,timing)
+                        if not associated:
+                            raise ValueError(why)
                         feature = tape_feature(image, mask, depth)
+                        reason = ('Tape mask visible; wrist depth unavailable' if feature['depth_m'] is None
+                                  else 'Tape mask visible; axis uncertain' if not feature['axis_reliable'] else None)
                     except ValueError as exc:
                         reason = str(exc)
+                        mask = None
+                if seeded:
+                    failures = failures+1 if feature is None else 0
+                    if failures>=3:
+                        seeded = False
                 if feature is None and reason is None:
                     reason = (info or {}).get('mask_reason', 'Tape not visible in wrist view')
+                if info is not None:
+                    info.update(prompt_generation=generation,prompt_id=active_prompt_id,
+                        recovery_pending=not seeded)
                 rgbd = None
                 if archive is not None:
                     filename = f'frame_{index:06d}_wrist.npz'
@@ -85,14 +143,26 @@ def main(argv=None):
                     'timing': timing, 'feature': feature, 'reason': reason,
                     'processing_state': 'tracking' if seeded else 'waiting_for_prompt',
                     'processing_s': time.monotonic()-processing_started,
+                    'detection':detection,'target_hint':hint,
                     'rgbd': rgbd, 'tracker': info, 'host_published_monotonic_s': time.monotonic()}
                 log.write(json.dumps(record, allow_nan=False)+'\n')
                 view = image.copy()
+                if mask is not None:
+                    selected = mask>0
+                    view[selected] = (.65*view[selected]+.35*np.array([0,255,0])).astype(np.uint8)
+                if hint is not None and hint.get('in_view'):
+                    cv2.drawMarker(view,tuple(np.rint(hint['center_px']).astype(int)),(255,255,0),cv2.MARKER_CROSS,18,2)
+                if candidate_box is not None:
+                    x,y,w,h = candidate_box
+                    cv2.rectangle(view,(x,y),(x+w,y+h),(0,255,255),1)
                 if feature:
                     center = np.array(feature['center_px'])
                     axis = np.array([np.cos(feature['axis_rad']), np.sin(feature['axis_rad'])])
-                    cv2.line(view, tuple(np.rint(center-55*axis).astype(int)),
-                             tuple(np.rint(center+55*axis).astype(int)), (0,255,0), 2)
+                    if feature['axis_reliable']:
+                        cv2.line(view, tuple(np.rint(center-55*axis).astype(int)),
+                                 tuple(np.rint(center+55*axis).astype(int)), (0,255,0), 2)
+                    x,y,w,h = feature['bbox_xywh']
+                    cv2.rectangle(view,(x,y),(x+w,y+h),(0,255,0),2)
                 cv2.putText(view, 'WRIST: '+(reason or 'EfficientTAM tape mask'), (8,24),
                             cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,255), 1)
                 cv2.imwrite(str(root/'live.tmp.jpg'), view)

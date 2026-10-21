@@ -62,9 +62,20 @@ class WristTargetEstimator:
         self.source = 'waiting'
         self.capture_pose = None
         self.live_registration = False
+        self.prompt_generation = None
 
     def update(self, fixed, wrist, q_at_capture, now):
         self.capture_pose = None
+        generation=((wrist or {}).get('tracker') or {}).get('prompt_generation')
+        if generation is not None and generation!=self.prompt_generation:
+            # Reacquisition must not turn a previous wrong mask's position into
+            # a large object velocity or keep its surface registration offset.
+            self.prompt_generation=generation
+            self.last_stamp=self.last_point=None
+            self.offset=None
+            self.last_state=fixed
+            self.velocity=np.zeros(3) if fixed is None else fixed.velocity_m_s.copy()
+            self.live_registration=False
         feature = (wrist or {}).get('feature') or {}
         depth = feature.get('depth_m')
         valid = (q_at_capture is not None and isinstance(depth,(int,float))

@@ -42,7 +42,8 @@ def tape_feature(image, mask, depth=None):
     # Estimate the axis from saturated tape pixels inside the identity mask;
     # do not include the lamp reflection or dark gripper fingers in the PCA.
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    core = (mask > 0) & (hsv[:, :, 1] >= 140) & (hsv[:, :, 2] >= 35)
+    core = ((mask > 0) & (hsv[:,:,0]>=90) & (hsv[:,:,0]<=140)
+            & (hsv[:, :, 1] >= 100) & (hsv[:, :, 2] >= 25))
     ys, xs = np.where(core)
     if len(xs) < 100:
         raise ValueError('Too few tape pixels for wrist geometry')
@@ -52,6 +53,8 @@ def tape_feature(image, mask, depth=None):
     n, labels, stats, _ = cv2.connectedComponentsWithStats(core.astype(np.uint8))
     i = 1+int(np.argmax(stats[1:, 4]))
     ys, xs = np.where(labels == i)
+    if len(xs) < 100:
+        raise ValueError('Largest tape-colored region has too few pixels for wrist geometry')
     pixels = np.column_stack([xs, ys]).astype(float)
     center = np.mean(pixels, axis=0)
     values, vectors = np.linalg.eigh(np.cov(pixels.T))

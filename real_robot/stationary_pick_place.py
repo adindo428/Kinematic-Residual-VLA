@@ -314,6 +314,8 @@ def run(args):
         cwd=PROJECT,env=child_env)
     arm=None;worker=None
     stop=threading.Event();start=threading.Event();done=threading.Event()
+    prompt_pause=threading.Event();prompt_paused=threading.Event()
+    await_prompt_id=[None]
     state={'running':True,'status':'preview / SPACE starts one attempt','motion_sent':False,
            'success':False,'error':None,'torque_writes':False,'execute':args.execute,
            'demonstrator':'automatic_demonstrator_v1','robot_backend':'shared_pose_velocity_servo',
@@ -384,7 +386,8 @@ def run(args):
                         previous_feedback=(feedback_stamp,pose[:3,3].copy())
                         state['measured_speed_guard_enabled']=False
                         if now-health>.25:arm.check_health();health=time.monotonic()
-                        if now-preview_heartbeat[0]>.5:raise RuntimeError('Operator preview heartbeat lost')
+                        if now-preview_heartbeat[0]>.5 and not prompt_pause.is_set():
+                            raise RuntimeError('Operator preview heartbeat lost')
                         if child.poll() is not None:raise RuntimeError('Wrist perception process exited')
                         wrist=wrist_record()
                         fixed=None;fixed_point=None
@@ -392,6 +395,37 @@ def run(args):
                             fixed=read_json(observation_file)
                             fixed_point=fresh_observation(fixed,template['rig_sha256'],time.monotonic())
                         except (OSError,ValueError):pass
+                        hint={'active':False,'host_monotonic_s':feedback_stamp}
+                        if fixed_point is not None and (machine is None or machine.needs_object):
+                            track=fixed.get('track') or {}
+                            velocity=np.asarray(track.get('velocity_mps',[0,0,0]),float)
+                            if (velocity.shape!=(3,) or not np.isfinite(velocity).all()
+                                    or not track.get('accepted') or not track.get('ready')
+                                    or track.get('frame')!='right_base_estimate' or track.get('stationary_assumed')):
+                                velocity=np.zeros(3)
+                            joint_velocity=np.zeros(6)
+                            if len(joint_history)>1:
+                                old_stamp,old_q=joint_history[-2]
+                                joint_velocity=(q-old_q)/(feedback_stamp-old_stamp)
+                            hint.update(active=True,q_rad=q.tolist(),joint_velocity_rad_s=joint_velocity.tolist(),
+                                object_position_m=fixed_point.tolist(),object_velocity_m_s=velocity.tolist(),
+                                object_stamp_s=fixed['timing']['oldest_host_arrival_monotonic_s'])
+                        if (output/'wrist').exists():save_json(output/'wrist/target_hint.json',hint)
+                        requested=await_prompt_id[0]
+                        acknowledged=(wrist or {}).get('tracker') or {}
+                        if requested is not None and acknowledged.get('prompt_id')==requested:
+                            await_prompt_id[0]=None
+                        if prompt_pause.is_set() or await_prompt_id[0] is not None:
+                            servo.hold()
+                            if machine is not None:
+                                machine.core.last_now=time.monotonic()
+                                machine.core.stable_since=None
+                            prompt_paused.set()
+                            state['status']='holding / mark the tape' if prompt_pause.is_set() else 'holding / applying wrist prompt'
+                            log.write(json.dumps(dict(state),allow_nan=False)+'\n')
+                            save_json(output/'status.json',state)
+                            continue
+                        prompt_paused.clear()
                         state['ready_to_start']=bool(machine is None and wrist is not None and fixed_point is not None)
                         if machine is None:
                             state['status']='ready / SPACE starts pursuit and pick' if state['ready_to_start'] else 'preview / waiting for fixed and wrist feeds'
@@ -506,7 +540,7 @@ def run(args):
             reference=np.rint(template['wrist_reference']['center_px']).astype(int)
             cv2.drawMarker(view,tuple(reference),(0,255,255),cv2.MARKER_CROSS,20,2)
             footer=np.full((90,640,3),24,np.uint8)
-            labels=[state['status'],'SPACE: start one attempt | Q: stop new goals; retain hold',
+            labels=[state['status'],'SPACE: start | R: mark wrist tape | Q: retain hold',
                     'Moving/stationary tape | '+box['box_id']+' | existing torque must be ON']
             for i,label in enumerate(labels):cv2.putText(footer,label,(8,22+26*i),cv2.FONT_HERSHEY_SIMPLEX,.48,(0,255,255),1)
             cv2.imshow('Automatic demonstrator - wrist alignment',np.vstack([view,footer]))
@@ -515,6 +549,34 @@ def run(args):
             if key==32:
                 if args.execute:start.set()
                 else:print('Preview only. Restart with --execute to permit commands.',flush=True)
+            if key==ord('r'):
+                prompt_pause.set()
+                try:
+                    if not prompt_paused.wait(timeout=1.):
+                        print('Wrist selection unavailable: control has not acknowledged the hold.',flush=True)
+                        continue
+                    snapshot=view.copy();frame_file=None;selection_stamp=None
+                    try:
+                        record=read_json(output/'wrist/observation.json')
+                        candidate_file=(record.get('rgbd') or {}).get('file')
+                        if candidate_file:
+                            with np.load(output/'wrist'/candidate_file) as frame:
+                                snapshot=frame['bgr'].copy()
+                            frame_file=candidate_file
+                            selection_stamp=record['timing']['sensor_timestamp_s']
+                    except (OSError,ValueError,KeyError):pass
+                    title='Hold tape still; draw tape box, ENTER confirms, ESC cancels'
+                    box_roi=cv2.selectROI(title,snapshot,fromCenter=False,showCrosshair=True)
+                    cv2.destroyWindow(title)
+                    if box_roi[2]>0 and box_roi[3]>0:
+                        prompt_id=time.monotonic_ns()
+                        await_prompt_id[0]=prompt_id
+                        save_json(output/'wrist/prompt_request.json',{
+                            'request_id':prompt_id,'box_xywh':list(map(int,box_roi)),
+                            'frame_file':frame_file,'sensor_timestamp_s':selection_stamp})
+                finally:
+                    preview_heartbeat[0]=time.monotonic()
+                    prompt_pause.clear()
             if args.execute and (output/'START').exists():start.set()
     except BaseException as exc:
         state.update(error=f'{type(exc).__name__}: {exc}',status='stopped')

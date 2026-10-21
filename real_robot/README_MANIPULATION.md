@@ -33,6 +33,10 @@ The tape may already be moving, or you can start rolling it during approach.
 **Q** stops new
 goals and retains the current hold. Omit `--execute` for preview only.
 A stopped attempt does not automatically release, retreat or retry.
+If the wrist mask selects the wrong object, press **R**, keep the tape still,
+draw a box around it and press **Enter**. Goals hold during selection and resume
+after a fresh mask arrives. Green shows the accepted mask; the cyan cross is
+the fixed-camera target projected into the wrist view.
 
 Approach and wrist alignment run together; descent and closure keep following
 the tape. Lift and transport follow one curved path, with holding verification
