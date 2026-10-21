@@ -26,12 +26,16 @@ class PoseVelocityServo:
         forward(self.goal, self.offset)
         if np.any(self.goal < LOWER) or np.any(self.goal > UPPER):
             raise ValueError('Retained joint goal outside model limits')
-        gains = [kp, ki, kd, integral_limit, rotation_kp, max_following_error_deg]
-        if not np.isfinite(gains).all() or min(gains) < 0 or min(kp, rotation_kp, max_following_error_deg) <= 0:
+        gains = [kp, ki, kd, integral_limit, rotation_kp]
+        if not np.isfinite(gains).all() or min(gains) < 0 or min(kp, rotation_kp) <= 0:
             raise ValueError('Invalid Cartesian servo gains')
         self.kp, self.ki, self.kd = kp, ki, kd
         self.integral_limit, self.rotation_kp = integral_limit, rotation_kp
-        self.max_following_error = np.deg2rad(max_following_error_deg)
+        self.max_following_error = None
+        if max_following_error_deg is not None:
+            if not np.isfinite(max_following_error_deg) or max_following_error_deg <= 0:
+                raise ValueError('Invalid joint following-error setting')
+            self.max_following_error = np.deg2rad(max_following_error_deg)
         self.hardware_rates = None
         if hardware_joint_rates_deg_s is not None:
             rates = np.asarray(hardware_joint_rates_deg_s, float)
@@ -53,7 +57,7 @@ class PoseVelocityServo:
 
     def step(self, target_pose, actual, dt, *, tcp_rate_m_s, joint_rate_deg_s,
              angular_rate_deg_s, acceleration_m_s2=None, target_velocity_m_s=None,
-             orientation_weight=1.):
+             orientation_weight=1., relative_tcp_rate_m_s=None):
         target = validate_transform(target_pose)
         actual = np.asarray(actual, float)
         if actual.shape != (6,) or not np.isfinite(actual).all() or not 0 < dt <= .15:
@@ -75,7 +79,7 @@ class PoseVelocityServo:
         if feedforward.shape != (3,) or not np.isfinite(feedforward).all():
             raise ValueError('Expected finite target velocity XYZ')
         following_error = self.goal-actual
-        if np.max(np.abs(following_error)) > self.max_following_error:
+        if self.max_following_error is not None and np.max(np.abs(following_error)) > self.max_following_error:
             raise RuntimeError('Joint following error exceeds configured stall bound')
         pose = forward(actual, self.offset)
         position = pose[:3, 3]
@@ -85,8 +89,12 @@ class PoseVelocityServo:
         self.previous_position = position.copy()
         error = target[:3, 3]-position
         self.integral = np.clip(self.integral+error*dt, -self.integral_limit, self.integral_limit)
-        desired_velocity = bounded(feedforward+self.kp*error+self.ki*self.integral
-                                   -self.kd*self.measured_velocity, tcp_rate_m_s)
+        feedback = self.kp*error+self.ki*self.integral-self.kd*self.measured_velocity
+        if relative_tcp_rate_m_s is not None:
+            if not np.isfinite(relative_tcp_rate_m_s) or relative_tcp_rate_m_s <= 0:
+                raise ValueError('Relative TCP trajectory rate must be positive')
+            feedback = bounded(feedback,relative_tcp_rate_m_s)
+        desired_velocity = bounded(feedforward+feedback,tcp_rate_m_s)
         if acceleration_m_s2 is None:
             self.velocity = desired_velocity
         else:

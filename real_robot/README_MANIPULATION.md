@@ -3,7 +3,7 @@
 Use the existing `.venv` from `/home/ailab/Desktop/Kinematic-Residual-VLA`.
 Prepare the arm with the leader as shown in [Tracking](README_TRACKING.md#1-prepare-the-arm-with-the-leader),
 then stop teleoperation. Start with an empty gripper and TCP at least **100 mm**
-above the table. Keep the tape stationary on its curved edge and the box fixed.
+above the table. Keep the tape upright on its curved edge and the box fixed.
 
 ## 1. Start perception — terminal 1
 
@@ -18,6 +18,9 @@ stop perception when finished because it uses substantial disk space.
 
 ## 2. Run one pick-and-place — terminal 2
 
+This command handles tracking and manipulation together. Stop any separate
+`tracking_session follow` process first; leave perception running.
+
 ```bash
 DISPLAY=:1 .venv/bin/python -u -m real_robot.automatic_pick_place run \
   --template scratch/real_robot/pick-place/blue-tape-auto-template.json \
@@ -25,34 +28,42 @@ DISPLAY=:1 .venv/bin/python -u -m real_robot.automatic_pick_place run \
   --speed-scale 1.5 --execute
 ```
 
-Wait for the wrist preview, then press **SPACE** once to start. **Q** stops new
+Wait for the wrist preview, then press **SPACE** once to start pursuit and pick.
+The tape may already be moving, or you can start rolling it during approach.
+**Q** stops new
 goals and retains the current hold. Omit `--execute` for preview only.
 A stopped attempt does not automatically release, retreat or retry.
 
-Sequence: approach → wrist alignment → descend → grasp → lift/verify →
-above box → release/verify → retreat → return to the starting pose.
+Approach and wrist alignment run together; descent and closure keep following
+the tape. Lift and transport follow one curved path, with holding verification
+running alongside motion. Then release/verify, retreat and return.
 
 | Current setting | Value |
 |---|---|
 | Travel/reset at `--speed-scale 1.5` | `18°/s` joints, `120 mm/s` TCP |
 | Alignment/contact/first 50 mm of lift | `4.5°/s` joints, `30 mm/s` TCP |
 | Final box approach | `12°/s` joints, `60 mm/s` TCP |
-| Wrist roll during alignment | `9°/s`; corrections up to `3°` |
-| Pregrasp handoff | `5 mm / 3°` plus reliable wrist tracking |
+| Wrist roll during approach/descent | `9°/s`, continuous image corrections |
+| Moving-target pursuit | Target velocity feedforward plus relative contact motion |
 | Current box | Right-side `box_2`, measured `90 × 165 mm`, rim `65 mm` |
 | Release TCP height | Approximately `185 mm` above the tabletop |
 
 Following and manipulation share one pose/velocity servo. Edit `manipulation:`
 in [`config.yaml`](config.yaml) for phase rates and gains. The default speed
 scale is **1.5**; `--speed-scale 1` uses the baseline rates in that section.
-Motor velocity/profile readbacks also apply. Fresh wrist tracking carries alignment and descent
-through fixed-camera occlusion after pregrasp. Optional expired fixed estimates
-do not stop lift/transport. The gripper keeps its grasp orientation relative to
+Motor velocity/profile readbacks also apply. The precision rate bounds motion
+relative to the tape; pursuit uses the tracking speed setting and motor limits.
+Wrist depth is registered to the fixed-camera proxy while both are visible;
+the demonstration supplies an initial offset if overlap is unavailable.
+Capture-time encoder poses compensate camera motion during occlusion.
+If both target estimates disappear, goals hold until fresh feedback returns.
+The gripper keeps its grasp orientation relative to
 the arm's radial heading during transport, avoiding the taught drop wrist twist.
 Release requires 35 mm interior clearance, height within 10 mm of the target,
 and filtered lateral speed below 15 mm/s for 0.2 s; it keeps converging until ready.
-There are no software torque/current abort caps. This entry point remains for
-stationary tape; moving-object grasping is the next integration step.
+There are no total wrist-angle/translation budgets, stationary-start checks,
+or software torque/current abort caps. Table/robot/box geometry checks remain.
+The moving-target implementation has not yet been validated on the arm.
 The camera/base, wrist and fingertip transforms remain provisional.
 
 ## Teach additional grasps

@@ -7,10 +7,11 @@ import numpy as np
 
 from .automatic_demonstrator import AutomaticDemonstrator, DemonstratorConfig, Observation, Stage
 from .demonstrator_adapters import EstimatedObjectAdapter, prior_from_template, release_from_registration
-from .geometry import validate_transform
-from .pick_geometry import inside_polygon, pose_error, rx
+from .geometry import validate_transform, interpolate_pose
+from .pick_geometry import inside_polygon, rx
 from .vx300s_kinematics import forward
 from .wrist_alignment import corrections, line_error
+from .wrist_target import WristTargetEstimator, camera_from_tcp, feature_point, project
 
 
 def manipulation_motion(template, values=None, scale=1.5):
@@ -51,90 +52,88 @@ def manipulation_motion(template, values=None, scale=1.5):
 
 
 class WristGraspAligner:
-    """Tape-specific image alignment; the task core only sees pose targets."""
+    """Continuous image feedback during approach, descent and closure.
+
+    The installed hand-eye transform supplies the roll response; no physical
+    probe or arrival/settle handshake is required before each correction.
+    """
     def __init__(self, template):
         self.template = template
         self.phase = 'WAIT'
         self.target = self.grasp = None
-        self.origin = self.initial_approach = self.initial_grasp = None
-        self.probe_axis = self.probe_q8 = None
-        self.roll_gain = None
-        self.started = self.stable_since = self.last_stamp = None
+        self.roll_gain = -float(template['T_gripper_wrist_camera'][0][2])
+        self.roll = 0.
+        self.translation = np.zeros(3)
+        self.last_stamp = None
+        self.complete = False
+        self.established = False
+        self.axis_error = self.pixel_error = None
 
-    def _settled(self, condition, now, duration=.7):
-        if not condition:
-            self.stable_since = None
-            return False
-        if self.stable_since is None:
-            self.stable_since = now
-        return now-self.stable_since >= duration
-
-    def update(self, now, q, wrist, approach, grasp):
-        pose = forward(q, self.template['tcp_offset_m'])
-        feature = wrist.get('feature')
-        stamp = wrist['timing']['sensor_timestamp_s']
-        fresh = stamp != self.last_stamp
-        self.last_stamp = stamp
-        reliable = feature is not None and feature.get('axis_reliable') and feature.get('depth_m') is not None
-        if self.started is None:
-            self.started = now
-            self.target = approach.copy()
-        if now-self.started > 90:
-            raise RuntimeError('Wrist alignment timeout')
-        if self.phase == 'DONE':
-            return
-        if self.phase == 'WAIT':
-            if not reliable:
-                if now-self.started > 8:
-                    raise RuntimeError('No reliable wrist tape axis/depth at pregrasp')
-                return
-            self.origin = (pose.copy(), float(q[5]))
-            self.initial_approach, self.initial_grasp = approach.copy(), grasp.copy()
-            self.probe_axis, self.probe_q8 = feature['axis_rad'], float(q[5])
-            self.target = pose.copy(); self.target[:3, :3] = pose[:3, :3]@rx(np.deg2rad(3))
-            self.phase = 'PROBE'
-            self.stable_since = None
-            return
-        distance, angle = pose_error(pose, self.target)
-        arrived = distance < .002 and angle < np.deg2rad(.6)
-        if self.phase == 'PROBE':
-            if self._settled(arrived and reliable, now):
-                dq = q[5]-self.probe_q8
-                gain = line_error(feature['axis_rad'], self.probe_axis)/dq if abs(dq) > np.deg2rad(1.5) else 0.
-                if not -1.8 <= gain <= -.35:
-                    raise RuntimeError(f'Wrist roll/image response not verified: gain {gain:.3f}')
-                self.roll_gain = float(gain)
-                self.phase = 'ALIGN'; self.stable_since = None
-            return
-        if not reliable:
-            raise RuntimeError('Wrist tape axis/depth lost during alignment')
-        reference = self.template['wrist_reference']
-        pixel_error = np.linalg.norm(np.asarray(feature['center_px'])-reference['center_px'])
-        axis_error = line_error(reference['axis_rad'], feature['axis_rad'])
-        aligned = arrived and pixel_error < 7 and abs(axis_error) < np.deg2rad(3)
-        if aligned:
-            # Hold one target while confirming alignment; chasing image noise
-            # would reset the settling interval on every new frame.
-            if self._settled(True, now):
-                delta = pose[:3, 3]-self.initial_approach[:3, 3]
-                roll = q[5]-self.origin[1]
-                self.grasp = self.initial_grasp.copy()
-                self.grasp[:3, 3] += delta
-                self.grasp[:3, :3] = self.grasp[:3, :3]@rx(roll)
-                self.target = pose.copy(); self.phase = 'DONE'
-            return
-        self.stable_since = None
-        if fresh and arrived:
-            camera = forward(q)@np.asarray(self.template['T_gripper_wrist_camera'])
-            delta, _ = corrections(feature, reference, wrist['timing']['intrinsics'], camera)
-            desired = pose.copy(); desired[:3, 3] += delta
-            desired[:3, :3] = pose[:3, :3]@rx(float(np.clip(.6*axis_error/self.roll_gain,
-                                                              -np.deg2rad(3), np.deg2rad(3))))
-            if np.linalg.norm(desired[:2, 3]-self.origin[0][:2, 3]) > .035:
-                raise RuntimeError('Wrist centering exceeded 35mm correction budget')
-            if abs(q[5]-self.origin[1]) > np.deg2rad(65):
-                raise RuntimeError('Wrist alignment exceeded 65-degree correction budget')
-            self.target = desired
+    def update(self, now, q, wrist, approach, grasp, *, fraction=0., capture_camera=None,
+               velocity=None, prediction_s=0., roll_rate_deg_s=9.):
+        feature = wrist.get('feature') or {}
+        stamp = wrist['timing']['host_arrival_monotonic_s']
+        intr = wrist['timing']['intrinsics']
+        reliable = feature.get('axis_reliable') and feature.get('depth_m') is not None
+        # Near closure the tape may be clipped by the fingers. Keep the last
+        # aligned orientation while fresh centroid/depth still localizes it.
+        self.complete = bool(self.established and feature.get('depth_m') is not None)
+        nominal = interpolate_pose(approach,grasp,fraction)
+        planned = nominal.copy()
+        planned[:3,3] += self.translation
+        planned[:3,:3] = planned[:3,:3]@rx(self.roll)
+        if reliable and capture_camera is not None:
+            # Project the demonstrated surface/axis into the camera expected at
+            # this descent depth. A fixed pregrasp pixel is wrong near contact.
+            taught_approach = np.asarray(self.template['stages']['pregrasp']['T_base_tcp'])
+            taught_grasp = np.asarray(self.template['stages']['before_close']['T_base_tcp'])
+            reference = self.template['wrist_reference']
+            taught_camera = camera_from_tcp(taught_approach,self.template)
+            surface = taught_camera[:3,:3]@feature_point(reference,intr)+taught_camera[:3,3]
+            axis = np.array([np.cos(reference['axis_rad'])/intr['fx'],
+                             np.sin(reference['axis_rad'])/intr['fy'],0.])
+            expected = project(surface,taught_camera[:3,:3]@axis,
+                camera_from_tcp(interpolate_pose(taught_approach,taught_grasp,fraction),self.template),intr)
+            observed = capture_camera[:3,:3]@feature_point(feature,intr)+capture_camera[:3,3]
+            if velocity is not None:
+                observed += np.asarray(velocity)*(max(0.,now-stamp)+prediction_s)
+            direction = capture_camera[:3,:3]@np.array([np.cos(feature['axis_rad'])/intr['fx'],
+                                                        np.sin(feature['axis_rad'])/intr['fy'],0.])
+            camera = camera_from_tcp(planned,self.template)
+            projected = project(observed,direction,camera,intr)
+            if expected is not None and projected is not None:
+                self.axis_error = line_error(expected['axis_rad'],projected['axis_rad'])
+                self.pixel_error = float(np.linalg.norm(np.asarray(projected['center_px'])-expected['center_px']))
+                self.complete = abs(self.axis_error) < np.deg2rad(4) and self.pixel_error < 10
+                self.established = self.established or self.complete
+                if stamp != self.last_stamp:
+                    elapsed = 1/15 if self.last_stamp is None else float(np.clip(stamp-self.last_stamp,0.,.15))
+                    # Trajectory shaping limits each update, not the total
+                    # correction or target displacement. Joint/table geometry
+                    # still applies to the resulting commands.
+                    shifted = planned.copy()
+                    shifted[:3,:3] = shifted[:3,:3]@rx(.001)
+                    response = project(observed,direction,camera_from_tcp(shifted,self.template),intr)
+                    if response is not None:
+                        self.roll_gain = line_error(response['axis_rad'],projected['axis_rad'])/.001
+                    step = .5*self.axis_error*self.roll_gain/(self.roll_gain**2+.01)
+                    rate = np.deg2rad(roll_rate_deg_s)*elapsed
+                    self.roll += float(np.clip(step,-rate,rate))
+                    delta,_ = corrections(projected,expected,intr,camera,
+                                          max_translation=.04*elapsed)
+                    self.translation += delta
+                self.phase = 'ALIGNED' if self.complete else 'TRACK'
+            else:
+                self.phase = 'WAIT'
+        else:
+            self.phase = 'WAIT'
+        if reliable:
+            self.last_stamp = stamp
+        self.target,self.grasp = approach.copy(),grasp.copy()
+        for pose in (self.target,self.grasp):
+            pose[:3,3] += self.translation
+            pose[:3,:3] = pose[:3,:3]@rx(self.roll)
+        return self.complete
 
 
 class TapeDemonstrator:
@@ -142,20 +141,21 @@ class TapeDemonstrator:
     def __init__(self, template, box, object_point, actual, now, motion=None):
         self.template, self.box = template, box
         self.motion = manipulation_motion(template) if motion is None else motion
-        shift = np.asarray(object_point)-template['object_reference_m']
-        if np.linalg.norm(shift[:2]) > .15 or abs(shift[2]) > .025:
-            raise ValueError('Tape outside the demonstrated neighborhood (150mm XY / 25mm Z)')
         self.object_adapter = EstimatedObjectAdapter(template)
         config_values = dict(template.get('automatic_demonstrator', {}).get('config', {}))
-        config_values.update(carry_orientation=self.motion['carry_orientation'],
-            release_height_tolerance_m=self.motion['release_height_tolerance_m'])
+        config_values.update(stationary=False,carry_orientation=self.motion['carry_orientation'],
+            object_max_age_s=.25,
+            release_height_tolerance_m=self.motion['release_height_tolerance_m'],
+            transport_speed_m_s=self.motion['travel']['tcp_rate_m_s'],
+            contact_speed_m_s=self.motion['precision']['tcp_rate_m_s'])
         config = DemonstratorConfig(**config_values)
-        if not config.stationary:
-            raise ValueError('The VX300 entry point currently supports stationary tape only')
         self.core = AutomaticDemonstrator(prior_from_template(template),
             release_from_registration(template, box), forward(actual, template['tcp_offset_m']),
             rim_z_m=box['rim_z_base_m'], config=config)
         self.aligner = WristGraspAligner(template)
+        self.object_estimator = WristTargetEstimator(template,self.object_adapter.reference)
+        self.object_state = None
+        self.observation_ready = False
         self.open_raw = template['gripper']['open_raw']
         self.closed_raw = template['gripper']['empty_closed_raw']
         self.gripper_target = self.open_raw
@@ -201,7 +201,7 @@ class TapeDemonstrator:
             and -.015 <= point[2] <= self.box['rim_z_base_m']+.04
             and z > self.closed_feature['depth_m']+.025)
 
-    def update(self, now, q, raw_gripper, current, wrist, *, object_record=None, tcp_velocity_m_s=None):
+    def update(self, now, q, raw_gripper, current, wrist, *, object_record=None, tcp_velocity_m_s=None, wrist_capture_q=None):
         obj = None
         self.object_feedback_reason = None
         if object_record is not None:
@@ -211,23 +211,32 @@ class TapeDemonstrator:
                 # A frame may expire between the executor's check and this
                 # conversion. Optional external feedback must not stop a stage
                 # already driven by the wrist and committed grasp reference.
-                if self.core.requires_object:
-                    raise
                 self.object_feedback_reason = str(exc)
-        self.teacher_state = None if obj is None else self.object_adapter.teacher_metadata(obj)
+        wrist = wrist or {'timing':{},'feature':None}
+        obj = self.object_estimator.update(obj,wrist,wrist_capture_q,now) if self.core.requires_object else obj
+        self.object_state = obj
         feature = wrist.get('feature')
+        old_stage = self.core.stage
+        self.observation_ready = not self.core.requires_object or obj is not None
+        if not self.observation_ready:
+            self.core.last_now = now
+            self.core.stable_since = None
+            return None
+        self.teacher_state = None if obj is None else {
+            **self.object_adapter.teacher_metadata(obj),'source':self.object_estimator.source}
         contact = bool(abs(current) >= .18 and self.closed_raw+45 < raw_gripper < self.open_raw-45
                        and feature is not None and feature.get('depth_m') is not None)
-        old_stage = self.core.stage
-        if old_stage == Stage.ALIGN_GRASP:
-            if obj is None:
-                depth = None if feature is None else feature.get('depth_m')
-                if (feature is None or not feature.get('axis_reliable') or depth is None
-                        or not np.isfinite(depth) or depth <= 0):
-                    raise RuntimeError('Reliable wrist tape axis/depth required during fixed-camera occlusion')
-            self.aligner.update(now, q, wrist, *self.core.alignment_targets(obj))
-        if old_stage == Stage.APPROACH_OBJECT and feature is None:
-            raise RuntimeError('Tape lost during descent')
+        if old_stage in (*self.core.PRECOMMIT, Stage.GRASP_OBJECT) and wrist.get('timing',{}).get('intrinsics'):
+            fraction = self.core.descent
+            horizon = self.core.config.prediction_horizon_s*(1-fraction)
+            approach,grasp = self.core.alignment_targets(obj,now)
+            self.aligner.update(now,q,wrist,approach,grasp,fraction=fraction,
+                capture_camera=self.object_estimator.capture_pose,
+                velocity=obj.velocity_m_s,prediction_s=horizon,
+                roll_rate_deg_s=self.motion['alignment_wrist_roll_rate_deg_s'])
+        elif old_stage in (*self.core.PRECOMMIT, Stage.GRASP_OBJECT):
+            self.aligner.complete = False
+            self.aligner.target,self.aligner.grasp = self.core.alignment_targets(obj)
         if old_stage == Stage.GRASP_OBJECT and contact:
             self.closed_feature = dict(feature)
         held = bool(self.closed_feature is not None and feature is not None
@@ -243,12 +252,15 @@ class TapeDemonstrator:
         observation = Observation(now, tcp_pose, obj,
             gripper_open=bool(raw_gripper >= self.open_raw-12 and abs(current) < .12),
             grasp_contact=contact, holding=held, placed=self._placed(q, feature, wrist),
-            confirmation_stamp=wrist['timing']['sensor_timestamp_s'],
-            alignment_complete=self.aligner.phase == 'DONE', alignment_target=self.aligner.target,
+            confirmation_stamp=wrist['timing'].get('sensor_timestamp_s'),
+            alignment_complete=self.aligner.complete, alignment_target=self.aligner.target,
             aligned_grasp=self.aligner.grasp,
             release_ready=drop_ready,
-            pregrasp_ready=bool(feature is not None and feature.get('axis_reliable')
-                               and feature.get('depth_m') is not None))
+            tcp_velocity_m_s=np.zeros(3) if velocity is None else velocity,
+            pregrasp_ready=bool(feature is not None and feature.get('depth_m') is not None
+                and (self.aligner.established or (self.aligner.axis_error is not None
+                    and abs(self.aligner.axis_error)<np.deg2rad(12)
+                    and self.aligner.pixel_error is not None and self.aligner.pixel_error<25))))
         action = self.core.step(observation)
         if old_stage == Stage.GRASP_OBJECT and action.stage == Stage.LIFT_OBJECT:
             self.hold_goal = max(self.closed_raw, raw_gripper-32)

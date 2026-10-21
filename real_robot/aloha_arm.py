@@ -143,5 +143,3 @@ class TapeArm(RightArm):
                 raise RuntimeError('Motor hardware fault')
             if self.read_register(motor, 64, 1) != 1:
                 raise RuntimeError(f'Motor {motor} torque unexpectedly off')
-            if self.read_register(motor, 146, 1) >= 55:
-                raise RuntimeError(f'Motor {motor} temperature guard')

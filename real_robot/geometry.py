@@ -2,6 +2,17 @@
 import numpy as np
 
 
+def interpolate_pose(first, second, fraction):
+    """Linear translation and shortest-path rotation between two poses."""
+    from scipy.spatial.transform import Rotation
+    first,second = np.asarray(first,float),np.asarray(second,float)
+    result = first.copy()
+    result[:3,3] = (1-fraction)*first[:3,3]+fraction*second[:3,3]
+    rotation = Rotation.from_matrix(second[:3,:3]@first[:3,:3].T).as_rotvec()
+    result[:3,:3] = Rotation.from_rotvec(rotation*fraction).as_matrix()@first[:3,:3]
+    return result
+
+
 def validate_transform(transform):
     t = np.asarray(transform, dtype=float)
     if t.shape != (4, 4) or not np.isfinite(t).all():

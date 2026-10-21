@@ -10,7 +10,7 @@ from enum import Enum
 
 import numpy as np
 
-from .geometry import validate_transform
+from .geometry import validate_transform, interpolate_pose
 
 
 class Stage(str, Enum):
@@ -61,7 +61,7 @@ class GraspPrior:
 
 @dataclass(frozen=True)
 class DemonstratorConfig:
-    stationary: bool = True
+    stationary: bool = False
     prediction_horizon_s: float = .23
     max_prediction_m: float = .08
     object_max_age_s: float = .20
@@ -82,6 +82,10 @@ class DemonstratorConfig:
     waypoint_position_tolerance_m: float = .012
     release_settle_s: float = .20
     release_height_tolerance_m: float = .010
+    transport_speed_m_s: float = .12
+    contact_speed_m_s: float = .03
+    path_lookahead_m: float = .025
+    grasp_relative_speed_m_s: float = .04
 
     def __post_init__(self):
         positive = [self.max_prediction_m, self.object_max_age_s, self.stationary_tolerance_m,
@@ -90,7 +94,8 @@ class DemonstratorConfig:
                     self.transport_z_m, self.above_target_m, self.retreat_m,
                     self.stage_timeout_s, self.attempt_timeout_s,
                     self.waypoint_position_tolerance_m, self.release_settle_s,
-                    self.release_height_tolerance_m]
+                    self.release_height_tolerance_m, self.transport_speed_m_s,
+                    self.contact_speed_m_s, self.path_lookahead_m, self.grasp_relative_speed_m_s]
         if not np.isfinite(positive).all() or min(positive) <= 0:
             raise ValueError('Demonstrator distances, tolerances and timeouts must be positive')
         if not np.isfinite(self.prediction_horizon_s) or self.prediction_horizon_s < 0:
@@ -114,6 +119,7 @@ class Observation:
     aligned_grasp: np.ndarray | None = None
     release_ready: bool = True
     pregrasp_ready: bool = True
+    tcp_velocity_m_s: np.ndarray = field(default_factory=lambda: np.zeros(3))
 
 
 @dataclass(frozen=True)
@@ -145,8 +151,8 @@ def pose_reached(actual, target, config, *, pregrasp=False, tolerances=None):
 class AutomaticDemonstrator:
     """One attempt, shared between simulator and estimated-state adapters.
 
-    Position targets track the object before closure, and grasp orientation is
-    latched after alignment. Failed grasp/placement verification raises; this
+    Wrist alignment overlaps approach/descent; pursuit continues during closure.
+    Lift, transport and verification share a continuous curved trajectory. This
     core never automatically opens, retries, or resets after a failure.
     """
     PRECOMMIT = frozenset((Stage.INIT, Stage.APPROACH_ABOVE_OBJECT,
@@ -172,17 +178,26 @@ class AutomaticDemonstrator:
         self.alignment_reference_stamp_s = None
         self.grasp = self.lift = self.retreat = None
         self.carry_rotation = self.carry_heading = None
+        self.carry_path = self.carry_distances = None
+        self.path_progress_m = 0.
+        self.descent = 0.
+        self.last_dt = 0.
+        self.holding_confirmed = False
+        self.path_velocity = np.zeros(3)
         self.action = Action(self.stage, self.home.copy(), 'OPEN')
 
-    def grasp_targets(self, obj):
+    def grasp_targets(self, obj, now_s=None):
         if obj.semantics != self.prior.semantics:
             raise ValueError('Object-state origin does not match the grasp-prior origin')
         predicted = obj.pose.copy()
-        age = 0. if self.last_now is None else max(0., self.last_now-obj.stamp_s)
-        lead = np.zeros(3) if self.config.stationary else obj.velocity_m_s*(age+self.config.prediction_horizon_s)
-        length = np.linalg.norm(lead)
-        if length > self.config.max_prediction_m:
-            lead *= self.config.max_prediction_m/length
+        now = self.last_now if now_s is None else now_s
+        age = 0. if now is None else max(0., now-obj.stamp_s)
+        # Shrink interception lookahead during descent; at contact track the
+        # present object rather than closing on a point ahead of it.
+        horizon = self.config.prediction_horizon_s
+        if self.stage in (Stage.APPROACH_OBJECT, Stage.GRASP_OBJECT):
+            horizon *= 1-self.descent
+        lead = np.zeros(3) if self.config.stationary else obj.velocity_m_s*(age+horizon)
         predicted[:3, 3] += lead
         return predicted@self.prior.T_object_approach, predicted@self.prior.T_object_grasp
 
@@ -196,14 +211,14 @@ class AutomaticDemonstrator:
             result[:3,:3] = np.array([[c,-s,0],[s,c,0],[0,0,1]])@self.carry_rotation
         return result
 
-    def alignment_targets(self, obj):
+    def alignment_targets(self, obj, now_s=None):
         # The stationary reference was established from a fresh object estimate
         # at pregrasp. It is a fixed pose reference, never a refreshed observation.
         if self.config.stationary and self.alignment_reference is not None:
             return tuple(pose.copy() for pose in self.alignment_reference)
         if obj is None:
             raise RuntimeError('No object estimate or established alignment reference')
-        return self.grasp_targets(obj)
+        return self.grasp_targets(obj,now_s)
 
     @property
     def requires_object(self):
@@ -212,7 +227,43 @@ class AutomaticDemonstrator:
         if self.stage == Stage.ALIGN_GRASP:
             return not self.config.stationary or self.alignment_reference is None
         return self.stage in (Stage.INIT, Stage.APPROACH_ABOVE_OBJECT) or (
-            self.stage == Stage.APPROACH_OBJECT and not self.config.stationary)
+            self.stage in (Stage.APPROACH_OBJECT, Stage.GRASP_OBJECT) and not self.config.stationary)
+
+    def _start_carry(self, tcp):
+        self.grasp = tcp.copy()
+        self.carry_rotation = tcp[:3,:3].copy()
+        self.carry_heading = float(np.arctan2(tcp[1,3],tcp[0,3]))
+        self.release = self._carry_pose(self.release)
+        height = max(tcp[2,3]+self.config.lift_m, self.config.transport_z_m,
+                     self.release[2,3]+self.config.above_target_m)
+        p0, p3 = tcp[:3,3].copy(), self.release[:3,3].copy()
+        p1, p2 = p0.copy(), p3.copy()
+        # Bezier control points are above the actual arc. Set their height so
+        # the midpoint reaches the requested transport height.
+        p1[2] = p2[2] = (height-.125*(p0[2]+p3[2]))/.75
+        u = np.linspace(0.,1.,201)[:,None]
+        self.carry_path = (1-u)**3*p0+3*(1-u)**2*u*p1+3*(1-u)*u**2*p2+u**3*p3
+        self.carry_distances = np.r_[0.,np.cumsum(np.linalg.norm(np.diff(self.carry_path,axis=0),axis=1))]
+        self.path_progress_m = 0.
+
+    def _carry_target(self, tcp):
+        # Measured path progress, rather than a clock, drives the lookahead.
+        # The first tangent is vertical; lateral travel grows continuously.
+        distances = self.carry_distances
+        eligible = np.flatnonzero(distances >= self.path_progress_m-1e-9)
+        i = eligible[np.argmin(np.linalg.norm(self.carry_path[eligible]-tcp[:3,3],axis=1))]
+        self.path_progress_m = max(self.path_progress_m,float(distances[i]))
+        ahead = min(distances[-1], self.path_progress_m+self.config.path_lookahead_m)
+        point = np.array([np.interp(ahead,distances,self.carry_path[:,axis]) for axis in range(3)])
+        j = min(len(distances)-1,max(1,int(np.searchsorted(distances,ahead))))
+        tangent = self.carry_path[j]-self.carry_path[j-1]
+        speed = (self.config.contact_speed_m_s if tcp[2,3] < self.grasp[2,3]+.05
+                 else self.config.transport_speed_m_s)
+        speed = min(speed,4*max(0.,distances[-1]-ahead))
+        self.path_velocity = tangent/max(np.linalg.norm(tangent),1e-12)*speed
+        result = self.release.copy()
+        result[:3,3] = point
+        return self._carry_pose(result)
 
     def _settled(self, condition, now, duration=.4):
         if not condition:
@@ -239,22 +290,24 @@ class AutomaticDemonstrator:
         if stage == Stage.INIT:
             return self.home.copy()
         if stage == Stage.APPROACH_ABOVE_OBJECT:
-            return self.grasp_targets(obs.object)[0]
+            return (self.alignment_targets(obs.object)[0] if obs.alignment_target is None
+                    else validate_transform(obs.alignment_target).copy())
         if stage == Stage.ALIGN_GRASP:
             return (self.alignment_targets(obs.object)[0] if obs.alignment_target is None
                     else validate_transform(obs.alignment_target).copy())
         if stage == Stage.APPROACH_OBJECT:
-            target = self.aligned_grasp.copy()
-            if not self.config.stationary:
-                target[:3, 3] += self.grasp_targets(obs.object)[1][:3, 3]-self.aligned_at
-            return target
+            approach, grasp = self.alignment_targets(obs.object)
+            if obs.alignment_target is not None:
+                approach = validate_transform(obs.alignment_target).copy()
+            if obs.aligned_grasp is not None:
+                grasp = validate_transform(obs.aligned_grasp).copy()
+            return interpolate_pose(approach,grasp,self.descent)
         if stage == Stage.GRASP_OBJECT:
-            return self.grasp.copy()
-        if stage in (Stage.LIFT_OBJECT, Stage.VERIFY_LIFT):
-            return self.lift.copy()
-        if stage == Stage.APPROACH_ABOVE_TARGET:
-            return self.above_target.copy()
-        if stage in (Stage.APPROACH_TARGET, Stage.PLACE_OBJECT, Stage.VERIFY_PLACE):
+            return (validate_transform(obs.aligned_grasp).copy() if obs.aligned_grasp is not None
+                    else self.alignment_targets(obs.object)[1])
+        if stage in (Stage.LIFT_OBJECT, Stage.VERIFY_LIFT, Stage.APPROACH_ABOVE_TARGET, Stage.APPROACH_TARGET):
+            return self._carry_target(obs.tcp_pose)
+        if stage in (Stage.PLACE_OBJECT, Stage.VERIFY_PLACE):
             return self.release.copy()
         if stage == Stage.RETREAT:
             return self.retreat.copy()
@@ -265,76 +318,62 @@ class AutomaticDemonstrator:
         tcp = validate_transform(obs.tcp_pose)
         if not np.isfinite(now) or (self.last_now is not None and now <= self.last_now):
             raise ValueError('Demonstrator time must advance monotonically')
+        self.last_dt = 0. if self.last_now is None else now-self.last_now
         self.last_now = now
         if self.started is None:
             self.started = self.stage_started = now
-        if now-self.started > self.config.attempt_timeout_s or now-self.stage_started > self.config.stage_timeout_s:
-            raise RuntimeError('Automatic demonstrator stage/attempt timeout')
         if self.requires_object:
             if obs.object is None or not 0 <= now-obs.object.stamp_s <= self.config.object_max_age_s:
                 raise RuntimeError('Fresh object estimate required before grasp commitment')
             if self.anchor is None:
                 self.anchor = obs.object.pose[:3, 3].copy()
-            if self.config.stationary and np.linalg.norm(obs.object.pose[:3, 3]-self.anchor) > self.config.stationary_tolerance_m:
-                raise RuntimeError('Tape moved during the stationary attempt')
-        elif (self.stage in (Stage.ALIGN_GRASP, Stage.APPROACH_OBJECT)
-              and obs.object is not None and self.config.stationary
-              and 0 <= now-obs.object.stamp_s <= self.config.object_max_age_s):
-            if np.linalg.norm(obs.object.pose[:3, 3]-self.anchor) > self.config.stationary_tolerance_m:
-                raise RuntimeError('Tape moved during stationary alignment/descent')
-        if self.stage in (Stage.APPROACH_ABOVE_TARGET, Stage.APPROACH_TARGET) and not obs.holding:
-            raise RuntimeError('Held object lost during transport')
+        if self.stage == Stage.APPROACH_OBJECT and progress:
+            # Progress the descending reference while pursuing XY and aligning
+            # the wrist. Large XY tracking error pauses vertical progress only.
+            approach, grasp = self.alignment_targets(obs.object)
+            lateral = np.linalg.norm(tcp[:2,3]-(obs.aligned_grasp if obs.aligned_grasp is not None else grasp)[:2,3])
+            if obs.pregrasp_ready and lateral < .02:
+                span = max(.01,abs(approach[2,3]-grasp[2,3]))
+                self.descent = min(1.,self.descent+self.last_dt*self.config.contact_speed_m_s/span)
 
         target = self._target(obs)
-        arrived = pose_reached(tcp, target, self.config, pregrasp=self.stage == Stage.APPROACH_ABOVE_OBJECT)
         stage = self.stage
         if progress:
-            if stage == Stage.INIT and self._settled(obs.gripper_open, now, .28):
+            if stage == Stage.INIT:
                 self._advance(Stage.APPROACH_ABOVE_OBJECT, now)
-            elif stage == Stage.APPROACH_ABOVE_OBJECT and self._settled(arrived and obs.pregrasp_ready, now):
+            elif stage in (Stage.APPROACH_ABOVE_OBJECT, Stage.ALIGN_GRASP) and (
+                    np.linalg.norm(tcp[:3,3]-target[:3,3]) < .015 and obs.pregrasp_ready and obs.gripper_open):
                 if self.config.stationary:
                     self.alignment_reference = tuple(pose.copy() for pose in self.grasp_targets(obs.object))
                     self.alignment_reference_stamp_s = float(obs.object.stamp_s)
-                self._advance(Stage.ALIGN_GRASP, now)
-            elif stage == Stage.ALIGN_GRASP and self._settled(obs.alignment_complete and arrived, now):
-                if obs.aligned_grasp is None:
-                    raise ValueError('Alignment must supply the corrected grasp pose')
-                self.aligned_grasp = validate_transform(obs.aligned_grasp).copy()
-                self.aligned_at = self.alignment_targets(obs.object)[1][:3, 3].copy()
                 self._advance(Stage.APPROACH_OBJECT, now)
-            elif stage == Stage.APPROACH_OBJECT and self._settled(arrived, now, .5):
+            elif stage == Stage.APPROACH_OBJECT and self._settled(
+                    self.descent >= 1 and obs.alignment_complete and
+                    pose_reached(tcp,target,self.config,tolerances=(.008,np.deg2rad(5))) and
+                    np.linalg.norm(np.asarray(obs.tcp_velocity_m_s)-(np.zeros(3) if self.config.stationary
+                        else obs.object.velocity_m_s)) < self.config.grasp_relative_speed_m_s, now, .06):
                 self.grasp = target.copy()
                 self._advance(Stage.GRASP_OBJECT, now)
             elif stage == Stage.GRASP_OBJECT:
-                if self._settled(obs.grasp_contact, now):
-                    self.carry_rotation = tcp[:3,:3].copy()
-                    self.carry_heading = float(np.arctan2(tcp[1,3],tcp[0,3]))
-                    self.release = self._carry_pose(self.release)
-                    self.above_target = self._carry_pose(self.above_target)
-                    self.lift = self.grasp.copy()
-                    self.lift[2, 3] = max(self.lift[2, 3]+self.config.lift_m,
-                        self.above_target[2, 3], self.config.transport_z_m)
-                    self.lift = self._carry_pose(self.lift)
+                if self._settled(obs.grasp_contact, now, .08):
+                    self._start_carry(tcp)
                     self._advance(Stage.LIFT_OBJECT, now)
-                elif now-self.stage_started > 8:
-                    raise RuntimeError('Grasp failed: no supported gripper contact')
-            elif stage == Stage.LIFT_OBJECT and self._settled(
-                    np.linalg.norm(tcp[:3,3]-target[:3,3]) < self.config.waypoint_position_tolerance_m, now, .1):
-                self._advance(Stage.VERIFY_LIFT, now)
-            elif stage == Stage.VERIFY_LIFT:
-                if self._confirmed(obs.holding, obs) and now-self.stage_started > .4:
+            elif stage in (Stage.LIFT_OBJECT, Stage.VERIFY_LIFT, Stage.APPROACH_ABOVE_TARGET, Stage.APPROACH_TARGET):
+                self.holding_confirmed = self.holding_confirmed or self._confirmed(obs.holding, obs)
+                if not obs.holding:
+                    # Retain the grasp while feedback recovers; never open on
+                    # an unverified carry or turn verification into a waypoint.
+                    self.path_velocity[:] = 0
+                if stage in (Stage.LIFT_OBJECT, Stage.VERIFY_LIFT) and tcp[2,3] > self.grasp[2,3]+.05:
                     self._advance(Stage.APPROACH_ABOVE_TARGET, now)
-                elif now-self.stage_started > 5:
-                    raise RuntimeError('Lift verification failed')
-            elif stage == Stage.APPROACH_ABOVE_TARGET and self._settled(
-                    np.linalg.norm(tcp[:3,3]-target[:3,3]) < self.config.waypoint_position_tolerance_m, now, .1):
-                self._advance(Stage.APPROACH_TARGET, now)
-            elif stage == Stage.APPROACH_TARGET and self._settled(
-                    obs.release_ready and
-                    np.linalg.norm(tcp[:2,3]-target[:2,3]) < self.config.waypoint_position_tolerance_m and
-                    abs(tcp[2,3]-target[2,3]) < self.config.release_height_tolerance_m,
-                    now, self.config.release_settle_s):
-                self._advance(Stage.PLACE_OBJECT, now)
+                if stage == Stage.APPROACH_ABOVE_TARGET and self.carry_distances[-1]-self.path_progress_m < .06:
+                    self._advance(Stage.APPROACH_TARGET, now)
+                if stage == Stage.APPROACH_TARGET and self._settled(
+                        obs.release_ready and self.holding_confirmed and obs.holding and
+                        np.linalg.norm(tcp[:2,3]-self.release[:2,3]) < self.config.waypoint_position_tolerance_m and
+                        abs(tcp[2,3]-self.release[2,3]) < self.config.release_height_tolerance_m,
+                        now, self.config.release_settle_s):
+                    self._advance(Stage.PLACE_OBJECT, now)
             elif stage == Stage.PLACE_OBJECT and self._settled(obs.gripper_open, now):
                 self._advance(Stage.VERIFY_PLACE, now)
             elif stage == Stage.VERIFY_PLACE:
@@ -342,8 +381,6 @@ class AutomaticDemonstrator:
                     self.retreat = self.release.copy()
                     self.retreat[2, 3] += self.config.retreat_m
                     self._advance(Stage.RETREAT, now)
-                elif now-self.stage_started > 10:
-                    raise RuntimeError('Object released; placement is visually unverified')
             elif stage == Stage.RETREAT and self._settled(
                     np.linalg.norm(tcp[:3,3]-target[:3,3]) < self.config.waypoint_position_tolerance_m, now, .1):
                 self._advance(Stage.RETURN_HOME if self.config.return_home else Stage.COMPLETE, now)
@@ -354,7 +391,12 @@ class AutomaticDemonstrator:
         stage = self.stage
         gripper = ('CLOSE' if stage == Stage.GRASP_OBJECT else 'HOLD' if stage in
             (Stage.LIFT_OBJECT, Stage.VERIFY_LIFT, Stage.APPROACH_ABOVE_TARGET, Stage.APPROACH_TARGET) else 'OPEN')
-        self.action = Action(stage, self._target(obs), gripper,
+        result = self._target(obs)
+        carrying_motion = stage in (Stage.LIFT_OBJECT,Stage.VERIFY_LIFT,Stage.APPROACH_ABOVE_TARGET,Stage.APPROACH_TARGET)
+        if carrying_motion and not obs.holding:
+            result = tcp.copy()
+            self.path_velocity[:] = 0
+        self.action = Action(stage, result, gripper,
             contact=stage in (Stage.APPROACH_OBJECT, Stage.GRASP_OBJECT, Stage.LIFT_OBJECT),
             carrying=gripper == 'HOLD',
             # Containment is a release condition; approach must be allowed to
@@ -363,8 +405,11 @@ class AutomaticDemonstrator:
             done=stage == Stage.COMPLETE,
             metadata={'stationary': self.config.stationary, 'teacher_states_only': True,
                       'alignment_reference_stamp_s': self.alignment_reference_stamp_s,
-                      'wrist_only_alignment': stage == Stage.ALIGN_GRASP and obs.object is None},
-            target_velocity_m_s=(obs.object.velocity_m_s.copy() if not self.config.stationary
-                and stage in (Stage.APPROACH_ABOVE_OBJECT, Stage.ALIGN_GRASP, Stage.APPROACH_OBJECT)
+                      'wrist_only_alignment': stage in self.PRECOMMIT and obs.object is None,
+                      'descent_fraction': self.descent, 'path_progress_m': self.path_progress_m,
+                      'holding_confirmed': self.holding_confirmed},
+            target_velocity_m_s=(self.path_velocity.copy() if carrying_motion else
+                obs.object.velocity_m_s.copy() if not self.config.stationary
+                and stage in (Stage.APPROACH_ABOVE_OBJECT,Stage.ALIGN_GRASP,Stage.APPROACH_OBJECT,Stage.GRASP_OBJECT)
                 and obs.object is not None else np.zeros(3)))
         return self.action

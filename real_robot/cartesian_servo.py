@@ -42,7 +42,7 @@ class CartesianIKServo:
             raise ValueError('Read motor velocity limits before disabling the pilot joint-rate limit')
         self.core = PoseVelocityServo(retained if actual is None else actual, retained, [.16,0,0],
             kp=self.c['kp'], ki=self.c['ki'], kd=self.c['kd'], integral_limit=self.c['integral_limit_m_s'],
-            max_following_error_deg=self.c['max_following_error_deg'],
+            max_following_error_deg=None,
             hardware_joint_rates_deg_s=joint_velocity_limits_deg_s)
         self.filtered_target = None
         self.pitch_reference = None

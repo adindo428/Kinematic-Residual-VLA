@@ -5,7 +5,7 @@ Commands for the right VX300 ALOHA arm and blue tape on this workstation.
 | Task | Guide |
 |---|---|
 | Prepare the arm, track rolling tape, stop/shutdown | [Tracking](README_TRACKING.md) |
-| Teach grasps and run stationary pick-and-place | [Manipulation](README_MANIPULATION.md) |
+| Teach grasps and run moving/stationary pick-and-place | [Manipulation](README_MANIPULATION.md) |
 
 Run from `/home/ailab/Desktop/Kinematic-Residual-VLA` using `.venv/bin/python`.
 Leader teleoperation uses the separate LeRobot environment shown in the tracking guide.
@@ -23,7 +23,9 @@ Only one controller may own the follower serial port.
 
 Tracking uses fixed-camera EfficientTAM masks and RGB-D fusion. Manipulation
 uses an object-relative grasp prior, wrist alignment and a model-based state
-machine. It currently targets **stationary tape standing on its curved edge**.
+machine with concurrent alignment and pursuit, followed by curved transport.
+It targets **upright tape standing or rolling on its curved edge**; the moving
+path still needs physical validation.
 Camera/base, wrist and TCP transforms remain provisional.
 
 Neither active controller adds software torque/current abort thresholds.

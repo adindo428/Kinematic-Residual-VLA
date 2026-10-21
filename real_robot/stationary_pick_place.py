@@ -18,13 +18,14 @@ from .geometry import validate_transform, transform_point
 from .grasp_prior import fresh_observation
 from .automatic_demonstrator import DemonstratorConfig
 from .demonstrator_adapters import prior_from_template
-from .pick_geometry import PickGeometry, inside_polygon, clearance_center, pose_error
+from .pick_geometry import PickGeometry, inside_polygon, clearance_center
 from .tracking_config import load_config
 from .vx300_demonstrator import TapeDemonstrator, manipulation_motion
 from .task_space_servo import PoseVelocityServo
 from .vx300s_kinematics import forward
 from .wrist_alignment import blue_seed, line_error, tape_feature
-from .wrist_feed import read_wrist_observation, WristMaskStartup
+from .wrist_feed import read_wrist_observation
+from .wrist_target import capture_joints
 
 PROJECT = Path(__file__).resolve().parent.parent
 
@@ -144,9 +145,9 @@ def prepare(args):
             'method':'Image error servo, followed by a local 3-degree roll probe before every descent.',
             'model_image_angle_per_roll':-float(T[0,2]),
             'note':'Recorded successful views constrain the desired axis, not an absolute wrist angle. Clipped close-up masks cannot calibrate the axis.'},
-        'validated_for_hardware':False,'stationary_only':True,
-        'limits':{'joint_rate_deg_s':3,'tcp_rate_m_s':.020,'alignment_xy_budget_m':.035,
-                  'roll_budget_deg':65,'carried_tape_radius_envelope_m':.045}}
+        'validated_for_hardware':False,'stationary_only':False,
+        'limits':{'joint_rate_deg_s':3,'tcp_rate_m_s':.020,
+                  'carried_tape_radius_envelope_m':.045}}
     if result['tcp_offset_m'] != [.16,0,0]:
         raise ValueError('This pilot requires the same 160mm TCP as the recorded setup')
     prior=prior_from_template(result)
@@ -285,8 +286,6 @@ def run(args):
     if not Path('/dev/ttyDXL_follower_right').exists():
         raise RuntimeError('Right follower serial device is not exposed in this runtime; run on the robot workstation')
     observation_file, observation, point=latest_observation(template)
-    if set(observation['fusion']['sources'])!={'front','side'}:
-        raise ValueError('Require both fixed views for initial tape reference')
     if args.execute and not all((observation.get('rgbd') or {}).get('files', {}).get(role) for role in ('front','side')):
         raise ValueError('Automatic demonstration collection requires perception --record-rgbd')
     output=resolve(args.output) if args.output else PROJECT/'scratch/real_robot/picks'/datetime.now(timezone.utc).strftime('automatic-%Y%m%dT%H%M%SZ')
@@ -297,7 +296,8 @@ def run(args):
         'boot_id':Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
         'created_at_utc':datetime.now(timezone.utc).isoformat(),
         'demonstrator':'real_robot.automatic_demonstrator.AutomaticDemonstrator',
-        'robot_backend':'shared_pose_velocity_servo','stationary_only':True,
+        'robot_backend':'shared_pose_velocity_servo','stationary_only':False,
+        'blended_approach_alignment':True,'curved_lift_transport':True,
         'config_file':str(config_path),'experimental_current_guard':False,
         'speed_scale':args.speed_scale,'motion_rates':rates,
         'fixed_observation_file':str(observation_file),'wrist_rgbd_recording':args.execute,
@@ -340,6 +340,7 @@ def run(args):
         def make_servo(actual_q,retained_q):
             return PoseVelocityServo(actual_q,retained_q,template['tcp_offset_m'],
                 kp=rates['position_kp'],rotation_kp=rates['rotation_kp'],
+                max_following_error_deg=None,
                 hardware_joint_rates_deg_s=hardware_rates)
         servo=make_servo(actual,retained)
         geometry=PickGeometry(template['collision_model'],actual,box)
@@ -356,17 +357,19 @@ def run(args):
         def control():
             nonlocal gripper_goal
             machine=None;last=time.monotonic();health=last
-            previous_feedback=None;last_stage=None;point_history=[];tcp_velocity=np.zeros(3)
-            wrist_startup=WristMaskStartup(timeout_s=5.)
+            previous_feedback=None;last_stage=None;tcp_velocity=np.zeros(3)
+            joint_history=[]
             try:
                 with (output/'motion.jsonl').open('x',buffering=1) as log:
                     while not stop.is_set():
                         now=time.monotonic();dt=now-last
                         if dt<1/30:stop.wait(1/30-dt);continue
                         last=now
-                        if dt>.15:raise RuntimeError('Pick control interval exceeded 150ms')
+                        control_dt=min(dt,.10)
                         q,currents,raw=arm.telemetry()
                         feedback_stamp=time.monotonic()
+                        joint_history.append((feedback_stamp,q.copy()))
+                        joint_history[:]=[(t,j) for t,j in joint_history if feedback_stamp-t<=2.]
                         pose=forward(q,template['tcp_offset_m'])
                         state.update(actual_q_rad=q.tolist(),currents_a=currents.tolist(),
                             raw_gripper=raw[9],tcp_m=pose[:3,3].tolist(),host_monotonic_s=feedback_stamp)
@@ -388,62 +391,52 @@ def run(args):
                         try:
                             fixed=read_json(observation_file)
                             fixed_point=fresh_observation(fixed,template['rig_sha256'],time.monotonic())
-                            point_history.append((now,fixed_point.copy()))
-                            point_history[:]=[(t,p) for t,p in point_history if now-t<=.8]
                         except (OSError,ValueError):pass
-                        history_ready=(len(point_history)>=12 and now-point_history[0][0]>=.5 and
-                            np.max(np.ptp([p for _,p in point_history],axis=0))<=.012)
-                        state['ready_to_start']=bool(machine is None and wrist is not None and fixed_point is not None
-                            and set(fixed['fusion']['sources'])=={'front','side'} and history_ready)
+                        state['ready_to_start']=bool(machine is None and wrist is not None and fixed_point is not None)
                         if machine is None:
-                            state['status']='ready / SPACE starts one attempt' if state['ready_to_start'] else 'preview / waiting for stable fixed and wrist feeds'
-                        if start.is_set() and machine is None:
-                            if wrist is None:raise ValueError('Wrist feed not ready; restart and wait for preview before SPACE')
-                            if fixed_point is None or set(fixed['fusion']['sources'])!={'front','side'}:
-                                raise ValueError('Fresh two-view tape reference required')
-                            if len(point_history)<12 or now-point_history[0][0]<.5:
-                                raise ValueError('Wait for stationary tape history before SPACE')
-                            if np.max(np.ptp([p for _,p in point_history],axis=0))>.012:
-                                raise ValueError('Tape/reference is not stationary within 12mm')
+                            state['status']='ready / SPACE starts pursuit and pick' if state['ready_to_start'] else 'preview / waiting for fixed and wrist feeds'
+                        if start.is_set() and machine is None and state['ready_to_start']:
                             machine=TapeDemonstrator(template,box,fixed_point,q,time.monotonic(),motion=rates)
+                            state['demonstrator_config']=asdict(machine.core.config)
                             servo=make_servo(q,arm.goals())
                         if machine is not None:
-                            if machine.needs_object:
-                                if fixed_point is None:raise RuntimeError('Fixed-camera target lost before grasp commitment')
-                            distance,angle=pose_error(pose,machine.target_pose)
-                            if (machine.stage=='APPROACH_ABOVE_OBJECT' and distance<.005
-                                    and angle<np.deg2rad(3) and wrist_startup.started_s is None):
-                                wrist_startup.request(time.monotonic())
-                                (output/'wrist/SEED_ENABLE').touch(exist_ok=True)
-                            waiting=wrist_startup.waiting(wrist,state['wrist_feed'],time.monotonic())
-                            state['wrist_mask_initializing']=waiting
-                            state['wrist_initialization_elapsed_s']=(None if wrist_startup.started_s is None
-                                else time.monotonic()-wrist_startup.started_s)
-                            if waiting:
-                                # First-prompt inference may exceed one frame's
-                                # freshness budget. Retain BOTH goals; never
-                                # advance the task using stale wrist features.
+                            stamp=((wrist or {}).get('timing') or {}).get('host_arrival_monotonic_s')
+                            capture_q=None if stamp is None else capture_joints(joint_history,stamp)
+                            action=machine.update(time.monotonic(),q,raw[9],currents[-1],wrist,
+                                object_record=fixed if fixed_point is not None else None,
+                                tcp_velocity_m_s=tcp_velocity,wrist_capture_q=capture_q)
+                            state['target_estimate_source']=machine.object_estimator.source
+                            if action is None or (wrist is None and not machine.needs_object):
+                                servo.hold()
                                 geometry.check(q,**machine.flags())
-                                state.update(status=machine.stage+' / initializing wrist mask (holding)',
+                                state.update(status=machine.stage+' / waiting for fresh target feedback',
                                     gripper_target_raw=gripper_goal)
                             else:
-                                if wrist is None:raise wrist_error('during pick')
-                                action=machine.update(time.monotonic(),q,raw[9],currents[-1],wrist,
-                                    object_record=fixed if fixed_point is not None else None,
-                                    tcp_velocity_m_s=tcp_velocity)
                                 flags=machine.flags()
                                 geometry.check(q,**flags)
                                 previous_goal=servo.goal.copy()
                                 profile_name=machine.motion_profile(pose)
                                 profile=rates[profile_name]
                                 joint_rates=np.full(6,profile['joint_rate_deg_s'])
-                                if machine.stage=='ALIGN_GRASP':
+                                tcp_rate=profile['tcp_rate_m_s']
+                                relative_rate=None
+                                if machine.needs_object:
+                                    target_speed=float(np.linalg.norm(action.target_velocity_m_s))
+                                    relative_rate=tcp_rate
+                                    tcp_rate=min(config.get('servo',{}).get('max_tcp_speed_mps',.5),tcp_rate+target_speed)
+                                    # Match object translation using the same
+                                    # motor readbacks as continuous tracking;
+                                    # retain slower relative contact corrections.
+                                    blend=min(1.,target_speed/.03)
+                                    joint_rates+=(np.asarray(hardware_rates)-joint_rates)*blend
+                                if machine.stage in ('APPROACH_ABOVE_OBJECT','ALIGN_GRASP','APPROACH_OBJECT','GRASP_OBJECT'):
                                     joint_rates[-1]=rates['alignment_wrist_roll_rate_deg_s']
-                                command=servo.step(action.tcp_pose,q,min(dt,1/30),
-                                    tcp_rate_m_s=profile['tcp_rate_m_s'],joint_rate_deg_s=joint_rates,
+                                command=servo.step(action.tcp_pose,q,control_dt,
+                                    tcp_rate_m_s=tcp_rate,joint_rate_deg_s=joint_rates,
                                     angular_rate_deg_s=profile['angular_rate_deg_s'],
                                     acceleration_m_s2=rates['acceleration_m_s2'],
-                                    target_velocity_m_s=action.target_velocity_m_s)
+                                    target_velocity_m_s=action.target_velocity_m_s,
+                                    relative_tcp_rate_m_s=relative_rate)
                                 # Check both actual-to-command and goal-to-command
                                 # segments, including retained holding compensation.
                                 # Drop containment applies to the measured TCP,
@@ -453,14 +446,19 @@ def run(args):
                                 geometry.path(q,command,**path_flags)
                                 geometry.path(previous_goal,command,**path_flags)
                                 if time.monotonic()-health>.25:arm.check_health();health=time.monotonic()
-                                # Recheck freshness after all model calculations.
-                                if wrist_record() is None:raise wrist_error('before command')
-                                consumed_age=time.monotonic()-wrist['timing']['host_arrival_monotonic_s']
-                                if not 0<=consumed_age<=.25:
-                                    raise RuntimeError(f'Consumed wrist observation stale before command: age={consumed_age:.3f}s')
+                                # If the consumed state expires during geometry
+                                # calculation, retain the previous goals and
+                                # consume the next frame instead of aborting.
+                                if machine.needs_object and machine.object_state is not None:
+                                    consumed_age=time.monotonic()-machine.object_state.stamp_s
+                                    if not 0<=consumed_age<=.25:
+                                        servo.hold()
+                                        state['status']=machine.stage+' / waiting for next target frame'
+                                        save_json(output/'status.json',state)
+                                        continue
                                 if time.monotonic()-preview_heartbeat[0]>.5:raise RuntimeError('Preview heartbeat lost before command')
                                 if stop.is_set():break
-                                gripper_step=max(1,int(rates['gripper_rate_raw_s']*dt))
+                                gripper_step=max(1,int(rates['gripper_rate_raw_s']*control_dt))
                                 goal=gripper_goal+int(np.clip(machine.gripper_target-gripper_goal,-gripper_step,gripper_step))
                                 if not template['gripper']['empty_closed_raw']<=goal<=template['gripper']['calibrated_open_raw']:
                                     raise RuntimeError('Gripper target outside taught calibration bounds')
@@ -478,7 +476,9 @@ def run(args):
                                              'target_velocity_m_s':action.target_velocity_m_s.tolist(),
                                              'optional_object_feedback_rejection':machine.object_feedback_reason,
                                              'alignment_reference_stamp_s':action.metadata.get('alignment_reference_stamp_s'),
-                                             'wrist_only_alignment':action.metadata.get('wrist_only_alignment',False),
+                                             'wrist_only_alignment':machine.object_estimator.source.startswith('wrist'),
+                                             'descent_fraction':action.metadata.get('descent_fraction'),
+                                             'path_progress_m':action.metadata.get('path_progress_m'),
                                              'policy_input':False})
                             if machine.stage!=last_stage:print('Pick stage:',machine.stage,flush=True)
                             last_stage=machine.stage
@@ -496,7 +496,7 @@ def run(args):
                 state.update(error=f'{type(exc).__name__}: {exc}',status='stopped')
                 print(state['error'],flush=True)
             finally:done.set()
-        worker=threading.Thread(target=control,name='stationary-pick-control',daemon=True);worker.start()
+        worker=threading.Thread(target=control,name='automatic-pick-control',daemon=True);worker.start()
         print('Pick output:',output,'\nStarts in preview. SPACE starts one attempt with --execute; Q stops new goals.',flush=True)
         while not done.is_set():
             preview_heartbeat[0]=time.monotonic()
@@ -507,7 +507,7 @@ def run(args):
             cv2.drawMarker(view,tuple(reference),(0,255,255),cv2.MARKER_CROSS,20,2)
             footer=np.full((90,640,3),24,np.uint8)
             labels=[state['status'],'SPACE: start one attempt | Q: stop new goals; retain hold',
-                    'Stationary tape | '+box['box_id']+' | existing torque must be ON']
+                    'Moving/stationary tape | '+box['box_id']+' | existing torque must be ON']
             for i,label in enumerate(labels):cv2.putText(footer,label,(8,22+26*i),cv2.FONT_HERSHEY_SIMPLEX,.48,(0,255,255),1)
             cv2.imshow('Automatic demonstrator - wrist alignment',np.vstack([view,footer]))
             key=cv2.waitKey(10)&255
@@ -549,7 +549,7 @@ def main(argv=None):
     p.add_argument('--box-size-mm',type=float,nargs=2,help='Measured box WIDTH LENGTH for checking a rim-corner footprint')
     p.add_argument('--rim-z-base-m',type=float,required=True,help='Measured rim Z above the modeled table/base plane, meters')
     p.add_argument('--device',default='cuda')
-    p=sub.add_parser('run',help='Feedback preview; --execute and SPACE permit one stationary attempt')
+    p=sub.add_parser('run',help='Continuous pursuit, wrist alignment and curved pick/place; SPACE starts one attempt')
     p.add_argument('--template',required=True);p.add_argument('--box-registration',required=True)
     p.add_argument('--config',default='real_robot/config.yaml',help='Tracking configuration to validate and snapshot')
     p.add_argument('--speed-scale',type=float,default=1.5,

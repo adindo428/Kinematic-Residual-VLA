@@ -1,4 +1,4 @@
-"""Wrist EfficientTAM feed for stationary grasping; camera-only process."""
+"""Wrist EfficientTAM feed for continuous grasping; camera-only process."""
 import argparse
 import json
 from pathlib import Path
@@ -54,9 +54,7 @@ def main(argv=None):
                 reason = None
                 info = None
                 mask = None
-                if not seeded and not (root/'SEED_ENABLE').exists():
-                    reason = 'Waiting for pregrasp pose before automatic tape prompt'
-                elif not seeded:
+                if not seeded:
                     try:
                         box = args.seed_box or blue_seed(image, template['wrist_reference']['center_px'])[0]
                         publish(root, {'schema': 'wrist_pick_observation_v1', 'running': True,

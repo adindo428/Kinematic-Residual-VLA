@@ -45,7 +45,8 @@ class EstimatedObjectAdapter:
         pose[:3, 3] = point
         track = record.get('track') or {}
         velocity = np.asarray(track.get('velocity_mps', [0., 0., 0.]), float)
-        if track.get('frame') != 'right_base_estimate' or not track.get('ready'):
+        if (track.get('frame') != 'right_base_estimate' or not track.get('ready')
+                or not track.get('accepted') or track.get('stationary_assumed',False)):
             velocity = np.zeros(3)
         return ObjectState(pose, velocity,
             record['timing']['oldest_host_arrival_monotonic_s'],
@@ -99,6 +100,7 @@ class IsaacDemonstratorAdapter:
         if demonstrator.prior.semantics != 'object_center' and T_object_prior_origin is None:
             raise ValueError('A proxy-origin prior needs an explicit object-to-prior-origin transform in simulation')
         self.origin = validate_transform(np.eye(4) if T_object_prior_origin is None else T_object_prior_origin).copy()
+        self.last_tcp = self.last_time = None
 
     def _item(self, value):
         return _array(value)[self.env_index]
@@ -115,11 +117,18 @@ class IsaacDemonstratorAdapter:
             velocity = velocity+np.cross(self._item(obj['angular_velocity']), obj_pose[:3, 3]-center)
         state = ObjectState(obj_pose, velocity, now_s, semantics=self.demonstrator.prior.semantics)
         approach, grasp = self.demonstrator.grasp_targets(state)
-        obs = Observation(now_s,
-            pose_from_wxyz(self._item(ee['pos']), self._item(ee['quat'])), state,
+        tcp = pose_from_wxyz(self._item(ee['pos']), self._item(ee['quat']))
+        tcp_velocity = np.zeros(3)
+        if 'velocity' in ee:
+            tcp_velocity = self._item(ee['velocity'])[:3]
+        elif self.last_time is not None and now_s > self.last_time:
+            tcp_velocity = (tcp[:3,3]-self.last_tcp[:3,3])/(now_s-self.last_time)
+        self.last_tcp,self.last_time = tcp.copy(),now_s
+        obs = Observation(now_s, tcp, state,
             gripper_open=bool(gripper_open), grasp_contact=bool(grasp_contact),
             holding=bool(holding), placed=bool(placed), confirmation_stamp=now_s,
-            alignment_complete=True, alignment_target=approach, aligned_grasp=grasp)
+            alignment_complete=True, alignment_target=approach, aligned_grasp=grasp,
+            tcp_velocity_m_s=tcp_velocity)
         action = self.demonstrator.step(obs)
         return {'action': action_wxyz(action), 'sm_state': action.stage.value,
                 'teacher_action': action}

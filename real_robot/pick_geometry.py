@@ -103,7 +103,9 @@ class PickGeometry:
                     if overlaps:
                         raise RuntimeError(f'Robot geometry enters box/rim envelope: {name}')
         tcp = forward(q, [.16,0,0])[:3,3]
-        if carrying and not contact and tcp[2]-.045 < self.box['rim_z_base_m']+.020:
+        if (carrying and not contact and
+                inside_polygon(tcp[:2],self.box['interior_polygon_xy_m'],-.045) and
+                tcp[2]-.045 < self.box['rim_z_base_m']+.020):
             raise RuntimeError('Held-tape envelope below transport clearance')
         if over_box and not inside_polygon(tcp[:2], self.box['interior_polygon_xy_m'], .035):
             raise RuntimeError('Release point lacks 35mm clearance inside box interior')

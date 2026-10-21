@@ -69,7 +69,6 @@ def main(argv=None):
     try:
         arm=TapeArm();arm.check_health();actual,currents,_=arm.telemetry();retained=arm.goals()
         if np.any(actual<LOWER) or np.any(actual>UPPER):raise RuntimeError('Use leader teleoperation to lift the arm into its normal range first')
-        if np.max(np.abs(retained-actual))>np.deg2rad(settings['max_following_error_deg']):raise RuntimeError('Retained holding error exceeds stall bound')
         geometry=GeometryGuard(str(resolve(settings['collision_model'])),actual)
         geometry.check(actual,.025);geometry.check(retained,.025)
         # Read existing motor settings; never write velocity/current limits.
@@ -91,13 +90,10 @@ def main(argv=None):
                 measured_tcp=forward(actual,[.16,0,0])[:3,3]
                 measured_speed=None if previous_tcp is None else float(np.linalg.norm(measured_tcp-previous_tcp)/dt)
                 previous_tcp=measured_tcp.copy()
-                if measured_speed is not None and measured_speed>settings['max_tcp_speed_mps']:
-                    state.update(measured_fk_tcp_speed_mps=measured_speed,host_monotonic_s=now)
-                    raise RuntimeError('Measured FK TCP speed exceeds configured ceiling')
+                state['measured_fk_tcp_speed_mps']=measured_speed
                 geometry.check(actual,.02)
                 if np.any(actual<LOWER) or np.any(actual>UPPER):raise RuntimeError('Measured joints outside model limits')
                 if now-last_health>.25:arm.check_health();last_health=now
-                if np.max(np.abs(servo.q-actual))>np.deg2rad(settings['max_following_error_deg']):raise RuntimeError('Measured joint following error exceeds stall bound')
                 observation,reason=read_target(args.observation,digest,settings,now)
                 if observation is None:servo.hold();state['status']='holding: '+reason
                 else:

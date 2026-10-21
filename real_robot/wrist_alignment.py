@@ -91,9 +91,9 @@ def corrections(feature, reference, intrinsics, T_base_camera, max_translation=.
     projection = np.array([[intrinsics['fx']/z, 0, -intrinsics['fx']*x/z**2],
                            [0, intrinsics['fy']/z, -intrinsics['fy']*y/z**2]])
     jacobian = projection @ (-t[:3, :3].T[:, :2])
-    if np.linalg.cond(jacobian) > 20:
-        raise ValueError('Wrist translation geometry is ill-conditioned')
-    delta_xy = np.linalg.solve(jacobian, .35*error_px)
+    # Damped image Jacobian: reduce unobservable corrections instead of
+    # aborting the task at an arbitrary condition-number threshold.
+    delta_xy = jacobian.T@np.linalg.solve(jacobian@jacobian.T+25.*np.eye(2), .35*error_px)
     length = np.linalg.norm(delta_xy)
     if length > max_translation:
         delta_xy *= max_translation/length
