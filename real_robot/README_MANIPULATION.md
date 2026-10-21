@@ -41,6 +41,10 @@ the fixed-camera target projected into the wrist view.
 Approach and wrist alignment run together; descent and closure keep following
 the tape. Lift and transport follow one curved path, with holding verification
 running alongside motion. Then release/verify, retreat and return.
+Placement uses **five distinct front-camera frames after opening**: the tracked
+tape must be inside the fixed box footprint and below its rim. The arm begins
+its upward retreat while this check runs; wrist/side visibility is not required
+after release. Restart perception once after updating to publish this feedback.
 
 | Current setting | Value |
 |---|---|

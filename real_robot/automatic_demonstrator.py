@@ -120,6 +120,7 @@ class Observation:
     release_ready: bool = True
     pregrasp_ready: bool = True
     tcp_velocity_m_s: np.ndarray = field(default_factory=lambda: np.zeros(3))
+    placement_confirmation_stamp: float | None = None
 
 
 @dataclass(frozen=True)
@@ -279,9 +280,12 @@ class AutomaticDemonstrator:
         self.confirmations = 0
         # Do not count the same image again after a state transition.
 
-    def _confirmed(self, condition, obs):
-        if obs.confirmation_stamp is not None and obs.confirmation_stamp != self.last_confirmation:
-            self.last_confirmation = obs.confirmation_stamp
+    def _confirmed(self, condition, obs, *, stamp=None):
+        if not condition:
+            self.confirmations = 0
+        stamp = obs.confirmation_stamp if stamp is None else stamp
+        if stamp is not None and stamp != self.last_confirmation:
+            self.last_confirmation = stamp
             self.confirmations = self.confirmations+1 if condition else 0
         return self.confirmations >= self.config.verification_frames
 
@@ -307,8 +311,10 @@ class AutomaticDemonstrator:
                     else self.alignment_targets(obs.object)[1])
         if stage in (Stage.LIFT_OBJECT, Stage.VERIFY_LIFT, Stage.APPROACH_ABOVE_TARGET, Stage.APPROACH_TARGET):
             return self._carry_target(obs.tcp_pose)
-        if stage in (Stage.PLACE_OBJECT, Stage.VERIFY_PLACE):
+        if stage == Stage.PLACE_OBJECT:
             return self.release.copy()
+        if stage == Stage.VERIFY_PLACE:
+            return self.retreat.copy()
         if stage == Stage.RETREAT:
             return self.retreat.copy()
         return self.home.copy()
@@ -375,11 +381,11 @@ class AutomaticDemonstrator:
                         now, self.config.release_settle_s):
                     self._advance(Stage.PLACE_OBJECT, now)
             elif stage == Stage.PLACE_OBJECT and self._settled(obs.gripper_open, now):
+                self.retreat = self.release.copy()
+                self.retreat[2,3] += self.config.retreat_m
                 self._advance(Stage.VERIFY_PLACE, now)
             elif stage == Stage.VERIFY_PLACE:
-                if self._confirmed(obs.placed, obs) and now-self.stage_started > .5:
-                    self.retreat = self.release.copy()
-                    self.retreat[2, 3] += self.config.retreat_m
+                if self._confirmed(obs.placed, obs, stamp=obs.placement_confirmation_stamp) and now-self.stage_started > .5:
                     self._advance(Stage.RETREAT, now)
             elif stage == Stage.RETREAT and self._settled(
                     np.linalg.norm(tcp[:3,3]-target[:3,3]) < self.config.waypoint_position_tolerance_m, now, .1):

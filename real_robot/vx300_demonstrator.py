@@ -2,12 +2,12 @@
 
 No devices are opened here. The executor owns the existing serial connection.
 """
-import cv2
 import numpy as np
 
 from .automatic_demonstrator import AutomaticDemonstrator, DemonstratorConfig, Observation, Stage
 from .demonstrator_adapters import EstimatedObjectAdapter, prior_from_template, release_from_registration
-from .geometry import validate_transform, interpolate_pose
+from .geometry import interpolate_pose
+from .front_placement import FrontPlacementVerifier
 from .pick_geometry import inside_polygon, rx
 from .vx300s_kinematics import forward
 from .wrist_alignment import corrections, line_error
@@ -162,6 +162,11 @@ class TapeDemonstrator:
         self.closed_feature = self.hold_goal = None
         self.teacher_state = None
         self.object_feedback_reason = None
+        self.placement_verifier = FrontPlacementVerifier(template,box)
+        self.release_observed_at = None
+        self.placement_verified = False
+        self.placement_evidence = {'source':'front_efficienttam_rgbd','confirmed':False,
+                                   'reason':'waiting for release'}
 
     @property
     def stage(self): return self.core.stage.value
@@ -178,6 +183,16 @@ class TapeDemonstrator:
     @property
     def needs_object(self): return self.core.requires_object
 
+    @property
+    def needs_wrist_camera(self):
+        return self.core.stage not in (Stage.PLACE_OBJECT,Stage.VERIFY_PLACE,Stage.RETREAT,
+                                       Stage.RETURN_HOME,Stage.COMPLETE)
+
+    @property
+    def needs_wrist_holding_feedback(self):
+        return self.core.stage in (Stage.LIFT_OBJECT,Stage.VERIFY_LIFT,
+            Stage.APPROACH_ABOVE_TARGET,Stage.APPROACH_TARGET)
+
     def flags(self): return self.core.action.geometry_flags()
 
     def motion_profile(self, tcp_pose):
@@ -190,18 +205,8 @@ class TapeDemonstrator:
             return 'release'
         return 'precision'
 
-    def _placed(self, q, feature, wrist):
-        if feature is None or feature.get('depth_m') is None or self.closed_feature is None:
-            return False
-        intr = wrist['timing']['intrinsics']; z = feature['depth_m']; u, v = feature['center_px']
-        # Same provisional eye-in-hand model as the recorded grasp review.
-        point = np.array([(u-intr['ppx'])*z/intr['fx'], (v-intr['ppy'])*z/intr['fy'], z, 1.])
-        point = forward(q)@np.asarray(self.template['T_gripper_wrist_camera'])@point
-        return bool(inside_polygon(point[:2], self.box['interior_polygon_xy_m'])
-            and -.015 <= point[2] <= self.box['rim_z_base_m']+.04
-            and z > self.closed_feature['depth_m']+.025)
-
-    def update(self, now, q, raw_gripper, current, wrist, *, object_record=None, tcp_velocity_m_s=None, wrist_capture_q=None):
+    def update(self, now, q, raw_gripper, current, wrist, *, object_record=None,
+               front_record=None, tcp_velocity_m_s=None, wrist_capture_q=None):
         obj = None
         self.object_feedback_reason = None
         if object_record is not None:
@@ -249,10 +254,16 @@ class TapeDemonstrator:
             and abs(tcp_pose[2,3]-self.core.release[2,3]) < self.motion['release_height_tolerance_m']
             and velocity is not None and velocity.shape==(3,) and np.isfinite(velocity).all()
             and np.linalg.norm(velocity[:2]) < self.motion['release_lateral_speed_m_s'])
+        gripper_open = bool(raw_gripper >= self.open_raw-12 and abs(current) < .12)
+        if old_stage == Stage.PLACE_OBJECT and gripper_open and self.release_observed_at is None:
+            self.release_observed_at = now
+        placed,front_stamp,self.placement_evidence = self.placement_verifier.evaluate(
+            front_record,now,self.release_observed_at)
         observation = Observation(now, tcp_pose, obj,
-            gripper_open=bool(raw_gripper >= self.open_raw-12 and abs(current) < .12),
-            grasp_contact=contact, holding=held, placed=self._placed(q, feature, wrist),
+            gripper_open=gripper_open,
+            grasp_contact=contact, holding=held, placed=placed and gripper_open,
             confirmation_stamp=wrist['timing'].get('sensor_timestamp_s'),
+            placement_confirmation_stamp=front_stamp,
             alignment_complete=self.aligner.complete, alignment_target=self.aligner.target,
             aligned_grasp=self.aligner.grasp,
             release_ready=drop_ready,
@@ -262,6 +273,13 @@ class TapeDemonstrator:
                     and abs(self.aligner.axis_error)<np.deg2rad(12)
                     and self.aligner.pixel_error is not None and self.aligner.pixel_error<25))))
         action = self.core.step(observation)
+        if old_stage == Stage.VERIFY_PLACE and action.stage == Stage.RETREAT:
+            self.placement_verified = True
+        self.placement_evidence.update(
+            verified=self.placement_verified,
+            verified_frames=(self.core.config.verification_frames if self.placement_verified
+                else self.core.confirmations if old_stage==Stage.VERIFY_PLACE else 0),
+            required_frames=self.core.config.verification_frames)
         if old_stage == Stage.GRASP_OBJECT and action.stage == Stage.LIFT_OBJECT:
             self.hold_goal = max(self.closed_raw, raw_gripper-32)
         if action.gripper == 'OPEN':

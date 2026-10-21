@@ -150,6 +150,7 @@ def main(argv=None):
     complete = False; error = None; last_publish_s = 0.; last_pair_host_s = None
     paired_views = {}; paired_masks = {}; paired_qualities = {}
     latest_rgbd = None
+    latest_views = {}
     latest_fusion = {'status': 'waiting_for_paired_frames', 'position_output_m': None}
     latest_track = None; latest_timing = None; last_observation_write = 0.
     cv2.setNumThreads(1)
@@ -253,6 +254,7 @@ def main(argv=None):
                     latest_fusion['visible_top_z_base_m']=max(tops.values()) if tops else None
                     latest_fusion['visible_top_per_view_m']=tops
                     duration = time.monotonic()-before; processing.append(duration)
+                    latest_views = per_view
                     record = {'index': count-1, 'pair': timing, 'views': per_view,
                               'fusion': latest_fusion, 'track': None if track is None else track.as_dict(),
                               'velocity_report': velocity_report(track),
@@ -284,7 +286,7 @@ def main(argv=None):
                 if pair is not None or time.monotonic()-last_observation_write > .05:
                     observation = {'schema': 'front_side_observation_v1', 'running': True,
                         'rig_sha256': digest, 'output_frame': output_frame, 'timing': latest_timing,
-                        'rgbd': latest_rgbd,
+                        'rgbd': latest_rgbd, 'views': latest_views,
                         'host_published_monotonic_s': time.monotonic(), 'stale': observation_stale,
                         'fusion': published, 'track': None if latest_track is None or observation_stale else latest_track.as_dict(),
                         'velocity_report': speed_report, 'motion_sent': False}

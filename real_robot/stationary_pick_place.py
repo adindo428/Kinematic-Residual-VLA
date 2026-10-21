@@ -298,10 +298,11 @@ def run(args):
         'demonstrator':'real_robot.automatic_demonstrator.AutomaticDemonstrator',
         'robot_backend':'shared_pose_velocity_servo','stationary_only':False,
         'blended_approach_alignment':True,'curved_lift_transport':True,
+        'placement_verification':'front_efficienttam_rgbd_after_release',
         'config_file':str(config_path),'experimental_current_guard':False,
         'speed_scale':args.speed_scale,'motion_rates':rates,
         'fixed_observation_file':str(observation_file),'wrist_rgbd_recording':args.execute,
-        'teacher_fields':['teacher','target_tcp_pose','differential_ik'],
+        'teacher_fields':['teacher','target_tcp_pose','differential_ik','placement_verification'],
         'policy_observation_sources':['front_rgb','side_rgb','wrist_rgb','robot_proprioception'],
         'estimated_object_states_are_policy_inputs':False,
         'time_note':'Native camera timestamps and joint host timestamps are recorded; not hardware-synchronized exposures.'})
@@ -388,7 +389,8 @@ def run(args):
                         if now-health>.25:arm.check_health();health=time.monotonic()
                         if now-preview_heartbeat[0]>.5 and not prompt_pause.is_set():
                             raise RuntimeError('Operator preview heartbeat lost')
-                        if child.poll() is not None:raise RuntimeError('Wrist perception process exited')
+                        if child.poll() is not None and (machine is None or machine.needs_wrist_camera):
+                            raise RuntimeError('Wrist perception process exited')
                         wrist=wrist_record()
                         fixed=None;fixed_point=None
                         try:
@@ -438,9 +440,11 @@ def run(args):
                             capture_q=None if stamp is None else capture_joints(joint_history,stamp)
                             action=machine.update(time.monotonic(),q,raw[9],currents[-1],wrist,
                                 object_record=fixed if fixed_point is not None else None,
+                                front_record=fixed,
                                 tcp_velocity_m_s=tcp_velocity,wrist_capture_q=capture_q)
                             state['target_estimate_source']=machine.object_estimator.source
-                            if action is None or (wrist is None and not machine.needs_object):
+                            state['placement_verification']=machine.placement_evidence
+                            if action is None or (wrist is None and machine.needs_wrist_holding_feedback):
                                 servo.hold()
                                 geometry.check(q,**machine.flags())
                                 state.update(status=machine.stage+' / waiting for fresh target feedback',
@@ -542,6 +546,9 @@ def run(args):
             footer=np.full((90,640,3),24,np.uint8)
             labels=[state['status'],'SPACE: start | R: mark wrist tape | Q: retain hold',
                     'Moving/stationary tape | '+box['box_id']+' | existing torque must be ON']
+            if state['status']=='VERIFY_PLACE':
+                evidence=state.get('placement_verification') or {}
+                labels[2]=f"FRONT {evidence.get('verified_frames',0)}/{evidence.get('required_frames',5)}: {evidence.get('reason','waiting for placement')}"
             for i,label in enumerate(labels):cv2.putText(footer,label,(8,22+26*i),cv2.FONT_HERSHEY_SIMPLEX,.48,(0,255,255),1)
             cv2.imshow('Automatic demonstrator - wrist alignment',np.vstack([view,footer]))
             key=cv2.waitKey(10)&255
