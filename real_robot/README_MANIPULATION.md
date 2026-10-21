@@ -51,7 +51,7 @@ after release. Restart perception once after updating to publish this feedback.
 | Travel/reset at `--speed-scale 1.5` | `18°/s` joints, `120 mm/s` TCP |
 | Precision baseline/contact/first 50 mm of lift | `4.5°/s` joints, `30 mm/s` TCP |
 | Final box approach | `12°/s` joints, `60 mm/s` TCP |
-| Grasp orientation during approach/descent | `2×` rotation rates; wrist roll `18°/s` |
+| Grasp orientation during approach/descent | `1.5×` rotation rates; wrist roll `13.5°/s` |
 | Moving-target pursuit | Target velocity feedforward plus relative contact motion |
 | Current box | Right-side `box_2`, measured `90 × 165 mm`, rim `65 mm` |
 | Release TCP height | Approximately `185 mm` above the tabletop |
@@ -59,7 +59,7 @@ after release. Restart perception once after updating to publish this feedback.
 Following and manipulation share one pose/velocity servo. Edit `manipulation:`
 in [`config.yaml`](config.yaml) for phase rates and gains. The default speed
 scale is **1.5**; `--speed-scale 1` uses the baseline rates in that section.
-`approach_rotation_scale: 2.0` doubles orientation rates before closure;
+`approach_rotation_scale: 1.5` increases orientation rates by 1.5× before closure;
 translation, closure and transport rates keep their existing settings.
 Motor velocity/profile readbacks also apply. The precision rate bounds motion
 relative to the tape; pursuit uses the tracking speed setting and motor limits.
