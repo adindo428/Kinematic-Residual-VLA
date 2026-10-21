@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "files": {
+    "statistics.json": "47daca8eebcdc7e532e7a3265a455b6552c07bbf209ee7b3de05b5da09da1cc2",
+    "split.json": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "checkpoints.json": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+    "implementation-lock.json": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83",
+    "data-provenance.json": "a147eed2781b8e0516cfd4c1cdc1c69f40098d01e0ecbaba86d571dfe94c20eb",
+    "parquet_hashes.json": "6c4d642dbee8936ac9f2644a5a73b3b6e81ebcbebcd4bcaf6ab9adc8c0bcac73",
+    "video_hashes.json": "24dcff97988d7a732585a5f9cfa6a5a7ae95807e02dbe50c5fd742cec76beb56",
+    "subset-report.json": "1da4a6ef7bb8f54acc66df321372aa2b3f2a7356c6e132da4f67fb7d776e2e53",
+    "selected-episodes.json": "d82fd3337b501dee34a3ff3f8c00902f980a0432c50460a6080e48bf7253e1b7",
+    "recipes/pi05_baseline.json": "09e065b8a08f41b2e91dc19e664d29fc85340aa74ad60a8df6238bba583587dd",
+    "recipes/pi05_kr.json": "0a8014ae910d09df35638922edb301e912b4f5f8f05ba9346fa30f9a96051380",
+    "recipes/smolvla_baseline.json": "9a10eb0432397ac76d25ffd40beed29581bb9e2dd403e12f1c2e7fa07bc46763",
+    "recipes/smolvla_kr.json": "21ca164bb55986f1ed119b08b3be3a96b9ebbf45e7d90261c75b90aed424ea3b",
+    "recipes/vlash_baseline.json": "d8992c64cb558e51809f70f941ea288b0da4578f7cf78f31fc41369580924a56",
+    "recipes/vlash_kr.json": "40527f4f3659f6e876482edcff0d75761206b530ded76d5e60918f89d575d800"
+  },
+  "source_sha256": "0eb89ad59f173478a9d89baed2548e495e50b31bfd0fe84fc8e46e6abfbd290c"
+}

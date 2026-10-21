@@ -48,3 +48,12 @@ The paper is an unfinished draft: the introduction has a truncated sentence; lat
 ## Next steps
 
 Recover any surviving checkpoint or run artifacts from backups, Git remotes, W&B, or other storage; then document the actual environment, commands, datasets, and results here. Implementations and empirical claims should be added only after they can be verified.
+
+## 20k episode dataset and training
+
+The shared split contains 20,000 training episodes (9,000 pick, 9,000 place,
+2,000 long horizon), with the original validation and test partitions retained.
+
+- [Exact dataset split](experiments/main8_20k_10epochs/split.json)
+- [Main eight runs: checkpoint continuation for at least ten additional epochs](experiments/main8_20k_10epochs/README.md)
+- [Subset selection, preparation, and fresh initialization workflow](experiments/cross_vla_krfm_20k/README.md)
