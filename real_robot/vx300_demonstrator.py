@@ -23,7 +23,7 @@ def manipulation_motion(template, values=None, scale=1.5):
         'release': {'joint_rate_deg_s':8., 'tcp_rate_m_s':.040, 'angular_rate_deg_s':20.},
         'acceleration_m_s2':.30, 'position_kp':4., 'rotation_kp':4.,
         'release_height_tolerance_m':.010, 'release_lateral_speed_m_s':.015,
-        'carry_orientation':True, 'approach_rotation_scale':1.5}
+        'carry_orientation':True, 'approach_rotation_scale':1.0}
     values = {} if values is None else values
     if not isinstance(values,dict) or set(values)-set(defaults):
         raise ValueError('Unknown manipulation setting')

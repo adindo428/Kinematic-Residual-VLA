@@ -48,7 +48,7 @@ servo:
 # Baseline motion rates; automatic_pick_place multiplies these by --speed-scale.
 # Precision is used near contact, travel for clearance/transport/reset.
 manipulation:
-  approach_rotation_scale: 1.5
+  approach_rotation_scale: 1.0
   travel:
     joint_rate_deg_s: 12.0
     tcp_rate_m_s: 0.080
