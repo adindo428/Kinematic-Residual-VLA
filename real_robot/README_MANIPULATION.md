@@ -37,6 +37,10 @@ If the wrist mask selects the wrong object, press **R**, keep the tape still,
 draw a box around it and press **Enter**. Goals hold during selection and resume
 after a fresh mask arrives. Green shows the accepted mask; the cyan cross is
 the fixed-camera target projected into the wrist view.
+The magenta line marks the detected finger tips and their midpoint. Alignment
+centers the tape across this live gap; descent waits for centering while tracking
+continues. Clipped wrist masks do not supply new object motion, and pickup height
+stays anchored to the initial tabletop observation.
 
 Approach and wrist alignment run together; descent and closure keep following
 the tape. Lift and transport follow one curved path, with holding verification

@@ -2,6 +2,8 @@
 
 No devices are opened here. The executor owns the existing serial connection.
 """
+import json
+from pathlib import Path
 import numpy as np
 
 from .automatic_demonstrator import AutomaticDemonstrator, DemonstratorConfig, Observation, Stage
@@ -10,7 +12,7 @@ from .geometry import interpolate_pose
 from .front_placement import FrontPlacementVerifier
 from .pick_geometry import inside_polygon, rx
 from .vx300s_kinematics import forward
-from .wrist_alignment import corrections, line_error
+from .wrist_alignment import corrections, line_error, gripper_gap
 from .wrist_target import WristTargetEstimator, camera_from_tcp, feature_point, project
 
 
@@ -68,6 +70,12 @@ class WristGraspAligner:
         self.complete = False
         self.established = False
         self.axis_error = self.pixel_error = None
+        episode_path = Path(template['source_episode'])
+        episode = json.loads(episode_path.read_text())
+        with np.load(episode_path.parent.parent/episode['events']['pregrasp']['wrist_rgbd']['file']) as frame:
+            self.reference_gap = gripper_gap(frame['bgr'])
+        self.gap_error_px = None
+        self.centering_observed = False
 
     def update(self, now, q, wrist, approach, grasp, *, fraction=0., capture_camera=None,
                velocity=None, prediction_s=0., roll_rate_deg_s=9.):
@@ -77,7 +85,12 @@ class WristGraspAligner:
         reliable = feature.get('axis_reliable') and feature.get('depth_m') is not None
         # Near closure the tape may be clipped by the fingers. Keep the last
         # aligned orientation while fresh centroid/depth still localizes it.
-        self.complete = bool(self.established and feature.get('depth_m') is not None)
+        gap = wrist.get('gripper_gap')
+        self.centering_observed = gap is not None and self.reference_gap is not None and bool(feature)
+        self.gap_error_px = (float(np.dot(np.asarray(feature['center_px'])-gap['center_px'],gap['closing_axis_px']))
+                             if self.centering_observed else None)
+        centered = self.centering_observed and abs(self.gap_error_px)<8
+        self.complete = bool(self.established and feature.get('depth_m') is not None and centered)
         nominal = interpolate_pose(approach,grasp,fraction)
         planned = nominal.copy()
         planned[:3,3] += self.translation
@@ -101,10 +114,20 @@ class WristGraspAligner:
                                                         np.sin(feature['axis_rad'])/intr['fy'],0.])
             camera = camera_from_tcp(planned,self.template)
             projected = project(observed,direction,camera,intr)
-            if expected is not None and projected is not None:
+            if expected is not None and projected is not None and self.centering_observed:
+                # Express the taught depth-dependent target in the live jaw
+                # frame. The cross-gap target bisects the fingers; a camera
+                # mounting shift must not keep the old absolute image column.
+                ref_axis = np.asarray(self.reference_gap['closing_axis_px'])
+                live_axis = np.asarray(gap['closing_axis_px'])
+                ref_perp = np.array([-ref_axis[1],ref_axis[0]])
+                live_perp = np.array([-live_axis[1],live_axis[0]])
+                along = np.dot(np.asarray(expected['center_px'])-self.reference_gap['center_px'],ref_perp)
+                expected['center_px'] = (np.asarray(gap['center_px'])+live_perp*along*gap['span_px']/self.reference_gap['span_px']).tolist()
+                expected['axis_rad'] += np.arctan2(live_axis[1],live_axis[0])-np.arctan2(ref_axis[1],ref_axis[0])
                 self.axis_error = line_error(expected['axis_rad'],projected['axis_rad'])
                 self.pixel_error = float(np.linalg.norm(np.asarray(projected['center_px'])-expected['center_px']))
-                self.complete = abs(self.axis_error) < np.deg2rad(4) and self.pixel_error < 10
+                self.complete = abs(self.axis_error) < np.deg2rad(4) and self.pixel_error < 10 and centered
                 self.established = self.established or self.complete
                 if stamp != self.last_stamp:
                     elapsed = 1/15 if self.last_stamp is None else float(np.clip(stamp-self.last_stamp,0.,.15))
@@ -154,6 +177,7 @@ class TapeDemonstrator:
             rim_z_m=box['rim_z_base_m'], config=config)
         self.aligner = WristGraspAligner(template)
         self.object_estimator = WristTargetEstimator(template,self.object_adapter.reference)
+        self.object_estimator.height = float(object_point[2])
         self.object_state = None
         self.observation_ready = False
         self.open_raw = template['gripper']['open_raw']
@@ -274,6 +298,7 @@ class TapeDemonstrator:
             release_ready=drop_ready,
             tcp_velocity_m_s=np.zeros(3) if velocity is None else velocity,
             pregrasp_ready=bool(feature is not None and feature.get('depth_m') is not None
+                and self.aligner.centering_observed and abs(self.aligner.gap_error_px)<10
                 and (self.aligner.established or (self.aligner.axis_error is not None
                     and abs(self.aligner.axis_error)<np.deg2rad(12)
                     and self.aligner.pixel_error is not None and self.aligner.pixel_error<25))))

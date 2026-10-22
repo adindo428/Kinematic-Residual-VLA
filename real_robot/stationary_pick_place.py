@@ -443,6 +443,7 @@ def run(args):
                                 front_record=fixed,
                                 tcp_velocity_m_s=tcp_velocity,wrist_capture_q=capture_q)
                             state['target_estimate_source']=machine.object_estimator.source
+                            state['wrist_centering_error_px']=machine.aligner.gap_error_px
                             state['placement_verification']=machine.placement_evidence
                             if action is None or (wrist is None and machine.needs_wrist_holding_feedback):
                                 servo.hold()
@@ -526,6 +527,7 @@ def run(args):
                             if machine.done:
                                 state['success']=True;done.set()
                         state['wrist_feature']=None if wrist is None else wrist.get('feature')
+                        state['wrist_gripper_gap']=None if wrist is None else wrist.get('gripper_gap')
                         state['observation_refs']={'front_side_session':str(observation_file.parent),
                             'front_side_rgbd':None if fixed is None else fixed.get('rgbd'),
                             'wrist_rgbd':None if wrist is None else wrist.get('rgbd'),

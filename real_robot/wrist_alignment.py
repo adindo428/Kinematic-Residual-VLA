@@ -3,6 +3,33 @@ import cv2
 import numpy as np
 
 
+def gripper_gap(image, tape_mask=None):
+    """Locate the two dark finger silhouettes connected to the image bottom."""
+    hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
+    dark = (hsv[:,:,2]<85).astype(np.uint8)
+    dark[:image.shape[0]//2] = 0
+    blue = (hsv[:,:,0]>=90)&(hsv[:,:,0]<=140)&(hsv[:,:,1]>=100)
+    dark[blue] = 0
+    if tape_mask is not None:dark[tape_mask>0] = 0
+    dark = cv2.morphologyEx(dark,cv2.MORPH_OPEN,np.ones((3,3),np.uint8))
+    n,labels,stats,centers = cv2.connectedComponentsWithStats(dark)
+    fingers = []
+    for i in range(1,n):
+        x,y,w,h,area = stats[i]
+        if area<300 or y+h<image.shape[0]-2 or h<image.shape[0]*.15:continue
+        ys,xs = np.where(labels==i)
+        top = ys<=np.percentile(ys,2)
+        fingers.append((area,np.array([np.median(xs[top]),np.median(ys[top])],float),centers[i,0]))
+    left = [f for f in fingers if f[2]<image.shape[1]/2]
+    right = [f for f in fingers if f[2]>=image.shape[1]/2]
+    if not left or not right:return None
+    a,b = max(left,key=lambda f:f[0])[1],max(right,key=lambda f:f[0])[1]
+    span = float(np.linalg.norm(b-a))
+    if span<80:return None
+    return {'left_tip_px':a.tolist(),'right_tip_px':b.tolist(),
+            'center_px':((a+b)/2).tolist(),'closing_axis_px':((b-a)/span).tolist(),'span_px':span}
+
+
 def line_error(target, actual):
     """Undirected line angle error in radians, respecting parallel-jaw symmetry."""
     return float((target-actual+np.pi/2) % np.pi-np.pi/2)

@@ -10,7 +10,7 @@ import numpy as np
 from .camera import RGBDCamera
 from .efficienttam_tracker import EfficientTAMTracker
 from .rgbd_archive import RGBDArchiveWriter
-from .wrist_alignment import tape_feature
+from .wrist_alignment import tape_feature, gripper_gap
 from .wrist_detection import read_hint, tape_prompt, associated_mask
 
 
@@ -139,7 +139,9 @@ def main(argv=None):
                     archive.submit({'wrist': filename}, {'wrist': {'bgr': image, 'depth': depth}})
                     rgbd = {'file': filename, 'frame_index': index}
                     index += 1
+                gap = gripper_gap(image,mask)
                 record = {'schema': 'wrist_pick_observation_v1', 'running': True,
+                    'gripper_gap':gap,
                     'timing': timing, 'feature': feature, 'reason': reason,
                     'processing_state': 'tracking' if seeded else 'waiting_for_prompt',
                     'processing_s': time.monotonic()-processing_started,
@@ -147,6 +149,10 @@ def main(argv=None):
                     'rgbd': rgbd, 'tracker': info, 'host_published_monotonic_s': time.monotonic()}
                 log.write(json.dumps(record, allow_nan=False)+'\n')
                 view = image.copy()
+                if gap is not None:
+                    a,b = (tuple(np.rint(gap[k]).astype(int)) for k in ('left_tip_px','right_tip_px'))
+                    cv2.line(view,a,b,(255,0,255),2)
+                    cv2.drawMarker(view,tuple(np.rint(gap['center_px']).astype(int)),(255,0,255),cv2.MARKER_CROSS,16,2)
                 if mask is not None:
                     selected = mask>0
                     view[selected] = (.65*view[selected]+.35*np.array([0,255,0])).astype(np.uint8)

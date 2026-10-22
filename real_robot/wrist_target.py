@@ -55,6 +55,7 @@ class WristTargetEstimator:
     def __init__(self, template, reference_pose):
         self.template = template
         self.reference_pose = np.asarray(reference_pose,float).copy()
+        self.height = float(self.reference_pose[2,3])
         self.offset = None
         self.last_stamp = self.last_point = None
         self.velocity = np.zeros(3)
@@ -79,7 +80,7 @@ class WristTargetEstimator:
         feature = (wrist or {}).get('feature') or {}
         depth = feature.get('depth_m')
         valid = (q_at_capture is not None and isinstance(depth,(int,float))
-                 and np.isfinite(depth) and depth > 0)
+                 and np.isfinite(depth) and depth > 0 and not feature.get('clipped',False))
         stamp = ((wrist or {}).get('timing') or {}).get('host_arrival_monotonic_s')
         if valid:
             self.capture_pose = forward(q_at_capture)@np.asarray(self.template['T_gripper_wrist_camera'])
@@ -120,8 +121,7 @@ class WristTargetEstimator:
                 pose[:3,3] = point+self.offset
                 # Upright tape rolls on the same tabletop; mask changes must
                 # not create an artificial vertical interception velocity.
-                if self.last_state is not None:
-                    pose[2,3] = self.last_state.pose[2,3]
+                pose[2,3] = self.height
                 self.velocity[2] = 0.
                 self.last_state = ObjectState(pose,self.velocity,stamp,
                     semantics='fused_visible_surface_proxy')
@@ -131,7 +131,9 @@ class WristTargetEstimator:
             return self.last_state
         if fixed is not None:
             self.source = 'fixed_cameras'
-            self.last_state = fixed
-            return fixed
+            pose = fixed.pose.copy();pose[2,3] = self.height
+            velocity = fixed.velocity_m_s.copy();velocity[2] = 0.
+            self.last_state = ObjectState(pose,velocity,fixed.stamp_s,semantics=fixed.semantics)
+            return self.last_state
         self.source = 'unavailable'
         return None
