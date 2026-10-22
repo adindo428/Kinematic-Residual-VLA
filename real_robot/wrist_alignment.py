@@ -8,8 +8,8 @@ def gripper_gap(image, tape_mask=None):
     hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
     dark = (hsv[:,:,2]<85).astype(np.uint8)
     dark[:image.shape[0]//2] = 0
-    blue = (hsv[:,:,0]>=90)&(hsv[:,:,0]<=140)&(hsv[:,:,1]>=100)
-    dark[blue] = 0
+    # Dark fingers acquire blue hue under reflected illumination. Exclude the
+    # actual TAM object mask rather than removing every blue-looking pixel.
     if tape_mask is not None:dark[tape_mask>0] = 0
     dark = cv2.morphologyEx(dark,cv2.MORPH_OPEN,np.ones((3,3),np.uint8))
     n,labels,stats,centers = cv2.connectedComponentsWithStats(dark)

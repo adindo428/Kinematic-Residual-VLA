@@ -452,6 +452,8 @@ def run(args):
                                 tcp_velocity_m_s=tcp_velocity,wrist_capture_q=capture_q)
                             state['target_estimate_source']=machine.object_estimator.source
                             state['wrist_centering_error_px']=machine.aligner.gap_error_px
+                            state['wrist_alignment_axis_error_deg']=(None if machine.aligner.axis_error is None
+                                else float(np.rad2deg(machine.aligner.axis_error)))
                             state['placement_verification']=machine.placement_evidence
                             if action is None or (wrist is None and machine.needs_wrist_holding_feedback):
                                 servo.hold()
@@ -562,6 +564,13 @@ def run(args):
             if state['status']=='VERIFY_PLACE':
                 evidence=state.get('placement_verification') or {}
                 labels[2]=f"FRONT {evidence.get('verified_frames',0)}/{evidence.get('required_frames',5)}: {evidence.get('reason','waiting for placement')}"
+            elif state['status'] in ('APPROACH_ABOVE_OBJECT','APPROACH_OBJECT'):
+                gap_error=state.get('wrist_centering_error_px')
+                axis_error=state.get('wrist_alignment_axis_error_deg')
+                if state.get('wrist_gripper_gap') is None:
+                    labels[2]='WRIST: finger tips not detected; waiting to center'
+                elif gap_error is not None:
+                    labels[2]=f'WRIST: gap error {gap_error:.1f}px | axis '+('unavailable' if axis_error is None else f'{axis_error:.1f}deg')
             for i,label in enumerate(labels):cv2.putText(footer,label,(8,22+26*i),cv2.FONT_HERSHEY_SIMPLEX,.48,(0,255,255),1)
             cv2.imshow('Automatic demonstrator - wrist alignment',np.vstack([view,footer]))
             key=cv2.waitKey(10)&255

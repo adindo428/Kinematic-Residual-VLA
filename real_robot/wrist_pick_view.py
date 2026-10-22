@@ -140,6 +140,8 @@ def main(argv=None):
                     rgbd = {'file': filename, 'frame_index': index}
                     index += 1
                 gap = gripper_gap(image,mask)
+                if gap is None and feature is not None and reason is None:
+                    reason = 'Tape visible; gripper tips not detected for centering'
                 record = {'schema': 'wrist_pick_observation_v1', 'running': True,
                     'gripper_gap':gap,
                     'timing': timing, 'feature': feature, 'reason': reason,
