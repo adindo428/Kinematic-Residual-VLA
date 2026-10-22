@@ -23,7 +23,7 @@ from .tracking_config import load_config
 from .vx300_demonstrator import TapeDemonstrator, manipulation_motion
 from .task_space_servo import PoseVelocityServo
 from .vx300s_kinematics import forward
-from .wrist_alignment import blue_seed, line_error, tape_feature
+from .wrist_alignment import blue_seed, line_error, tape_feature, select_gripper_reference, fixed_gripper_gap
 from .wrist_feed import read_wrist_observation
 from .wrist_target import capture_joints
 
@@ -314,7 +314,9 @@ def run(args):
     child_env=os.environ.copy()
     # aloha_arm disables CUDA at import. Start the camera-only process
     # first so it retains the actual GPU visibility of the workstation session.
+    gripper_reference=resolve('scratch/real_robot/pick-place/wrist-gripper-reference.json')
     child=subprocess.Popen([sys.executable,'-u','-m','real_robot.wrist_pick_view',
+        '--gripper-reference',str(gripper_reference),
         '--template',str(resolve(args.template)),'--output',str(output/'wrist'),'--device',args.device,
         *(['--record-rgbd'] if args.execute else [])],
         cwd=PROJECT,env=child_env)
@@ -559,7 +561,7 @@ def run(args):
             reference=np.rint(template['wrist_reference']['center_px']).astype(int)
             cv2.drawMarker(view,tuple(reference),(0,255,255),cv2.MARKER_CROSS,20,2)
             footer=np.full((90,640,3),24,np.uint8)
-            labels=[state['status'],'SPACE: start | R: mark wrist tape | Q: retain hold',
+            labels=[state['status'],'SPACE: start | R: tape | G: gripper reference | Q: hold',
                     'Moving/stationary tape | '+box['box_id']+' | existing torque must be ON']
             if state['status']=='VERIFY_PLACE':
                 evidence=state.get('placement_verification') or {}
@@ -568,7 +570,7 @@ def run(args):
                 gap_error=state.get('wrist_centering_error_px')
                 axis_error=state.get('wrist_alignment_axis_error_deg')
                 if state.get('wrist_gripper_gap') is None:
-                    labels[2]='WRIST: finger tips not detected; waiting to center'
+                    labels[2]='WRIST: press G to save open finger reference'
                 elif gap_error is not None:
                     labels[2]=f'WRIST: gap error {gap_error:.1f}px | axis '+('unavailable' if axis_error is None else f'{axis_error:.1f}deg')
             for i,label in enumerate(labels):cv2.putText(footer,label,(8,22+26*i),cv2.FONT_HERSHEY_SIMPLEX,.48,(0,255,255),1)
@@ -578,7 +580,7 @@ def run(args):
             if key==32:
                 if args.execute:start.set()
                 else:print('Preview only. Restart with --execute to permit commands.',flush=True)
-            if key==ord('r'):
+            if key in (ord('r'),ord('g')):
                 prompt_pause.set()
                 try:
                     if not prompt_paused.wait(timeout=1.):
@@ -594,6 +596,18 @@ def run(args):
                             frame_file=candidate_file
                             selection_stamp=record['timing']['sensor_timestamp_s']
                     except (OSError,ValueError,KeyError):pass
+                    if key==ord('g'):
+                        tips=select_gripper_reference(snapshot)
+                        if tips is not None:
+                            reference={'schema':'wrist_gripper_reference_v1',
+                                'camera_serial':template['wrist_serial'],
+                                'image_size_wh':list(snapshot.shape[1::-1]),'tips_px':tips,
+                                'raw_gripper_at_capture':state.get('raw_gripper')}
+                            fixed_gripper_gap(reference,snapshot.shape,template['wrist_serial'])
+                            gripper_reference.parent.mkdir(parents=True,exist_ok=True)
+                            save_json(gripper_reference,reference)
+                            print('Saved fixed wrist gripper reference:',gripper_reference,flush=True)
+                        continue
                     title='Hold tape still; draw tape box, ENTER confirms, ESC cancels'
                     box_roi=cv2.selectROI(title,snapshot,fromCenter=False,showCrosshair=True)
                     cv2.destroyWindow(title)

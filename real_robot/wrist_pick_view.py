@@ -10,7 +10,7 @@ import numpy as np
 from .camera import RGBDCamera
 from .efficienttam_tracker import EfficientTAMTracker
 from .rgbd_archive import RGBDArchiveWriter
-from .wrist_alignment import tape_feature, gripper_gap
+from .wrist_alignment import tape_feature, fixed_gripper_gap
 from .wrist_detection import read_hint, tape_prompt, associated_mask
 
 
@@ -25,6 +25,7 @@ def main(argv=None):
     parser.add_argument('--output', required=True)
     parser.add_argument('--template', required=True)
     parser.add_argument('--device', default='cuda')
+    parser.add_argument('--gripper-reference', required=True)
     parser.add_argument('--seed-box', type=int, nargs=4)
     parser.add_argument('--record-rgbd', action='store_true', help='Archive every processed wrist RGB-D frame')
     args = parser.parse_args(argv)
@@ -139,9 +140,12 @@ def main(argv=None):
                     archive.submit({'wrist': filename}, {'wrist': {'bgr': image, 'depth': depth}})
                     rgbd = {'file': filename, 'frame_index': index}
                     index += 1
-                gap = gripper_gap(image,mask)
-                if gap is None and feature is not None and reason is None:
-                    reason = 'Tape visible; gripper tips not detected for centering'
+                gap = None
+                try:
+                    reference = json.loads(Path(args.gripper_reference).read_text())
+                    gap = fixed_gripper_gap(reference,image.shape,template['wrist_serial'])
+                except (OSError,ValueError,KeyError,TypeError) as exc:
+                    reason = 'Press G to save open gripper tips: '+str(exc)
                 record = {'schema': 'wrist_pick_observation_v1', 'running': True,
                     'gripper_gap':gap,
                     'timing': timing, 'feature': feature, 'reason': reason,

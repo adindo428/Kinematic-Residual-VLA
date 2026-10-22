@@ -30,6 +30,49 @@ def gripper_gap(image, tape_mask=None):
             'center_px':((a+b)/2).tolist(),'closing_axis_px':((b-a)/span).tolist(),'span_px':span}
 
 
+def fixed_gripper_gap(reference, image_shape, serial):
+    """Saved open-jaw geometry; scene content never changes the grasp center.
+
+    Fingers move horizontally when opening; alignment uses their fixed midpoint.
+    The displayed tips are the open reference, not estimated current positions.
+    """
+    if reference['camera_serial'] != serial or reference['image_size_wh'] != list(image_shape[1::-1]):
+        raise ValueError('Reference camera/resolution changed; press G')
+    tips = np.asarray(reference['tips_px'], dtype=float)
+    if (tips.shape != (2,2) or not np.isfinite(tips).all()
+            or tips[1,0] <= tips[0,0] or np.any(tips < 0)
+            or np.any(tips >= np.array(image_shape[1::-1]))):
+        raise ValueError('Invalid saved finger pixels; press G')
+    a,b = tips
+    return {'left_tip_px':a.tolist(), 'right_tip_px':b.tolist(),
+            'center_px':((a+b)/2).tolist(), 'closing_axis_px':[1.,0.],
+            'span_px':float(b[0]-a[0]), 'source':'saved_open_jaw_reference'}
+
+
+def select_gripper_reference(image):
+    """Explicit fingertip clicks, without silhouette/color detection."""
+    title = 'Open gripper: LEFT then RIGHT inner tip; ENTER saves; ESC cancels'
+    points = []
+    def click(event,x,y,flags,param):
+        if event == cv2.EVENT_LBUTTONDOWN:
+            if len(points) == 2: points.clear()
+            points.append([x,y])
+    cv2.namedWindow(title)
+    cv2.setMouseCallback(title,click)
+    try:
+        while True:
+            view = image.copy()
+            for point in points:
+                cv2.drawMarker(view,tuple(point),(255,0,255),cv2.MARKER_CROSS,16,2)
+            if len(points) == 2: cv2.line(view,tuple(points[0]),tuple(points[1]),(255,0,255),2)
+            cv2.imshow(title,view)
+            key = cv2.waitKey(20)&255
+            if key == 27 or cv2.getWindowProperty(title,cv2.WND_PROP_VISIBLE) < 1:return None
+            if key in (10,13) and len(points) == 2 and points[1][0] > points[0][0]:return points
+    finally:
+        cv2.destroyWindow(title)
+
+
 def line_error(target, actual):
     """Undirected line angle error in radians, respecting parallel-jaw symmetry."""
     return float((target-actual+np.pi/2) % np.pi-np.pi/2)

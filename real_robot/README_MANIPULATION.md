@@ -35,8 +35,13 @@ If the wrist mask selects the wrong object, press **R**, keep the tape still,
 draw a box around it and press **Enter**. Goals hold during selection and resume
 after a fresh mask arrives. Green shows the accepted mask; the cyan cross is
 the fixed-camera target projected into the wrist view.
-The magenta line marks the detected finger tips and their midpoint. Alignment
-centers the tape across this live gap; descent waits for centering while tracking
+With the gripper open, press **G**, click the left then right inner finger tip,
+and press **Enter**. Do this once before the first pick. The fixed pixel reference
+is saved in `scratch/real_robot/pick-place/wrist-gripper-reference.json` and reused
+across runs. Repeat G only if the wrist camera mount or image framing changes.
+The magenta line shows the saved open-jaw reference. Finger opening moves
+horizontally; alignment uses the fixed horizontal midpoint so background shadows
+cannot move the grasp center. Alignment centers the tape across this reference; descent waits for centering while tracking
 continues. Clipped wrist masks do not supply new object motion, and pickup height
 stays anchored to the initial tabletop observation.
 
