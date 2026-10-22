@@ -285,7 +285,12 @@ def run(args):
         raise ValueError('Source demonstration changed; prepare the template again')
     if not Path('/dev/ttyDXL_follower_right').exists():
         raise RuntimeError('Right follower serial device is not exposed in this runtime; run on the robot workstation')
-    observation_file, observation, point=latest_observation(template)
+    if getattr(args,'observation',None):
+        observation_file=resolve(args.observation)
+        observation=read_json(observation_file)
+        point=fresh_observation(observation,template['rig_sha256'],time.monotonic())
+    else:
+        observation_file, observation, point=latest_observation(template)
     if args.execute and not all((observation.get('rgbd') or {}).get('files', {}).get(role) for role in ('front','side')):
         raise ValueError('Automatic demonstration collection requires perception --record-rgbd')
     output=resolve(args.output) if args.output else PROJECT/'scratch/real_robot/picks'/datetime.now(timezone.utc).strftime('automatic-%Y%m%dT%H%M%SZ')
@@ -369,6 +374,9 @@ def run(args):
                         if dt<1/30:stop.wait(1/30-dt);continue
                         last=now
                         control_dt=min(dt,.10)
+                        managed=getattr(args,'managed_perception_process',None)
+                        if managed is not None and managed.poll() is not None:
+                            raise RuntimeError('Managed fixed-camera perception exited; inspect perception.log')
                         q,currents,raw=arm.telemetry()
                         feedback_stamp=time.monotonic()
                         joint_history.append((feedback_stamp,q.copy()))
@@ -629,9 +637,19 @@ def main(argv=None):
     p.add_argument('--speed-scale',type=float,default=1.5,
                    help='Multiply phase joint/TCP, angular and gripper motion rates (default: 1.5)')
     p.add_argument('--output');p.add_argument('--execute',action='store_true');p.add_argument('--device',default='cuda')
+    p.add_argument('--new-mask',action='store_true',help='Select and save fresh front/side tape masks')
+    p.add_argument('--mask-profile',default='scratch/real_robot/object_profiles/blue_tape',help='Shared collection/pick EfficientTAM mask library')
+    p.add_argument('--external-perception',action='store_true',help='Use an already running perception session')
+    p.add_argument('--observation',help='External perception observation.json (implies --external-perception)')
     args=parser.parse_args(argv)
     try:
-        result={'prepare':prepare,'register-box':register_box,'run':run}[args.command](args)
+        if args.command=='run' and not args.external_perception and not args.observation:
+            from .pick_perception import run_managed
+            result=run_managed(args,run)
+        else:
+            if args.command=='run' and args.new_mask:
+                parser.error('--new-mask belongs to managed perception; omit --external-perception/--observation')
+            result={'prepare':prepare,'register-box':register_box,'run':run}[args.command](args)
     except (ValueError,RuntimeError,OSError,KeyError) as exc:
         parser.exit(2,str(exc)+'\n')
     return result or 0

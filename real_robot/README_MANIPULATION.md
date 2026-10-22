@@ -5,21 +5,10 @@ Prepare the arm with the leader as shown in [Tracking](README_TRACKING.md#1-prep
 then stop teleoperation. Start with an empty gripper and TCP at least **100 mm**
 above the table. Keep the tape upright on its curved edge and the box fixed.
 
-## 1. Start perception — terminal 1
+## Run pick-and-place — one command
 
-```bash
-DISPLAY=:1 .venv/bin/python -u -m real_robot.tracking_session perception \
-  --config real_robot/config.yaml --record-rgbd
-```
-
-Select the tape in both fixed views and wait for stable fusion. Leave this
-terminal running. Continuous RGB-D recording is required for manipulation;
-stop perception when finished because it uses substantial disk space.
-
-## 2. Run one pick-and-place — terminal 2
-
-This command handles tracking and manipulation together. Stop any separate
-`tracking_session follow` process first; leave perception running.
+Stop separate perception, collection and `tracking_session follow` processes
+first so this command can own the cameras and follower.
 
 ```bash
 DISPLAY=:1 .venv/bin/python -u -m real_robot.automatic_pick_place run \
@@ -27,6 +16,15 @@ DISPLAY=:1 .venv/bin/python -u -m real_robot.automatic_pick_place run \
   --box-registration scratch/real_robot/pick-place/box2-rim-registration.json \
   --speed-scale 1.5 --execute
 ```
+
+The command starts EfficientTAM perception and the wrist camera, reuses saved
+front/side tape masks, and stops its perception processes when the attempt ends.
+The shared mask library is `scratch/real_robot/object_profiles/blue_tape`, the same
+layout used by data collection. If no saved prompts exist, select the tape once
+in each fixed view; the prompts are saved automatically. Existing teaching
+reference prompts are imported when available. Add **`--new-mask`** to redraw
+and replace the front/side prompts. Raw camera frames are recorded during the
+managed session, including startup, so finish/quit when done.
 
 Wait for the wrist preview, then press **SPACE** once to start pursuit and pick.
 The tape may already be moving, or you can start rolling it during approach.
@@ -48,7 +46,7 @@ running alongside motion. Then release/verify, retreat and return.
 Placement uses **five distinct front-camera frames after opening**: the tracked
 tape must be inside the fixed box footprint and below its rim. The arm begins
 its upward retreat while this check runs; wrist/side visibility is not required
-after release. Restart perception once after updating to publish this feedback.
+after release. Managed startup publishes this feedback automatically.
 
 | Current setting | Value |
 |---|---|
@@ -80,9 +78,22 @@ or software torque/current abort caps. Table/robot/box geometry checks remain.
 The moving-target implementation has not yet been validated on the arm.
 The camera/base, wrist and fingertip transforms remain provisional.
 
-## Teach additional grasps
+## External perception / teaching
 
-Keep perception running with `--record-rgbd`. Match the leader to the follower,
+For teaching or box registration, start camera-only perception separately:
+
+```bash
+DISPLAY=:1 .venv/bin/python -u -m real_robot.tracking_session perception \
+  --config real_robot/config.yaml --record-rgbd
+```
+
+To use that process for picking, add `--external-perception` to the run command.
+Optionally supply `--observation /path/to/observation.json`. The controller leaves
+external perception running when it exits; `--new-mask` uses managed startup.
+
+### Teach additional grasps
+
+Keep this external perception running with `--record-rgbd`. Match the leader to the follower,
 then start capture with a **new output directory**:
 
 ```bash
@@ -138,8 +149,8 @@ Use the new template/registration paths in `run`. If the floor is too occluded,
 
 ## Common issues
 
-- **Requires perception `--record-rgbd`:** stop perception and restart with the
-  flag from step 1; leave it running before starting manipulation.
+- **Camera busy:** stop the other perception/collection process before managed
+  startup. For external perception, use `--record-rgbd` and `--external-perception`.
 - **Blank wrist:** wait for its preview before SPACE. A camera detected over
   USB but delivering no frames may need its wrist USB connection restarted.
 - **Not saved before N:** hold the leader, follower and tape still; check valid
@@ -147,5 +158,7 @@ Use the new template/registration paths in `run`. If the floor is too occluded,
 - **Stopped attempt:** inspect the printed reason, reset manually to the empty
   held starting pose, then start a new run.
 
-Run logs are under `scratch/real_robot/picks/automatic-*`. Demonstrations,
+Managed sessions are under `scratch/real_robot/pick-place/sessions/<timestamp>/`:
+`perception/`, `perception.log`, and `pick/`. External-perception runs use
+`scratch/real_robot/picks/automatic-*`. Demonstrations,
 calibrations, templates and box registrations remain local; GitHub contains code.
