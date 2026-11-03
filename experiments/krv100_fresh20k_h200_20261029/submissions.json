@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029/scripts/setup.sbatch",
+    "script_sha256": "d3932e0acfabff77c9fe27621afbb40073875fdfdb62d0f3a8d91e11e5af96f6",
+    "dependency": null,
+    "at": "2026-10-29T23:30:48.695251+00:00",
+    "job_id": "18663625"
+  },
+  "profile": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029/scripts/profile.sbatch",
+    "script_sha256": "eea45965cb16313e2b9c4483b6abaaff2e5caedbd242b754ca40bc5531f73492",
+    "dependency": "afterok:18663625",
+    "at": "2026-10-29T23:30:50.905816+00:00",
+    "job_id": "18663626"
+  },
+  "train": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029/scripts/train.sbatch",
+    "script_sha256": "6301c5ffce103b0da826c8103abb65fe89e267e52fad9ed63e9dd84c442e8cdd",
+    "dependency": "afterok:18663626",
+    "at": "2026-10-29T23:30:53.115640+00:00",
+    "job_id": "18663627"
+  }
+}

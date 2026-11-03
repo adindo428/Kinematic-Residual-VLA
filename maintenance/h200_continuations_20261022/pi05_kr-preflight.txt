@@ -1,0 +1,4 @@
+sbatch: Requested Features: gpu_h200
+sbatch: Partition: work1
+sbatch: Submit checks complete
+sbatch: Job 17931256 to start at 2026-10-22T17:31:15 a using 32 processors on nodes nodeai10 in partition work1

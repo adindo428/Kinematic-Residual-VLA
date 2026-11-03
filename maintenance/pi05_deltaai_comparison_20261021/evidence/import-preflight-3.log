@@ -1,0 +1,7 @@
+/sw/user/python/miniforge3-pytorch-2.12.0/lib/python3.12/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.7.0) or chardet (6.0.0.post1)/charset_normalizer (3.4.1) doesn't match a supported version!
+  warnings.warn(
+WARNING:torchao:Skipping import of cpp extensions due to incompatible torch version 2.12.0+cu130 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+/sw/user/python/miniforge3-pytorch-2.12.0/lib/python3.12/site-packages/torch/cuda/__init__.py:1074: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+4.53.3 /work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/env/lib/python3.12/site-packages/transformers/__init__.py 2.12.0+cu130
+Pinned pi05 imports passed

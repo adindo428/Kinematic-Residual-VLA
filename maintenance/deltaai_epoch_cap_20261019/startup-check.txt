@@ -1,0 +1,2 @@
+{"job": "3381947", "activation_inherits_stop_cap": 10, "original_scheduler_horizon": 100, "original_checkpoint_identity": true, "gpu_training_executed": false}
+{"job": "3382533", "activation_inherits_stop_cap": 10, "original_scheduler_horizon": 100, "original_checkpoint_identity": true, "gpu_training_executed": false}

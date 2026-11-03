@@ -1,0 +1,530 @@
+{
+  "checked_at": "2026-10-29T23:32:51.565614+00:00",
+  "runs": [
+    {
+      "model": "pi05_baseline",
+      "source": "current-stage validation receipts",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 94608,
+          "mse": 0.47546979784965515
+        },
+        {
+          "epoch": 2,
+          "step": 169819,
+          "mse": 0.4524466395378113
+        },
+        {
+          "epoch": 3,
+          "step": 245030,
+          "mse": 0.4485120177268982
+        },
+        {
+          "epoch": 4,
+          "step": 320241,
+          "mse": 0.4340569078922272
+        },
+        {
+          "epoch": 5,
+          "step": 395452,
+          "mse": 0.386758953332901
+        }
+      ],
+      "best": {
+        "epoch": 5,
+        "step": 395452,
+        "mse": 0.386758953332901
+      },
+      "latest": {
+        "epoch": 5,
+        "step": 395452,
+        "mse": 0.386758953332901
+      },
+      "last_vs_best_percent": 0.0,
+      "has_separate_best_checkpoint_here": false
+    },
+    {
+      "model": "pi05_kr",
+      "source": "current-stage validation receipts",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 135215,
+          "mse": 0.49573078751564026
+        },
+        {
+          "epoch": 2,
+          "step": 210426,
+          "mse": 0.41136282682418823
+        },
+        {
+          "epoch": 3,
+          "step": 285637,
+          "mse": 0.3568862974643707
+        }
+      ],
+      "best": {
+        "epoch": 3,
+        "step": 285637,
+        "mse": 0.3568862974643707
+      },
+      "latest": {
+        "epoch": 3,
+        "step": 285637,
+        "mse": 0.3568862974643707
+      },
+      "last_vs_best_percent": 0.0,
+      "has_separate_best_checkpoint_here": false
+    },
+    {
+      "model": "vlash_baseline",
+      "source": "current-stage validation receipts",
+      "values": [
+        {
+          "epoch": 2,
+          "step": 180422,
+          "mse": 0.8483843207359314
+        },
+        {
+          "epoch": 3,
+          "step": 255633,
+          "mse": 0.8498834371566772
+        },
+        {
+          "epoch": 4,
+          "step": 330844,
+          "mse": 0.845055341720581
+        }
+      ],
+      "best": {
+        "epoch": 4,
+        "step": 330844,
+        "mse": 0.845055341720581
+      },
+      "latest": {
+        "epoch": 4,
+        "step": 330844,
+        "mse": 0.845055341720581
+      },
+      "last_vs_best_percent": 0.0,
+      "has_separate_best_checkpoint_here": false
+    },
+    {
+      "model": "smolvla_baseline",
+      "source": "current-stage validation receipts",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 57605,
+          "mse": 0.7750489115715027
+        },
+        {
+          "epoch": 2,
+          "step": 95210,
+          "mse": 0.7693405747413635
+        },
+        {
+          "epoch": 3,
+          "step": 132815,
+          "mse": 0.7643481492996216
+        },
+        {
+          "epoch": 4,
+          "step": 170420,
+          "mse": 0.7703079581260681
+        },
+        {
+          "epoch": 5,
+          "step": 208025,
+          "mse": 0.759470522403717
+        },
+        {
+          "epoch": 6,
+          "step": 245630,
+          "mse": 0.7585327625274658
+        },
+        {
+          "epoch": 7,
+          "step": 283235,
+          "mse": 0.7596623301506042
+        },
+        {
+          "epoch": 8,
+          "step": 320840,
+          "mse": 0.7578212022781372
+        },
+        {
+          "epoch": 9,
+          "step": 358445,
+          "mse": 0.7532870769500732
+        },
+        {
+          "epoch": 10,
+          "step": 396050,
+          "mse": 0.751673698425293
+        }
+      ],
+      "best": {
+        "epoch": 10,
+        "step": 396050,
+        "mse": 0.751673698425293
+      },
+      "latest": {
+        "epoch": 10,
+        "step": 396050,
+        "mse": 0.751673698425293
+      },
+      "last_vs_best_percent": 0.0,
+      "has_separate_best_checkpoint_here": false
+    },
+    {
+      "model": "smolvla_kr",
+      "source": "current-stage validation receipts",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 57605,
+          "mse": 0.7860457897186279
+        },
+        {
+          "epoch": 2,
+          "step": 95210,
+          "mse": 0.7758922576904297
+        },
+        {
+          "epoch": 3,
+          "step": 132815,
+          "mse": 0.7788101434707642
+        },
+        {
+          "epoch": 4,
+          "step": 170420,
+          "mse": 0.7695586085319519
+        },
+        {
+          "epoch": 5,
+          "step": 208025,
+          "mse": 0.7803536057472229
+        },
+        {
+          "epoch": 6,
+          "step": 245630,
+          "mse": 0.775177001953125
+        },
+        {
+          "epoch": 7,
+          "step": 283235,
+          "mse": 0.7736393809318542
+        },
+        {
+          "epoch": 8,
+          "step": 320840,
+          "mse": 0.7716137766838074
+        },
+        {
+          "epoch": 9,
+          "step": 358445,
+          "mse": 0.7681863307952881
+        },
+        {
+          "epoch": 10,
+          "step": 396050,
+          "mse": 0.7740855813026428
+        }
+      ],
+      "best": {
+        "epoch": 9,
+        "step": 358445,
+        "mse": 0.7681863307952881
+      },
+      "latest": {
+        "epoch": 10,
+        "step": 396050,
+        "mse": 0.7740855813026428
+      },
+      "last_vs_best_percent": 0.7679452589643754,
+      "has_separate_best_checkpoint_here": false
+    },
+    {
+      "model": "domv100",
+      "source": "current-stage validation receipts",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 225305,
+          "mse": 0.20782531797885895
+        },
+        {
+          "epoch": 2,
+          "step": 232142,
+          "mse": 0.18389172852039337
+        },
+        {
+          "epoch": 3,
+          "step": 238979,
+          "mse": 0.2266303449869156
+        },
+        {
+          "epoch": 4,
+          "step": 245816,
+          "mse": 0.2007741630077362
+        },
+        {
+          "epoch": 5,
+          "step": 252653,
+          "mse": 0.20511570572853088
+        },
+        {
+          "epoch": 6,
+          "step": 259490,
+          "mse": 0.197986900806427
+        },
+        {
+          "epoch": 7,
+          "step": 266327,
+          "mse": 0.19454941153526306
+        },
+        {
+          "epoch": 8,
+          "step": 273164,
+          "mse": 0.2185283750295639
+        },
+        {
+          "epoch": 9,
+          "step": 280001,
+          "mse": 0.21342259645462036
+        },
+        {
+          "epoch": 10,
+          "step": 286838,
+          "mse": 0.1922149807214737
+        }
+      ],
+      "best": {
+        "epoch": 2,
+        "step": 232142,
+        "mse": 0.18389172852039337
+      },
+      "latest": {
+        "epoch": 10,
+        "step": 286838,
+        "mse": 0.1922149807214737
+      },
+      "last_vs_best_percent": 4.52616997406563,
+      "has_separate_best_checkpoint_here": false
+    },
+    {
+      "model": "workstation_kr_full",
+      "source": "W&B unsampled validation scan",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 65569,
+          "mse": 0.1891906635047237
+        },
+        {
+          "epoch": 2,
+          "step": 131138,
+          "mse": 0.18003071979319601
+        },
+        {
+          "epoch": 3,
+          "step": 137976,
+          "mse": 0.11930174884983792
+        },
+        {
+          "epoch": 4,
+          "step": 144814,
+          "mse": 0.12031804761929987
+        },
+        {
+          "epoch": 5,
+          "step": 151652,
+          "mse": 0.12134158880061609
+        },
+        {
+          "epoch": 6,
+          "step": 158490,
+          "mse": 0.12333565327486164
+        },
+        {
+          "epoch": 7,
+          "step": 165328,
+          "mse": 0.1250874330652212
+        },
+        {
+          "epoch": 8,
+          "step": 172166,
+          "mse": 0.12619826012186589
+        }
+      ],
+      "best": {
+        "epoch": 3,
+        "step": 137976,
+        "mse": 0.11930174884983792
+      },
+      "latest": {
+        "epoch": 8,
+        "step": 172166,
+        "mse": 0.12619826012186589
+      },
+      "caution": "Historical KR changes from full data to 20k at epoch3; do not compare different validation protocols."
+    },
+    {
+      "model": "workstation_dom_fresh20k",
+      "source": "W&B unsampled validation scan",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 6838,
+          "mse": 0.19418226952635603
+        },
+        {
+          "epoch": 2,
+          "step": 13676,
+          "mse": 0.19339717442982704
+        },
+        {
+          "epoch": 3,
+          "step": 20514,
+          "mse": 0.19213743263566677
+        },
+        {
+          "epoch": 4,
+          "step": 27352,
+          "mse": 0.18601176634952332
+        },
+        {
+          "epoch": 5,
+          "step": 34190,
+          "mse": 0.18348983280575631
+        },
+        {
+          "epoch": 6,
+          "step": 41028,
+          "mse": 0.1826794328646184
+        },
+        {
+          "epoch": 7,
+          "step": 47866,
+          "mse": 0.1802983953415568
+        },
+        {
+          "epoch": 8,
+          "step": 54704,
+          "mse": 0.18003719865112916
+        }
+      ],
+      "best": {
+        "epoch": 8,
+        "step": 54704,
+        "mse": 0.18003719865112916
+      },
+      "latest": {
+        "epoch": 8,
+        "step": 54704,
+        "mse": 0.18003719865112916
+      },
+      "caution": ""
+    },
+    {
+      "model": "domv100_parent_history",
+      "source": "W&B unsampled validation scan",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 63552,
+          "mse": 0.17569225412964573
+        },
+        {
+          "epoch": 2,
+          "step": 127104,
+          "mse": 0.16896636872746038
+        },
+        {
+          "epoch": 3,
+          "step": 190656,
+          "mse": 0.1654408333767772
+        }
+      ],
+      "best": {
+        "epoch": 3,
+        "step": 190656,
+        "mse": 0.1654408333767772
+      },
+      "latest": {
+        "epoch": 3,
+        "step": 190656,
+        "mse": 0.1654408333767772
+      },
+      "caution": "Parent-stage history is separate from continuation validation receipts."
+    },
+    {
+      "model": "vlash_kr",
+      "source": "original run directory retained epoch receipts",
+      "values": [
+        {
+          "epoch": 1,
+          "step": 105211,
+          "mse": 0.8845261931419373
+        },
+        {
+          "epoch": 2,
+          "step": 180422,
+          "mse": 0.8946900367736816
+        },
+        {
+          "epoch": 3,
+          "step": 255633,
+          "mse": 0.90167635679245
+        },
+        {
+          "epoch": 4,
+          "step": 330844,
+          "mse": 0.90402752161026
+        },
+        {
+          "epoch": 5,
+          "step": 406055,
+          "mse": 0.906947672367096
+        },
+        {
+          "epoch": 6,
+          "step": 481266,
+          "mse": 0.9120452404022217
+        },
+        {
+          "epoch": 7,
+          "step": 556477,
+          "mse": 0.906684935092926
+        },
+        {
+          "epoch": 8,
+          "step": 631688,
+          "mse": 0.8977129459381104
+        },
+        {
+          "epoch": 9,
+          "step": 706899,
+          "mse": 0.9220216274261475
+        }
+      ],
+      "best": {
+        "epoch": 1,
+        "step": 105211,
+        "mse": 0.8845261931419373
+      },
+      "latest": {
+        "epoch": 9,
+        "step": 706899,
+        "mse": 0.9220216274261475
+      }
+    }
+  ],
+  "findings": {
+    "recent_trainer": "Cross-backbone/main8 logs training loss, saves validation JSON but overwrites latest.pt without best.pt retention.",
+    "stopping": "Current main8 ten-epoch fixed budget; earlier DynamicVLA stopping rules do not apply automatically.",
+    "ranking": "No offline-MSE finding establishes closed-loop task success."
+  }
+}

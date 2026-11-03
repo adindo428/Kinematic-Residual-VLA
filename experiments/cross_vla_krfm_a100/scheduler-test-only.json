@@ -1,0 +1,74 @@
+[
+  {
+    "script": "pi05_baseline_profile.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685438 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "pi05_baseline_train.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685439 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "pi05_kr_profile.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685440 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "pi05_kr_train.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685441 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "smolvla_baseline_profile.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685442 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "smolvla_baseline_train.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685443 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "smolvla_kr_profile.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685444 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "smolvla_kr_train.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685445 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "vlash_baseline_profile.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685446 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "vlash_baseline_train.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685447 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "vlash_kr_profile.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685448 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "vlash_kr_train.sbatch",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17685449 to start at 2026-10-19T18:57:22 a using 32 processors on nodes node0373 in partition work1\n"
+  }
+]

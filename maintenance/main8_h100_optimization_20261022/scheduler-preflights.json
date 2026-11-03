@@ -1,0 +1,10 @@
+{
+  "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/scripts/prepare.sbatch": {
+    "script_sha256": "9c1bc7207f46acb060c537e6fd06d6c9341a42289fa9e708a3ae03996e213d0c",
+    "scheduler_result": "sbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17913475 to start at 2026-10-22T10:08:46 a using 8 processors on nodes node0170 in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/scripts/profile.sbatch": {
+    "script_sha256": "07ae2b8d96fe026899e44ec13a571f0d7153046b56b76517fa3528eae0f5efd0",
+    "scheduler_result": "sbatch: Requested Features: gpu_h100\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17913476 to start at 2026-10-22T10:08:47 a using 32 processors on nodes nodeai03 in partition work1\n"
+  }
+}

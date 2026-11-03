@@ -1,0 +1,38 @@
+{
+  "batch": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-scale-domv-20261014/production.sbatch",
+  "batch_sha256": "42b60d396a8589bfcb98cea50cd247e5bb7e311ba47a37ae96f984998be73541",
+  "dependency": null,
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-scale-ddp-20261014",
+  "job_id": "3381947",
+  "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+  "old_held_job_cancelled": true,
+  "profile_job": "3381859",
+  "recipe": "0088404fa9bfb7c61959d91fa50da752b783974c7e8db7bb788422f3a751c64a",
+  "returncode": 0,
+  "selected_runtime": {
+    "distributed_profile_fingerprint": "9d61bf2f46c17aaacacc41633dfb2c543f8ffccc66efcf7e66a85682e766c27a",
+    "fingerprint": "14b8c1ecbae9d5d34f6628098af885294e6d734acda01bcdbb59fef2b80bee0b",
+    "global_effective_batch": 352,
+    "gpus_per_node": 4,
+    "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+    "measurement_note": "200-update check;20warmup/180measured; timing includes checkpoints25..175, excludes startup/final validation/reload",
+    "node_count": 2,
+    "runtime": {
+      "fused": false,
+      "microbatch": 44,
+      "pin_memory": false,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "frames",
+      "workers": 4
+    },
+    "samples_per_second": 373.45165815190313,
+    "single_gpu_profile_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+    "training_epoch_hours_excluding_validation_and_io": 16.63922113232303,
+    "world_size": 8
+  },
+  "stage": "submitted",
+  "stderr": "",
+  "stdout": "3381947\n",
+  "superseded_held_job": "3381061"
+}

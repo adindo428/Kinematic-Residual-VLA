@@ -1,0 +1,121 @@
+{
+  "queue": "17720948|PENDING|(Priority)\n17719993|RUNNING|node0376\n",
+  "accounting": "17716903|COMPLETED|00:23:43|0:0\n17716904|COMPLETED|00:23:09|0:0\n17719992|COMPLETED|00:00:18|0:0\n17719993|RUNNING|00:04:44|0:0\n17720947|COMPLETED|00:00:19|0:0\n17720948|PENDING|00:00:00|0:0\n",
+  "release_files": {
+    "pi05_baseline-config.json": "{\n  \"root\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020\",\n  \"recipe\": \"pi05_baseline\",\n  \"gpu_profile_job_id\": \"17716903\",\n  \"profile_sha256\": \"60b12f7bc07b44dcd11b07190249c9ce5b93962557539009848539bbdbb2a269\",\n  \"source_sha256\": \"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\",\n  \"recipe_fingerprint\": \"b9612a99b64c7a17f281b77a9662865f19e569e3540f9eb6554c54617a831746\",\n  \"receipt\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_baseline-verified.json\"\n}\n",
+    "pi05_baseline-expired-dependency.json": "{\n  \"command\": [\n    \"sbatch\",\n    \"--test-only\",\n    \"--dependency=afterok:17716903\",\n    \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_baseline_train.sbatch\"\n  ],\n  \"returncode\": 1,\n  \"stdout\": \"\",\n  \"stderr\": \"sbatch: error: Requested Features: gpu_a100_80gb\\nsbatch: error: Partition: work1\\nsbatch: error: Submit checks complete\\nallocation failure: Job dependency problem\\n\",\n  \"checked_at\": \"2026-10-20T09:10:24.726979+00:00\"\n}\n",
+    "pi05_baseline-preflight.json": "{\n  \"returncode\": 0,\n  \"stdout\": \"{\\\"approved\\\": true, \\\"gpu_profile_job_id\\\": \\\"17716903\\\", \\\"gpu_profile_state\\\": \\\"COMPLETED\\\", \\\"gpu_profile_sha256\\\": \\\"60b12f7bc07b44dcd11b07190249c9ce5b93962557539009848539bbdbb2a269\\\", \\\"identity\\\": \\\"ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49\\\", \\\"source_sha256\\\": \\\"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\\\", \\\"recipe\\\": \\\"pi05_baseline\\\", \\\"actual_gpu_readiness_revalidated\\\": true, \\\"new_gpu_test_performed\\\": false, \\\"job_id\\\": null, \\\"retention_recovery\\\": true}\\n\",\n  \"stderr\": \"\"\n}\n",
+    "pi05_baseline-verified.json": "{\n  \"approved\": true,\n  \"gpu_profile_job_id\": \"17716903\",\n  \"gpu_profile_state\": \"COMPLETED\",\n  \"gpu_profile_sha256\": \"60b12f7bc07b44dcd11b07190249c9ce5b93962557539009848539bbdbb2a269\",\n  \"identity\": \"ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49\",\n  \"source_sha256\": \"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\",\n  \"recipe\": \"pi05_baseline\",\n  \"actual_gpu_readiness_revalidated\": true,\n  \"new_gpu_test_performed\": false,\n  \"job_id\": \"17719992\",\n  \"retention_recovery\": true\n}",
+    "pi05_baseline.sbatch": "#!/bin/bash -l\n#SBATCH --job-name=pi05-ready-release\n#SBATCH --account=cuuser_yue6_vae_verification\n#SBATCH --partition=work1\n#SBATCH --nodes=1\n#SBATCH --ntasks=1\n#SBATCH --cpus-per-task=2\n#SBATCH --mem=16G\n#SBATCH --time=00:12:00\n#SBATCH --output=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/logs/pi05_baseline-%j.out\n#SBATCH --error=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/logs/pi05_baseline-%j.err\nset -euo pipefail\nexport OMP_NUM_THREADS=2\nexport LD_LIBRARY_PATH=/home/aparame/.conda/envs/dynamicvla/lib:${LD_LIBRARY_PATH:-}\n/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/env/bin/python /scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/verify_ready.py /scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_baseline-config.json\n",
+    "pi05_kr-config.json": "{\n  \"root\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020\",\n  \"recipe\": \"pi05_kr\",\n  \"gpu_profile_job_id\": \"17716904\",\n  \"profile_sha256\": \"a08115f3676fb773d7d0597ac19aeb205ff386d876a436b4eb1fad8022e376d5\",\n  \"source_sha256\": \"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\",\n  \"recipe_fingerprint\": \"2845584d495e6a91af59c215fe3c807e4a4b055aac10e7cda1cfa2f90bd46c5a\",\n  \"receipt\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_kr-verified.json\"\n}\n",
+    "pi05_kr-expired-dependency.json": "{\n  \"command\": [\n    \"sbatch\",\n    \"--test-only\",\n    \"--dependency=afterok:17716904\",\n    \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_kr_train.sbatch\"\n  ],\n  \"returncode\": 1,\n  \"stdout\": \"\",\n  \"stderr\": \"sbatch: error: Requested Features: gpu_a100_80gb\\nsbatch: error: Partition: work1\\nsbatch: error: Submit checks complete\\nallocation failure: Job dependency problem\\n\",\n  \"checked_at\": \"2026-10-20T09:23:37.824431+00:00\"\n}\n",
+    "pi05_kr-preflight.json": "{\n  \"returncode\": 0,\n  \"stdout\": \"{\\\"approved\\\": true, \\\"gpu_profile_job_id\\\": \\\"17716904\\\", \\\"gpu_profile_state\\\": \\\"COMPLETED\\\", \\\"gpu_profile_sha256\\\": \\\"a08115f3676fb773d7d0597ac19aeb205ff386d876a436b4eb1fad8022e376d5\\\", \\\"identity\\\": \\\"9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972\\\", \\\"source_sha256\\\": \\\"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\\\", \\\"recipe\\\": \\\"pi05_kr\\\", \\\"actual_gpu_readiness_revalidated\\\": true, \\\"new_gpu_test_performed\\\": false, \\\"job_id\\\": null, \\\"retention_recovery\\\": true}\\n\",\n  \"stderr\": \"\"\n}\n",
+    "pi05_kr-verified.json": "{\n  \"approved\": true,\n  \"gpu_profile_job_id\": \"17716904\",\n  \"gpu_profile_state\": \"COMPLETED\",\n  \"gpu_profile_sha256\": \"a08115f3676fb773d7d0597ac19aeb205ff386d876a436b4eb1fad8022e376d5\",\n  \"identity\": \"9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972\",\n  \"source_sha256\": \"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\",\n  \"recipe\": \"pi05_kr\",\n  \"actual_gpu_readiness_revalidated\": true,\n  \"new_gpu_test_performed\": false,\n  \"job_id\": \"17720947\",\n  \"retention_recovery\": true\n}",
+    "pi05_kr.sbatch": "#!/bin/bash -l\n#SBATCH --job-name=pi05-ready-release\n#SBATCH --account=cuuser_yue6_vae_verification\n#SBATCH --partition=work1\n#SBATCH --nodes=1\n#SBATCH --ntasks=1\n#SBATCH --cpus-per-task=2\n#SBATCH --mem=16G\n#SBATCH --time=00:12:00\n#SBATCH --output=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/logs/pi05_kr-%j.out\n#SBATCH --error=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/logs/pi05_kr-%j.err\nset -euo pipefail\nexport OMP_NUM_THREADS=2\nexport LD_LIBRARY_PATH=/home/aparame/.conda/envs/dynamicvla/lib:${LD_LIBRARY_PATH:-}\n/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/env/bin/python /scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/verify_ready.py /scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_kr-config.json\n",
+    "submissions.json": "{\n  \"pi05_baseline\": {\n    \"job_id\": \"17719992\",\n    \"gpu_profile_job_id\": \"17716903\",\n    \"config\": {\n      \"root\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020\",\n      \"recipe\": \"pi05_baseline\",\n      \"gpu_profile_job_id\": \"17716903\",\n      \"profile_sha256\": \"60b12f7bc07b44dcd11b07190249c9ce5b93962557539009848539bbdbb2a269\",\n      \"source_sha256\": \"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\",\n      \"recipe_fingerprint\": \"b9612a99b64c7a17f281b77a9662865f19e569e3540f9eb6554c54617a831746\",\n      \"receipt\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_baseline-verified.json\"\n    },\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_baseline.sbatch\",\n    \"production_job_id\": \"17719993\"\n  },\n  \"pi05_kr\": {\n    \"job_id\": \"17720947\",\n    \"gpu_profile_job_id\": \"17716904\",\n    \"config\": {\n      \"root\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020\",\n      \"recipe\": \"pi05_kr\",\n      \"gpu_profile_job_id\": \"17716904\",\n      \"profile_sha256\": \"a08115f3676fb773d7d0597ac19aeb205ff386d876a436b4eb1fad8022e376d5\",\n      \"source_sha256\": \"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\",\n      \"recipe_fingerprint\": \"2845584d495e6a91af59c215fe3c807e4a4b055aac10e7cda1cfa2f90bd46c5a\",\n      \"receipt\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_kr-verified.json\"\n    },\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_kr.sbatch\",\n    \"production_job_id\": \"17720948\"\n  }\n}\n",
+    "verify_ready.py": "\"\"\"Revalidate an already completed actual-GPU readiness receipt for Slurm retention.\"\"\"\nimport sys,json,hashlib,subprocess,os\nfrom pathlib import Path\nimport torch\nconfig=json.loads(Path(sys.argv[1]).read_text());r=Path(config['root']);name=config['recipe']\ndef sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()\ndef fingerprint(v):return hashlib.sha256(json.dumps(v,sort_keys=True).encode()).hexdigest()\np=r/'profiles'/f'{name}.json';assert sha(p)==config['profile_sha256'],'GPU receipt changed'\nreceipt=json.loads(p.read_text());selection=json.loads((r/'tuning'/name/'selection.json').read_text());manifest=json.loads((r/'source-manifest.json').read_text());prepared=json.loads((r/'prepared.json').read_text());recipe=json.loads((r/'recipes'/f'{name}.json').read_text())\nsource={p.name:sha(p) for p in r.glob('*.py')};assert source==manifest['files']==receipt['source'];assert fingerprint(source)==manifest['source_sha256']==config['source_sha256']\nassert prepared['complete']\nfor key,namefile in [('statistics_sha256','statistics.json'),('split_sha256','split.json'),('checkpoints_sha256','checkpoints.json'),('implementation_sha256','implementation-lock.json')]:assert sha(r/namefile)==prepared[key]\nlock=json.loads((r/'implementation-lock.json').read_text())\nfor filename,expected in lock['files'].items():assert sha(filename)==expected\nassert fingerprint(recipe)==config['recipe_fingerprint'];assert receipt['runtime']==selection['selected']['runtime'];assert receipt['identity']==selection['selected']['identity']\nassert receipt['hardware']=='NVIDIA A100 80GB PCIe' and receipt['runtime']['autocast_cache_enabled'] is False and receipt['runtime']['allocator']=='expandable_segments:True'\nexpected=fingerprint({'recipe':recipe,'prepared':prepared,'source':source,'hardware':receipt['hardware'],'world':2,'torch':torch.__version__,'runtime':receipt['runtime']});assert expected==receipt['identity']\nassert receipt['approved'] and receipt['decoded_optimizer_updates']==20\nassert receipt['strict_checkpoint_rng_reload'] and receipt['strict_inference_reload'] and receipt['coordinated_checkpoint_test']\nassert receipt['peak_gpu_reserved_bytes']<=.85*selection['selected']['total_gpu_bytes'] and receipt['node_process_peak_rss_bytes']<=.85*224*1024**3\naccount=subprocess.check_output(['sacct','-X','-j',config['gpu_profile_job_id'],'-n','-P','--format=JobIDRaw,State,ExitCode'],text=True)\nrows=[line.split('|') for line in account.splitlines() if line.strip()];assert any(v[0]==config['gpu_profile_job_id'] and v[1]=='COMPLETED' and v[2]=='0:0' for v in rows)\nresult={'approved':True,'gpu_profile_job_id':config['gpu_profile_job_id'],'gpu_profile_state':'COMPLETED','gpu_profile_sha256':config['profile_sha256'],'identity':expected,'source_sha256':manifest['source_sha256'],'recipe':name,'actual_gpu_readiness_revalidated':True,'new_gpu_test_performed':False,'job_id':os.environ.get('SLURM_JOB_ID'),'retention_recovery':True}\nif '--check-only' not in sys.argv:\n p=Path(config['receipt']);tmp=p.with_suffix('.tmp');tmp.write_text(json.dumps(result,indent=2));os.replace(tmp,p)\nprint(json.dumps(result),flush=True)\n"
+  },
+  "production_artifacts": {
+    "runs/pi05_baseline/provenance.json": {
+      "recipe": {
+        "name": "pi05_baseline",
+        "method": "pi05",
+        "kr": false,
+        "lr": 2.5e-05,
+        "steps": 30000,
+        "weight_decay": 0.01,
+        "clip": 1.0,
+        "global_batch": 32,
+        "max_delay": 0,
+        "decay_lr": 2.5e-06,
+        "horizon": 20,
+        "fps": 25,
+        "seed": 42,
+        "normalization": "quantiles",
+        "velocity_conditioning": false,
+        "phase_gate": false,
+        "shared_observation": false
+      },
+      "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "train.py": "0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d"
+      },
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "job_id": "17719993",
+      "world_size": 2,
+      "readiness": {
+        "approved": true,
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "runtime": {
+          "microbatch": 8,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "microbatch": 8,
+        "global_batch": 32,
+        "accumulation": 2,
+        "decoded_optimizer_updates": 20,
+        "seconds": 144.61472610291094,
+        "samples_per_second": 4.425552066838354,
+        "peak_gpu_reserved_bytes": 71798095872.0,
+        "node_process_peak_rss_bytes": 114189242368.0,
+        "validation_h20_action_mse": 4.517374038696289,
+        "strict_checkpoint_rng_reload": true,
+        "strict_inference_reload": true,
+        "coordinated_checkpoint_test": true,
+        "mean_gpu_utilization_percent": 45.182539682539684,
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596",
+          "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+          "train.py": "0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d"
+        }
+      },
+      "preparation": {
+        "complete": true,
+        "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+        "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+        "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+        "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+      },
+      "wandb_id": "ifalqwwf",
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/ifalqwwf"
+    }
+  },
+  "logs": {
+    "pi05_kr-17720947.err": "",
+    "pi05_kr-17720947.out": "{\"approved\": true, \"gpu_profile_job_id\": \"17716904\", \"gpu_profile_state\": \"COMPLETED\", \"gpu_profile_sha256\": \"a08115f3676fb773d7d0597ac19aeb205ff386d876a436b4eb1fad8022e376d5\", \"identity\": \"9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972\", \"source_sha256\": \"34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c\", \"recipe\": \"pi05_kr\", \"actual_gpu_readiness_revalidated\": true, \"new_gpu_test_performed\": false, \"job_id\": \"17720947\", \"retention_recovery\": true}\n",
+    "pi05_baseline-train-17719993.err": "aligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nwandb: WARNING `start_method` is deprecated and will be removed in a future version of wandb. This setting is currently non-functional and safely ignored.\nwandb: Currently logged in as: aparame (aparame-clemson-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin\nwandb: creating run\nwandb: Tracking run with wandb version 0.21.4\nwandb: Run data is saved locally in /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/wandb/run-20261020_052211-ifalqwwf\nwandb: Run `wandb offline` to turn off syncing.\nwandb: Syncing run pi05_baseline_a100\nwandb: \u2b50\ufe0f View project at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: \ud83d\ude80 View run at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/ifalqwwf\n",
+    "pi05_baseline-train-17719993.out": "{\"Train/loss\": 0.7262978553771973, \"Train/optimizer_updates\": 10, \"Train/samples\": 320, \"Train/epoch\": 1.4304744065553993e-05, \"Train/samples_per_second\": 5.4535537586153575, \"Train/lr\": 2.75e-07}\n{\"Train/loss\": 0.9400150775909424, \"Train/optimizer_updates\": 20, \"Train/samples\": 640, \"Train/epoch\": 2.8609488131107986e-05, \"Train/samples_per_second\": 9.682333927910534, \"Train/lr\": 5.250000000000001e-07}\n{\"Train/loss\": 0.6961109638214111, \"Train/optimizer_updates\": 30, \"Train/samples\": 960, \"Train/epoch\": 4.291423219666198e-05, \"Train/samples_per_second\": 9.64190405267652, \"Train/lr\": 7.75e-07}\n{\"Train/loss\": 0.5545932650566101, \"Train/optimizer_updates\": 40, \"Train/samples\": 1280, \"Train/epoch\": 5.721897626221597e-05, \"Train/samples_per_second\": 9.624446663858931, \"Train/lr\": 1.0250000000000001e-06}\n"
+  },
+  "checked_at": "2026-10-20T09:25:19.055062+00:00"
+}

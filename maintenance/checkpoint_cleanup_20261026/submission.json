@@ -1,0 +1,11 @@
+{
+  "state": "submitted",
+  "root": "/scratch/aparame/Dynamic_VLA/checkpoint-cleanup-20261026",
+  "files": 41,
+  "bytes": 806490103923,
+  "scope": "Exact older/superseded checkpoints from plan.json; user requested older copies removed on2026-10-26",
+  "at": "2026-10-26T14:30:56.795991+00:00",
+  "script_sha256": "33c37a56f5e209560af6abe22eb58f145e1de1f148877b4a3c838ab3d1b47873",
+  "plan_sha256": "43c0b7dbe0f113c4b0665a035e946c8812a1160f4b891cc38c77ac32ce740a39",
+  "job_id": "18232434"
+}

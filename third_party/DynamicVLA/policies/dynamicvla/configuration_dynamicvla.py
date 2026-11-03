@@ -99,6 +99,16 @@ class DynamicVLAConfig(PreTrainedConfig):
     # Residual proactive flow settings. When enabled, the action expert predicts
     # the residual flow after subtracting analytical object-motion drift.
     enable_residual_flow: bool = False
+    # DOM+Velocity: current robot-base XYZ velocity occupies unused state slots
+    # 6:9. The existing state projection learns its contribution; no drift.
+    condition_on_object_velocity: bool = False
+    velocity_input_mean: list[float] = field(default_factory=lambda: [0., 0., 0.])
+    velocity_input_std: list[float] = field(default_factory=lambda: [1., 1., 1.])
+    # field: legacy Case 1; coordinate: train/sample in A - centered drift.
+    residual_phase_gate_mode: str = "constant"
+    residual_phase_gate_key: str = "dynamic_object.phase_gate"
+    residual_phase_gate_config: dict = field(default_factory=dict)
+    residual_flow_formulation: str = "field"
     residual_lambda_type: str = "constant"
     residual_drift_scale: float = 1.0
     residual_drift_mode: str = "trajectory"
@@ -134,6 +144,13 @@ class DynamicVLAConfig(PreTrainedConfig):
                 "`use_delta_joint_actions_aloha` is used by dynamicvla for aloha real"
                 " models. It is not ported yet in LeRobot."
             )
+        self.validate_residual_formulation()
+        if self.residual_phase_gate_mode not in {"constant", "causal_rules"}:
+            raise ValueError("Unknown residual phase gate mode")
+        if self.residual_phase_gate_mode == "causal_rules" and (not self.enable_residual_flow or self.residual_flow_formulation != "coordinate"):
+            raise ValueError("Phase gating requires residual-coordinate flow")
+        from proactive_vla.phase_gate import PhaseGateConfig
+        PhaseGateConfig(**self.residual_phase_gate_config)
         if self.residual_lambda_type not in {"constant", "linear", "cosine"}:
             raise ValueError(
                 "residual_lambda_type must be one of {'constant', 'linear', 'cosine'}, "
@@ -144,6 +161,12 @@ class DynamicVLAConfig(PreTrainedConfig):
                 "residual_drift_mode must be one of {'trajectory', 'velocity', 'lookahead'}, "
                 f"got {self.residual_drift_mode!r}."
             )
+
+    def validate_residual_formulation(self) -> None:
+        if self.residual_flow_formulation not in {"field", "coordinate"}:
+            raise ValueError("residual_flow_formulation must be field or coordinate")
+        if self.enable_residual_flow and self.residual_flow_formulation == "coordinate" and self.residual_lambda_type != "constant":
+            raise ValueError("Residual-coordinate flow currently requires constant lambda=1")
 
     def validate_features(self) -> None:
         for i in range(self.empty_cameras):

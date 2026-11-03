@@ -1,0 +1,39 @@
+{
+  "diagnostic_job_id": "17837039",
+  "timing_comparison_complete": true,
+  "profiler_complete": true,
+  "scheduler_accounting": "17837039|COMPLETED|0:0|00:27:06\n",
+  "snapshot_saved_updates": 60004,
+  "exact_tokens_bins_loss_gradients_passed": true,
+  "per_rank_trainable_gradient_tensors_compared": 805,
+  "timed_updates_per_variant": 200,
+  "warmup_updates_per_variant": 10,
+  "global_batch": 32,
+  "all_fifteen_percent_memory_headroom_passed": true,
+  "checkpoint_io_excluded": true,
+  "controls_samples_per_second": [
+    37.33426523990839,
+    37.665585459333265
+  ],
+  "control_drift_percent": 0.8874427213066305,
+  "control_median_samples_per_second": 37.499925349620824,
+  "best_candidate": "worker_prompts12_cuda_prefetch",
+  "best_candidate_samples_per_second": 37.65677072259248,
+  "best_candidate_change_percent_vs_control_median": 0.41825516053526357,
+  "best_candidate_change_percent_vs_final_control": -0.02340262771249879,
+  "data_loader_wait_percent_control": 0.0138399615136818,
+  "decision": "Do not promote CPU prompt/prefetch/worker changes: best candidate matches the unchanged final control; no convincing throughput gain. Existing loader already keeps batches ready.",
+  "production_changed": false,
+  "next_targets_to_investigate_not_yet_benchmarked": [
+    "GPU execution and kernel-launch/cast overhead, guided by CPU/CUDA trace",
+    "H200-only autocast weight-cache comparison: previous cache-disabled setting was needed for A100 headroom; preserve FP32 pi05 parameters/moments and BF16 math, prove gradients and15%headroom",
+    "Activation-checkpoint compute/memory tradeoff using spare H200 VRAM; requires exact gradient/RNG and memory testing, not applied"
+  ],
+  "diagnostic_success": true,
+  "checked_at": "2026-10-21T15:35:51.815867+00:00",
+  "diagnostic_total_elapsed": "00:27:06",
+  "cpu_profile_includes_cold_loader_startup": true,
+  "profiler_updates": 3,
+  "cuda_launch_calls_per_profiled_update": 18898.0,
+  "profiler_cold_loader_seconds": 6.543904934999995
+}

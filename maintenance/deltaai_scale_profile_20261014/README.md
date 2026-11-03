@@ -1,0 +1,13 @@
+# Sustained and multi-node confirmation
+
+User requested worst-case interactive profiling, then suggested multiple nodes/up to4nodes interactive. Live partition ghx4-interactive reportsMaxNodes2, and a4node sbatch--test-only request was rejected Node count specification invalid. Published documentation still lists4nodes; scheduler is authoritative for current availability. Regular ghx4 reports unlimitednodes. No real four-node job was submitted.
+
+Original frozen model/training/math source f991015a... is unchanged. Additional frozen multi_entry.py bypasses only the old one-node entry restriction and invokes original distributed_smoke/train_distributed helpers. World4/8/16 with4GPUpernode; global352 means per-rank microbatch88/44/22 respectively, accumulation1. Training sources, data, split, normalization, initialization, LR and validation stopping retained. Only world4/8 will be verified interactively given current limit.
+
+run_nodes.sh uses one torchrun pernode underSlurm, staticmaster/node ranks, site's inheritedNCCL/OFI/CXI environment, GLOOhsn0 instead ofloopback. NCCLDEBUGINFO verifiesactualplugin/provider. Wall-limit signal forwarding targets only training worker processes on each allocatednode. Continuation uses original all-rankoptimizer/RNG checkpoints, leader continuation receipt and scontrolrequeue.
+
+New frozen native_benchmark.py omits periodic async faulthandlerwatchdog, retains on-crash logging. Prior44/w4failed during240second stackdump with corrupted File??? frames; CPythonissues158200/116008 report related failures. This is a diagnostic hypothesis, not a confirmed rootcause. Production already omits scheduled stackdumps.
+
+One12minute check perallocation: original strict checkpoint/RNG smoke, then fresh full-data process.200updates/70400samples,20warmup/180measured. Checkpoint saves at25/50/75/100/125/150/175/200, post-trainingvalidation2batches with train workers and optimizerstate alive, exact200update checkpointprediction/RNGreload on everyrank.15percentGPU/RAMheadroom required. Global summedhostpeak<=85percentofone384GBnode is conservative and guarantees eachnode'shostheadroom; report describes global sum accurately.
+
+Do not select failed/incomplete profiles. Do not startproduction until actualworldsize profile passed and approved recipe/runtime recorded. Original3381061 remainsheld. The separate domv-stress family preserves4candidate outcomes includingnativefailure. Single andmulti-nodeconfirmation use domv-scale family with new frozenmanifest/provenance. Profile checkpoint outputs arediagnostic, not production resumes. Reused804900fileaudit isnot a claimednewscan.

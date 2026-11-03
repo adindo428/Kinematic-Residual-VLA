@@ -1,0 +1,38 @@
+{
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-a100-20261021/scripts/prepare.sbatch": {
+    "script_sha256": "707d4e187c283dfd9164e471f2a4645a4860f3ee4ffd521fb5ae1dda05aea9e1",
+    "scheduler_result": "sbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859057 to start at 2026-10-21T20:51:53 a using 16 processors on nodes node[1192,1197] in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-a100-20261021/scripts/pi05_baseline.sbatch": {
+    "script_sha256": "7a9e63380e9baa50bd7fa17cbc6a685f7c8368474e3b41c6d16ee0ac03ce2a33",
+    "scheduler_result": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859058 to start at 2026-10-22T00:39:13 a using 64 processors on nodes node[0408-0409] in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-a100-20261021/scripts/pi05_kr.sbatch": {
+    "script_sha256": "6222d250b508626f48f947dfd0b3d7883765274431520d4eabcd1768ca70c6d9",
+    "scheduler_result": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859059 to start at 2026-10-22T00:39:13 a using 64 processors on nodes node[0408-0409] in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-a100-20261021/scripts/vlash_baseline.sbatch": {
+    "script_sha256": "1fab0d077d923ea67ef924e9b7a46ad79d84589b5d6d559760e7733e27fe3d48",
+    "scheduler_result": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859060 to start at 2026-10-22T00:39:13 a using 64 processors on nodes node[0408-0409] in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-a100-20261021/scripts/vlash_kr.sbatch": {
+    "script_sha256": "49d2d87af782fba988bc6ef5855a15807cdac79e9abc76058f781746d2477f92",
+    "scheduler_result": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859061 to start at 2026-10-22T00:39:13 a using 64 processors on nodes node[0408-0409] in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/scripts/pi05_baseline.sbatch": {
+    "script_sha256": "36dcba517d88dc69ee148cce8a42dc96908d5329df84d65f1db3bdbf17889827",
+    "scheduler_result": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859064 to start at 2026-10-21T22:42:17 a using 32 processors on nodes node0107 in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/scripts/pi05_kr.sbatch": {
+    "script_sha256": "e5ae345326e03aa5add162c2af2cd38630a842e4a13fc8d0608bc53d1e796f8e",
+    "scheduler_result": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859065 to start at 2026-10-21T22:42:17 a using 32 processors on nodes node0107 in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/scripts/vlash_baseline.sbatch": {
+    "script_sha256": "3197e9390fe3124ea915aa3d6f0dda8f407fd83d89ece940b73c95d28e7dc2d9",
+    "scheduler_result": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859066 to start at 2026-10-21T22:42:17 a using 32 processors on nodes node0107 in partition work1\n"
+  },
+  "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/scripts/vlash_kr.sbatch": {
+    "script_sha256": "5a1f0489a149852a186bf247c2dea6c997ad9d8f0e2c26ff9636973fd9fd0eee",
+    "scheduler_result": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17859067 to start at 2026-10-21T22:42:17 a using 32 processors on nodes node0107 in partition work1\n"
+  }
+}

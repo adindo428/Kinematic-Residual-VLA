@@ -1,0 +1,3 @@
+17839148|main8-20k-domv100|PENDING|(Resources)
+17839147|main8-20k-smolvla_kr|PENDING|(Resources)
+17839146|main8-20k-smolvla_baseline|PENDING|(Resources)

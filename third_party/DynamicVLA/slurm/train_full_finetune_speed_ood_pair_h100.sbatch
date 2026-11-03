@@ -6,13 +6,12 @@
 #SBATCH --gres=gpu:h100:8
 #SBATCH --time=72:00:00
 #SBATCH --mem=256GB
-#SBATCH --output=runs/slurm_logs/%x-%j.out
-#SBATCH --error=runs/slurm_logs/%x-%j.err
+#SBATCH --output=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.out
+#SBATCH --error=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.err
 
 set -euo pipefail
 
-cd /scratch/aparame/Dynamic_VLA/third_party/DynamicVLA
-mkdir -p runs/slurm_logs
+cd /home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA
 
 export NCCL_DEBUG=${NCCL_DEBUG:-WARN}
 export OMP_NUM_THREADS=${OMP_NUM_THREADS:-4}

@@ -1,0 +1,11 @@
+Master running (pid=32341)
+Master running (pid=32422)
+b9a6df4017406a31e2ed4a08f7bfaa88916b6fbb1d1e64bdb8acc0f8d4acb6da  /work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/checkpoint.pt.partial
+Traceback (most recent call last):
+  File "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/pi05_deltaai_comparison_20261021/stage.py", line 29, in <module>
+    if __name__=='__main__':main()
+  File "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/pi05_deltaai_comparison_20261021/stage.py", line 26, in main
+    stream(f'cat {snapshot}',f'cat > {DEST}/checkpoint.pt.partial && sha256sum {DEST}/checkpoint.pt.partial && test "$(sha256sum {DEST}/checkpoint.pt.partial | cut -d\" \" -f1)" = 09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c && mv {DEST}/checkpoint.pt.partial {DEST}/checkpoint.pt')
+  File "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/pi05_deltaai_comparison_20261021/stage.py", line 13, in stream
+    assert source.wait()==0 and sink.returncode==0, 'Transfer failed; reconcile partial assets before retry'
+AssertionError: Transfer failed; reconcile partial assets before retry

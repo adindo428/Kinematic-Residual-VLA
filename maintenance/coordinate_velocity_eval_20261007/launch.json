@@ -1,0 +1,20 @@
+{
+  "job_id": 16787490,
+  "submitted_palmetto_time": "2026-10-07T15:16:57",
+  "gpu": "l40s:1",
+  "training_job_id": 16748131,
+  "selected_epoch": 57,
+  "expected_new_rollouts": 30,
+  "reused_rollouts": 120,
+  "prior_eval_job": 16741254,
+  "other_methods_rerun": false,
+  "seconds": 10,
+  "speeds": [1, 1.5, 2],
+  "episodes": [8, 12, 13, 14, 36, 47, 53, 65, 66, 77],
+  "results": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490",
+  "checkpoint": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/checkpoints/tracking_dom75_full20_coordinate_velocity_16748131",
+  "cpu_tests_passed": 36,
+  "frozen_source": "/scratch/aparame/Dynamic_VLA/runs/tracking_coordinate_velocity_eval/source_20261007",
+  "frozen_collector": "/scratch/aparame/Dynamic_VLA/runs/tracking_coordinate_velocity_eval/collector_20261007",
+  "status_at_submission": "PENDING: Priority"
+}

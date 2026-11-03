@@ -1,0 +1,3 @@
+{"episode": 195674, "frames_decoded": 107, "errors": ["observation.images.wrist_cam: video has fewer frames than labels"]}
+{"episode": 195616, "frames_decoded": 109, "errors": ["observation.images.opst_cam: video has fewer frames than labels"]}
+{"episode": 195200, "frames_decoded": 106, "errors": ["observation.images.wrist_cam: video has fewer frames than labels"]}

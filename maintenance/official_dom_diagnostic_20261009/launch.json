@@ -1,0 +1,29 @@
+{
+  "pilot_job_id": 16894064,
+  "dual_gpu_job_id": 16894531,
+  "pilot": "three variants, same shared L40S, six trials each",
+  "dual": "corrected gripper and aligned actions, separate L40S GPUs, six trials",
+  "original_run_snapshot": {
+    "stopped_at_utc": "2026-10-09T20:23:34.773491+00:00",
+    "reason": "Replaced uncorrected DOM evaluation with user-authorized isolated gripper/timing diagnostic. Original results preserved; incomplete full benchmark must not be reported as complete.",
+    "cancelled_jobs": [
+      16868047,
+      16868048
+    ],
+    "snapshot": {
+      "00_CR": {
+        "completed_trials": 200,
+        "successes": 0
+      },
+      "01_DA": {
+        "completed_trials": 200,
+        "successes": 0
+      }
+    }
+  },
+  "results": "/home/aparame/Research/Dynamic_VLA/RESULTS/official_dom_diagnostic/20261009",
+  "replaced_dual_job": {
+    "old": 16894065,
+    "reason": "Short diagnostic requests 25 minutes instead of 90 to allow scheduler backfill."
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "setup": {
+    "job_id": "17709582",
+    "purpose": "Freeze verified parent production checkpoints"
+  },
+  "setup_attempts": [],
+  "previous_attempt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019",
+  "frozen_preparation": {
+    "job_id": "17668675",
+    "reused_from": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019"
+  },
+  "profile_dependency": "17709582",
+  "pi05_baseline_profile": {
+    "job_id": "17709583",
+    "recipe": "pi05_baseline",
+    "command": "profile",
+    "dependency": "17709582",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:06.681759+00:00"
+  },
+  "pi05_baseline_train": {
+    "job_id": "17709584",
+    "recipe": "pi05_baseline",
+    "command": "train",
+    "dependency": "17709583",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:06.786947+00:00"
+  },
+  "pi05_kr_profile": {
+    "job_id": "17709585",
+    "recipe": "pi05_kr",
+    "command": "profile",
+    "dependency": "17709582",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:06.922957+00:00"
+  },
+  "pi05_kr_train": {
+    "job_id": "17709586",
+    "recipe": "pi05_kr",
+    "command": "train",
+    "dependency": "17709585",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.080700+00:00"
+  },
+  "smolvla_baseline_profile": {
+    "job_id": "17709587",
+    "recipe": "smolvla_baseline",
+    "command": "profile",
+    "dependency": "17709582",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.200209+00:00"
+  },
+  "smolvla_baseline_train": {
+    "job_id": "17709588",
+    "recipe": "smolvla_baseline",
+    "command": "train",
+    "dependency": "17709587",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.301025+00:00"
+  },
+  "smolvla_kr_profile": {
+    "job_id": "17709589",
+    "recipe": "smolvla_kr",
+    "command": "profile",
+    "dependency": "17709582",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.403062+00:00"
+  },
+  "smolvla_kr_train": {
+    "job_id": "17709590",
+    "recipe": "smolvla_kr",
+    "command": "train",
+    "dependency": "17709589",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.498060+00:00"
+  },
+  "vlash_baseline_profile": {
+    "job_id": "17709591",
+    "recipe": "vlash_baseline",
+    "command": "profile",
+    "dependency": "17709582",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.621030+00:00"
+  },
+  "vlash_baseline_train": {
+    "job_id": "17709592",
+    "recipe": "vlash_baseline",
+    "command": "train",
+    "dependency": "17709591",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.723924+00:00"
+  },
+  "vlash_kr_profile": {
+    "job_id": "17709593",
+    "recipe": "vlash_kr",
+    "command": "profile",
+    "dependency": "17709582",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.830063+00:00"
+  },
+  "vlash_kr_train": {
+    "job_id": "17709594",
+    "recipe": "vlash_kr",
+    "command": "train",
+    "dependency": "17709593",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T03:24:07.926625+00:00"
+  }
+}

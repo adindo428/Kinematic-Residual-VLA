@@ -1,0 +1,17 @@
+{
+  "job_id": 16748131,
+  "submitted_utc": "2026-10-06T23:19:42.199825+00:00",
+  "source_snapshot": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/source_20261006",
+  "config": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/source_20261006/configs/tracking_dom75_full20_coordinate_velocity.yaml",
+  "checkpoint": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/checkpoints/tracking_dom75_full20_coordinate_velocity_16748131",
+  "gpu_smoke_before_training": true,
+  "epochs": 75,
+  "batch_size": 8,
+  "grad_accum_steps": 44,
+  "initialization": "hzxie/dynamic-vla-DOM",
+  "resume": false,
+  "variant": "coordinate",
+  "neural_velocity_conditioning": true,
+  "analytic_velocity_drift": true,
+  "tests_passed": 34
+}

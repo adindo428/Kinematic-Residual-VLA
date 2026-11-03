@@ -1,0 +1,181 @@
+{
+  "dataset": "/scratch/aparame/.cache/huggingface/lerobot/adi2440/dom-franka-tracking",
+  "evaluation_reference": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing",
+  "dataset_revision_from_evaluation_manifest": "5c46a9f26b5f85edafa53885187cc03fa8706219",
+  "sampling_hz": 25,
+  "episode_seconds": 10.0,
+  "tolerance_m": 0.02,
+  "warmup_excluded": true,
+  "future_action_labels_excluded": true,
+  "target_offset_from_object_origin_m": [
+    -3.091116806963612e-08,
+    -7.057189899128957e-08,
+    0.14145086452364922
+  ],
+  "target_offset_max_deviation_across_reference_traces_m": 2.7755575615628914e-17,
+  "expert_and_evaluation_initial_observation_matches": 10,
+  "samples_within_0p2_micrometers_of_threshold": 0,
+  "scope": "100 accepted original training-collection episodes; not newly collected diverse data and not expert rollouts under the nine new stress conditions.",
+  "all_episodes": {
+    "episodes": 100,
+    "whole_episode_coverage_percent": {
+      "mean": 99.97200000000001,
+      "min": 97.2,
+      "p05": 100.0,
+      "p10": 100.0,
+      "median": 100.0,
+      "p90": 100.0,
+      "max": 100.0
+    },
+    "post_1s_coverage_percent": {
+      "mean": 99.96888888888888,
+      "min": 96.88888888888889,
+      "p05": 100.0,
+      "p10": 100.0,
+      "median": 100.0,
+      "p90": 100.0,
+      "max": 100.0
+    },
+    "per_episode_rmse_mm": {
+      "mean": 2.964031837140995,
+      "min": 1.9249193729466196,
+      "p05": 2.156214818603185,
+      "p10": 2.317140577449869,
+      "median": 2.9488488266010955,
+      "p90": 3.5550524559688723,
+      "max": 6.384313013804239
+    },
+    "episodes_above_coverage_threshold": {
+      "50": 100,
+      "70": 100,
+      "80": 100,
+      "90": 100,
+      "95": 100,
+      "99": 99
+    },
+    "perfect_coverage_episodes": 99
+  },
+  "splits": {
+    "test": {
+      "episodes": 10,
+      "whole_episode_coverage_percent": {
+        "mean": 100.0,
+        "min": 100.0,
+        "p05": 100.0,
+        "p10": 100.0,
+        "median": 100.0,
+        "p90": 100.0,
+        "max": 100.0
+      },
+      "post_1s_coverage_percent": {
+        "mean": 100.0,
+        "min": 100.0,
+        "p05": 100.0,
+        "p10": 100.0,
+        "median": 100.0,
+        "p90": 100.0,
+        "max": 100.0
+      },
+      "per_episode_rmse_mm": {
+        "mean": 2.919195151646173,
+        "min": 2.0862623228907093,
+        "p05": 2.275334979143044,
+        "p10": 2.4644076353953785,
+        "median": 2.847215058988503,
+        "p90": 3.500013546917284,
+        "max": 3.718972720700326
+      },
+      "episodes_above_coverage_threshold": {
+        "50": 10,
+        "70": 10,
+        "80": 10,
+        "90": 10,
+        "95": 10,
+        "99": 10
+      },
+      "perfect_coverage_episodes": 10
+    },
+    "train": {
+      "episodes": 80,
+      "whole_episode_coverage_percent": {
+        "mean": 99.965,
+        "min": 97.2,
+        "p05": 100.0,
+        "p10": 100.0,
+        "median": 100.0,
+        "p90": 100.0,
+        "max": 100.0
+      },
+      "post_1s_coverage_percent": {
+        "mean": 99.96111111111111,
+        "min": 96.88888888888889,
+        "p05": 100.0,
+        "p10": 100.0,
+        "median": 100.0,
+        "p90": 100.0,
+        "max": 100.0
+      },
+      "per_episode_rmse_mm": {
+        "mean": 2.9659401561600687,
+        "min": 1.9249193729466196,
+        "p05": 2.203038173169519,
+        "p10": 2.3926529065963167,
+        "median": 2.9499964466660415,
+        "p90": 3.5500145742048614,
+        "max": 6.384313013804239
+      },
+      "episodes_above_coverage_threshold": {
+        "50": 80,
+        "70": 80,
+        "80": 80,
+        "90": 80,
+        "95": 80,
+        "99": 79
+      },
+      "perfect_coverage_episodes": 79
+    },
+    "validation": {
+      "episodes": 10,
+      "whole_episode_coverage_percent": {
+        "mean": 100.0,
+        "min": 100.0,
+        "p05": 100.0,
+        "p10": 100.0,
+        "median": 100.0,
+        "p90": 100.0,
+        "max": 100.0
+      },
+      "post_1s_coverage_percent": {
+        "mean": 100.0,
+        "min": 100.0,
+        "p05": 100.0,
+        "p10": 100.0,
+        "median": 100.0,
+        "p90": 100.0,
+        "max": 100.0
+      },
+      "per_episode_rmse_mm": {
+        "mean": 2.993601970483227,
+        "min": 2.144372676476692,
+        "p05": 2.149870161917734,
+        "p10": 2.1553676473587755,
+        "median": 2.9950466153665243,
+        "p90": 3.703275986438349,
+        "max": 4.426859865762162
+      },
+      "episodes_above_coverage_threshold": {
+        "50": 10,
+        "70": 10,
+        "80": 10,
+        "90": 10,
+        "95": 10,
+        "99": 10
+      },
+      "perfect_coverage_episodes": 10
+    }
+  },
+  "pooled_rmse_mm_at_25hz": 3.0207348923012143,
+  "original_collection_pooled_rmse_mm_at_200hz": 3.0229919990249647,
+  "original_collection_max_error_mm_at_200hz": 31.851384961357525,
+  "limitation": "Coverage is measured at the 25 Hz recorded observation timestamps. Raw 200 Hz expert telemetry is unavailable in this cached dataset; brief inter-frame errors may be missed."
+}

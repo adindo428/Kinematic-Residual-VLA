@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-20T16:31:06.484330+00:00",
+  "control_manifest_sha256": "828e924ba63c34cd3a1344132ad1fb3fa05dec9a2a5447b4f47e6a659464e14f",
+  "passed": true,
+  "checks": [
+    {
+      "name": "controller-contracts",
+      "returncode": 0,
+      "output": "test_accounting_lag_waits_after_queue_disappearance (test_controller.ControllerTests) ... ok\ntest_allocated_parent_restart_is_detectable (test_controller.ControllerTests) ... ok\ntest_pending_autorequeue_cancel_requires_valid_checkpoint (test_controller.ControllerTests) ... ok\ntest_purged_queue_is_absent_but_access_errors_fail_closed (test_controller.ControllerTests) ... ok\ntest_trusted_synthetic_checkpoint_contains_exact_resume_state (test_controller.ControllerTests) ... ok\ntest_checkpoint_requires_optimizer_scheduler_rng_cursor (test_handoff_guards.GuardContracts) ... ok\ntest_completed_budget_never_repeated (test_handoff_guards.GuardContracts) ... ok\ntest_exact_budget_manifest_and_parent_terminal (test_handoff_guards.GuardContracts) ... ok\ntest_hardware_and_identity_before_signal (test_handoff_guards.GuardContracts) ... ok\ntest_no_parent_action_while_queued (test_handoff_guards.GuardContracts) ... ok\ntest_pair_requires_both_sustained_receipts_and_accounting (test_handoff_guards.GuardContracts) ... ok\ntest_running_parent_requests_checkpoint (test_handoff_guards.GuardContracts) ... ok\ntest_stale_stop_and_autorequeue_fail_closed (test_handoff_guards.GuardContracts) ... ok\ntest_wrong_parent_or_wandb_refused (test_handoff_guards.GuardContracts) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 6.225s\n\nOK\n"
+    },
+    {
+      "name": "frozen-readiness-and-parent-identities",
+      "returncode": 0,
+      "output": "{\"pi05_baseline\": {\"identity\": \"fba9738d280eab0c58c19128931f16027cc38ccdc08a50667162c5b17e8a3587\", \"ratio\": 2.7798669674323495}, \"pi05_kr\": {\"identity\": \"c0985b1f3ffd8d637ef1da4d9d23e8de0ee7f47d214adb223cc7edb2eb917ca1\", \"ratio\": 2.869401219126021}}\n"
+    },
+    {
+      "name": "bash-verify",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "scheduler-verify",
+      "returncode": 0,
+      "output": "sbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17745180 to start at 2026-10-20T13:34:13 a using 2 processors on nodes node0356 in partition work1\n"
+    },
+    {
+      "name": "bash-pi05_baseline",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "scheduler-pi05_baseline",
+      "returncode": 0,
+      "output": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17745181 to start at 2026-10-20T19:20:45 a using 32 processors on nodes nodeai09 in partition work1\n"
+    },
+    {
+      "name": "bash-pi05_kr",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "scheduler-pi05_kr",
+      "returncode": 0,
+      "output": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17745182 to start at 2026-10-20T19:20:45 a using 32 processors on nodes nodeai09 in partition work1\n"
+    }
+  ],
+  "original_gpu_profile_job_id": "17740320",
+  "native_dependency_test": {
+    "original_gpu_profile_job_id": "17740320",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "sbatch: error: Requested Features: gpu_h200\nsbatch: error: Partition: work1\nsbatch: error: Submit checks complete\nallocation failure: Job dependency problem\n",
+    "test_only_not_submitted": true
+  },
+  "release_strategy": "separate CPU-only exact completed GPU receipt revalidation; own afterok live verifier plus unchanged native matching GPU readiness/release gate"
+}

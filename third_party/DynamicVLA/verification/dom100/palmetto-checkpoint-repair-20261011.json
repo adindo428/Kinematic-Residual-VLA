@@ -1,0 +1,54 @@
+{
+  "cluster": "Palmetto",
+  "job_id": "17017544",
+  "name": "krv100",
+  "method": "KRVLA Coordinate + velocity",
+  "group": "production",
+  "purpose": "DOM manipulation training",
+  "world_size": 8,
+  "gpu": "H100 or H200",
+  "lr": 3e-05,
+  "target_epochs": 100,
+  "early_stopping": {
+    "enabled": true,
+    "metric": "h20/action_mse",
+    "min_epochs": 5,
+    "patience": 3,
+    "relative_min_delta": 0.005
+  },
+  "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011",
+  "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011/runs/krv100",
+  "source_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+  "source_sha256": "8f6cd758f2686990fd8c8af37e98ecaa4c0e10bd011ce9fa6e08b0736462a8d9",
+  "recipe_fingerprint": "1cacc9867ca73d0a51fae94ee11c0c536ba91b5fdd8c19e8f28f49130a55d7ae",
+  "manifest_fingerprint": "6b8d35f5df86c990c72cdeedc99d5fa9d190a8a7c903547224324f9fa0242a80",
+  "scheduler_state": "PENDING",
+  "reason_or_node": "(Priority)",
+  "submit": "2026-10-11T12:15:23",
+  "elapsed": "00:00:00",
+  "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/dom100-ddp-17017544.out",
+  "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/dom100-ddp-17017544.err",
+  "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+  "runtime": {
+    "microbatch": 44,
+    "workers": 1,
+    "prefetch": 2,
+    "pin_memory": true,
+    "fused": true,
+    "precision": "bf16"
+  },
+  "training_started": false,
+  "production_progress": {
+    "epochs": 0,
+    "samples": 0,
+    "optimizer_updates": 0
+  },
+  "production_checkpoint_present": false,
+  "replaces": "16869869",
+  "local_regression_tests": {
+    "passed": 17,
+    "suite": "tests/test_dom_ddp.py",
+    "includes": "Rank-local BatchNorm checkpoint/reload, RNG, error propagation, 4/8-rank gradients, interrupted resume and early stopping"
+  },
+  "note": "Queued on eight H100/H200 GPUs. Synchronizes rank-zero checkpoint buffers; CPU Gloo metadata and coordinated verification failures. Real decoded backward/checkpoint/RNG and 15% headroom verification runs before automatic training. Same split, initialization, normalization, LR and early stopping."
+}

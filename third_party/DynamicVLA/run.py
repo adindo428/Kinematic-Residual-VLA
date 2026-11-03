@@ -181,6 +181,11 @@ def main():
     with open(args.cfg_file) as fp:
         cfg = yaml.load(fp, Loader=yaml.FullLoader)
         cfg = easydict.EasyDict(cfg)
+    cfg.DIR.OUTPUT = os.environ.get("DVLA_OUTPUT_ROOT", cfg.DIR.OUTPUT)
+    if os.environ.get("DVLA_WANDB_ENTITY"):
+        cfg.WANDB.ENTITY = os.environ["DVLA_WANDB_ENTITY"]
+    if os.environ.get("DVLA_WANDB_PROJECT"):
+        cfg.WANDB.PROJECT = os.environ["DVLA_WANDB_PROJECT"]
 
     # Parse runtime arguments
     if args.gpus is not None:

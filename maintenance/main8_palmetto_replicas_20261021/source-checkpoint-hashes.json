@@ -1,0 +1,18 @@
+{
+  "pi05_baseline": {
+    "bytes": 40456772509,
+    "sha256": "ec522d6f1c9243e37575b61cd9068e04384830e36e74f4399a999cef2639ad75"
+  },
+  "pi05_kr": {
+    "bytes": 40456772509,
+    "sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c"
+  },
+  "vlash_baseline": {
+    "bytes": 20946855289,
+    "sha256": "eb7dcfbb974dcba23b192389bc2d8f0365870ec8c54827c81cc1006a6465dbea"
+  },
+  "vlash_kr": {
+    "bytes": 20946855289,
+    "sha256": "64752c521784c0f8942b9ca7fc6a7e02b393b751edf487a279444d29c3fcf0e4"
+  }
+}

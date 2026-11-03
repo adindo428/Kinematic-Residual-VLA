@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-30T00:09:15.315742+00:00",
+  "scope": "Seven current Palmetto trained variants, plus pending fresh KRV and workstation verification limits",
+  "canonical_latest_paths": {
+    "pi05_baseline": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+    "pi05_kr": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+    "vlash_baseline": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+    "vlash_kr": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr/runs/vlash_kr/latest.pt",
+    "smolvla_baseline": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+    "smolvla_kr": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+    "domv100": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt"
+  },
+  "last_completed_cleanup_protected_all_canonical_latest": true,
+  "deleted_best_labelled_files": [],
+  "trainer_source_finding": "Current seven-run continuation engine writes readiness.pt and latest.pt; no best.pt or best-validation retention implementation. Therefore all-seven best checkpoints cannot be confirmed. Native fresh KRV engine independently retains best.json/latest.json generation pointers once training starts.",
+  "workstation": "W&B metrics do not prove local checkpoint files exist; PC filesystem not accessed",
+  "remote_weights_loaded_or_changed": false
+}

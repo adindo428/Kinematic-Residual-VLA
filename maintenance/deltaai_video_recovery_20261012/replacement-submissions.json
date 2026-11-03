@@ -1,0 +1,92 @@
+{
+  "old_jobs": [
+    "17017544",
+    "17091380",
+    "17091381"
+  ],
+  "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012",
+  "source": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+  "submissions": [
+    {
+      "name": "krv100",
+      "replaces": "17017544",
+      "args": [
+        "sbatch",
+        "--parsable",
+        "--account=cuuser_yue6_vae_verification",
+        "--partition=work1",
+        "--chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+        "--job-name=krv100",
+        "--export=ALL,DVLA_PROJECT_DIR=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012,DOM100_ROOT=/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012,DOM100_VARIANT=krv100",
+        "--gpus=8",
+        "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/dom100_distributed.sbatch"
+      ],
+      "status": "submitted",
+      "returncode": 0,
+      "stdout": "17099227\n",
+      "stderr": "sbatch: Requested Features: gpu_h100|gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\n",
+      "job_id": "17099227"
+    },
+    {
+      "name": "krv100-a8",
+      "replaces": "17091380",
+      "args": [
+        "sbatch",
+        "--parsable",
+        "--account=cuuser_yue6_vae_verification",
+        "--partition=work1",
+        "--chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+        "--job-name=krv100-a8",
+        "--export=ALL,DVLA_PROJECT_DIR=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012,DOM100_ROOT=/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012,DOM100_VARIANT=krv100",
+        "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/krv100_a100_8gpu.sbatch"
+      ],
+      "status": "submitted",
+      "returncode": 0,
+      "stdout": "17099228\n",
+      "stderr": "sbatch: Requested Features: gpu_a100_40gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\n",
+      "job_id": "17099228"
+    },
+    {
+      "name": "krv100-h2x8",
+      "replaces": "17091381",
+      "args": [
+        "sbatch",
+        "--parsable",
+        "--account=cuuser_yue6_vae_verification",
+        "--partition=work1",
+        "--chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+        "--job-name=krv100-h2x8",
+        "--export=ALL,DVLA_PROJECT_DIR=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012,DOM100_ROOT=/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012,DOM100_VARIANT=krv100",
+        "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/krv100_h200_8gpu.sbatch"
+      ],
+      "status": "submitted",
+      "returncode": 0,
+      "stdout": "17099229\n",
+      "stderr": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\n",
+      "job_id": "17099229"
+    }
+  ],
+  "stage": "submitted",
+  "failed_submission_attempts": [
+    {
+      "name": "krv100",
+      "replaces": "17017544",
+      "args": [
+        "sbatch",
+        "--parsable",
+        "--account=cuuser_yue6_vae_verification",
+        "--partition=work1",
+        "--qos=normal",
+        "--chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+        "--job-name=krv100",
+        "--export=ALL,DVLA_PROJECT_DIR=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012,DOM100_ROOT=/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012,DOM100_VARIANT=krv100",
+        "--gpus=8",
+        "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/dom100_distributed.sbatch"
+      ],
+      "status": "failed",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "sbatch: error: A user-specified QOS is not currently supported on Palmetto2\nsbatch: error: Submit checks failed\nsbatch: error: Batch job submission failed: Invalid qos specification\n"
+    }
+  ]
+}

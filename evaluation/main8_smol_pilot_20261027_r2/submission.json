@@ -1,0 +1,12 @@
+{
+  "state": "submitted",
+  "script": "/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-r2-20261027/pilot.sbatch",
+  "script_sha256": "1b7cc7c877bd3d92669d24d95a35dd47b27a694c4d3e9d79f840644d1b15fafb",
+  "root": "/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-r2-20261027",
+  "checkpoint": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+  "trials": 9,
+  "gpu": "L40S",
+  "gpu_count": 1,
+  "max_hours": 2,
+  "job_id": "18363872"
+}

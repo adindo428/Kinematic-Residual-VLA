@@ -1,0 +1,116 @@
+{
+  "scope": "Completed CR, DA, LS only; partial benchmark, not the final nine-dimension table",
+  "scoring_version": 4,
+  "success_definition": "For each episode, calculate 100 times the duration with 3D EE-to-hover-target distance <=0.03 m divided by the episode duration; average episode percentages with equal weight. The entire episode, including the initial second, counts. No binary pass/fail threshold or orientation gate. A policy termination earns no tracking credit for the unexecuted remainder of its requested horizon; completion rate and observed-only coverage are reported separately.",
+  "rollouts": 2400,
+  "models": {
+    "baseline": {
+      "label": "DOM-VLA",
+      "dimensions": {
+        "CR": {
+          "episodes": 200,
+          "success_percent": 10.938750000000002,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 66.25465087976994,
+          "mean_object_speed_cm_s": 6.05649979251764
+        },
+        "DA": {
+          "episodes": 200,
+          "success_percent": 10.395249999999999,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 68.10363133988382,
+          "mean_object_speed_cm_s": 6.18128814191698
+        },
+        "LS": {
+          "episodes": 200,
+          "success_percent": 8.83625,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 68.15657668952234,
+          "mean_object_speed_cm_s": 5.763235480901747
+        }
+      },
+      "three_dimension_mean_success_percent": 10.056750000000001
+    },
+    "velocity": {
+      "label": "DOM-VLA+Velocity",
+      "dimensions": {
+        "CR": {
+          "episodes": 200,
+          "success_percent": 53.662,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 34.869281193142264,
+          "mean_object_speed_cm_s": 6.05649979251764
+        },
+        "DA": {
+          "episodes": 200,
+          "success_percent": 45.729,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 38.20459558249498,
+          "mean_object_speed_cm_s": 6.18128814191698
+        },
+        "LS": {
+          "episodes": 200,
+          "success_percent": 46.814166666666665,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 36.62150771208436,
+          "mean_object_speed_cm_s": 5.763235480901747
+        }
+      },
+      "three_dimension_mean_success_percent": 48.735055555555554
+    },
+    "coordinate": {
+      "label": "KR-VLA-Coordinate",
+      "dimensions": {
+        "CR": {
+          "episodes": 200,
+          "success_percent": 51.37500000000001,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 34.926166832516095,
+          "mean_object_speed_cm_s": 6.05649979251764
+        },
+        "DA": {
+          "episodes": 200,
+          "success_percent": 50.52100000000001,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 36.730857995670384,
+          "mean_object_speed_cm_s": 6.18128814191698
+        },
+        "LS": {
+          "episodes": 200,
+          "success_percent": 49.71216666666667,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 34.45189914589161,
+          "mean_object_speed_cm_s": 5.763235480901747
+        }
+      },
+      "three_dimension_mean_success_percent": 50.536055555555556
+    },
+    "coordinate_velocity": {
+      "label": "KR-VLA-Coordinate+Velocity",
+      "dimensions": {
+        "CR": {
+          "episodes": 200,
+          "success_percent": 52.86924999999999,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 33.411468357530474,
+          "mean_object_speed_cm_s": 6.05649979251764
+        },
+        "DA": {
+          "episodes": 200,
+          "success_percent": 55.17575,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 34.157665214272924,
+          "mean_object_speed_cm_s": 6.18128814191698
+        },
+        "LS": {
+          "episodes": 200,
+          "success_percent": 52.102666666666664,
+          "completion_percent": 100,
+          "mean_hover_rmse_mm": 33.16743346795103,
+          "mean_object_speed_cm_s": 5.763235480901747
+        }
+      },
+      "three_dimension_mean_success_percent": 53.38255555555555
+    }
+  }
+}

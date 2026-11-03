@@ -1,0 +1,203 @@
+{
+  "gripper": {
+    "verified": true,
+    "trials": 6,
+    "environments": 3,
+    "successes": 0,
+    "success_percent": 0,
+    "mean_task_time_s": 11.846666666666668,
+    "infrastructure_failures": 0,
+    "simulator": {
+      "isaacsim_runtime": [
+        "5.1.0",
+        "rc.19",
+        "5",
+        "1",
+        "0",
+        "rc",
+        "19",
+        "release.26219.9c81211b.gl"
+      ],
+      "isaacsim_version_file": "5.1.0-rc.19+release.26219.9c81211b.gl",
+      "isaaclab_version_file": "2.3.2",
+      "isaaclab_package": "0.54.3"
+    },
+    "client_actions": 1724,
+    "late_action_count": 0,
+    "future_action_count": 0,
+    "maximum_action_lag_steps": 0,
+    "exact_index_action_percent": 100.0,
+    "grasp_telemetry": [
+      {
+        "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+        "trial": 1,
+        "max_object_height_change_m": 0.01982995867729187,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011399140566936694
+      },
+      {
+        "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+        "trial": 2,
+        "max_object_height_change_m": 0.00689828023314476,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011457418077043258
+      },
+      {
+        "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+        "trial": 1,
+        "max_object_height_change_m": 0.0,
+        "minimum_finger_gap_while_commanded_closed_m": 0.0001163173365057446
+      },
+      {
+        "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+        "trial": 2,
+        "max_object_height_change_m": 0.0,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011643677862593904
+      },
+      {
+        "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+        "trial": 1,
+        "max_object_height_change_m": 0.0025384128093719482,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011668219303828664
+      },
+      {
+        "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+        "trial": 2,
+        "max_object_height_change_m": 0.001956850290298462,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011106755664513912
+      }
+    ]
+  },
+  "gripper_aligned": {
+    "verified": true,
+    "trials": 6,
+    "environments": 3,
+    "successes": 0,
+    "success_percent": 0,
+    "mean_task_time_s": 11.313333333333333,
+    "infrastructure_failures": 0,
+    "simulator": {
+      "isaacsim_runtime": [
+        "5.1.0",
+        "rc.19",
+        "5",
+        "1",
+        "0",
+        "rc",
+        "19",
+        "release.26219.9c81211b.gl"
+      ],
+      "isaacsim_version_file": "5.1.0-rc.19+release.26219.9c81211b.gl",
+      "isaaclab_version_file": "2.3.2",
+      "isaaclab_package": "0.54.3"
+    },
+    "client_actions": 1646,
+    "late_action_count": 0,
+    "future_action_count": 0,
+    "maximum_action_lag_steps": 0,
+    "exact_index_action_percent": 100.0,
+    "grasp_telemetry": [
+      {
+        "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+        "trial": 1,
+        "max_object_height_change_m": 0.005444258451461792,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011418655412853695
+      },
+      {
+        "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+        "trial": 2,
+        "max_object_height_change_m": 0.00544312596321106,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011134738997498062
+      },
+      {
+        "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+        "trial": 1,
+        "max_object_height_change_m": 0.0,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011560379061847925
+      },
+      {
+        "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+        "trial": 2,
+        "max_object_height_change_m": 0.0,
+        "minimum_finger_gap_while_commanded_closed_m": 0.0001132484212575946
+      },
+      {
+        "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+        "trial": 1,
+        "max_object_height_change_m": 0.0021861493587493896,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011836499834316783
+      },
+      {
+        "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+        "trial": 2,
+        "max_object_height_change_m": 0.001956850290298462,
+        "minimum_finger_gap_while_commanded_closed_m": 0.00011508119132486172
+      }
+    ]
+  },
+  "original": {
+    "verified": true,
+    "trials": 6,
+    "environments": 3,
+    "successes": 0,
+    "success_percent": 0,
+    "mean_task_time_s": 12.0,
+    "infrastructure_failures": 0,
+    "simulator": {
+      "isaacsim_runtime": [
+        "5.1.0",
+        "rc.19",
+        "5",
+        "1",
+        "0",
+        "rc",
+        "19",
+        "release.26219.9c81211b.gl"
+      ],
+      "isaacsim_version_file": "5.1.0-rc.19+release.26219.9c81211b.gl",
+      "isaaclab_version_file": "2.3.2",
+      "isaaclab_package": "0.54.3"
+    },
+    "client_actions": 1747,
+    "late_action_count": 0,
+    "future_action_count": 0,
+    "maximum_action_lag_steps": 0,
+    "exact_index_action_percent": 100.0,
+    "grasp_telemetry": [
+      {
+        "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+        "trial": 1,
+        "max_object_height_change_m": 0.005925893783569336,
+        "minimum_finger_gap_while_commanded_closed_m": 0.005883625242859125
+      },
+      {
+        "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+        "trial": 2,
+        "max_object_height_change_m": 0.17875096201896667,
+        "minimum_finger_gap_while_commanded_closed_m": 0.058666955679655075
+      },
+      {
+        "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+        "trial": 1,
+        "max_object_height_change_m": 0.0,
+        "minimum_finger_gap_while_commanded_closed_m": 0.0019679233664646745
+      },
+      {
+        "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+        "trial": 2,
+        "max_object_height_change_m": 0.0,
+        "minimum_finger_gap_while_commanded_closed_m": 0.002141211007256061
+      },
+      {
+        "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+        "trial": 1,
+        "max_object_height_change_m": 0.001956850290298462,
+        "minimum_finger_gap_while_commanded_closed_m": 0.0044611538760364056
+      },
+      {
+        "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+        "trial": 2,
+        "max_object_height_change_m": 0.001956850290298462,
+        "minimum_finger_gap_while_commanded_closed_m": 0.0025896589504554868
+      }
+    ]
+  }
+}

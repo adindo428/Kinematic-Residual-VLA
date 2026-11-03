@@ -1,0 +1,46 @@
+{
+  "selected": {
+    "runtime": {
+      "microbatch": 32,
+      "workers": 8,
+      "main_threads": 2,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-5.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 2.3224067641422153,
+    "samples_per_second": 220.46094935014884,
+    "peak_gpu_reserved_bytes": 7482638336.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 32832569344.0,
+    "mean_gpu_utilization_percent": 9.5,
+    "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+    "eligible": true
+  },
+  "control": {
+    "runtime": {
+      "microbatch": 1,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-0.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 28.035361028276384,
+    "samples_per_second": 18.26265049640696,
+    "peak_gpu_reserved_bytes": 2808086528.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 16834908160.0,
+    "mean_gpu_utilization_percent": 24.67391304347826,
+    "identity": "d36e461b1f968962cd442de54ec61d07491a7c5c84ff2782652ea584cb5d9bdb",
+    "eligible": true
+  },
+  "throughput_ratio_to_control": 12.071684194664016,
+  "criterion": "Highest measured decoded throughput retaining at least15% GPU/node memory headroom",
+  "recipe_unchanged": true,
+  "sampling_order_unchanged": true
+}

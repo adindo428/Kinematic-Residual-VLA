@@ -1,0 +1,11 @@
+{
+  "batch": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-scale-domv-20261014/debug.sbatch",
+  "batch_sha256": "5032bc59ae248399e8fa848bc01b40172430f7e7c45bed111d4dc57536a86f56",
+  "dependency": null,
+  "job_id": "3381859",
+  "returncode": 0,
+  "stage": "submitted",
+  "stderr": "",
+  "stdout": "3381859\n",
+  "training_job_held": "3381061"
+}

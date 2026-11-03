@@ -1,0 +1,7 @@
+{"name": "domv100", "valid": true, "completed": false, "progress": {"updates": 224155, "samples": 78902251, "epoch": 0, "cursor": 2001824}}
+{"name": "pi05_baseline", "valid": true, "completed": false, "progress": {"updates": 96531, "samples": 3088992, "epoch": 1, "cursor": 61536}}
+{"name": "pi05_kr", "valid": true, "completed": false, "progress": {"updates": 106501, "samples": 3408032, "epoch": 0, "cursor": 1487904}}
+{"name": "smolvla_baseline", "valid": true, "completed": false, "progress": {"updates": 142943, "samples": 9148352, "epoch": 3, "cursor": 648192}}
+{"name": "smolvla_kr", "valid": true, "completed": false, "progress": {"updates": 136618, "samples": 8743552, "epoch": 3, "cursor": 243392}}
+{"name": "vlash_baseline", "valid": true, "completed": false, "progress": {"updates": 143047, "samples": 4577504, "epoch": 1, "cursor": 1210752}}
+{"name": "vlash_kr", "valid": true, "completed": false, "progress": {"updates": 124055, "samples": 3969760, "epoch": 1, "cursor": 603008}}

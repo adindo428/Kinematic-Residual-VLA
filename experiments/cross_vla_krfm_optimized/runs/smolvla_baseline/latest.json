@@ -1,0 +1,10 @@
+{
+  "progress": {
+    "updates": 20000,
+    "samples": 1280000,
+    "epoch": 0,
+    "cursor": 1280000
+  },
+  "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+  "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt"
+}

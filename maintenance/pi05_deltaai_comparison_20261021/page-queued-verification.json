@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "sequence": 218,
+  "receipt": {
+    "new_sequence": 218,
+    "through_sequence": 218,
+    "operation_results": [
+      {
+        "operation_index": 0,
+        "preceding_block_id": "7e1bbc83-aaba-4907-9312-29f83339def7",
+        "created_block_ids": [],
+        "continuation_position": {
+          "block_id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+          "relative_position_base64": "AP//6FmdFkE="
+        },
+        "affected_blocks": [
+          {
+            "block_id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+            "hash": "989fbc516b84dc8b94624d346ff51f5f3ffbc37b879370cc1495a899ace4e06f"
+          }
+        ]
+      }
+    ]
+  },
+  "readback": {
+    "metadata": {
+      "page_id": "page_4ff536c9060081919225467494390460",
+      "layout": "document",
+      "symbol": null,
+      "title": "KRVLA training run register",
+      "preview": "DynamicVLA and KRVLA training submissions, including the current six-model DOM manipulation study, earlier tracking runs, and the separate DeltaAI DOM launch. Scheduler completion and checkpoint epochs are reported separately; neither impli",
+      "creator_account_user_id": "user-Uxm2x1EDmPPhJh6DV43gC1uL__4c54659e-5103-4f34-9102-cca112775f74",
+      "owner_workspace_id": "4c54659e-5103-4f34-9102-cca112775f74",
+      "parent": null,
+      "drive_scope": "workspace_private",
+      "drive_space_id": null,
+      "library_container_id": "fde3_cGFnZV80ZmY1MzZjOTA2MDA4MTkxOTIyNTQ2NzQ5NDM5MDQ2MA_b1c20e2b9f388191bc424aac9e399af7",
+      "file_upload_page_id": "page_4ff536c9060081919225467494390460",
+      "position": 1834562553847808,
+      "created_at": "2026-10-09T16:56:34.266050Z",
+      "updated_at": "2026-10-21T17:08:18.615659Z",
+      "deleted_at": null,
+      "current_sequence": 218,
+      "projection_through_sequence": 218,
+      "access": {
+        "can_read": true,
+        "can_comment": true,
+        "can_write": true,
+        "can_share": true,
+        "can_delete": true,
+        "sources": [
+          "library"
+        ]
+      },
+      "url": "https://chatgpt.com/space/page_4ff536c9060081919225467494390460"
+    },
+    "content": {
+      "schema_version": 2,
+      "symbol": null,
+      "title": "KRVLA training run register",
+      "title_hash": "4612ac26e1ab986edcfab25b61f1807b03d8b2206bd32f5d9ced0d9e46c6157f",
+      "blocks": [
+        {
+          "id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+          "kind": "markdown",
+          "markdown": "DeltaAI interactive comparison October21: the explicitly authorized transfer completed, and the full40,456,772,509-byte π0.5 KR checkpoint passed SHA25609c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c. Both clusters produced the same exact210-update warmup/timing anchor sequence (SHA2560f18a66052fd83cbf8d7fb2502b063d13c1852dfcf1be66d5ddbadad3a87defb). The isolated GH200120GB/PyTorch2.12 environment passed pinned π0.5 imports, audited train/validation two-camera decoding, BF16 cache and optimizer-continuation CPU contracts, and the two-rank coordinated-flag test. Interactive diagnostic3429662 is PENDINGPriority for2GH200/32CPU/256GiB, with a2hour allocation limit and150minute overall controller timeout including queue wait. The previous short request3429648 timed out before allocation with zero GPU runtime; it is historical, not an active comparison. No GPU comparison results exist yet. The unchanged frozen diagnostic manifest is591ae5d7af07b30e93a73ceaaadbd90790781cd598dfbbef139c34f7376d8354. Planned variants are repeated controls, CPU tokenization, transfer prefetch,12workers, autocast weight caching and disabling activation recomputation, restoring identical model/optimizer/scheduler/two-rank RNG/cursor from60,004saved updates, with native global32, loss/all-gradient checks and15%actual memory headroom. Throughput comparisons will be within the same DeltaAI allocation; GH200/PyTorch differences prevent treating absolute cross-cluster rates as a code speedup. Production runs and the paused follow-up monitor remain unchanged. Evidence: maintenance/pi05_deltaai_comparison_20261021/status.json and control_queue_r2/submission.json.",
+          "hash": "989fbc516b84dc8b94624d346ff51f5f3ffbc37b879370cc1495a899ace4e06f",
+          "metadata": {}
+        }
+      ],
+      "page_id": "page_4ff536c9060081919225467494390460"
+    },
+    "view": "editing",
+    "selection": {
+      "mode": "block_ids",
+      "selection_complete": true,
+      "whole_page_complete": false,
+      "page_block_count": 40,
+      "returned_block_count": 1,
+      "matched_block_count": 1,
+      "context_blocks": 0,
+      "query_matches": [],
+      "missing_block_ids": [],
+      "blocks": [
+        {
+          "block_id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+          "block_index": 9,
+          "roles": [
+            "match"
+          ],
+          "query_indices": []
+        }
+      ]
+    }
+  }
+}

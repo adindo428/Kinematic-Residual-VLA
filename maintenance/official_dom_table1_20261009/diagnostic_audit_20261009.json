@@ -1,0 +1,73 @@
+{
+  "checked_at_utc": "2026-10-09T19:01:35.924193+00:00",
+  "reference_source": "https://github.com/hzxie/DynamicVLA/issues/29",
+  "proposed_gripper_fix": "https://github.com/hzxie/DynamicVLA/pull/30",
+  "actual_isaaclab_version": "2.3.2",
+  "actual_isaacsim_version": "5.1.0-rc.19+release.26219.9c81211b.gl",
+  "actual_gpus": {
+    "simulation": "L40S",
+    "policy": "same L40S"
+  },
+  "reference_environment_as_reported_by_author": {
+    "isaacsim": "4.5.0",
+    "isaaclab": "2.2.1",
+    "gpus": "two RTX A6000, simulation and inference separated"
+  },
+  "franka_finger_velocity_limit_m_s": 0.05,
+  "reference_finger_velocity_limit_m_s": 0.2,
+  "franka_finger_friction": 0.2,
+  "checkpoint_probe": {
+    "validated": true,
+    "gpu": "NVIDIA L40S",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/runs/official_dom_table1_20261009/checkpoint",
+    "normalizers_exactly_match_checkpoint": true,
+    "all_state_keys_match": true,
+    "finite_action_shape": [
+      1,
+      20,
+      7
+    ],
+    "warmed_chunk_time_s": 0.1107014948502183,
+    "torch": "2.7.1+cu126",
+    "transformers": "5.2.0"
+  },
+  "dimensions": {
+    "00_CR": {
+      "completed_trials": 200,
+      "successes": 0,
+      "statuses": [
+        1
+      ],
+      "logged_chunks": 18480,
+      "inference_seconds_quantile_05_50_95": [
+        0.1258,
+        0.1297,
+        0.1342
+      ],
+      "sleep_wall_seconds_quantile_05_50_95": [
+        0.0727,
+        0.0979,
+        0.12820499999999993
+      ]
+    },
+    "01_DA": {
+      "completed_trials": 67,
+      "successes": 0,
+      "statuses": [
+        1
+      ],
+      "logged_chunks": 6329,
+      "inference_seconds_quantile_05_50_95": [
+        0.1257,
+        0.1288,
+        0.1342
+      ],
+      "sleep_wall_seconds_quantile_05_50_95": [
+        0.1034,
+        0.1406,
+        0.198
+      ]
+    }
+  },
+  "conclusion": "Current setup differs from the author-reported Table 1 runtime. Gripper calibration and streaming latency are plausible contributors; unique cause of empty grasps has not been established. Released checkpoint is documented for direct inference without retraining. No policy or physics modifications made by this audit; jobs unchanged."
+}

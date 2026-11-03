@@ -1,0 +1,65 @@
+{
+  "pi05_baseline": {
+    "parent_job_id": "17859073",
+    "dependency": "afterany:17859073",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-continuations-20261022/scripts/pi05_baseline.sbatch",
+    "script_sha256": "251695d6b8d4a0eb3069e6083890f72a1c2efe6db87f5f7d93f734b62c76ecd1",
+    "state": "submitted",
+    "at": "2026-10-22T18:37:50.174201+00:00",
+    "job_id": "17931273"
+  },
+  "pi05_kr": {
+    "parent_job_id": "17859076",
+    "dependency": "afterany:17859076",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-continuations-20261022/scripts/pi05_kr.sbatch",
+    "script_sha256": "52a0b811fb9e6ec2b29e620fe122e737e0651d22988d5b668e06f9a611f8987a",
+    "state": "submitted",
+    "at": "2026-10-22T18:37:53.763337+00:00",
+    "job_id": "17931274"
+  },
+  "vlash_baseline": {
+    "parent_job_id": "17859077",
+    "dependency": "afterany:17859077",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-continuations-20261022/scripts/vlash_baseline.sbatch",
+    "script_sha256": "522e1e6b2f6249430c28d116ce719b3c3201c50dd8e90797dbd463b072a30cbd",
+    "state": "submitted",
+    "at": "2026-10-22T18:37:57.316341+00:00",
+    "job_id": "17931275"
+  },
+  "vlash_kr": {
+    "parent_job_id": "17859078",
+    "dependency": "afterany:17859078",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-continuations-20261022/scripts/vlash_kr.sbatch",
+    "script_sha256": "58e67790dd8303a32e0377b49d662ee875bef6fc01abbbdf5d4a58a27830a589",
+    "state": "submitted",
+    "at": "2026-10-22T18:38:00.997948+00:00",
+    "job_id": "17931276"
+  },
+  "smolvla_baseline": {
+    "parent_job_id": "17912900",
+    "dependency": "afterany:17912900",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-continuations-20261022/scripts/smolvla_baseline.sbatch",
+    "script_sha256": "67db3acffa685ab6b3258b306157568e7c9e392d83e3ef7020d86058ced1e118",
+    "state": "submitted",
+    "at": "2026-10-22T18:38:04.667544+00:00",
+    "job_id": "17931278"
+  },
+  "smolvla_kr": {
+    "parent_job_id": "17912901",
+    "dependency": "afterany:17912901",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-continuations-20261022/scripts/smolvla_kr.sbatch",
+    "script_sha256": "b70982d292ff72e3dadf91124d7a8d928ba1871b6123dc0bb74414291bca3a36",
+    "state": "submitted",
+    "at": "2026-10-22T18:38:08.129119+00:00",
+    "job_id": "17931279"
+  },
+  "domv100": {
+    "parent_job_id": "17912902",
+    "dependency": "afterany:17912902",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-continuations-20261022/scripts/domv100.sbatch",
+    "script_sha256": "4c1a3bd26d8df99693d616a5bf4efae47189d05635fdbeb5c3643589d9ce3d6b",
+    "state": "submitted",
+    "at": "2026-10-22T18:38:11.696522+00:00",
+    "job_id": "17931280"
+  }
+}

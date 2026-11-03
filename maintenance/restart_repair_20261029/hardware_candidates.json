@@ -1,0 +1,38 @@
+{
+  "pi05_kr": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/restart-repair-20261029-r2/scripts/pi05_kr.sbatch",
+    "script_sha256": "1c46ed85ab3c47a21511926a2dd67d4252e002efa7f1ffda2973a8e0b23ec1b0",
+    "dependency": "afterok:18661723",
+    "at": "2026-10-29T23:12:00.525636+00:00",
+    "job_id": "18661724",
+    "cluster": "Palmetto",
+    "variant": "pi05_kr",
+    "root": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021",
+    "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021",
+    "run_directory": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr",
+    "gpu": "H200 NVL",
+    "gpu_count": 2,
+    "world_size": 2,
+    "resume_from_updates": 301262,
+    "conditional_no_new_budget": true
+  },
+  "vlash_baseline": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/restart-repair-20261029-r2/scripts/vlash_baseline.sbatch",
+    "script_sha256": "4a2565e6a0ca14353a6958509f16b389a0579411f3587ffc97999bea3d0b96b8",
+    "dependency": "afterok:18661723",
+    "at": "2026-10-29T23:12:04.680323+00:00",
+    "job_id": "18661744",
+    "cluster": "Palmetto",
+    "variant": "vlash_baseline",
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline",
+    "family": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline",
+    "run_directory": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline",
+    "gpu": "H200 NVL",
+    "gpu_count": 2,
+    "world_size": 2,
+    "resume_from_updates": 364331,
+    "conditional_no_new_budget": true
+  }
+}

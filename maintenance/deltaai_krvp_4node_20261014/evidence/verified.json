@@ -1,0 +1,25 @@
+{
+  "completed_files": 804900,
+  "counts": {
+    "metadata": 4,
+    "parquet": 201224,
+    "phase": 201224,
+    "video": 402448
+  },
+  "errors": [],
+  "job_id": "3370672",
+  "manifest": "5d9f8004d1a7f210790e1d2b1933960b3bb95ada7b70da422278cec391a3e846",
+  "method": "Full byte identity with completed Palmetto decode audit; no repeated decode sweep",
+  "original_verified_manifest": "1bbb8092365ff5376c7b79dc736bdee36aa3dca18097e4cc4eff76968c8ac5c2",
+  "original_verified_receipt_sha256": "272464608be2c0abfd722d21ee5153bf92d20d5d08c944b1d1bc7560a6841d5f",
+  "paired_audit_manifest": "f0d58f4500e2976f1891c1f0c2595480d76cd086769b4031c04fce929726e0cf",
+  "source_audit_job": "17119970",
+  "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+  "started_unix": 1791962831.258943,
+  "state": "complete",
+  "total_files": 804900,
+  "updated_unix": 1791963084.9224942,
+  "verification_reused": true,
+  "verified_bytes": 188007523506,
+  "workers": 16
+}

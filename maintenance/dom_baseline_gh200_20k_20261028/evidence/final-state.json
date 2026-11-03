@@ -1,0 +1,201 @@
+{
+  "finalization.json": {
+    "job_id": "3479152",
+    "released": true,
+    "stage": "released_to_scheduler",
+    "verification": {
+      "complete": true,
+      "state": "complete",
+      "errors": [],
+      "dataset_root": "/work/nvme/bicn/anayak2/dynamicvla/huggingface/lerobot/hzxie/DOM",
+      "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+      "training_episodes": 20000,
+      "validation_episodes": 2015,
+      "test_downloaded": false,
+      "completed_files": 66045,
+      "total_files": 66045,
+      "phase_files_verified": 22015,
+      "metadata_files_verified": 4,
+      "metadata_hashes": {
+        "meta/episodes.jsonl": "85a53fa75d05036ff5a8002fbf974b9ea923fd1d41f833b0ef3d3826c53db403",
+        "meta/episodes_stats.jsonl": "3283537f8578ec348cc91f71bc09e87edfb313aa9783c461ca4a4829e9d8f68a",
+        "meta/info.json": "32df3dc5974e83d806e8a4ef3b3cbf4a8d3eb3e6eec94f53d8ed4ccf7abb1f98",
+        "meta/tasks.jsonl": "c4462d36dfb4cdbe5422c670ef50b84886b11d376641321a68f9d5968c85e4e4"
+      },
+      "seconds": 87.2669899892062,
+      "data_acquisition": "reused verified cache plus transfer from old Delta account; Hub downloads stopped at user request"
+    },
+    "queue": "3479152|anayak2|bicn-dtai-gh|dom100-20k-2n|PENDING|(None)",
+    "elapsed_seconds": 1.309912197291851
+  },
+  "verified-data.json": {
+    "complete": true,
+    "state": "complete",
+    "errors": [],
+    "dataset_root": "/work/nvme/bicn/anayak2/dynamicvla/huggingface/lerobot/hzxie/DOM",
+    "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+    "training_episodes": 20000,
+    "validation_episodes": 2015,
+    "test_downloaded": false,
+    "completed_files": 66045,
+    "total_files": 66045,
+    "phase_files_verified": 22015,
+    "metadata_files_verified": 4,
+    "metadata_hashes": {
+      "meta/episodes.jsonl": "85a53fa75d05036ff5a8002fbf974b9ea923fd1d41f833b0ef3d3826c53db403",
+      "meta/episodes_stats.jsonl": "3283537f8578ec348cc91f71bc09e87edfb313aa9783c461ca4a4829e9d8f68a",
+      "meta/info.json": "32df3dc5974e83d806e8a4ef3b3cbf4a8d3eb3e6eec94f53d8ed4ccf7abb1f98",
+      "meta/tasks.jsonl": "c4462d36dfb4cdbe5422c670ef50b84886b11d376641321a68f9d5968c85e4e4"
+    },
+    "seconds": 87.2669899892062,
+    "data_acquisition": "reused verified cache plus transfer from old Delta account; Hub downloads stopped at user request"
+  },
+  "family/manifest.json": {
+    "artifacts": {
+      "._cache_admission.py": "b2575e35076c3e7d8b8f9ea88b02cd1c92d71e1e36d697828431298a39323d66",
+      "._entry.py": "b2575e35076c3e7d8b8f9ea88b02cd1c92d71e1e36d697828431298a39323d66",
+      "._native_benchmark.py": "b2575e35076c3e7d8b8f9ea88b02cd1c92d71e1e36d697828431298a39323d66",
+      "._node_torchrun.sh": "b2575e35076c3e7d8b8f9ea88b02cd1c92d71e1e36d697828431298a39323d66",
+      "._run_nodes.sh": "b2575e35076c3e7d8b8f9ea88b02cd1c92d71e1e36d697828431298a39323d66",
+      "._stop_ranks.py": "b2575e35076c3e7d8b8f9ea88b02cd1c92d71e1e36d697828431298a39323d66",
+      "cache_admission.py": "e0550cad3f6ac80c06cbf32a3b66c72b04d3fcbb00418ec05aebaab1778be0f5",
+      "entry.py": "a86df13a18c4dc3906a1e3e4cad08516796d34553badd220138b7095f5d3abce",
+      "episodes.json": "38133225d617905527f4a021587c304880bb3141380fd79feb61f3439d66e385",
+      "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c",
+      "metadata_hashes.json": "577571375aa6241198ec1d7bd288317e89366da0e1dd09943dc85f42abb39b59",
+      "native_benchmark.py": "7791b7f5afab5c0b4d1999cae52d9f95ba177d0150ee2fdce68a26f09a90666f",
+      "node_torchrun.sh": "c7d0851b4fd81427455f9927a3eb79f48c4a5a97882f3d3969944c2e2215e49b",
+      "parent-manifest.json": "2e6c94bb2f2926bec60533d6ab5d56bad4c564321e937b3c1ff87bc088b669e4",
+      "parquet_hashes.json": "e36546bca72b1096b4d8478373e75e1ec4b58e5bdd02bf223a2bd0b7410e4fc8",
+      "phase_hashes.json": "5a077c528783086a55aaa762c6e83225360dd9a6d2720e19d703eb4fa838a485",
+      "pilot_episodes.json": "dd7c77e7f3de9528f371f0782a5f3b84fc8c38c012bb0b9b128cf43d6d1fadef",
+      "run_nodes.sh": "953a6385ab37eb504859e7875cde66d67e0c71af70f7373647f024b910408290",
+      "split.json": "3fed010ba90003510486eb6b6ff837a22cd28a7960049c38e4e910246d8b768a",
+      "stop_ranks.py": "ebd24f4a66919f998fc7d4ff19bbb8eb1a65dfc786913683ed65273a6c729188",
+      "subset-data-provenance.json": "083e49cf6a26df24b9244cba013158982c620e5a51bc9cc470f844ae8edd253e",
+      "subset-report.json": "e97964874389f9fc3a318f2ea1b1c1ee67944f62eb7f9ae923f376f5f6e26bae",
+      "test_cases.json": "3fca5ff097b8216d0cc1aaedc0235af172709a6520a72f05001e7dc3795c9fba",
+      "validation_anchors.json": "089d22058f2337cba93a25333c5b7b97994f6c6faefefc33a53187914f9fea63",
+      "validation_cases.json": "d0a5f98549dc8923091a0ffd999d9dc82573b2cc39f2ec83862fe151d9727961",
+      "video_hashes.json": "1bfc46fbd949f6e9f0a87067cbc123c0fcc018d8f60eca2a98d6ef8792f6cede"
+    },
+    "counts": {
+      "test": 2011,
+      "train": 20000,
+      "validation": 2015
+    },
+    "dataset": "hzxie/DOM",
+    "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+    "dataset_root": "/work/nvme/bicn/anayak2/dynamicvla/huggingface/lerobot/hzxie/DOM",
+    "episodes": 24026,
+    "execution_horizon": 20,
+    "fingerprint": "7e5e4b88245380d326ce4266ab0e6f6eae2a04e6a3d191ecd242fb8abc208c93",
+    "fps": 25,
+    "frames": 2864547,
+    "initialization": "/work/nvme/bicn/anayak2/dynamicvla/dom100-20k-gh200-20261028/family/initialization",
+    "initialization_provenance": {
+      "claim": "20k fine-tuning episodes; not 20k-only lifetime exposure",
+      "kind": "same released DOM initialization as the historical matched family",
+      "parent_manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+      "prior_DOM_pretraining": true,
+      "training_checkpoint_resumed": false
+    },
+    "kr": false,
+    "model_revision": "c9609d94c5940eb42436a31927d7e80ae454279e",
+    "normalization": "pretrained_state_action",
+    "phase_config": {
+      "close_duration_s": 0.2,
+      "fade_s": 0.2,
+      "history_s": 0.2,
+      "lift_m": 0.02,
+      "loss_duration_s": 0.12,
+      "loss_position_m": 0.03,
+      "loss_speed_m_s": 0.1,
+      "relative_position_m": 0.01,
+      "relative_speed_m_s": 0.05
+    },
+    "prediction_horizon": 20,
+    "profile_reference": {
+      "global_batch": 352,
+      "job_id": "3381859",
+      "microbatch": 44,
+      "samples_per_second": 373.45165815190313,
+      "use": "candidate runtime only; fresh dom100 readiness required",
+      "variant": "domv100",
+      "world_size": 8
+    },
+    "source_sha256": "f991015a229476400e0fc772177af33759d1bc3f23901381e2f83c7faaeab921",
+    "split_sha256": "3fed010ba90003510486eb6b6ff837a22cd28a7960049c38e4e910246d8b768a",
+    "subset_provenance": {
+      "held_out_membership_preserved": true,
+      "parent_split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+      "source": "cross-vla-krfm-20k-20261020",
+      "task_quotas": {
+        "long_horizon": 2000,
+        "pick": 9000,
+        "place": 9000
+      }
+    },
+    "train_frames": 2406773,
+    "training_authorization": "User requested missing plain DOM baseline on two-node GH200 setup, 2026-10-28; ten epochs follows current 20k campaign",
+    "variant": "dom100",
+    "velocity_conditioning": false,
+    "velocity_mean": [
+      -0.012337089571103266,
+      -0.0028381792549408494,
+      0.0165055323457251
+    ],
+    "velocity_std": [
+      0.1241744187278931,
+      0.1688344493051613,
+      0.20343423337015365
+    ],
+    "verified_data_sha256": "e0544d5510e1cf50e4f4ea30e52cfd3c38df03ab1c963914f5a8b191b64d1580",
+    "version": 2,
+    "weights_sha256": "e3da8b1e0326d7a3ee6873f7fa17cdf7015201251901be5107377cb851ce3af8"
+  },
+  "family/recipe.json": {
+    "early_stopping": {
+      "enabled": false
+    },
+    "effective_batch": 352,
+    "epochs": 10,
+    "fingerprint": "b46392ea6e06c24eb35c961866d7550eafc7817b37d1a5947fd06f3db1cdb6ab",
+    "initialization": "fresh from preserved released DOM initialization; no domv100 run state",
+    "kr": false,
+    "lr": 3e-05,
+    "manifest": "7e5e4b88245380d326ce4266ab0e6f6eae2a04e6a3d191ecd242fb8abc208c93",
+    "precision": "bf16",
+    "runtime_fingerprint": "f19ad25721ba08d802eaaab150c16e45edc051c730107476e14816b21f5b9ec6",
+    "sampling": "frames",
+    "scheduler": "cosine",
+    "scheduler_decay_steps": 68380,
+    "seed": 42,
+    "simulator_evaluation_mode": "disabled_on_deltaai",
+    "supported_world_sizes": [
+      8
+    ],
+    "velocity_conditioning": false,
+    "warmup_updates": 1000
+  },
+  "family/selected-runtime.json": {
+    "approval": "candidate; full same-attempt dom100 readiness required",
+    "fingerprint": "4705a84a508279ed33a4cff4814d92e6e06f300e1b54df9f47bdf06284d4769f",
+    "global_effective_batch": 352,
+    "gpus_per_node": 4,
+    "manifest": "7e5e4b88245380d326ce4266ab0e6f6eae2a04e6a3d191ecd242fb8abc208c93",
+    "node_count": 2,
+    "runtime": {
+      "fused": false,
+      "microbatch": 44,
+      "pin_memory": false,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "frames",
+      "workers": 4
+    },
+    "world_size": 8
+  },
+  "queue": "3479152|anayak2|bicn-dtai-gh|dom100-20k-2n|PENDING|(Priority)",
+  "job": "JobId=3479152 JobName=dom100-20k-2n UserId=anayak2(96398) GroupId=grp_202(202) MCS_label=N/A Priority=256 Nice=0 Account=bicn-dtai-gh QOS=bicn-dtai-gh JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-10-28T16:56:07 EligibleTime=2026-10-28T17:23:28 AccrueTime=2026-10-28T17:23:28 StartTime=2026-10-29T18:09:24 EndTime=2026-10-30T18:09:24 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-28T17:24:57 Scheduler=Main Partition=ghx4 AllocNode:Sid=gh-login01:1200119 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=2-2 NumCPUs=64 NumTasks=2 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=64,mem=768G,node=2,billing=8000,gres/gpu=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryTRES=113560M MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/work/nvme/bicn/anayak2/dynamicvla/dom100-20k-gh200-20261028/production.sbatch SubmitLine=sbatch --hold --parsable /work/nvme/bicn/anayak2/dynamicvla/dom100-20k-gh200-20261028/production.sbatch WorkDir=/u/anayak2 StdErr=/work/nvme/bicn/anayak2/dynamicvla/dom100-20k-gh200-20261028/logs/train-3479152.err StdIn=/dev/null StdOut=/work/nvme/bicn/anayak2/dynamicvla/dom100-20k-gh200-20261028/logs/train-3479152.out MemPerTres=gpu:113560 TresPerNode=gres/gpu:4 TresPerTask=cpu=32"
+}

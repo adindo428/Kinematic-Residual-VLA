@@ -1,0 +1,436 @@
+{
+  "source": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009",
+  "git_head": "",
+  "files": {
+    "DELTA_AI.md": {
+      "sha256": "e9e65e4b6e08310c62ced2c854dffc96f4626454a1192f887f56e601bcaeacf6",
+      "bytes": 5463
+    },
+    "DOM100.md": {
+      "sha256": "3ecfd02d5a1e0cc102a10385cb2ad932d479038413dd0c070e104129f69d8f8e",
+      "bytes": 25506
+    },
+    "LICENSE": {
+      "sha256": "eb7237d17f7586cd2412bb8173722d55dc59464aa1241acb96a3318a02394cf2",
+      "bytes": 1718
+    },
+    "RECOVERY.md": {
+      "sha256": "9eb799bd8da95da5c68e4b59b8aab79fb2392094c0d75b5bda98c69ad3cfb731",
+      "bytes": 11063
+    },
+    "configs/deltaai_torch_constraints.txt": {
+      "sha256": "88880c70b44b2ade0ec0db5d924513bd6f74bb721ecfbabed68cf16586e0f182",
+      "bytes": 46
+    },
+    "configs/diffusion.yaml": {
+      "sha256": "f8f1eade9814d5fa697bede50d1c369f110758cdde1c2d2066c4c978cf53159a",
+      "bytes": 947
+    },
+    "configs/dom_speed_ood_0p10_0p18_eval_split.json": {
+      "sha256": "698f62009e3cf62419612d9c867dad200b9dca5d2adcf2d4ccd9b944a8115e56",
+      "bytes": 918
+    },
+    "configs/dom_speed_ood_0p10_0p18_split.json": {
+      "sha256": "41fd905474a04898b7041527dfaf67ce9e73b5a6a6c907278d7c7a00bf39757d",
+      "bytes": 1426123
+    },
+    "configs/dynamicvla.yaml": {
+      "sha256": "7625326293becaaa16330d5b0759650707f702c38e8ec8e2af10adb1c19591b7",
+      "bytes": 1236
+    },
+    "configs/dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "sha256": "063f5d0cb18cdd1253d7743008dfca6c23f05702ca09bf56b3a5dd95c53b9ce5",
+      "bytes": 1705
+    },
+    "configs/dynamicvla_dom_paired_velocity.yaml": {
+      "sha256": "83b3f997701a20fb991ad5f8abe684b4f502e916881a77575e83e81aebb37c59",
+      "bytes": 1825
+    },
+    "configs/residual_dynamicvla_dom_cartesian_512.yaml": {
+      "sha256": "6a749fbd1b653ab00efae96a946601fb2a88e4d0cf6e4f2fedd929d745adaa0a",
+      "bytes": 2416
+    },
+    "configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "sha256": "c4b77205a62e128f38b71c150b47fda9a685da16b377d1587efa80d84787a567",
+      "bytes": 2423
+    },
+    "configs/residual_dynamicvla_dom_paired_velocity.yaml": {
+      "sha256": "161422cdf76c0bb431339481638964c8d8b3bef3a3a5bd77b80032c78724a288",
+      "bytes": 2534
+    },
+    "configs/residual_dynamicvla_dom_tiny.yaml": {
+      "sha256": "9f6e2cd3aab26f73115bf4e3e2333b37351d7a344a8e93fec22438b528cb306c",
+      "bytes": 1860
+    },
+    "configs/smolvla.yaml": {
+      "sha256": "547ebec6c498af223f8f0f82168b7413a2a6090bc187b5c3ba11d3a88654bfcd",
+      "bytes": 1052
+    },
+    "core/__init__.py": {
+      "sha256": "a0140c8c0b2fafac636e194beb15d8d4623ff04e007f4f522f7987300003d8bd",
+      "bytes": 637
+    },
+    "core/dom_checkpoint.py": {
+      "sha256": "2f187f78b37bbb9431d33b2139362ecfdbefe0de38e2a6230546e609ea8adf18",
+      "bytes": 5141
+    },
+    "core/dom_distributed.py": {
+      "sha256": "48fc1b251f35b7f483a3c66294ec06c9344a2a58024ec0deccbb00dc5977b1cf",
+      "bytes": 4270
+    },
+    "core/dom_distributed_training.py": {
+      "sha256": "a27b906ad580d0f9c5febee265b8fc0f300b40850af2a02a5663ce44cea21da5",
+      "bytes": 18389
+    },
+    "core/dom_profiling.py": {
+      "sha256": "c50915a77b5a7aafc24ce979eccfa59cf4e72297d729ccf281c3d4625df4e7e9",
+      "bytes": 10618
+    },
+    "core/dom_stopping.py": {
+      "sha256": "836965b509d950e65112741abf9644e3074520e3f9ddc72101b06956bb104ff0",
+      "bytes": 1626
+    },
+    "core/dom_training.py": {
+      "sha256": "b1adc5a75db5c4cba9f8593c095e9a212cac2fd1d3827df7f83ee296cde6e2bc",
+      "bytes": 22729
+    },
+    "core/test.py": {
+      "sha256": "e3ca543be189bfdeb1db8f14251d5330c076e423e4eec8db986afd24a86a676e",
+      "bytes": 3497
+    },
+    "core/train.py": {
+      "sha256": "922f96aa09dd0be459787a6ed2c740eeee2051e7808452d452976453a49a2bfb",
+      "bytes": 43708
+    },
+    "policies/dynamicvla/configuration_dynamicvla.py": {
+      "sha256": "c89db949f01c695dcc914cbde3aa8f35e58f430334baca5e429e5533cbddcc65",
+      "bytes": 8980
+    },
+    "policies/dynamicvla/modeling_dynamicvla.py": {
+      "sha256": "70109e2e840d9be86492f7779bb389fbce04539d6eed5d26f0c84b5c659427de",
+      "bytes": 60140
+    },
+    "policies/dynamicvla/modeling_fastvlm.py": {
+      "sha256": "a7b5fa1d1addd043938d6580d1e8c8449859b3b4c94f9a3a6d7ee9a7b4203259",
+      "bytes": 58646
+    },
+    "policies/dynamicvla/modeling_vlm_with_expert.py": {
+      "sha256": "e8315169202f995b479798262cc66e1c380103bba779f26e3dc43889211a2fe0",
+      "bytes": 25970
+    },
+    "proactive_vla/__init__.py": {
+      "sha256": "8e3eef0c5e8fbdfa0e5dba569738d0fc181f1c7d50abf171f3abf32ae3c51456",
+      "bytes": 846
+    },
+    "proactive_vla/phase_gate.py": {
+      "sha256": "8e8271db25125d4d489cc799bcad2d7e27069d1d47da7ee28e23363ee933a41a",
+      "bytes": 7503
+    },
+    "proactive_vla/residual_flow.py": {
+      "sha256": "2c6133bb5686d6c02696221f5c0938531fb1b12ed0105eeb2220ea008c29f4cf",
+      "bytes": 24664
+    },
+    "requirements.txt": {
+      "sha256": "09d7d4152f663e7c856e0d0c1be30adba396a0a848eacae4d6ee69f808d7a9eb",
+      "bytes": 209
+    },
+    "requirements_rocky8.txt": {
+      "sha256": "65ed132c0a470ca3aaf03fcf79fedfdb7dfc2b7ec27b687742a31ea213eaafbb",
+      "bytes": 1018
+    },
+    "run.py": {
+      "sha256": "329c4a0e574758d4c67365a6f75e1a8183cbc371adf6726d1b27a1f65dcd1da0",
+      "bytes": 11343
+    },
+    "scripts/check_train_readiness.py": {
+      "sha256": "ca502bf793862b8dbd92ccf1ec046627af52b751f3cf4a4a23db881c5e212324",
+      "bytes": 2298
+    },
+    "scripts/deltaai_env.sh": {
+      "sha256": "672c1cbb0cc905903bdadf4755b775f8752ad494b83d14b88104d3ee813ea6b2",
+      "bytes": 1755
+    },
+    "scripts/dom100.py": {
+      "sha256": "9706231413bc17a5fcf384a77269e1cec291d59cf019d2943aa95eb7024a4358",
+      "bytes": 15513
+    },
+    "scripts/dom100_distributed.py": {
+      "sha256": "1cf9f1a6600ce4626945d08b8d31f451ecd6895d81bca697de80878190687322",
+      "bytes": 4470
+    },
+    "scripts/dom100_env.sh": {
+      "sha256": "70596158871208a9ce35e7708edb93419d508ba1232c50e9c66b3923be01c70b",
+      "bytes": 511
+    },
+    "scripts/dom100_submit.py": {
+      "sha256": "30040fcdf1bf0d5762d913beb9318832bd2ebef03dfe09e6c1feb9a2a4a62e7e",
+      "bytes": 4581
+    },
+    "scripts/fix_lerobot_videos.py": {
+      "sha256": "044e5a7ff45d93e8751bf5f39f4be8ecbc8393555ca516747f588eebf504f581",
+      "bytes": 4017
+    },
+    "scripts/hub_checkpoints.py": {
+      "sha256": "727169f171735f95f8a695ef80261825d7219732eec0b5a13f4e3d27f48b369f",
+      "bytes": 5206
+    },
+    "scripts/palmetto_env.sh": {
+      "sha256": "8125ffd3978793119852c910387d7f9772c9833b708b260349f2df51934a15c6",
+      "bytes": 740
+    },
+    "scripts/prepare_dom100.py": {
+      "sha256": "419709eed5014370702f7665153dc11646b58e7e3761574796bdee52000dd5de",
+      "bytes": 18226
+    },
+    "scripts/rebuild_dom_speed_split.py": {
+      "sha256": "7b0c0e4901f5f665ced9f9a15c0826c79951973d3e611f32d0eabdf2d3e3b39f",
+      "bytes": 3570
+    },
+    "scripts/run_dom100.sh": {
+      "sha256": "50492a01a2370ca5e08c10563e3fdf3649d01c1ff7dca9dec4e65ba57e7866c8",
+      "bytes": 2354
+    },
+    "scripts/run_dom100_distributed.sh": {
+      "sha256": "f64c8c97841abf6ae96cf6d8f7c127118ee5cfda7c94b0afbca981ce02aba45e",
+      "bytes": 1792
+    },
+    "scripts/submit_dom100.sh": {
+      "sha256": "999617bdfa80a68617b1e21a1671323027276c9293e80ebb46f1b386b6c4c1e5",
+      "bytes": 538
+    },
+    "scripts/train_full_finetune_speed_ood_pair.sh": {
+      "sha256": "dd1105ac6d007f7956cc8d7ba7815ad61c7dae7a39f660a1f921c43ce81d6753",
+      "bytes": 4675
+    },
+    "scripts/train_paired_velocity_pair.sh": {
+      "sha256": "81b2269a29580ea4e108dc05d72c36feb87f4ed752bd68c7638d49deac68ac0c",
+      "bytes": 7293
+    },
+    "slurm/01_dom100.sbatch": {
+      "sha256": "d3b04be8de5711fdbc1f5bf2001029032e3ef38c5b8ed56872a7bd57d8811617",
+      "bytes": 424
+    },
+    "slurm/02_kr100.sbatch": {
+      "sha256": "2389f5638850bfb22206d9b9dc83761802a55b705601c978863366bf281cab8e",
+      "bytes": 420
+    },
+    "slurm/03_domv100.sbatch": {
+      "sha256": "87a10936678fee7fcf348686f38fb805b38b7e60727589ed3327d35867b69e8f",
+      "bytes": 428
+    },
+    "slurm/04_krv100.sbatch": {
+      "sha256": "fff3945b405ac234478abbb0e2837e40caae615134b7c331b8191d9979f2d029",
+      "bytes": 424
+    },
+    "slurm/05_krp100.sbatch": {
+      "sha256": "4ed792e0e0cc8e4b4cf806f953a9cf16572005e1bb7353920507f4c3f6a7d031",
+      "bytes": 424
+    },
+    "slurm/06_krvp100.sbatch": {
+      "sha256": "9b9672496c2f959392b433071fcf9f895a7c15f76b1bed70cb5f11907f4961e6",
+      "bytes": 428
+    },
+    "slurm/deltaai_dependencies.sbatch": {
+      "sha256": "b2ab648c38d83d2c0db0d3fb97b519f8e6a382ca3a736f685bfbceb2bc1a758c",
+      "bytes": 944
+    },
+    "slurm/deltaai_environment_smoke.sbatch": {
+      "sha256": "3a141d03646683e26604afa36daa611fdcc454aa0b8f89a2fee12bf6da1f4d4a",
+      "bytes": 1913
+    },
+    "slurm/deltaai_full_finetune.sbatch": {
+      "sha256": "00f76015edfcef7c477040680c6dc7599038991919d4b58fbca70ec62ef69d9f",
+      "bytes": 1373
+    },
+    "slurm/deltaai_prefetch.sbatch": {
+      "sha256": "47a6730c2876172d553ee700278a50fb083bf0d096daf55276726246b18b1633",
+      "bytes": 1182
+    },
+    "slurm/dom100_distributed.sbatch": {
+      "sha256": "c180fad0042d00bdbf48a85b2270287abe07743c93168041e6681224e47a4656",
+      "bytes": 469
+    },
+    "slurm/pilots_dom100.sbatch": {
+      "sha256": "fdf9d531ef4ae2e506ee745a5150a5a7c0696d2336835833b37f67d8cc4be994",
+      "bytes": 369
+    },
+    "slurm/prepare_dom100.sbatch": {
+      "sha256": "4494231eb7f7399289cd72da7b8442138088eeb713fb1289cf20849429c9a1a6",
+      "bytes": 351
+    },
+    "slurm/profile_dom100_a100.sbatch": {
+      "sha256": "6370c287d86e3e5ad60b95accbd405869c7e078f22399404fdb7b0ba2aeb2847",
+      "bytes": 327
+    },
+    "slurm/profile_dom100_h100.sbatch": {
+      "sha256": "27723047e76105ff25583141481aac6ac57f040b7c305503f6e8746874f6d029",
+      "bytes": 327
+    },
+    "slurm/profile_dom100_h200.sbatch": {
+      "sha256": "aecf1ca49e2b3b0674bedfca18ea5d006f5ac071583fd826724cf0b6194f7a92",
+      "bytes": 327
+    },
+    "slurm/smoke_dom100.sbatch": {
+      "sha256": "92c67cf0dd6f6bb25e149c968e20c75cd9076e45bc9a9c347ad8c6460c1c75ed",
+      "bytes": 366
+    },
+    "slurm/train_full_finetune_speed_ood_pair_a100.sbatch": {
+      "sha256": "51fbf8c62faeea647bc7eac4c63f98f8799c796347d09295e47447a6ddd9e84d",
+      "bytes": 1099
+    },
+    "slurm/train_full_finetune_speed_ood_pair_a100_4gpu.sbatch": {
+      "sha256": "803e3fbacb7c4b4be564e6d9bc2f59ef7478c60f45892f4b92fbb63ff8690736",
+      "bytes": 1795
+    },
+    "slurm/train_full_finetune_speed_ood_pair_h100.sbatch": {
+      "sha256": "72f28dfb0a16bb622209a60763c196c09f0bfcd2e3c9724853eff8767a32a866",
+      "bytes": 1098
+    },
+    "slurm/train_full_finetune_speed_ood_pair_h200.sbatch": {
+      "sha256": "44c39aedcf3d33c7daed6658a562fd44831d45bd102922c73803be89486752d0",
+      "bytes": 1099
+    },
+    "slurm/train_paired_velocity_pair_h100.sbatch": {
+      "sha256": "4387904531ec93892a684eea043da4656ea99d1972481c43f5f1d646b6ec2368",
+      "bytes": 6616
+    },
+    "slurm/train_scratch_speed_ood_pair_a100.sbatch": {
+      "sha256": "bcf3f956d48bd4fb363d348692cb923a00d386eeacf9e44fa5e3deea8a827758",
+      "bytes": 1025
+    },
+    "slurm/train_scratch_speed_ood_pair_h100.sbatch": {
+      "sha256": "3d1e524cb73d569ea002890776b44f53bc58fe116eec3187d01c855760b0d4ae",
+      "bytes": 1025
+    },
+    "utils/average_meter.py": {
+      "sha256": "2c0da4fd0620175740197c778d969f653312b5badcb219a1846b59c25c73c178",
+      "bytes": 1834
+    },
+    "utils/datasets.py": {
+      "sha256": "2fdde2a18a2b153a1f2adb099058670fa5fee608f5dfc242794cbc315f0d818d",
+      "bytes": 53300
+    },
+    "utils/distributed.py": {
+      "sha256": "4ba72c4b9569e8ed361b7792dd2bb801a23aeb4212f8cdf27bedfbdb915309a5",
+      "bytes": 4555
+    },
+    "utils/dom_data.py": {
+      "sha256": "45eabc6dc163826788721fe4089dedcaecd5aed266ed41c968abff1cb78e4611",
+      "bytes": 10714
+    },
+    "utils/dom_experiment.py": {
+      "sha256": "8f6b500cdbaa7d2136af4db5b76554785b0a672de6c32b57aa3bd0601b261c7f",
+      "bytes": 5894
+    },
+    "utils/helpers.py": {
+      "sha256": "1601c731d2f821c5e15a89246be0fcdf3b01a2c7697af6df225d87683e21dcc8",
+      "bytes": 11333
+    },
+    "utils/instruction_generator.py": {
+      "sha256": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+      "bytes": 1712
+    },
+    "utils/memcached.py": {
+      "sha256": "96cb0d41a88dbdca3798f961376cad8868ea962728aa91cd2565c3d051b8e70a",
+      "bytes": 4793
+    },
+    "utils/summary_writer.py": {
+      "sha256": "b417e410325da4233702060cd025872516d3af161061e9caa83c4170771a53dd",
+      "bytes": 3378
+    }
+  },
+  "excluded_files": [
+    "PROACTIVE_RESIDUAL_MVP.md",
+    "README.md",
+    "scripts/compare_da3_dom_velocity.py",
+    "scripts/create_lerobot_dataset.py",
+    "scripts/create_libero_dataset.py",
+    "scripts/create_object_collision.py",
+    "scripts/create_scene_collision.py",
+    "scripts/create_usd_objects.py",
+    "scripts/create_usd_scenes.py",
+    "scripts/dom100_horizon20.py",
+    "scripts/dom_closed_loop.py",
+    "scripts/eval_checkpoints.py",
+    "scripts/eval_libero_dataset.py",
+    "scripts/evaluate_baseline_residual_iid_ood.py",
+    "scripts/evaluate_residual_paired_velocity_sweep.py",
+    "scripts/fix_error_scenes.py",
+    "scripts/inference.py",
+    "scripts/make_speed_smoke_split.py",
+    "scripts/prefetch_eval_splits.py",
+    "scripts/proactive_residual_dom_ablation.py",
+    "scripts/proactive_residual_offline_compare.py",
+    "scripts/replay_dataset_seq.py",
+    "scripts/submit_dom100_distributed.py",
+    "scripts/submit_paired_velocity_pair.sh",
+    "scripts/train_scratch_speed_ood_pair.sh",
+    "scripts/translate_dataset_seq.py",
+    "scripts/update_usd_tex_loc.py",
+    "scripts/visualze_dataset_seq.py",
+    "simulations/__init__.py",
+    "simulations/configs/__init__.py",
+    "simulations/configs/env_cfg.py",
+    "simulations/configs/event_cfg.py",
+    "simulations/configs/object_cfg.py",
+    "simulations/configs/robot_cfg.py",
+    "simulations/configs/scene_cfg.py",
+    "simulations/configs/sim_cfg.yaml",
+    "simulations/configs/termination_cfg.py",
+    "simulations/evaluate.py",
+    "simulations/helpers.py",
+    "simulations/robots/PIPER/configuration/piper_base.usd",
+    "simulations/robots/PIPER/configuration/piper_physics.usd",
+    "simulations/robots/PIPER/configuration/piper_sensor.usd",
+    "simulations/robots/PIPER/meshes/base_link.STL",
+    "simulations/robots/PIPER/meshes/gripper_base.STL",
+    "simulations/robots/PIPER/meshes/link1.STL",
+    "simulations/robots/PIPER/meshes/link2.STL",
+    "simulations/robots/PIPER/meshes/link3.STL",
+    "simulations/robots/PIPER/meshes/link4.STL",
+    "simulations/robots/PIPER/meshes/link5.STL",
+    "simulations/robots/PIPER/meshes/link6.STL",
+    "simulations/robots/PIPER/meshes/link7.STL",
+    "simulations/robots/PIPER/meshes/link8.STL",
+    "simulations/robots/PIPER/piper.usd",
+    "simulations/robots/PIPER/piper_description.urdf",
+    "simulations/robots/__init__.py",
+    "simulations/robots/franka.py",
+    "simulations/robots/piper.py",
+    "simulations/simulate.py",
+    "simulations/state_machines/__int__.py",
+    "simulations/state_machines/pick_sm.py",
+    "simulations/state_machines/place_sm.py",
+    "simulations/state_machines/sm_utils.py",
+    "slurm/continue_full_finetune_speed_ood_pair_h100.sbatch",
+    "slurm/evaluate_closed_loop_dom_l40.sbatch",
+    "slurm/evaluate_dom100.sbatch",
+    "slurm/evaluate_full_finetune_iid_ood_h100.sbatch",
+    "slurm/evaluate_residual_paired_velocity_sweep_h100.sbatch",
+    "slurm/integration_dom100.sbatch",
+    "slurm/krv100_4gpu.sbatch",
+    "slurm/krv100_8gpu.sbatch",
+    "slurm/postprocess_full_finetune_eval_splits.sbatch",
+    "slurm/preprocess_full_finetune_speed_ood_pair.sbatch",
+    "slurm/smoke_full_finetune_speed_ood_h100.sbatch",
+    "tests/test_dataset_split_file.py",
+    "tests/test_dom100_horizon.py",
+    "tests/test_dom100_runtime.py",
+    "tests/test_dom100_training.py",
+    "tests/test_dom_batched_decoding.py",
+    "tests/test_dom_ddp.py",
+    "tests/test_dom_phase_gate.py",
+    "tests/test_dom_stopping.py",
+    "tests/test_dom_velocity_conditioning.py",
+    "tests/test_hub_checkpoints.py",
+    "tests/test_instruction_generator.py",
+    "tests/test_offline_compare.py",
+    "tests/test_residual_coordinate_flow.py",
+    "tests/test_residual_flow.py",
+    "tests/test_scheduler_steps.py",
+    "tests/test_train_eval_metrics.py",
+    "tests/test_train_only_prefetch.py",
+    "utils/dom_sim_metrics.py",
+    "utils/maya_controller.py"
+  ]
+}

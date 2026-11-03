@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "sequence": 217,
+  "receipt": {
+    "new_sequence": 217,
+    "through_sequence": 217,
+    "operation_results": [
+      {
+        "operation_index": 0,
+        "preceding_block_id": "7e1bbc83-aaba-4907-9312-29f83339def7",
+        "created_block_ids": [],
+        "continuation_position": {
+          "block_id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+          "relative_position_base64": "AP//6FmdFkE="
+        },
+        "affected_blocks": [
+          {
+            "block_id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+            "hash": "30970fd6f02706d35557559d4918501af811db8c2485115c8d45d71b91eb27f3"
+          }
+        ]
+      }
+    ]
+  },
+  "readback": {
+    "metadata": {
+      "page_id": "page_4ff536c9060081919225467494390460",
+      "layout": "document",
+      "symbol": null,
+      "title": "KRVLA training run register",
+      "preview": "DynamicVLA and KRVLA training submissions, including the current six-model DOM manipulation study, earlier tracking runs, and the separate DeltaAI DOM launch. Scheduler completion and checkpoint epochs are reported separately; neither impli",
+      "creator_account_user_id": "user-Uxm2x1EDmPPhJh6DV43gC1uL__4c54659e-5103-4f34-9102-cca112775f74",
+      "owner_workspace_id": "4c54659e-5103-4f34-9102-cca112775f74",
+      "parent": null,
+      "drive_scope": "workspace_private",
+      "drive_space_id": null,
+      "library_container_id": "fde3_cGFnZV80ZmY1MzZjOTA2MDA4MTkxOTIyNTQ2NzQ5NDM5MDQ2MA_b1c20e2b9f388191bc424aac9e399af7",
+      "file_upload_page_id": "page_4ff536c9060081919225467494390460",
+      "position": 1834562553847808,
+      "created_at": "2026-10-09T16:56:34.266050Z",
+      "updated_at": "2026-10-21T16:46:34.937752Z",
+      "deleted_at": null,
+      "current_sequence": 217,
+      "projection_through_sequence": 217,
+      "access": {
+        "can_read": true,
+        "can_comment": true,
+        "can_write": true,
+        "can_share": true,
+        "can_delete": true,
+        "sources": [
+          "library"
+        ]
+      },
+      "url": "https://chatgpt.com/space/page_4ff536c9060081919225467494390460"
+    },
+    "content": {
+      "schema_version": 2,
+      "symbol": null,
+      "title": "KRVLA training run register",
+      "title_hash": "4612ac26e1ab986edcfab25b61f1807b03d8b2206bd32f5d9ced0d9e46c6157f",
+      "blocks": [
+        {
+          "id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+          "kind": "markdown",
+          "markdown": "DeltaAI interactive comparison October21: user approved transferring the exact π0.5 KR checkpoint and pinned implementation. The isolated GH200120GB/PyTorch2.12 environment passed pinned π0.5 imports, actual audited train/validation two-camera decoding, BF16 cache and optimizer-continuation CPU contracts, and the two-rank coordinated-flag test. Scheduler test-only3429509 was a preflight, not a submitted job. Both cluster connections were restored. The first20,308,901,888bytes exactly matched the immutable source prefix (SHA256 b9a6df4017406a31e2ed4a08f7bfaa88916b6fbb1d1e64bdb8acc0f8d4acb6da), and the remaining transfer has resumed. The complete checkpoint is40,456,772,509bytes; its final SHA remains mandatory. The one-shot controller is waiting for a complete SHA-verified checkpoint before requesting2GH200/32CPU/256GiB for at most2hours; no GPU allocation or comparison results exist yet. Planned variants are repeated controls, CPU tokenization, transfer prefetch,12workers, autocast weight caching and disabling activation recomputation, with identical saved model/optimizer/scheduler/RNG/cursor, native global32, loss/gradient checks and15%memory headroom. Rates will be compared within the same DeltaAI allocation, not treated as a Palmetto code speedup. Production runs and the paused follow-up monitor remain unchanged. Evidence: maintenance/pi05_deltaai_comparison_20261021/status.json. Keep authenticated sessions open through staging.",
+          "hash": "30970fd6f02706d35557559d4918501af811db8c2485115c8d45d71b91eb27f3",
+          "metadata": {}
+        }
+      ],
+      "page_id": "page_4ff536c9060081919225467494390460"
+    },
+    "view": "editing",
+    "selection": {
+      "mode": "block_ids",
+      "selection_complete": true,
+      "whole_page_complete": false,
+      "page_block_count": 40,
+      "returned_block_count": 1,
+      "matched_block_count": 1,
+      "context_blocks": 0,
+      "query_matches": [],
+      "missing_block_ids": [],
+      "blocks": [
+        {
+          "block_id": "88a1a785-4d96-484f-9a0b-87d8b7013094",
+          "block_index": 9,
+          "roles": [
+            "match"
+          ],
+          "query_indices": []
+        }
+      ]
+    }
+  }
+}

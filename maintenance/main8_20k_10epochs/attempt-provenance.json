@@ -1,0 +1,1 @@
+{"supersedes": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021", "cancelled_unstarted_jobs": ["17837949", "17837950", "17837951"], "reason": "Native DOM preserves original local BatchNorm training buffers and canonical leader buffers for checkpoint/validation", "original_parent_checkpoints_preserved": true, "new_training_not_started_in_parent_attempt": true}

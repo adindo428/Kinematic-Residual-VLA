@@ -1,0 +1,10 @@
+{
+  "job_id": "3429648",
+  "state": "CANCELLED",
+  "exit_code": "0:0",
+  "elapsed": "00:00:00",
+  "reason": "salloc immediate=60 resource wait timed out while PENDING Priority",
+  "allocation_granted": false,
+  "gpu_comparison_executed": false,
+  "production_changed": false
+}

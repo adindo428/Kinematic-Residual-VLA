@@ -1,0 +1,18 @@
+{
+  "krv100": {
+    "cluster": "Palmetto",
+    "family": "/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029/family",
+    "root": "/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029",
+    "job_id": "18663627",
+    "profile_job_id": "18663626",
+    "setup_job_id": "18663625",
+    "gpu": "H200 SXM",
+    "gpu_count": 2,
+    "variant": "krv100",
+    "fresh_20k": true,
+    "epochs": 10,
+    "total_updates": 68380,
+    "run_directory": "/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029/family/runs/krv100",
+    "wandb_id": null
+  }
+}

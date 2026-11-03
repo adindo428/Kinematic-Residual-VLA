@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "per_rank": [
+    {
+      "rank": 0,
+      "actual_batch_size": 16,
+      "synthetic_boundary_states": 771,
+      "prepared_tensors_exact": true,
+      "token_mismatches": [],
+      "bin_boundaries_exact": true,
+      "loss_gradient_consistency": true,
+      "candidate_eligible": true,
+      "trainable_gradient_tensors_compared": 805
+    },
+    {
+      "rank": 1,
+      "actual_batch_size": 16,
+      "synthetic_boundary_states": 771,
+      "prepared_tensors_exact": true,
+      "token_mismatches": [],
+      "bin_boundaries_exact": true,
+      "loss_gradient_consistency": true,
+      "candidate_eligible": true,
+      "trainable_gradient_tensors_compared": 805
+    }
+  ],
+  "snapshot": {
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+    "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+    "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+    "progress": {
+      "updates": 60004,
+      "samples": 1920128,
+      "epoch": 0,
+      "cursor": 1920128
+    },
+    "parent_job_id": "17782830",
+    "at": "2026-10-21T15:10:39.482250+00:00",
+    "hard_link_to_atomically_replaced_latest_inode": true,
+    "production_untouched": true
+  },
+  "not_production_readiness": true
+}

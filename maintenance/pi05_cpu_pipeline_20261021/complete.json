@@ -1,0 +1,58 @@
+{
+  "complete": true,
+  "job_id": "17837039",
+  "at": "2026-10-21T15:34:35.578683+00:00",
+  "control_samples_per_second_median": 37.499925349620824,
+  "best_candidate": {
+    "runtime": {
+      "name": "worker_prompts12_cuda_prefetch",
+      "cpu_prompts": true,
+      "prefetch_gpu": true,
+      "workers": 12,
+      "prefetch": 2
+    },
+    "timed_updates": 200,
+    "global_batch": 32,
+    "seconds_slowest_rank": 169.95615601632744,
+    "samples_per_second": 37.65677072259248,
+    "per_rank_seconds": [
+      169.95576787367463,
+      169.95615601632744
+    ],
+    "per_rank_dataloader_wait_seconds": [
+      0.020967266522347927,
+      0.02151974570006132
+    ],
+    "gpu_peak_reserved_bytes": 63403196416.0,
+    "total_gpu_bytes": 150109880320,
+    "node_conservative_rss_bytes": 95850266624.0,
+    "node_ram_limit_bytes": 274877906944,
+    "fifteen_percent_headroom_pass": true,
+    "mean_gpu_utilization_percent_rank0_sampler": 97.57051282051282,
+    "mean_cpu_busy_cores_rank_local": 1.292441782205819,
+    "same_production_snapshot": {
+      "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+      "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+      "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+      "progress": {
+        "updates": 60004,
+        "samples": 1920128,
+        "epoch": 0,
+        "cursor": 1920128
+      },
+      "parent_job_id": "17782830",
+      "at": "2026-10-21T15:10:39.482250+00:00",
+      "hard_link_to_atomically_replaced_latest_inode": true,
+      "production_untouched": true
+    },
+    "includes_checkpoints": false,
+    "warmup_updates": 10,
+    "not_production_readiness": true
+  },
+  "candidate_speedup": 1.0041825516053526,
+  "control_drift_ratio": 1.0088744272130663,
+  "production_untouched": true,
+  "production_source_identity_unchanged": true,
+  "not_production_readiness": true,
+  "no_wandb_run_created": true
+}

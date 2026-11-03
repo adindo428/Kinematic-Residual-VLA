@@ -1,0 +1,10 @@
+{
+  "script": "/scratch/aparame/Dynamic_VLA/h200-consolidation-control-20261022/approved-parent-cleanup/cleanup.sbatch",
+  "script_sha256": "c5e49affceb0a63ce4829b6a12f556991506634241de861f9740a6155d431ff0",
+  "controller_sha256": "a01ae030af1b1521181519ba065d7af7cc7e99037e28e4fe35ed12d5f7ab98d8",
+  "state": "submitted",
+  "approved_file_count": 8,
+  "approved_bytes": 129348096607,
+  "preflight": "sbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17923815 to start at 2026-10-22T12:47:57 a using 8 processors on nodes node0736 in partition work1\n",
+  "job_id": "17923816"
+}

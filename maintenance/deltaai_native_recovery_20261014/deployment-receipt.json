@@ -1,0 +1,47 @@
+{
+  "deployment.json": {
+    "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-isolated-ddp-20261014",
+    "manifest": "912219018b52820b95fa3c1806cbe3994a5fe8ac4a96fbbd2896e07c6137167f",
+    "previous_failed_job": "3370672",
+    "recipe": "34c03e74ccf45fb03a6a2e6c123d8c75fcefe2e5f3e2cf0f3167ea8f84012655",
+    "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261012-video-clean/dom100",
+    "source_sha256": "f991015a229476400e0fc772177af33759d1bc3f23901381e2f83c7faaeab921",
+    "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+    "verified_files_reused": 804900
+  },
+  "combined-submission.json": {
+    "batch": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-isolated-domv-20261014/combined.sbatch",
+    "batch_sha256": "6211e76cbbd7568710fe203d64ab2d953bda2c0eb60d8f754143f5e5e6ff1c52",
+    "dependency": null,
+    "incident_job": "3370672",
+    "job_id": "3379435",
+    "purpose": "15minute isolated check; conditional training in same48hour allocation",
+    "requested_exclusion": "gh055; diagnostic choice, not a confirmed node fault",
+    "returncode": 0,
+    "stage": "submitted",
+    "stderr": "",
+    "stdout": "3379435\n"
+  },
+  "status.json": {
+    "candidate_microbatch": 22,
+    "candidate_workers": 1,
+    "combined_allocation": true,
+    "dependency": null,
+    "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-isolated-ddp-20261014",
+    "manifest_fingerprint": "912219018b52820b95fa3c1806cbe3994a5fe8ac4a96fbbd2896e07c6137167f",
+    "native_cause_confirmed": false,
+    "previous_failed_job": "3370672",
+    "production_submitted": true,
+    "readiness_candidate_limit_minutes": 15,
+    "readiness_total_limit_minutes": 15,
+    "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261012-video-clean/dom100",
+    "stage": "isolated_check_and_training_queued",
+    "training_job": "3379435",
+    "training_started": false,
+    "updated_utc": "2026-10-14T13:55:42Z",
+    "verification_complete": true,
+    "verification_job": "3370672",
+    "verification_reused": true,
+    "verified_files": 804900
+  }
+}

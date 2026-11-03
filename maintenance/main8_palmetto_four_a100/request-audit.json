@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-10-21T21:37:47.861177+00:00",
+  "request": "on palmetto, send the same training runs to 4x A100 as well",
+  "palmetto_access_verified": true,
+  "existing_four_a100_jobs": {
+    "smolvla_baseline": "17839146",
+    "smolvla_kr": "17839147",
+    "domv100": "17839148"
+  },
+  "existing_state": "PENDING(Resources)",
+  "existing_gpu_class": "A10040",
+  "existing_jobs_changed": false,
+  "additional_candidate_models": [
+    "pi05_baseline",
+    "pi05_kr",
+    "vlash_baseline",
+    "vlash_kr"
+  ],
+  "proposed_pi05_placement": {
+    "nodes": 2,
+    "a100_80gb_per_node": 2,
+    "total_gpus": 4,
+    "reason": "Palmetto A10080 nodes expose two GPUs per node; data parallel replicas do not combine per-device memory"
+  },
+  "protocol": "same 20000 training episodes / 2406773 anchors / 10 additional subset sampler epochs; global batch and parent learning-rate schedule unchanged",
+  "pending_user_clarification": [
+    "which additional pairs",
+    "alternative placements versus separate parallel replicas"
+  ],
+  "delta_access": "Existing multiplexed connection failed; no interactive login attempted",
+  "deltaai_access": "Existing multiplexed connection failed; no interactive login attempted",
+  "new_submissions": [],
+  "training_source_changed": false,
+  "canonical_jobs_cancelled": false,
+  "updated_at": "2026-10-21T21:38:37.865518+00:00",
+  "additional_h200_request": true,
+  "proposed_h200_placement": {
+    "nodes": 1,
+    "h200_per_node": 2,
+    "total_gpus": 2,
+    "fresh_actual_gpu_readiness_required": true
+  },
+  "last_actual_palmetto_queue": {
+    "17839146": "PENDING(Resources)",
+    "17839147": "PENDING(Resources)",
+    "17839148": "PENDING(Resources)"
+  },
+  "existing_frozen_parent_staging_verified": true,
+  "pending_scope_question": "Add pi05 and VLASH baseline/KR pairs on both hardware types; separate replicas versus alternative placements still unanswered"
+}

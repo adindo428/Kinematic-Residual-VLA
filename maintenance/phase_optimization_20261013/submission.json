@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "17182057\n",
+  "stderr": "sbatch: Requested Features: gpu_a100_40gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\n"
+}

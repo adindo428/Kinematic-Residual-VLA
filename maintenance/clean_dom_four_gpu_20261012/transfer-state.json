@@ -1,0 +1,20 @@
+{
+  "pack_job": "17129784",
+  "delta_audit_cancelled": "3369190",
+  "stage": "cancelled_use_existing_delta_dataset",
+  "pid": 98379,
+  "updated_unix": 1791855950.407972,
+  "pack_progress": {
+    "state": "complete",
+    "files": 804922,
+    "total": 804922,
+    "archive": "/scratch/aparame/Dynamic_VLA/clean-dom-four-gpu-20261012/dom-clean.tar",
+    "updated_unix": 1791855948.3910203,
+    "recovered_from_job": "17123683"
+  },
+  "paused_unix": 1791856909.8665369,
+  "pause_method": "SIGSTOP process group 98379",
+  "resume_requires_user": true,
+  "transfer_worker_terminated": true,
+  "current_plan": "Use existing DeltaAI DOM copy; final nine exclusions approved in DeltaAI chat; verify hashes before conditional training launch"
+}

@@ -1,0 +1,35 @@
+{
+  "vlash_baseline": {
+    "job": "17931275",
+    "parent": "17859077",
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline",
+    "microbatch": 16,
+    "accumulation": 1,
+    "global_batch": 32,
+    "source_and_guard_hashes_verified": true,
+    "dependency": "afterany:17859077",
+    "active_parent_unmodified": true
+  },
+  "vlash_kr": {
+    "job": "17931276",
+    "parent": "17859078",
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr",
+    "microbatch": 16,
+    "accumulation": 1,
+    "global_batch": 32,
+    "source_and_guard_hashes_verified": true,
+    "dependency": "afterany:17859078",
+    "active_parent_unmodified": true
+  },
+  "domv100": {
+    "job": "17931280",
+    "parent": "17912902",
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/domv100",
+    "microbatch": 44,
+    "accumulation": 4,
+    "global_batch": 352,
+    "source_and_guard_hashes_verified": true,
+    "dependency": "afterany:17912902",
+    "active_parent_unmodified": true
+  }
+}

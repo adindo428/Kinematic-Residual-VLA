@@ -1,0 +1,26 @@
+{
+  "verification": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/restart-repair-20261029-r2/scripts/verification.sbatch",
+    "script_sha256": "38ed9be010a47988dc4e8cbd5e3c0894f9f877effed6d723b29dd3793fd034c1",
+    "dependency": null,
+    "at": "2026-10-29T23:11:57.989517+00:00",
+    "job_id": "18661723"
+  },
+  "pi05_kr": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/restart-repair-20261029-r2/scripts/pi05_kr.sbatch",
+    "script_sha256": "1c46ed85ab3c47a21511926a2dd67d4252e002efa7f1ffda2973a8e0b23ec1b0",
+    "dependency": "afterok:18661723",
+    "at": "2026-10-29T23:12:00.525636+00:00",
+    "job_id": "18661724"
+  },
+  "vlash_baseline": {
+    "state": "submitted",
+    "script": "/scratch/aparame/Dynamic_VLA/restart-repair-20261029-r2/scripts/vlash_baseline.sbatch",
+    "script_sha256": "4a2565e6a0ca14353a6958509f16b389a0579411f3587ffc97999bea3d0b96b8",
+    "dependency": "afterok:18661723",
+    "at": "2026-10-29T23:12:04.680323+00:00",
+    "job_id": "18661744"
+  }
+}

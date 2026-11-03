@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#SBATCH --account=cuuser_yue6_vae_verification
+#SBATCH --partition=work1
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --job-name=fresh20k-krv-profile
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=256G
+#SBATCH --time=02:00:00
+#SBATCH --output=/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029/logs/profile-%j.out
+#SBATCH --error=/scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029/logs/profile-%j.err
+#SBATCH --gpus-per-node=h200:2
+#SBATCH --constraint=gpu_h200&chip_manufacturer_intel
+set -euo pipefail
+export OMP_NUM_THREADS=2 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1
+export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export LD_LIBRARY_PATH=/software/slurm/spackages/linux-rocky8-x86_64/gcc-12.3.0/cuda-12.3.0-p2hoh7xwcu52zilqglv3nnc5bwnritue/lib64:/home/aparame/.conda/envs/dynamicvla/lib:${LD_LIBRARY_PATH:-}
+cd /scratch/aparame/Dynamic_VLA/krv100-fresh20k-h200-20261029
+export PYTHONPATH="$PWD/source"
+export WANDB_CONFIG_DIR="$PWD/wandb-config"
+mkdir -p "$WANDB_CONFIG_DIR"
+secret=/home/aparame/.config/kinematic-residual-vla/secrets.env
+if [[ -f "$secret" && ! -L "$secret" && $(stat -c %a "$secret") == 600 ]]; then set -a; source "$secret"; set +a; fi
+runner=
+forward_stop() { [[ -z "$runner" ]] || kill -USR1 "$runner" || true; }
+trap forward_stop USR1 TERM
+/home/aparame/.conda/envs/dynamicvla/bin/python launch.py profile &
+runner=$!
+set +e
+while true; do wait "$runner"; status=$?; if ! kill -0 "$runner" 2>/dev/null; then break; fi; done
+set -e
+exit "$status"

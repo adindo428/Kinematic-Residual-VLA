@@ -1,0 +1,179 @@
+{
+  "at": "2026-10-29T22:58:24.928382+00:00",
+  "runs": {
+    "pi05_baseline": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 460857,
+          "samples": 14747424,
+          "epoch": 5,
+          "cursor": 2092960
+        },
+        "identity": "2a7c3f2ccf3271fcc36a35a78b515ea11eee363d8f0679e8d4e8d236edd3f5a9",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 325297,
+          "samples": 10409504,
+          "epoch": 4,
+          "cursor": 161792
+        },
+        "reason": "allocation_signal"
+      }
+    },
+    "pi05_kr": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 301262,
+          "samples": 9640384,
+          "epoch": 3,
+          "cursor": 500000
+        },
+        "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 301262,
+          "samples": 9640384,
+          "epoch": 3,
+          "cursor": 500000
+        },
+        "reason": "allocation_signal"
+      }
+    },
+    "vlash_baseline": {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 364331,
+          "samples": 11658592,
+          "epoch": 4,
+          "cursor": 1071584
+        },
+        "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+        "file": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 364331,
+          "samples": 11658592,
+          "epoch": 4,
+          "cursor": 1071584
+        },
+        "reason": "allocation_signal"
+      }
+    },
+    "vlash_kr": {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr/runs/vlash_kr/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 739423,
+          "samples": 23661536,
+          "epoch": 9,
+          "cursor": 1040768
+        },
+        "identity": "468a3b6fbab9d8ff2e06ccbfbe4b7b3a74ae15001d242e283c13c4e64f7b189d",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt"
+      }
+    },
+    "smolvla_baseline": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt"
+      },
+      "completed.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "validation_h20_action_mse": 0.751673698425293,
+        "stop_reason": "ten_complete_additional_subset_epochs"
+      }
+    },
+    "smolvla_kr": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "9267082799c9df91479901c75e478fdc63f5abb79ade007fb5de76ceeab54ed6",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt"
+      },
+      "completed.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "validation_h20_action_mse": 0.7740855813026428,
+        "stop_reason": "ten_complete_additional_subset_epochs"
+      }
+    },
+    "domv100": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 286838,
+          "samples": 100966667,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "2dc7b26e5d4e56da990f601e7f456d74b7d52e7cd24d3a0272e8cf1a2b968ddb",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt"
+      },
+      "completed.json": {
+        "progress": {
+          "updates": 286838,
+          "samples": 100966667,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "validation_h20_action_mse": 0.1922149807214737,
+        "stop_reason": "ten_complete_additional_subset_epochs"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 245279,
+          "samples": 86337899,
+          "epoch": 3,
+          "cursor": 2217600
+        },
+        "reason": "allocation_signal"
+      }
+    }
+  },
+  "queue": "17931276|h2-cont-vlash_kr|PENDING|(Dependency)\n17931273|h2-cont-pi05_baseline|PENDING|(Dependency)\n18659810|v1bc_apf_iql_training_g0999|PENDING|(Dependency)\n18659809|v1bc_apf_iql_smoke_g0999|PENDING|(Priority)\n18659811|v1bc_final_apf_iql_g0999|PENDING|(Dependency)\n17859073|main8-rep-h200-pi05_baseline|RUNNING|nodeai10\n17859078|main8-rep-h200-vlash_kr|RUNNING|nodeai09\n",
+  "accounting": "17931275|FAILED|1:0|00:00:24\n17859078|RUNNING|0:0|1-13:33:54\n17859073|RUNNING|0:0|1-09:42:30\n17859076|FAILED|1:0|00:00:07\n18363872|FAILED|1:0|00:01:49\n",
+  "evaluation": {
+    "results/pilot/failure.json": "{\n  \"error\": \"Policy exited with 1\",\n  \"benchmark_complete\": false\n}\n",
+    "results/pilot/policy_probe.json": "{\n  \"strict_completed_checkpoint_loaded\": true,\n  \"progress\": {\n    \"updates\": 396050,\n    \"samples\": 25347200,\n    \"epoch\": 10,\n    \"cursor\": 0\n  },\n  \"identity\": \"e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af\",\n  \"checkpoint_sha256\": \"f1afb54da8c8d208ea2e8c1bd1d46a18674f53502f9d80c5fca655634ba12c5c\",\n  \"finite_physical_action_shape\": [\n    1,\n    20,\n    7\n  ],\n  \"gpu\": \"NVIDIA L40S\",\n  \"baseline_only\": true\n}",
+    "results/pilot/client.log": "[INFO] 2026-10-27 11:15:37,094 Cuda backend detected, using cuda.\n[WARNING] 2026-10-27 11:15:37,094 Device 'None' is not available. Switching to 'cuda'.\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nYou have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.\nReducing the number of VLM layers to 16 ...\nTraceback (most recent call last):\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-r2-20261027/client.py\", line 63, in <module>\n    logging.basicConfig(level=logging.INFO,format='[%(levelname)s] %(asctime)s %(message)s');main()\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-r2-20261027/client.py\", line 51, in main\n    source=Path(cfg['official_source']);sys.path.insert(0,str(source));spec=importlib.util.spec_from_file_location('official_rpc',source/'scripts/inference.py');rpc=importlib.util.module_from_spec(spec);spec.loader.exec_module(rpc)\n  File \"<frozen importlib._bootstrap_external>\", line 883, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\n  File \"/scratch/aparame/Dynamic_VLA/runs/official_dom_table1_20261009/source/scripts/inference.py\", line 29, in <module>\n    import utils.helpers\n  File \"/scratch/aparame/Dynamic_VLA/runs/official_dom_table1_20261009/source/utils/helpers.py\", line 35, in <module>\n    from policies.dynamicvla.modeling_dynamicvla import DynamicVLAPolicy\n  File \"/scratch/aparame/Dynamic_VLA/runs/official_dom_table1_20261009/source/policies/dynamicvla/modeling_dynamicvla.py\", line 21, in <module>\n    from lerobot.constants import ACTION, OBS_STATE\nModuleNotFoundError: No module named 'lerobot.constants'\n",
+    "results/pilot/server.log": "r: Intel(R) Xeon(R) Platinum 8462Y+\n| Cores: 64 | Logical Cores: 64\n|---------------------------------------------------------------------------------------------|\n| Total Memory (MB): 256924 | Free Memory: 21821\n| Total Page/Swap (MB): 8191 | Free Page/Swap: 7529\n|---------------------------------------------------------------------------------------------|\n2026-10-27T15:15:33Z [3,359ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0\n2026-10-27T15:15:34Z [4,874ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.\n2026-10-27T15:15:34Z [4,875ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)\n2026-10-27T15:15:34Z [5,005ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.\n2026-10-27T15:15:34Z [5,005ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)\n2026-10-27T15:15:34Z [5,020ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.\n2026-10-27T15:15:34Z [5,020ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)\n2026-10-27T15:15:35Z [5,047ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.\n2026-10-27T15:15:35Z [5,047ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)\n2026-10-27T15:15:35Z [5,053ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.\n2026-10-27T15:15:35Z [5,053ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)\n2026-10-27T15:15:35Z [5,056ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.\n2026-10-27T15:15:35Z [5,056ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)\n2026-10-27T15:15:35Z [5,752ms] [Warning] [omni.log] Source: omni.hydra was already registered.\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'any' as 'Any'\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'bool' as 'Bool' and array 'BoolArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'bundle' as 'Bundle'\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'colord[3]' as 'Color3d' and array 'Color3dArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'colorf[3]' as 'Color3f' and array 'Color3fArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'colorh[3]' as 'Color3h' and array 'Color3hArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'colord[4]' as 'Color4d' and array 'Color4dArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'colorf[4]' as 'Color4f' and array 'Color4fArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'colorh[4]' as 'Color4h' and array 'Color4hArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'double' as 'Double' and array 'DoubleArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'double[2]' as 'Double2' and array 'Double2Array\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'double[3]' as 'Double3' and array 'Double3Array\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'double[4]' as 'Double4' and array 'Double4Array\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'execution' as 'Execution'\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'float' as 'Float' and array 'FloatArray\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'float[2]' as 'Float2' and array 'Float2Array\n[DEBUG] 2026-10-27 11:15:36,201 Defining data type 'float[3]' as 'Float3' and array 'Float3Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'float[4]' as 'Float4' and array 'Float4Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'frame[4]' as 'Frame' and array 'FrameArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'half' as 'Half' and array 'HalfArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'half[2]' as 'Half2' and array 'Half2Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'half[3]' as 'Half3' and array 'Half3Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'half[4]' as 'Half4' and array 'Half4Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'int' as 'Int' and array 'IntArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'int[2]' as 'Int2' and array 'Int2Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'int[3]' as 'Int3' and array 'Int3Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'int[4]' as 'Int4' and array 'Int4Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'int64' as 'Int64' and array 'Int64Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'matrixd[2]' as 'Matrix2d' and array 'Matrix2dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'matrixd[3]' as 'Matrix3d' and array 'Matrix3dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'matrixd[4]' as 'Matrix4d' and array 'Matrix4dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'normald[3]' as 'Normal3d' and array 'Normal3dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'normalf[3]' as 'Normal3f' and array 'Normal3fArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'normalh[3]' as 'Normal3h' and array 'Normal3hArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'objectId' as 'ObjectId' and array 'ObjectIdArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'path' as 'Path'\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'pointd[3]' as 'Point3d' and array 'Point3dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'pointf[3]' as 'Point3f' and array 'Point3fArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'pointh[3]' as 'Point3h' and array 'Point3hArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'quatd[4]' as 'Quatd' and array 'QuatdArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'quatf[4]' as 'Quatf' and array 'QuatfArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'quath[4]' as 'Quath' and array 'QuathArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'string' as 'String'\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'target' as 'Target'\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'texcoordd[2]' as 'TexCoord2d' and array 'TexCoord2dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'texcoordf[2]' as 'TexCoord2f' and array 'TexCoord2fArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'texcoordh[2]' as 'TexCoord2h' and array 'TexCoord2hArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'texcoordd[3]' as 'TexCoord3d' and array 'TexCoord3dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'texcoordf[3]' as 'TexCoord3f' and array 'TexCoord3fArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'texcoordh[3]' as 'TexCoord3h' and array 'TexCoord3hArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'timecode' as 'Timecode' and array 'TimecodeArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'token' as 'Token' and array 'TokenArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'uchar' as 'UChar' and array 'UCharArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'uint' as 'UInt' and array 'UIntArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'uint64' as 'UInt64' and array 'UInt64Array\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'vectord[3]' as 'Vector3d' and array 'Vector3dArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'vectorf[3]' as 'Vector3f' and array 'Vector3fArray\n[DEBUG] 2026-10-27 11:15:36,202 Defining data type 'vectorh[3]' as 'Vector3h' and array 'Vector3hArray\n2026-10-27T15:15:36Z [6,785ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.\n2026-10-27T15:15:36Z [6,798ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.\n[DEBUG] 2026-10-27 11:15:37,877 falling back to hashlib hashing: `pip install xxhash`for 50x faster cache checks\n2026-10-27T15:15:38Z [8,897ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead\n2026-10-27T15:15:39Z [9,972ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'\n2026-10-27T15:15:39Z [9,972ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'\n2026-10-27T15:15:39Z [9,976ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.\n[DEBUG] 2026-10-27 11:15:41,543 matplotlib data path: /isaac-sim/exts/omni.isaac.core_archive/pip_prebundle/matplotlib/mpl-data\n[DEBUG] 2026-10-27 11:15:41,558 CONFIGDIR=/home/aparame/.config/matplotlib\n[DEBUG] 2026-10-27 11:15:41,560 interactive is False\n[DEBUG] 2026-10-27 11:15:41,560 platform is linux\n2026-10-27T15:15:43Z [13,775ms] [Warning] [carb.graphics-vulkan.plugin] Trying to initialize NGX without vkGetInstanceProcAddr and vkGetDeviceProcAddr pointer-to-functions.\n2026-10-27T15:15:43Z [13,776ms] [Error] [carb.graphics-vulkan.plugin] Could not get NGX parameters block because NGX isn't enabled.\n2026-10-27T15:15:43Z [13,776ms] [Error] [carb.graphics-vulkan.plugin] Failed to create NGX context.\n2026-10-27T15:15:43Z [13,776ms] [Warning] [carb.scenerenderer-rtx.plugin] Failed to create NGX context.\n",
+    "logs/pilot-18363872.err": "[INFO] 2026-10-27 11:14:50,795 Cuda backend detected, using cuda.\n[WARNING] 2026-10-27 11:14:50,796 Device 'None' is not available. Switching to 'cuda'.\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nYou have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.\nTraceback (most recent call last):\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-r2-20261027/run.py\", line 92, in <module>\n    a=p.parse_args();run(a.stage,a.root,a.mode,a.index)\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-r2-20261027/run.py\", line 78, in run\n    if client.returncode!=0:raise RuntimeError(f'Policy exited with {client.returncode}')\nRuntimeError: Policy exited with 1\n",
+    "logs/pilot-18363872.out": "Reducing the number of VLM layers to 16 ...\n"
+  }
+}

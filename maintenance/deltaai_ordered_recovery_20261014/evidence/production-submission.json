@@ -1,0 +1,36 @@
+{
+  "batch": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-ordered-domv-20261014/combined.sbatch",
+  "batch_sha256": "100b0c67c87093b55b19aa70ddaee6aec23e1209568dbbe24fb06a659a55241a",
+  "dependency": null,
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-ordered-ddp-20261014",
+  "interactive_check_job": "3381007",
+  "interactive_check_passed": true,
+  "job_id": "3381061",
+  "manifest": "dcb3be84fa47896c4c10416aded492573d34d04d678c5a74d5dd2fdb2d7cf266",
+  "old_held_job_cancelled": true,
+  "recipe": "30372bcdf677c486c305e6c8134045e030540a169078fcc144d67ac0189d9092",
+  "returncode": 0,
+  "selected_runtime": {
+    "distributed_profile_fingerprint": "d5e22517f66b2655030e0f076bf67ce177d6ada4f37a582d28e7dca95ddde1a9",
+    "fingerprint": "c3e9d6a359c41bb3caec20cbec32c300e046efa9feb1e7a87e87df407d683633",
+    "global_effective_batch": 352,
+    "manifest": "dcb3be84fa47896c4c10416aded492573d34d04d678c5a74d5dd2fdb2d7cf266",
+    "runtime": {
+      "fused": false,
+      "microbatch": 22,
+      "pin_memory": false,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "frames",
+      "workers": 1
+    },
+    "samples_per_second": 75.4578523705871,
+    "single_gpu_profile_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+    "training_epoch_hours_excluding_validation_and_io": 82.34987515552947,
+    "world_size": 4
+  },
+  "stage": "submitted",
+  "stderr": "",
+  "stdout": "3381061\n",
+  "superseded_held_job": "3379435"
+}

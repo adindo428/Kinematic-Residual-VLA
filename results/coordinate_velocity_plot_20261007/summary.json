@@ -1,0 +1,870 @@
+{
+  "evaluation": "live closed-loop tracking in simulation time",
+  "models": {
+    "baseline": "DOM-VLA",
+    "velocity": "DOM-VLA+Velocity",
+    "residual": "KR-VLA-Field",
+    "coordinate": "KR-VLA-Coordinate",
+    "coordinate_velocity": "KR-VLA-Coordinate+Velocity"
+  },
+  "expected_rollouts": 150,
+  "recorded_rollouts": 150,
+  "complete": true,
+  "all_rollouts_completed": false,
+  "policy_terminations": 1,
+  "groups": {
+    "baseline_1x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.0870653109614232,
+      "completed_mean_hover_p95_m": 0.13061477085940187,
+      "completed_mean_orientation_rmse_deg": 25.083498602990932,
+      "completed_mean_position_within_2cm_fraction": 0.0203,
+      "completed_mean_fraction_above_train_max_speed": 0.0,
+      "completed_mean_mean_inference_seconds": 0.12798832619132902
+    },
+    "velocity_1x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.04620927598079756,
+      "completed_mean_hover_p95_m": 0.0704584343395342,
+      "completed_mean_orientation_rmse_deg": 22.210980082367847,
+      "completed_mean_position_within_2cm_fraction": 0.1086,
+      "completed_mean_fraction_above_train_max_speed": 0.0,
+      "completed_mean_mean_inference_seconds": 0.12722042333334685
+    },
+    "residual_1x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.05723117995514595,
+      "completed_mean_hover_p95_m": 0.08242688556372904,
+      "completed_mean_orientation_rmse_deg": 21.66420072372532,
+      "completed_mean_position_within_2cm_fraction": 0.07365,
+      "completed_mean_fraction_above_train_max_speed": 0.0,
+      "completed_mean_mean_inference_seconds": 0.1293500047678558
+    },
+    "coordinate_1x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.02895663071153371,
+      "completed_mean_hover_p95_m": 0.044215502119755154,
+      "completed_mean_orientation_rmse_deg": 22.422272862968338,
+      "completed_mean_position_within_2cm_fraction": 0.3012,
+      "completed_mean_fraction_above_train_max_speed": 0.0,
+      "completed_mean_mean_inference_seconds": 0.1268487547739194
+    },
+    "coordinate_velocity_1x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.030974292053076852,
+      "completed_mean_hover_p95_m": 0.04678947161647155,
+      "completed_mean_orientation_rmse_deg": 19.72442466047319,
+      "completed_mean_position_within_2cm_fraction": 0.3155,
+      "completed_mean_fraction_above_train_max_speed": 0.0,
+      "completed_mean_mean_inference_seconds": 0.15086422621344145
+    },
+    "baseline_1.5x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.09343869889796655,
+      "completed_mean_hover_p95_m": 0.1400133793766321,
+      "completed_mean_orientation_rmse_deg": 34.03612992317342,
+      "completed_mean_position_within_2cm_fraction": 0.023399999999999997,
+      "completed_mean_fraction_above_train_max_speed": 0.38445,
+      "completed_mean_mean_inference_seconds": 0.1251033726076667
+    },
+    "velocity_1.5x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.05103799431061773,
+      "completed_mean_hover_p95_m": 0.07862044317546879,
+      "completed_mean_orientation_rmse_deg": 35.632209813716976,
+      "completed_mean_position_within_2cm_fraction": 0.0962,
+      "completed_mean_fraction_above_train_max_speed": 0.38445,
+      "completed_mean_mean_inference_seconds": 0.12747377272552024
+    },
+    "residual_1.5x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.06824740025923194,
+      "completed_mean_hover_p95_m": 0.10150294247840039,
+      "completed_mean_orientation_rmse_deg": 31.565005998345224,
+      "completed_mean_position_within_2cm_fraction": 0.047299999999999995,
+      "completed_mean_fraction_above_train_max_speed": 0.38445,
+      "completed_mean_mean_inference_seconds": 0.1296598136496659
+    },
+    "coordinate_1.5x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.05168970497399521,
+      "completed_mean_hover_p95_m": 0.08257934686135676,
+      "completed_mean_orientation_rmse_deg": 33.05803581788155,
+      "completed_mean_position_within_2cm_fraction": 0.11840000000000002,
+      "completed_mean_fraction_above_train_max_speed": 0.38445,
+      "completed_mean_mean_inference_seconds": 0.12707063646700517
+    },
+    "coordinate_velocity_1.5x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.05053490707257948,
+      "completed_mean_hover_p95_m": 0.07949427686878759,
+      "completed_mean_orientation_rmse_deg": 33.16215231343135,
+      "completed_mean_position_within_2cm_fraction": 0.1287,
+      "completed_mean_fraction_above_train_max_speed": 0.38445,
+      "completed_mean_mean_inference_seconds": 0.1250295043994601
+    },
+    "baseline_2x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.10590047020429763,
+      "completed_mean_hover_p95_m": 0.1566036865865532,
+      "completed_mean_orientation_rmse_deg": 42.857388615197166,
+      "completed_mean_position_within_2cm_fraction": 0.020749999999999998,
+      "completed_mean_fraction_above_train_max_speed": 0.7504000000000001,
+      "completed_mean_mean_inference_seconds": 0.12500998750329018
+    },
+    "velocity_2x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.07250003180055681,
+      "completed_mean_hover_p95_m": 0.10953648611011242,
+      "completed_mean_orientation_rmse_deg": 46.252269173034726,
+      "completed_mean_position_within_2cm_fraction": 0.032499999999999994,
+      "completed_mean_fraction_above_train_max_speed": 0.7504000000000001,
+      "completed_mean_mean_inference_seconds": 0.12711958028376102
+    },
+    "residual_2x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.08989431865624109,
+      "completed_mean_hover_p95_m": 0.13353453603186993,
+      "completed_mean_orientation_rmse_deg": 42.50647989671027,
+      "completed_mean_position_within_2cm_fraction": 0.022099999999999998,
+      "completed_mean_fraction_above_train_max_speed": 0.7504000000000001,
+      "completed_mean_mean_inference_seconds": 0.12928617780025187
+    },
+    "coordinate_2x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 9,
+      "policy_terminations": 1,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.08503647808008387,
+      "completed_mean_hover_p95_m": 0.13687238013317027,
+      "completed_mean_orientation_rmse_deg": 44.527012926546874,
+      "completed_mean_position_within_2cm_fraction": 0.03266666666666666,
+      "completed_mean_fraction_above_train_max_speed": 0.7467222222222223,
+      "completed_mean_mean_inference_seconds": 0.12704894972694478
+    },
+    "coordinate_velocity_2x": {
+      "expected": 10,
+      "recorded": 10,
+      "completed": 10,
+      "policy_terminations": 0,
+      "success_count": 0,
+      "success_rate_over_expected": 0.0,
+      "completed_mean_hover_rmse_m": 0.0817803174070471,
+      "completed_mean_hover_p95_m": 0.13091773175585994,
+      "completed_mean_orientation_rmse_deg": 44.688430340817334,
+      "completed_mean_position_within_2cm_fraction": 0.0576,
+      "completed_mean_fraction_above_train_max_speed": 0.7504000000000001,
+      "completed_mean_mean_inference_seconds": 0.12481404452656324
+    }
+  },
+  "pairwise": {
+    "velocity_minus_baseline_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.040856034980625636,
+      "episode_bootstrap_ci95": [
+        -0.04768816311703849,
+        -0.034057080105801635
+      ],
+      "episodes_right_better": 10
+    },
+    "residual_minus_baseline_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.029834131006277253,
+      "episode_bootstrap_ci95": [
+        -0.03793112525973823,
+        -0.021821098305091546
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_minus_baseline_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.05810868024988949,
+      "episode_bootstrap_ci95": [
+        -0.06911040840739222,
+        -0.04833503383295997
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_velocity_minus_baseline_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.056091018908346335,
+      "episode_bootstrap_ci95": [
+        -0.0688058824018288,
+        -0.04441821735734202
+      ],
+      "episodes_right_better": 10
+    },
+    "residual_minus_velocity_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": 0.011021903974348388,
+      "episode_bootstrap_ci95": [
+        0.005674227132293659,
+        0.016057318045808372
+      ],
+      "episodes_right_better": 2
+    },
+    "coordinate_minus_velocity_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.017252645269263848,
+      "episode_bootstrap_ci95": [
+        -0.024293779108338222,
+        -0.010396277165034221
+      ],
+      "episodes_right_better": 9
+    },
+    "coordinate_velocity_minus_velocity_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.015234983927720705,
+      "episode_bootstrap_ci95": [
+        -0.02385594567673264,
+        -0.006389533452018702
+      ],
+      "episodes_right_better": 9
+    },
+    "coordinate_minus_residual_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.028274549243612234,
+      "episode_bootstrap_ci95": [
+        -0.03439056144388837,
+        -0.02181049079644952
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_velocity_minus_residual_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.026256887902069093,
+      "episode_bootstrap_ci95": [
+        -0.03432255461736444,
+        -0.018257114538057527
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_velocity_minus_coordinate_1x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": 0.0020176613415431436,
+      "episode_bootstrap_ci95": [
+        -0.0016874371412150598,
+        0.005804378257168337
+      ],
+      "episodes_right_better": 5
+    },
+    "velocity_minus_baseline_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.04240070458734881,
+      "episode_bootstrap_ci95": [
+        -0.050223532653106084,
+        -0.03429729605855722
+      ],
+      "episodes_right_better": 10
+    },
+    "residual_minus_baseline_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.02519129863873461,
+      "episode_bootstrap_ci95": [
+        -0.03319758525040873,
+        -0.017423097256533945
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_minus_baseline_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.04174899392397134,
+      "episode_bootstrap_ci95": [
+        -0.053011443269099935,
+        -0.031200121159509382
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_velocity_minus_baseline_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.04290379182538707,
+      "episode_bootstrap_ci95": [
+        -0.054798163391402956,
+        -0.03121434583039151
+      ],
+      "episodes_right_better": 10
+    },
+    "residual_minus_velocity_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": 0.017209405948614198,
+      "episode_bootstrap_ci95": [
+        0.010909753206560246,
+        0.023392479382026758
+      ],
+      "episodes_right_better": 0
+    },
+    "coordinate_minus_velocity_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": 0.0006517106633774708,
+      "episode_bootstrap_ci95": [
+        -0.006384267381308218,
+        0.007111748177972356
+      ],
+      "episodes_right_better": 5
+    },
+    "coordinate_velocity_minus_velocity_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.0005030872380382565,
+      "episode_bootstrap_ci95": [
+        -0.007499797347848811,
+        0.0063610022671682365
+      ],
+      "episodes_right_better": 5
+    },
+    "coordinate_minus_residual_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.016557695285236727,
+      "episode_bootstrap_ci95": [
+        -0.02123639380608747,
+        -0.01227554067864137
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_velocity_minus_residual_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.017712493186652453,
+      "episode_bootstrap_ci95": [
+        -0.02347351780706357,
+        -0.012349734053765946
+      ],
+      "episodes_right_better": 10
+    },
+    "coordinate_velocity_minus_coordinate_1.5x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.0011547979014157272,
+      "episode_bootstrap_ci95": [
+        -0.0031453532702079233,
+        0.0009785110409221587
+      ],
+      "episodes_right_better": 7
+    },
+    "velocity_minus_baseline_2x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.03340043840374082,
+      "episode_bootstrap_ci95": [
+        -0.04044971680018113,
+        -0.026492954576742007
+      ],
+      "episodes_right_better": 10
+    },
+    "residual_minus_baseline_2x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.016006151548056527,
+      "episode_bootstrap_ci95": [
+        -0.022652334811364548,
+        -0.009216570408483732
+      ],
+      "episodes_right_better": 9
+    },
+    "coordinate_minus_baseline_2x": {
+      "completed_matched_pairs": 9,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.022257837496532755,
+      "episode_bootstrap_ci95": [
+        -0.03681706550557214,
+        -0.008040107337238365
+      ],
+      "episodes_right_better": 6
+    },
+    "coordinate_velocity_minus_baseline_2x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.024120152797250542,
+      "episode_bootstrap_ci95": [
+        -0.03895597553666076,
+        -0.009940701354651181
+      ],
+      "episodes_right_better": 7
+    },
+    "residual_minus_velocity_2x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": 0.0173942868556843,
+      "episode_bootstrap_ci95": [
+        0.013914717053741789,
+        0.020642099304028935
+      ],
+      "episodes_right_better": 0
+    },
+    "coordinate_minus_velocity_2x": {
+      "completed_matched_pairs": 9,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": 0.013091679649306786,
+      "episode_bootstrap_ci95": [
+        0.002917919933077388,
+        0.023563253493194127
+      ],
+      "episodes_right_better": 2
+    },
+    "coordinate_velocity_minus_velocity_2x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": 0.009280285606490291,
+      "episode_bootstrap_ci95": [
+        -0.0011362498741076701,
+        0.019576058780813633
+      ],
+      "episodes_right_better": 3
+    },
+    "coordinate_minus_residual_2x": {
+      "completed_matched_pairs": 9,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.004424307924942105,
+      "episode_bootstrap_ci95": [
+        -0.0135624036624785,
+        0.0038978913828018372
+      ],
+      "episodes_right_better": 5
+    },
+    "coordinate_velocity_minus_residual_2x": {
+      "completed_matched_pairs": 10,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.00811400124919401,
+      "episode_bootstrap_ci95": [
+        -0.017600993103741035,
+        0.0004474650032590359
+      ],
+      "episodes_right_better": 7
+    },
+    "coordinate_velocity_minus_coordinate_2x": {
+      "completed_matched_pairs": 9,
+      "expected_pairs": 10,
+      "right_minus_left_hover_rmse_m": -0.004815680259278737,
+      "episode_bootstrap_ci95": [
+        -0.008607526792463176,
+        -0.0015690857843898547
+      ],
+      "episodes_right_better": 7
+    }
+  },
+  "pairing_issues": [],
+  "comparison_videos": [
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000008.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000012.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000013.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000014.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000036.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000047.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000053.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000065.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000066.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1x_episode_000077.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000008.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000012.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000013.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000014.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000036.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000047.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000053.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000065.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000066.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/1.5x_episode_000077.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000008.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000012.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000013.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000014.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000036.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000047.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000053.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000065.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000066.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    },
+    {
+      "path": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/comparison_videos/2x_episode_000077.mp4",
+      "frames": 250,
+      "model_order": [
+        "baseline",
+        "velocity",
+        "residual",
+        "coordinate",
+        "coordinate_velocity"
+      ]
+    }
+  ],
+  "notes": [
+    "All policy terminations count as failed rollouts. Missing rollouts remain missing.",
+    "Mean errors and paired RMSE differences use completed rollouts only; compare termination/success rates alongside them.",
+    "A complete benchmark may contain terminated rollouts; all_rollouts_completed distinguishes this.",
+    "Simulation pauses for inference. Speed multipliers also scale acceleration by their square.",
+    "Video panels follow model order; termination cards fill the remaining requested horizon."
+  ],
+  "pairing_valid": true
+}

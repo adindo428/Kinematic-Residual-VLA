@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-21T15:51:21.087380+00:00",
+  "status": "awaiting_explicit_private_transfer_authorization",
+  "cluster_access_verified": true,
+  "interactive_allocation_submitted": false,
+  "gpu_comparison_executed": false,
+  "production_changed": false,
+  "private_payload_transferred": false,
+  "auto_review_rejection": {
+    "action": "stream private production checkpoint and pinned implementation from Palmetto to DeltaAI",
+    "reason": "explicit export authorization required"
+  },
+  "prepared_variants": [
+    "control",
+    "cpu_tokens",
+    "cpu_tokens_prefetch",
+    "workers12_prefetch",
+    "autocast_cache",
+    "no_recompute",
+    "control_repeat"
+  ],
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "transformers": "4.53.3",
+    "tokenizers": "0.21.4"
+  }
+}

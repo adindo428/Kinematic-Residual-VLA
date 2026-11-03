@@ -1,0 +1,208 @@
+{
+  "check": {
+    "sequence": 214,
+    "table_exact": true,
+    "prose_exact": true,
+    "support_exact": true,
+    "cancelled_table_rows": 0
+  },
+  "receipt": {
+    "new_sequence": 214,
+    "through_sequence": 214,
+    "operation_results": [
+      {
+        "operation_index": 0,
+        "preceding_block_id": "ce3e5409-4cab-42d3-aa7a-d33638956b0f",
+        "created_block_ids": [],
+        "continuation_position": {
+          "block_id": "0ac94091-6e81-4793-9308-4830482aeaed",
+          "relative_position_base64": "AIWthPAD2wtB"
+        },
+        "affected_blocks": [
+          {
+            "block_id": "0ac94091-6e81-4793-9308-4830482aeaed",
+            "hash": "1b20ad99a3e7a14634c1a27212b7536b29a09e7082601c0b43fcc6964ded2cd7"
+          }
+        ]
+      },
+      {
+        "operation_index": 1,
+        "preceding_block_id": "a056ecf6-b0bd-4145-8f3a-1f912f2dec9f",
+        "created_block_ids": [
+          "7e1bbc83-aaba-4907-9312-29f83339def7"
+        ],
+        "continuation_position": {
+          "block_id": "7e1bbc83-aaba-4907-9312-29f83339def7",
+          "relative_position_base64": "AMO61z7DUEE="
+        },
+        "affected_blocks": [
+          {
+            "block_id": "a056ecf6-b0bd-4145-8f3a-1f912f2dec9f",
+            "hash": "9843e65a17f8099a1454f0c7315062d31f23f10559f4a42b22131b27631e819a"
+          },
+          {
+            "block_id": "7e1bbc83-aaba-4907-9312-29f83339def7",
+            "hash": "17c33fce496b819fc7b360161558a6b4721f910071c44c696b948ae06e8b68e5"
+          }
+        ]
+      },
+      {
+        "operation_index": 2,
+        "preceding_block_id": "4159dd53-4e89-4525-93a8-fc91630b7f5c",
+        "created_block_ids": [],
+        "continuation_position": {
+          "block_id": "601c99a6-878e-4820-8c2e-8beb77a4faab",
+          "relative_position_base64": "ANflwKYOvwRB"
+        },
+        "affected_blocks": [
+          {
+            "block_id": "601c99a6-878e-4820-8c2e-8beb77a4faab",
+            "hash": "0109ddba97d8c7b3fc201c0ef04238a0e78de453a39f271f35a83ef5ac6a5ce2"
+          }
+        ]
+      }
+    ]
+  },
+  "readback": {
+    "metadata": {
+      "page_id": "page_4ff536c9060081919225467494390460",
+      "layout": "document",
+      "symbol": null,
+      "title": "KRVLA training run register",
+      "preview": "DynamicVLA and KRVLA training submissions, including the current six-model DOM manipulation study, earlier tracking runs, and the separate DeltaAI DOM launch. Scheduler completion and checkpoint epochs are reported separately; neither impli",
+      "creator_account_user_id": "user-Uxm2x1EDmPPhJh6DV43gC1uL__4c54659e-5103-4f34-9102-cca112775f74",
+      "owner_workspace_id": "4c54659e-5103-4f34-9102-cca112775f74",
+      "parent": null,
+      "drive_scope": "workspace_private",
+      "drive_space_id": null,
+      "library_container_id": "fde3_cGFnZV80ZmY1MzZjOTA2MDA4MTkxOTIyNTQ2NzQ5NDM5MDQ2MA_b1c20e2b9f388191bc424aac9e399af7",
+      "file_upload_page_id": "page_4ff536c9060081919225467494390460",
+      "position": 1834562553847808,
+      "created_at": "2026-10-09T16:56:34.266050Z",
+      "updated_at": "2026-10-21T15:15:04.643198Z",
+      "deleted_at": null,
+      "current_sequence": 214,
+      "projection_through_sequence": 214,
+      "access": {
+        "can_read": true,
+        "can_comment": true,
+        "can_write": true,
+        "can_share": true,
+        "can_delete": true,
+        "sources": [
+          "library"
+        ]
+      },
+      "url": "https://chatgpt.com/space/page_4ff536c9060081919225467494390460"
+    },
+    "content": {
+      "schema_version": 2,
+      "symbol": null,
+      "title": "KRVLA training run register",
+      "title_hash": "4612ac26e1ab986edcfab25b61f1807b03d8b2206bd32f5d9ced0d9e46c6157f",
+      "blocks": [
+        {
+          "id": "0ac94091-6e81-4793-9308-4830482aeaed",
+          "kind": "markdown",
+          "markdown": "| Run | Method | Job or W&B ID | Last verified scheduler or W&B status (check times shown per run) | GPUs / ranks | GPU class | Checkpoint epochs | Logged progress |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| dom100 | DOM | Not submitted | Not submitted | 8 | H100 or H200 | 0 | — |\n| kr100 | KRVLA Coordinate | Not submitted | Not submitted | 8 | H100 or H200 | 0 | — |\n| domv100 | DOM + velocity | 3381947 | PENDING(Priority), checkpoint continuation; checked Oct19 5:09PM EDT | 8 | GH200, two nodes (DeltaAI) | 3 completed +43.76% of next | 218468saved updates/76900427samples;10total-epoch stopping cap; original LR schedule retained; [bwx4b5i1](https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/bwx4b5i1) (tracker state not refreshed) |\n| krp100 | KRVLA Coordinate + phase gate | Not submitted | Not submitted | 8 | H100 or H200 | 0 | — |\n| krvp100 | KRVLA Coordinate + velocity + causal phase gate | 3382533 | PENDING(Priority); checked Oct19 5:09PM EDT | 16 | GH200, four nodes (DeltaAI) | 0 | 10total-epoch stopping cap; MB22/workers4/accumulation1/global352; own15-minute readiness then same-allocation training; no updates yet |\n| krv100-local | KRVLA Coordinate + velocity | [2qh0ijb1](https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/2qh0ijb1) | W&B running | 2 ranks | RTX A6000 (user reported) | Not inspected | 55,030 updates; 19,370,560 samples; loss0.03043 |\n| smolvla_baseline-a100-opt | SmolVLA matched baseline | 17709588 | COMPLETED, exit0; checked Oct20 6:23PM EDT; W&B finished (separate read) | 2 | A100 80 GB (Palmetto) | 0 completed epochs; 20000 saved updates | 1,280,000 saved samples; 20000 logged updates/1,280,000 samples; 218.86 samples/s; loss0.04080; logged fractional epoch0.057219; prior20k budget completed; five-epoch extension queued; final validation action MSE0.775761; stop:official_step_budget; [W&B](https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en) |\n| smolvla_kr-a100-opt | SmolVLA + KRFM | 17709590 | COMPLETED, exit0; checked Oct20 6:23PM EDT; W&B finished (separate read) | 2 | A100 80 GB (Palmetto) | 0 completed epochs; 20000 saved updates | 1,280,000 saved samples; 20000 logged updates/1,280,000 samples; 213.24 samples/s; loss0.05284; logged fractional epoch0.057219; prior20k budget completed; five-epoch extension queued; final validation action MSE0.774071; stop:official_step_budget; [W&B](https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw) |\n| vlash_baseline-a100-opt | VLASH (π0.5) matched baseline | 17709592 | COMPLETED, exit0; checked Oct20 6:23PM EDT; W&B finished (separate read) | 2 | A100 80 GB (Palmetto) | 0 completed epochs; 30000 saved updates | 960,000 saved samples; 30000 logged updates/960,000 samples; 16.90 samples/s; loss0.00655; logged fractional epoch0.042914; prior30k cap; five-epoch extension queued; final validation action MSE0.832599; stop:official_step_budget; automatically resumed after preemption; current allocation first logged update27400; [W&B](https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8m07ro1o) |\n| vlash_kr-a100-opt | VLASH (π0.5) + KRFM | 17709594 | COMPLETED, exit0 under prior30k budget; checked Oct21 11:09AM EDT | 2 | A100 80 GB (Palmetto) | 0 complete epochs;30,000 saved updates | Final960,000saved samples; five-epoch extension17782826 failed its handoff precision check before new training. Own final checkpoint remains preserved. [W&B](https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qdxs3h1p). |\n| pi05_baseline-a100-pi05-cache | π0.5 matched baseline | 17719993 | REQUEUED accounting; absent from live queue; checked Oct21 11:09AM EDT | 2 | A100 80 GB (Palmetto) | 0 complete epochs; 19,397 saved updates | Saved620,704samples and matching stop receipt retained; H200 handoff17782828 needs terminal-accounting reconciliation. Original W&B ifalqwwf retained. |\n| smolvla_baseline-five-epochs | SmolVLA matched baseline | 17782820 | FAILED, exit1 before training; checked Oct21 11:09AM EDT | 2 requested | A100 80 GB (Palmetto) | Not yet restored; own production checkpoint absent | Own 200-update GPU readiness passed. Handoff rejected Moment precision differs; no new training or checkpoint. Original completed parent state retained; recovery check needs repair. |\n| smolvla_kr-five-epochs | SmolVLA + KRFM | 17782822 | FAILED, exit1 before training; checked Oct21 11:09AM EDT | 2 requested | A100 80 GB (Palmetto) | Not yet restored; own production checkpoint absent | Own 200-update GPU readiness passed. Handoff rejected Moment precision differs; no new training or checkpoint. Original completed parent state retained; recovery check needs repair. |\n| vlash_baseline-five-epochs | VLASH (π0.5) matched baseline | 17782824 | FAILED, exit1 before training; checked Oct21 11:09AM EDT | 2 requested | A100 80 GB (Palmetto) | Not yet restored; own production checkpoint absent | Own 200-update GPU readiness passed. Handoff rejected Moment precision differs; no new training or checkpoint. Original completed parent state retained; recovery check needs repair. |\n| vlash_kr-five-epochs | VLASH (π0.5) + KRFM | 17782826 | FAILED, exit1 before training; checked Oct21 11:09AM EDT | 2 requested | A100 80 GB (Palmetto) | Not yet restored; own production checkpoint absent | Own 200-update GPU readiness passed. Handoff rejected Moment precision differs; no new training or checkpoint. Original completed parent state retained; recovery check needs repair. |\n| pi05_baseline-five-epochs | π0.5 matched baseline | 17782828 | FAILED, exit1 during handoff; checked Oct21 11:09AM EDT | 2 requested | H200 (Palmetto) | Not yet restored; own production checkpoint absent | Own H200 readiness passed; A100 baseline saved19,397updates. Handoff stopped at terminal REQUEUED accounting; own H200 training/checkpoint absent. Saved parent preserved. |\n| pi05_kr-five-epochs | π0.5 + KRFM | 17782830 | FAILED, exit138 on restart; checked Oct21 11:09AM EDT | 2 requested | H200 (Palmetto) | 0 complete epochs; 60,004 own saved updates | Restored20,247 A100 updates with optimizer/scheduler/two-rank RNG/cursor; own latest saved60,004updates/1,920,128samples. Prior allocation median37.29samples/s; checkpointed requeue at10:53AM, next startup received SIGUSR1 at10:57AM. State intact. [W&B](https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/l66vuxv6). |\n| pi05-cpu-pipeline-diagnostic | π0.5 KR isolated throughput comparison | 17837039 | RUNNING nodeai09; checked Oct21 11:09AM EDT | 2 | H200 (Palmetto) | Snapshot60,004updates; diagnostic only | Compare existing pipeline, CPU worker prompt/tokenization, copy-stream prefetch and8vs12workers. Exact token/bin/gradient checks before eligibility;200timed decoded updates per variant; separate CPU/CUDA profiler. No production edits/restart or new W&B run. |",
+          "hash": "1b20ad99a3e7a14634c1a27212b7536b29a09e7082601c0b43fcc6964ded2cd7",
+          "metadata": {
+            "layout": "full-width",
+            "tableWidths": [
+              [
+                125,
+                220,
+                130,
+                180,
+                95,
+                175,
+                130,
+                270
+              ]
+            ]
+          }
+        },
+        {
+          "id": "a056ecf6-b0bd-4145-8f3a-1f912f2dec9f",
+          "kind": "markdown",
+          "markdown": "Current audit and CPU-pipeline investigation, October21 11:09AM EDT: all six five-epoch actual-GPU200-update readiness profiles17782819/21/23/25/27/29 COMPLETED exit0 and approved their own strict checkpoint/optimizer/scheduler/per-rank RNG/physical-inference and15%memory checks. Production handoffs for SmolVLA17782820/22 and VLASH17782824/26 failed an over-restrictive moment-precision validation before new training. π0.5 baseline17782828 failed while reconciling terminal REQUEUED parent accounting; its saved19,397-update A100 production checkpoint remains intact. π0.5 KR17782830 actually restored20,247updates from its own A100 parent, then trained on H200 and saved60,004updates/1,920,128samples. Its first allocation checkpointed and REQUEUED at10:53AM EDT; the log says CANCELLED DUE TO JOB REQUEUE. The next allocation received SIGUSR1 during startup at10:57AM and failed, while the latest60,004-update checkpoint remains preserved. Logged progress, checkpoint progress and scheduler outcomes are separate. No production restart, signal, cancellation, source/recipe change or new tracker run was issued by this investigation.",
+          "hash": "9843e65a17f8099a1454f0c7315062d31f23f10559f4a42b22131b27631e819a",
+          "metadata": {}
+        },
+        {
+          "id": "7e1bbc83-aaba-4907-9312-29f83339def7",
+          "kind": "markdown",
+          "markdown": "For that H200 KR allocation, sampled W&B GPU utilization averaged92.39%/95.73%, with median100% on both GPUs; reported CPU averaged0.842%. Host metadata shows120logical CPUs, while the job allocated32CPUs. Median last20logged ten-update production intervals was37.2918samples/s; GPU-memory allocation was about43.02% each. These utilization samples do not isolate data wait, host work or useful GPU computation. Frozen policy preparation currently sends normalized state bins from GPU back to CPU for prompt formation/tokenization, then copies tokens to GPU. Diagnostic17837039 is RUNNING separately on2H200/32CPU/256GiB with90minute cap, root`/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021`. It snapshots the atomically replaced latest checkpoint inode and SHA entirely on Palmetto, restores the same model/optimizer/scheduler/rank RNG/cursor for all variants, checks real tokens/bin-boundaries/loss/gradients, and compares worker tokenization, copy-stream prefetch and8versus12workers against repeated controls. If exact CPU token equivalence fails, token candidates are ineligible; control/worker profiling still runs. Each timing covers200decoded updates after10warmup; checkpoint IO and the separate CPU/CUDA profiler are excluded. Throughput, memory headroom and measured speedup are not yet verified for the candidates. Existing production source remains frozen and the current five-epoch/LR-schedule budget is unchanged. Evidence:`maintenance/pi05_cpu_pipeline_20261021`; the existing production follow-up monitor remains paused.",
+          "hash": "17c33fce496b819fc7b360161558a6b4721f910071c44c696b948ae06e8b68e5",
+          "metadata": {}
+        },
+        {
+          "id": "601c99a6-878e-4820-8c2e-8beb77a4faab",
+          "kind": "markdown",
+          "markdown": "| Cluster | Job ID | Job | Recorded scheduler outcome | Purpose | Notes |\n| --- | --- | --- | --- | --- | --- |\n| Palmetto | 16822429 | dom-prep | COMPLETED | Freeze available DOM cache, split, normalization and causal gate cache | Reused unchanged for current study. |\n| Palmetto | 16844383 | dom-h20-check | COMPLETED | Six-variant decoded backward and reload smoke | Completed in 9m39s. |\n| Palmetto | 16844385 | domprof-a10080 | OUT_OF_MEMORY | A100 80 GB profiling | Verified profile saved despite scheduler OOM in worker candidates. |\n| Palmetto | 16844386 | domprof-h100 | OUT_OF_MEMORY | H100 profiling | Verified profile saved despite scheduler OOM in worker candidates. |\n| Palmetto | 16865161 | domprof-a100-resume | COMPLETED | A100 40 GB bounded profile recovery | Separate from eight-GPU production. |\n| Palmetto | 16865162 | domprof-h200-resume | COMPLETED | H200 bounded profile recovery | Separate from eight-GPU production. |\n| Palmetto | 16794853 | dom-mild-validate | COMPLETED | Expert replay and recording checks for separate validation collection | 30 smoke episodes; 7 successes. Full production collection not verified. |\n| DeltaAI | 3349092 | domv-runtime-4gh200 | FAILED | Bounded DOM+velocity readiness on four GPUs | Failed after 39 seconds: wrong Python interpreter, missing LeRobot. Launcher corrected; replaced by 3350039. |\n| DeltaAI | 3350039 | domv-runtime-4gh200 | FAILED | Bounded DOM+velocity readiness with corrected launcher | 40m13s; both candidates exceeded startup limits. Worker metadata reduced in a separate frozen source. |\n| DeltaAI | 3354039 | domv-runtime-4gh200 | FAILED | Bounded DOM+velocity readiness with reduced worker metadata | 40m15s, exit 1:0 on gh112. Both candidates completed 2 readiness updates and 355 samples, and wrote checkpoint files; subsequent traces locate post-reload GPU memory synchronization stall. Production remains unsubmitted. |\n| DeltaAI | 3360358 | domv-runtime-4gh200 | COMPLETED | Paired checkpoint fix, strict reload/RNG and full-data benchmark | 13m24s; all checks passed. 158.56 frames/s; ~39.19 h/epoch excluding validation/IO. Approved runtime applied before submitting production 3360409. |\n| DeltaAI | 3367150 | domv-runtime-4gh200 | COMPLETED | Approved clean split and coordinated loader checks | 11m54s; strict checkpoint/RNG reload and memory checks passed. 156.42 frames/s; 39.73 h/epoch before validation/IO. Production 3367506 submitted without dependency. |\n| Palmetto | 17119955 | dom-audit-smoke | COMPLETED | Validate exhaustive audit | Eight episodes; 3,044 decoded frames; zero failed checks. |\n| DeltaAI | 3369177 | dom-audit-smoke | COMPLETED; audit environment failed | Validate exhaustive audit | Missing FFmpeg path in audit launcher; no conclusion about data. Corrected in 3369185. |\n| DeltaAI | 3369185 | dom-audit-smoke | COMPLETED | Repeat with training library path | Eight episodes; 3,234 decoded frames; zero failed checks. |\n| Palmetto | 17119970 | dom-audit | COMPLETED | Every retained episode, labels and two-camera decode | All 201,227 checked; three short-video episodes: 195200, 195616, 195674. New family excludes all three. |\n| Palmetto | 17123683 | dom-clean-pack | FAILED | Hash-checked clean dataset archive for SCP | All dataset members packed; final checkpoint missing through inherited broken symlink. Archive preserved for recovery. |\n| Palmetto | 17128271 | dom-pack-recover | FAILED | Verify pinned weights and finish archive | Verified weights and member list; append failed on missing closing marker. Replaced by 17129784. |\n| Palmetto | 17129784 | dom-pack-recover-v2 | COMPLETED | Finish clean archive and SHA256 | 26m03s; archive190.07GB preserved on Palmetto. SCP worker terminated after user chose existing DeltaAI dataset; no archive on Mac. |\n| Palmetto | 17182057 | krvp-opt | COMPLETED | Two A100s: four-worker and microbatch44 benchmark, then eight-frame block sampling pilots | Isolated from production17169830. Compare MB22/workers1, MB22/workers4, MB44/workers4; paired2000-update pilots with4096 fixed episodes and validation anchors. Require15% memory headroom, at least10% throughput gain and no more than5% MSE degradation for blocks. Results: `/scratch/aparame/Dynamic_VLA/phase-optimization-20261013/results-17182057`; logs `opt-17182057.out/.err`. Production17169830 subsequently checkpointed and cancelled at user request to release GPUs; saved364 updates. Completed in6h25m. MB22/workers4:71.06 samples/s vs24.48 with1 worker (~2.9×; pilot workload). MB44/workers4:CUDA OOM on both ranks. Paired2000-update pilots:frames71.36 samples/s,MSE0.27984; blocks71.63 samples/s,MSE0.30401 (+8.64% worse), so blocks rejected. Production not resumed. |\n| DeltaAI | 3380739 | domv-interactive-check | Allocation TIMEOUT; full-data test FAILED earlier | Four-GH200 check ongh050 | Checkpoint/RNG passed; rank0SIGSEGV reproduced before full-data updates. Two model-first validation probes passed. Training held. |\n| DeltaAI | 3381007 | domv-ordered-check | COMPLETED, exit0; gh048 | Four-GH200 interactive check of model-before-validation startup ordering | Checkpoint/RNG and18 full-data updates passed;6,336 samples;75.46 frames/s;26.79GB/device reserved GPU peak;42.32GB summed process RAM peak. Readiness7m02s; allocation9m55s, released. Production3381061 queued with verified approval. |\n| DeltaAI | 3381095 | domv-stress-profile | COMPLETED; extended88 runtime rejected | Interactive speed/stress profiling | Short88/workers4 reached268.32samples/s. Extended200-update training/checkpoint/validation/RNG check completed but failed15%GPUheadroom after reload; excluded. Earlier44/workers4 nativeSIGSEGV evidence preserved. |\n| DeltaAI | 3381341 | domv-two-node-check | COMPLETED; check INCOMPLETE | Two nodes/eight GH200s | Allocation ended after4m23s ongh021/gh098 when SSH session closed; no final pass receipt. Replaced by scheduler-owned3381859. |\n| DeltaAI | 3381859 | domv-scale8-check | COMPLETED, exit0;11m07s | Two-node/eight-GH200 sustained readiness | Passed200updates/70400samples, eight checkpoints, post-training validation, exact all-rank checkpoint/RNG reload and15%GPU/per-nodeRAM headroom.373.45samples/s;46.38GB/device reserved peak;84.93GB/76.27GB conservative node RAM peaks. Released; approved production3381947. |\n| Palmetto | 17668717 | pi05_baseline profiling | COMPLETED, exit0; historical readiness | Two-H200 decoded backward/checkpoint/RNG/inference and memory checks | Passed 20-update checkpoint/RNG/inference gate. Duplicate H200 production cancelled and output deleted at user request Oct20; canonical A100 production17719993 retained. |\n| Palmetto | 17668719 | pi05_kr profiling | COMPLETED, exit0; historical readiness | Two-H200 decoded backward/checkpoint/RNG/inference and memory checks | Passed 20-update checkpoint/RNG/inference gate. Duplicate H200 production cancelled and output deleted at user request Oct20; canonical A100 production17720948 retained. |\n| Palmetto | 17668723 | smolvla_baseline profiling | COMPLETED, exit0; historical readiness | Two-H200 decoded backward/checkpoint/RNG/inference and memory checks | Passed 20-update checkpoint/RNG/inference gate. Duplicate H200 production cancelled and output deleted at user request Oct20; canonical A100 production17709588 retained. |\n| Palmetto | 17668725 | smolvla_kr profiling | COMPLETED, exit0; historical readiness | Two-H200 decoded backward/checkpoint/RNG/inference and memory checks | Passed 20-update checkpoint/RNG/inference gate. Duplicate H200 production cancelled and output deleted at user request Oct20; canonical A100 production17709590 retained. |\n| Palmetto | 17668727 | vlash_baseline profiling | COMPLETED, exit0; historical readiness | Two-H200 decoded backward/checkpoint/RNG/inference and memory checks | Passed 20-update checkpoint/RNG/inference gate. Duplicate H200 production cancelled and output deleted at user request Oct20; canonical A100 production17709592 retained. |\n| Palmetto | 17668729 | vlash_kr profiling | COMPLETED, exit0; historical readiness | Two-H200 decoded backward/checkpoint/RNG/inference and memory checks | Passed 20-update checkpoint/RNG/inference gate. Duplicate H200 production cancelled and output deleted at user request Oct20; canonical A100 production17709594 retained. |\n| Palmetto | 17668675 | Cross-backbone preparation | COMPLETED | Train-only normalization and pinned model/tokenizer preparation | Six paired runs; parent audit reused, per-access byte checks retained |\n| Palmetto | 17685506 | pi05_baseline A100 profiling (first attempt) | FAILED, exit127;1–3seconds (historical; resolved) | Two-A100-80GB readiness | Missing env/bin/torchrun; failed before model loading; preserved logs; replaced by 17692792 Resolved: current replacement production17719993 verified training; earlier receipt retained. |\n| Palmetto | 17685508 | pi05_kr A100 profiling (first attempt) | FAILED, exit127;1–3seconds (historical; resolved) | Two-A100-80GB readiness | Missing env/bin/torchrun; failed before model loading; preserved logs; replaced by 17692794 Resolved: current replacement production17720948 verified training; earlier receipt retained. |\n| Palmetto | 17685510 | smolvla_baseline A100 profiling (first attempt) | FAILED, exit127;1–3seconds (historical; resolved) | Two-A100-80GB readiness | Missing env/bin/torchrun; failed before model loading; preserved logs; replaced by 17692796 Resolved: current replacement production17709588 verified COMPLETED its budget; earlier receipt retained. |\n| Palmetto | 17685512 | smolvla_kr A100 profiling (first attempt) | FAILED, exit127;1–3seconds (historical; resolved) | Two-A100-80GB readiness | Missing env/bin/torchrun; failed before model loading; preserved logs; replaced by 17692798 Resolved: current replacement production17709590 verified COMPLETED its budget; earlier receipt retained. |\n| Palmetto | 17685514 | vlash_baseline A100 profiling (first attempt) | FAILED, exit127;1–3seconds (historical; resolved) | Two-A100-80GB readiness | Missing env/bin/torchrun; failed before model loading; preserved logs; replaced by 17692800 Resolved: current replacement production17709592 verified training; earlier receipt retained. |\n| Palmetto | 17685516 | vlash_kr A100 profiling (first attempt) | FAILED, exit127;1–3seconds (historical; resolved) | Two-A100-80GB readiness | Missing env/bin/torchrun; failed before model loading; preserved logs; replaced by 17692802 Resolved: current replacement production17709594 verified training; earlier receipt retained. |\n| Palmetto | 17692792 | pi05_baseline A100 readiness, superseded | FAILED at optimizer reload (historical; resolved) | Two-A100-80GB decoded readiness | GPU optimizer moments duplicated during reload; repaired in frozen optimized source Resolved: current replacement production17719993 verified training; earlier receipt retained. |\n| Palmetto | 17692794 | pi05_kr A100 readiness, superseded | FAILED at optimizer reload (historical; resolved) | Two-A100-80GB decoded readiness | GPU optimizer moments duplicated during reload; repaired in frozen optimized source Resolved: current replacement production17720948 verified training; earlier receipt retained. |\n| Palmetto | 17692796 | smolvla_baseline A100 readiness, superseded | COMPLETED; readiness passed | Two-A100-80GB decoded readiness | Microbatch1 checkpoint/RNG/inference passed; replaced for measured optimization |\n| Palmetto | 17692798 | smolvla_kr A100 readiness, superseded | COMPLETED; readiness passed | Two-A100-80GB decoded readiness | Microbatch1 checkpoint/RNG/inference passed; replaced for measured optimization |\n| Palmetto | 17692800 | vlash_baseline A100 readiness, superseded | COMPLETED; readiness passed | Two-A100-80GB decoded readiness | Microbatch1 checkpoint/RNG/inference passed; replaced for measured optimization |\n| Palmetto | 17692802 | vlash_kr A100 readiness, superseded | COMPLETED; readiness passed | Two-A100-80GB decoded readiness | Microbatch1 checkpoint/RNG/inference passed; replaced for measured optimization |\n| Palmetto | 17709583 | pi05_baseline A100 optimization/readiness | FAILED; all four candidates exceed GPU headroom (historical; resolved) | Bounded decoded microbatch and4/8/12-worker sweeps, then full20-update readiness | Decoded benchmarks completed, but76.6–79.1GB reserved on85.1GB GPUs exceeded85% limit; replaced by isolated fused AdamW readiness Resolved: current replacement production17719993 verified training; earlier receipt retained. |\n| Palmetto | 17709585 | pi05_kr A100 optimization/readiness | FAILED; all four candidates exceed GPU headroom (historical; resolved) | Bounded decoded microbatch and4/8/12-worker sweeps, then full20-update readiness | Decoded benchmarks completed, but76.6–79.1GB reserved on85.1GB GPUs exceeded85% limit; replaced by isolated fused AdamW readiness Resolved: current replacement production17720948 verified training; earlier receipt retained. |\n| Palmetto | 17709587 | smolvla_baseline A100 optimization/readiness | COMPLETED; readiness approved | Bounded decoded microbatch and4/8/12-worker sweeps, then full20-update readiness | MB32/workers8;20-update readiness89.52samples/s including saves; strict optimizer/RNG/inference reload pass; peak GPU7.48GB, node RAM36.58GB; short benchmark220.46samples/s (12.07×control) |\n| Palmetto | 17709589 | smolvla_kr A100 optimization/readiness | COMPLETED; readiness approved | Bounded decoded microbatch and4/8/12-worker sweeps, then full20-update readiness | MB32/workers4;20-update readiness100.25samples/s including saves; strict optimizer/RNG/inference reload pass; peak GPU7.48GB, node RAM23.59GB; short benchmark219.56samples/s (11.94×control) |\n| Palmetto | 17709591 | vlash_baseline A100 optimization/readiness | COMPLETED; readiness approved | Bounded decoded microbatch and4/8/12-worker sweeps, then full20-update readiness | MB8/workers12;20-update readiness8.91samples/s including saves; strict optimizer/RNG/inference reload pass; peak GPU67.61GB, node RAM99.45GB; short benchmark17.04samples/s (2.00×control) |\n| Palmetto | 17709593 | vlash_kr A100 optimization/readiness | COMPLETED; readiness approved | Bounded decoded microbatch and4/8/12-worker sweeps, then full20-update readiness | MB8/workers12;20-update readiness8.39samples/s including saves; strict optimizer/RNG/inference reload pass; peak GPU67.61GB, node RAM100.69GB; short benchmark17.11samples/s (2.03×control) |\n| Palmetto | 17709582 | Optimized checkpoint migration preparation | COMPLETED,7m08s; checked Oct19 11:33PM EDT | Verify immutable parent checkpoint SHA256, optimizer/RNG state and recipe/data identity | CPU-only,2CPUs/16GiB; gates all six tuning jobs |\n| Palmetto | 17713148 | pi05_baseline fused AdamW readiness | FAILED;15% GPU headroom unmet (historical; resolved) | Same two-A10080 decoded benchmark and20-update reload/inference/headroom gate | All four microbatches completed8 decoded updates; fused AdamW reserved peaks76.8–78.8GB on85.1GB. Production did not start; memory diagnostic17714677 submitted Resolved: current replacement production17719993 verified training; earlier receipt retained. |\n| Palmetto | 17713150 | pi05_kr fused AdamW readiness | FAILED;15% GPU headroom unmet (historical; resolved) | Same two-A10080 decoded benchmark and20-update reload/inference/headroom gate | All four microbatches completed8 decoded updates; fused AdamW reserved peaks76.8–78.8GB on85.1GB. Production did not start; memory diagnostic17714677 submitted Resolved: current replacement production17720948 verified training; earlier receipt retained. |\n| Palmetto | 17714677 | pi05 memory diagnostic | COMPLETED,8m01s,exit0 | Two-A10080,32CPU,224GiB; same baseline/global32/MB4 | Control77.43GB reserved/74.50GB allocated peak; trim77.42/74.49GB; expandable+trim74.72/74.34GB. All exceed72.33GB cap; genuine backward peak, not only allocator reserve; no readiness/production approval |\n| Palmetto | 17716903 | pi05_baseline autocast-cache readiness | COMPLETED,23m43s,exit0; GPU readiness approved | Two-A10080,32CPU,224GiB; paired official recipe unchanged | SelectedMB8/workers8: short benchmark9.72samples/s,2.66×MB1;20-update full readiness4.43samples/s including saves,71.80GB GPU peak/114.19GB node RAM peak; strict optimizer/scheduler/RNG/inference reload pass; production17719993 submitted |\n| Palmetto | 17716904 | pi05_kr autocast-cache readiness | COMPLETED,23m09s,exit0; GPU readiness approved | Two-A10080,32CPU,224GiB; paired official recipe unchanged | SelectedMB8/workers8/mainthreads2/accum2/global32;20-update full readiness4.97samples/s including saves;71.80GB GPU/113.96GB node RAM peaks; strict optimizer/scheduler/RNG/inference reload passed; production17720948 submitted |\n| Palmetto | 17719992 | pi05_baseline completed-readiness verification | COMPLETED,18s,exit0 | CPU-only: revalidate passed GPU profile after Slurm removed its live dependency record | Exact GPU receipt SHA,source/implementation/data/recipe/runtime identity,15%headroom and original17716903 COMPLETED exit0 verified; no new GPU test claimed; production17719993 has afterok17719992 |\n| Palmetto | 17720947 | pi05_kr completed-readiness verification | COMPLETED,19s,exit0 | CPU-only: revalidate own passed GPU profile after live Slurm retention expiry | Exact GPU receipt/source/implementation/data/recipe/runtime identity,15%headroom and original17716904 COMPLETEDexit0 verified; no new GPU test claimed; production17720948 has afterok17720947 |\n| Palmetto | 17737992 | pi05 baseline/KR H200 optimization profile, superseded | FAILED,15s,exit1; staging repaired | Bounded two-H200 profiling allocation | Missing isolated parquet/video hash manifests stopped dataset startup before model loading. Original source/logs preserved; replaced by17740320 after verified metadata and real two-camera train/validation decode. |\n| Palmetto | 17740320 | pi05 baseline/KR H200 optimization profile, R2 | COMPLETED,51m31s,exit0; accounting confirmed Oct20 3:13PM EDT | Two-H200/32CPU/256GiB paired optimization/readiness | Both200-update strict optimizer/scheduler/RNG/physical inference reload approvals pass. MB16/workers8/mainthreads2; sustained26.78baseline/27.66KR samples/s including intermediate save, about2.8×current A100 medians. GPU63.19GB/nodeRSS117.02–117.12GB;15% headroom passes. Earlier30k continuations were later superseded by user-requested five-epoch jobs17782828/17782830; original measured profile retained. |\n| Palmetto | 17745541 | pi05 paired H200 completed-readiness release | COMPLETED,18s,exit0; accounting confirmed Oct20 3:13PM EDT | CPU-only2CPU/16GiB exact completed-GPU receipt/source/runtime revalidation | Preserved native expired-afterok test rejection; rechecked successful GPU17740320 accounting, both original receipt SHA/identities, frozen source/implementation/preparation/recipe/runtime/hardware,200-update strict reload/headroom and current20-interval sustained comparisons. No new GPU test claimed. Both H200 continuations submitted with own afterok17745541, now fulfilled, plus native matching actual-GPU readiness/release gate. |\n| Palmetto | 17782819 | smolvla_baseline five-epoch readiness | COMPLETED, exit0; readiness approved; checked Oct21 11:09AM EDT | Actual two-A100 80 GB200-update decoded optimizer/checkpoint/RNG/inference and15% memory headroom | Own actual-hardware200-update strict checkpoint/RNG/inference/headroom passed. Production and handoff outcomes are separate in current-runs table. |\n| Palmetto | 17782821 | smolvla_kr five-epoch readiness | COMPLETED, exit0; readiness approved; checked Oct21 11:09AM EDT | Actual two-A100 80 GB200-update decoded optimizer/checkpoint/RNG/inference and15% memory headroom | Own actual-hardware200-update strict checkpoint/RNG/inference/headroom passed. Production and handoff outcomes are separate in current-runs table. |\n| Palmetto | 17782823 | vlash_baseline five-epoch readiness | COMPLETED, exit0; readiness approved; checked Oct21 11:09AM EDT | Actual two-A100 80 GB200-update decoded optimizer/checkpoint/RNG/inference and15% memory headroom | Own actual-hardware200-update strict checkpoint/RNG/inference/headroom passed. Production and handoff outcomes are separate in current-runs table. |\n| Palmetto | 17782825 | vlash_kr five-epoch readiness | COMPLETED, exit0; readiness approved; checked Oct21 11:09AM EDT | Actual two-A100 80 GB200-update decoded optimizer/checkpoint/RNG/inference and15% memory headroom | Own actual-hardware200-update strict checkpoint/RNG/inference/headroom passed. Production and handoff outcomes are separate in current-runs table. |\n| Palmetto | 17782827 | pi05_baseline five-epoch readiness | COMPLETED, exit0; readiness approved; checked Oct21 11:09AM EDT | Actual two-H200200-update decoded optimizer/checkpoint/RNG/inference and15% memory headroom | Own actual-hardware200-update strict checkpoint/RNG/inference/headroom passed. Production and handoff outcomes are separate in current-runs table. |\n| Palmetto | 17782829 | pi05_kr five-epoch readiness | COMPLETED, exit0; readiness approved; checked Oct21 11:09AM EDT | Actual two-H200200-update decoded optimizer/checkpoint/RNG/inference and15% memory headroom | Own actual-hardware200-update strict checkpoint/RNG/inference/headroom passed. Production and handoff outcomes are separate in current-runs table. |\n| Palmetto | 17837039 | pi05 CPU-pipeline diagnostic | RUNNING nodeai09; Oct21 11:09AM EDT | Isolated same-checkpoint200-update throughput and CPU/CUDA profiling | Exact prompt/gradient eligibility; worker tokenization, copy-stream prefetch,8vs12workers, repeated control; no production changes or speedup claim yet. |",
+          "hash": "0109ddba97d8c7b3fc201c0ef04238a0e78de453a39f271f35a83ef5ac6a5ce2",
+          "metadata": {
+            "layout": "full-width",
+            "tableWidths": [
+              [
+                95,
+                110,
+                190,
+                145,
+                295,
+                345
+              ]
+            ]
+          }
+        }
+      ],
+      "page_id": "page_4ff536c9060081919225467494390460"
+    },
+    "view": "editing",
+    "selection": {
+      "mode": "block_ids",
+      "selection_complete": true,
+      "whole_page_complete": false,
+      "page_block_count": 39,
+      "returned_block_count": 4,
+      "matched_block_count": 4,
+      "context_blocks": 0,
+      "query_matches": [],
+      "missing_block_ids": [],
+      "blocks": [
+        {
+          "block_id": "0ac94091-6e81-4793-9308-4830482aeaed",
+          "block_index": 5,
+          "roles": [
+            "match"
+          ],
+          "query_indices": []
+        },
+        {
+          "block_id": "a056ecf6-b0bd-4145-8f3a-1f912f2dec9f",
+          "block_index": 7,
+          "roles": [
+            "match"
+          ],
+          "query_indices": []
+        },
+        {
+          "block_id": "7e1bbc83-aaba-4907-9312-29f83339def7",
+          "block_index": 8,
+          "roles": [
+            "match"
+          ],
+          "query_indices": []
+        },
+        {
+          "block_id": "601c99a6-878e-4820-8c2e-8beb77a4faab",
+          "block_index": 17,
+          "roles": [
+            "match"
+          ],
+          "query_indices": []
+        }
+      ]
+    }
+  }
+}

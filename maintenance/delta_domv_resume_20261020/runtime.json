@@ -1,0 +1,14 @@
+{
+  "fingerprint": "b4771a7b2a619573f3f1e0c0e4cac05dc77fa455359799088c1442f27faa76f1",
+  "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+  "reason": "Same batch/runtime on eight H200s, requiring actual hardware and saved-checkpoint proof",
+  "runtime": {
+    "fused": false,
+    "microbatch": 44,
+    "pin_memory": false,
+    "precision": "bf16",
+    "prefetch": 2,
+    "sampling": "frames",
+    "workers": 4
+  }
+}

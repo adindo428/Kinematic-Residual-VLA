@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-20T22:28:36.285651+00:00",
+  "scope": "eight current paired Palmetto VLA jobs including two queued H200 continuations",
+  "current_runs": [
+    {
+      "job_id": "17709588",
+      "name": "smolvla_baseline",
+      "scheduler_state": "COMPLETED",
+      "wandb_state": "finished",
+      "saved_updates": 20000,
+      "logged_updates": 20000,
+      "total_cap": 20000
+    },
+    {
+      "job_id": "17709590",
+      "name": "smolvla_kr",
+      "scheduler_state": "COMPLETED",
+      "wandb_state": "finished",
+      "saved_updates": 20000,
+      "logged_updates": 20000,
+      "total_cap": 20000
+    },
+    {
+      "job_id": "17709592",
+      "name": "vlash_baseline",
+      "scheduler_state": "COMPLETED",
+      "wandb_state": "finished",
+      "saved_updates": 30000,
+      "logged_updates": 30000,
+      "total_cap": 30000
+    },
+    {
+      "job_id": "17709594",
+      "name": "vlash_kr",
+      "scheduler_state": "RUNNING",
+      "wandb_state": "running",
+      "saved_updates": 28360,
+      "logged_updates": 28810,
+      "total_cap": 30000
+    },
+    {
+      "job_id": "17719993",
+      "name": "pi05_baseline",
+      "scheduler_state": "RUNNING",
+      "wandb_state": "running",
+      "saved_updates": 12447,
+      "logged_updates": 12570,
+      "total_cap": 30000
+    },
+    {
+      "job_id": "17720948",
+      "name": "pi05_kr",
+      "scheduler_state": "RUNNING",
+      "wandb_state": "running",
+      "saved_updates": 13045,
+      "logged_updates": 13360,
+      "total_cap": 30000
+    }
+  ],
+  "h200_continuations": {
+    "17745549": "PENDING(Resources)",
+    "17745557": "PENDING(Resources)"
+  },
+  "genuine_failed_current_jobs": [],
+  "new_submissions": false,
+  "training_actions": false,
+  "reason_no_resubmission": "Preempted allocations already requeued and resumed under the same IDs; finished budgets must not be restarted and active jobs must not be duplicated.",
+  "historical_failures_preserved": true,
+  "deltaai_scope": "not refreshed: authenticated DeltaAI socket absent; no claims about current DeltaAI status",
+  "audit_folder": "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/training_run_register/failure-audit-20261020-1827",
+  "page_verified_sequence": 211,
+  "page_readback_verified": true
+}

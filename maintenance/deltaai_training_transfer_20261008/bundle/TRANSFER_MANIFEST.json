@@ -1,0 +1,653 @@
+{
+  "captured_utc": "20261008T152033Z",
+  "deltaai_root": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261008T152033Z",
+  "changes": [
+    {
+      "path": "tracking/scripts/train_paired_velocity_pair.sh",
+      "reason": "Omitted legacy submission/evaluation coupling; use direct training entry points."
+    },
+    {
+      "path": "tracking/scripts/train_full_finetune_speed_ood_pair.sh",
+      "reason": "source \"${DVLA_ENV_SCRIPT:-${SCRIPT_DIR}/deltaai_env.sh}\""
+    },
+    {
+      "path": "tracking/scripts/train_full_finetune_speed_ood_pair.sh",
+      "reason": "Removed optional post-training comparison stage; in-training recorded-data validation stays intact."
+    },
+    {
+      "path": "tracking/scripts/deltaai_env.sh",
+      "reason": "Added existing DeltaAI ARM module/venv adapter from DOM100 snapshot."
+    },
+    {
+      "path": "dom100/scripts/dom100_submit.py",
+      "reason": "Omitted legacy submission/evaluation coupling; use direct training entry points."
+    },
+    {
+      "path": "dom100/scripts/submit_dom100.sh",
+      "reason": "Omitted legacy submission/evaluation coupling; use direct training entry points."
+    },
+    {
+      "path": "dom100/scripts/train_paired_velocity_pair.sh",
+      "reason": "Omitted legacy submission/evaluation coupling; use direct training entry points."
+    },
+    {
+      "path": "dom100/scripts/train_full_finetune_speed_ood_pair.sh",
+      "reason": "source \"${DVLA_ENV_SCRIPT:-${SCRIPT_DIR}/deltaai_env.sh}\""
+    },
+    {
+      "path": "dom100/scripts/train_full_finetune_speed_ood_pair.sh",
+      "reason": "Removed optional post-training comparison stage; in-training recorded-data validation stays intact."
+    },
+    {
+      "path": "dom100/core/dom_training.py",
+      "reason": ", source_digest"
+    },
+    {
+      "path": "dom100/core/dom_training.py",
+      "reason": ""
+    },
+    {
+      "path": "dom100/core/dom_training.py",
+      "reason": ""
+    },
+    {
+      "path": "dom100/core/dom_training.py",
+      "reason": ""
+    },
+    {
+      "path": "dom100/core/dom_training.py",
+      "reason": ""
+    },
+    {
+      "path": "dom100/core/dom_training.py",
+      "reason": "Removed simulator request/dispatch function; optimizer, epochs, recorded-data validation and checkpoint logic unchanged."
+    },
+    {
+      "path": "dom100/scripts/dom100.py",
+      "reason": ", choose_sampling"
+    },
+    {
+      "path": "dom100/scripts/dom100.py",
+      "reason": ""
+    },
+    {
+      "path": "dom100/scripts/dom100.py",
+      "reason": ""
+    },
+    {
+      "path": "dom100/scripts/dom100.py",
+      "reason": "result[\"simulator_evaluation_mode\"] = \"disabled_on_deltaai\""
+    },
+    {
+      "path": "dom100/scripts/dom100.py",
+      "reason": "result[\"evaluation_plan_sha256\"] = None"
+    },
+    {
+      "path": "dom100/utils/dom_experiment.py",
+      "reason": "\"scripts\""
+    },
+    {
+      "path": "dom100/utils/dom_experiment.py",
+      "reason": "Removed simulator plan dependency; source fingerprint covers the transferred training-only tree."
+    },
+    {
+      "path": "dom100/scripts/run_dom100.sh",
+      "reason": "Removed Isaac controller integration command; retained preparation/profile/pilots/smoke/train runner and signal handling."
+    },
+    {
+      "path": "dom100/scripts/dom100_env.sh",
+      "reason": "Routes to DeltaAI environment and project work storage instead of Palmetto conda/scratch."
+    }
+  ],
+  "scope": "code and small configuration/split metadata only; no dataset, weights, secrets, simulator, generated logs, or environment binaries",
+  "files": {
+    "README.md": {
+      "bytes": 2819,
+      "sha256": "c90e12a09071a8d1c4bcfdf59fa15359d947989747ec6e50ae1649b9359b9c87"
+    },
+    "dom100/DELTA_AI.md": {
+      "bytes": 5463,
+      "sha256": "e9e65e4b6e08310c62ced2c854dffc96f4626454a1192f887f56e601bcaeacf6"
+    },
+    "dom100/DOM100.md": {
+      "bytes": 15846,
+      "sha256": "dff3e987bf7b16fde8aeca96a3a2ea8c03ea30f59061801197f33a479384a3c2"
+    },
+    "dom100/LICENSE": {
+      "bytes": 1718,
+      "sha256": "eb7237d17f7586cd2412bb8173722d55dc59464aa1241acb96a3318a02394cf2"
+    },
+    "dom100/PALMETTO_SOURCE_MANIFEST.json": {
+      "bytes": 15636,
+      "sha256": "34e8767f21eb4de49911cf0670dea1617f6ec3558dc7f12e464573f6d002b5f5"
+    },
+    "dom100/RECOVERY.md": {
+      "bytes": 11063,
+      "sha256": "9eb799bd8da95da5c68e4b59b8aab79fb2392094c0d75b5bda98c69ad3cfb731"
+    },
+    "dom100/configs/deltaai_torch_constraints.txt": {
+      "bytes": 46,
+      "sha256": "88880c70b44b2ade0ec0db5d924513bd6f74bb721ecfbabed68cf16586e0f182"
+    },
+    "dom100/configs/diffusion.yaml": {
+      "bytes": 947,
+      "sha256": "f8f1eade9814d5fa697bede50d1c369f110758cdde1c2d2066c4c978cf53159a"
+    },
+    "dom100/configs/dom_speed_ood_0p10_0p18_eval_split.json": {
+      "bytes": 918,
+      "sha256": "698f62009e3cf62419612d9c867dad200b9dca5d2adcf2d4ccd9b944a8115e56"
+    },
+    "dom100/configs/dom_speed_ood_0p10_0p18_split.json": {
+      "bytes": 1426123,
+      "sha256": "41fd905474a04898b7041527dfaf67ce9e73b5a6a6c907278d7c7a00bf39757d"
+    },
+    "dom100/configs/dynamicvla.yaml": {
+      "bytes": 1236,
+      "sha256": "7625326293becaaa16330d5b0759650707f702c38e8ec8e2af10adb1c19591b7"
+    },
+    "dom100/configs/dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "bytes": 1705,
+      "sha256": "063f5d0cb18cdd1253d7743008dfca6c23f05702ca09bf56b3a5dd95c53b9ce5"
+    },
+    "dom100/configs/dynamicvla_dom_paired_velocity.yaml": {
+      "bytes": 1825,
+      "sha256": "83b3f997701a20fb991ad5f8abe684b4f502e916881a77575e83e81aebb37c59"
+    },
+    "dom100/configs/residual_dynamicvla_dom_cartesian_512.yaml": {
+      "bytes": 2416,
+      "sha256": "6a749fbd1b653ab00efae96a946601fb2a88e4d0cf6e4f2fedd929d745adaa0a"
+    },
+    "dom100/configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "bytes": 2423,
+      "sha256": "c4b77205a62e128f38b71c150b47fda9a685da16b377d1587efa80d84787a567"
+    },
+    "dom100/configs/residual_dynamicvla_dom_paired_velocity.yaml": {
+      "bytes": 2534,
+      "sha256": "161422cdf76c0bb431339481638964c8d8b3bef3a3a5bd77b80032c78724a288"
+    },
+    "dom100/configs/residual_dynamicvla_dom_tiny.yaml": {
+      "bytes": 1860,
+      "sha256": "9f6e2cd3aab26f73115bf4e3e2333b37351d7a344a8e93fec22438b528cb306c"
+    },
+    "dom100/configs/smolvla.yaml": {
+      "bytes": 1052,
+      "sha256": "547ebec6c498af223f8f0f82168b7413a2a6090bc187b5c3ba11d3a88654bfcd"
+    },
+    "dom100/core/__init__.py": {
+      "bytes": 637,
+      "sha256": "a0140c8c0b2fafac636e194beb15d8d4623ff04e007f4f522f7987300003d8bd"
+    },
+    "dom100/core/dom_checkpoint.py": {
+      "bytes": 4433,
+      "sha256": "bcec70fa11b944791e0710f90e9fbe59b1a34126de3d6f25af85e2867c077577"
+    },
+    "dom100/core/dom_profiling.py": {
+      "bytes": 10618,
+      "sha256": "c50915a77b5a7aafc24ce979eccfa59cf4e72297d729ccf281c3d4625df4e7e9"
+    },
+    "dom100/core/dom_training.py": {
+      "bytes": 20114,
+      "sha256": "302d22c4820bcc5057a71895abd05418faf2bc2b03077482775f6853e38fb814"
+    },
+    "dom100/core/test.py": {
+      "bytes": 3497,
+      "sha256": "e3ca543be189bfdeb1db8f14251d5330c076e423e4eec8db986afd24a86a676e"
+    },
+    "dom100/core/train.py": {
+      "bytes": 43708,
+      "sha256": "922f96aa09dd0be459787a6ed2c740eeee2051e7808452d452976453a49a2bfb"
+    },
+    "dom100/policies/dynamicvla/configuration_dynamicvla.py": {
+      "bytes": 8980,
+      "sha256": "c89db949f01c695dcc914cbde3aa8f35e58f430334baca5e429e5533cbddcc65"
+    },
+    "dom100/policies/dynamicvla/modeling_dynamicvla.py": {
+      "bytes": 60140,
+      "sha256": "70109e2e840d9be86492f7779bb389fbce04539d6eed5d26f0c84b5c659427de"
+    },
+    "dom100/policies/dynamicvla/modeling_fastvlm.py": {
+      "bytes": 58646,
+      "sha256": "a7b5fa1d1addd043938d6580d1e8c8449859b3b4c94f9a3a6d7ee9a7b4203259"
+    },
+    "dom100/policies/dynamicvla/modeling_vlm_with_expert.py": {
+      "bytes": 25970,
+      "sha256": "e8315169202f995b479798262cc66e1c380103bba779f26e3dc43889211a2fe0"
+    },
+    "dom100/proactive_vla/__init__.py": {
+      "bytes": 846,
+      "sha256": "8e3eef0c5e8fbdfa0e5dba569738d0fc181f1c7d50abf171f3abf32ae3c51456"
+    },
+    "dom100/proactive_vla/phase_gate.py": {
+      "bytes": 7503,
+      "sha256": "8e8271db25125d4d489cc799bcad2d7e27069d1d47da7ee28e23363ee933a41a"
+    },
+    "dom100/proactive_vla/residual_flow.py": {
+      "bytes": 24664,
+      "sha256": "2c6133bb5686d6c02696221f5c0938531fb1b12ed0105eeb2220ea008c29f4cf"
+    },
+    "dom100/reference_palmetto/slurm/01_dom100.sbatch": {
+      "bytes": 424,
+      "sha256": "d3b04be8de5711fdbc1f5bf2001029032e3ef38c5b8ed56872a7bd57d8811617"
+    },
+    "dom100/reference_palmetto/slurm/02_kr100.sbatch": {
+      "bytes": 420,
+      "sha256": "2389f5638850bfb22206d9b9dc83761802a55b705601c978863366bf281cab8e"
+    },
+    "dom100/reference_palmetto/slurm/03_domv100.sbatch": {
+      "bytes": 428,
+      "sha256": "87a10936678fee7fcf348686f38fb805b38b7e60727589ed3327d35867b69e8f"
+    },
+    "dom100/reference_palmetto/slurm/04_krv100.sbatch": {
+      "bytes": 424,
+      "sha256": "fff3945b405ac234478abbb0e2837e40caae615134b7c331b8191d9979f2d029"
+    },
+    "dom100/reference_palmetto/slurm/05_krp100.sbatch": {
+      "bytes": 424,
+      "sha256": "4ed792e0e0cc8e4b4cf806f953a9cf16572005e1bb7353920507f4c3f6a7d031"
+    },
+    "dom100/reference_palmetto/slurm/06_krvp100.sbatch": {
+      "bytes": 428,
+      "sha256": "9b9672496c2f959392b433071fcf9f895a7c15f76b1bed70cb5f11907f4961e6"
+    },
+    "dom100/reference_palmetto/slurm/deltaai_dependencies.sbatch": {
+      "bytes": 944,
+      "sha256": "b2ab648c38d83d2c0db0d3fb97b519f8e6a382ca3a736f685bfbceb2bc1a758c"
+    },
+    "dom100/reference_palmetto/slurm/deltaai_environment_smoke.sbatch": {
+      "bytes": 1913,
+      "sha256": "3a141d03646683e26604afa36daa611fdcc454aa0b8f89a2fee12bf6da1f4d4a"
+    },
+    "dom100/reference_palmetto/slurm/deltaai_full_finetune.sbatch": {
+      "bytes": 1373,
+      "sha256": "00f76015edfcef7c477040680c6dc7599038991919d4b58fbca70ec62ef69d9f"
+    },
+    "dom100/reference_palmetto/slurm/deltaai_prefetch.sbatch": {
+      "bytes": 1182,
+      "sha256": "47a6730c2876172d553ee700278a50fb083bf0d096daf55276726246b18b1633"
+    },
+    "dom100/reference_palmetto/slurm/pilots_dom100.sbatch": {
+      "bytes": 369,
+      "sha256": "fdf9d531ef4ae2e506ee745a5150a5a7c0696d2336835833b37f67d8cc4be994"
+    },
+    "dom100/reference_palmetto/slurm/prepare_dom100.sbatch": {
+      "bytes": 351,
+      "sha256": "4494231eb7f7399289cd72da7b8442138088eeb713fb1289cf20849429c9a1a6"
+    },
+    "dom100/reference_palmetto/slurm/profile_dom100_a100.sbatch": {
+      "bytes": 327,
+      "sha256": "6370c287d86e3e5ad60b95accbd405869c7e078f22399404fdb7b0ba2aeb2847"
+    },
+    "dom100/reference_palmetto/slurm/profile_dom100_h100.sbatch": {
+      "bytes": 327,
+      "sha256": "27723047e76105ff25583141481aac6ac57f040b7c305503f6e8746874f6d029"
+    },
+    "dom100/reference_palmetto/slurm/profile_dom100_h200.sbatch": {
+      "bytes": 327,
+      "sha256": "aecf1ca49e2b3b0674bedfca18ea5d006f5ac071583fd826724cf0b6194f7a92"
+    },
+    "dom100/reference_palmetto/slurm/smoke_dom100.sbatch": {
+      "bytes": 366,
+      "sha256": "92c67cf0dd6f6bb25e149c968e20c75cd9076e45bc9a9c347ad8c6460c1c75ed"
+    },
+    "dom100/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_a100.sbatch": {
+      "bytes": 1099,
+      "sha256": "51fbf8c62faeea647bc7eac4c63f98f8799c796347d09295e47447a6ddd9e84d"
+    },
+    "dom100/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_a100_4gpu.sbatch": {
+      "bytes": 1795,
+      "sha256": "803e3fbacb7c4b4be564e6d9bc2f59ef7478c60f45892f4b92fbb63ff8690736"
+    },
+    "dom100/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_h100.sbatch": {
+      "bytes": 1098,
+      "sha256": "72f28dfb0a16bb622209a60763c196c09f0bfcd2e3c9724853eff8767a32a866"
+    },
+    "dom100/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_h200.sbatch": {
+      "bytes": 1099,
+      "sha256": "44c39aedcf3d33c7daed6658a562fd44831d45bd102922c73803be89486752d0"
+    },
+    "dom100/reference_palmetto/slurm/train_paired_velocity_pair_h100.sbatch": {
+      "bytes": 6616,
+      "sha256": "4387904531ec93892a684eea043da4656ea99d1972481c43f5f1d646b6ec2368"
+    },
+    "dom100/reference_palmetto/slurm/train_scratch_speed_ood_pair_a100.sbatch": {
+      "bytes": 1025,
+      "sha256": "bcf3f956d48bd4fb363d348692cb923a00d386eeacf9e44fa5e3deea8a827758"
+    },
+    "dom100/reference_palmetto/slurm/train_scratch_speed_ood_pair_h100.sbatch": {
+      "bytes": 1025,
+      "sha256": "3d1e524cb73d569ea002890776b44f53bc58fe116eec3187d01c855760b0d4ae"
+    },
+    "dom100/requirements.txt": {
+      "bytes": 209,
+      "sha256": "09d7d4152f663e7c856e0d0c1be30adba396a0a848eacae4d6ee69f808d7a9eb"
+    },
+    "dom100/requirements_rocky8.txt": {
+      "bytes": 1018,
+      "sha256": "65ed132c0a470ca3aaf03fcf79fedfdb7dfc2b7ec27b687742a31ea213eaafbb"
+    },
+    "dom100/run.py": {
+      "bytes": 11343,
+      "sha256": "329c4a0e574758d4c67365a6f75e1a8183cbc371adf6726d1b27a1f65dcd1da0"
+    },
+    "dom100/scripts/check_train_readiness.py": {
+      "bytes": 2298,
+      "sha256": "ca502bf793862b8dbd92ccf1ec046627af52b751f3cf4a4a23db881c5e212324"
+    },
+    "dom100/scripts/deltaai_env.sh": {
+      "bytes": 1755,
+      "sha256": "672c1cbb0cc905903bdadf4755b775f8752ad494b83d14b88104d3ee813ea6b2"
+    },
+    "dom100/scripts/dom100.py": {
+      "bytes": 13965,
+      "sha256": "e7966db3c941a7f8939b023f711ea056b1e12a4c4f8c02d38ad3d676515022bb"
+    },
+    "dom100/scripts/dom100_env.sh": {
+      "bytes": 339,
+      "sha256": "d71a7ccbd1efeb205f750670278c51443869fa64c3f44c36022b27127b0854d8"
+    },
+    "dom100/scripts/fix_lerobot_videos.py": {
+      "bytes": 4017,
+      "sha256": "044e5a7ff45d93e8751bf5f39f4be8ecbc8393555ca516747f588eebf504f581"
+    },
+    "dom100/scripts/hub_checkpoints.py": {
+      "bytes": 5206,
+      "sha256": "727169f171735f95f8a695ef80261825d7219732eec0b5a13f4e3d27f48b369f"
+    },
+    "dom100/scripts/palmetto_env.sh": {
+      "bytes": 740,
+      "sha256": "8125ffd3978793119852c910387d7f9772c9833b708b260349f2df51934a15c6"
+    },
+    "dom100/scripts/prepare_dom100.py": {
+      "bytes": 12388,
+      "sha256": "5c33e25cfa697b75c7750b4ad839803259e909bc506dde0a4a8de8cbb52f40bc"
+    },
+    "dom100/scripts/rebuild_dom_speed_split.py": {
+      "bytes": 3570,
+      "sha256": "7b0c0e4901f5f665ced9f9a15c0826c79951973d3e611f32d0eabdf2d3e3b39f"
+    },
+    "dom100/scripts/run_dom100.sh": {
+      "bytes": 1663,
+      "sha256": "cabf02537930c59a4af60164784f18a4ade244540be665cb7df25d835b9576c0"
+    },
+    "dom100/scripts/train_full_finetune_speed_ood_pair.sh": {
+      "bytes": 4213,
+      "sha256": "dd259aff6c7687fdb4337510e53e3e859d7528175190569192201cfad6912735"
+    },
+    "dom100/utils/average_meter.py": {
+      "bytes": 1834,
+      "sha256": "2c0da4fd0620175740197c778d969f653312b5badcb219a1846b59c25c73c178"
+    },
+    "dom100/utils/datasets.py": {
+      "bytes": 53300,
+      "sha256": "2fdde2a18a2b153a1f2adb099058670fa5fee608f5dfc242794cbc315f0d818d"
+    },
+    "dom100/utils/distributed.py": {
+      "bytes": 4555,
+      "sha256": "4ba72c4b9569e8ed361b7792dd2bb801a23aeb4212f8cdf27bedfbdb915309a5"
+    },
+    "dom100/utils/dom_data.py": {
+      "bytes": 10475,
+      "sha256": "6b4610f8104de58769dcff49e11a4debdabcf92fbf6859171ccdbac2a4a410b3"
+    },
+    "dom100/utils/dom_experiment.py": {
+      "bytes": 4704,
+      "sha256": "46a9103e8549a07e088e2f509fdd88763fd2a8da1f006c2175a7d4618b3a0eb1"
+    },
+    "dom100/utils/helpers.py": {
+      "bytes": 11333,
+      "sha256": "1601c731d2f821c5e15a89246be0fcdf3b01a2c7697af6df225d87683e21dcc8"
+    },
+    "dom100/utils/instruction_generator.py": {
+      "bytes": 1712,
+      "sha256": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4"
+    },
+    "dom100/utils/memcached.py": {
+      "bytes": 4793,
+      "sha256": "96cb0d41a88dbdca3798f961376cad8868ea962728aa91cd2565c3d051b8e70a"
+    },
+    "dom100/utils/summary_writer.py": {
+      "bytes": 3378,
+      "sha256": "b417e410325da4233702060cd025872516d3af161061e9caa83c4170771a53dd"
+    },
+    "tracking/LICENSE": {
+      "bytes": 1718,
+      "sha256": "eb7237d17f7586cd2412bb8173722d55dc59464aa1241acb96a3318a02394cf2"
+    },
+    "tracking/PALMETTO_SOURCE_MANIFEST.json": {
+      "bytes": 14985,
+      "sha256": "809b2cf943c4042def2d765fe524240f2c35d13dda8d1bf16d662aadae717bf6"
+    },
+    "tracking/RECOVERY.md": {
+      "bytes": 11063,
+      "sha256": "9eb799bd8da95da5c68e4b59b8aab79fb2392094c0d75b5bda98c69ad3cfb731"
+    },
+    "tracking/configs/diffusion.yaml": {
+      "bytes": 947,
+      "sha256": "f8f1eade9814d5fa697bede50d1c369f110758cdde1c2d2066c4c978cf53159a"
+    },
+    "tracking/configs/dom_franka_tracking_split.json": {
+      "bytes": 847,
+      "sha256": "58a41da80df8718d33e949df0d4fd39378d1ed9ec297ce7f52509b20f31c395d"
+    },
+    "tracking/configs/dom_speed_ood_0p10_0p18_eval_split.json": {
+      "bytes": 918,
+      "sha256": "698f62009e3cf62419612d9c867dad200b9dca5d2adcf2d4ccd9b944a8115e56"
+    },
+    "tracking/configs/dom_speed_ood_0p10_0p18_split.json": {
+      "bytes": 1426123,
+      "sha256": "41fd905474a04898b7041527dfaf67ce9e73b5a6a6c907278d7c7a00bf39757d"
+    },
+    "tracking/configs/dynamicvla.yaml": {
+      "bytes": 1236,
+      "sha256": "7625326293becaaa16330d5b0759650707f702c38e8ec8e2af10adb1c19591b7"
+    },
+    "tracking/configs/dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "bytes": 1680,
+      "sha256": "f492c1f14aa3cd1322970f20906c948a0aef89d6d9385f8126e119dafa4c551d"
+    },
+    "tracking/configs/dynamicvla_dom_full_finetune_speed_ood_0p12_0p13.yaml": {
+      "bytes": 1867,
+      "sha256": "c2f6749346ea82e2191b714ebe339d8394268ba7230f2ae6a172b2ee46eab830"
+    },
+    "tracking/configs/dynamicvla_dom_paired_velocity.yaml": {
+      "bytes": 1825,
+      "sha256": "83b3f997701a20fb991ad5f8abe684b4f502e916881a77575e83e81aebb37c59"
+    },
+    "tracking/configs/dynamicvla_dom_tracking_velocity75.yaml": {
+      "bytes": 2344,
+      "sha256": "961456dbd50da5aa396b0ab402b5b2a0b0670ff73aa1b30e5cda44f6f91ab306"
+    },
+    "tracking/configs/residual_dynamicvla_dom_cartesian_512.yaml": {
+      "bytes": 2416,
+      "sha256": "6a749fbd1b653ab00efae96a946601fb2a88e4d0cf6e4f2fedd929d745adaa0a"
+    },
+    "tracking/configs/residual_dynamicvla_dom_cartesian_speed_ood_0p05.yaml": {
+      "bytes": 2777,
+      "sha256": "bcf5d6833d3ee86b9f8fe607876a618109e03fe9c9fc50b4eca5180e3aae56ba"
+    },
+    "tracking/configs/residual_dynamicvla_dom_cartesian_speed_ood_0p12_0p13.yaml": {
+      "bytes": 2702,
+      "sha256": "94613da85d2e2bf5db44b69f2c0b557111a0d864cd820b0967a5b4993c74f919"
+    },
+    "tracking/configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "bytes": 2398,
+      "sha256": "9eac8741b8bdf724a62beec89f39098f5fbb937a1610af5fda44701856fd5c9c"
+    },
+    "tracking/configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p12_0p13.yaml": {
+      "bytes": 2585,
+      "sha256": "d05846bd393fb7cba21213dc4cb9c825f8c37b2cb23cc7aff985cf33448c4f72"
+    },
+    "tracking/configs/residual_dynamicvla_dom_paired_velocity.yaml": {
+      "bytes": 2534,
+      "sha256": "161422cdf76c0bb431339481638964c8d8b3bef3a3a5bd77b80032c78724a288"
+    },
+    "tracking/configs/residual_dynamicvla_dom_tiny.yaml": {
+      "bytes": 1860,
+      "sha256": "9f6e2cd3aab26f73115bf4e3e2333b37351d7a344a8e93fec22438b528cb306c"
+    },
+    "tracking/configs/smolvla.yaml": {
+      "bytes": 1052,
+      "sha256": "547ebec6c498af223f8f0f82168b7413a2a6090bc187b5c3ba11d3a88654bfcd"
+    },
+    "tracking/configs/tracking_dom75_full20_baseline.yaml": {
+      "bytes": 2091,
+      "sha256": "95bc186fc284a070b66b292b0486a45841b294c5e65f72206072acb053dc024d"
+    },
+    "tracking/configs/tracking_dom75_full20_coordinate.yaml": {
+      "bytes": 2855,
+      "sha256": "a65125cbdd64b4f309acf5204808fdb9732bb1bd250dbfc8001ad57154bf452c"
+    },
+    "tracking/configs/tracking_dom75_full20_coordinate_velocity.yaml": {
+      "bytes": 3269,
+      "sha256": "1cf209f7b26700a936390d002f489d604a235db7a6ce409b4ed9a61b594b54cf"
+    },
+    "tracking/configs/tracking_dom75_full20_residual.yaml": {
+      "bytes": 2813,
+      "sha256": "29fb08f8cb01aab2680a031e010ee9f2a7353167818451297705122139da8497"
+    },
+    "tracking/core/__init__.py": {
+      "bytes": 254,
+      "sha256": "14d2d8531d7af301da1f683098545e334b229710e732906830fe4d80fd799ce3"
+    },
+    "tracking/core/test.py": {
+      "bytes": 3497,
+      "sha256": "e3ca543be189bfdeb1db8f14251d5330c076e423e4eec8db986afd24a86a676e"
+    },
+    "tracking/core/train.py": {
+      "bytes": 45179,
+      "sha256": "82e0d14f3dbdf342f40794bdb878475a3e7c683339a1cbcc89b01bb536996585"
+    },
+    "tracking/policies/dynamicvla/configuration_dynamicvla.py": {
+      "bytes": 8315,
+      "sha256": "fe25222ff23660da22673e9a6dc23262be06123b4763d2780accedf1a99f2399"
+    },
+    "tracking/policies/dynamicvla/modeling_dynamicvla.py": {
+      "bytes": 58428,
+      "sha256": "152cef31509fd73ea4a2c2d69b3c43c1475437a08b3c487e1a4822499aa060ee"
+    },
+    "tracking/policies/dynamicvla/modeling_fastvlm.py": {
+      "bytes": 58646,
+      "sha256": "a7b5fa1d1addd043938d6580d1e8c8449859b3b4c94f9a3a6d7ee9a7b4203259"
+    },
+    "tracking/policies/dynamicvla/modeling_vlm_with_expert.py": {
+      "bytes": 25970,
+      "sha256": "e8315169202f995b479798262cc66e1c380103bba779f26e3dc43889211a2fe0"
+    },
+    "tracking/proactive_vla/__init__.py": {
+      "bytes": 846,
+      "sha256": "8e3eef0c5e8fbdfa0e5dba569738d0fc181f1c7d50abf171f3abf32ae3c51456"
+    },
+    "tracking/proactive_vla/residual_flow.py": {
+      "bytes": 23773,
+      "sha256": "9242f9010432c40d4b5716e589246ae680ea7934aa204bcfb2ddc1ebae6d31a9"
+    },
+    "tracking/reference_palmetto/slurm/resume_tracking_dom75_full20_coordinate.sbatch": {
+      "bytes": 1225,
+      "sha256": "f7a5412180bd7d0d5d119d75f4059da3a929673a47644caf9c426d942c5b76c8"
+    },
+    "tracking/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_a100.sbatch": {
+      "bytes": 1099,
+      "sha256": "51fbf8c62faeea647bc7eac4c63f98f8799c796347d09295e47447a6ddd9e84d"
+    },
+    "tracking/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_a100_4gpu.sbatch": {
+      "bytes": 1795,
+      "sha256": "803e3fbacb7c4b4be564e6d9bc2f59ef7478c60f45892f4b92fbb63ff8690736"
+    },
+    "tracking/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_h100.sbatch": {
+      "bytes": 1098,
+      "sha256": "72f28dfb0a16bb622209a60763c196c09f0bfcd2e3c9724853eff8767a32a866"
+    },
+    "tracking/reference_palmetto/slurm/train_full_finetune_speed_ood_pair_h200.sbatch": {
+      "bytes": 1099,
+      "sha256": "44c39aedcf3d33c7daed6658a562fd44831d45bd102922c73803be89486752d0"
+    },
+    "tracking/reference_palmetto/slurm/train_paired_velocity_pair_h100.sbatch": {
+      "bytes": 6616,
+      "sha256": "4387904531ec93892a684eea043da4656ea99d1972481c43f5f1d646b6ec2368"
+    },
+    "tracking/reference_palmetto/slurm/train_scratch_speed_ood_pair_a100.sbatch": {
+      "bytes": 1025,
+      "sha256": "bcf3f956d48bd4fb363d348692cb923a00d386eeacf9e44fa5e3deea8a827758"
+    },
+    "tracking/reference_palmetto/slurm/train_scratch_speed_ood_pair_h100.sbatch": {
+      "bytes": 1025,
+      "sha256": "3d1e524cb73d569ea002890776b44f53bc58fe116eec3187d01c855760b0d4ae"
+    },
+    "tracking/reference_palmetto/slurm/train_tracking_coordinate_velocity75_a100.sbatch": {
+      "bytes": 2398,
+      "sha256": "f2aa9c729e590af38579cdf47776e6dc93a50bb9514610c1f892724154ace169"
+    },
+    "tracking/reference_palmetto/slurm/train_tracking_velocity75_a100.sbatch": {
+      "bytes": 1670,
+      "sha256": "6f7de3972436610e4f2bb9d574d063a2fc8dda31a934c01905e43374a2dc52aa"
+    },
+    "tracking/requirements.txt": {
+      "bytes": 202,
+      "sha256": "16ff97e90ea7e2412e02e34aec1f3a15097c956c989f11d44ffa4ee7ecc30bfb"
+    },
+    "tracking/requirements_rocky8.txt": {
+      "bytes": 1018,
+      "sha256": "65ed132c0a470ca3aaf03fcf79fedfdb7dfc2b7ec27b687742a31ea213eaafbb"
+    },
+    "tracking/run.py": {
+      "bytes": 11134,
+      "sha256": "9bbfad08bdc808b93f2a231ca795320ba58d6a5f75a0230b7cc285941f64f1b5"
+    },
+    "tracking/scripts/check_train_readiness.py": {
+      "bytes": 2107,
+      "sha256": "d745682a1ab276d752e02b08f7ceb64d79b93f25f98619f64e5d148407635086"
+    },
+    "tracking/scripts/deltaai_env.sh": {
+      "bytes": 1755,
+      "sha256": "672c1cbb0cc905903bdadf4755b775f8752ad494b83d14b88104d3ee813ea6b2"
+    },
+    "tracking/scripts/fix_lerobot_videos.py": {
+      "bytes": 4017,
+      "sha256": "044e5a7ff45d93e8751bf5f39f4be8ecbc8393555ca516747f588eebf504f581"
+    },
+    "tracking/scripts/palmetto_env.sh": {
+      "bytes": 740,
+      "sha256": "8125ffd3978793119852c910387d7f9772c9833b708b260349f2df51934a15c6"
+    },
+    "tracking/scripts/rebuild_dom_speed_split.py": {
+      "bytes": 3570,
+      "sha256": "7b0c0e4901f5f665ced9f9a15c0826c79951973d3e611f32d0eabdf2d3e3b39f"
+    },
+    "tracking/scripts/train_full_finetune_speed_ood_pair.sh": {
+      "bytes": 3350,
+      "sha256": "383c3b9d3f11964cef0c4d788465534d55a78c9c96b95ebd8dcfd068c85d45c4"
+    },
+    "tracking/scripts/train_tracking_velocity.py": {
+      "bytes": 543,
+      "sha256": "cab501981a03d1526192601f884de42522854410cfa7a2fe51389f43be3da06c"
+    },
+    "tracking/utils/average_meter.py": {
+      "bytes": 1834,
+      "sha256": "2c0da4fd0620175740197c778d969f653312b5badcb219a1846b59c25c73c178"
+    },
+    "tracking/utils/datasets.py": {
+      "bytes": 52370,
+      "sha256": "76a1a10300c587fff95dda939afa5f8509a3cb029fc834024c24940417dc90f6"
+    },
+    "tracking/utils/distributed.py": {
+      "bytes": 4555,
+      "sha256": "4ba72c4b9569e8ed361b7792dd2bb801a23aeb4212f8cdf27bedfbdb915309a5"
+    },
+    "tracking/utils/helpers.py": {
+      "bytes": 11333,
+      "sha256": "1601c731d2f821c5e15a89246be0fcdf3b01a2c7697af6df225d87683e21dcc8"
+    },
+    "tracking/utils/instruction_generator.py": {
+      "bytes": 1872,
+      "sha256": "8b04b167855ae8cfe815068654667bd8dda5c0ae07018af2f3523b49bc14d6d2"
+    },
+    "tracking/utils/memcached.py": {
+      "bytes": 4784,
+      "sha256": "d0c0ca19d4450b0c7239ac37ba22155efcabec78f3a952ff6c5a1fa6178dd77e"
+    },
+    "tracking/utils/summary_writer.py": {
+      "bytes": 3378,
+      "sha256": "b417e410325da4233702060cd025872516d3af161061e9caa83c4170771a53dd"
+    }
+  }
+}

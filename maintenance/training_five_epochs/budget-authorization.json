@@ -1,0 +1,22 @@
+{
+  "user_authorized_at": "2026-10-20",
+  "scope": [
+    "pi05_baseline",
+    "pi05_kr",
+    "smolvla_baseline",
+    "smolvla_kr",
+    "vlash_baseline",
+    "vlash_kr"
+  ],
+  "minimum_complete_native_epochs": 5,
+  "audited_training_anchors": 22370201,
+  "drop_last_anchors_per_epoch": 25,
+  "total_consumed_anchors_per_run": 111850880,
+  "global32_total_updates": 3495340,
+  "global64_total_updates": 1747670,
+  "learning_rate_policy": "preserve_original_then_floor",
+  "learning_rate_policy_explicit_user_reply": "Preserve schedule, then final rate (Recommended)",
+  "new_budget_is_extension_not_original_official_step_budget": true,
+  "original_wandb_ids_retained": true,
+  "resume_exact_latest_production_state": true
+}

@@ -1,0 +1,12 @@
+{
+  "requested_gpu": "l40s:1",
+  "pilot_trials": 9,
+  "full_trials": 1800,
+  "full_array_dimensions": 9,
+  "max_concurrent_full_tasks": 1,
+  "results": "/home/aparame/Research/Dynamic_VLA/RESULTS/official_dom_table1/20261009",
+  "stage": "/scratch/aparame/Dynamic_VLA/runs/official_dom_table1_20261009",
+  "pilot_job_id": 16868046,
+  "full_array_job_id": 16868047,
+  "summary_job_id": 16868048
+}

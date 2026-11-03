@@ -1,0 +1,50 @@
+PyTorch 2.12.1 for Delta — RH9.6 / CPE 26.3 (CUDA 13.0, Python 3.12)
+
+Built for the RH9.6 stack: cu130 wheels (CUDA 13.0 runtime), mpi4py linked
+against cray-mpich 9.1.0, system libfabric 2.3.1 (Slingshot CXI). Runs on
+driver 595.71.05 natively. Refuses to load on RH9.4 nodes — use
+pytorch-conda/2.8 there.
+
+For documentation and examples:
+  https://docs.ncsa.illinois.edu/systems/delta/
+
+Run setup-kernel prior to launching an OOD job.
+
+Quick start (on a RH9.6 compute node):
+  module load pytorch-conda/2.12
+  conda activate base
+  python -c "import torch; print(torch.cuda.is_available())"
+
+CUDA extensions: CUDA_HOME comes from the default cudatoolkit module
+(cudatoolkit/default -> 26.5_13.2 on RH9.6, nvcc 13.2).
+
+Multi-node NCCL: the aws-ofi-nccl plugin is loaded automatically, so NCCL
+routes over Slingshot CXI rather than falling back to TCP sockets.
+
+aws-ofi-nccl/1.19.2 (RH9.6/CPE 26.3: libfabric 2.3.1, CUDA 13.2)
+/sw/rh9.4/user/python/conda-env/pytorch-2.12.1-cu130/lib/python3.12/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.5.0) or chardet (6.0.0.post1)/charset_normalizer (3.4.2) doesn't match a supported version!
+  warnings.warn(
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/training-sources/delta-domv-f991015a/utils/helpers.py", line 27, in <module>
+    from lerobot.policies.diffusion.modeling_diffusion import DiffusionPolicy
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/policies/diffusion/modeling_diffusion.py", line 39, in <module>
+    from lerobot.policies.pretrained import PreTrainedPolicy
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/policies/pretrained.py", line 32, in <module>
+    from lerobot.configs.train import TrainPipelineConfig
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/configs/train.py", line 24, in <module>
+    from lerobot import envs
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/envs/__init__.py", line 15, in <module>
+    from .configs import AlohaEnv, EnvConfig, PushtEnv, XarmEnv  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/envs/configs.py", line 23, in <module>
+    from lerobot.robots import RobotConfig
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/robots/__init__.py", line 2, in <module>
+    from .robot import Robot
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/robots/robot.py", line 23, in <module>
+    from lerobot.motors import MotorCalibration
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/motors/__init__.py", line 1, in <module>
+    from .motors_bus import Motor, MotorCalibration, MotorNormMode, MotorsBus
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/venv-domv-delta-20261020/lib/python3.12/site-packages/lerobot/motors/motors_bus.py", line 31, in <module>
+    import serial
+ModuleNotFoundError: No module named 'serial'

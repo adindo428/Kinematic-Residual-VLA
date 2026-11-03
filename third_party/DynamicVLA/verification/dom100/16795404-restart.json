@@ -1,0 +1,31 @@
+{
+  "dataset_cache_preserved": true,
+  "dependency_updates": "Palmetto disallows scontrol job modification; pending dependent jobs replaced.",
+  "download_timeout_seconds": 60,
+  "download_transport": "HTTP; HF_HUB_DISABLE_XET=1",
+  "metadata_timeout_seconds": 30,
+  "old_job_id": "16795404",
+  "old_jobs_cancelled": true,
+  "profiling_jobs": [
+    "16795406",
+    "16795407",
+    "16795408",
+    "16795409"
+  ],
+  "reason": "Download log stalled for approximately nine hours; restart from verified existing cache.",
+  "replacement_job_id": "16821555",
+  "replacement_jobs": {
+    "16795404": "16821555",
+    "16795406": "16821566",
+    "16795407": "16821567",
+    "16795408": "16821568",
+    "16795409": "16821569",
+    "16795424": "16821570",
+    "16795425": "16821571",
+    "16795426": "16821572",
+    "16795443": "16821573",
+    "16795472": "16821574",
+    "16795473": "16821575",
+    "16795474": "16821576"
+  }
+}

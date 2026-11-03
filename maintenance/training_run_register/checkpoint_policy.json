@@ -1,0 +1,46 @@
+{
+  "user_instruction": "For all future training, always save latest and best checkpoints",
+  "effective_user_date": "2026-10-29",
+  "scope": "All future project models, variants, sites, hardware, fresh attempts and continuations",
+  "required": [
+    "latest",
+    "best_validation"
+  ],
+  "default_selection": {
+    "metric": "physical_h20_action_mse",
+    "direction": "minimize",
+    "finite_only": true,
+    "tie": "retain_previous_best",
+    "override": "Only an explicitly declared study validation metric"
+  },
+  "best_before_first_validation": "pending; no invented best",
+  "contents": [
+    "model",
+    "optimizer",
+    "lr_scheduler",
+    "per_rank_rng",
+    "epoch",
+    "updates",
+    "samples",
+    "data_cursor",
+    "original_total_budget",
+    "source_data_recipe_provenance"
+  ],
+  "save_latest_at": [
+    "periodic_intervals",
+    "epoch_boundaries",
+    "graceful_stop_or_allocation_signal",
+    "completion"
+  ],
+  "atomic_complete_saves": true,
+  "immutable_generation_pointers_allowed": true,
+  "cleanup_protects": [
+    "latest",
+    "best_validation",
+    "metadata",
+    "all_pointer_and_symlink_targets"
+  ],
+  "moving_best_symlink_to_latest_forbidden": true,
+  "active_or_submitted_source_edits_forbidden": true,
+  "existing_historical_best_not_assumed": true
+}

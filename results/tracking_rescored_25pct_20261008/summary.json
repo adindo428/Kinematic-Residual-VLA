@@ -1,0 +1,119 @@
+{
+  "scoring_version": 3,
+  "success_definition": "Complete the full horizon and keep 3D EE-to-hover-target distance <=0.02 m for at least 25% of the entire episode, including the initial second. Intervals need not be consecutive. Orientation is not a success gate.",
+  "time_definition": "Time to accumulate at least 25% of the requested episode duration within 2 cm. Failed/terminated trials receive their full requested horizon; successful-only time is also reported. Simulation time, excluding expert warmup and inference pauses.",
+  "source": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing",
+  "original_results_unchanged": true,
+  "recorded_rollouts": 120,
+  "scope": "Rescoring the earlier 10 held-out tracking trajectories at 1x, 1.5x and 2x; not the new nine-dimension suite.",
+  "groups": {
+    "baseline_1x": {
+      "model_label": "DOM-VLA",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 2.0300000000000002,
+      "mean_failure_capped_time_s": 10.0
+    },
+    "baseline_1.5x": {
+      "model_label": "DOM-VLA",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 2.3400000000000003,
+      "mean_failure_capped_time_s": 10.0
+    },
+    "baseline_2x": {
+      "model_label": "DOM-VLA",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 2.075,
+      "mean_failure_capped_time_s": 10.0
+    },
+    "velocity_1x": {
+      "model_label": "DOM-VLA+Velocity",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 1,
+      "success_percent": 10,
+      "mean_whole_episode_within_2cm_percent": 10.860000000000001,
+      "mean_failure_capped_time_s": 9.6515
+    },
+    "velocity_1.5x": {
+      "model_label": "DOM-VLA+Velocity",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 9.62,
+      "mean_failure_capped_time_s": 10.0
+    },
+    "velocity_2x": {
+      "model_label": "DOM-VLA+Velocity",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 3.249999999999999,
+      "mean_failure_capped_time_s": 10.0
+    },
+    "coordinate_1x": {
+      "model_label": "KR-VLA-Coordinate",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 4,
+      "success_percent": 40,
+      "mean_whole_episode_within_2cm_percent": 30.120000000000005,
+      "mean_failure_capped_time_s": 7.669500000000001
+    },
+    "coordinate_1.5x": {
+      "model_label": "KR-VLA-Coordinate",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 11.84,
+      "mean_failure_capped_time_s": 10.0
+    },
+    "coordinate_2x": {
+      "model_label": "KR-VLA-Coordinate",
+      "episodes": 10,
+      "completed": 9,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 3.4,
+      "mean_failure_capped_time_s": 10.0
+    },
+    "coordinate_velocity_1x": {
+      "model_label": "KR-VLA-Coordinate+Velocity",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 5,
+      "success_percent": 50,
+      "mean_whole_episode_within_2cm_percent": 31.55,
+      "mean_failure_capped_time_s": 7.659000000000001
+    },
+    "coordinate_velocity_1.5x": {
+      "model_label": "KR-VLA-Coordinate+Velocity",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 1,
+      "success_percent": 10,
+      "mean_whole_episode_within_2cm_percent": 12.87,
+      "mean_failure_capped_time_s": 9.747499999999999
+    },
+    "coordinate_velocity_2x": {
+      "model_label": "KR-VLA-Coordinate+Velocity",
+      "episodes": 10,
+      "completed": 10,
+      "successes": 0,
+      "success_percent": 0,
+      "mean_whole_episode_within_2cm_percent": 5.76,
+      "mean_failure_capped_time_s": 10.0
+    }
+  }
+}

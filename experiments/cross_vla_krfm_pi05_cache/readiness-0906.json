@@ -1,0 +1,343 @@
+{
+  "submissions": {
+    "previous_attempt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020",
+    "supersedes": {
+      "pi05_baseline_profile": "17713148",
+      "pi05_baseline_train": "17713149",
+      "pi05_kr_profile": "17713150",
+      "pi05_kr_train": "17713151"
+    },
+    "frozen_preparation": {
+      "reused_from": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020",
+      "direct_hash_validation": true
+    },
+    "pi05_baseline_profile": {
+      "job_id": "17716903",
+      "recipe": "pi05_baseline",
+      "command": "profile",
+      "dependency": null,
+      "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_baseline_profile.sbatch",
+      "gpus": 2,
+      "gpu": "A100 80 GB",
+      "submitted_at": "2026-10-20T07:14:02.727389+00:00"
+    },
+    "pi05_kr_profile": {
+      "job_id": "17716904",
+      "recipe": "pi05_kr",
+      "command": "profile",
+      "dependency": null,
+      "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_kr_profile.sbatch",
+      "gpus": 2,
+      "gpu": "A100 80 GB",
+      "submitted_at": "2026-10-20T07:14:02.830162+00:00"
+    }
+  },
+  "queue": "17716904|RUNNING|node0394\n",
+  "queue_error": "",
+  "accounting": "17716903|COMPLETED|00:23:43|0:0\n17716904|RUNNING|00:08:01|0:0\n",
+  "artifacts": {
+    "tuning/pi05_baseline/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 70.12316727545112,
+        "samples_per_second": 3.6507192978663565,
+        "peak_gpu_reserved_bytes": 70948749312.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41557868544.0,
+        "mean_gpu_utilization_percent": 55.205882352941174,
+        "identity": "9fbb3cad6f618ef84039beaa722c50756c17f317a10c041bc4a449ece101b799",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 2,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 40.57907397206873,
+        "samples_per_second": 6.30867033033354,
+        "peak_gpu_reserved_bytes": 71229767680.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41752117248.0,
+        "mean_gpu_utilization_percent": 59.078125,
+        "identity": "d2d0c4b738ffa138d782537d3a9b7c01238b45de163676447fc321a91ff05c4f",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 4,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-2.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 31.25038461945951,
+        "samples_per_second": 8.191899175557335,
+        "peak_gpu_reserved_bytes": 72066531328.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41634521088.0,
+        "mean_gpu_utilization_percent": 65.13461538461539,
+        "identity": "2a7d508f488d3d8b8a586bae96620c08dc5e85ef3d4ca1cae193044e1dc099ce",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-3.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 26.35849431157112,
+        "samples_per_second": 9.712239135283934,
+        "peak_gpu_reserved_bytes": 71798095872.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41645813760.0,
+        "mean_gpu_utilization_percent": 65.08695652173913,
+        "identity": "0146f466ba242148724abfaefdbf64028895f25c35a1017473bdb999439d0333",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-4.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 26.332215014845133,
+        "samples_per_second": 9.72193185630896,
+        "peak_gpu_reserved_bytes": 71798095872.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41559740416.0,
+        "mean_gpu_utilization_percent": 57.517857142857146,
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 26.505782363936305,
+        "samples_per_second": 9.658269900695815,
+        "peak_gpu_reserved_bytes": 71798095872.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 43608727552.0,
+        "mean_gpu_utilization_percent": 45.55882352941177,
+        "identity": "f1505bd21460fd0631d4665cee4de927b69abf3766ae5b7885fce5be5db9c50d",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/profile-final.log",
+        "command": "profile"
+      }
+    ],
+    "tuning/pi05_baseline/selection.json": {
+      "selected": {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-4.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 26.332215014845133,
+        "samples_per_second": 9.72193185630896,
+        "peak_gpu_reserved_bytes": 71798095872.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41559740416.0,
+        "mean_gpu_utilization_percent": 57.517857142857146,
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "eligible": true
+      },
+      "control": {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_baseline/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 70.12316727545112,
+        "samples_per_second": 3.6507192978663565,
+        "peak_gpu_reserved_bytes": 70948749312.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41557868544.0,
+        "mean_gpu_utilization_percent": 55.205882352941174,
+        "identity": "9fbb3cad6f618ef84039beaa722c50756c17f317a10c041bc4a449ece101b799",
+        "eligible": true
+      },
+      "throughput_ratio_to_control": 2.663018178908165,
+      "criterion": "Highest measured decoded throughput retaining at least15% GPU/node memory headroom",
+      "recipe_unchanged": true,
+      "sampling_order_unchanged": true
+    },
+    "tuning/pi05_kr/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_kr/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 67.26915466412902,
+        "samples_per_second": 3.805607507306924,
+        "peak_gpu_reserved_bytes": 70946652160.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41600880640.0,
+        "mean_gpu_utilization_percent": 56.840425531914896,
+        "identity": "8d7403857b3a65e2b79990fcc802c298d8fd4b0242b527a355e324ef46706a87",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 2,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_kr/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 39.96568806376308,
+        "samples_per_second": 6.405494623076823,
+        "peak_gpu_reserved_bytes": 71229767680.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 41601798144.0,
+        "mean_gpu_utilization_percent": 62.806451612903224,
+        "identity": "eea254e58f1da63cf286f9665177aa6043e910376981f7e4afb160de67895c01",
+        "eligible": true
+      }
+    ],
+    "profiles/pi05_baseline.json": {
+      "approved": true,
+      "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "runtime": {
+        "microbatch": 8,
+        "workers": 8,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "microbatch": 8,
+      "global_batch": 32,
+      "accumulation": 2,
+      "decoded_optimizer_updates": 20,
+      "seconds": 144.61472610291094,
+      "samples_per_second": 4.425552066838354,
+      "peak_gpu_reserved_bytes": 71798095872.0,
+      "node_process_peak_rss_bytes": 114189242368.0,
+      "validation_h20_action_mse": 4.517374038696289,
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "coordinated_checkpoint_test": true,
+      "mean_gpu_utilization_percent": 45.182539682539684,
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "train.py": "0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d"
+      }
+    }
+  },
+  "logs": {
+    "logs/pi05_baseline-profile-17716903.err": "",
+    "logs/pi05_baseline-profile-17716903.out": "nd\": 9.658269900695815, \"eligible\": true}\n{\"runtime\": {\"microbatch\": 8, \"workers\": 8, \"main_threads\": 2, \"prefetch\": 2, \"autocast_cache_enabled\": false, \"allocator\": \"expandable_segments:True\"}, \"command\": \"profile\", \"returncode\": 0}\n{\"recipe\": \"pi05_baseline\", \"runtime\": {\"microbatch\": 8, \"workers\": 8, \"main_threads\": 2, \"prefetch\": 2, \"autocast_cache_enabled\": false, \"allocator\": \"expandable_segments:True\"}, \"samples_per_second\": 9.72193185630896, \"readiness\": {\"approved\": true, \"identity\": \"ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49\", \"hardware\": \"NVIDIA A100 80GB PCIe\", \"runtime\": {\"microbatch\": 8, \"workers\": 8, \"main_threads\": 2, \"prefetch\": 2, \"autocast_cache_enabled\": false, \"allocator\": \"expandable_segments:True\"}, \"microbatch\": 8, \"global_batch\": 32, \"accumulation\": 2, \"decoded_optimizer_updates\": 20, \"seconds\": 144.61472610291094, \"samples_per_second\": 4.425552066838354, \"peak_gpu_reserved_bytes\": 71798095872.0, \"node_process_peak_rss_bytes\": 114189242368.0, \"validation_h20_action_mse\": 4.517374038696289, \"strict_checkpoint_rng_reload\": true, \"strict_inference_reload\": true, \"coordinated_checkpoint_test\": true, \"mean_gpu_utilization_percent\": 45.182539682539684, \"source\": {\"autotune.py\": \"c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794\", \"common.py\": \"f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822\", \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\", \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\", \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\", \"policy.py\": \"47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79\", \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\", \"prepare_resume.py\": \"297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d\", \"runtime.py\": \"0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730\", \"submit.py\": \"69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596\", \"test_autocast.py\": \"b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc\", \"test_collective.py\": \"a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56\", \"test_contract.py\": \"99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6\", \"test_optimizer.py\": \"dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222\", \"train.py\": \"0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d\"}}}\n",
+    "logs/pi05_kr-profile-17716904.err": "",
+    "logs/pi05_kr-profile-17716904.out": "{\"runtime\": {\"microbatch\": 1, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2, \"autocast_cache_enabled\": false, \"allocator\": \"expandable_segments:True\"}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 3.805607507306924, \"eligible\": true}\n{\"runtime\": {\"microbatch\": 2, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2, \"autocast_cache_enabled\": false, \"allocator\": \"expandable_segments:True\"}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 6.405494623076823, \"eligible\": true}\n",
+    "tuning/pi05_baseline/benchmark-0.log": " This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_baseline/benchmark-1.log": " This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_baseline/benchmark-2.log": " This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_baseline/benchmark-3.log": "nt. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_baseline/benchmark-4.log": "nt. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_baseline/benchmark-5.log": "nt. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_baseline/profile-final.log": "vs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_kr/benchmark-0.log": "nt. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_kr/benchmark-1.log": "nt. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "tuning/pi05_kr/benchmark-2.log": "e alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias\nWARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n"
+  },
+  "checked_at": "2026-10-20T09:07:05.274820+00:00"
+}

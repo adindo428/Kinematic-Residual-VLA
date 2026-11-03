@@ -1,0 +1,29 @@
+{
+  "diagnostic_job_id": "17837039",
+  "comparison_complete": false,
+  "exact_tokens_bins_gradients_passed": true,
+  "per_rank_gradient_tensors_compared": 805,
+  "control_loader_wait_percent": 0.0138399615136818,
+  "partial_comparisons": [
+    {
+      "name": "control_workers8",
+      "samples_per_second": 37.33426523990839,
+      "change_percent_vs_first_control": 0.0,
+      "headroom_pass": true
+    },
+    {
+      "name": "worker_prompts8",
+      "samples_per_second": 36.86872902886191,
+      "change_percent_vs_first_control": -1.2469408680068184,
+      "headroom_pass": true
+    },
+    {
+      "name": "worker_prompts8_cuda_prefetch",
+      "samples_per_second": 37.16359004719344,
+      "change_percent_vs_first_control": -0.457154283386052,
+      "headroom_pass": true
+    }
+  ],
+  "interpretation": "Current evidence shows no data-loader starvation. CPU prompt preparation and transfer prefetch have not improved throughput over the first control; await final worker-count and repeated-control measurements.",
+  "production_changes_made": false
+}

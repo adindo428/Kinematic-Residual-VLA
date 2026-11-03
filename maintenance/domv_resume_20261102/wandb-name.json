@@ -1,0 +1,16 @@
+{
+  "name": "DOMV_Full_Dataset",
+  "id": "bwx4b5i1",
+  "entity": "aparame-clemson-university",
+  "project": "Kinematic-Residual-VLA",
+  "remote_rename_succeeded": true,
+  "local_metrics_uploaded": true,
+  "verified_remote_name": "DOMV_Full_Dataset",
+  "last_sync_at": "2026-11-03T14:38:09.998646+00:00",
+  "last_synced_updates": 267760,
+  "last_synced_epoch": 4.213243680734027,
+  "authorization": "User explicitly approved uploading saved metrics to aparame-clemson-university/Kinematic-Residual-VLA in this chat",
+  "continuous_sync": false,
+  "last_verified_at": "2026-11-03T14:38:05.113621+00:00",
+  "sync_process_state": "completed successfully"
+}

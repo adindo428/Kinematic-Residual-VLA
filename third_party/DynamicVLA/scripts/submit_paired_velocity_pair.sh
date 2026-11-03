@@ -36,7 +36,7 @@ export DVLA_REQUESTED_GPU_TYPE=${GPU_TYPE}
 export DVLA_REQUESTED_GPU_COUNT=${GPU_COUNT}
 
 cd "${PROJECT_ROOT}"
-mkdir -p runs/slurm_logs
+mkdir -p /home/aparame/Research/Dynamic_VLA/logs/slurm
 
 echo "[paired-velocity] Requesting ${GPU_COUNT} x ${GPU_TYPE}."
 exec sbatch \

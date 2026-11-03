@@ -17,3 +17,24 @@ videos/
 datasets/
 .cache/
 paper/*.zip
+
+# Runtime artifacts and local-only transfer bundles
+/results/
+/maintenance/
+/vendor/
+/experiments/**/runtime/
+.DS_Store
+._*
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.mp4
+*.avi
+*.so
+*.egg-info/
+.venv/
+venv/
+
+# Linux workstation paths and credentials stay local
+/workstation/env.local.sh

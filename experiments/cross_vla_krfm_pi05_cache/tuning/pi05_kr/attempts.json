@@ -1,0 +1,46 @@
+[
+  {
+    "runtime": {
+      "microbatch": 1,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2,
+      "autocast_cache_enabled": false,
+      "allocator": "expandable_segments:True"
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_kr/benchmark-0.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 67.26915466412902,
+    "samples_per_second": 3.805607507306924,
+    "peak_gpu_reserved_bytes": 70946652160.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 41600880640.0,
+    "mean_gpu_utilization_percent": 56.840425531914896,
+    "identity": "8d7403857b3a65e2b79990fcc802c298d8fd4b0242b527a355e324ef46706a87",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 2,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2,
+      "autocast_cache_enabled": false,
+      "allocator": "expandable_segments:True"
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/tuning/pi05_kr/benchmark-1.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 39.96568806376308,
+    "samples_per_second": 6.405494623076823,
+    "peak_gpu_reserved_bytes": 71229767680.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 41601798144.0,
+    "mean_gpu_utilization_percent": 62.806451612903224,
+    "identity": "eea254e58f1da63cf286f9665177aa6043e910376981f7e4afb160de67895c01",
+    "eligible": true
+  }
+]

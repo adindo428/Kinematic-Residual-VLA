@@ -15,6 +15,7 @@ import os
 import random
 import sys
 import time
+import uuid
 
 import gymnasium as gym
 import numpy as np
@@ -29,6 +30,7 @@ sys.path.append(os.path.join(PROJECT_HOME, "simulations"))
 
 import simulations.simulate as sim
 from utils.instruction_generator import InstructionGenerator
+from utils.dom_sim_metrics import ManipulationMetrics
 
 
 def get_zmq_sockets(host, img_port, act_port):
@@ -53,6 +55,7 @@ def get_test_env(
     device,
     disable_fabric,
     path_tracing,
+    dom_instrument=False,
 ):
     import omni.replicator.core as rep
 
@@ -61,6 +64,8 @@ def get_test_env(
         cfg, num_envs, scene_dir, object_dir, tolerance, device, disable_fabric
     )
     env_cfg.dt = physics_time_step
+    if dom_instrument:
+        _instrument_dom_contacts(env_cfg)
     env_cfg.episode_length_s = cfg["episode_length_s"]
     env = gym.make("Robot-Env-Cfg-v0", cfg=env_cfg, seed=cfg["seed"])
     # Increase the fictional frictions of the object
@@ -74,6 +79,34 @@ def get_test_env(
         rep.settings.set_render_pathtraced()
 
     return env
+
+
+def _instrument_dom_contacts(env_cfg):
+    """Single-body sensors exclude intentional target contact on gripper links."""
+    from isaaclab.sensors import ContactSensorCfg
+    robot = env_cfg.scene.robot
+    if "panda" not in robot.spawn.usd_path.lower():
+        raise ValueError("DOM100 contact instrumentation currently requires Franka")
+    robot.spawn.activate_contact_sensors = True
+    for name in [f"panda_link{i}" for i in range(1, 8)]+["panda_hand", "panda_leftfinger", "panda_rightfinger"]:
+        filters = [env_cfg.scene.object.prim_path] if name in ("panda_hand", "panda_leftfinger", "panda_rightfinger") else []
+        setattr(env_cfg.scene, "dom_contact_"+name, ContactSensorCfg(
+            prim_path=robot.prim_path+"/"+name, update_period=0., history_length=1,
+            filter_prim_paths_expr=filters))
+
+
+def _collision_force(env):
+    forces = []
+    for name, sensor in env.unwrapped.scene.sensors.items():
+        if not name.startswith("dom_contact_"):
+            continue
+        force = sensor.data.net_forces_w
+        if sensor.cfg.filter_prim_paths_expr:
+            if sensor.data.force_matrix_w is None:
+                raise RuntimeError("Filtered target contact forces unavailable")
+            force = force-sensor.data.force_matrix_w.sum(dim=2)
+        forces.append(float(torch.linalg.vector_norm(force, dim=-1).max()))
+    return max(forces) if forces else None
 
 
 def _get_env_cfg(
@@ -334,13 +367,23 @@ def _get_observation_environment_state(curr_state):
     }
 
 
-def simulate(env, obs_socket, act_socket, init_poses):
+def _get_split(env_cfg):
+    object_velocity = np.linalg.norm(
+        env_cfg["scene"]["object"]["init_state"]["lin_vel"]
+    )
+    return "ood" if object_velocity >= 0.18 else "iid"
+
+
+def simulate(env, obs_socket, act_socket, init_poses, instruction=None, replay=None, phase_config=None):
     import configs.robot_cfg
     import configs.termination_cfg
 
     rcv_action = False
     last_action = None
-    sim_results = {"status": -1, "cam_views": [], "ee_path": []}
+    sim_results = {"status": -1, "cam_views": [], "ee_path": [], "object_path": []}
+    metrics = ManipulationMetrics(phase_config)
+    episode_token = str(uuid.uuid4())
+    instrumented = _collision_force(env) is not None
     # The simulation loop
     term_mgr = env.env.termination_manager
     done_term = configs.termination_cfg.get_done_term(term_mgr.active_terms)
@@ -359,7 +402,12 @@ def simulate(env, obs_socket, act_socket, init_poses):
         )
         sim_results["cam_views"].append(cam_view)
         sim_results["ee_path"].append(curr_state["end_effector"]["pos"].cpu().numpy())
+        sim_results["object_path"].append(curr_state["object"]["pos"].cpu().numpy())
         observation = {
+            "episode_token": episode_token,
+            "task": instruction,
+            "timestamp": (len(sim_results["cam_views"])-1)*env.env.step_dt,
+            "previous_gripper_command": None if last_action is None else last_action[:, -1].cpu().numpy(),
             "dt_scale": (
                 1.0 if step_time is None else max(1.0, step_time / env.env.step_dt)
             ),
@@ -375,9 +423,19 @@ def simulate(env, obs_socket, act_socket, init_poses):
         environment_state = _get_observation_environment_state(curr_state)
         if environment_state is not None:
             observation["observation.environment_state"] = environment_state
-        obs_socket.send_pyobj(observation)
+            from utils.helpers import get_rotation_vector
+            ee_rotation = get_rotation_vector(curr_state["end_effector"]["quat"].cpu().numpy(), "euler")
+            metrics.observe(observation["timestamp"], observation["observation.state"]["end_effector"]["pos"][0],
+                environment_state[0, :3], environment_state[0, 6:9],
+                None if last_action is None else float(last_action[0, -1]), _collision_force(env), ee_rotation[0])
+        if obs_socket is not None:
+            obs_socket.send_pyobj(observation)
 
-        action = get_latest_action(act_socket)
+        if replay is not None:
+            idx = min(len(sim_results["cam_views"])-1, len(replay)-1)
+            action = {"action": replay[idx:idx+1]}
+        else:
+            action = get_latest_action(act_socket)
         if action is not None and "action" in action:
             action = _get_action_tensor(
                 action["action"], env.unwrapped.num_envs, env.unwrapped.device
@@ -396,7 +454,7 @@ def simulate(env, obs_socket, act_socket, init_poses):
         env.step(last_action)
         step_time = time.perf_counter() - tick
         # Make sure each step takes at least step_dt seconds
-        if step_time < env.env.step_dt:
+        if replay is None and step_time < env.env.step_dt:
             time.sleep(env.env.step_dt - step_time)
 
         tick = time.perf_counter()
@@ -413,7 +471,12 @@ def simulate(env, obs_socket, act_socket, init_poses):
             sim_results["status"] = 0
         elif term_mgr.dones.all():
             sim_results["status"] = 1 if rcv_action else 2
+        elif replay is not None and len(sim_results["cam_views"]) >= len(replay)+50:
+            sim_results["status"] = 1
 
+    terms = {name: bool(term_mgr.get_term(name).any()) for name in term_mgr.active_terms}
+    sim_results["metrics"] = metrics.finish(terms, "pick" if done_term == "object_picked" else "place",
+        sim_results["status"] == 0, instrumented)
     # term_mgr.reset()  # NOT WORKING
     term_mgr = term_mgr.__init__(term_mgr.cfg, env.env)
     return sim_results
@@ -466,25 +529,34 @@ def get_sim_results(sim_cfg, env_cfg_file_path, obs_socket, act_socket):
             sim_cfg["device"],
             sim_cfg["disable_fabric"],
             sim_cfg["path_tracing"],
+            sim_cfg.get("dom_instrument", False),
         )
         setattr(get_sim_results, "cfg_path", env_cfg_file_path)
         setattr(get_sim_results, "cfg", env_cfg)
         setattr(get_sim_results, "env", env)
 
-    # Randomize the task instruction before fixing the random seed
-    instruction = InstructionGenerator.generate_instruction(env_cfg["instruction"])
     # Fix random seed for reproducibility
     random.seed(env_cfg["seed"])
     np.random.seed(env_cfg["seed"])
     torch.manual_seed(env_cfg["seed"])
+    instruction = InstructionGenerator.generate_instruction(env_cfg["instruction"])
     env.reset(seed=env_cfg["seed"])
 
     # Send the task instruction at the beginning of the simulation
-    obs_socket.send_pyobj({"task": instruction})
-    sim_results = simulate(env, obs_socket, act_socket, sim_cfg["init_poses"])
+    if obs_socket is not None:
+        obs_socket.send_pyobj({"task": instruction})
+    replay = None
+    if sim_cfg.get("replay"):
+        with np.load(sim_cfg["replay"]) as data:
+            raw = data["actions"]
+        from utils.helpers import get_quaternion
+        replay = np.concatenate([raw[:, :3], get_quaternion(raw[:, 3:6], "euler"), raw[:, 6:7]], axis=-1)
+    sim_results = simulate(env, obs_socket, act_socket, sim_cfg["init_poses"], instruction, replay, sim_cfg.get("phase_config"))
+    sim_results["split"] = _get_split(env_cfg)
     logging.info("Simulation finished with code: %d" % sim_results["status"])
     # Clear the action socket
-    get_latest_action(act_socket)
+    if act_socket is not None:
+        get_latest_action(act_socket)
 
     return sim_results
 
@@ -503,7 +575,7 @@ def main(simulation_app, args):
 
     logging.info("Starting evaluation server...")
     # Set up Zero MQ context and sockets
-    obs_socket, act_socket = get_zmq_sockets(args.host, args.img_port, args.act_port)
+    obs_socket, act_socket = (None, None) if args.replay_manifest else get_zmq_sockets(args.host, args.img_port, args.act_port)
     logging.info(
         "ZeroMQs are listening on %s:%d for images and %s:%d for actions"
         % (args.host, args.img_port, args.host, args.act_port)
@@ -537,7 +609,31 @@ def main(simulation_app, args):
         "disable_fabric": args.disable_fabric,
         "path_tracing": args.path_tracing,
         "init_poses": init_poses,
+        "dom_instrument": args.dom_instrument,
     }
+    if args.dom_case_manifest:
+        rows = json.load(open(args.dom_case_manifest))
+        test_envs = [row["env_cfg"] for row in rows]
+        sim_cfg["phase_config"] = rows[0]["phase_config"]
+    if args.replay_manifest:
+        rows = json.load(open(args.replay_manifest))
+        reports = []
+        for row in rows:
+            sim_cfg["replay"] = row["replay"]
+            sim_cfg["phase_config"] = row["phase_config"]
+            result = get_sim_results(sim_cfg, row["env_cfg"], None, None)
+            with np.load(row["replay"]) as demonstration:
+                expected = demonstration["states"][:, :3]
+            actual = np.asarray(result["ee_path"]).reshape(-1, 3)
+            n = min(len(actual), len(expected))
+            reports.append({"episode_index": row["episode_index"], **result["metrics"],
+                "replay_position_rmse_m": float(np.sqrt(np.mean(np.square(actual[:n]-expected[:n])))),
+                "steps": len(actual)})
+        os.makedirs(args.output_dir, exist_ok=True)
+        with open(os.path.join(args.output_dir, "replay_results.json"), "w") as stream:
+            json.dump(reports, stream, indent=2)
+        return
+    suite_cases = []
     while simulation_app.is_running():
         action = get_latest_action(act_socket)
         # Hand-shake to the VLA client
@@ -580,9 +676,13 @@ def main(simulation_app, args):
                         "env_name": env_name,
                         "eps_name": episode_name[:-4],
                         "success": sim_results["status"] == 0,
+                        "split": sim_results["split"],
                         "ee_path": np.array(sim_results["ee_path"]),
+                        "object_path": np.array(sim_results["object_path"]),
+                        "metrics": sim_results["metrics"],
                     }
                 )
+                suite_cases.append({"env_cfg": te, **sim_results["metrics"]})
                 if args.save:
                     episode_file_path = os.path.join(output_dir, episode_name)
                     logging.info(
@@ -617,6 +717,9 @@ def main(simulation_app, args):
 
         # Say goodbye to the VLA client
         obs_socket.send_pyobj({"vla": vla_name, "success_rates": success_rates})
+        with open(os.path.join(args.output_dir, "case_results.json"), "w") as stream:
+            json.dump(suite_cases, stream, indent=2)
+        break
 
 
 if __name__ == "__main__":
@@ -677,6 +780,9 @@ if __name__ == "__main__":
         default=os.path.join(PROJECT_HOME, "simulations", "configs", "sim_cfg.yaml"),
     )
     parser.add_argument("--env_cfg", required=True)
+    parser.add_argument("--dom-instrument", action="store_true", dest="dom_instrument")
+    parser.add_argument("--dom-case-manifest")
+    parser.add_argument("--replay-manifest")
     args = parser.parse_args(script_args)
     # Copy the shared parameters from isaaclab_args to args
     for sp in SHARED_PARAMETERS:

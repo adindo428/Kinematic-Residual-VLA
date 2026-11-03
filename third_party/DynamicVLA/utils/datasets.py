@@ -48,7 +48,11 @@ PREFETCH_STATUS_INTERVAL_ENV = "DYNAMICVLA_PREFETCH_STATUS_INTERVAL"
 PREFETCH_STATUS_INTERVAL_S = 30.0
 PREFETCH_MODE_ENV = "DYNAMICVLA_PREFETCH_MODE"
 PREFETCH_RETRIES_ENV = "DYNAMICVLA_PREFETCH_RETRIES"
-PREFETCH_RETRIES = 3
+PREFETCH_RETRIES = 8
+PREFETCH_FILE_DELAY_ENV = "DYNAMICVLA_PREFETCH_FILE_DELAY"
+PREFETCH_FILE_DELAY_S = 1.0
+PREFETCH_RATE_LIMIT_DELAY_ENV = "DYNAMICVLA_PREFETCH_RATE_LIMIT_DELAY"
+PREFETCH_RATE_LIMIT_DELAY_S = 60.0
 PREFETCH_CHUNK_PATTERN_THRESHOLD_ENV = "DYNAMICVLA_PREFETCH_CHUNK_PATTERN_THRESHOLD"
 PREFETCH_CHUNK_PATTERN_THRESHOLD = 1000
 EPISODE_SPEED_CACHE_VERSION = 1
@@ -241,6 +245,17 @@ def _read_prefetch_retries() -> int:
             PREFETCH_RETRIES,
         )
         return PREFETCH_RETRIES
+
+
+def _read_prefetch_delay(name: str, default: float) -> float:
+    raw_value = os.environ.get(name)
+    if raw_value is None:
+        return default
+    try:
+        return max(0.0, float(raw_value))
+    except ValueError:
+        logging.warning("Ignoring invalid %s=%r; using %.1fs.", name, raw_value, default)
+        return default
 
 
 def _read_prefetch_mode(missing: list[str]) -> str:
@@ -459,6 +474,10 @@ def _download_patterns_individually(
 ) -> None:
     total = len(patterns)
     retries = _read_prefetch_retries()
+    file_delay_s = _read_prefetch_delay(PREFETCH_FILE_DELAY_ENV, PREFETCH_FILE_DELAY_S)
+    rate_limit_delay_s = _read_prefetch_delay(
+        PREFETCH_RATE_LIMIT_DELAY_ENV, PREFETCH_RATE_LIMIT_DELAY_S
+    )
     started_at = time.monotonic()
     completed = 0
 
@@ -537,7 +556,8 @@ def _download_patterns_individually(
                         f"Could not download {pattern} after {retries} attempts."
                     ) from exc
 
-                sleep_s = min(30.0, 2.0**attempt)
+                is_rate_limit = "429" in str(exc)
+                sleep_s = rate_limit_delay_s if is_rate_limit else min(60.0, 2.0**attempt)
                 logging.warning(
                     "DOM prefetch file %d/%d failed attempt %d/%d for %s: %s. "
                     "Retrying in %s.",
@@ -550,6 +570,9 @@ def _download_patterns_individually(
                     _format_duration(sleep_s),
                 )
                 time.sleep(sleep_s)
+
+        if file_idx < total:
+            time.sleep(file_delay_s)
 
         if last_exc is not None and _safe_stat(target) is None:
             raise RuntimeError(f"Could not download {pattern}.") from last_exc
@@ -1201,6 +1224,7 @@ class LeRobotDataset(torch.utils.data.Dataset):
         image_transforms: typing.Callable | None = None,
         delta_timestamps: dict[str, list[float]] | None = None,
         tolerance_s: float = 1e-4,
+        revision: str = LEROBOT_MAIN_REVISION,
     ):
         super().__init__()
         self._memcached = utils.memcached.MCClient(enabled=pin_memory)
@@ -1214,7 +1238,7 @@ class LeRobotDataset(torch.utils.data.Dataset):
         self.image_transforms = image_transforms
         self.tolerance_s = tolerance_s
         self.delta_indices = None
-        self.revision = LEROBOT_MAIN_REVISION
+        self.revision = revision
 
         # Load metadata
         _ensure_lerobot_subset_cached(

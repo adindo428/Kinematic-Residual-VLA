@@ -1,0 +1,11 @@
+{
+  "previous_attempt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020",
+  "purpose": "Bounded memory diagnosis only, no production",
+  "diagnostic": {
+    "job_id": "17714677",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-memory-20261020/memory.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80GB",
+    "submitted_at": "2026-10-20T06:11:40.076316+00:00"
+  }
+}

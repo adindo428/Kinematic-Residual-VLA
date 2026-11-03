@@ -1,0 +1,17 @@
+{
+  "batch": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-krvp-4node-20261014/production.sbatch",
+  "batch_sha256": "a8f994772681c298874b85b32361c948c026ec4e6179f3be598b1f05b0b00f6d",
+  "dependency": null,
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/krvp-scale-ddp-20261014",
+  "job_id": "3382533",
+  "manifest": "5d9f8004d1a7f210790e1d2b1933960b3bb95ada7b70da422278cec391a3e846",
+  "nodes": 4,
+  "readiness": "One15-minute bounded16-GPU check, then training in same allocation",
+  "returncode": 0,
+  "stage": "submitted",
+  "stderr": "",
+  "stdout": "3382533\n",
+  "submitted_utc": "2026-10-14T21:57:25Z",
+  "variant": "krvp100",
+  "world_size": 16
+}

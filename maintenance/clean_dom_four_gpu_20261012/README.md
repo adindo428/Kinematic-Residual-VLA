@@ -1,0 +1,31 @@
+# Clean DOM deployment and four GPU continuation
+
+User authorization (2026-10-12): once the dataset is clean and confirmed, SCP it to DeltaAI, cancel the redundant audit there, then resubmit KRVLA+Velocity on only 4 A100 and 4 H100 GPUs. These are alternatives for one shared experiment, not independent duplicate models.
+
+Palmetto audit 17119970 finished all 201227 retained episodes. Exactly three additional episodes failed: 195200 wrist_cam, 195616 opst_cam, 195674 wrist_cam (videos shorter than labels). freeze_family.py created `/scratch/aparame/Dynamic_VLA/dom100-audited-20261012`, excluding these three training episodes (322 frames). All remaining 201224 episodes passed all audit criteria. New train count197198, train frames22370201, retained frames22827975. Validation/test membership remains unchanged. Original normalization retained for matched continuity, as with prior six-episode correction. Top-level episode count fixed in new manifest.
+
+New Palmetto fingerprints: manifest f0d58f4500e2976f1891c1f0c2595480d76cd086769b4031c04fce929726e0cf; recipe b4b4b6d387866fa062a1db0f334b5c461119458af6c5ec7462ea7331e42b7ffc; split bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c. Source remains `/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012`, SHA182dd497885658c5a355d2ffb29763845d362f1dc1f455507de3b8f717dbc2bb.
+
+DeltaAI audit3369190 cancelled by this task after clean family creation. Do not cancel or modify held DeltaAI production3367506. The old dataset/families are preserved.
+
+Packaging job17123683 uses pack.py: each data/video/phase/artifact file is checked against frozen SHA256 as it is added to an uncompressed tar. Two camera videos total182876071710bytes (~183GB); labels, metadata and family/checkpoints are additional. Archive under `/scratch/aparame/Dynamic_VLA/clean-dom-four-gpu-20261012/dom-clean.tar`. Atomic progress is dom-clean.status.json, SHA file dom-clean.sha256.
+
+Local background transfer.py PID83012 waits for packaging, SCPs the tar and SHA file, then submits verification/extraction on DeltaAI. Read transfer-state.json and transfer.log; do not start a second worker. SSH aliases in `/tmp/krvla-clean-transfer-ssh.conf` use existing sockets. No secrets are stored. SCP uses `-3` so data traverses this Mac without a local archive copy. Connection failure is recorded; never attempt interactive authentication automatically.
+
+Destination `/work/nvme/bivv/aparameshwaran/dynamicvla/dom-audited-20261012` holds archive, dataset/, family/, and verified.json when complete. verify_unpack.py checks whole-archive SHA256 before safe extraction, checks frozen family artifacts, and relocates dataset/initialization paths and source fingerprint for DeltaAI. One GPU is reserved only because DeltaAI forbids CPU-only batch requests. This is integrity verification, not a duplicate video decode sweep.
+
+AFTER destination verified.json confirms completion, submit exactly the two files located in `/scratch/aparame/Dynamic_VLA/clean-dom-four-gpu-20261012`: krv100_a4.sbatch and krv100_h4.sbatch. They use new Palmetto family and unchanged source, shared locked krv100 output, LR3e-5, early stop, horizon20, batch352. A100 MB22 x4 ranks x4 accumulation; H100 MB44 x4 ranks x2 accumulation. CPU32, RAM256GB, 48h. Each training allocation retains mandatory real decoded backward/reload/memory checks.
+
+H100 --test-only accepted (4 H100 constraint). A100 --test-only returned Requested node configuration is not available for 4 A10040GB; nodes nodeau01/02 advertise8 A100 and node0497 advertises4. No A100 production submission has been made. Resolve actual scheduler compatibility without increasing GPU count, bypassing resource policy, or substituting H200. Test-only job IDs are NOT actual submissions.
+
+Persist every actual sbatch receipt immediately in launch-state.json and new family/submissions/hardware_candidates.json. Check existing submissions/squeue before retrying any ambiguous outcome. Register new jobs and preserve old cancelled rows in the online run register. A separate continuation heartbeat handles this conditional launch; the usual hourly monitor remains read-only. Delete continuation after both jobs are submitted and registered.
+
+Recovery 2026-10-12 20:48 EDT: pack17123683 failed on final model.safetensors: inherited symlink points to missing bnfix file. CPU recovery17128271 verifies original dom100 weights against frozen SHA, repairs only new-family link, verifies existing tar member sequence, appends weights and computes archive SHA. Restarted transfer worker watches17128271; prior failed state retained. No training submitted.
+
+Recovery v2 2026-10-12 21:18 EDT: job17128271 verified weights and existing member sequence but tar append failed because interrupted archive has no closing marker. Corrected recovery17129784 writes final member and standard tar trailer directly at validated end; small interrupted-archive test passed. Transfer worker PID98379 watches17129784. Existing pinned link repaired, no dataset repack, no training submitted.
+
+USER PAUSE: transfer process group98379 stopped on user request; do not resume or launch training without user authorization. Do not store dataset archives on the Mac. SCP was a stream relay only; source archive is on Palmetto and partial destination on DeltaAI.
+
+2026-10-12 DeltaAI chat steering: user chose existing DeltaAI dataset instead of slow archive transfer and explicitly approved all nine exclusions. Transfer process group98379 was terminated; archive/partial copy remain remote. New route is maintenance/deltaai_existing_data_clean_20261012: no bulk dataset copy, full byte-identity verification against completed Palmetto decode audit, bounded readiness, then fresh four-GH200 DOM+Velocity submission. Archive-transfer automation remains PAUSED; do not resume it. Palmetto final nine-exclusion family already exists.
+
+2026-10-13: user clarified pause applies ONLY to transfer and authorized training now. Submitted and verified pending17140872 (4 A100) and17140873 (4 H100), shared clean family. Transfer remains stopped. A100 actual sbatch accepted despite test-only estimate failure. Registered local and remote hardware_candidates.json. Do not resubmit.

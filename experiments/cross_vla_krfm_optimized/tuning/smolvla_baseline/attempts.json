@@ -1,0 +1,153 @@
+[
+  {
+    "runtime": {
+      "microbatch": 1,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-0.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 28.035361028276384,
+    "samples_per_second": 18.26265049640696,
+    "peak_gpu_reserved_bytes": 2808086528.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 16834908160.0,
+    "mean_gpu_utilization_percent": 24.67391304347826,
+    "identity": "d36e461b1f968962cd442de54ec61d07491a7c5c84ff2782652ea584cb5d9bdb",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 4,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-1.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 7.891381799243391,
+    "samples_per_second": 64.88090590789683,
+    "peak_gpu_reserved_bytes": 2824863744.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 16921333760.0,
+    "mean_gpu_utilization_percent": 18.0,
+    "identity": "a67d60f7ddc9cd85a6b0b85b8900a25216876b31496aab1850b856f14a7531da",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 8,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-2.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 4.7865768084302545,
+    "samples_per_second": 106.96579632823422,
+    "peak_gpu_reserved_bytes": 3554672640.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 17276395520.0,
+    "mean_gpu_utilization_percent": 12.777777777777779,
+    "identity": "24e2a7f838b7ceba04eaf6b9901d2cd037b998e9b8e5d10ba67ff2ae9a4d09d5",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 16,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-3.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 3.026432480663061,
+    "samples_per_second": 169.17608546410588,
+    "peak_gpu_reserved_bytes": 4932501504.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 18200838144.0,
+    "mean_gpu_utilization_percent": 18.125,
+    "identity": "2e50d1e2e01beda9d70b5ef445af77d954ae250fe94c4ccc0b5d3f4e6531079b",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 32,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-4.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 2.3272577626630664,
+    "samples_per_second": 220.00141463235323,
+    "peak_gpu_reserved_bytes": 7482638336.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 19875262464.0,
+    "mean_gpu_utilization_percent": 13.8125,
+    "identity": "8468df11965efcd037d5d858c85594b7e24928562f2e868dda1d0f86c4a80c29",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 32,
+      "workers": 8,
+      "main_threads": 2,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-5.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 2.3224067641422153,
+    "samples_per_second": 220.46094935014884,
+    "peak_gpu_reserved_bytes": 7482638336.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 32832569344.0,
+    "mean_gpu_utilization_percent": 9.5,
+    "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 32,
+      "workers": 12,
+      "main_threads": 2,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-6.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 2.3362849643453956,
+    "samples_per_second": 219.15134832169647,
+    "peak_gpu_reserved_bytes": 7482638336.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 45499592704.0,
+    "mean_gpu_utilization_percent": 9.36111111111111,
+    "identity": "f09b3a76bedc744af4e0dad91707b25d8877b1bff24b8462887c342fd90e4283",
+    "eligible": true
+  },
+  {
+    "runtime": {
+      "microbatch": 32,
+      "workers": 8,
+      "main_threads": 2,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/profile-final.log",
+    "command": "profile"
+  }
+]

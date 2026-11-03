@@ -1,0 +1,27 @@
+{
+  "early_stopping": {
+    "enabled": true,
+    "metric": "h20/action_mse",
+    "min_epochs": 5,
+    "patience": 3,
+    "relative_min_delta": 0.005
+  },
+  "effective_batch": 352,
+  "epochs": 100,
+  "evaluation_plan_sha256": null,
+  "fingerprint": "0088404fa9bfb7c61959d91fa50da752b783974c7e8db7bb788422f3a751c64a",
+  "lr": 3e-05,
+  "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+  "precision": "bf16",
+  "runtime_fingerprint": "f19ad25721ba08d802eaaab150c16e45edc051c730107476e14816b21f5b9ec6",
+  "sampling": "frames",
+  "scheduler": "cosine",
+  "seed": 42,
+  "selection": "user_fixed_rate_20261009",
+  "simulator_evaluation_mode": "disabled_on_deltaai",
+  "supported_world_sizes": [
+    4,
+    8
+  ],
+  "warmup_updates": 1000
+}

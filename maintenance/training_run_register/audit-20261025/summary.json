@@ -1,0 +1,114 @@
+{
+  "pi05_baseline": {
+    "job_id": "17859073",
+    "progress": {
+      "updates": 325297,
+      "samples": 10409504,
+      "epoch": 4,
+      "cursor": 161792
+    },
+    "completion": null,
+    "scheduler": "PENDING Resources",
+    "epochs": 4.067224209224714
+  },
+  "pi05_kr": {
+    "job_id": "17859076",
+    "progress": {
+      "updates": 246373,
+      "samples": 7883936,
+      "epoch": 2,
+      "cursor": 1150304
+    },
+    "completion": null,
+    "scheduler": "RUNNING",
+    "epochs": 2.4779487043118693
+  },
+  "vlash_baseline": {
+    "job_id": "17931275",
+    "progress": {
+      "updates": 364331,
+      "samples": 11658592,
+      "epoch": 4,
+      "cursor": 1071584
+    },
+    "completion": null,
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline",
+    "scheduler": "PENDING Resources",
+    "epochs": 4.445240722766616
+  },
+  "vlash_kr": {
+    "job_id": "17859078",
+    "progress": {
+      "updates": 508214,
+      "samples": 16262848,
+      "epoch": 6,
+      "cursor": 862336
+    },
+    "completion": null,
+    "scheduler": "PENDING Resources",
+    "epochs": 6.3582986531225485
+  },
+  "smolvla_baseline": {
+    "job_id": "17912900",
+    "progress": {
+      "updates": 396050,
+      "samples": 25347200,
+      "epoch": 10,
+      "cursor": 0
+    },
+    "completion": {
+      "progress": {
+        "updates": 396050,
+        "samples": 25347200,
+        "epoch": 10,
+        "cursor": 0
+      },
+      "validation_h20_action_mse": 0.751673698425293,
+      "stop_reason": "ten_complete_additional_subset_epochs"
+    },
+    "scheduler": "COMPLETED",
+    "epochs": 10.0
+  },
+  "smolvla_kr": {
+    "job_id": "17912901",
+    "progress": {
+      "updates": 396050,
+      "samples": 25347200,
+      "epoch": 10,
+      "cursor": 0
+    },
+    "completion": {
+      "progress": {
+        "updates": 396050,
+        "samples": 25347200,
+        "epoch": 10,
+        "cursor": 0
+      },
+      "validation_h20_action_mse": 0.7740855813026428,
+      "stop_reason": "ten_complete_additional_subset_epochs"
+    },
+    "scheduler": "COMPLETED",
+    "epochs": 10.0
+  },
+  "domv100": {
+    "job_id": "17912902",
+    "progress": {
+      "updates": 286838,
+      "samples": 100966667,
+      "epoch": 10,
+      "cursor": 0
+    },
+    "completion": {
+      "progress": {
+        "updates": 286838,
+        "samples": 100966667,
+        "epoch": 10,
+        "cursor": 0
+      },
+      "validation_h20_action_mse": 0.1922149807214737,
+      "stop_reason": "ten_complete_additional_subset_epochs"
+    },
+    "scheduler": "COMPLETED",
+    "epochs": 10.0
+  }
+}

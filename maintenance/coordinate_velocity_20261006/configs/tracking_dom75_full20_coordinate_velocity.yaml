@@ -1,0 +1,119 @@
+# Original Coordinate recipe, now with explicit neural current-velocity conditioning.
+# Effective batch 352 = upstream 8 GPUs x 44; here 8 x 44 accumulation.
+# Preserve +0.2s tracking labels and zero-based residual drift at dt=0.04.
+CONST:
+  EXP_NAME: tracking_dom75_full20_coordinate_velocity
+  N_WORKERS: 2
+  SEED: 42
+DATASET:
+  NAME: adi2440/dom-franka-tracking
+  PIN_MEMORY: false
+  USE_DELTA_ACTION: true
+  IMG_SIZE: null
+  EPISODE_SPLIT_FILE: configs/dom_franka_tracking_split.json
+  DELTA_TIMESTAMPS:
+    observation:
+    - -2
+    - 0
+  REQUIRED_FEATURES:
+  - observation.images.opst_cam
+  - observation.images.wrist_cam
+  - observation.state
+  - observation.environment_state
+  - action
+  USE_TRAIN_SPLIT_NORMALIZATION: true
+  NORMALIZATION_REFERENCE_CHECKPOINT: /scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_baseline_16623336
+POLICY:
+  TYPE: dynamicvla
+  CHECKPOINT: hzxie/dynamic-vla-DOM
+  N_OBS_STEPS: 2
+  CHUNK_SIZE: 20
+  N_ACTION_STEPS: 20
+  RESIZE_IMGS_WITH_PADDING:
+  - 384
+  - 384
+  ATTENTION_MODE: cross_attn
+  VLM_MODEL_NAME: HuggingFaceTB/SmolLM2-360M
+  NUM_VLM_LAYERS: 16
+  NUM_EXPERT_SKIP_LAYERS: 0
+  TEMPORAL_FUSION: attn
+  FREEZE_VISION_MODEL: false
+  FREEZE_CONNECTOR: false
+  FREEZE_TEXT_MODEL: false
+  ENABLE_RESIDUAL_FLOW: true
+  RESIDUAL_FLOW_FORMULATION: coordinate
+  RESIDUAL_LAMBDA_TYPE: constant
+  RESIDUAL_DRIFT_SCALE: 1.0
+  RESIDUAL_DRIFT_MODE: trajectory
+  RESIDUAL_ACTION_DT: 0.04
+  RESIDUAL_AXIS_SCALE_XYZ:
+  - 1.0
+  - 1.0
+  - 1.0
+  RESIDUAL_POSITION_KEY: dynamic_object.position_xyz
+  RESIDUAL_VELOCITY_KEY: dynamic_object.velocity_xyz
+  RESIDUAL_COVARIANCE_KEY: dynamic_object.covariance_xyz
+  RESIDUAL_LOOKAHEAD_POSITION_KEY: dynamic_object.lookahead_position_xyz
+  RESIDUAL_LOOKAHEAD_HORIZON_KEY: dynamic_object.lookahead_horizon_s
+  RESIDUAL_LOOKAHEAD_HORIZON_S: 1.0
+  RESIDUAL_NORMALIZE_DRIFT: true
+  RESIDUAL_CENTER_DRIFT: true
+  RESIDUAL_ESTIMATE_DRIFT_MEAN: true
+  RESIDUAL_DRIFT_MEAN_MAX_BATCHES: 0
+  RESIDUAL_DRIFT_MEAN_CACHE: true
+  RESIDUAL_DRIFT_MEAN_CACHE_DIR: null
+  USE_CHECKPOINT_NORMALIZATION: false
+  TRAIN_STATE_PROJ: true
+  CONDITION_ON_OBJECT_VELOCITY: true
+  VELOCITY_INPUT_MEAN: [-0.0002714536565211347, -8.079752708067645e-06, 5.3059701140341534e-05]
+  VELOCITY_INPUT_STD: [0.06030793278532838, 0.059935625202825644, 0.0417054527617769]
+DIR:
+  OUTPUT: /scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity
+WANDB:
+  ENABLED: true
+  PROJECT: Kinematic-Residual-VLA
+  ENTITY: aparame-clemson-university
+  MODE: online
+  RUN_ID: null
+  LOG_CODE: true
+  SYNC_TENSORBOARD: false
+TRAIN:
+  N_EPOCHS: 75
+  BATCH_SIZE: 8
+  GRAD_ACCUM_STEPS: 44
+  EVAL_TEST_DURING_TRAIN: false
+  EVAL_SPLITS:
+  - validation
+  EVAL_FREQ_EPOCH: 1
+  EVAL_MAX_BATCHES: 0
+  EVAL_PRIMARY_METRIC: action_mse
+  EVAL_PRIMARY_SPLIT: validation
+  CKPT_SAVE_FREQ:
+    EPOCH: 5
+    BATCH: 0
+  OPTIMIZER:
+    LR: 0.0001
+    EPS: 1.0e-08
+    WEIGHT_DECAY: 1.0e-10
+    BETAS:
+    - 0.9
+    - 0.95
+  LR_SCHEDULER:
+    NAME: cosine
+    N_WARMUP_STEPS: 1000
+    STEP_MODE: optimizer
+  IMAGE_TRANSFORMS:
+    BRIGHTNESS:
+    - 0.8
+    - 1.2
+    CONTRAST:
+    - 0.8
+    - 1.2
+    SATURATION:
+    - 0.5
+    - 1.5
+    HUE:
+    - -0.05
+    - 0.05
+  EVAL_OBJECT_PROXIMITY: false
+  EVAL_NOISE_SEED: 42

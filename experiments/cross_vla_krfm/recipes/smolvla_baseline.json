@@ -1,0 +1,19 @@
+{
+  "name": "smolvla_baseline",
+  "method": "smolvla",
+  "kr": false,
+  "lr": 0.0001,
+  "steps": 20000,
+  "weight_decay": 1e-10,
+  "clip": 10.0,
+  "global_batch": 64,
+  "max_delay": 0,
+  "decay_lr": 2.5e-06,
+  "horizon": 20,
+  "fps": 25,
+  "seed": 42,
+  "normalization": "mean_std",
+  "velocity_conditioning": false,
+  "phase_gate": false,
+  "shared_observation": false
+}

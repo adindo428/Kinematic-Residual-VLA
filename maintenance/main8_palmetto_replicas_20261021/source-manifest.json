@@ -1,0 +1,26 @@
+{
+  "files": {
+    "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+    "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+    "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+    "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+    "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+    "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+    "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+    "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+    "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+    "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+    "placements.py": "ba37c3383fad76c9bfdfbfa8491593372031fb5b656f42e9fa6a2bd5823cbe67",
+    "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+    "prepare_replicas.py": "b26dfe6aa1dcc54b0570a2d6a1878ec50ace1bb28baa770c9efe47f33038f5fd",
+    "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+    "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+    "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+    "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+    "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+    "test_placements.py": "0b068a9debdfc2296997f6f9ad424c3ba8775d714bb8eb62fcb68eb8f91fd105",
+    "train.py": "7ff6de22885b22b1dafc204cd28ea38d79ff8886dd1e51b8107a59520872a92c",
+    "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+  },
+  "fingerprint": "f5f0dad6be2ae19c43618a9f5e838c19ae2ac19e778c001f8890efd741b6db53"
+}

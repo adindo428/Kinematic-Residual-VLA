@@ -1,0 +1,14 @@
+# Current Palmetto training source for DeltaAI
+
+This directory contains two separate current Palmetto training sources:
+
+- `dom100/`: active matched full-DOM 100-epoch family, from `/scratch/aparame/Dynamic_VLA/third_party/dom100-20261007`, including DOM baseline, kinematic residual, neural velocity and causal phase-gate variants.
+- `tracking/`: current home working tree from `/home/aparame/Research/Dynamic_VLA/third_party/Kinematic-Residual-VLA/third_party/DynamicVLA`, including uncommitted October 6–8 model/trainer updates. The three original baseline/residual/coordinate recipes were recovered from the active run's provenance, alongside the current coordinate+velocity recipe.
+
+`PALMETTO_SOURCE_MANIFEST.json` in each tree records original hashes, source location, and excluded paths. `TRANSFER_MANIFEST.json` records deployed hashes and the narrow platform/exclusion edits. Model weights, flow equations, optimizer behavior, training epoch counts and validation mathematics were not changed by this transfer. Dataset-based training validation (`core/test.py` and the DOM validation loop) does not use Isaac Sim and is retained.
+
+Simulator modules, Isaac controllers, scene/asset generation, rollouts, simulator evaluation dispatch, datasets, videos, checkpoints, environments, caches, credentials and generated logs are excluded. DOM100 simulator checks/dispatch were removed from its training runner; selected recipes are explicitly tagged `disabled_on_deltaai`. Offline validation and GPU profile/smoke/reload prerequisites remain. Palmetto batch recipes are retained as reference under `reference_palmetto/slurm`, not as DeltaAI launchers. Old destination code is untouched.
+
+The transfer does not submit jobs or install packages. Do not source `palmetto_env.sh` or install `requirements_rocky8.txt` on DeltaAI: those are x86/Palmetto references. The included `deltaai_env.sh` uses the existing ARM module/venv adapter. DeltaAI Python environment, current Slurm billing account, actual project storage, GPU profile and dataset/video decoding must be configured separately before training. No A100/H100/H200 profiling evidence is transplanted as GH200 approval.
+
+Next step: obtain data on DeltaAI. DOM100 uses `hzxie/DOM`; tracking uses `adi2440/dom-franka-tracking`; initialization uses `hzxie/dynamic-vla-DOM`. Preserve immutable dataset/model revisions when preparing the new family. Rebuild DeltaAI family metadata/source fingerprints after code selection. Several historical tracking configs still point to a Palmetto normalization-reference checkpoint; that exact normalization information must be restored or prepared explicitly before running those variants. Do not silently substitute normalization statistics. Set `DVLA_OUTPUT_ROOT` to the DeltaAI work directory when using historical configs.

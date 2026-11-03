@@ -1,0 +1,1667 @@
+{
+  "files": {
+    "submissions.json": "{\n  \"setup\": {\n    \"job_id\": \"17709582\",\n    \"purpose\": \"Freeze verified parent production checkpoints\"\n  },\n  \"setup_attempts\": [],\n  \"previous_attempt\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019\",\n  \"frozen_preparation\": {\n    \"job_id\": \"17668675\",\n    \"reused_from\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019\"\n  },\n  \"profile_dependency\": \"17709582\",\n  \"pi05_baseline_profile\": {\n    \"job_id\": \"17709583\",\n    \"recipe\": \"pi05_baseline\",\n    \"command\": \"profile\",\n    \"dependency\": \"17709582\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_baseline_profile.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:06.681759+00:00\"\n  },\n  \"pi05_baseline_train\": {\n    \"job_id\": \"17709584\",\n    \"recipe\": \"pi05_baseline\",\n    \"command\": \"train\",\n    \"dependency\": \"17709583\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_baseline_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:06.786947+00:00\"\n  },\n  \"pi05_kr_profile\": {\n    \"job_id\": \"17709585\",\n    \"recipe\": \"pi05_kr\",\n    \"command\": \"profile\",\n    \"dependency\": \"17709582\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_kr_profile.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:06.922957+00:00\"\n  },\n  \"pi05_kr_train\": {\n    \"job_id\": \"17709586\",\n    \"recipe\": \"pi05_kr\",\n    \"command\": \"train\",\n    \"dependency\": \"17709585\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_kr_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.080700+00:00\"\n  },\n  \"smolvla_baseline_profile\": {\n    \"job_id\": \"17709587\",\n    \"recipe\": \"smolvla_baseline\",\n    \"command\": \"profile\",\n    \"dependency\": \"17709582\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_baseline_profile.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.200209+00:00\"\n  },\n  \"smolvla_baseline_train\": {\n    \"job_id\": \"17709588\",\n    \"recipe\": \"smolvla_baseline\",\n    \"command\": \"train\",\n    \"dependency\": \"17709587\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_baseline_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.301025+00:00\"\n  },\n  \"smolvla_kr_profile\": {\n    \"job_id\": \"17709589\",\n    \"recipe\": \"smolvla_kr\",\n    \"command\": \"profile\",\n    \"dependency\": \"17709582\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_kr_profile.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.403062+00:00\"\n  },\n  \"smolvla_kr_train\": {\n    \"job_id\": \"17709590\",\n    \"recipe\": \"smolvla_kr\",\n    \"command\": \"train\",\n    \"dependency\": \"17709589\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_kr_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.498060+00:00\"\n  },\n  \"vlash_baseline_profile\": {\n    \"job_id\": \"17709591\",\n    \"recipe\": \"vlash_baseline\",\n    \"command\": \"profile\",\n    \"dependency\": \"17709582\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_baseline_profile.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.621030+00:00\"\n  },\n  \"vlash_baseline_train\": {\n    \"job_id\": \"17709592\",\n    \"recipe\": \"vlash_baseline\",\n    \"command\": \"train\",\n    \"dependency\": \"17709591\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_baseline_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.723924+00:00\"\n  },\n  \"vlash_kr_profile\": {\n    \"job_id\": \"17709593\",\n    \"recipe\": \"vlash_kr\",\n    \"command\": \"profile\",\n    \"dependency\": \"17709582\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_kr_profile.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.830063+00:00\"\n  },\n  \"vlash_kr_train\": {\n    \"job_id\": \"17709594\",\n    \"recipe\": \"vlash_kr\",\n    \"command\": \"train\",\n    \"dependency\": \"17709593\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_kr_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.926625+00:00\"\n  }\n}\n",
+    "source-manifest.json": "{\n  \"files\": {\n    \"autotune.py\": \"c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794\",\n    \"common.py\": \"f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822\",\n    \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\",\n    \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\",\n    \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\",\n    \"policy.py\": \"47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79\",\n    \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\",\n    \"prepare_resume.py\": \"297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d\",\n    \"runtime.py\": \"0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730\",\n    \"submit.py\": \"cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d\",\n    \"test_collective.py\": \"a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56\",\n    \"test_contract.py\": \"99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6\",\n    \"train.py\": \"17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a\"\n  },\n  \"source_sha256\": \"86b30f19e4680a2ec47b02a403dad71d62cc75af435849b2053e432bd5a41bec\"\n}",
+    "prepared.json": "{\n  \"complete\": true,\n  \"statistics_sha256\": \"ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e\",\n  \"split_sha256\": \"bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c\",\n  \"checkpoints_sha256\": \"33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860\",\n  \"implementation_sha256\": \"45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83\"\n}\n",
+    "README.md": "# Throughput-tuned A100 paired VLA campaign\n\nThis frozen replacement covers the six pi0.5/SmolVLA/VLASH baseline/KR pairs\non two A10080 GPUs each; original H200 queue is retained unchanged.\nThe official recipes, audited split, pinned weights, horizon20, privileged\nanalytic KR and native trainable parameter sets match the preceding campaign.\n\nExecution improvements: bounded per-run microbatch/worker sweeps, pinned\nhost buffers and asynchronous copies, cached affine normalizers, reduced\nmicrobatch-level synchronizations, and gradient bucket views. Benchmark\nmicrobatches preserve effective batch32/64/32 and identical global anchor\nsets at each optimizer update. Per-anchor padded loss normalization preserves\nthe prior microbatch1 objective for mixed valid horizons. Numerical training\ntrajectories may differ with microbatching; no bitwise claim is made.\n\nReliability: clear existing GPU optimizer moments before strict checkpoint\nreload; mmap trusted CPU checkpoint state; coordinate time-based saves across\nall ranks to prevent ALLGATHER/ALLREDUCE mismatch. A deliberately unequal-clock\ntwo-rank CPU test supplements full decoded checkpoint/RNG/inference readiness.\n\nFor each model, test bounded microbatches then worker counts4/8/12, keeping\nCPU count within32. Choose highest measured decoded samples/s retaining15%\nGPU and conservative node RSS headroom; final20-update readiness includes\nan asymmetric save trigger, optimizer/scheduler/RNG reload and inference reload.\nProduction afterok plus matching runtime/source/data/hardware identity gate\nis mandatory. Separate tuning scratch is never used as production progress.\n\nPrevious production checkpoints are explicitly migrated only after old jobs\nstop and the immutable checkpoint SHA256, recipe, preparation, hardware and\nworld size match. Restore optimizer, scheduler, per-rank RNG and consumed-data\ncursor; retain existing W&B ID only for an actually checkpointed continuation.\nNever infer saved progress from tracker logs. Models without a production\ncheckpoint restart from the pinned initialization, not readiness weights.\n\nNo datasets or weights are stored on the Mac. Failure history and source\nsnapshots remain preserved. Logs/tuning/profiles/run directories are separate\nunder /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019.\n\n## Submitted optimization jobs\n\nCheckpoint migration: 17709582.\n\n| Model | Tuning baseline / KR | Production baseline / KR |\n|---|---|---|\n| pi05 | 17709583 / 17709585 | 17709584 / 17709586 |\n| smolvla | 17709587 / 17709589 | 17709588 / 17709590 |\n| vlash | 17709591 / 17709593 | 17709592 / 17709594 |\n",
+    "preflight.json": "[\n  {\n    \"command\": [\n      \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/env/bin/python\",\n      \"-m\",\n      \"unittest\",\n      \"test_contract.py\"\n    ],\n    \"returncode\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"..../home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.\\n  warnings.warn(warn_msg)\\n.......\\n----------------------------------------------------------------------\\nRan 11 tests in 0.374s\\n\\nOK\\n\"\n  },\n  {\n    \"command\": [\n      \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/env/bin/python\",\n      \"-m\",\n      \"torch.distributed.run\",\n      \"--standalone\",\n      \"--nproc_per_node=2\",\n      \"test_collective.py\"\n    ],\n    \"returncode\": 0,\n    \"stdout\": \"Unequal-rank checkpoint clocks and coordinated stop: PASS\\n\",\n    \"stderr\": \"\"\n  },\n  {\n    \"script\": \"pi05_baseline_profile.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709562 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"pi05_baseline_train.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709563 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"pi05_kr_profile.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709564 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"pi05_kr_train.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709565 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"smolvla_baseline_profile.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709566 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"smolvla_baseline_train.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709567 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"smolvla_kr_profile.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709568 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"smolvla_kr_train.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709569 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"vlash_baseline_profile.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709570 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"vlash_baseline_train.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709571 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"vlash_kr_profile.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709572 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  },\n  {\n    \"script\": \"vlash_kr_train.sbatch\",\n    \"returncode\": 0,\n    \"stderr\": \"sbatch: Requested Features: gpu_a100_80gb\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17709573 to start at 2026-10-20T02:03:14 a using 32 processors on nodes node0283 in partition work1\\n\"\n  }\n]",
+    "submissions/hardware_candidates.json": "{\n  \"pi05_baseline\": {\n    \"job_id\": \"17709584\",\n    \"recipe\": \"pi05_baseline\",\n    \"command\": \"train\",\n    \"dependency\": \"17709583\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_baseline_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:06.786947+00:00\",\n    \"world_size\": 2,\n    \"variant\": \"pi05_baseline\",\n    \"name\": \"pi05_baseline-a100-opt\",\n    \"method\": \"pi05 baseline\",\n    \"lr\": 2.5e-05,\n    \"target_epochs\": null,\n    \"target_updates\": 30000,\n    \"recipe_fingerprint\": \"b9612a99b64c7a17f281b77a9662865f19e569e3540f9eb6554c54617a831746\"\n  },\n  \"pi05_kr\": {\n    \"job_id\": \"17709586\",\n    \"recipe\": \"pi05_kr\",\n    \"command\": \"train\",\n    \"dependency\": \"17709585\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/pi05_kr_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.080700+00:00\",\n    \"world_size\": 2,\n    \"variant\": \"pi05_kr\",\n    \"name\": \"pi05_kr-a100-opt\",\n    \"method\": \"pi05 + KRFM\",\n    \"lr\": 2.5e-05,\n    \"target_epochs\": null,\n    \"target_updates\": 30000,\n    \"recipe_fingerprint\": \"2845584d495e6a91af59c215fe3c807e4a4b055aac10e7cda1cfa2f90bd46c5a\"\n  },\n  \"smolvla_baseline\": {\n    \"job_id\": \"17709588\",\n    \"recipe\": \"smolvla_baseline\",\n    \"command\": \"train\",\n    \"dependency\": \"17709587\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_baseline_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.301025+00:00\",\n    \"world_size\": 2,\n    \"variant\": \"smolvla_baseline\",\n    \"name\": \"smolvla_baseline-a100-opt\",\n    \"method\": \"smolvla baseline\",\n    \"lr\": 0.0001,\n    \"target_epochs\": null,\n    \"target_updates\": 20000,\n    \"recipe_fingerprint\": \"03069f6713b88c38a24d32849d9cc7da5df2139b3b4bf5a6309e3dd9b166c973\"\n  },\n  \"smolvla_kr\": {\n    \"job_id\": \"17709590\",\n    \"recipe\": \"smolvla_kr\",\n    \"command\": \"train\",\n    \"dependency\": \"17709589\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/smolvla_kr_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.498060+00:00\",\n    \"world_size\": 2,\n    \"variant\": \"smolvla_kr\",\n    \"name\": \"smolvla_kr-a100-opt\",\n    \"method\": \"smolvla + KRFM\",\n    \"lr\": 0.0001,\n    \"target_epochs\": null,\n    \"target_updates\": 20000,\n    \"recipe_fingerprint\": \"25e983706cf8b1253b4da33e7857f5bdf2133b7c6c93614906c2f23a7fe62170\"\n  },\n  \"vlash_baseline\": {\n    \"job_id\": \"17709592\",\n    \"recipe\": \"vlash_baseline\",\n    \"command\": \"train\",\n    \"dependency\": \"17709591\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_baseline_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.723924+00:00\",\n    \"world_size\": 2,\n    \"variant\": \"vlash_baseline\",\n    \"name\": \"vlash_baseline-a100-opt\",\n    \"method\": \"vlash baseline\",\n    \"lr\": 5e-05,\n    \"target_epochs\": null,\n    \"target_updates\": 30000,\n    \"recipe_fingerprint\": \"9bdde5eeff38bdaf0db7148ca53066730e9b599bf372ff34937d2ebe08034613\"\n  },\n  \"vlash_kr\": {\n    \"job_id\": \"17709594\",\n    \"recipe\": \"vlash_kr\",\n    \"command\": \"train\",\n    \"dependency\": \"17709593\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/vlash_kr_train.sbatch\",\n    \"gpus\": 2,\n    \"gpu\": \"A100 80 GB\",\n    \"submitted_at\": \"2026-10-20T03:24:07.926625+00:00\",\n    \"world_size\": 2,\n    \"variant\": \"vlash_kr\",\n    \"name\": \"vlash_kr-a100-opt\",\n    \"method\": \"vlash + KRFM\",\n    \"lr\": 5e-05,\n    \"target_epochs\": null,\n    \"target_updates\": 30000,\n    \"recipe_fingerprint\": \"587c316d9e35580ad6f7c7fb9593cf1817391e91686858cd81fd1308df30cb0a\"\n  }\n}\n",
+    "resume-prepared.json": "{\n  \"complete\": true,\n  \"runs\": {\n    \"pi05_baseline\": {\n      \"fresh_start\": true,\n      \"reason\": \"No verified production checkpoint; never resume readiness weights\"\n    },\n    \"pi05_kr\": {\n      \"fresh_start\": true,\n      \"reason\": \"No verified production checkpoint; never resume readiness weights\"\n    },\n    \"smolvla_baseline\": {\n      \"checkpoint\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt\",\n      \"checkpoint_sha256\": \"fecc84b315fc8ad48d4711613bdf6b30eabe166b79cf0d86ae44f52f43f8a10d\",\n      \"identity\": \"d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a\",\n      \"recipe_fingerprint\": \"03069f6713b88c38a24d32849d9cc7da5df2139b3b4bf5a6309e3dd9b166c973\",\n      \"preparation\": {\n        \"complete\": true,\n        \"statistics_sha256\": \"ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e\",\n        \"split_sha256\": \"bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c\",\n        \"checkpoints_sha256\": \"33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860\",\n        \"implementation_sha256\": \"45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83\"\n      },\n      \"hardware\": \"NVIDIA A100 80GB PCIe\",\n      \"world_size\": 2,\n      \"progress\": {\n        \"updates\": 956,\n        \"samples\": 61184,\n        \"epoch\": 0,\n        \"cursor\": 61184\n      },\n      \"parent_job_id\": \"17692797\",\n      \"parent_source\": {\n        \"common.py\": \"612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f\",\n        \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\",\n        \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\",\n        \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\",\n        \"policy.py\": \"7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9\",\n        \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\",\n        \"submit.py\": \"4ad117ed97d11100d7e0672be6d59457a57debda55b812facfa7c38b9397316f\",\n        \"test_contract.py\": \"97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d\",\n        \"train.py\": \"5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059\"\n      },\n      \"explicit_runtime_migration\": true\n    },\n    \"smolvla_kr\": {\n      \"fresh_start\": true,\n      \"reason\": \"No verified production checkpoint; never resume readiness weights\"\n    },\n    \"vlash_baseline\": {\n      \"checkpoint\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt\",\n      \"checkpoint_sha256\": \"5561935e575254650cd790495f083576623979fdffc2f1c9e6f76a8cd77a7a18\",\n      \"identity\": \"7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102\",\n      \"recipe_fingerprint\": \"9bdde5eeff38bdaf0db7148ca53066730e9b599bf372ff34937d2ebe08034613\",\n      \"preparation\": {\n        \"complete\": true,\n        \"statistics_sha256\": \"ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e\",\n        \"split_sha256\": \"bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c\",\n        \"checkpoints_sha256\": \"33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860\",\n        \"implementation_sha256\": \"45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83\"\n      },\n      \"hardware\": \"NVIDIA A100 80GB PCIe\",\n      \"world_size\": 2,\n      \"progress\": {\n        \"updates\": 745,\n        \"samples\": 23840,\n        \"epoch\": 0,\n        \"cursor\": 23840\n      },\n      \"parent_job_id\": \"17692801\",\n      \"parent_source\": {\n        \"common.py\": \"612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f\",\n        \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\",\n        \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\",\n        \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\",\n        \"policy.py\": \"7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9\",\n        \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\",\n        \"submit.py\": \"4ad117ed97d11100d7e0672be6d59457a57debda55b812facfa7c38b9397316f\",\n        \"test_contract.py\": \"97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d\",\n        \"train.py\": \"5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059\"\n      },\n      \"explicit_runtime_migration\": true\n    },\n    \"vlash_kr\": {\n      \"checkpoint\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt\",\n      \"checkpoint_sha256\": \"788812f150a102566a4367e9ed0445454a197ebbb81071736877f370b550d798\",\n      \"identity\": \"e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728\",\n      \"recipe_fingerprint\": \"587c316d9e35580ad6f7c7fb9593cf1817391e91686858cd81fd1308df30cb0a\",\n      \"preparation\": {\n        \"complete\": true,\n        \"statistics_sha256\": \"ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e\",\n        \"split_sha256\": \"bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c\",\n        \"checkpoints_sha256\": \"33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860\",\n        \"implementation_sha256\": \"45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83\"\n      },\n      \"hardware\": \"NVIDIA A100 80GB PCIe\",\n      \"world_size\": 2,\n      \"progress\": {\n        \"updates\": 738,\n        \"samples\": 23616,\n        \"epoch\": 0,\n        \"cursor\": 23616\n      },\n      \"parent_job_id\": \"17692803\",\n      \"parent_source\": {\n        \"common.py\": \"612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f\",\n        \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\",\n        \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\",\n        \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\",\n        \"policy.py\": \"7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9\",\n        \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\",\n        \"submit.py\": \"4ad117ed97d11100d7e0672be6d59457a57debda55b812facfa7c38b9397316f\",\n        \"test_contract.py\": \"97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d\",\n        \"train.py\": \"5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059\"\n      },\n      \"explicit_runtime_migration\": true\n    }\n  },\n  \"stop\": {\n    \"started_at\": \"2026-10-20T03:19:59.382141+00:00\",\n    \"jobs\": {\n      \"17692797\": {\n        \"name\": \"smolvla_baseline\",\n        \"initial_state\": \"RUNNING\",\n        \"last_checkpoint\": {\n          \"progress\": {\n            \"updates\": 516,\n            \"samples\": 33024,\n            \"epoch\": 0,\n            \"cursor\": 33024\n          },\n          \"identity\": \"d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a\",\n          \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt\"\n        },\n        \"hold_returncode\": 1,\n        \"hold_stderr\": \"scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\\nUnspecified error for job 17692797\\n\",\n        \"signal_returncode\": 0,\n        \"finalized\": true,\n        \"final_scheduler_state\": \"PENDING\",\n        \"final_checkpoint\": {\n          \"progress\": {\n            \"updates\": 956,\n            \"samples\": 61184,\n            \"epoch\": 0,\n            \"cursor\": 61184\n          },\n          \"identity\": \"d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a\",\n          \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt\"\n        },\n        \"stop_note\": \"Used last completed checkpoint; scheduler terminated before coordinated stop\"\n      },\n      \"17692801\": {\n        \"name\": \"vlash_baseline\",\n        \"initial_state\": \"RUNNING\",\n        \"last_checkpoint\": {\n          \"progress\": {\n            \"updates\": 472,\n            \"samples\": 15104,\n            \"epoch\": 0,\n            \"cursor\": 15104\n          },\n          \"identity\": \"7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102\",\n          \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt\"\n        },\n        \"hold_returncode\": 1,\n        \"hold_stderr\": \"scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\\nUnspecified error for job 17692801\\n\",\n        \"signal_returncode\": 0,\n        \"finalized\": true,\n        \"final_scheduler_state\": \"PENDING\",\n        \"final_checkpoint\": {\n          \"progress\": {\n            \"updates\": 745,\n            \"samples\": 23840,\n            \"epoch\": 0,\n            \"cursor\": 23840\n          },\n          \"identity\": \"7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102\",\n          \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt\"\n        },\n        \"stop_note\": \"Used last completed checkpoint; scheduler terminated before coordinated stop\"\n      },\n      \"17692803\": {\n        \"name\": \"vlash_kr\",\n        \"initial_state\": \"RUNNING\",\n        \"last_checkpoint\": {\n          \"progress\": {\n            \"updates\": 470,\n            \"samples\": 15040,\n            \"epoch\": 0,\n            \"cursor\": 15040\n          },\n          \"identity\": \"e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728\",\n          \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt\"\n        },\n        \"hold_returncode\": 1,\n        \"hold_stderr\": \"scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\\nUnspecified error for job 17692803\\n\",\n        \"signal_returncode\": 0,\n        \"finalized\": true,\n        \"final_scheduler_state\": \"PENDING\",\n        \"final_checkpoint\": {\n          \"progress\": {\n            \"updates\": 738,\n            \"samples\": 23616,\n            \"epoch\": 0,\n            \"cursor\": 23616\n          },\n          \"identity\": \"e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728\",\n          \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt\"\n        },\n        \"stop_note\": \"Used last completed checkpoint; scheduler terminated before coordinated stop\"\n      }\n    },\n    \"complete\": true,\n    \"finished_at\": \"2026-10-20T03:20:45.034869+00:00\",\n    \"old_requeued_jobs_cancelled\": [\n      \"17692797\",\n      \"17692801\",\n      \"17692803\"\n    ],\n    \"note\": \"Site disallows hold. Batch scripts requeued after saved USR1 checkpoint; pending continuations were explicitly cancelled before replacement submission.\"\n  }\n}\n",
+    "stop-state.json": "{\n  \"started_at\": \"2026-10-20T03:19:59.382141+00:00\",\n  \"jobs\": {\n    \"17692797\": {\n      \"name\": \"smolvla_baseline\",\n      \"initial_state\": \"RUNNING\",\n      \"last_checkpoint\": {\n        \"progress\": {\n          \"updates\": 516,\n          \"samples\": 33024,\n          \"epoch\": 0,\n          \"cursor\": 33024\n        },\n        \"identity\": \"d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a\",\n        \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt\"\n      },\n      \"hold_returncode\": 1,\n      \"hold_stderr\": \"scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\\nUnspecified error for job 17692797\\n\",\n      \"signal_returncode\": 0,\n      \"finalized\": true,\n      \"final_scheduler_state\": \"PENDING\",\n      \"final_checkpoint\": {\n        \"progress\": {\n          \"updates\": 956,\n          \"samples\": 61184,\n          \"epoch\": 0,\n          \"cursor\": 61184\n        },\n        \"identity\": \"d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a\",\n        \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt\"\n      },\n      \"stop_note\": \"Used last completed checkpoint; scheduler terminated before coordinated stop\"\n    },\n    \"17692801\": {\n      \"name\": \"vlash_baseline\",\n      \"initial_state\": \"RUNNING\",\n      \"last_checkpoint\": {\n        \"progress\": {\n          \"updates\": 472,\n          \"samples\": 15104,\n          \"epoch\": 0,\n          \"cursor\": 15104\n        },\n        \"identity\": \"7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102\",\n        \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt\"\n      },\n      \"hold_returncode\": 1,\n      \"hold_stderr\": \"scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\\nUnspecified error for job 17692801\\n\",\n      \"signal_returncode\": 0,\n      \"finalized\": true,\n      \"final_scheduler_state\": \"PENDING\",\n      \"final_checkpoint\": {\n        \"progress\": {\n          \"updates\": 745,\n          \"samples\": 23840,\n          \"epoch\": 0,\n          \"cursor\": 23840\n        },\n        \"identity\": \"7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102\",\n        \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt\"\n      },\n      \"stop_note\": \"Used last completed checkpoint; scheduler terminated before coordinated stop\"\n    },\n    \"17692803\": {\n      \"name\": \"vlash_kr\",\n      \"initial_state\": \"RUNNING\",\n      \"last_checkpoint\": {\n        \"progress\": {\n          \"updates\": 470,\n          \"samples\": 15040,\n          \"epoch\": 0,\n          \"cursor\": 15040\n        },\n        \"identity\": \"e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728\",\n        \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt\"\n      },\n      \"hold_returncode\": 1,\n      \"hold_stderr\": \"scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\\nUnspecified error for job 17692803\\n\",\n      \"signal_returncode\": 0,\n      \"finalized\": true,\n      \"final_scheduler_state\": \"PENDING\",\n      \"final_checkpoint\": {\n        \"progress\": {\n          \"updates\": 738,\n          \"samples\": 23616,\n          \"epoch\": 0,\n          \"cursor\": 23616\n        },\n        \"identity\": \"e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728\",\n        \"file\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt\"\n      },\n      \"stop_note\": \"Used last completed checkpoint; scheduler terminated before coordinated stop\"\n    }\n  },\n  \"complete\": true,\n  \"finished_at\": \"2026-10-20T03:20:45.034869+00:00\",\n  \"old_requeued_jobs_cancelled\": [\n    \"17692797\",\n    \"17692801\",\n    \"17692803\"\n  ],\n  \"note\": \"Site disallows hold. Batch scripts requeued after saved USR1 checkpoint; pending continuations were explicitly cancelled before replacement submission.\"\n}"
+  },
+  "queue": "17668729|PENDING|(Priority)\n17668727|PENDING|(Priority)\n17668725|PENDING|(Priority)\n17668723|PENDING|(Priority)\n17668719|PENDING|(Priority)\n17668717|PENDING|(Priority)\n17668730|PENDING|(Dependency)\n17668728|PENDING|(Dependency)\n17668726|PENDING|(Dependency)\n17668724|PENDING|(Dependency)\n17668722|PENDING|(Dependency)\n17668718|PENDING|(Dependency)\n17709594|RUNNING|node0373\n17709592|RUNNING|node0377\n",
+  "accounting": "17668717|PENDING|00:00:00|0:0\n17668718|PENDING|00:00:00|0:0\n17668719|PENDING|00:00:00|0:0\n17668722|PENDING|00:00:00|0:0\n17668723|PENDING|00:00:00|0:0\n17668724|PENDING|00:00:00|0:0\n17668725|PENDING|00:00:00|0:0\n17668726|PENDING|00:00:00|0:0\n17668727|PENDING|00:00:00|0:0\n17668728|PENDING|00:00:00|0:0\n17668729|PENDING|00:00:00|0:0\n17668730|PENDING|00:00:00|0:0\n17692792|FAILED|00:08:47|1:0\n17692793|CANCELLED|00:00:00|0:0\n17692794|FAILED|00:07:35|1:0\n17692795|CANCELLED|00:00:00|0:0\n17692796|COMPLETED|00:02:49|0:0\n17692798|COMPLETED|00:02:34|0:0\n17692799|FAILED|00:41:05|1:0\n17692800|COMPLETED|00:06:20|0:0\n17692802|COMPLETED|00:04:45|0:0\n17692797|CANCELLED by 432600|00:00:00|0:0\n17692801|CANCELLED by 432600|00:00:00|0:0\n17692803|CANCELLED by 432600|00:00:00|0:0\n17709582|COMPLETED|00:07:08|0:0\n17709583|FAILED|00:10:42|1:0\n17709584|CANCELLED|00:00:00|0:0\n17709585|FAILED|00:10:20|1:0\n17709586|CANCELLED|00:00:00|0:0\n17709587|COMPLETED|00:09:52|0:0\n17709588|COMPLETED|01:35:05|0:0\n17709589|COMPLETED|00:09:44|0:0\n17709590|COMPLETED|01:41:47|0:0\n17709591|COMPLETED|00:18:10|0:0\n17709592|RUNNING|04:14:35|0:0\n17709593|COMPLETED|00:18:42|0:0\n17709594|RUNNING|03:54:14|0:0\n",
+  "artifacts": {
+    "tuning/pi05_baseline/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_baseline/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 69.24688439443707,
+        "samples_per_second": 3.69691722939907,
+        "peak_gpu_reserved_bytes": 76640419840.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40824614912.0,
+        "mean_gpu_utilization_percent": 54.295918367346935,
+        "identity": "cce6f8d4ee2a7914b9d6fb81f3298ff12a192ac35be153e2963514548a701c91",
+        "eligible": false
+      },
+      {
+        "runtime": {
+          "microbatch": 2,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_baseline/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 40.916120540350676,
+        "samples_per_second": 6.256702654581776,
+        "peak_gpu_reserved_bytes": 76797706240.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40763387904.0,
+        "mean_gpu_utilization_percent": 67.91935483870968,
+        "identity": "e3f7ce0df106cad545712edac5fedea72c76802d6b942674befe54f2262505da",
+        "eligible": false
+      },
+      {
+        "runtime": {
+          "microbatch": 4,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_baseline/benchmark-2.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 31.022587910294533,
+        "samples_per_second": 8.252051722449918,
+        "peak_gpu_reserved_bytes": 77267468288.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40607043584.0,
+        "mean_gpu_utilization_percent": 71.03846153846153,
+        "identity": "b946c7b2b225de5859be241ccab3639e4c58737587a655977337d6a3933bfd74",
+        "eligible": false
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_baseline/benchmark-3.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 26.961065158247948,
+        "samples_per_second": 9.495173818148809,
+        "peak_gpu_reserved_bytes": 79096184832.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40628867072.0,
+        "mean_gpu_utilization_percent": 73.47826086956522,
+        "identity": "cf87171ac03ec01b04e47baddae9aaf3761043bb77070a94a1e46f996b4b84b1",
+        "eligible": false
+      }
+    ],
+    "tuning/pi05_kr/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_kr/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 67.84821230918169,
+        "samples_per_second": 3.773128153081143,
+        "peak_gpu_reserved_bytes": 76640419840.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40773931008.0,
+        "mean_gpu_utilization_percent": 58.361702127659576,
+        "identity": "c808817a3b86ac0a49408987566d55e15cfe3b32032489df72e77cbec8371152",
+        "eligible": false
+      },
+      {
+        "runtime": {
+          "microbatch": 2,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_kr/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 40.79383237846196,
+        "samples_per_second": 6.275458447369634,
+        "peak_gpu_reserved_bytes": 76839649280.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40777142272.0,
+        "mean_gpu_utilization_percent": 65.83870967741936,
+        "identity": "88e6171082c87aa4bd4a08cb454e699f5d96dd08f76d1025df7037af0c0e4c1d",
+        "eligible": false
+      },
+      {
+        "runtime": {
+          "microbatch": 4,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_kr/benchmark-2.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 31.212307614274323,
+        "samples_per_second": 8.20189276498491,
+        "peak_gpu_reserved_bytes": 77246496768.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40676253696.0,
+        "mean_gpu_utilization_percent": 73.24,
+        "identity": "1f85e00496c9ecf2c1ba3b9344be679aa675a5a471ba6f743eb29d782bbb447f",
+        "eligible": false
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/pi05_kr/benchmark-3.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 27.138729742728174,
+        "samples_per_second": 9.433013351282414,
+        "peak_gpu_reserved_bytes": 79014395904.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 40613482496.0,
+        "mean_gpu_utilization_percent": 69.5,
+        "identity": "6896d5146236ca74c55e1d684d54015aed54c01fa7b437d4bc2457898574742a",
+        "eligible": false
+      }
+    ],
+    "tuning/smolvla_baseline/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 28.035361028276384,
+        "samples_per_second": 18.26265049640696,
+        "peak_gpu_reserved_bytes": 2808086528.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 16834908160.0,
+        "mean_gpu_utilization_percent": 24.67391304347826,
+        "identity": "d36e461b1f968962cd442de54ec61d07491a7c5c84ff2782652ea584cb5d9bdb",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 4,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 7.891381799243391,
+        "samples_per_second": 64.88090590789683,
+        "peak_gpu_reserved_bytes": 2824863744.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 16921333760.0,
+        "mean_gpu_utilization_percent": 18.0,
+        "identity": "a67d60f7ddc9cd85a6b0b85b8900a25216876b31496aab1850b856f14a7531da",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-2.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 4.7865768084302545,
+        "samples_per_second": 106.96579632823422,
+        "peak_gpu_reserved_bytes": 3554672640.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 17276395520.0,
+        "mean_gpu_utilization_percent": 12.777777777777779,
+        "identity": "24e2a7f838b7ceba04eaf6b9901d2cd037b998e9b8e5d10ba67ff2ae9a4d09d5",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 16,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-3.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 3.026432480663061,
+        "samples_per_second": 169.17608546410588,
+        "peak_gpu_reserved_bytes": 4932501504.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 18200838144.0,
+        "mean_gpu_utilization_percent": 18.125,
+        "identity": "2e50d1e2e01beda9d70b5ef445af77d954ae250fe94c4ccc0b5d3f4e6531079b",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-4.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.3272577626630664,
+        "samples_per_second": 220.00141463235323,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 19875262464.0,
+        "mean_gpu_utilization_percent": 13.8125,
+        "identity": "8468df11965efcd037d5d858c85594b7e24928562f2e868dda1d0f86c4a80c29",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.3224067641422153,
+        "samples_per_second": 220.46094935014884,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 32832569344.0,
+        "mean_gpu_utilization_percent": 9.5,
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-6.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.3362849643453956,
+        "samples_per_second": 219.15134832169647,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 45499592704.0,
+        "mean_gpu_utilization_percent": 9.36111111111111,
+        "identity": "f09b3a76bedc744af4e0dad91707b25d8877b1bff24b8462887c342fd90e4283",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/profile-final.log",
+        "command": "profile"
+      }
+    ],
+    "tuning/smolvla_baseline/selection.json": {
+      "selected": {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.3224067641422153,
+        "samples_per_second": 220.46094935014884,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 32832569344.0,
+        "mean_gpu_utilization_percent": 9.5,
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "eligible": true
+      },
+      "control": {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_baseline/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 28.035361028276384,
+        "samples_per_second": 18.26265049640696,
+        "peak_gpu_reserved_bytes": 2808086528.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 16834908160.0,
+        "mean_gpu_utilization_percent": 24.67391304347826,
+        "identity": "d36e461b1f968962cd442de54ec61d07491a7c5c84ff2782652ea584cb5d9bdb",
+        "eligible": true
+      },
+      "throughput_ratio_to_control": 12.071684194664016,
+      "criterion": "Highest measured decoded throughput retaining at least15% GPU/node memory headroom",
+      "recipe_unchanged": true,
+      "sampling_order_unchanged": true
+    },
+    "tuning/smolvla_kr/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 27.8366107204929,
+        "samples_per_second": 18.393043791896446,
+        "peak_gpu_reserved_bytes": 2808086528.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 16737828864.0,
+        "mean_gpu_utilization_percent": 22.36,
+        "identity": "a2963ec9881da588b6ad5a52c68e83a71ad2f897f0e499c161d0888dda25f92e",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 4,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 7.857700610533357,
+        "samples_per_second": 65.1590109342747,
+        "peak_gpu_reserved_bytes": 2826960896.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 16662208512.0,
+        "mean_gpu_utilization_percent": 17.772727272727273,
+        "identity": "80fdbec732f067b8d4acf3b2f13a4b5486c1e9b624e292e27147c1773868ad6d",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-2.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 4.638433814048767,
+        "samples_per_second": 110.3820859638587,
+        "peak_gpu_reserved_bytes": 3554672640.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 16936595456.0,
+        "mean_gpu_utilization_percent": 19.61111111111111,
+        "identity": "d73e7b9a84b1b6aeb7a7d70ce113586f4a3c1e5a3012268f0488c47beb19aa7d",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 16,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-3.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 3.00728193577379,
+        "samples_per_second": 170.25340853791934,
+        "peak_gpu_reserved_bytes": 4932501504.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 17995087872.0,
+        "mean_gpu_utilization_percent": 12.3125,
+        "identity": "bc29046a52da5d2d80ec08d2ea35fc4b59a48ccdc3dda0f5a28dd7e45630e3dc",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-4.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.331937089562416,
+        "samples_per_second": 219.5599539505913,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 19669078016.0,
+        "mean_gpu_utilization_percent": 11.75,
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.3339055525138974,
+        "samples_per_second": 219.3747726631501,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 31662084096.0,
+        "mean_gpu_utilization_percent": 7.423076923076923,
+        "identity": "832b263f742122ac06ac152a85eadbbb142716198e086e7c8508b967d85a24b4",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-6.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.3336447114124894,
+        "samples_per_second": 219.39929308695017,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 44345528320.0,
+        "mean_gpu_utilization_percent": 9.88888888888889,
+        "identity": "b4d1535617ced529addccf9d3f7a0fccf4668299ead64a7dbfef76d86c42a011",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/profile-final.log",
+        "command": "profile"
+      }
+    ],
+    "tuning/smolvla_kr/selection.json": {
+      "selected": {
+        "runtime": {
+          "microbatch": 32,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-4.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 2.331937089562416,
+        "samples_per_second": 219.5599539505913,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 19669078016.0,
+        "mean_gpu_utilization_percent": 11.75,
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "eligible": true
+      },
+      "control": {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/smolvla_kr/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 27.8366107204929,
+        "samples_per_second": 18.393043791896446,
+        "peak_gpu_reserved_bytes": 2808086528.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 16737828864.0,
+        "mean_gpu_utilization_percent": 22.36,
+        "identity": "a2963ec9881da588b6ad5a52c68e83a71ad2f897f0e499c161d0888dda25f92e",
+        "eligible": true
+      },
+      "throughput_ratio_to_control": 11.937119077992104,
+      "criterion": "Highest measured decoded throughput retaining at least15% GPU/node memory headroom",
+      "recipe_unchanged": true,
+      "sampling_order_unchanged": true
+    },
+    "tuning/vlash_baseline/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 29.986340994015336,
+        "samples_per_second": 8.537220331453323,
+        "peak_gpu_reserved_bytes": 40768634880.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49210445824.0,
+        "mean_gpu_utilization_percent": 48.77777777777778,
+        "identity": "f022e29c70afd8c03f285f31a4504b411022a607449d1070eab1cc0cea857e2b",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 2,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 19.83436956186779,
+        "samples_per_second": 12.906888681360874,
+        "peak_gpu_reserved_bytes": 44749029376.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49176424448.0,
+        "mean_gpu_utilization_percent": 60.0,
+        "identity": "994c39faf679961694c950780f3d29777be3f1b47d9b530e76f19fc33628d86a",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 4,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-2.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 16.848557363962755,
+        "samples_per_second": 15.194179208930752,
+        "peak_gpu_reserved_bytes": 52462354432.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49156640768.0,
+        "mean_gpu_utilization_percent": 59.44117647058823,
+        "identity": "cfa48b544f1aebc04d801183d2061a6a7049a5c6456d79b096ac7d3884a201a5",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-3.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 15.12677298602648,
+        "samples_per_second": 16.92363600858443,
+        "peak_gpu_reserved_bytes": 67656220672.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49188040704.0,
+        "mean_gpu_utilization_percent": 55.75,
+        "identity": "8858090970e0a701ada1430402695144acf3c8f40ad2aeb06f3a10db6f09623c",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-4.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 15.105550044914708,
+        "samples_per_second": 16.947413317543013,
+        "peak_gpu_reserved_bytes": 67607986176.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49218646016.0,
+        "mean_gpu_utilization_percent": 44.1,
+        "identity": "0e7bee30f618e92250468bd4028afdf995150b6bb9663c8844c5018ae0d3d6db",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 15.020556333009154,
+        "samples_per_second": 17.04331013608429,
+        "peak_gpu_reserved_bytes": 67607986176.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49224404992.0,
+        "mean_gpu_utilization_percent": 32.895833333333336,
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/profile-final.log",
+        "command": "profile"
+      }
+    ],
+    "tuning/vlash_baseline/selection.json": {
+      "selected": {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 15.020556333009154,
+        "samples_per_second": 17.04331013608429,
+        "peak_gpu_reserved_bytes": 67607986176.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49224404992.0,
+        "mean_gpu_utilization_percent": 32.895833333333336,
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "eligible": true
+      },
+      "control": {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_baseline/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 29.986340994015336,
+        "samples_per_second": 8.537220331453323,
+        "peak_gpu_reserved_bytes": 40768634880.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49210445824.0,
+        "mean_gpu_utilization_percent": 48.77777777777778,
+        "identity": "f022e29c70afd8c03f285f31a4504b411022a607449d1070eab1cc0cea857e2b",
+        "eligible": true
+      },
+      "throughput_ratio_to_control": 1.996353552372584,
+      "criterion": "Highest measured decoded throughput retaining at least15% GPU/node memory headroom",
+      "recipe_unchanged": true,
+      "sampling_order_unchanged": true
+    },
+    "tuning/vlash_kr/attempts.json": [
+      {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 30.392976087518036,
+        "samples_per_second": 8.422998763360182,
+        "peak_gpu_reserved_bytes": 40766537728.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49202384896.0,
+        "mean_gpu_utilization_percent": 55.1,
+        "identity": "d5a06ea872f4b85af31fd2446f95988ad66d2c8750bea7a8b1f933cf323f5abb",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 2,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-1.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 19.610911643132567,
+        "samples_per_second": 13.05395713664577,
+        "peak_gpu_reserved_bytes": 44772098048.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49182400512.0,
+        "mean_gpu_utilization_percent": 57.30555555555556,
+        "identity": "66d4040d51cf569b9faf9a2ebd2bd959ce66cd7418193c6246d03ed14531699b",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 4,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-2.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 16.56495228689164,
+        "samples_per_second": 15.454315567366937,
+        "peak_gpu_reserved_bytes": 52437188608.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49207336960.0,
+        "mean_gpu_utilization_percent": 58.94117647058823,
+        "identity": "f444f4b90423cdcbe6018176c78f64ece6fde1cdd8d5e20828ccf8b327732703",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-3.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 14.970730936154723,
+        "samples_per_second": 17.100033464749075,
+        "peak_gpu_reserved_bytes": 67664609280.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49231572992.0,
+        "mean_gpu_utilization_percent": 55.59375,
+        "identity": "677a814258f5616620123bcdc5f93c2ed28feeede0df1593860669a4662aef5e",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-4.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 14.980863170698285,
+        "samples_per_second": 17.088467939599195,
+        "peak_gpu_reserved_bytes": 67607986176.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49129447424.0,
+        "mean_gpu_utilization_percent": 44.5,
+        "identity": "d4d98b3b67fe9daa5e185fa937f0412130841b9cce8c4399e1980cc784af0c2b",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 14.960086545906961,
+        "samples_per_second": 17.112200468522083,
+        "peak_gpu_reserved_bytes": 67664609280.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49225633792.0,
+        "mean_gpu_utilization_percent": 32.44230769230769,
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "eligible": true
+      },
+      {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/profile-final.log",
+        "command": "profile"
+      }
+    ],
+    "tuning/vlash_kr/selection.json": {
+      "selected": {
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-5.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 14.960086545906961,
+        "samples_per_second": 17.112200468522083,
+        "peak_gpu_reserved_bytes": 67664609280.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49225633792.0,
+        "mean_gpu_utilization_percent": 32.44230769230769,
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "eligible": true
+      },
+      "control": {
+        "runtime": {
+          "microbatch": 1,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "returncode": 0,
+        "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/tuning/vlash_kr/benchmark-0.log",
+        "command": "benchmark",
+        "updates": 8,
+        "seconds": 30.392976087518036,
+        "samples_per_second": 8.422998763360182,
+        "peak_gpu_reserved_bytes": 40766537728.0,
+        "total_gpu_bytes": 85093777408,
+        "conservative_node_rss_bytes": 49202384896.0,
+        "mean_gpu_utilization_percent": 55.1,
+        "identity": "d5a06ea872f4b85af31fd2446f95988ad66d2c8750bea7a8b1f933cf323f5abb",
+        "eligible": true
+      },
+      "throughput_ratio_to_control": 2.0316042954867446,
+      "criterion": "Highest measured decoded throughput retaining at least15% GPU/node memory headroom",
+      "recipe_unchanged": true,
+      "sampling_order_unchanged": true
+    },
+    "profiles/smolvla_baseline.json": {
+      "approved": true,
+      "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "runtime": {
+        "microbatch": 32,
+        "workers": 8,
+        "main_threads": 2,
+        "prefetch": 2
+      },
+      "microbatch": 32,
+      "global_batch": 64,
+      "accumulation": 1,
+      "decoded_optimizer_updates": 20,
+      "seconds": 14.29891394637525,
+      "samples_per_second": 89.51728815211716,
+      "peak_gpu_reserved_bytes": 7482638336.0,
+      "node_process_peak_rss_bytes": 36579377152.0,
+      "validation_h20_action_mse": 1.669071912765503,
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "coordinated_checkpoint_test": true,
+      "mean_gpu_utilization_percent": 16.608695652173914,
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      }
+    },
+    "profiles/smolvla_kr.json": {
+      "approved": true,
+      "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "runtime": {
+        "microbatch": 32,
+        "workers": 4,
+        "main_threads": 4,
+        "prefetch": 2
+      },
+      "microbatch": 32,
+      "global_batch": 64,
+      "accumulation": 1,
+      "decoded_optimizer_updates": 20,
+      "seconds": 12.76817658636719,
+      "samples_per_second": 100.2492400807394,
+      "peak_gpu_reserved_bytes": 7482638336.0,
+      "node_process_peak_rss_bytes": 23587786752.0,
+      "validation_h20_action_mse": 1.6703147888183594,
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "coordinated_checkpoint_test": true,
+      "mean_gpu_utilization_percent": 16.333333333333332,
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      }
+    },
+    "profiles/vlash_baseline.json": {
+      "approved": true,
+      "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "runtime": {
+        "microbatch": 8,
+        "workers": 12,
+        "main_threads": 2,
+        "prefetch": 2
+      },
+      "microbatch": 8,
+      "global_batch": 32,
+      "accumulation": 2,
+      "decoded_optimizer_updates": 20,
+      "seconds": 71.84424838703126,
+      "samples_per_second": 8.908159168876873,
+      "peak_gpu_reserved_bytes": 67607986176.0,
+      "node_process_peak_rss_bytes": 99446624256.0,
+      "validation_h20_action_mse": 2.57668137550354,
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "coordinated_checkpoint_test": true,
+      "mean_gpu_utilization_percent": 40.094202898550726,
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      }
+    },
+    "profiles/vlash_kr.json": {
+      "approved": true,
+      "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "runtime": {
+        "microbatch": 8,
+        "workers": 12,
+        "main_threads": 2,
+        "prefetch": 2
+      },
+      "microbatch": 8,
+      "global_batch": 32,
+      "accumulation": 2,
+      "decoded_optimizer_updates": 20,
+      "seconds": 76.29112228937447,
+      "samples_per_second": 8.388918406160826,
+      "peak_gpu_reserved_bytes": 67607986176.0,
+      "node_process_peak_rss_bytes": 100690997248.0,
+      "validation_h20_action_mse": 2.580958604812622,
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "coordinated_checkpoint_test": true,
+      "mean_gpu_utilization_percent": 29.0531914893617,
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      }
+    },
+    "runs/smolvla_baseline/completed.json": {
+      "progress": {
+        "updates": 20000,
+        "samples": 1280000,
+        "epoch": 0,
+        "cursor": 1280000
+      },
+      "validation_h20_action_mse": 0.7757606506347656,
+      "stop_reason": "official_step_budget"
+    },
+    "runs/smolvla_baseline/latest.json": {
+      "progress": {
+        "updates": 20000,
+        "samples": 1280000,
+        "epoch": 0,
+        "cursor": 1280000
+      },
+      "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+      "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt"
+    },
+    "runs/smolvla_baseline/provenance.json": {
+      "recipe": {
+        "name": "smolvla_baseline",
+        "method": "smolvla",
+        "kr": false,
+        "lr": 0.0001,
+        "steps": 20000,
+        "weight_decay": 1e-10,
+        "clip": 10.0,
+        "global_batch": 64,
+        "max_delay": 0,
+        "decay_lr": 2.5e-06,
+        "horizon": 20,
+        "fps": 25,
+        "seed": 42,
+        "normalization": "mean_std",
+        "velocity_conditioning": false,
+        "phase_gate": false,
+        "shared_observation": false
+      },
+      "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      },
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "job_id": "17709588",
+      "world_size": 2,
+      "readiness": {
+        "approved": true,
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "runtime": {
+          "microbatch": 32,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "microbatch": 32,
+        "global_batch": 64,
+        "accumulation": 1,
+        "decoded_optimizer_updates": 20,
+        "seconds": 14.29891394637525,
+        "samples_per_second": 89.51728815211716,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "node_process_peak_rss_bytes": 36579377152.0,
+        "validation_h20_action_mse": 1.669071912765503,
+        "strict_checkpoint_rng_reload": true,
+        "strict_inference_reload": true,
+        "coordinated_checkpoint_test": true,
+        "mean_gpu_utilization_percent": 16.608695652173914,
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        }
+      },
+      "preparation": {
+        "complete": true,
+        "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+        "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+        "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+        "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+      },
+      "wandb_id": "qabxg0en",
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en"
+    },
+    "runs/smolvla_baseline/resume-migration.json": {
+      "parent": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt",
+        "checkpoint_sha256": "fecc84b315fc8ad48d4711613bdf6b30eabe166b79cf0d86ae44f52f43f8a10d",
+        "identity": "d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a",
+        "recipe_fingerprint": "03069f6713b88c38a24d32849d9cc7da5df2139b3b4bf5a6309e3dd9b166c973",
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "world_size": 2,
+        "progress": {
+          "updates": 956,
+          "samples": 61184,
+          "epoch": 0,
+          "cursor": 61184
+        },
+        "parent_job_id": "17692797",
+        "parent_source": {
+          "common.py": "612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "submit.py": "4ad117ed97d11100d7e0672be6d59457a57debda55b812facfa7c38b9397316f",
+          "test_contract.py": "97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d",
+          "train.py": "5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059"
+        },
+        "explicit_runtime_migration": true
+      },
+      "new_identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+      "restored_progress": {
+        "updates": 956,
+        "samples": 61184,
+        "epoch": 0,
+        "cursor": 61184
+      },
+      "optimizer_scheduler_rng_restored": true,
+      "microbatch_changed": true,
+      "data_cursor_preserved": true
+    },
+    "runs/smolvla_kr/completed.json": {
+      "progress": {
+        "updates": 20000,
+        "samples": 1280000,
+        "epoch": 0,
+        "cursor": 1280000
+      },
+      "validation_h20_action_mse": 0.774071216583252,
+      "stop_reason": "official_step_budget"
+    },
+    "runs/smolvla_kr/latest.json": {
+      "progress": {
+        "updates": 20000,
+        "samples": 1280000,
+        "epoch": 0,
+        "cursor": 1280000
+      },
+      "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+      "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt"
+    },
+    "runs/smolvla_kr/provenance.json": {
+      "recipe": {
+        "name": "smolvla_kr",
+        "method": "smolvla",
+        "kr": true,
+        "lr": 0.0001,
+        "steps": 20000,
+        "weight_decay": 1e-10,
+        "clip": 10.0,
+        "global_batch": 64,
+        "max_delay": 0,
+        "decay_lr": 2.5e-06,
+        "horizon": 20,
+        "fps": 25,
+        "seed": 42,
+        "normalization": "mean_std",
+        "velocity_conditioning": false,
+        "phase_gate": false,
+        "shared_observation": false
+      },
+      "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      },
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "job_id": "17709590",
+      "world_size": 2,
+      "readiness": {
+        "approved": true,
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "runtime": {
+          "microbatch": 32,
+          "workers": 4,
+          "main_threads": 4,
+          "prefetch": 2
+        },
+        "microbatch": 32,
+        "global_batch": 64,
+        "accumulation": 1,
+        "decoded_optimizer_updates": 20,
+        "seconds": 12.76817658636719,
+        "samples_per_second": 100.2492400807394,
+        "peak_gpu_reserved_bytes": 7482638336.0,
+        "node_process_peak_rss_bytes": 23587786752.0,
+        "validation_h20_action_mse": 1.6703147888183594,
+        "strict_checkpoint_rng_reload": true,
+        "strict_inference_reload": true,
+        "coordinated_checkpoint_test": true,
+        "mean_gpu_utilization_percent": 16.333333333333332,
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        }
+      },
+      "preparation": {
+        "complete": true,
+        "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+        "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+        "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+        "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+      },
+      "wandb_id": "8npmrzpw",
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw"
+    },
+    "runs/vlash_baseline/latest.json": {
+      "progress": {
+        "updates": 8342,
+        "samples": 266944,
+        "epoch": 0,
+        "cursor": 266944
+      },
+      "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+      "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt"
+    },
+    "runs/vlash_baseline/provenance.json": {
+      "recipe": {
+        "name": "vlash_baseline",
+        "method": "vlash",
+        "kr": false,
+        "lr": 5e-05,
+        "steps": 30000,
+        "weight_decay": 1e-10,
+        "clip": 1.0,
+        "global_batch": 32,
+        "max_delay": 3,
+        "decay_lr": 2.5e-06,
+        "horizon": 20,
+        "fps": 25,
+        "seed": 42,
+        "normalization": "quantiles",
+        "velocity_conditioning": false,
+        "phase_gate": false,
+        "shared_observation": false
+      },
+      "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      },
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "job_id": "17709592",
+      "world_size": 2,
+      "readiness": {
+        "approved": true,
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "microbatch": 8,
+        "global_batch": 32,
+        "accumulation": 2,
+        "decoded_optimizer_updates": 20,
+        "seconds": 71.84424838703126,
+        "samples_per_second": 8.908159168876873,
+        "peak_gpu_reserved_bytes": 67607986176.0,
+        "node_process_peak_rss_bytes": 99446624256.0,
+        "validation_h20_action_mse": 2.57668137550354,
+        "strict_checkpoint_rng_reload": true,
+        "strict_inference_reload": true,
+        "coordinated_checkpoint_test": true,
+        "mean_gpu_utilization_percent": 40.094202898550726,
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        }
+      },
+      "preparation": {
+        "complete": true,
+        "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+        "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+        "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+        "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+      },
+      "wandb_id": "8m07ro1o",
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8m07ro1o"
+    },
+    "runs/vlash_baseline/resume-migration.json": {
+      "parent": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt",
+        "checkpoint_sha256": "5561935e575254650cd790495f083576623979fdffc2f1c9e6f76a8cd77a7a18",
+        "identity": "7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102",
+        "recipe_fingerprint": "9bdde5eeff38bdaf0db7148ca53066730e9b599bf372ff34937d2ebe08034613",
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "world_size": 2,
+        "progress": {
+          "updates": 745,
+          "samples": 23840,
+          "epoch": 0,
+          "cursor": 23840
+        },
+        "parent_job_id": "17692801",
+        "parent_source": {
+          "common.py": "612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "submit.py": "4ad117ed97d11100d7e0672be6d59457a57debda55b812facfa7c38b9397316f",
+          "test_contract.py": "97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d",
+          "train.py": "5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059"
+        },
+        "explicit_runtime_migration": true
+      },
+      "new_identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+      "restored_progress": {
+        "updates": 745,
+        "samples": 23840,
+        "epoch": 0,
+        "cursor": 23840
+      },
+      "optimizer_scheduler_rng_restored": true,
+      "microbatch_changed": true,
+      "data_cursor_preserved": true
+    },
+    "runs/vlash_kr/latest.json": {
+      "progress": {
+        "updates": 7396,
+        "samples": 236672,
+        "epoch": 0,
+        "cursor": 236672
+      },
+      "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+      "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt"
+    },
+    "runs/vlash_kr/provenance.json": {
+      "recipe": {
+        "name": "vlash_kr",
+        "method": "vlash",
+        "kr": true,
+        "lr": 5e-05,
+        "steps": 30000,
+        "weight_decay": 1e-10,
+        "clip": 1.0,
+        "global_batch": 32,
+        "max_delay": 3,
+        "decay_lr": 2.5e-06,
+        "horizon": 20,
+        "fps": 25,
+        "seed": 42,
+        "normalization": "quantiles",
+        "velocity_conditioning": false,
+        "phase_gate": false,
+        "shared_observation": false
+      },
+      "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+      "source": {
+        "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+        "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+        "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+        "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+        "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+        "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+        "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+        "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+        "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+      },
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "job_id": "17709594",
+      "world_size": 2,
+      "readiness": {
+        "approved": true,
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "runtime": {
+          "microbatch": 8,
+          "workers": 12,
+          "main_threads": 2,
+          "prefetch": 2
+        },
+        "microbatch": 8,
+        "global_batch": 32,
+        "accumulation": 2,
+        "decoded_optimizer_updates": 20,
+        "seconds": 76.29112228937447,
+        "samples_per_second": 8.388918406160826,
+        "peak_gpu_reserved_bytes": 67607986176.0,
+        "node_process_peak_rss_bytes": 100690997248.0,
+        "validation_h20_action_mse": 2.580958604812622,
+        "strict_checkpoint_rng_reload": true,
+        "strict_inference_reload": true,
+        "coordinated_checkpoint_test": true,
+        "mean_gpu_utilization_percent": 29.0531914893617,
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        }
+      },
+      "preparation": {
+        "complete": true,
+        "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+        "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+        "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+        "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+      },
+      "wandb_id": "qdxs3h1p",
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qdxs3h1p"
+    },
+    "runs/vlash_kr/resume-migration.json": {
+      "parent": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt",
+        "checkpoint_sha256": "788812f150a102566a4367e9ed0445454a197ebbb81071736877f370b550d798",
+        "identity": "e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728",
+        "recipe_fingerprint": "587c316d9e35580ad6f7c7fb9593cf1817391e91686858cd81fd1308df30cb0a",
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "world_size": 2,
+        "progress": {
+          "updates": 738,
+          "samples": 23616,
+          "epoch": 0,
+          "cursor": 23616
+        },
+        "parent_job_id": "17692803",
+        "parent_source": {
+          "common.py": "612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "submit.py": "4ad117ed97d11100d7e0672be6d59457a57debda55b812facfa7c38b9397316f",
+          "test_contract.py": "97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d",
+          "train.py": "5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059"
+        },
+        "explicit_runtime_migration": true
+      },
+      "new_identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+      "restored_progress": {
+        "updates": 738,
+        "samples": 23616,
+        "epoch": 0,
+        "cursor": 23616
+      },
+      "optimizer_scheduler_rng_restored": true,
+      "microbatch_changed": true,
+      "data_cursor_preserved": true
+    }
+  },
+  "logs": {
+    "pi05_baseline-profile-17709583.err": "Traceback (most recent call last):\n  File \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/autotune.py\", line 58, in <module>\n    if not eligible:raise RuntimeError('No candidate retained 15% GPU and node memory headroom')\nRuntimeError: No candidate retained 15% GPU and node memory headroom\n",
+    "pi05_baseline-profile-17709583.out": "{\"runtime\": {\"microbatch\": 1, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 3.69691722939907, \"eligible\": false}\n{\"runtime\": {\"microbatch\": 2, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 6.256702654581776, \"eligible\": false}\n{\"runtime\": {\"microbatch\": 4, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 8.252051722449918, \"eligible\": false}\n{\"runtime\": {\"microbatch\": 8, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 9.495173818148809, \"eligible\": false}\n",
+    "pi05_kr-profile-17709585.err": "Traceback (most recent call last):\n  File \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/autotune.py\", line 58, in <module>\n    if not eligible:raise RuntimeError('No candidate retained 15% GPU and node memory headroom')\nRuntimeError: No candidate retained 15% GPU and node memory headroom\n",
+    "pi05_kr-profile-17709585.out": "{\"runtime\": {\"microbatch\": 1, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 3.773128153081143, \"eligible\": false}\n{\"runtime\": {\"microbatch\": 2, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 6.275458447369634, \"eligible\": false}\n{\"runtime\": {\"microbatch\": 4, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 8.20189276498491, \"eligible\": false}\n{\"runtime\": {\"microbatch\": 8, \"workers\": 4, \"main_threads\": 4, \"prefetch\": 2}, \"command\": \"benchmark\", \"returncode\": 0, \"samples_per_second\": 9.433013351282414, \"eligible\": false}\n",
+    "prepare-resume-17709582.err": "",
+    "prepare-resume-17709582.out": "{\"pi05_baseline\": {\"fresh_start\": true, \"reason\": \"No verified production checkpoint; never resume readiness weights\"}, \"pi05_kr\": {\"fresh_start\": true, \"reason\": \"No verified production checkpoint; never resume readiness weights\"}, \"smolvla_baseline\": {\"updates\": 956, \"samples\": 61184, \"epoch\": 0, \"cursor\": 61184}, \"smolvla_kr\": {\"fresh_start\": true, \"reason\": \"No verified production checkpoint; never resume readiness weights\"}, \"vlash_baseline\": {\"updates\": 745, \"samples\": 23840, \"epoch\": 0, \"cursor\": 23840}, \"vlash_kr\": {\"updates\": 738, \"samples\": 23616, \"epoch\": 0, \"cursor\": 23616}}\n",
+    "smolvla_baseline-profile-17709587.err": "",
+    "smolvla_baseline-profile-17709587.out": "optimizer_updates\": 20, \"seconds\": 14.29891394637525, \"samples_per_second\": 89.51728815211716, \"peak_gpu_reserved_bytes\": 7482638336.0, \"node_process_peak_rss_bytes\": 36579377152.0, \"validation_h20_action_mse\": 1.669071912765503, \"strict_checkpoint_rng_reload\": true, \"strict_inference_reload\": true, \"coordinated_checkpoint_test\": true, \"mean_gpu_utilization_percent\": 16.608695652173914, \"source\": {\"autotune.py\": \"c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794\", \"common.py\": \"f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822\", \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\", \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\", \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\", \"policy.py\": \"47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79\", \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\", \"prepare_resume.py\": \"297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d\", \"runtime.py\": \"0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730\", \"submit.py\": \"cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d\", \"test_collective.py\": \"a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56\", \"test_contract.py\": \"99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6\", \"train.py\": \"17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a\"}}}\n",
+    "smolvla_baseline-train-17709588.err": " Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\nwandb: updating run metadata\nwandb: \nwandb: Run history:\nwandb:              Train/epoch \u2581\u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2585\u2585\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\u2588\nwandb:               Train/loss \u2588\u2587\u2586\u2585\u2585\u2583\u2582\u2584\u2584\u2584\u2583\u2584\u2584\u2583\u2584\u2583\u2584\u2586\u2583\u2581\u2582\u2583\u2583\u2582\u2583\u2585\u2585\u2584\u2582\u2582\u2582\u2583\u2582\u2583\u2582\u2582\u2582\u2583\u2582\u2581\nwandb:                 Train/lr \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2587\u2587\u2587\u2587\u2587\u2586\u2586\u2586\u2586\u2586\u2585\u2585\u2585\u2585\u2585\u2584\u2584\u2584\u2584\u2584\u2583\u2582\u2582\u2582\u2582\u2581\u2581\u2581\u2581\u2581\nwandb:  Train/optimizer_updates \u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2585\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\u2588\u2588\u2588\nwandb:            Train/samples \u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2588\nwandb: Train/samples_per_second \u2588\u2587\u2584\u2583\u2583\u2582\u2582\u2583\u2582\u2581\u2583\u2584\u2583\u2582\u2584\u2585\u2586\u2585\u2585\u2586\u2585\u2586\u2586\u2586\u2587\u2586\u2587\u2587\u2586\u2586\u2587\u2586\u2586\u2587\u2586\u2585\u2584\u2586\u2587\u2588\nwandb: \nwandb: Run summary:\nwandb:              Train/epoch 0.05722\nwandb:               Train/loss 0.0408\nwandb:                 Train/lr 0.0\nwandb:  Train/optimizer_updates 20000\nwandb:            Train/samples 1280000\nwandb: Train/samples_per_second 218.85881\nwandb: \nwandb: \ud83d\ude80 View run smolvla_baseline_a100 at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en\nwandb: \u2b50\ufe0f View project at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)\nwandb: Find logs at: ./runs/smolvla_baseline/wandb/run-20261020_003743-qabxg0en/logs\n",
+    "smolvla_baseline-train-17709588.out": "}\n{\"Train/loss\": 0.06361411511898041, \"Train/optimizer_updates\": 19940, \"Train/samples\": 1276160, \"Train/epoch\": 0.057047319333429325, \"Train/samples_per_second\": 218.88143299396742, \"Train/lr\": 2.502399032362632e-06}\n{\"Train/loss\": 0.04158492386341095, \"Train/optimizer_updates\": 19950, \"Train/samples\": 1276800, \"Train/epoch\": 0.05707592882156043, \"Train/samples_per_second\": 218.7251492516493, \"Train/lr\": 2.5016659988714896e-06}\n{\"Train/loss\": 0.06410709768533707, \"Train/optimizer_updates\": 19960, \"Train/samples\": 1277440, \"Train/epoch\": 0.05710453830969154, \"Train/samples_per_second\": 218.78917760872883, \"Train/lr\": 2.5010662414640516e-06}\n{\"Train/loss\": 0.03897115960717201, \"Train/optimizer_updates\": 19970, \"Train/samples\": 1278080, \"Train/epoch\": 0.05713314779782265, \"Train/samples_per_second\": 218.52800197179394, \"Train/lr\": 2.5005997617800336e-06}\n{\"Train/loss\": 0.04871242493391037, \"Train/optimizer_updates\": 19980, \"Train/samples\": 1278720, \"Train/epoch\": 0.057161757285953754, \"Train/samples_per_second\": 218.80231585178362, \"Train/lr\": 2.5002665610947772e-06}\n{\"Train/loss\": 0.05816228687763214, \"Train/optimizer_updates\": 19990, \"Train/samples\": 1279360, \"Train/epoch\": 0.057190366774084865, \"Train/samples_per_second\": 218.91625214886278, \"Train/lr\": 2.5000666403192447e-06}\n{\"Train/loss\": 0.04080217331647873, \"Train/optimizer_updates\": 20000, \"Train/samples\": 1280000, \"Train/epoch\": 0.05721897626221597, \"Train/samples_per_second\": 218.85880885562096, \"Train/lr\": 2.5e-06}\n",
+    "smolvla_kr-profile-17709589.err": "",
+    "smolvla_kr-profile-17709589.out": "ptimizer_updates\": 20, \"seconds\": 12.76817658636719, \"samples_per_second\": 100.2492400807394, \"peak_gpu_reserved_bytes\": 7482638336.0, \"node_process_peak_rss_bytes\": 23587786752.0, \"validation_h20_action_mse\": 1.6703147888183594, \"strict_checkpoint_rng_reload\": true, \"strict_inference_reload\": true, \"coordinated_checkpoint_test\": true, \"mean_gpu_utilization_percent\": 16.333333333333332, \"source\": {\"autotune.py\": \"c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794\", \"common.py\": \"f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822\", \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\", \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\", \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\", \"policy.py\": \"47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79\", \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\", \"prepare_resume.py\": \"297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d\", \"runtime.py\": \"0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730\", \"submit.py\": \"cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d\", \"test_collective.py\": \"a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56\", \"test_contract.py\": \"99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6\", \"train.py\": \"17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a\"}}}\n",
+    "smolvla_kr-train-17709590.err": "`barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\nwandb: updating run metadata\nwandb: \nwandb: Run history:\nwandb:              Train/epoch \u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\nwandb:               Train/loss \u2587\u2588\u2584\u2585\u2583\u2587\u2584\u2584\u2584\u2588\u2582\u2583\u2583\u2584\u2585\u2582\u2582\u2582\u2582\u2584\u2584\u2583\u2582\u2582\u2582\u2581\u2582\u2582\u2582\u2581\u2582\u2584\u2582\u2581\u2583\u2581\u2582\u2582\u2582\u2582\nwandb:                 Train/lr \u2582\u2582\u2583\u2587\u2587\u2588\u2588\u2588\u2588\u2588\u2587\u2587\u2587\u2586\u2586\u2586\u2586\u2586\u2586\u2585\u2585\u2585\u2585\u2585\u2585\u2584\u2584\u2584\u2584\u2583\u2583\u2582\u2582\u2582\u2582\u2581\u2581\u2581\u2581\u2581\nwandb:  Train/optimizer_updates \u2581\u2581\u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2588\nwandb:            Train/samples \u2581\u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2588\u2588\u2588\u2588\u2588\nwandb: Train/samples_per_second \u2581\u2582\u2582\u2584\u2584\u2582\u2581\u2583\u2583\u2585\u2585\u2586\u2586\u2583\u2583\u2586\u2582\u2585\u2585\u2585\u2585\u2585\u2585\u2585\u2586\u2585\u2588\u2585\u2583\u2586\u2585\u2586\u2585\u2585\u2585\u2585\u2584\u2584\u2585\u2584\nwandb: \nwandb: Run summary:\nwandb:              Train/epoch 0.05722\nwandb:               Train/loss 0.05284\nwandb:                 Train/lr 0.0\nwandb:  Train/optimizer_updates 20000\nwandb:            Train/samples 1280000\nwandb: Train/samples_per_second 213.23884\nwandb: \nwandb: \ud83d\ude80 View run smolvla_kr_a100 at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw\nwandb: \u2b50\ufe0f View project at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)\nwandb: Find logs at: ./runs/smolvla_kr/wandb/run-20261020_004356-8npmrzpw/logs\n",
+    "smolvla_kr-train-17709590.out": "-06}\n{\"Train/loss\": 0.0790882334113121, \"Train/optimizer_updates\": 19940, \"Train/samples\": 1276160, \"Train/epoch\": 0.057047319333429325, \"Train/samples_per_second\": 213.4985092993078, \"Train/lr\": 2.502399032362632e-06}\n{\"Train/loss\": 0.05330706760287285, \"Train/optimizer_updates\": 19950, \"Train/samples\": 1276800, \"Train/epoch\": 0.05707592882156043, \"Train/samples_per_second\": 213.55688460893327, \"Train/lr\": 2.5016659988714896e-06}\n{\"Train/loss\": 0.07474521547555923, \"Train/optimizer_updates\": 19960, \"Train/samples\": 1277440, \"Train/epoch\": 0.05710453830969154, \"Train/samples_per_second\": 213.4210407733589, \"Train/lr\": 2.5010662414640516e-06}\n{\"Train/loss\": 0.04890017583966255, \"Train/optimizer_updates\": 19970, \"Train/samples\": 1278080, \"Train/epoch\": 0.05713314779782265, \"Train/samples_per_second\": 213.73853872234892, \"Train/lr\": 2.5005997617800336e-06}\n{\"Train/loss\": 0.06623233109712601, \"Train/optimizer_updates\": 19980, \"Train/samples\": 1278720, \"Train/epoch\": 0.057161757285953754, \"Train/samples_per_second\": 213.65321577188277, \"Train/lr\": 2.5002665610947772e-06}\n{\"Train/loss\": 0.0635785236954689, \"Train/optimizer_updates\": 19990, \"Train/samples\": 1279360, \"Train/epoch\": 0.057190366774084865, \"Train/samples_per_second\": 213.42902709063515, \"Train/lr\": 2.5000666403192447e-06}\n{\"Train/loss\": 0.05283635854721069, \"Train/optimizer_updates\": 20000, \"Train/samples\": 1280000, \"Train/epoch\": 0.05721897626221597, \"Train/samples_per_second\": 213.23884243642996, \"Train/lr\": 2.5e-06}\n",
+    "vlash_baseline-profile-17709591.err": "",
+    "vlash_baseline-profile-17709591.out": "optimizer_updates\": 20, \"seconds\": 71.84424838703126, \"samples_per_second\": 8.908159168876873, \"peak_gpu_reserved_bytes\": 67607986176.0, \"node_process_peak_rss_bytes\": 99446624256.0, \"validation_h20_action_mse\": 2.57668137550354, \"strict_checkpoint_rng_reload\": true, \"strict_inference_reload\": true, \"coordinated_checkpoint_test\": true, \"mean_gpu_utilization_percent\": 40.094202898550726, \"source\": {\"autotune.py\": \"c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794\", \"common.py\": \"f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822\", \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\", \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\", \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\", \"policy.py\": \"47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79\", \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\", \"prepare_resume.py\": \"297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d\", \"runtime.py\": \"0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730\", \"submit.py\": \"cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d\", \"test_collective.py\": \"a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56\", \"test_contract.py\": \"99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6\", \"train.py\": \"17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a\"}}}\n",
+    "vlash_baseline-train-17709592.err": "ppened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nwandb: WARNING `start_method` is deprecated and will be removed in a future version of wandb. This setting is currently non-functional and safely ignored.\nwandb: Currently logged in as: aparame (aparame-clemson-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin\nwandb: creating run\nwandb: Tracking run with wandb version 0.21.4\nwandb: Run data is saved locally in /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/wandb/run-20261020_005501-8m07ro1o\nwandb: Run `wandb offline` to turn off syncing.\nwandb: Resuming run vlash_baseline_a100\nwandb: \u2b50\ufe0f View project at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: \ud83d\ude80 View run at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8m07ro1o\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "vlash_baseline-train-17709592.out": "{\"Train/loss\": 0.011280747130513191, \"Train/optimizer_updates\": 8520, \"Train/samples\": 272640, \"Train/epoch\": 0.012187641943852003, \"Train/samples_per_second\": 16.976813314265844, \"Train/lr\": 4.2545466204050855e-05}\n{\"Train/loss\": 0.012372033670544624, \"Train/optimizer_updates\": 8530, \"Train/samples\": 272960, \"Train/epoch\": 0.012201946687917556, \"Train/samples_per_second\": 16.955715220538938, \"Train/lr\": 4.252673953575883e-05}\n{\"Train/loss\": 0.010198996402323246, \"Train/optimizer_updates\": 8540, \"Train/samples\": 273280, \"Train/epoch\": 0.01221625143198311, \"Train/samples_per_second\": 16.9765643438033, \"Train/lr\": 4.250799376580636e-05}\n{\"Train/loss\": 0.012898106127977371, \"Train/optimizer_updates\": 8550, \"Train/samples\": 273600, \"Train/epoch\": 0.012230556176048664, \"Train/samples_per_second\": 16.972533433514354, \"Train/lr\": 4.248922891619263e-05}\n{\"Train/loss\": 0.00764440605416894, \"Train/optimizer_updates\": 8560, \"Train/samples\": 273920, \"Train/epoch\": 0.012244860920114217, \"Train/samples_per_second\": 16.978770833534114, \"Train/lr\": 4.247044500893925e-05}\n{\"Train/loss\": 0.00911222118884325, \"Train/optimizer_updates\": 8570, \"Train/samples\": 274240, \"Train/epoch\": 0.012259165664179773, \"Train/samples_per_second\": 16.980084566257638, \"Train/lr\": 4.2451642066090166e-05}\n{\"Train/loss\": 0.006973145995289087, \"Train/optimizer_updates\": 8580, \"Train/samples\": 274560, \"Train/epoch\": 0.012273470408245326, \"Train/samples_per_second\": 16.97104834432867, \"Train/lr\": 4.24328201097117e-05}\n",
+    "vlash_kr-profile-17709593.err": "",
+    "vlash_kr-profile-17709593.out": "optimizer_updates\": 20, \"seconds\": 76.29112228937447, \"samples_per_second\": 8.388918406160826, \"peak_gpu_reserved_bytes\": 67607986176.0, \"node_process_peak_rss_bytes\": 100690997248.0, \"validation_h20_action_mse\": 2.580958604812622, \"strict_checkpoint_rng_reload\": true, \"strict_inference_reload\": true, \"coordinated_checkpoint_test\": true, \"mean_gpu_utilization_percent\": 29.0531914893617, \"source\": {\"autotune.py\": \"c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794\", \"common.py\": \"f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822\", \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\", \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\", \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\", \"policy.py\": \"47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79\", \"prepare.py\": \"e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e\", \"prepare_resume.py\": \"297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d\", \"runtime.py\": \"0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730\", \"submit.py\": \"cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d\", \"test_collective.py\": \"a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56\", \"test_contract.py\": \"99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6\", \"train.py\": \"17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a\"}}}\n",
+    "vlash_kr-train-17709594.err": " may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nwandb: WARNING `start_method` is deprecated and will be removed in a future version of wandb. This setting is currently non-functional and safely ignored.\nwandb: Currently logged in as: aparame (aparame-clemson-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin\nwandb: creating run\nwandb: Tracking run with wandb version 0.21.4\nwandb: Run data is saved locally in /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/wandb/run-20261020_011537-qdxs3h1p\nwandb: Run `wandb offline` to turn off syncing.\nwandb: Resuming run vlash_kr_a100\nwandb: \u2b50\ufe0f View project at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: \ud83d\ude80 View run at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qdxs3h1p\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n",
+    "vlash_kr-train-17709594.out": "{\"Train/loss\": 0.012823937460780144, \"Train/optimizer_updates\": 7900, \"Train/samples\": 252800, \"Train/epoch\": 0.011300747811787654, \"Train/samples_per_second\": 16.95991997338237, \"Train/lr\": 4.366831290834503e-05}\n{\"Train/loss\": 0.013206861913204193, \"Train/optimizer_updates\": 7910, \"Train/samples\": 253120, \"Train/epoch\": 0.011315052555853208, \"Train/samples_per_second\": 16.9579521252487, \"Train/lr\": 4.3650812557289016e-05}\n{\"Train/loss\": 0.02598724700510502, \"Train/optimizer_updates\": 7920, \"Train/samples\": 253440, \"Train/epoch\": 0.011329357299918762, \"Train/samples_per_second\": 16.96049701348606, \"Train/lr\": 4.363329178541023e-05}\n{\"Train/loss\": 0.011310511268675327, \"Train/optimizer_updates\": 7930, \"Train/samples\": 253760, \"Train/epoch\": 0.011343662043984317, \"Train/samples_per_second\": 16.968397019863875, \"Train/lr\": 4.361575061327029e-05}\n{\"Train/loss\": 0.014346680603921413, \"Train/optimizer_updates\": 7940, \"Train/samples\": 254080, \"Train/epoch\": 0.01135796678804987, \"Train/samples_per_second\": 16.95959552656692, \"Train/lr\": 4.359818906145475e-05}\n{\"Train/loss\": 0.006477991584688425, \"Train/optimizer_updates\": 7950, \"Train/samples\": 254400, \"Train/epoch\": 0.011372271532115424, \"Train/samples_per_second\": 16.954618909829374, \"Train/lr\": 4.3580607150573035e-05}\n{\"Train/loss\": 0.00703640840947628, \"Train/optimizer_updates\": 7960, \"Train/samples\": 254720, \"Train/epoch\": 0.011386576276180978, \"Train/samples_per_second\": 16.963381258781556, \"Train/lr\": 4.3563004901258527e-05}\n"
+  },
+  "checked_at": "2026-10-20T09:11:04.591664+00:00"
+}

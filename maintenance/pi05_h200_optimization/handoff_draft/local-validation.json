@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "tests": 9,
+  "scope": "standard-library safety contracts only; no GPU,remote scheduler or allocation controller validation claimed",
+  "files": {
+    "handoff_guards.py": "3ba645f30f990a9a70b35ccb318243b893bcf7e85949daf5a256ee5686a12580",
+    "test_handoff_guards.py": "742f61e45a46881455ecf17e44d81f00e9f19e9907a5c549a8db2f9fe7869aa7"
+  }
+}

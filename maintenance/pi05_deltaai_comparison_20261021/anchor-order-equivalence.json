@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "global_updates": 210,
+  "global_batch": 32,
+  "microbatch_per_rank": 16,
+  "world_size": 2,
+  "starting_cursor": 1920128,
+  "anchor_order_sha256": "0f18a66052fd83cbf8d7fb2502b063d13c1852dfcf1be66d5ddbadad3a87defb",
+  "palmetto_numpy": "2.2.6",
+  "deltaai_numpy": "1.26.4",
+  "same_native_batch_sampler": true
+}

@@ -1,0 +1,7 @@
+{
+  "original_gpu_profile_job_id": "17740320",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "sbatch: error: Requested Features: gpu_h200\nsbatch: error: Partition: work1\nsbatch: error: Submit checks complete\nallocation failure: Job dependency problem\n",
+  "test_only_not_submitted": true
+}

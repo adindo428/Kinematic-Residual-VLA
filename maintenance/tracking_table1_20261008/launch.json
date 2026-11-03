@@ -1,0 +1,20 @@
+{
+  "pilot_job_id": 16830025,
+  "full_array_job_id": 16830026,
+  "summary_job_id": 16830027,
+  "gpu_per_task": "L40S:1",
+  "max_concurrent_full_tasks": 2,
+  "expected_full_rollouts": 7200,
+  "pilot_rollouts": 52,
+  "success_tolerance_m": 0.03,
+  "acquisition_seconds": 1.0,
+  "full_evaluation_dependency": "afterok pilot; pilot_verified.json must also exist",
+  "summary_dependency": "afterok entire full array; all 7200 trials must verify",
+  "results": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_table1_75epoch/20261008",
+  "source": "/scratch/aparame/Dynamic_VLA/runs/tracking_table1_20261008/source",
+  "scoring_version": 4,
+  "initial_second_counts_for_success": true,
+  "acquisition_seconds_applies_to": "Secondary post-1-second diagnostics only; the whole episode counts for success.",
+  "binary_success_threshold": null,
+  "success_aggregation": "arithmetic mean of per-episode time percentages"
+}

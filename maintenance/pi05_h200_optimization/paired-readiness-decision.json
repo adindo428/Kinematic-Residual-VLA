@@ -1,0 +1,473 @@
+{
+  "source_sha256": "562087215a107ad0f5ce81ed35fa914400bbd0616b5a73b241257c2481f93ed7",
+  "source_and_preparation_files_verified": true,
+  "comparisons": {
+    "pi05_baseline": {
+      "gpu_profile_sha256": "692b48db2c5b2af8bddd45742daaddf9e5c4c76284251f1c3461fc948d168d93",
+      "identity": "fba9738d280eab0c58c19128931f16027cc38ccdc08a50667162c5b17e8a3587",
+      "h200_sustained_samples_per_second": 26.775228732326894,
+      "a100_production_median_samples_per_second": 9.618082215529093,
+      "ratio_to_a100": 2.783842779914726,
+      "threshold": 1.25,
+      "variant_meets_threshold": true,
+      "a100_observations": [
+        {
+          "Train/loss": 0.027430783957242966,
+          "Train/optimizer_updates": 6990,
+          "Train/samples": 223680,
+          "Train/epoch": 0.009999016101822241,
+          "Train/samples_per_second": 9.617566014334678,
+          "Train/lr": 2.2713417119526163e-05
+        },
+        {
+          "Train/loss": 0.06288518011569977,
+          "Train/optimizer_updates": 7000,
+          "Train/samples": 224000,
+          "Train/epoch": 0.010013320845887795,
+          "Train/samples_per_second": 9.647978723834072,
+          "Train/lr": 2.2706046989188493e-05
+        },
+        {
+          "Train/loss": 0.030889924615621567,
+          "Train/optimizer_updates": 7010,
+          "Train/samples": 224320,
+          "Train/epoch": 0.010027625589953348,
+          "Train/samples_per_second": 9.627230669565948,
+          "Train/lr": 2.2698666348430832e-05
+        },
+        {
+          "Train/loss": 0.04553550109267235,
+          "Train/optimizer_updates": 7020,
+          "Train/samples": 224640,
+          "Train/epoch": 0.010041930334018904,
+          "Train/samples_per_second": 9.581898372100117,
+          "Train/lr": 2.269127520591477e-05
+        },
+        {
+          "Train/loss": 0.035098589956760406,
+          "Train/optimizer_updates": 7030,
+          "Train/samples": 224960,
+          "Train/epoch": 0.010056235078084457,
+          "Train/samples_per_second": 9.672818325822542,
+          "Train/lr": 2.2683873570314223e-05
+        },
+        {
+          "Train/loss": 0.021180184558033943,
+          "Train/optimizer_updates": 7040,
+          "Train/samples": 225280,
+          "Train/epoch": 0.010070539822150011,
+          "Train/samples_per_second": 3.5361897861500466,
+          "Train/lr": 2.267646145031543e-05
+        },
+        {
+          "Train/loss": 0.043412499129772186,
+          "Train/optimizer_updates": 7050,
+          "Train/samples": 225600,
+          "Train/epoch": 0.010084844566215565,
+          "Train/samples_per_second": 9.641396783275004,
+          "Train/lr": 2.266903885461692e-05
+        },
+        {
+          "Train/loss": 0.04148302227258682,
+          "Train/optimizer_updates": 7060,
+          "Train/samples": 225920,
+          "Train/epoch": 0.010099149310281118,
+          "Train/samples_per_second": 9.659831377294395,
+          "Train/lr": 2.2661605791929524e-05
+        },
+        {
+          "Train/loss": 0.048543114215135574,
+          "Train/optimizer_updates": 7070,
+          "Train/samples": 226240,
+          "Train/epoch": 0.010113454054346674,
+          "Train/samples_per_second": 9.650072749216987,
+          "Train/lr": 2.265416227097636e-05
+        },
+        {
+          "Train/loss": 0.04658152908086777,
+          "Train/optimizer_updates": 7080,
+          "Train/samples": 226560,
+          "Train/epoch": 0.010127758798412228,
+          "Train/samples_per_second": 9.6019165535606,
+          "Train/lr": 2.2646708300492805e-05
+        },
+        {
+          "Train/loss": 0.03896034508943558,
+          "Train/optimizer_updates": 7090,
+          "Train/samples": 226880,
+          "Train/epoch": 0.010142063542477781,
+          "Train/samples_per_second": 9.56578958931665,
+          "Train/lr": 2.263924388922652e-05
+        },
+        {
+          "Train/loss": 0.05268287658691406,
+          "Train/optimizer_updates": 7100,
+          "Train/samples": 227200,
+          "Train/epoch": 0.010156368286543335,
+          "Train/samples_per_second": 9.605010777403555,
+          "Train/lr": 2.2631769045937396e-05
+        },
+        {
+          "Train/loss": 0.049162764102220535,
+          "Train/optimizer_updates": 7110,
+          "Train/samples": 227520,
+          "Train/epoch": 0.010170673030608889,
+          "Train/samples_per_second": 9.612054844548588,
+          "Train/lr": 2.2624283779397583e-05
+        },
+        {
+          "Train/loss": 0.0668453574180603,
+          "Train/optimizer_updates": 7120,
+          "Train/samples": 227840,
+          "Train/epoch": 0.010184977774674442,
+          "Train/samples_per_second": 9.570747754608679,
+          "Train/lr": 2.2616788098391463e-05
+        },
+        {
+          "Train/loss": 0.0361003614962101,
+          "Train/optimizer_updates": 7130,
+          "Train/samples": 228160,
+          "Train/epoch": 0.010199282518739998,
+          "Train/samples_per_second": 9.669103713344635,
+          "Train/lr": 2.2609282011715626e-05
+        },
+        {
+          "Train/loss": 0.06829246878623962,
+          "Train/optimizer_updates": 7140,
+          "Train/samples": 228480,
+          "Train/epoch": 0.010213587262805551,
+          "Train/samples_per_second": 9.628182397559176,
+          "Train/lr": 2.260176552817889e-05
+        },
+        {
+          "Train/loss": 0.04440830275416374,
+          "Train/optimizer_updates": 7150,
+          "Train/samples": 228800,
+          "Train/epoch": 0.010227892006871105,
+          "Train/samples_per_second": 9.618598416723506,
+          "Train/lr": 2.2594238656602267e-05
+        },
+        {
+          "Train/loss": 0.028775474056601524,
+          "Train/optimizer_updates": 7160,
+          "Train/samples": 229120,
+          "Train/epoch": 0.010242196750936659,
+          "Train/samples_per_second": 9.586331040795697,
+          "Train/lr": 2.2586701405818955e-05
+        },
+        {
+          "Train/loss": 0.05192549154162407,
+          "Train/optimizer_updates": 7170,
+          "Train/samples": 229440,
+          "Train/epoch": 0.010256501495002212,
+          "Train/samples_per_second": 9.608785700075899,
+          "Train/lr": 2.2579153784674338e-05
+        },
+        {
+          "Train/loss": 0.04391810670495033,
+          "Train/optimizer_updates": 7180,
+          "Train/samples": 229760,
+          "Train/epoch": 0.010270806239067768,
+          "Train/samples_per_second": 9.649353458833536,
+          "Train/lr": 2.2571595802025976e-05
+        }
+      ],
+      "a100_log_modified_at_ns": 1792512703882816065,
+      "gpu_profile_modified_at_ns": 1792510959406488891,
+      "note": "Provisional per-variant comparison. No paired release until both readiness receipts and paired scheduler COMPLETED exit0."
+    },
+    "pi05_kr": {
+      "gpu_profile_sha256": "c41d282e57239f0ea1b7d03aae0727443798bb368e373fa1f965c431579ad1bc",
+      "identity": "c0985b1f3ffd8d637ef1da4d9d23e8de0ee7f47d214adb223cc7edb2eb917ca1",
+      "h200_sustained_samples_per_second": 27.655606555732007,
+      "a100_production_median_samples_per_second": 9.600746998167985,
+      "ratio_to_a100": 2.8805682058916093,
+      "threshold": 1.25,
+      "variant_meets_threshold": true,
+      "a100_observations": [
+        {
+          "Train/loss": 0.07938728481531143,
+          "Train/optimizer_updates": 6630,
+          "Train/samples": 212160,
+          "Train/epoch": 0.009484045315462297,
+          "Train/samples_per_second": 9.631626478552974,
+          "Train/lr": 2.2971669823095414e-05
+        },
+        {
+          "Train/loss": 0.07172504812479019,
+          "Train/optimizer_updates": 6640,
+          "Train/samples": 212480,
+          "Train/epoch": 0.00949835005952785,
+          "Train/samples_per_second": 9.549496520786278,
+          "Train/lr": 2.2964683731702107e-05
+        },
+        {
+          "Train/loss": 0.04010482877492905,
+          "Train/optimizer_updates": 6650,
+          "Train/samples": 212800,
+          "Train/epoch": 0.009512654803593406,
+          "Train/samples_per_second": 9.640104928406595,
+          "Train/lr": 2.295768682636418e-05
+        },
+        {
+          "Train/loss": 0.09297216683626175,
+          "Train/optimizer_updates": 6660,
+          "Train/samples": 213120,
+          "Train/epoch": 0.00952695954765896,
+          "Train/samples_per_second": 9.549994280005993,
+          "Train/lr": 2.2950679115292903e-05
+        },
+        {
+          "Train/loss": 0.07480861991643906,
+          "Train/optimizer_updates": 6670,
+          "Train/samples": 213440,
+          "Train/epoch": 0.009541264291724513,
+          "Train/samples_per_second": 9.637532157782076,
+          "Train/lr": 2.2943660606712206e-05
+        },
+        {
+          "Train/loss": 0.06678350269794464,
+          "Train/optimizer_updates": 6680,
+          "Train/samples": 213760,
+          "Train/epoch": 0.009555569035790067,
+          "Train/samples_per_second": 9.586787372786581,
+          "Train/lr": 2.2936631308858697e-05
+        },
+        {
+          "Train/loss": 0.06713961809873581,
+          "Train/optimizer_updates": 6690,
+          "Train/samples": 214080,
+          "Train/epoch": 0.00956987377985562,
+          "Train/samples_per_second": 9.602917749761705,
+          "Train/lr": 2.2929591229981656e-05
+        },
+        {
+          "Train/loss": 0.06852580606937408,
+          "Train/optimizer_updates": 6700,
+          "Train/samples": 214400,
+          "Train/epoch": 0.009584178523921176,
+          "Train/samples_per_second": 9.583396141419383,
+          "Train/lr": 2.2922540378343006e-05
+        },
+        {
+          "Train/loss": 0.044334132224321365,
+          "Train/optimizer_updates": 6710,
+          "Train/samples": 214720,
+          "Train/epoch": 0.00959848326798673,
+          "Train/samples_per_second": 9.576148165684982,
+          "Train/lr": 2.2915478762217306e-05
+        },
+        {
+          "Train/loss": 0.034796617925167084,
+          "Train/optimizer_updates": 6720,
+          "Train/samples": 215040,
+          "Train/epoch": 0.009612788012052283,
+          "Train/samples_per_second": 9.607512541467928,
+          "Train/lr": 2.2908406389891768e-05
+        },
+        {
+          "Train/loss": 0.08217453956604004,
+          "Train/optimizer_updates": 6730,
+          "Train/samples": 215360,
+          "Train/epoch": 0.009627092756117837,
+          "Train/samples_per_second": 9.600797776799247,
+          "Train/lr": 2.290132326966621e-05
+        },
+        {
+          "Train/loss": 0.07013778388500214,
+          "Train/optimizer_updates": 6740,
+          "Train/samples": 215680,
+          "Train/epoch": 0.00964139750018339,
+          "Train/samples_per_second": 9.61392937659586,
+          "Train/lr": 2.2894229409853064e-05
+        },
+        {
+          "Train/loss": 0.04519511014223099,
+          "Train/optimizer_updates": 6750,
+          "Train/samples": 216000,
+          "Train/epoch": 0.009655702244248946,
+          "Train/samples_per_second": 9.59154632732187,
+          "Train/lr": 2.2887124818777374e-05
+        },
+        {
+          "Train/loss": 0.09698645025491714,
+          "Train/optimizer_updates": 6760,
+          "Train/samples": 216320,
+          "Train/epoch": 0.0096700069883145,
+          "Train/samples_per_second": 9.617901723740518,
+          "Train/lr": 2.288000950477678e-05
+        },
+        {
+          "Train/loss": 0.10971590876579285,
+          "Train/optimizer_updates": 6770,
+          "Train/samples": 216640,
+          "Train/epoch": 0.009684311732380053,
+          "Train/samples_per_second": 9.608419361955592,
+          "Train/lr": 2.2872883476201482e-05
+        },
+        {
+          "Train/loss": 0.07623441517353058,
+          "Train/optimizer_updates": 6780,
+          "Train/samples": 216960,
+          "Train/epoch": 0.009698616476445607,
+          "Train/samples_per_second": 9.645577854668115,
+          "Train/lr": 2.2865746741414288e-05
+        },
+        {
+          "Train/loss": 0.049798253923654556,
+          "Train/optimizer_updates": 6790,
+          "Train/samples": 217280,
+          "Train/epoch": 0.00971292122051116,
+          "Train/samples_per_second": 9.600696219536724,
+          "Train/lr": 2.285859930879054e-05
+        },
+        {
+          "Train/loss": 0.07810964435338974,
+          "Train/optimizer_updates": 6800,
+          "Train/samples": 217600,
+          "Train/epoch": 0.009727225964576714,
+          "Train/samples_per_second": 9.598648013584585,
+          "Train/lr": 2.285144118671816e-05
+        },
+        {
+          "Train/loss": 0.055946528911590576,
+          "Train/optimizer_updates": 6810,
+          "Train/samples": 217920,
+          "Train/epoch": 0.00974153070864227,
+          "Train/samples_per_second": 9.591330120281723,
+          "Train/lr": 2.2844272383597597e-05
+        },
+        {
+          "Train/loss": 0.08745730668306351,
+          "Train/optimizer_updates": 6820,
+          "Train/samples": 218240,
+          "Train/epoch": 0.009755835452707824,
+          "Train/samples_per_second": 9.511269125106212,
+          "Train/lr": 2.2837092907841846e-05
+        }
+      ],
+      "a100_log_modified_at_ns": 1792512730762621764,
+      "gpu_profile_modified_at_ns": 1792512580100197377,
+      "note": "Provisional per-variant comparison. No paired release until both readiness receipts and paired scheduler COMPLETED exit0."
+    }
+  },
+  "paired_release_approved": false,
+  "recorded_at": "2026-10-20T16:18:26.137975+00:00",
+  "gpu_profile_accounting": {
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:51:31"
+  },
+  "pair_completion_marker": {
+    "complete": true,
+    "job_id": "17740320",
+    "profiles": {
+      "pi05_baseline": {
+        "approved": true,
+        "identity": "fba9738d280eab0c58c19128931f16027cc38ccdc08a50667162c5b17e8a3587",
+        "hardware": "NVIDIA H200",
+        "runtime": {
+          "microbatch": 16,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "microbatch": 16,
+        "global_batch": 32,
+        "accumulation": 1,
+        "decoded_optimizer_updates": 200,
+        "seconds": 239.02690296247602,
+        "samples_per_second": 26.775228732326894,
+        "torch_version": "2.7.1+cu126",
+        "world_size": 2,
+        "total_readiness_seconds": 592.4607577295974,
+        "includes_intermediate_checkpoint_in_timed_training": true,
+        "job_id": "17740320",
+        "peak_gpu_reserved_bytes": 63191384064.0,
+        "node_process_peak_rss_bytes": 117015932928.0,
+        "validation_h20_action_mse": 0.7799603343009949,
+        "strict_checkpoint_rng_reload": true,
+        "strict_inference_reload": true,
+        "coordinated_checkpoint_test": true,
+        "mean_gpu_utilization_percent": 36.41836734693877,
+        "mean_cpu_busy_cores_per_rank": 0.6117702168572042,
+        "total_gpu_bytes": 150109880320,
+        "memory_limit_bytes": 274877906944,
+        "source": {
+          "autotune.py": "e2a8bd71eaf5d76b67c8b3b84a21c7cd41569a19102f1edd8cf179e745fcd9d1",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "migration.py": "e816c589956eee92b35c02865c2bde83c56b3fc00ac6c972f2d309fbf425b0fd",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "runtime.py": "b6466491feffee777c07db75a4e8a4741ec73aad1f153eff98d84f8e204eb5c8",
+          "submit_profiles.py": "b3775834d66e92fa1e461309c3d6c819859e88b1b878e8081504c25bebe31dbb",
+          "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "test_h200.py": "b47d832da7936e65144b655f0dd938389cc1f39a70c6c21f873319ac78e60142",
+          "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+          "train.py": "5afa25a8421c869064b46e08791d0b68a050955f07f011f65000550ae98acb57"
+        }
+      },
+      "pi05_kr": {
+        "approved": true,
+        "identity": "c0985b1f3ffd8d637ef1da4d9d23e8de0ee7f47d214adb223cc7edb2eb917ca1",
+        "hardware": "NVIDIA H200",
+        "runtime": {
+          "microbatch": 16,
+          "workers": 8,
+          "main_threads": 2,
+          "prefetch": 2,
+          "autocast_cache_enabled": false,
+          "allocator": "expandable_segments:True"
+        },
+        "microbatch": 16,
+        "global_batch": 32,
+        "accumulation": 1,
+        "decoded_optimizer_updates": 200,
+        "seconds": 231.41781349480152,
+        "samples_per_second": 27.655606555732007,
+        "torch_version": "2.7.1+cu126",
+        "world_size": 2,
+        "total_readiness_seconds": 787.5667514083907,
+        "includes_intermediate_checkpoint_in_timed_training": true,
+        "job_id": "17740320",
+        "peak_gpu_reserved_bytes": 63191384064.0,
+        "node_process_peak_rss_bytes": 117122519040.0,
+        "validation_h20_action_mse": 1.0253225564956665,
+        "strict_checkpoint_rng_reload": true,
+        "strict_inference_reload": true,
+        "coordinated_checkpoint_test": true,
+        "mean_gpu_utilization_percent": 26.160766961651916,
+        "mean_cpu_busy_cores_per_rank": 0.4586818789793554,
+        "total_gpu_bytes": 150109880320,
+        "memory_limit_bytes": 274877906944,
+        "source": {
+          "autotune.py": "e2a8bd71eaf5d76b67c8b3b84a21c7cd41569a19102f1edd8cf179e745fcd9d1",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "migration.py": "e816c589956eee92b35c02865c2bde83c56b3fc00ac6c972f2d309fbf425b0fd",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "runtime.py": "b6466491feffee777c07db75a4e8a4741ec73aad1f153eff98d84f8e204eb5c8",
+          "submit_profiles.py": "b3775834d66e92fa1e461309c3d6c819859e88b1b878e8081504c25bebe31dbb",
+          "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "test_h200.py": "b47d832da7936e65144b655f0dd938389cc1f39a70c6c21f873319ac78e60142",
+          "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+          "train.py": "5afa25a8421c869064b46e08791d0b68a050955f07f011f65000550ae98acb57"
+        }
+      }
+    },
+    "production_submitted": false
+  },
+  "both_variants_qualified": true,
+  "production_handoff_submitted": false,
+  "execution_status": "blocked on authenticated Palmetto SSH before remote handoff validation/submission"
+}

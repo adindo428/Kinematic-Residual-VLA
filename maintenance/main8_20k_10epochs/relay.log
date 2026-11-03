@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/main8_20k_10epochs/relay.py", line 56, in <module>
+    if __name__=='__main__':main()
+  File "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/main8_20k_10epochs/relay.py", line 53, in main
+    raise RuntimeError('Launch transfer relay exceeded4h; held jobs remain held')
+RuntimeError: Launch transfer relay exceeded4h; held jobs remain held

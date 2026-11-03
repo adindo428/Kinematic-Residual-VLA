@@ -1,0 +1,26 @@
+{
+  "jobs": {
+    "a4": "17140872",
+    "h4": "17140873"
+  },
+  "transfer": "remain_paused",
+  "authorization": "2026-10-13 user clarified pause applies only to transfer; resume training",
+  "attempts": [
+    {
+      "variant": "a4",
+      "time": 1791866068.490994,
+      "returncode": 0,
+      "stdout": "17140872\n",
+      "stderr": "sbatch: Requested Features: gpu_a100_40gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\n"
+    },
+    {
+      "variant": "h4",
+      "time": 1791866069.3051689,
+      "returncode": 0,
+      "stdout": "17140873\n",
+      "stderr": "sbatch: Requested Features: gpu_h100\nsbatch: Partition: work1\nsbatch: Submit checks complete\n"
+    }
+  ],
+  "registered": true,
+  "verified_submitted": true
+}

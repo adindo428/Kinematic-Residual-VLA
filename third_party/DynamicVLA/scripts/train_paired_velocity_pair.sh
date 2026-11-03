@@ -20,29 +20,19 @@ RUN_PREFETCH=${RUN_PREFETCH:-1}
 RUN_TRAIN=${RUN_TRAIN:-1}
 RUN_OBSERVED_EVAL=${RUN_OBSERVED_EVAL:-1}
 RUN_PAIRED_SWEEP=${RUN_PAIRED_SWEEP:-1}
-OBSERVED_EVAL_OUTPUT=${OBSERVED_EVAL_OUTPUT:-runs/proactive_vla/offline_compare/paired_velocity_iid_ood_report.json}
-OBSERVED_EVAL_CSV_OUTPUT=${OBSERVED_EVAL_CSV_OUTPUT:-runs/proactive_vla/offline_compare/paired_velocity_iid_ood_report.csv}
+OBSERVED_EVAL_OUTPUT=${OBSERVED_EVAL_OUTPUT:-${DVLA_OUTPUT_ROOT:-/scratch/aparame/Dynamic_VLA/runs}/proactive_vla/offline_compare/paired_velocity_iid_ood_report.json}
+OBSERVED_EVAL_CSV_OUTPUT=${OBSERVED_EVAL_CSV_OUTPUT:-${DVLA_OUTPUT_ROOT:-/scratch/aparame/Dynamic_VLA/runs}/proactive_vla/offline_compare/paired_velocity_iid_ood_report.csv}
 OBSERVED_EVAL_SPLITS=${OBSERVED_EVAL_SPLITS:-"iid_eval ood_val ood_test"}
 OBSERVED_EVAL_BATCH_SIZE=${OBSERVED_EVAL_BATCH_SIZE:-8}
 OBSERVED_EVAL_MAX_BATCHES=${OBSERVED_EVAL_MAX_BATCHES:-1000}
 OBSERVED_EVAL_MAX_EPISODES=${OBSERVED_EVAL_MAX_EPISODES:-0}
 OBSERVED_EVAL_NUM_WORKERS=${OBSERVED_EVAL_NUM_WORKERS:-}
-PAIRED_SWEEP_OUTPUT=${PAIRED_SWEEP_OUTPUT:-runs/proactive_vla/paired_velocity_sweep/report.json}
+PAIRED_SWEEP_OUTPUT=${PAIRED_SWEEP_OUTPUT:-${DVLA_OUTPUT_ROOT:-/scratch/aparame/Dynamic_VLA/runs}/proactive_vla/paired_velocity_sweep/report.json}
 DVLA_EVAL_TEST_DURING_TRAIN=${DVLA_EVAL_TEST_DURING_TRAIN:-0}
 export DVLA_EVAL_TEST_DURING_TRAIN
 
-if command -v module >/dev/null 2>&1; then
-  module load cuda/12.3.0 || true
-  module load gcc/12.3.0 || true
-fi
-
-if command -v conda >/dev/null 2>&1; then
-  # shellcheck disable=SC1091
-  source "$(conda info --base)/etc/profile.d/conda.sh"
-  conda activate dynamicvla
-fi
-
-mkdir -p runs/slurm_logs runs/proactive_vla/paired_velocity_sweep runs/proactive_vla/offline_compare
+source "${SCRIPT_DIR}/palmetto_env.sh"
+mkdir -p "${DVLA_OUTPUT_ROOT}/proactive_vla/paired_velocity_sweep" "${DVLA_OUTPUT_ROOT}/proactive_vla/offline_compare"
 
 if [[ "${RESUME_RESIDUAL_ONLY}" != "0" && "${RESUME_RESIDUAL_ONLY}" != "1" ]]; then
   echo "[paired-velocity] RESUME_RESIDUAL_ONLY must be 0 or 1, got: ${RESUME_RESIDUAL_ONLY}" >&2
@@ -56,13 +46,17 @@ echo "[paired-velocity] Residual init=${RESIDUAL_INIT_CKPT:-none} explicit_ckpt=
 checkpoint_for_exp() {
   local exp_name=$1
   local explicit_ckpt=$2
-  local ckpt_dir="runs/checkpoints/${exp_name}"
+  local ckpt_dir="${DVLA_OUTPUT_ROOT}/checkpoints/${exp_name}"
 
   if [[ -n "${explicit_ckpt}" ]]; then
+    if [[ ! -f "${explicit_ckpt}/training_state.pt" ]]; then
+      echo "Resume checkpoint lacks training_state.pt: ${explicit_ckpt}" >&2
+      return 2
+    fi
     printf '%s\n' "${explicit_ckpt}"
     return 0
   fi
-  if [[ "${AUTO_RESUME}" == "1" && -f "${ckpt_dir}/config.json" && -f "${ckpt_dir}/model.safetensors" ]]; then
+  if [[ "${AUTO_RESUME}" == "1" && -f "${ckpt_dir}/config.json" && -f "${ckpt_dir}/model.safetensors" && -f "${ckpt_dir}/training_state.pt" ]]; then
     printf '%s\n' "${ckpt_dir}"
     return 0
   fi
@@ -75,7 +69,7 @@ checkpoint_for_eval() {
   if [[ -n "${explicit_ckpt}" ]]; then
     printf '%s\n' "${explicit_ckpt}"
   else
-    printf 'runs/checkpoints/%s\n' "${exp_name}"
+    printf '%s/checkpoints/%s\n' "${DVLA_OUTPUT_ROOT}" "${exp_name}"
   fi
 }
 
@@ -102,7 +96,7 @@ run_torchrun_train() {
 }
 
 residual_resume_checkpoint() {
-  local ckpt=${RESIDUAL_CKPT:-runs/checkpoints/${RESIDUAL_EXP}}
+  local ckpt=${RESIDUAL_CKPT:-${DVLA_OUTPUT_ROOT}/checkpoints/${RESIDUAL_EXP}}
   local required_file
 
   for required_file in config.json model.safetensors training_state.pt; do

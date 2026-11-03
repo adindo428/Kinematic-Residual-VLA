@@ -1,0 +1,360 @@
+{
+  "source": "/home/aparame/Research/Dynamic_VLA/third_party/Kinematic-Residual-VLA/third_party/DynamicVLA",
+  "git_head": "9a5f7db1881a6d74c9a965f5c65a83f98b48d58d",
+  "files": {
+    "LICENSE": {
+      "sha256": "eb7237d17f7586cd2412bb8173722d55dc59464aa1241acb96a3318a02394cf2",
+      "bytes": 1718
+    },
+    "RECOVERY.md": {
+      "sha256": "9eb799bd8da95da5c68e4b59b8aab79fb2392094c0d75b5bda98c69ad3cfb731",
+      "bytes": 11063
+    },
+    "configs/diffusion.yaml": {
+      "sha256": "f8f1eade9814d5fa697bede50d1c369f110758cdde1c2d2066c4c978cf53159a",
+      "bytes": 947
+    },
+    "configs/dom_franka_tracking_split.json": {
+      "sha256": "58a41da80df8718d33e949df0d4fd39378d1ed9ec297ce7f52509b20f31c395d",
+      "bytes": 847
+    },
+    "configs/dom_speed_ood_0p10_0p18_eval_split.json": {
+      "sha256": "698f62009e3cf62419612d9c867dad200b9dca5d2adcf2d4ccd9b944a8115e56",
+      "bytes": 918
+    },
+    "configs/dom_speed_ood_0p10_0p18_split.json": {
+      "sha256": "41fd905474a04898b7041527dfaf67ce9e73b5a6a6c907278d7c7a00bf39757d",
+      "bytes": 1426123
+    },
+    "configs/dynamicvla.yaml": {
+      "sha256": "7625326293becaaa16330d5b0759650707f702c38e8ec8e2af10adb1c19591b7",
+      "bytes": 1236
+    },
+    "configs/dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "sha256": "f492c1f14aa3cd1322970f20906c948a0aef89d6d9385f8126e119dafa4c551d",
+      "bytes": 1680
+    },
+    "configs/dynamicvla_dom_full_finetune_speed_ood_0p12_0p13.yaml": {
+      "sha256": "c2f6749346ea82e2191b714ebe339d8394268ba7230f2ae6a172b2ee46eab830",
+      "bytes": 1867
+    },
+    "configs/dynamicvla_dom_paired_velocity.yaml": {
+      "sha256": "83b3f997701a20fb991ad5f8abe684b4f502e916881a77575e83e81aebb37c59",
+      "bytes": 1825
+    },
+    "configs/dynamicvla_dom_tracking_velocity75.yaml": {
+      "sha256": "961456dbd50da5aa396b0ab402b5b2a0b0670ff73aa1b30e5cda44f6f91ab306",
+      "bytes": 2344
+    },
+    "configs/residual_dynamicvla_dom_cartesian_512.yaml": {
+      "sha256": "6a749fbd1b653ab00efae96a946601fb2a88e4d0cf6e4f2fedd929d745adaa0a",
+      "bytes": 2416
+    },
+    "configs/residual_dynamicvla_dom_cartesian_speed_ood_0p05.yaml": {
+      "sha256": "bcf5d6833d3ee86b9f8fe607876a618109e03fe9c9fc50b4eca5180e3aae56ba",
+      "bytes": 2777
+    },
+    "configs/residual_dynamicvla_dom_cartesian_speed_ood_0p12_0p13.yaml": {
+      "sha256": "94613da85d2e2bf5db44b69f2c0b557111a0d864cd820b0967a5b4993c74f919",
+      "bytes": 2702
+    },
+    "configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml": {
+      "sha256": "9eac8741b8bdf724a62beec89f39098f5fbb937a1610af5fda44701856fd5c9c",
+      "bytes": 2398
+    },
+    "configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p12_0p13.yaml": {
+      "sha256": "d05846bd393fb7cba21213dc4cb9c825f8c37b2cb23cc7aff985cf33448c4f72",
+      "bytes": 2585
+    },
+    "configs/residual_dynamicvla_dom_paired_velocity.yaml": {
+      "sha256": "161422cdf76c0bb431339481638964c8d8b3bef3a3a5bd77b80032c78724a288",
+      "bytes": 2534
+    },
+    "configs/residual_dynamicvla_dom_tiny.yaml": {
+      "sha256": "9f6e2cd3aab26f73115bf4e3e2333b37351d7a344a8e93fec22438b528cb306c",
+      "bytes": 1860
+    },
+    "configs/smolvla.yaml": {
+      "sha256": "547ebec6c498af223f8f0f82168b7413a2a6090bc187b5c3ba11d3a88654bfcd",
+      "bytes": 1052
+    },
+    "configs/tracking_dom75_full20_coordinate_velocity.yaml": {
+      "sha256": "1cf209f7b26700a936390d002f489d604a235db7a6ce409b4ed9a61b594b54cf",
+      "bytes": 3269
+    },
+    "core/__init__.py": {
+      "sha256": "14d2d8531d7af301da1f683098545e334b229710e732906830fe4d80fd799ce3",
+      "bytes": 254
+    },
+    "core/test.py": {
+      "sha256": "e3ca543be189bfdeb1db8f14251d5330c076e423e4eec8db986afd24a86a676e",
+      "bytes": 3497
+    },
+    "core/train.py": {
+      "sha256": "82e0d14f3dbdf342f40794bdb878475a3e7c683339a1cbcc89b01bb536996585",
+      "bytes": 45179
+    },
+    "policies/dynamicvla/configuration_dynamicvla.py": {
+      "sha256": "fe25222ff23660da22673e9a6dc23262be06123b4763d2780accedf1a99f2399",
+      "bytes": 8315
+    },
+    "policies/dynamicvla/modeling_dynamicvla.py": {
+      "sha256": "152cef31509fd73ea4a2c2d69b3c43c1475437a08b3c487e1a4822499aa060ee",
+      "bytes": 58428
+    },
+    "policies/dynamicvla/modeling_fastvlm.py": {
+      "sha256": "a7b5fa1d1addd043938d6580d1e8c8449859b3b4c94f9a3a6d7ee9a7b4203259",
+      "bytes": 58646
+    },
+    "policies/dynamicvla/modeling_vlm_with_expert.py": {
+      "sha256": "e8315169202f995b479798262cc66e1c380103bba779f26e3dc43889211a2fe0",
+      "bytes": 25970
+    },
+    "proactive_vla/__init__.py": {
+      "sha256": "8e3eef0c5e8fbdfa0e5dba569738d0fc181f1c7d50abf171f3abf32ae3c51456",
+      "bytes": 846
+    },
+    "proactive_vla/residual_flow.py": {
+      "sha256": "9242f9010432c40d4b5716e589246ae680ea7934aa204bcfb2ddc1ebae6d31a9",
+      "bytes": 23773
+    },
+    "requirements.txt": {
+      "sha256": "16ff97e90ea7e2412e02e34aec1f3a15097c956c989f11d44ffa4ee7ecc30bfb",
+      "bytes": 202
+    },
+    "requirements_rocky8.txt": {
+      "sha256": "65ed132c0a470ca3aaf03fcf79fedfdb7dfc2b7ec27b687742a31ea213eaafbb",
+      "bytes": 1018
+    },
+    "run.py": {
+      "sha256": "9bbfad08bdc808b93f2a231ca795320ba58d6a5f75a0230b7cc285941f64f1b5",
+      "bytes": 11134
+    },
+    "scripts/check_train_readiness.py": {
+      "sha256": "d745682a1ab276d752e02b08f7ceb64d79b93f25f98619f64e5d148407635086",
+      "bytes": 2107
+    },
+    "scripts/fix_lerobot_videos.py": {
+      "sha256": "044e5a7ff45d93e8751bf5f39f4be8ecbc8393555ca516747f588eebf504f581",
+      "bytes": 4017
+    },
+    "scripts/palmetto_env.sh": {
+      "sha256": "8125ffd3978793119852c910387d7f9772c9833b708b260349f2df51934a15c6",
+      "bytes": 740
+    },
+    "scripts/rebuild_dom_speed_split.py": {
+      "sha256": "7b0c0e4901f5f665ced9f9a15c0826c79951973d3e611f32d0eabdf2d3e3b39f",
+      "bytes": 3570
+    },
+    "scripts/train_full_finetune_speed_ood_pair.sh": {
+      "sha256": "4a31ba7b64c03f0c947a0e7b07d023f759837540053f7cb28265dc2d1ecc601b",
+      "bytes": 3792
+    },
+    "scripts/train_paired_velocity_pair.sh": {
+      "sha256": "81b2269a29580ea4e108dc05d72c36feb87f4ed752bd68c7638d49deac68ac0c",
+      "bytes": 7293
+    },
+    "scripts/train_tracking_velocity.py": {
+      "sha256": "cab501981a03d1526192601f884de42522854410cfa7a2fe51389f43be3da06c",
+      "bytes": 543
+    },
+    "slurm/resume_tracking_dom75_full20_coordinate.sbatch": {
+      "sha256": "f7a5412180bd7d0d5d119d75f4059da3a929673a47644caf9c426d942c5b76c8",
+      "bytes": 1225
+    },
+    "slurm/train_full_finetune_speed_ood_pair_a100.sbatch": {
+      "sha256": "51fbf8c62faeea647bc7eac4c63f98f8799c796347d09295e47447a6ddd9e84d",
+      "bytes": 1099
+    },
+    "slurm/train_full_finetune_speed_ood_pair_a100_4gpu.sbatch": {
+      "sha256": "803e3fbacb7c4b4be564e6d9bc2f59ef7478c60f45892f4b92fbb63ff8690736",
+      "bytes": 1795
+    },
+    "slurm/train_full_finetune_speed_ood_pair_h100.sbatch": {
+      "sha256": "72f28dfb0a16bb622209a60763c196c09f0bfcd2e3c9724853eff8767a32a866",
+      "bytes": 1098
+    },
+    "slurm/train_full_finetune_speed_ood_pair_h200.sbatch": {
+      "sha256": "44c39aedcf3d33c7daed6658a562fd44831d45bd102922c73803be89486752d0",
+      "bytes": 1099
+    },
+    "slurm/train_paired_velocity_pair_h100.sbatch": {
+      "sha256": "4387904531ec93892a684eea043da4656ea99d1972481c43f5f1d646b6ec2368",
+      "bytes": 6616
+    },
+    "slurm/train_scratch_speed_ood_pair_a100.sbatch": {
+      "sha256": "bcf3f956d48bd4fb363d348692cb923a00d386eeacf9e44fa5e3deea8a827758",
+      "bytes": 1025
+    },
+    "slurm/train_scratch_speed_ood_pair_h100.sbatch": {
+      "sha256": "3d1e524cb73d569ea002890776b44f53bc58fe116eec3187d01c855760b0d4ae",
+      "bytes": 1025
+    },
+    "slurm/train_tracking_coordinate_velocity75_a100.sbatch": {
+      "sha256": "f2aa9c729e590af38579cdf47776e6dc93a50bb9514610c1f892724154ace169",
+      "bytes": 2398
+    },
+    "slurm/train_tracking_velocity75_a100.sbatch": {
+      "sha256": "6f7de3972436610e4f2bb9d574d063a2fc8dda31a934c01905e43374a2dc52aa",
+      "bytes": 1670
+    },
+    "utils/average_meter.py": {
+      "sha256": "2c0da4fd0620175740197c778d969f653312b5badcb219a1846b59c25c73c178",
+      "bytes": 1834
+    },
+    "utils/datasets.py": {
+      "sha256": "76a1a10300c587fff95dda939afa5f8509a3cb029fc834024c24940417dc90f6",
+      "bytes": 52370
+    },
+    "utils/distributed.py": {
+      "sha256": "4ba72c4b9569e8ed361b7792dd2bb801a23aeb4212f8cdf27bedfbdb915309a5",
+      "bytes": 4555
+    },
+    "utils/helpers.py": {
+      "sha256": "1601c731d2f821c5e15a89246be0fcdf3b01a2c7697af6df225d87683e21dcc8",
+      "bytes": 11333
+    },
+    "utils/instruction_generator.py": {
+      "sha256": "8b04b167855ae8cfe815068654667bd8dda5c0ae07018af2f3523b49bc14d6d2",
+      "bytes": 1872
+    },
+    "utils/memcached.py": {
+      "sha256": "d0c0ca19d4450b0c7239ac37ba22155efcabec78f3a952ff6c5a1fa6178dd77e",
+      "bytes": 4784
+    },
+    "utils/summary_writer.py": {
+      "sha256": "b417e410325da4233702060cd025872516d3af161061e9caa83c4170771a53dd",
+      "bytes": 3378
+    },
+    "configs/tracking_dom75_full20_baseline.yaml": {
+      "sha256": "95bc186fc284a070b66b292b0486a45841b294c5e65f72206072acb053dc024d",
+      "bytes": 2091
+    },
+    "configs/tracking_dom75_full20_coordinate.yaml": {
+      "sha256": "a65125cbdd64b4f309acf5204808fdb9732bb1bd250dbfc8001ad57154bf452c",
+      "bytes": 2855
+    },
+    "configs/tracking_dom75_full20_residual.yaml": {
+      "sha256": "29fb08f8cb01aab2680a031e010ee9f2a7353167818451297705122139da8497",
+      "bytes": 2813
+    }
+  },
+  "excluded_files": [
+    "PROACTIVE_RESIDUAL_MVP.md",
+    "README.md",
+    "scripts/compare_da3_dom_velocity.py",
+    "scripts/create_lerobot_dataset.py",
+    "scripts/create_libero_dataset.py",
+    "scripts/create_object_collision.py",
+    "scripts/create_scene_collision.py",
+    "scripts/create_usd_objects.py",
+    "scripts/create_usd_scenes.py",
+    "scripts/eval_checkpoints.py",
+    "scripts/eval_libero_dataset.py",
+    "scripts/evaluate_baseline_residual_iid_ood.py",
+    "scripts/evaluate_residual_paired_velocity_sweep.py",
+    "scripts/evaluate_tracking_four_offline.py",
+    "scripts/fix_error_scenes.py",
+    "scripts/inference.py",
+    "scripts/make_speed_smoke_split.py",
+    "scripts/merge_coordinate_velocity_eval.py",
+    "scripts/prefetch_eval_splits.py",
+    "scripts/prepare_coordinate_velocity_eval.py",
+    "scripts/prepare_tracking_online.py",
+    "scripts/proactive_residual_dom_ablation.py",
+    "scripts/proactive_residual_offline_compare.py",
+    "scripts/replay_dataset_seq.py",
+    "scripts/smoke_tracking_coordinate_velocity.py",
+    "scripts/smoke_tracking_velocity.py",
+    "scripts/submit_paired_velocity_pair.sh",
+    "scripts/summarize_tracking_online.py",
+    "scripts/summarize_tracking_online_three.py",
+    "scripts/tracking_checkpoint.py",
+    "scripts/tracking_online_common.py",
+    "scripts/tracking_online_policy.py",
+    "scripts/tracking_online_sim.py",
+    "scripts/tracking_recorded.py",
+    "scripts/tracking_variants.py",
+    "scripts/tracking_visuals.py",
+    "scripts/train_scratch_speed_ood_pair.sh",
+    "scripts/translate_dataset_seq.py",
+    "scripts/update_usd_tex_loc.py",
+    "scripts/verify_tracking_training.py",
+    "scripts/visualze_dataset_seq.py",
+    "simulations/__init__.py",
+    "simulations/configs/__init__.py",
+    "simulations/configs/env_cfg.py",
+    "simulations/configs/event_cfg.py",
+    "simulations/configs/object_cfg.py",
+    "simulations/configs/robot_cfg.py",
+    "simulations/configs/scene_cfg.py",
+    "simulations/configs/sim_cfg.yaml",
+    "simulations/configs/termination_cfg.py",
+    "simulations/evaluate.py",
+    "simulations/helpers.py",
+    "simulations/robots/PIPER/configuration/piper_base.usd",
+    "simulations/robots/PIPER/configuration/piper_physics.usd",
+    "simulations/robots/PIPER/configuration/piper_sensor.usd",
+    "simulations/robots/PIPER/meshes/base_link.STL",
+    "simulations/robots/PIPER/meshes/gripper_base.STL",
+    "simulations/robots/PIPER/meshes/link1.STL",
+    "simulations/robots/PIPER/meshes/link2.STL",
+    "simulations/robots/PIPER/meshes/link3.STL",
+    "simulations/robots/PIPER/meshes/link4.STL",
+    "simulations/robots/PIPER/meshes/link5.STL",
+    "simulations/robots/PIPER/meshes/link6.STL",
+    "simulations/robots/PIPER/meshes/link7.STL",
+    "simulations/robots/PIPER/meshes/link8.STL",
+    "simulations/robots/PIPER/piper.usd",
+    "simulations/robots/PIPER/piper_description.urdf",
+    "simulations/robots/__init__.py",
+    "simulations/robots/franka.py",
+    "simulations/robots/piper.py",
+    "simulations/simulate.py",
+    "simulations/state_machines/__int__.py",
+    "simulations/state_machines/pick_sm.py",
+    "simulations/state_machines/place_sm.py",
+    "simulations/state_machines/sm_utils.py",
+    "slurm/README_tracking_four.md",
+    "slurm/README_tracking_three_online.md",
+    "slurm/continue_full_finetune_speed_ood_pair_h100.sbatch",
+    "slurm/evaluate_closed_loop_dom_l40.sbatch",
+    "slurm/evaluate_coordinate_velocity_only_l40s.sbatch",
+    "slurm/evaluate_full_finetune_iid_ood_h100.sbatch",
+    "slurm/evaluate_residual_paired_velocity_sweep_h100.sbatch",
+    "slurm/evaluate_tracking_case1_online_l40.sbatch",
+    "slurm/evaluate_tracking_four_l40.sbatch",
+    "slurm/evaluate_tracking_four_offline_a100.sbatch",
+    "slurm/evaluate_tracking_four_rtx6000.sbatch",
+    "slurm/evaluate_tracking_three_online_l40.sbatch",
+    "slurm/postprocess_full_finetune_eval_splits.sbatch",
+    "slurm/preprocess_full_finetune_speed_ood_pair.sbatch",
+    "slurm/smoke_full_finetune_speed_ood_h100.sbatch",
+    "slurm/smoke_tracking_velocity_a100.sbatch",
+    "tests/test_dataset_split_file.py",
+    "tests/test_instruction_generator.py",
+    "tests/test_offline_compare.py",
+    "tests/test_residual_coordinate_flow.py",
+    "tests/test_residual_flow.py",
+    "tests/test_tracking_checkpoint.py",
+    "tests/test_tracking_coordinate_velocity.py",
+    "tests/test_tracking_coordinate_velocity_eval.py",
+    "tests/test_tracking_four_summary.py",
+    "tests/test_tracking_online.py",
+    "tests/test_tracking_velocity_conditioning.py",
+    "tests/test_train_eval_metrics.py",
+    "tests/test_train_only_prefetch.py",
+    "utils/maya_controller.py",
+    "verification/coordinate_velocity_20261006_backup/core/train.py",
+    "verification/coordinate_velocity_20261006_backup/policies/dynamicvla/modeling_dynamicvla.py",
+    "verification/coordinate_velocity_20261006_backup/scripts/tracking_variants.py",
+    "verification/coordinate_velocity_20261006_backup/scripts/verify_tracking_training.py",
+    "verification/coordinate_velocity_eval_20261007_before/original.tgz",
+    "verification/four_method_preflight/README.md",
+    "verification/four_method_preflight/manifest.json",
+    "verification/tracking_evaluator_restoration.json",
+    "verification/tracking_four_launch.json",
+    "verification/tracking_velocity_normalization.json",
+    "verification/tracking_velocity_selection_recovery.json"
+  ]
+}

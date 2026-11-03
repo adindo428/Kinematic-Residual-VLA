@@ -1,0 +1,206 @@
+{
+  "review_date": "2026-11-02",
+  "scope": "Ten other accessible Codex project chats and nine linked ChatGPT project chats; active/archived listings checked; no project-matching archived chats returned. No claims about inaccessible chats on other computers.",
+  "coverage": {
+    "codex": [
+      {
+        "id": "01a1844b-f520-7752-961c-b5c044564359",
+        "title": "Fix DeltaAI SSH host verification",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 1
+      },
+      {
+        "id": "01a18d48-12bf-7293-aff7-8bc43f5b83d9",
+        "title": "Check Palmetto CPU-node diagnostics",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 0
+      },
+      {
+        "id": "01a112d4-64a3-7d12-be41-f2a7daec58b4",
+        "title": "Evaluation",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 3
+      },
+      {
+        "id": "01a17b67-f0df-7e83-b7ac-0905434f3c1e",
+        "title": "Rewrite VLA resume entry",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 0
+      },
+      {
+        "id": "01a13aa1-116f-7fd2-9a87-07d879a9cf2e",
+        "title": "Paper updates",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 0
+      },
+      {
+        "id": "01a15b97-b2e3-71e0-ba5b-12f94b33cfc4",
+        "title": "Scale CVRP training to 20k episodes",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 0
+      },
+      {
+        "id": "01a10c96-8b06-7042-aed6-e7d56c2efd2b",
+        "title": "Optimization",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 1
+      },
+      {
+        "id": "01a11bfe-9cc8-7491-a0a3-e7643a02cca1",
+        "title": "DeltaAI Training",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 5
+      },
+      {
+        "id": "01a13ae6-2311-7261-a314-2433182d1935",
+        "title": "Complete VLA results for Table 1",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 0
+      },
+      {
+        "id": "01a117d5-c8f6-7ef1-84e6-a2f1dd033f3e",
+        "title": "Literature Review",
+        "kind": "codex",
+        "history_end_reached": true,
+        "additional_pages_read": 0
+      }
+    ],
+    "chatgpt": [
+      {
+        "id": "6acab530-0210-832b-8866-24f979f82f42",
+        "title": "Compare VLA Training Speed",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6ab45229-f3cc-8326-9e2a-bbe4bc5cf2d2",
+        "title": "Transport Theorem Approach",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6ac3e98e-fde8-832f-b3ee-c6314b29b8f9",
+        "title": "CVPR VLA Robotics Papers",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6abd4032-7a4c-8327-b6e5-99711028b994",
+        "title": "Optimal Transport Discussion",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6ab2b754-f634-8330-a25d-9f0fb12949c1",
+        "title": "Evolving Distributions",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6a32a82a-83b4-8330-ac5e-b6bb2a7c295f",
+        "title": "Theorem Explanation for Meeting",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6a2c5ca7-ad6c-8327-a8bd-9070416b810b",
+        "title": "Signed Wasserstein Barycenter",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6a2b18f1-7818-832f-8038-4dfc7ea69635",
+        "title": "Centering Term in Residualization",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      },
+      {
+        "id": "6a29ab1d-2b9c-832c-b614-0af26f4903eb",
+        "title": "Theorem Formulation Assistance",
+        "kind": "chatgpt",
+        "history_end_reached": true
+      }
+    ]
+  },
+  "history": [
+    {
+      "date": "2026-10-11",
+      "chat_title": "Literature Review",
+      "thread_id": "01a117d5-c8f6-7ef1-84e6-a2f1dd033f3e",
+      "finding": "Warnings explicitly identified iid_eval overlap with training episodes and unknown pretrained exposure to fine-tuning-held-out speeds. Recommended matching observations, motion estimates, evaluation episodes and execution conditions; no house mapping supplied."
+    },
+    {
+      "date": "2026-10-14",
+      "chat_title": "Complete VLA results for Table 1",
+      "thread_id": "01a13ae6-2311-7261-a314-2433182d1935",
+      "finding": "Evaluation plan was to fine-tune matched VLA comparisons on DOM and use the official1800-trial manipulation protocol; no20k-house-conditional simulator design was established."
+    },
+    {
+      "date": "2026-10-20",
+      "chat_title": "Scale CVRP training to 20k episodes",
+      "thread_id": "01a15b97-b2e3-71e0-ba5b-12f94b33cfc4",
+      "user_request": "We are having major scaliung problems because training200k episodes is impossible within the CVRP timeframe; can we scale down to20k episodes and possibly remove tasks?",
+      "finding": "Assistant recommended task/speed stratification, disjoint train/validation/test, fixed split and smaller learning-curve check. After user authorized implementation, retained9000pick/9000place/2000long_horizon with whole duplicate groups and unchanged2015validation/2011test. No house or asset identity was among selection inputs."
+    },
+    {
+      "date": "2026-10-21",
+      "chat_title": "Scale CVRP training to 20k episodes",
+      "thread_id": "01a15b97-b2e3-71e0-ba5b-12f94b33cfc4",
+      "finding": "User explicitly authorized resuming previously trained checkpoints for ten additional epochs on the20k split. This creates subset adaptation after prior data exposure, not automatically20k-only fine-tuning."
+    },
+    {
+      "date": "2026-10-21",
+      "chat_title": "Scale CVRP training to 20k episodes",
+      "thread_id": "01a15b97-b2e3-71e0-ba5b-12f94b33cfc4",
+      "finding": "Split/code were reported pushed as434c7a9 ontracking_controller and098e01e onmain."
+    }
+  ],
+  "selection_code": "experiments/cross_vla_krfm_20k/subset.py",
+  "selection_axes": [
+    "task quotas",
+    "capped square-root speed-bin allocation",
+    "seed42 hash ranking of whole duplicate groups"
+  ],
+  "held_out_preservation": "Existing episode partitions retained; no scene-level IID guarantee follows",
+  "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+  "missing_design_checks": [
+    "exact episode filename-to-house mapping",
+    "same-house and disjoint-house evaluation strata",
+    "objects/cameras/lights/physics/instructions protocol matching",
+    "paired target-velocity-only interventions",
+    "declared OOD velocity support relative to training and pretrained exposure",
+    "checkpoint selection versus final test separation"
+  ],
+  "interpretation": "A reproducible reduced-data training selection was implemented, but the bridge from its episode-level holdout to a defensible scene-controlled simulator IID/OOD evaluation was not established. Prior warnings were not promoted to launch-blocking evaluation requirements.",
+  "original_scene_mapping_found_in_reviewed_chats": false,
+  "existing_models_discard_or_retrain_requested": false,
+  "evaluation_restarted": false,
+  "external_messages_sent": false,
+  "messages_searched": 676,
+  "house_mapping_keyword_hits": [
+    {
+      "source": "chatResumeMessages",
+      "at": 1793071772,
+      "snippets": [
+        "licy execution for deployment, achieving 90\\% success rate in multi-robot navigation with 12x faster training convergence for warehouse robotic environments. (\\texttt{Python, ROS 2, Isaac Sim, VLM})}\n\\resumeItem{Reinforcement Learning for Robotic Manipulators}\n{Engineered PPO and SAC networks that achieve an 85\\% success rate in object manipulation and obstacle avoidance tasks using RGBD"
+      ]
+    },
+    {
+      "source": "chatLiteratureMessages",
+      "at": 1791740640,
+      "snippets": [
+        "we establish that history, we should call it *held out from fine-tuning*, rather than genuinely unseen-speed generalization.\n- **`iid_eval` contains training episodes.** It cannot serve as an independent test set.\n- **The end-effector proximity metric is a diagnostic.** Getting within 5 cm of an extrapolated object position is not equivalent to successfully grasping or placing it.\n\nThese"
+      ]
+    }
+  ],
+  "additional_eval_history_note": "Earlier IID/1.5x/2x and 7200-rollout Table1-style results concern the separate80-training-episode hover-tracking adaptation; they do not validate scene identities for the20k DOM manipulation subset."
+}

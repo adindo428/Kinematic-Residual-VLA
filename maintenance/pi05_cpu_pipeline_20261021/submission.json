@@ -1,0 +1,16 @@
+{
+  "pending_submission": false,
+  "script": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/benchmark.sbatch",
+  "script_sha256": "800bb1fe62b8d83ef27684c407008fb0a48e9ce18b4ac935eee0090434005f78",
+  "code_manifest_sha256": "8193cd30dcc8d5d732ad45ad68bb96fe673cac407e01476a7a62318269ebe9dc",
+  "attempted_at": "2026-10-21T15:07:17.199523+00:00",
+  "type": "bounded_diagnostic_only",
+  "production_changed": false,
+  "job_id": "17837039",
+  "submitted_at": "2026-10-21T15:07:17.253744+00:00",
+  "gpus": 2,
+  "hardware": "H200",
+  "cpus": 32,
+  "memory_gib": 256,
+  "time_limit": "01:30:00"
+}

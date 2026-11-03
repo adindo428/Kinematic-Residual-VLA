@@ -1,0 +1,47 @@
+{
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-profiled-ddp-20261009",
+  "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261009T173000Z/dom100",
+  "source_sha256": "9b94486de3751e8be0ce095191e32bb735dd39e17f6e32b6c6ff55e603fe4161",
+  "manifest": "9c291c56be5b0b94e3dc99d1a25d207db694d5a71674d70bc1671d3f35d0bcf2",
+  "recipe_before_runtime_selection": "7b59fd7e1ff83dab611af338d380ea39c390cf999e20d423ef6db8cc087aa35c",
+  "old_job": 3348823,
+  "old_job_state": "CANCELLED",
+  "single_gpu_profile_job": 3347735,
+  "stage": "bounded_four_gpu_readiness",
+  "production_submitted": false,
+  "workflow_status_file": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-profiled-domv-20261009/status.json",
+  "runtime_selection": "Microbatch44 with fastest measured <=4-worker frame loader; try <=2-worker fallback only if first fails; stop after first safe full-data four-GPU result",
+  "production": {
+    "gpus": 4,
+    "nodes": 1,
+    "wall_hours": 48,
+    "epoch_cap": 100,
+    "global_batch": 352,
+    "precision": "bf16",
+    "sampling": "frames",
+    "lr": 3e-05,
+    "early_stop_relative_improvement": 0.005,
+    "patience": 3,
+    "min_epochs": 5,
+    "scheduler_dependency": null,
+    "checkpoint_continuation": true
+  },
+  "coordinator_pid": 3507907,
+  "single_gpu_profile_state": "CANCELLED after preserving 39 trial records (38 successful, one OOM)",
+  "single_gpu_profile_complete": false,
+  "single_gpu_measurements_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+  "readiness_candidate_limit_minutes": 20,
+  "readiness_total_limit_minutes": 45,
+  "reason_for_microbatch44": "Microbatch88 full loader trials exceeded the required 85% maximum GPU memory usage; microbatch44 GPU-only trial reserved 46.25GB",
+  "readiness_job": 3350039,
+  "readiness_job_state": "PENDING (Priority)",
+  "previous_readiness_jobs": [
+    {
+      "job_id": 3349092,
+      "state": "FAILED",
+      "elapsed_seconds": 39,
+      "cause": "System torchrun bypassed virtual environment",
+      "fix": "python -m torch.distributed.run"
+    }
+  ]
+}

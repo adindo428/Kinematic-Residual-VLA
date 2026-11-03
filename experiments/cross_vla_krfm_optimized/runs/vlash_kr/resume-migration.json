@@ -1,0 +1,46 @@
+{
+  "parent": {
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt",
+    "checkpoint_sha256": "788812f150a102566a4367e9ed0445454a197ebbb81071736877f370b550d798",
+    "identity": "e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728",
+    "recipe_fingerprint": "587c316d9e35580ad6f7c7fb9593cf1817391e91686858cd81fd1308df30cb0a",
+    "preparation": {
+      "complete": true,
+      "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+      "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+      "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+      "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+    },
+    "hardware": "NVIDIA A100 80GB PCIe",
+    "world_size": 2,
+    "progress": {
+      "updates": 738,
+      "samples": 23616,
+      "epoch": 0,
+      "cursor": 23616
+    },
+    "parent_job_id": "17692803",
+    "parent_source": {
+      "common.py": "612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f",
+      "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+      "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+      "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+      "policy.py": "7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9",
+      "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+      "submit.py": "4ad117ed97d11100d7e0672be6d59457a57debda55b812facfa7c38b9397316f",
+      "test_contract.py": "97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d",
+      "train.py": "5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059"
+    },
+    "explicit_runtime_migration": true
+  },
+  "new_identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+  "restored_progress": {
+    "updates": 738,
+    "samples": 23616,
+    "epoch": 0,
+    "cursor": 23616
+  },
+  "optimizer_scheduler_rng_restored": true,
+  "microbatch_changed": true,
+  "data_cursor_preserved": true
+}

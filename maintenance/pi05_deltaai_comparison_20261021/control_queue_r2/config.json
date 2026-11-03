@@ -1,0 +1,7 @@
+{
+  "root": "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021",
+  "previous_job": "3429648",
+  "job_name": "pi05-compare-q2-20261021",
+  "manifest_sha256": "591ae5d7af07b30e93a73ceaaadbd90790781cd598dfbbef139c34f7376d8354",
+  "sweep_sha256": "2120ffccd0bc01dd0317d68d5055ed0e075c01705943a8783f79d7bc60faf356"
+}

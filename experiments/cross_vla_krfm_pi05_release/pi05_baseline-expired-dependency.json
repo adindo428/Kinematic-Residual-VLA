@@ -1,0 +1,12 @@
+{
+  "command": [
+    "sbatch",
+    "--test-only",
+    "--dependency=afterok:17716903",
+    "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_baseline_train.sbatch"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "sbatch: error: Requested Features: gpu_a100_80gb\nsbatch: error: Partition: work1\nsbatch: error: Submit checks complete\nallocation failure: Job dependency problem\n",
+  "checked_at": "2026-10-20T09:10:24.726979+00:00"
+}

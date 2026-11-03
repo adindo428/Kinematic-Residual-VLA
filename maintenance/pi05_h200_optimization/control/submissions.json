@@ -1,0 +1,59 @@
+{
+  "production": {
+    "pi05_baseline": {
+      "job_id": "17745549",
+      "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_baseline.sbatch",
+      "dependency": "17745541",
+      "submitted_at": "2026-10-20T16:31:49.242782+00:00",
+      "gpu_profile_job_id": "17740320",
+      "recipe": "pi05_baseline",
+      "command": "train",
+      "world_size": 2,
+      "gpus": 2,
+      "gpu": "H200",
+      "cpus": 32,
+      "memory_gib": 256,
+      "readiness_release_job_id": "17745541",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020",
+      "source_sha256": "562087215a107ad0f5ce81ed35fa914400bbd0616b5a73b241257c2481f93ed7",
+      "target_updates": 30000,
+      "lr": 2.5e-05,
+      "method": "pi05 baseline",
+      "variant": "pi05_baseline",
+      "name": "pi05_baseline-h200-continuation",
+      "parent_job_id": "17719993"
+    },
+    "pi05_kr": {
+      "job_id": "17745557",
+      "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_kr.sbatch",
+      "dependency": "17745541",
+      "submitted_at": "2026-10-20T16:31:49.550488+00:00",
+      "gpu_profile_job_id": "17740320",
+      "recipe": "pi05_kr",
+      "command": "train",
+      "world_size": 2,
+      "gpus": 2,
+      "gpu": "H200",
+      "cpus": 32,
+      "memory_gib": 256,
+      "readiness_release_job_id": "17745541",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020",
+      "source_sha256": "562087215a107ad0f5ce81ed35fa914400bbd0616b5a73b241257c2481f93ed7",
+      "target_updates": 30000,
+      "lr": 2.5e-05,
+      "method": "pi05 + KRFM",
+      "variant": "pi05_kr",
+      "name": "pi05_kr-h200-continuation",
+      "parent_job_id": "17720948"
+    }
+  },
+  "purpose": "User-authorized exact-latest-checkpoint replacements, not parallel duplicate training",
+  "production_training_verified": false,
+  "verification": {
+    "job_id": "17745541",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/verify.sbatch",
+    "dependency": null,
+    "submitted_at": "2026-10-20T16:31:48.908962+00:00",
+    "gpu_profile_job_id": "17740320"
+  }
+}

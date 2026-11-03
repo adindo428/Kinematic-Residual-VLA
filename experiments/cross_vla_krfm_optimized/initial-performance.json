@@ -1,0 +1,30 @@
+{
+  "initial_snapshot_source": "vla-optimization-snapshot",
+  "observed_gpu_activity_percent": {
+    "smolvla_baseline": [
+      32,
+      36
+    ],
+    "vlash_baseline": [
+      71,
+      84
+    ],
+    "vlash_kr": [
+      68,
+      82
+    ]
+  },
+  "observed_samples_per_second": {
+    "smolvla_baseline": 18.937239438863667,
+    "vlash_baseline": 8.494381531989335,
+    "vlash_kr": 8.612519387512636
+  },
+  "note": "Short pre-optimization samples; not optimized throughput claims",
+  "checkpoint_parent_updates": {
+    "smolvla_baseline": 956,
+    "vlash_baseline": 745,
+    "vlash_kr": 738
+  },
+  "new_cpu_contracts_passed": 11,
+  "two_rank_collective_clock_skew_test": true
+}

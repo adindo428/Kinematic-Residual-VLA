@@ -1,0 +1,11 @@
+{
+  "syntax_checked": true,
+  "selection_excludes_failed_and_unsafe_cases": true,
+  "cpu_budget_includes_persistent_validation_workers": true,
+  "cpu_bound": "3*workers+2*main_threads<=32",
+  "global_batch": 352,
+  "full_epoch_updates": 6838,
+  "total_updates": 68380,
+  "gpu_speedup_measured": false,
+  "contracts": "Fixed control, legal CPU cases, oversubscription rejection, safe-only selection, unchanged epoch budget"
+}

@@ -1,0 +1,2055 @@
+{
+  "schema_version": 1,
+  "title": "KRVLA training run register",
+  "scope": "Known DynamicVLA and KRVLA submissions; current DOM study plus documented tracking and DeltaAI history",
+  "active_source_sha256": "182dd497885658c5a355d2ffb29763845d362f1dc1f455507de3b8f717dbc2bb",
+  "active_recipe_fingerprint": "5fa38b00d845fd5e0db37508aa934b24c23cd224b681cd7fbcd6c833f4423887",
+  "runs": [
+    {
+      "cluster": "Palmetto",
+      "job_id": null,
+      "name": "dom100",
+      "method": "DOM",
+      "group": "production",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "gpu": "H100 or H200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009/runs/dom100",
+      "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+      "recipe_fingerprint": "75cdd199006e9efd01e1de5b65cd70920b71cf9fcb960db26d2def967494da71"
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": null,
+      "name": "kr100",
+      "method": "KRVLA Coordinate",
+      "group": "production",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "gpu": "H100 or H200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009/runs/kr100",
+      "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+      "recipe_fingerprint": "75cdd199006e9efd01e1de5b65cd70920b71cf9fcb960db26d2def967494da71"
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3360409",
+      "name": "domv100",
+      "method": "DOM + velocity",
+      "group": "historical",
+      "purpose": "DOM manipulation training",
+      "world_size": 4,
+      "gpu": "GH200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011",
+      "run_directory": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/runs/domv100",
+      "source_sha256": "d148491ad6d1cb06116b895b1c75fb983baeda2c54b2be850ce9d37d1331355a",
+      "recipe_fingerprint": "2fed78e295cd0181f2743ef83ff6bbcaa409a931d373a2d9c0934acba84ba4a0",
+      "manifest_fingerprint": "e062530e35c8a62e64e111ee70dcbe488e5bbc526b006d7ec338f88cfa4333ed",
+      "scheduler_state": "FAILED",
+      "note": "FAILED after 45m29s: 80 updates/28160 samples logged, initialization-only checkpoint. Six empty upstream videos identified; approved exclusion is paired on both servers.",
+      "dependency": null,
+      "workflow_status": {
+        "candidate_files": [
+          "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/runtime-candidates/e82b2d03f5b28d43.json"
+        ],
+        "change": "Paired Palmetto fix: canonicalize rank-zero checkpoint buffers before prediction/save and coordinate verification errors; preserve lean loaders and CPU control telemetry",
+        "dependency": null,
+        "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011",
+        "old_training_cancelled": true,
+        "old_training_job": "3348823",
+        "previous_failure": "Rank 0 passed reload; peers did not enter control reduction; probable rank-local BatchNorm statistics discrepancy",
+        "previous_readiness_jobs": [
+          "3349092",
+          "3350039",
+          "3354039",
+          "3360244"
+        ],
+        "production_submitted": true,
+        "profile_job": "3360358",
+        "profiler_job": "3347735",
+        "readiness_candidate_limit_minutes": 15,
+        "readiness_total_limit_minutes": 20,
+        "recipe_fingerprint": "2fed78e295cd0181f2743ef83ff6bbcaa409a931d373a2d9c0934acba84ba4a0",
+        "selected_runtime": {
+          "distributed_profile_fingerprint": "48c98f8907efbe8a26224a27bf3bf36d3bb64d730641cd40d18ef792e6a4f7f1",
+          "fingerprint": "ee8f1e3d4df155b0fe7580c7bb87db2ab5ac166bea0fa844ed8c56f4463fb3ee",
+          "global_effective_batch": 352,
+          "manifest": "e062530e35c8a62e64e111ee70dcbe488e5bbc526b006d7ec338f88cfa4333ed",
+          "runtime": {
+            "fused": false,
+            "microbatch": 44,
+            "pin_memory": false,
+            "precision": "bf16",
+            "prefetch": 2,
+            "sampling": "frames",
+            "workers": 2
+          },
+          "samples_per_second": 158.5646826679088,
+          "single_gpu_profile_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+          "training_epoch_hours_excluding_validation_and_io": 39.19042974134632,
+          "world_size": 4
+        },
+        "single_gpu_sweep_stopped": true,
+        "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261011-bnfix/dom100",
+        "stage": "production_submitted",
+        "stop_after_first_safe": true,
+        "training_job": "3360409",
+        "updated_utc": "2026-10-11T16:45:01Z"
+      },
+      "workflow_status_file": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-bnfix-domv-20261011/status.json",
+      "selected_runtime": {
+        "distributed_profile_fingerprint": "48c98f8907efbe8a26224a27bf3bf36d3bb64d730641cd40d18ef792e6a4f7f1",
+        "fingerprint": "ee8f1e3d4df155b0fe7580c7bb87db2ab5ac166bea0fa844ed8c56f4463fb3ee",
+        "global_effective_batch": 352,
+        "manifest": "e062530e35c8a62e64e111ee70dcbe488e5bbc526b006d7ec338f88cfa4333ed",
+        "runtime": {
+          "fused": false,
+          "microbatch": 44,
+          "pin_memory": false,
+          "precision": "bf16",
+          "prefetch": 2,
+          "sampling": "frames",
+          "workers": 2
+        },
+        "samples_per_second": 158.5646826679088,
+        "single_gpu_profile_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+        "training_epoch_hours_excluding_validation_and_io": 39.19042974134632,
+        "world_size": 4
+      },
+      "stdout": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/logs/train-3360409.out",
+      "stderr": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/logs/train-3360409.err",
+      "elapsed": "00:45:29",
+      "accounting": {
+        "JobIDRaw": "3360409",
+        "JobName": "domv-profiled-gh200",
+        "State": "FAILED",
+        "Elapsed": "00:45:29",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      },
+      "latest.json": {
+        "fingerprint": "815b03d094b7ef27f3bb180cedc6da0b4e62b7ed79253d28f3cc4f1a5861d121",
+        "generation": "u000000000-8aead3c6",
+        "progress": {
+          "cursor": 0,
+          "epoch": 0,
+          "samples": 0,
+          "updates": 0
+        }
+      },
+      "wandb_id": "xf5q6j0h",
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/xf5q6j0h",
+      "training_started": true,
+      "training_health": "Failed: video decoding worker exception",
+      "production_progress": {
+        "epochs": 0,
+        "samples": 28160,
+        "optimizer_updates": 80,
+        "epoch_fraction": 0.001259,
+        "evidence": "Last successful training log at 2026-10-12 11:30:23 EDT; progress beyond persisted checkpoint."
+      },
+      "production_checkpoint_present": true,
+      "checkpoint_progress": {
+        "cursor": 0,
+        "epoch": 0,
+        "samples": 0,
+        "updates": 0
+      },
+      "last_training_loss": 0.395445,
+      "last_logged_samples_per_second": 155.71,
+      "validation_loss": null,
+      "stop_reason": "Published episode 195603 third-person MP4 has no frames (48 bytes)",
+      "failure_evidence": {
+        "stderr": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/logs/train-3360409.err",
+        "rank": 3,
+        "error": "Failed to open input buffer: Invalid data found when processing input",
+        "time_edt": "2026-10-12 11:30:23 EDT",
+        "node": "gh062"
+      },
+      "start_edt": "2026-10-12 11:16:23 EDT",
+      "wandb_state": "crashed",
+      "wandb_summary": {
+        "Train/epoch": 0.001101416844927973,
+        "Train/loss": 0.39581795781850815,
+        "Train/lr": 2.1e-06,
+        "Train/optimizer_updates": 70,
+        "Train/samples": 24640,
+        "Train/samples_per_second": 155.92501573542597,
+        "Train/update_latency_s": 2.2574953630100936,
+        "Train/world_size": 4,
+        "_runtime": 199.774400964,
+        "_step": 70,
+        "_timestamp": 1791819000.807004,
+        "_wandb.runtime": 199
+      },
+      "wandb_checked_at": "2026-10-12T20:47:52.861947+00:00",
+      "wandb_config": {
+        "recipe": {
+          "lr": 3e-05,
+          "seed": 42,
+          "epochs": 100,
+          "manifest": "e062530e35c8a62e64e111ee70dcbe488e5bbc526b006d7ec338f88cfa4333ed",
+          "sampling": "frames",
+          "precision": "bf16",
+          "scheduler": "cosine",
+          "selection": "user_fixed_rate_20261009",
+          "fingerprint": "2fed78e295cd0181f2743ef83ff6bbcaa409a931d373a2d9c0934acba84ba4a0",
+          "early_stopping": {
+            "metric": "h20/action_mse",
+            "enabled": true,
+            "patience": 3,
+            "min_epochs": 5,
+            "relative_min_delta": 0.005
+          },
+          "warmup_updates": 1000,
+          "effective_batch": 352,
+          "runtime_fingerprint": "e82b2d03f5b28d438c3d3c6560b264891a16edab65026ae824d64e5dfdf436f0",
+          "supported_world_sizes": [
+            4,
+            8
+          ],
+          "evaluation_plan_sha256": null,
+          "simulator_evaluation_mode": "disabled_on_deltaai"
+        },
+        "runtime": {
+          "fused": false,
+          "workers": 2,
+          "prefetch": 2,
+          "sampling": "frames",
+          "precision": "bf16",
+          "microbatch": 44,
+          "pin_memory": false
+        },
+        "variant": "domv100",
+        "manifest": {
+          "fps": 25,
+          "counts": {
+            "test": 2011,
+            "train": 197207,
+            "validation": 2015
+          },
+          "frames": 22828959,
+          "dataset": "hzxie/DOM",
+          "version": 1,
+          "coverage": {
+            "frame_fraction": 0.9692912985643772,
+            "excluded_frames": 723258,
+            "retained_frames": 22828959,
+            "episode_fraction": 0.9707051411922472,
+            "published_frames": 23552217,
+            "excluded_episodes": 6073,
+            "retained_episodes": 201233,
+            "published_episodes": 207306,
+            "task_speed_coverage": {
+              "[\"pick\", 1]": {
+                "excluded": 0,
+                "retained": 950
+              },
+              "[\"pick\", 2]": {
+                "excluded": 0,
+                "retained": 32036
+              },
+              "[\"pick\", 3]": {
+                "excluded": 0,
+                "retained": 31692
+              },
+              "[\"pick\", 4]": {
+                "excluded": 0,
+                "retained": 3796
+              },
+              "[\"place\", 0]": {
+                "excluded": 0,
+                "retained": 85
+              },
+              "[\"place\", 1]": {
+                "excluded": 0,
+                "retained": 1451
+              },
+              "[\"place\", 2]": {
+                "excluded": 2574,
+                "retained": 44680
+              },
+              "[\"place\", 3]": {
+                "excluded": 3132,
+                "retained": 72769
+              },
+              "[\"place\", 4]": {
+                "excluded": 367,
+                "retained": 7893
+              },
+              "[\"long_horizon\", 0]": {
+                "excluded": 0,
+                "retained": 88
+              },
+              "[\"long_horizon\", 1]": {
+                "excluded": 0,
+                "retained": 1236
+              },
+              "[\"long_horizon\", 2]": {
+                "excluded": 0,
+                "retained": 4428
+              },
+              "[\"long_horizon\", 3]": {
+                "excluded": 0,
+                "retained": 129
+              }
+            },
+            "missing_or_empty_files": 12099
+          },
+          "episodes": 201233,
+          "artifacts": {
+            "split.json": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+            "episodes.json": "54c05acc563ff95904305681b94f6ec77825aa96258b31e288adf57c99b884c6",
+            "test_cases.json": "3fca5ff097b8216d0cc1aaedc0235af172709a6520a72f05001e7dc3795c9fba",
+            "phase_hashes.json": "803035bd133f89c36cd321719fa35668212e3fd11ae4d8261a91a9941f010492",
+            "video_hashes.json": "64f70f8b0282bbf12c9366483cddd0d5076347f6d85c2db3a14203840863ca35",
+            "horizon_change.json": "71161cd02c5b3efb88ccb7a55cbeca4ec75f9d6d9ad8ef04e4b6327645ea2ca3",
+            "parquet_hashes.json": "7a4ed0caf4c817e9ed6eec8f7fe67594f333b11e23879d891f0bd2ccfae8061b",
+            "pilot_episodes.json": "8faecfe8062cba78881f4411d62c8c12a686678b6f483e0a21dea2b253b07c86",
+            "dataset_coverage.json": "f2ccfe56bc575b02e420a69502ec0a25306c6ba46f4299e77308c67b84ea94fe",
+            "validation_cases.json": "d0a5f98549dc8923091a0ffd999d9dc82573b2cc39f2ec83862fe151d9727961",
+            "dataset_selection.json": "6eafe596da0b1697ef1db3784427cf8571cdd468e1d4f746fc573822a4d2228c",
+            "validation_anchors.json": "089d22058f2337cba93a25333c5b7b97994f6c6faefefc33a53187914f9fea63",
+            "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c"
+          },
+          "fingerprint": "e062530e35c8a62e64e111ee70dcbe488e5bbc526b006d7ec338f88cfa4333ed",
+          "dataset_root": "/work/nvme/bivv/aparameshwaran/dynamicvla/huggingface/lerobot/hzxie/DOM",
+          "derived_from": {
+            "reason": "User requested matching the paper with 20 predicted and executed actions.",
+            "parent_family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-20261009",
+            "reused_artifacts": {
+              "split.json": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+              "episodes.json": "54c05acc563ff95904305681b94f6ec77825aa96258b31e288adf57c99b884c6",
+              "test_cases.json": "3fca5ff097b8216d0cc1aaedc0235af172709a6520a72f05001e7dc3795c9fba",
+              "phase_hashes.json": "803035bd133f89c36cd321719fa35668212e3fd11ae4d8261a91a9941f010492",
+              "video_hashes.json": "64f70f8b0282bbf12c9366483cddd0d5076347f6d85c2db3a14203840863ca35",
+              "horizon_change.json": "d6d46c96e20339628dcb00c644f3b6f18edf873424a29701e15ed3c184eb0934",
+              "parquet_hashes.json": "7a4ed0caf4c817e9ed6eec8f7fe67594f333b11e23879d891f0bd2ccfae8061b",
+              "pilot_episodes.json": "8faecfe8062cba78881f4411d62c8c12a686678b6f483e0a21dea2b253b07c86",
+              "dataset_coverage.json": "f2ccfe56bc575b02e420a69502ec0a25306c6ba46f4299e77308c67b84ea94fe",
+              "validation_cases.json": "d0a5f98549dc8923091a0ffd999d9dc82573b2cc39f2ec83862fe151d9727961",
+              "dataset_selection.json": "6eafe596da0b1697ef1db3784427cf8571cdd468e1d4f746fc573822a4d2228c",
+              "validation_anchors.json": "089d22058f2337cba93a25333c5b7b97994f6c6faefefc33a53187914f9fea63",
+              "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c"
+            },
+            "execution_horizon": 20,
+            "parent_fingerprint": "048db8b61ee37b5a003c099196d4b35e97e9458b9cd0ca260ffce6dd6a15fcb1",
+            "prediction_horizon": 20,
+            "parent_source_sha256": "cd4ae5d9493f0aa95e01ad63df415a4443b8dad4ecce009c4a1e9901c87f2212",
+            "old_prediction_horizon": 20
+          },
+          "phase_config": {
+            "fade_s": 0.2,
+            "lift_m": 0.02,
+            "history_s": 0.2,
+            "loss_speed_m_s": 0.1,
+            "loss_duration_s": 0.12,
+            "loss_position_m": 0.03,
+            "close_duration_s": 0.2,
+            "relative_speed_m_s": 0.05,
+            "relative_position_m": 0.01
+          },
+          "split_sha256": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+          "train_frames": 22371185,
+          "velocity_std": [
+            0.1241744187278931,
+            0.1688344493051613,
+            0.20343423337015365
+          ],
+          "normalization": "pretrained_state_action",
+          "source_sha256": "d148491ad6d1cb06116b895b1c75fb983baeda2c54b2be850ce9d37d1331355a",
+          "velocity_mean": [
+            -0.011364248270240618,
+            -0.0031599214577056793,
+            0.011547081950829995
+          ],
+          "initialization": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/initialization",
+          "model_revision": "c9609d94c5940eb42436a31927d7e80ae454279e",
+          "weights_sha256": "e3da8b1e0326d7a3ee6873f7fa17cdf7015201251901be5107377cb851ce3af8",
+          "parquets_sha256": "96fe9127aef55fe66cdd18527ac4906186bc8d4942f2e62ff17dc6c320e9c5e9",
+          "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+          "profile_recovery": {
+            "reason": "Copy episode lengths out of torch-backed numpy views before spawning DataLoader workers. Previous metrics retained for diagnosis; approvals are recomputed.",
+            "parent_family": "/scratch/aparame/Dynamic_VLA/dom100-h20",
+            "cancelled_jobs": [
+              "16836839",
+              "16836840",
+              "16836841",
+              "16836842",
+              "16836847",
+              "16836848",
+              "16836849",
+              "16836843",
+              "16836844",
+              "16836845",
+              "16836846"
+            ],
+            "local_tests_passed": 72
+          },
+          "published_frames": 23552217,
+          "distributed_study": {
+            "data_parent": "/scratch/aparame/Dynamic_VLA/dom100-ddp-20261009",
+            "first_variant": "krv100",
+            "source_parent": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-20261009",
+            "frame_sampling": "frames",
+            "preferred_world_size": 8,
+            "shared_learning_rate": 3e-05,
+            "supported_world_sizes": [
+              4,
+              8
+            ],
+            "global_effective_batch": 352,
+            "learning_rate_selection": "User explicitly selected Start at 3e-5 on 2026-10-09 instead of waiting for pilots.",
+            "early_stopping_authorization": "User requested stopping on nonimproving validation loss; 100 epochs is an estimate and becomes a cap."
+          },
+          "execution_horizon": 20,
+          "prediction_horizon": 20,
+          "published_episodes": 207306,
+          "dataset_selection_mode": "available_only",
+          "runtime_adaptation_parent": "fd8fb83c9bea9120c07c113c266f11153afd3bb5928675bdfbc75f9aa2f928a0",
+          "deltaai_distributed_baseline": {
+            "variant": "domv100",
+            "parent_manifest": "195769ab6bbfae3edadbd0ff67b9aa2e75191e06b59c83470f8679ca81a10f51",
+            "paired_palmetto_job": 16869869,
+            "parent_source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+            "simulator_evaluation": "Separate Palmetto evaluation after checkpoint transfer",
+            "paired_palmetto_variant": "krv100",
+            "split_targets_and_initialization_unchanged": true
+          }
+        },
+        "world_size": 4
+      },
+      "superseded": true
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3348823",
+      "name": "domv100",
+      "method": "DOM + velocity",
+      "group": "production",
+      "purpose": "DOM manipulation training",
+      "world_size": 4,
+      "gpu": "GH200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-ddp-es-20261009",
+      "run_directory": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-ddp-es-20261009/runs/domv100",
+      "source_sha256": "fb9199a12dfae38867caa5693086bfb6f4e11667b904838962655fab357c7b68",
+      "recipe_fingerprint": "40d172eb16d9327565ca65fa852b3a8df7f654b9ddf3ccc5e374f5d61b5ae121",
+      "manifest_fingerprint": "374948f005220b43244aaa7db2b10b3f0e9abc997cd2ed9a0a0adcf1d4396649",
+      "stdout": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-ddp-es-20261009/logs/train-3348823.out",
+      "stderr": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-ddp-es-20261009/logs/train-3348823.err",
+      "scheduler_state": "CANCELLED by 98304",
+      "note": "Cancelled before starting on user instruction; replace only after profiling adaptation and four-GPU comparison.",
+      "elapsed": "00:00:00",
+      "accounting": {
+        "JobIDRaw": "3348823",
+        "JobName": "domv-ddp-gh200",
+        "State": "CANCELLED by 98304",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      },
+      "dependency": null,
+      "superseded": true
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16869869",
+      "name": "krv100 before checkpoint buffer repair",
+      "method": "KRVLA Coordinate + velocity",
+      "group": "production",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "gpu": "H100 or H200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009/runs/krv100",
+      "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+      "recipe_fingerprint": "75cdd199006e9efd01e1de5b65cd70920b71cf9fcb960db26d2def967494da71",
+      "scheduler_state": "FAILED",
+      "elapsed": "00:33:32",
+      "submit": "2026-10-09T11:56:22",
+      "accounting": {
+        "JobIDRaw": "16869869",
+        "JobName": "krv100",
+        "State": "FAILED",
+        "Submit": "2026-10-09T11:56:22",
+        "Start": "2026-10-10T12:51:23",
+        "Elapsed": "00:33:32",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009"
+      },
+      "reason_or_node": "(Priority)",
+      "slurm_details": "JobId=16869869 JobName=krv100 UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=620688 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-09T11:56:22 EligibleTime=2026-10-09T11:56:22 AccrueTime=2026-10-09T11:56:22 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-10T12:24:17 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login01:3468470 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1-1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=512G,node=1,billing=176,gres/gpu=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=512G MinTmpDiskNode=0 Features=gpu_h100|gpu_h200&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009/slurm/dom100_distributed.sbatch SubmitLine=sbatch --parsable --chdir /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009 --job-name=krv100 --export=ALL,DOM100_VARIANT=krv100 --gpus=8 /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009/slurm/dom100_distributed.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009 StdErr=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009/dom100-ddp-16869869.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009/dom100-ddp-16869869.out TresPerJob=gres/gpu:8 TresPerTask=cpu=32",
+      "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009/dom100-ddp-16869869.out",
+      "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009/dom100-ddp-16869869.err",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009",
+      "allocated_gpu": "H100",
+      "allocated_world_size": 8,
+      "training_started": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "production_checkpoint_present": false,
+      "stop_reason": "Startup checkpoint reload prediction comparison failed on ranks 1\u20137; rank 0 subsequently timed out in NCCL ALLREDUCE after 30 minutes.",
+      "note": "Failed during distributed startup smoke before production training. Seven ranks failed prediction equality after checkpoint reload; rank 0 then hit a 30-minute collective timeout. Production run directory absent. Allocated eight H100 GPUs on nodeai01; 12:51:23\u201313:24:55 EDT, 33m32s. Replaced by 17017544 with canonical checkpoint buffers and CPU control communication; failed source and evidence preserved.",
+      "failure_evidence": {
+        "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009/dom100-ddp-16869869.err",
+        "exit_code": "1:0",
+        "node": "nodeai01",
+        "start_edt": "2026-10-10 12:51:23 EDT",
+        "end_edt": "2026-10-10 13:24:55 EDT"
+      },
+      "superseded": true,
+      "replacement_job": "17017544"
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": null,
+      "name": "krp100",
+      "method": "KRVLA Coordinate + phase gate",
+      "group": "production",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "gpu": "H100 or H200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009/runs/krp100",
+      "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+      "recipe_fingerprint": "75cdd199006e9efd01e1de5b65cd70920b71cf9fcb960db26d2def967494da71"
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": null,
+      "name": "krvp100",
+      "method": "KRVLA Coordinate + velocity + phase gate",
+      "group": "production",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "gpu": "H100 or H200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009/runs/krvp100",
+      "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+      "recipe_fingerprint": "75cdd199006e9efd01e1de5b65cd70920b71cf9fcb960db26d2def967494da71"
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16868574",
+      "name": "krv100 before early stopping",
+      "group": "production",
+      "superseded": true,
+      "gpu": "8 \u00d7 H100 or H200",
+      "target_epochs": 100,
+      "note": "Canceled before start; replaced by 16869869.",
+      "scheduler_state": "CANCELLED by 432600",
+      "elapsed": "00:00:00",
+      "submit": "2026-10-09T11:40:23",
+      "accounting": {
+        "JobIDRaw": "16868574",
+        "JobName": "krv100",
+        "State": "CANCELLED by 432600",
+        "Submit": "2026-10-09T11:40:23",
+        "Start": "None",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-20261009"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16436877",
+      "name": "dvla-ff-a100-4",
+      "group": "historical",
+      "gpu": "4 \u00d7 A100",
+      "target_epochs": null,
+      "checkpoint_directory": null,
+      "note": "Earlier DOM full fine tuning; configuration not reconciled.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "2-17:31:41",
+      "submit": "2026-09-29T13:16:07",
+      "accounting": {
+        "JobIDRaw": "16436877",
+        "JobName": "dvla-ff-a100-4",
+        "State": "COMPLETED",
+        "Submit": "2026-09-29T13:16:07",
+        "Start": "2026-09-29T13:16:21",
+        "Elapsed": "2-17:31:41",
+        "ReqTRES": "billing=72,cpu=32,gres/gpu:a100=4,gres/gpu=4,mem=128G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16483444",
+      "name": "DOM tracking",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 30,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_case1/checkpoints/dynamicvla_dom_tracking_case1_16483444",
+      "note": "50-action horizon; checkpoint epoch inspected.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "06:22:18",
+      "submit": "2026-10-01T13:24:02",
+      "accounting": {
+        "JobIDRaw": "16483444",
+        "JobName": "dvla-track-base",
+        "State": "COMPLETED",
+        "Submit": "2026-10-01T13:24:02",
+        "Start": "2026-10-01T13:33:27",
+        "Elapsed": "06:22:18",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA"
+      },
+      "checkpoint_epoch": 30,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16483445",
+      "name": "KRVLA Field tracking",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 30,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_case1/checkpoints/residual_dynamicvla_dom_tracking_case1_16483445",
+      "note": "Historical field correction; 50-action horizon.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "06:29:17",
+      "submit": "2026-10-01T13:24:05",
+      "accounting": {
+        "JobIDRaw": "16483445",
+        "JobName": "dvla-track-res",
+        "State": "COMPLETED",
+        "Submit": "2026-10-01T13:24:05",
+        "Start": "2026-10-01T13:33:27",
+        "Elapsed": "06:29:17",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA"
+      },
+      "checkpoint_epoch": 30,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16558082",
+      "name": "KRVLA Coordinate tracking",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 30,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_coordinate/checkpoints/krvla_coordinate_dom_tracking_16558082",
+      "note": "50-action horizon; checkpoint epoch inspected.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "07:00:44",
+      "submit": "2026-10-03T00:46:41",
+      "accounting": {
+        "JobIDRaw": "16558082",
+        "JobName": "krvla-coordinate-track",
+        "State": "COMPLETED",
+        "Submit": "2026-10-03T00:46:41",
+        "Start": "2026-10-03T01:13:33",
+        "Elapsed": "07:00:44",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA"
+      },
+      "checkpoint_epoch": 30,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16623336",
+      "name": "DOM tracking75",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 75,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_baseline_16623336",
+      "note": "20-action horizon.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "18:31:32",
+      "submit": "2026-10-04T15:58:19",
+      "accounting": {
+        "JobIDRaw": "16623336",
+        "JobName": "tracking-dom75-baseline",
+        "State": "COMPLETED",
+        "Submit": "2026-10-04T15:58:19",
+        "Start": "2026-10-04T15:58:28",
+        "Elapsed": "18:31:32",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA"
+      },
+      "checkpoint_epoch": 75,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16623337",
+      "name": "KRVLA Field tracking75",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 75,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_residual_16623337",
+      "note": "Scheduler FAILED; config reports epoch 75.",
+      "scheduler_state": "FAILED",
+      "elapsed": "20:29:02",
+      "submit": "2026-10-04T15:58:19",
+      "accounting": {
+        "JobIDRaw": "16623337",
+        "JobName": "tracking-dom75-residual",
+        "State": "FAILED",
+        "Submit": "2026-10-04T15:58:19",
+        "Start": "2026-10-04T15:58:28",
+        "Elapsed": "20:29:02",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA"
+      },
+      "checkpoint_epoch": 75,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16623338",
+      "name": "KRVLA Coordinate tracking75",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 75,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/resume_outputs/checkpoints/tracking_dom75_full20_coordinate_16623338",
+      "note": "Initial job failed at epoch 13; resumed checkpoint stored separately; resume job ID not reconciled.",
+      "scheduler_state": "FAILED",
+      "elapsed": "00:00:08",
+      "submit": "2026-10-04T19:20:16",
+      "accounting": {
+        "JobIDRaw": "16623338",
+        "JobName": "tracking-dom75-coordinate",
+        "State": "FAILED",
+        "Submit": "2026-10-04T19:20:16",
+        "Start": "2026-10-04T19:22:25",
+        "Elapsed": "00:00:08",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA"
+      },
+      "checkpoint_epoch": 75,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16680047",
+      "name": "DOM + velocity tracking75",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 75,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_velocity/checkpoints/tracking_dom75_full20_velocity_16680047",
+      "note": "Scheduler FAILED; config reports epoch 75.",
+      "scheduler_state": "FAILED",
+      "elapsed": "21:45:39",
+      "submit": "2026-10-05T17:56:09",
+      "accounting": {
+        "JobIDRaw": "16680047",
+        "JobName": "tracking-dom75-velocity",
+        "State": "FAILED",
+        "Submit": "2026-10-05T17:56:09",
+        "Start": "2026-10-05T18:02:41",
+        "Elapsed": "21:45:39",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA/third_party/Kinematic-Residual-VLA/third_party/DynamicVLA"
+      },
+      "checkpoint_epoch": 75,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16748131",
+      "name": "KRVLA Coordinate + velocity tracking75",
+      "group": "historical",
+      "gpu": "1 \u00d7 A100",
+      "target_epochs": 75,
+      "checkpoint_directory": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/checkpoints/tracking_dom75_full20_coordinate_velocity_16748131",
+      "note": "75-epoch config; closed-loop evaluation is a separate job.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "19:33:30",
+      "submit": "2026-10-06T19:19:42",
+      "accounting": {
+        "JobIDRaw": "16748131",
+        "JobName": "tracking-coord-vel75",
+        "State": "COMPLETED",
+        "Submit": "2026-10-06T19:19:42",
+        "Start": "2026-10-06T19:20:32",
+        "Elapsed": "19:33:30",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/source_20261006"
+      },
+      "checkpoint_epoch": 75,
+      "checkpoint_lr": 0.0001
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3222405",
+      "name": "dom-vla-pair",
+      "group": "historical",
+      "gpu": "4 \u00d7 GH200",
+      "target_epochs": null,
+      "scheduler_state": "CANCELLED by 96398",
+      "note": "Canceled before training; data staging blocked.",
+      "stdout": "/u/aparameshwaran/Kinematic-Residual-VLA/third_party/DynamicVLA/logs/dom-vla-pair-3222405.out",
+      "elapsed": "00:00:00",
+      "accounting": {
+        "JobIDRaw": "3222405",
+        "JobName": "dom-vla-pair",
+        "State": "CANCELLED by 96398",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=200G,node=1"
+      }
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3286388",
+      "name": "dom-vla-pair",
+      "group": "historical",
+      "gpu": "4 \u00d7 GH200",
+      "target_epochs": null,
+      "scheduler_state": "FAILED",
+      "note": "Four-GH200 paired DOM run; separate source/recipe; no verified completed epoch.",
+      "stdout": "/u/aparameshwaran/Kinematic-Residual-VLA/third_party/DynamicVLA/logs/dom-vla-pair-3286388.out",
+      "elapsed": "00:03:51",
+      "accounting": {
+        "JobIDRaw": "3286388",
+        "JobName": "dom-vla-pair",
+        "State": "FAILED",
+        "Elapsed": "00:03:51",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=200G,node=1"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16822429",
+      "name": "dom-prep",
+      "group": "support",
+      "purpose": "Freeze available DOM cache, split, normalization and causal gate cache",
+      "note": "Reused unchanged for current study.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "03:01:23",
+      "submit": "2026-10-08T11:42:45",
+      "accounting": {
+        "JobIDRaw": "16822429",
+        "JobName": "dom-prepare",
+        "State": "COMPLETED",
+        "Submit": "2026-10-08T11:42:45",
+        "Start": "2026-10-08T11:45:36",
+        "Elapsed": "03:01:23",
+        "ReqTRES": "billing=24,cpu=8,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-20261007"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16844383",
+      "name": "dom-h20-check",
+      "group": "support",
+      "purpose": "Six-variant decoded backward and reload smoke",
+      "note": "Completed in 9m39s.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "00:09:39",
+      "submit": "2026-10-08T18:32:47",
+      "accounting": {
+        "JobIDRaw": "16844383",
+        "JobName": "dom-h20-check",
+        "State": "COMPLETED",
+        "Submit": "2026-10-08T18:32:47",
+        "Start": "2026-10-08T18:34:39",
+        "Elapsed": "00:09:39",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16844384",
+      "name": "domprof-a10040",
+      "group": "support",
+      "purpose": "A100 40 GB profiling",
+      "note": "Canceled after stalled eight-worker trial.",
+      "scheduler_state": "CANCELLED by 432600",
+      "elapsed": "16:33:00",
+      "submit": "2026-10-08T18:32:47",
+      "accounting": {
+        "JobIDRaw": "16844384",
+        "JobName": "domprof-a100",
+        "State": "CANCELLED by 432600",
+        "Submit": "2026-10-08T18:32:47",
+        "Start": "2026-10-08T18:34:39",
+        "Elapsed": "16:33:00",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16844385",
+      "name": "domprof-a10080",
+      "group": "support",
+      "purpose": "A100 80 GB profiling",
+      "note": "Verified profile saved despite scheduler OOM in worker candidates.",
+      "scheduler_state": "OUT_OF_MEMORY",
+      "elapsed": "04:38:53",
+      "submit": "2026-10-08T18:32:47",
+      "accounting": {
+        "JobIDRaw": "16844385",
+        "JobName": "domprof-a100",
+        "State": "OUT_OF_MEMORY",
+        "Submit": "2026-10-08T18:32:47",
+        "Start": "2026-10-08T18:34:39",
+        "Elapsed": "04:38:53",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16844386",
+      "name": "domprof-h100",
+      "group": "support",
+      "purpose": "H100 profiling",
+      "note": "Verified profile saved despite scheduler OOM in worker candidates.",
+      "scheduler_state": "OUT_OF_MEMORY",
+      "elapsed": "03:56:20",
+      "submit": "2026-10-08T18:32:47",
+      "accounting": {
+        "JobIDRaw": "16844386",
+        "JobName": "domprof-h100",
+        "State": "OUT_OF_MEMORY",
+        "Submit": "2026-10-08T18:32:47",
+        "Start": "2026-10-08T18:47:05",
+        "Elapsed": "03:56:20",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16844387",
+      "name": "domprof-h200",
+      "group": "support",
+      "purpose": "H200 profiling",
+      "note": "Canceled after stalled eight-worker trial.",
+      "scheduler_state": "CANCELLED by 432600",
+      "elapsed": "16:33:00",
+      "submit": "2026-10-08T18:32:47",
+      "accounting": {
+        "JobIDRaw": "16844387",
+        "JobName": "domprof-h200",
+        "State": "CANCELLED by 432600",
+        "Submit": "2026-10-08T18:32:47",
+        "Start": "2026-10-08T18:34:39",
+        "Elapsed": "16:33:00",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:h200=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16865161",
+      "name": "domprof-a100-resume",
+      "group": "support",
+      "purpose": "A100 40 GB bounded profile recovery",
+      "note": "Separate from eight-GPU production.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "01:20:36",
+      "submit": "2026-10-09T11:10:13",
+      "accounting": {
+        "JobIDRaw": "16865161",
+        "JobName": "domprof-a100-resume",
+        "State": "COMPLETED",
+        "Submit": "2026-10-09T11:10:13",
+        "Start": "2026-10-09T16:21:36",
+        "Elapsed": "01:20:36",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:a100=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+      },
+      "reason_or_node": "node2111",
+      "slurm_details": "JobId=16865161 JobName=domprof-a100-resume UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=619612 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:43:58 TimeLimit=04:00:00 TimeMin=N/A SubmitTime=2026-10-09T11:10:13 EligibleTime=2026-10-09T11:10:13 AccrueTime=2026-10-09T11:10:13 StartTime=2026-10-09T16:21:36 EndTime=2026-10-09T20:21:36 Deadline=N/A PreemptEligibleTime=2026-10-09T16:21:36 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-09T16:21:36 Scheduler=Backfill Partition=work1 AllocNode:Sid=vm-slurm-p-login01:3366682 ReqNodeList=(null) ExcNodeList=(null) NodeList=node2111 BatchHost=node2111 StepMgrEnabled=Yes NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=64G,node=1,billing=26,gres/gpu=1,gres/gpu:a100=1 AllocTRES=cpu=8,mem=64G,node=1,billing=26,gres/gpu=1,gres/gpu:a100=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=64G MinTmpDiskNode=0 Features=gpu_a100_40gb&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=(null) SubmitLine=sbatch --parsable --account=cuuser_yue6_vae_verification --constraint=gpu_a100_40gb --job-name=domprof-a100-resume --gpus=a100:1 --cpus-per-task=8 --mem=64G --time=04:00:00 --output=/scratch/aparame/Dynamic_VLA/dom100-h20-r2/recovery/20261009/profile-a100-%j.out --wrap=bash -lc 'set -e; source scripts/dom100_env.sh; python /scratch/aparame/Dynamic_VLA/dom100-h20-r2/recovery/20261009/finish-profiles.py --previous 16844384' WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008 StdErr= StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/dom100-h20-r2/recovery/20261009/profile-a100-16865161.out TresPerJob=gres/gpu:a100:1 TresPerTask=cpu=8",
+      "stdout": "/scratch/aparame/Dynamic_VLA/dom100-h20-r2/recovery/20261009/profile-a100-16865161.out",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16865162",
+      "name": "domprof-h200-resume",
+      "group": "support",
+      "purpose": "H200 bounded profile recovery",
+      "note": "Separate from eight-GPU production.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "01:04:05",
+      "submit": "2026-10-09T11:10:13",
+      "accounting": {
+        "JobIDRaw": "16865162",
+        "JobName": "domprof-h200-resume",
+        "State": "COMPLETED",
+        "Submit": "2026-10-09T11:10:13",
+        "Start": "2026-10-09T11:11:22",
+        "Elapsed": "01:04:05",
+        "ReqTRES": "billing=26,cpu=8,gres/gpu:h200=1,gres/gpu=1,mem=64G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-h20-r2-20261008"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "16794853",
+      "name": "dom-mild-validate",
+      "group": "support",
+      "purpose": "Expert replay and recording checks for separate validation collection",
+      "note": "30 smoke episodes; 7 successes. Full production collection not verified.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "00:07:09",
+      "submit": "2026-10-07T18:40:36",
+      "accounting": {
+        "JobIDRaw": "16794853",
+        "JobName": "dom-mild-validate",
+        "State": "COMPLETED",
+        "Submit": "2026-10-07T18:40:36",
+        "Start": "2026-10-07T21:56:32",
+        "Elapsed": "00:07:09",
+        "ReqTRES": "billing=46,cpu=24,gres/gpu:l40s=1,gres/gpu=1,mem=80G,node=1",
+        "WorkDir": "/home/aparame/Research/Dynamic_VLA"
+      }
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3347563",
+      "name": "DOM GH200 profiling",
+      "group": "support",
+      "purpose": "Reuse prepared Palmetto DOM data and profile GH200",
+      "note": "Separate DeltaAI setup; status to refresh.",
+      "scheduler_state": "CANCELLED by 98304",
+      "elapsed": "00:39:04",
+      "accounting": {
+        "JobIDRaw": "3347563",
+        "JobName": "domprof-gh200",
+        "State": "CANCELLED by 98304",
+        "Elapsed": "00:39:04",
+        "ReqTRES": "billing=1000,cpu=8,gres/gpu=1,mem=64G,node=1"
+      }
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3347735",
+      "name": "domprof-gh200-r2",
+      "group": "support",
+      "purpose": "GH200 profile recovery using the prepared DOM subset",
+      "scheduler_state": "CANCELLED by 98304",
+      "note": "Current separate DeltaAI profile; no production launch from this register.",
+      "elapsed": "02:54:34",
+      "accounting": {
+        "JobIDRaw": "3347735",
+        "JobName": "domprof-gh200-r2",
+        "State": "CANCELLED by 98304",
+        "Elapsed": "02:54:34",
+        "ReqTRES": "billing=1000,cpu=8,gres/gpu=1,mem=96G,node=1"
+      }
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3349092",
+      "name": "domv-runtime-4gh200",
+      "group": "support",
+      "world_size": 4,
+      "gpu": "GH200",
+      "purpose": "Bounded four-GPU DOM+velocity readiness",
+      "note": "Failed after 39 seconds because system torchrun used the wrong Python and could not import lerobot. Launcher fixed to activated python -m torch.distributed.run; replaced by 3350039.",
+      "scheduler_state": "FAILED",
+      "elapsed": "00:00:39",
+      "accounting": {
+        "JobIDRaw": "3349092",
+        "JobName": "domv-runtime-4gh200",
+        "State": "FAILED",
+        "Elapsed": "00:00:39",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      }
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3350039",
+      "name": "domv-runtime-4gh200",
+      "group": "support",
+      "world_size": 4,
+      "gpu": "GH200",
+      "purpose": "Bounded four-GPU DOM+velocity readiness",
+      "note": "Failed after 40m13s; both candidates exceeded 20-minute limits during loader startup. Separate source/family now drops unused raw episode statistics and adds stage/stack diagnostics.",
+      "scheduler_state": "FAILED",
+      "elapsed": "00:40:13",
+      "accounting": {
+        "JobIDRaw": "3350039",
+        "JobName": "domv-runtime-4gh200",
+        "State": "FAILED",
+        "Elapsed": "00:40:13",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      }
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3354039",
+      "name": "domv-runtime-4gh200",
+      "group": "support",
+      "world_size": 4,
+      "gpu": "GH200",
+      "purpose": "Bounded four-GPU DOM+velocity readiness",
+      "note": "FAILED after 40m15s. Both candidates completed two smoke updates (355 samples) and wrote checkpoint files; repeated traces locate a stall in post-reload GPU memory synchronization. Production not submitted.",
+      "scheduler_state": "FAILED",
+      "elapsed": "00:40:15",
+      "accounting": {
+        "JobIDRaw": "3354039",
+        "JobName": "domv-runtime-4gh200",
+        "State": "FAILED",
+        "Elapsed": "00:40:15",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      },
+      "readiness_progress": {
+        "samples": 355,
+        "optimizer_updates": 2,
+        "production_epochs": 0,
+        "checkpoint_verified": false
+      },
+      "readiness_stage": "Failed: both worker configurations timed out at checkpoint write after two smoke optimizer updates and 355 samples each.",
+      "stop_reason": "Both candidates exceeded their 20-minute limits at checkpoint write; repeated stack traces point to distributed_smoke line 299. Underlying stall cause unverified.",
+      "failure_evidence": {
+        "logs": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-lean-ddp-20261010/logs/",
+        "node": "gh112",
+        "exit_code": "1:0",
+        "elapsed": "00:40:15",
+        "workflow_stage": "failed",
+        "workflow_error": "RuntimeError: Four-GPU profiling failed; inspect its logs"
+      }
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3360244",
+      "name": "domv-runtime-4gh200",
+      "group": "support",
+      "world_size": 4,
+      "gpu": "GH200",
+      "purpose": "Bounded four-GPU DOM+velocity readiness",
+      "note": "Stopped idle check after 6m57s. All ranks completed two updates and loaded checkpoints; only rank 0 confirmed prediction/RNG checks. CPU telemetry reduction waited for peers. Replaced with paired Palmetto BatchNorm checkpoint canonicalization and coordinated verification.",
+      "scheduler_state": "CANCELLED by 98304",
+      "elapsed": "00:06:57",
+      "accounting": {
+        "JobIDRaw": "3360244",
+        "JobName": "domv-runtime-4gh200",
+        "State": "CANCELLED by 98304",
+        "Elapsed": "00:06:57",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "job_id": "17017544",
+      "name": "krv100",
+      "method": "KRVLA Coordinate + velocity",
+      "group": "historical",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "gpu": "H100 or H200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011/runs/krv100",
+      "source_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+      "source_sha256": "8f6cd758f2686990fd8c8af37e98ecaa4c0e10bd011ce9fa6e08b0736462a8d9",
+      "recipe_fingerprint": "1cacc9867ca73d0a51fae94ee11c0c536ba91b5fdd8c19e8f28f49130a55d7ae",
+      "manifest_fingerprint": "6b8d35f5df86c990c72cdeedc99d5fa9d190a8a7c903547224324f9fa0242a80",
+      "scheduler_state": "CANCELLED by 432600",
+      "reason_or_node": "(Priority)",
+      "submit": "2026-10-11T12:15:23",
+      "elapsed": "00:00:00",
+      "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/dom100-ddp-17017544.out",
+      "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/dom100-ddp-17017544.err",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+      "runtime": {
+        "microbatch": 44,
+        "workers": 1,
+        "prefetch": 2,
+        "pin_memory": true,
+        "fused": true,
+        "precision": "bf16"
+      },
+      "training_started": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "production_checkpoint_present": false,
+      "replaces": "16869869",
+      "local_regression_tests": {
+        "passed": 17,
+        "suite": "tests/test_dom_ddp.py",
+        "includes": "Rank-local BatchNorm checkpoint/reload, RNG, error propagation, 4/8-rank gradients, interrupted resume and early stopping"
+      },
+      "note": "Cancelled before training to apply user-approved six-episode exclusion; replaced by clean-data allocation alternatives.",
+      "accounting": {
+        "JobIDRaw": "17017544",
+        "JobName": "krv100",
+        "State": "CANCELLED by 432600",
+        "Submit": "2026-10-11T12:15:23",
+        "Start": "None",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011"
+      },
+      "slurm_details": "JobId=17017544 JobName=krv100 UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=620679 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-11T12:15:23 EligibleTime=2026-10-11T12:15:23 AccrueTime=2026-10-11T12:15:23 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-12T12:18:19 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login03:4043434 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1-1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=512G,node=1,billing=176,gres/gpu=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=512G MinTmpDiskNode=0 Features=gpu_h100|gpu_h200&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/dom100_distributed.sbatch SubmitLine=sbatch --parsable --chdir /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011 --job-name=krv100 --export=ALL,DOM100_VARIANT=krv100 --gpus=8 /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/dom100_distributed.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011 StdErr=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/dom100-ddp-17017544.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/dom100-ddp-17017544.out TresPerJob=gres/gpu:8 TresPerTask=cpu=32",
+      "superseded": true
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3360358",
+      "name": "domv-runtime-4gh200",
+      "group": "support",
+      "world_size": 4,
+      "gpu": "GH200",
+      "purpose": "Bounded four-GPU DOM+velocity readiness",
+      "note": "15 minutes per candidate; 20 minutes total; full-data, checkpoint and RNG verification required. Single-GPU measurements preserved.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "00:13:24",
+      "accounting": {
+        "JobIDRaw": "3360358",
+        "JobName": "domv-runtime-4gh200",
+        "State": "COMPLETED",
+        "Elapsed": "00:13:24",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      },
+      "reason_or_node": "gh099",
+      "readiness_progress": {
+        "samples": 355,
+        "optimizer_updates": 2,
+        "production_epochs": 0,
+        "checkpoint_verified": true,
+        "rank_rng_verified": true,
+        "canonical_checkpoint_buffers": true,
+        "memory_headroom_verified": true
+      },
+      "readiness_stage": "COMPLETED; approved full-data runtime selected and production 3360409 submitted. Last verified 2026-10-11 12:51 PM EDT.",
+      "readiness_profile": {
+        "path": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/distributed-profiles/34e8cb05033af734.json",
+        "fingerprint": "e0ba9afdd8faaca65cf937b2dc80699ae957ceec8ed7ecd415e9baeffc4d945b",
+        "peak_gpu_bytes_this_rank": 44449136640,
+        "sum_gpu_peak_bytes": 177825906688,
+        "sum_ram_bytes": 30566842368,
+        "smoke_loss": 0.06982243666425347,
+        "smoke_samples_per_second": 21.712691116583386,
+        "smoke_data_wait_s": 14.219413485145196,
+        "smoke_update_latency_s": 16.211716830031946,
+        "scope": "Startup smoke measurement; production throughput and validation MSE not yet available."
+      },
+      "readiness_verified_at": "2026-10-11T16:33:41+00:00",
+      "full_data_profile": {
+        "path": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-bnfix-ddp-20261011/distributed-profiles/34e8cb05033af734.json",
+        "fingerprint": "48c98f8907efbe8a26224a27bf3bf36d3bb64d730641cd40d18ef792e6a4f7f1",
+        "samples_per_second": 158.5646826679088,
+        "epoch_hours_excluding_validation_and_io": 39.19042974134632,
+        "world_size": 4,
+        "source": "Persisted selected runtime from last successful cluster check."
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "method": "KRVLA Coordinate + velocity",
+      "group": "historical",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011/runs/krv100",
+      "source_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+      "source_sha256": "8f6cd758f2686990fd8c8af37e98ecaa4c0e10bd011ce9fa6e08b0736462a8d9",
+      "recipe_fingerprint": "1cacc9867ca73d0a51fae94ee11c0c536ba91b5fdd8c19e8f28f49130a55d7ae",
+      "manifest_fingerprint": "6b8d35f5df86c990c72cdeedc99d5fa9d190a8a7c903547224324f9fa0242a80",
+      "runtime": {
+        "microbatch": 22,
+        "workers": 1,
+        "prefetch": 2,
+        "pin_memory": true,
+        "fused": true,
+        "precision": "bf16"
+      },
+      "job_id": "17091380",
+      "name": "krv100-a8",
+      "variant": "krv100",
+      "wandb_name": "krv100",
+      "gpu": "A100 40 GB",
+      "scheduler_state": "CANCELLED by 432600",
+      "reason_or_node": "(Priority)",
+      "elapsed": "00:00:00",
+      "submit": "2026-10-12T10:10:33",
+      "alternate_of": "17017544",
+      "allocation_candidate": true,
+      "progress_scope": "Shared krv100 checkpoint; scheduler status is allocation-specific.",
+      "training_started": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "production_checkpoint_present": false,
+      "launcher": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/krv100_a100_8gpu.sbatch",
+      "launcher_sha256": "a9b39de5f23fe2f0882e67bba98369132bac739b29382e8d740fbca7ff6e4afe",
+      "guard_sha256": "14ef6f2b9f8d6e1ee0d6a3be932abcb6fdf9d3c2580c9958a7c93a3c99f97869",
+      "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-a8-17091380.out",
+      "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-a8-17091380.err",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+      "note": "Cancelled before training to apply user-approved six-episode exclusion; replaced by clean-data allocation alternatives.",
+      "accounting": {
+        "JobIDRaw": "17091380",
+        "JobName": "krv100-a8",
+        "State": "CANCELLED by 432600",
+        "Submit": "2026-10-12T10:10:33",
+        "Start": "None",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu:a100=8,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011"
+      },
+      "slurm_details": "JobId=17091380 JobName=krv100-a8 UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=620614 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-12T10:10:33 EligibleTime=2026-10-12T10:10:33 AccrueTime=2026-10-12T10:10:33 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-12T12:18:19 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login02:945114 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1-1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=512G,node=1,billing=176,gres/gpu=8,gres/gpu:a100=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=512G MinTmpDiskNode=0 Features=gpu_a100_40gb&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/krv100_a100_8gpu.sbatch SubmitLine=sbatch --parsable --account=cuuser_yue6_vae_verification --chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011 --export=ALL /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/krv100_a100_8gpu.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011 StdErr=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-a8-17091380.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-a8-17091380.out TresPerJob=gres/gpu:a100:8 TresPerTask=cpu=32",
+      "superseded": true
+    },
+    {
+      "cluster": "Palmetto",
+      "method": "KRVLA Coordinate + velocity",
+      "group": "historical",
+      "purpose": "DOM manipulation training",
+      "world_size": 8,
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-bnfix-20261011/runs/krv100",
+      "source_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+      "source_sha256": "8f6cd758f2686990fd8c8af37e98ecaa4c0e10bd011ce9fa6e08b0736462a8d9",
+      "recipe_fingerprint": "1cacc9867ca73d0a51fae94ee11c0c536ba91b5fdd8c19e8f28f49130a55d7ae",
+      "manifest_fingerprint": "6b8d35f5df86c990c72cdeedc99d5fa9d190a8a7c903547224324f9fa0242a80",
+      "runtime": {
+        "microbatch": 44,
+        "workers": 1,
+        "prefetch": 2,
+        "pin_memory": true,
+        "fused": true,
+        "precision": "bf16"
+      },
+      "job_id": "17091381",
+      "name": "krv100-h2x8",
+      "variant": "krv100",
+      "wandb_name": "krv100",
+      "gpu": "H200",
+      "scheduler_state": "CANCELLED by 432600",
+      "reason_or_node": "(Priority)",
+      "elapsed": "00:00:00",
+      "submit": "2026-10-12T10:10:34",
+      "alternate_of": "17017544",
+      "allocation_candidate": true,
+      "progress_scope": "Shared krv100 checkpoint; scheduler status is allocation-specific.",
+      "training_started": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "production_checkpoint_present": false,
+      "launcher": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/krv100_h200_8gpu.sbatch",
+      "launcher_sha256": "90968b0b6d177655ac1b9b5c8a6dbb5501dc76b3fc69cd231ee4f368936831cb",
+      "guard_sha256": "14ef6f2b9f8d6e1ee0d6a3be932abcb6fdf9d3c2580c9958a7c93a3c99f97869",
+      "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-h2x8-17091381.out",
+      "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-h2x8-17091381.err",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011",
+      "note": "Cancelled before training to apply user-approved six-episode exclusion; replaced by clean-data allocation alternatives.",
+      "accounting": {
+        "JobIDRaw": "17091381",
+        "JobName": "krv100-h2x8",
+        "State": "CANCELLED by 432600",
+        "Submit": "2026-10-12T10:10:34",
+        "Start": "None",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu:h200=8,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011"
+      },
+      "slurm_details": "JobId=17091381 JobName=krv100-h2x8 UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=620614 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-12T10:10:34 EligibleTime=2026-10-12T10:10:34 AccrueTime=2026-10-12T10:10:34 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-12T12:18:19 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login02:945114 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1-1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=512G,node=1,billing=176,gres/gpu=8,gres/gpu:h200=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=512G MinTmpDiskNode=0 Features=gpu_h200&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/krv100_h200_8gpu.sbatch SubmitLine=sbatch --parsable --account=cuuser_yue6_vae_verification --chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011 --export=ALL /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/slurm/krv100_h200_8gpu.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011 StdErr=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-h2x8-17091381.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-bnfix-20261011/krv100-h2x8-17091381.out TresPerJob=gres/gpu:h200:8 TresPerTask=cpu=32",
+      "superseded": true
+    },
+    {
+      "cluster": "Local workstation",
+      "job_id": null,
+      "name": "krv100-local",
+      "wandb_name": "krv100",
+      "method": "KRVLA Coordinate + velocity",
+      "group": "production",
+      "variant": "krv100",
+      "world_size": 2,
+      "gpu": "RTX A6000 (user reported)",
+      "gpu_evidence": "User reports RTX A6000 workstation; W&B config verifies world_size=2 but metadata omits GPU model/count.",
+      "scheduler_state": "Not applicable",
+      "wandb_id": "2qh0ijb1",
+      "wandb_entity": "aparame-clemson-university",
+      "wandb_project": "Kinematic-Residual-VLA",
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/2qh0ijb1",
+      "wandb_state": "running",
+      "wandb_config": {
+        "recipe": {
+          "lr": 3e-05,
+          "seed": 42,
+          "epochs": 100,
+          "manifest": "8198f7c9569f0330ab05fc7b22c89b34fb55192e87836ea34a7112aca3fcc7e2",
+          "sampling": "frames",
+          "precision": "bf16",
+          "selection": "Existing DOM100 fixed-rate recipe; capacity is measured on this workstation",
+          "fingerprint": "3237dd89247dcd91abbe87aa8cbbd87fbdcc0174c5ae2123713ae1cac5adda93",
+          "early_stopping": {
+            "metric": "h20/action_mse",
+            "enabled": true,
+            "patience": 3,
+            "min_epochs": 5,
+            "relative_min_delta": 0.005
+          },
+          "effective_batch": 352,
+          "evaluation_plan_sha256": "46b42111444c944a682d0ec64ed6eb8ac50eba6f754704dcaed7b024e733beb7",
+          "simulator_evaluation_mode": "after_training"
+        },
+        "runtime": {
+          "fused": true,
+          "workers": 8,
+          "prefetch": 2,
+          "precision": "bf16",
+          "microbatch": 32,
+          "pin_memory": true
+        },
+        "variant": "krv100",
+        "manifest": {
+          "fps": 25,
+          "counts": {
+            "test": 2070,
+            "train": 203151,
+            "validation": 2076
+          },
+          "frames": 23551233,
+          "dataset": "hzxie/DOM",
+          "version": 1,
+          "coverage": {
+            "frame_fraction": 0.9999582204936376,
+            "excluded_frames": 984,
+            "retained_frames": 23551233,
+            "episode_fraction": 0.9999565859164712,
+            "published_frames": 23552217,
+            "excluded_episodes": 9,
+            "retained_episodes": 207297,
+            "published_episodes": 207306,
+            "invalid_video_files": 9,
+            "task_speed_coverage": {
+              "[\"pick\", 1]": {
+                "excluded": 0,
+                "retained": 950
+              },
+              "[\"pick\", 2]": {
+                "excluded": 0,
+                "retained": 32036
+              },
+              "[\"pick\", 3]": {
+                "excluded": 0,
+                "retained": 31692
+              },
+              "[\"pick\", 4]": {
+                "excluded": 0,
+                "retained": 3796
+              },
+              "[\"place\", 0]": {
+                "excluded": 0,
+                "retained": 85
+              },
+              "[\"place\", 1]": {
+                "excluded": 0,
+                "retained": 1451
+              },
+              "[\"place\", 2]": {
+                "excluded": 5,
+                "retained": 47249
+              },
+              "[\"place\", 3]": {
+                "excluded": 4,
+                "retained": 75897
+              },
+              "[\"place\", 4]": {
+                "excluded": 0,
+                "retained": 8260
+              },
+              "[\"long_horizon\", 0]": {
+                "excluded": 0,
+                "retained": 88
+              },
+              "[\"long_horizon\", 1]": {
+                "excluded": 0,
+                "retained": 1236
+              },
+              "[\"long_horizon\", 2]": {
+                "excluded": 0,
+                "retained": 4428
+              },
+              "[\"long_horizon\", 3]": {
+                "excluded": 0,
+                "retained": 129
+              }
+            },
+            "missing_or_empty_files": 0
+          },
+          "episodes": 207297,
+          "artifacts": {
+            "episodes.json": "55c3b859ed023aee4664262c823259ad228c8a906d6d9d3ef93d9f4b3baa89dc",
+            "test_cases.json": "116ac9b8d002d68bae3b4bfeefab816a10eddd19365e0f8b708fd76cfb50048d",
+            "phase_hashes.json": "855d569afee78ea9e1ebe92ccc1f799884562c00a19c3e27196ba8f07afe9f86",
+            "video_hashes.json": "09d1296687da05840b9fce86897788b8a8659b3406cae589b922bee017190ad2",
+            "parquet_hashes.json": "95dd6626527b097eefaebeb81a080427a57312d18a15ac7290b4d1e40d526a29",
+            "pilot_episodes.json": "0303ed4f065a5866876c63c8071dc62eb1b1c8ddd6c34528cf692512fb55dda3",
+            "dataset_coverage.json": "f127ddc85bc2964a856a1148293ae6c2a0636fcfb7ce318305bd486b1e4a22a9",
+            "validation_cases.json": "10f7682e51924b0f096db3d9ab367db33999e2e09b29a0d2e32f9108b6951284",
+            "dataset_selection.json": "57c71cedb1b575ed59be83d8e4137e28c5e17143dd8f26e2fb75da8316d3b0d7",
+            "validation_anchors.json": "c738ba90a3b08bf8b5992bb33ec855603e6fca6245818a06c7606031222c997f",
+            "approved_exclusions.json": "9b9a2465102bef171dd498618f0b81d302983c8a6406a28be7a1888585bd07ae",
+            "revision_provenance.json": "19afe1c6e74422b286bee05b0112e104b2f4c3cae26b1f8f530d61a5762cde54",
+            "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c"
+          },
+          "fingerprint": "8198f7c9569f0330ab05fc7b22c89b34fb55192e87836ea34a7112aca3fcc7e2",
+          "dataset_root": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/scratch/dom45/cache/huggingface/lerobot/hzxie/DOM",
+          "phase_config": {
+            "fade_s": 0.2,
+            "lift_m": 0.02,
+            "history_s": 0.2,
+            "loss_speed_m_s": 0.1,
+            "loss_duration_s": 0.12,
+            "loss_position_m": 0.03,
+            "close_duration_s": 0.2,
+            "relative_speed_m_s": 0.05,
+            "relative_position_m": 0.01
+          },
+          "split_sha256": "6316f1921ae37522421eac8e9f6c7cfdd8ece6c5f24cc00b361b7a6bcd659e7f",
+          "train_frames": 23080253,
+          "velocity_std": [
+            0.1241253557855877,
+            0.16916548438426535,
+            0.2042253843988524
+          ],
+          "normalization": "pretrained_state_action",
+          "source_sha256": "620c3c9e3ceed44a118efb0ae5e2f6f7f929ac708946117542ee2d642eed82bc",
+          "velocity_mean": [
+            -0.011169752001007996,
+            -0.003156090513994693,
+            0.010763034157126108
+          ],
+          "initialization": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/scratch/dom45/training/krv100-full-20261010/family/initialization",
+          "model_revision": "c9609d94c5940eb42436a31927d7e80ae454279e",
+          "weights_sha256": "e3da8b1e0326d7a3ee6873f7fa17cdf7015201251901be5107377cb851ce3af8",
+          "parquets_sha256": "88b2ad62cc67e10358894bc24ca309d05b4db8fb1338934162d20bd7f7622685",
+          "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+          "published_frames": 23552217,
+          "execution_horizon": 20,
+          "prediction_horizon": 20,
+          "published_episodes": 207306,
+          "dataset_selection_mode": "full_minus_approved_invalid_episodes"
+        },
+        "world_size": 2
+      },
+      "wandb_summary": {
+        "Train/epoch": 0.05231138497485274,
+        "Train/loss": 0.06764344413849441,
+        "Train/lr": 2.9999989830283037e-05,
+        "Train/optimizer_updates": 3430,
+        "Train/samples": 1207360,
+        "Train/samples_per_second": 60.14196923912314,
+        "Train/update_latency_s": 5.85281799803488,
+        "Train/world_size": 2,
+        "_runtime": 20522.157873493,
+        "_step": 3430,
+        "_timestamp": 1791837945.8497064,
+        "_wandb.runtime": 20522
+      },
+      "wandb_hardware_metadata": {
+        "python": "CPython 3.10.22",
+        "startedAt": "2026-10-12T15:04:41.052586Z",
+        "program": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/workstation/train_krv100.py",
+        "git": {
+          "remote": "git@github.com:adindo428/Kinematic-Residual-VLA.git",
+          "commit": "b192d7a17bde509c69ac20c7a8112f09b39cb64b"
+        },
+        "root": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/scratch/dom45/training/krv100-full-20261010/family/runs/krv100",
+        "host": "ailab-aloha"
+      },
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "metric": "h20/action_mse",
+        "enabled": true,
+        "patience": 3,
+        "min_epochs": 5,
+        "relative_min_delta": 0.005
+      },
+      "runtime": {
+        "fused": true,
+        "workers": 8,
+        "prefetch": 2,
+        "precision": "bf16",
+        "microbatch": 32,
+        "pin_memory": true
+      },
+      "source_sha256": "620c3c9e3ceed44a118efb0ae5e2f6f7f929ac708946117542ee2d642eed82bc",
+      "manifest_fingerprint": "8198f7c9569f0330ab05fc7b22c89b34fb55192e87836ea34a7112aca3fcc7e2",
+      "recipe_fingerprint": "3237dd89247dcd91abbe87aa8cbbd87fbdcc0174c5ae2123713ae1cac5adda93",
+      "split_sha256": "6316f1921ae37522421eac8e9f6c7cfdd8ece6c5f24cc00b361b7a6bcd659e7f",
+      "run_directory": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/scratch/dom45/training/krv100-full-20261010/family/runs/krv100",
+      "family": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/scratch/dom45/training/krv100-full-20261010/family",
+      "host": "ailab-aloha",
+      "program": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/workstation/train_krv100.py",
+      "dataset_episodes": 207297,
+      "train_episodes": 203151,
+      "train_frames": 23080253,
+      "checkpoint_verification": "Not inspected; W&B metrics report logged progress only.",
+      "note": "Separate workstation study: 207,297 retained episodes (nine invalid episodes excluded), 203,151 train episodes and 23,080,253 train frames. Different dataset coverage, split, normalization, source and recipe fingerprints from cluster runs; same pinned initial weights, target LR, global batch and action horizon. Do not treat as a matched hardware-only replica.",
+      "wandb_checked_at": "2026-10-12T20:47:53.073555+00:00"
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3367506",
+      "name": "domv100",
+      "method": "DOM + velocity",
+      "group": "production",
+      "purpose": "DOM manipulation training",
+      "world_size": 4,
+      "gpu": "GH200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-video-clean-ddp-20261012",
+      "run_directory": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-video-clean-ddp-20261012/runs/domv100",
+      "source_sha256": "f991015a229476400e0fc772177af33759d1bc3f23901381e2f83c7faaeab921",
+      "manifest_fingerprint": "bbef5ce50f5b783bd64a741f069b1268484db08f140b461870b5e4431aad5e7c",
+      "recipe_fingerprint": "135a2dc39bcc5f54cd0beaf709024400bd53b0753329ee72af3f8cd8e82e79a0",
+      "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+      "training_started": false,
+      "production_checkpoint_present": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "note": "Profiling adaptation stage: production_submitted. Old job 3348823 cancelled. Fresh production submission has no Slurm dependency. Bounded readiness: 15 minutes per attempt, 20 minutes total; stop after first safe configuration.",
+      "workflow_status": {
+        "candidate_files": [
+          "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-video-clean-ddp-20261012/runtime-candidates/e82b2d03f5b28d43.json"
+        ],
+        "change": "User-approved identical six-episode exclusion on DeltaAI/Palmetto, coordinated loader failure reporting, checkpoints every 25 updates through warmup",
+        "dependency": null,
+        "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-video-clean-ddp-20261012",
+        "old_training_cancelled": true,
+        "old_training_job": "3348823",
+        "previous_training_failure": "Empty MP4 for episode 195603; 80 updates logged but only initialization checkpoint persisted",
+        "previous_training_job": "3360409",
+        "previous_wandb_id": "xf5q6j0h",
+        "production_submitted": true,
+        "profile_job": "3367150",
+        "profiler_job": "3347735",
+        "readiness_candidate_limit_minutes": 15,
+        "readiness_total_limit_minutes": 20,
+        "recipe_fingerprint": "135a2dc39bcc5f54cd0beaf709024400bd53b0753329ee72af3f8cd8e82e79a0",
+        "selected_runtime": {
+          "distributed_profile_fingerprint": "6aef10af0a2149019fd6afe226b92a967d7977fb2310d8e12d21dded2d9afa97",
+          "fingerprint": "7dab799b2f1273e0c751088b7e84398d9a41068556caf3bf1710e06b309226f0",
+          "global_effective_batch": 352,
+          "manifest": "bbef5ce50f5b783bd64a741f069b1268484db08f140b461870b5e4431aad5e7c",
+          "runtime": {
+            "fused": false,
+            "microbatch": 44,
+            "pin_memory": false,
+            "precision": "bf16",
+            "prefetch": 2,
+            "sampling": "frames",
+            "workers": 2
+          },
+          "samples_per_second": 156.42373173501267,
+          "single_gpu_profile_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+          "training_epoch_hours_excluding_validation_and_io": 39.7256483894238,
+          "world_size": 4
+        },
+        "single_gpu_sweep_stopped": true,
+        "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261012-video-clean/dom100",
+        "stage": "production_submitted",
+        "stop_after_first_safe": true,
+        "training_job": "3367506",
+        "updated_utc": "2026-10-12T17:32:35Z"
+      },
+      "workflow_status_file": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-video-clean-domv-20261012/status.json",
+      "dependency": null,
+      "scheduler_state": "PENDING",
+      "selected_runtime": {
+        "distributed_profile_fingerprint": "6aef10af0a2149019fd6afe226b92a967d7977fb2310d8e12d21dded2d9afa97",
+        "fingerprint": "7dab799b2f1273e0c751088b7e84398d9a41068556caf3bf1710e06b309226f0",
+        "global_effective_batch": 352,
+        "manifest": "bbef5ce50f5b783bd64a741f069b1268484db08f140b461870b5e4431aad5e7c",
+        "runtime": {
+          "fused": false,
+          "microbatch": 44,
+          "pin_memory": false,
+          "precision": "bf16",
+          "prefetch": 2,
+          "sampling": "frames",
+          "workers": 2
+        },
+        "samples_per_second": 156.42373173501267,
+        "single_gpu_profile_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+        "training_epoch_hours_excluding_validation_and_io": 39.7256483894238,
+        "world_size": 4
+      },
+      "stdout": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-video-clean-ddp-20261012/logs/train-3367506.out",
+      "stderr": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-video-clean-ddp-20261012/logs/train-3367506.err",
+      "elapsed": "00:00:00",
+      "accounting": {
+        "JobIDRaw": "3367506",
+        "JobName": "domv-profiled-gh200",
+        "State": "PENDING",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      }
+    },
+    {
+      "cluster": "Palmetto",
+      "name": "krv100",
+      "method": "KRVLA Coordinate + velocity",
+      "world_size": 8,
+      "gpu": "H100 or H200",
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "runtime": {
+        "microbatch": 44,
+        "workers": 1,
+        "prefetch": 2,
+        "pin_memory": true,
+        "fused": true,
+        "precision": "bf16"
+      },
+      "job_id": "17099227",
+      "group": "production",
+      "superseded": false,
+      "purpose": "DOM manipulation training",
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012/runs/krv100",
+      "source_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+      "source_sha256": "182dd497885658c5a355d2ffb29763845d362f1dc1f455507de3b8f717dbc2bb",
+      "recipe_fingerprint": "5fa38b00d845fd5e0db37508aa934b24c23cd224b681cd7fbcd6c833f4423887",
+      "manifest_fingerprint": "3560fbea6fb95fa384dea15b18571b6f381af4d636699e45e98ec7d6f6ccc17f",
+      "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+      "scheduler_state": "PENDING",
+      "replaces": "17017544",
+      "training_started": false,
+      "production_checkpoint_present": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "note": "User-approved identical six-episode exclusion, coordinated loader failure propagation, checkpoints every 25 updates during first 1000 updates. Same scientific recipe and fixed validation/test. Allocation alternatives share one locked krv100 output.",
+      "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/dom100-ddp-17099227.out",
+      "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/dom100-ddp-17099227.err",
+      "elapsed": "00:00:00",
+      "submit": "2026-10-12T12:28:29",
+      "accounting": {
+        "JobIDRaw": "17099227",
+        "JobName": "krv100",
+        "State": "PENDING",
+        "Submit": "2026-10-12T12:28:29",
+        "Start": "Unknown",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012"
+      },
+      "reason_or_node": "(Priority)",
+      "slurm_details": "JobId=17099227 JobName=krv100 UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=620623 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-12T12:28:29 EligibleTime=2026-10-12T12:28:29 AccrueTime=2026-10-12T12:28:29 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-12T16:46:52 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login02:1190722 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=512G,node=1,billing=176,gres/gpu=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=512G MinTmpDiskNode=0 Features=gpu_h100|gpu_h200&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/dom100_distributed.sbatch SubmitLine=sbatch --parsable --account=cuuser_yue6_vae_verification --partition=work1 --chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012 --job-name=krv100 --export=ALL,DVLA_PROJECT_DIR=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012,DOM100_ROOT=/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012,DOM100_VARIANT=krv100 --gpus=8 /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/dom100_distributed.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012 StdErr=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/dom100-ddp-17099227.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/dom100-ddp-17099227.out TresPerJob=gres/gpu:8 TresPerTask=cpu=32"
+    },
+    {
+      "cluster": "Palmetto",
+      "method": "KRVLA Coordinate + velocity",
+      "world_size": 8,
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "runtime": {
+        "microbatch": 22,
+        "workers": 1,
+        "prefetch": 2,
+        "pin_memory": true,
+        "fused": true,
+        "precision": "bf16"
+      },
+      "name": "krv100-a8",
+      "variant": "krv100",
+      "wandb_name": "krv100",
+      "gpu": "A100 40 GB",
+      "allocation_candidate": true,
+      "progress_scope": "Shared krv100 checkpoint; scheduler status is allocation-specific.",
+      "job_id": "17099228",
+      "group": "production",
+      "superseded": false,
+      "purpose": "DOM manipulation training",
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012/runs/krv100",
+      "source_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+      "source_sha256": "182dd497885658c5a355d2ffb29763845d362f1dc1f455507de3b8f717dbc2bb",
+      "recipe_fingerprint": "5fa38b00d845fd5e0db37508aa934b24c23cd224b681cd7fbcd6c833f4423887",
+      "manifest_fingerprint": "3560fbea6fb95fa384dea15b18571b6f381af4d636699e45e98ec7d6f6ccc17f",
+      "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+      "scheduler_state": "PENDING",
+      "replaces": "17091380",
+      "training_started": false,
+      "production_checkpoint_present": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "note": "User-approved identical six-episode exclusion, coordinated loader failure propagation, checkpoints every 25 updates during first 1000 updates. Same scientific recipe and fixed validation/test. Allocation alternatives share one locked krv100 output.",
+      "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-a8-17099228.out",
+      "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-a8-17099228.err",
+      "alternate_of": "17099227",
+      "elapsed": "00:00:00",
+      "submit": "2026-10-12T12:28:29",
+      "accounting": {
+        "JobIDRaw": "17099228",
+        "JobName": "krv100-a8",
+        "State": "PENDING",
+        "Submit": "2026-10-12T12:28:29",
+        "Start": "Unknown",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu:a100=8,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012"
+      },
+      "reason_or_node": "(Priority)",
+      "slurm_details": "JobId=17099228 JobName=krv100-a8 UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=620623 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-12T12:28:29 EligibleTime=2026-10-12T12:28:29 AccrueTime=2026-10-12T12:28:29 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-12T16:46:52 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login02:1190722 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=512G,node=1,billing=176,gres/gpu=8,gres/gpu:a100=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=512G MinTmpDiskNode=0 Features=gpu_a100_40gb&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/krv100_a100_8gpu.sbatch SubmitLine=sbatch --parsable --account=cuuser_yue6_vae_verification --partition=work1 --chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012 --job-name=krv100-a8 --export=ALL,DVLA_PROJECT_DIR=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012,DOM100_ROOT=/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012,DOM100_VARIANT=krv100 /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/krv100_a100_8gpu.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012 StdErr=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-a8-17099228.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-a8-17099228.out TresPerJob=gres/gpu:a100:8 TresPerTask=cpu=32"
+    },
+    {
+      "cluster": "Palmetto",
+      "method": "KRVLA Coordinate + velocity",
+      "world_size": 8,
+      "lr": 3e-05,
+      "target_epochs": 100,
+      "early_stopping": {
+        "enabled": true,
+        "metric": "h20/action_mse",
+        "min_epochs": 5,
+        "patience": 3,
+        "relative_min_delta": 0.005
+      },
+      "runtime": {
+        "microbatch": 44,
+        "workers": 1,
+        "prefetch": 2,
+        "pin_memory": true,
+        "fused": true,
+        "precision": "bf16"
+      },
+      "name": "krv100-h2x8",
+      "variant": "krv100",
+      "wandb_name": "krv100",
+      "gpu": "H200",
+      "allocation_candidate": true,
+      "progress_scope": "Shared krv100 checkpoint; scheduler status is allocation-specific.",
+      "job_id": "17099229",
+      "group": "production",
+      "superseded": false,
+      "purpose": "DOM manipulation training",
+      "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012",
+      "run_directory": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012/runs/krv100",
+      "source_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+      "working_directory": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+      "source_sha256": "182dd497885658c5a355d2ffb29763845d362f1dc1f455507de3b8f717dbc2bb",
+      "recipe_fingerprint": "5fa38b00d845fd5e0db37508aa934b24c23cd224b681cd7fbcd6c833f4423887",
+      "manifest_fingerprint": "3560fbea6fb95fa384dea15b18571b6f381af4d636699e45e98ec7d6f6ccc17f",
+      "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+      "scheduler_state": "PENDING",
+      "replaces": "17091381",
+      "training_started": false,
+      "production_checkpoint_present": false,
+      "production_progress": {
+        "epochs": 0,
+        "samples": 0,
+        "optimizer_updates": 0
+      },
+      "note": "User-approved identical six-episode exclusion, coordinated loader failure propagation, checkpoints every 25 updates during first 1000 updates. Same scientific recipe and fixed validation/test. Allocation alternatives share one locked krv100 output.",
+      "stdout": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-h2x8-17099229.out",
+      "stderr": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-h2x8-17099229.err",
+      "alternate_of": "17099227",
+      "elapsed": "00:00:00",
+      "submit": "2026-10-12T12:28:29",
+      "accounting": {
+        "JobIDRaw": "17099229",
+        "JobName": "krv100-h2x8",
+        "State": "PENDING",
+        "Submit": "2026-10-12T12:28:29",
+        "Start": "Unknown",
+        "Elapsed": "00:00:00",
+        "ReqTRES": "billing=176,cpu=32,gres/gpu:h200=8,gres/gpu=8,mem=512G,node=1",
+        "WorkDir": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012"
+      },
+      "reason_or_node": "(Priority)",
+      "slurm_details": "JobId=17099229 JobName=krv100-h2x8 UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=620623 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-12T12:28:29 EligibleTime=2026-10-12T12:28:29 AccrueTime=2026-10-12T12:28:29 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-12T16:46:52 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login02:1190722 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=512G,node=1,billing=176,gres/gpu=8,gres/gpu:h200=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=512G MinTmpDiskNode=0 Features=gpu_h200&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/krv100_h200_8gpu.sbatch SubmitLine=sbatch --parsable --account=cuuser_yue6_vae_verification --partition=work1 --chdir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012 --job-name=krv100-h2x8 --export=ALL,DVLA_PROJECT_DIR=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012,DOM100_ROOT=/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012,DOM100_VARIANT=krv100 /scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/slurm/krv100_h200_8gpu.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012 StdErr=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-h2x8-17099229.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012/krv100-h2x8-17099229.out TresPerJob=gres/gpu:h200:8 TresPerTask=cpu=32"
+    },
+    {
+      "cluster": "DeltaAI",
+      "job_id": "3367150",
+      "name": "domv-runtime-4gh200",
+      "group": "support",
+      "world_size": 4,
+      "gpu": "GH200",
+      "purpose": "Bounded four-GPU DOM+velocity readiness",
+      "note": "15 minutes per candidate; 20 minutes total; full-data, checkpoint and RNG verification required. Single-GPU measurements preserved.",
+      "scheduler_state": "COMPLETED",
+      "elapsed": "00:11:54",
+      "accounting": {
+        "JobIDRaw": "3367150",
+        "JobName": "domv-runtime-4gh200",
+        "State": "COMPLETED",
+        "Elapsed": "00:11:54",
+        "ReqTRES": "billing=4000,cpu=32,gres/gpu=4,mem=384G,node=1"
+      },
+      "readiness_evidence": {
+        "complete": true,
+        "safe": true,
+        "strict_reload": true,
+        "rank_rng_reload": true,
+        "canonical_checkpoint_buffers": true,
+        "future_inputs_ignored": true,
+        "samples_per_second": 156.42373173501267,
+        "measured_updates": 16,
+        "warmup_updates": 2,
+        "smoke_updates": 2,
+        "smoke_samples": 355,
+        "max_gpu_reserved_bytes": 46936358912,
+        "sum_peak_ram_bytes": 60415475712,
+        "report_fingerprint": "6aef10af0a2149019fd6afe226b92a967d7977fb2310d8e12d21dded2d9afa97"
+      }
+    }
+  ],
+  "last_successful_cluster_check": "2026-10-12T20:47:50.709580+00:00",
+  "rendered_at": "2026-10-12T20:47:53.241426+00:00",
+  "last_successful_deltaai_check": "2026-10-12T20:47:51.820550+00:00",
+  "page_id": "page_4ff536c9060081919225467494390460",
+  "page_url": "https://chatgpt.com/space/page_4ff536c9060081919225467494390460",
+  "automation_id": "refresh-krvla-run-register",
+  "refresh_interval": "hourly",
+  "last_successful_wandb_check": "2026-10-12T20:47:53.241379+00:00",
+  "data_correction": {
+    "excluded_episode_ids": [
+      194633,
+      194760,
+      195154,
+      195405,
+      195417,
+      195603
+    ],
+    "train_episodes": 197201,
+    "train_frames": 22370523,
+    "retained_episodes": 201227,
+    "retained_frames": 22828297,
+    "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+    "user_approved": true,
+    "applied_to_both_servers": true
+  }
+}

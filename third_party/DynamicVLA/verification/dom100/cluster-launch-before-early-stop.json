@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-10-09T15:43:47.131078+00:00",
+  "project": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-20261009",
+  "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-20261009",
+  "source_sha256": "cd4ae5d9493f0aa95e01ad63df415a4443b8dad4ecce009c4a1e9901c87f2212",
+  "manifest_fingerprint": "048db8b61ee37b5a003c099196d4b35e97e9458b9cd0ca260ffce6dd6a15fcb1",
+  "recipe": {
+    "effective_batch": 352,
+    "epochs": 100,
+    "evaluation_plan_sha256": "f01ce47d879046e22ffe52b2a0031d1b19abd8f404af78e45612a98733414e48",
+    "fingerprint": "27c45dd3e4f42c09c6c03d2219dd00459b1f7432ce40c34d848c172a7d2f0cf4",
+    "lr": 3e-05,
+    "manifest": "048db8b61ee37b5a003c099196d4b35e97e9458b9cd0ca260ffce6dd6a15fcb1",
+    "precision": "bf16",
+    "sampling": "frames",
+    "scheduler": "cosine",
+    "seed": 42,
+    "selection": "user_fixed_rate_20261009",
+    "simulator_evaluation_mode": "after_training",
+    "supported_world_sizes": [
+      4,
+      8
+    ],
+    "warmup_updates": 1000
+  },
+  "production_jobs": {
+    "krv100": {
+      "gpu_selection": "auto",
+      "job_id": "16868574",
+      "wandb_name": "krv100",
+      "world_size": 8
+    }
+  },
+  "first_variant": "krv100",
+  "world_size": 8,
+  "gpu_selection": "H100 or H200 on one node",
+  "microbatch_per_gpu": 44,
+  "global_effective_batch": 352,
+  "epochs": 100,
+  "prediction_horizon": 20,
+  "execution_horizon": 20,
+  "backend": "DDP/NCCL",
+  "local_tests_passed": 87,
+  "gpu_smoke_status": "queued; executed inside allocation before production",
+  "preparation_reused_from": "/scratch/aparame/Dynamic_VLA/dom100-h20-r2",
+  "learning_rate_authorization": "User explicitly selected Start at 3e-5 (Recommended).",
+  "simulator_evaluation_mode": "after_training",
+  "superseded_single_gpu_jobs_cancelled": [
+    "16865163",
+    "16865164",
+    "16865165",
+    "16865166",
+    "16865167",
+    "16865168",
+    "16865169"
+  ]
+}

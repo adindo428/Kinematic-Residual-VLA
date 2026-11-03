@@ -1,0 +1,142 @@
+{
+  "setup": {
+    "job_id": "17668675"
+  },
+  "setup_attempts": [
+    {
+      "job_id": "17668622",
+      "result": "FAILED",
+      "reason": "DOM state6/action7 mapping corrected"
+    }
+  ],
+  "pi05_baseline_profile": {
+    "job_id": "17668717",
+    "recipe": "pi05_baseline",
+    "command": "profile",
+    "dependency": "17668675",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/pi05_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "pi05_baseline_train": {
+    "job_id": "17668718",
+    "recipe": "pi05_baseline",
+    "command": "train",
+    "dependency": "17668717",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/pi05_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "pi05_kr_profile": {
+    "job_id": "17668719",
+    "recipe": "pi05_kr",
+    "command": "profile",
+    "dependency": "17668675",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/pi05_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "pi05_kr_train": {
+    "job_id": "17668722",
+    "recipe": "pi05_kr",
+    "command": "train",
+    "dependency": "17668719",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/pi05_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "smolvla_baseline_profile": {
+    "job_id": "17668723",
+    "recipe": "smolvla_baseline",
+    "command": "profile",
+    "dependency": "17668675",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/smolvla_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "smolvla_baseline_train": {
+    "job_id": "17668724",
+    "recipe": "smolvla_baseline",
+    "command": "train",
+    "dependency": "17668723",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/smolvla_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "smolvla_kr_profile": {
+    "job_id": "17668725",
+    "recipe": "smolvla_kr",
+    "command": "profile",
+    "dependency": "17668675",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/smolvla_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "smolvla_kr_train": {
+    "job_id": "17668726",
+    "recipe": "smolvla_kr",
+    "command": "train",
+    "dependency": "17668725",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/smolvla_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "vlash_baseline_profile": {
+    "job_id": "17668727",
+    "recipe": "vlash_baseline",
+    "command": "profile",
+    "dependency": "17668675",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/vlash_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "vlash_baseline_train": {
+    "job_id": "17668728",
+    "recipe": "vlash_baseline",
+    "command": "train",
+    "dependency": "17668727",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/vlash_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "vlash_kr_profile": {
+    "job_id": "17668729",
+    "recipe": "vlash_kr",
+    "command": "profile",
+    "dependency": "17668675",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/vlash_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "vlash_kr_train": {
+    "job_id": "17668730",
+    "recipe": "vlash_kr",
+    "command": "train",
+    "dependency": "17668729",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/vlash_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "H200"
+  },
+  "retirement": {
+    "at": "2026-10-20T14:16:37.615722+00:00",
+    "reason": "duplicate hardware campaign cancelled/deleted by user",
+    "cancelled_job_ids": [
+      "17668718",
+      "17668722",
+      "17668724",
+      "17668726",
+      "17668728",
+      "17668730"
+    ],
+    "do_not_resubmit": true,
+    "canonical_job_ids": [
+      "17709588",
+      "17709590",
+      "17709592",
+      "17709594",
+      "17719993",
+      "17720948"
+    ],
+    "receipt": "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/training_run_register/deduplication-20261020.json"
+  }
+}

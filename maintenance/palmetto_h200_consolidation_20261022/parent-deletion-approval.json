@@ -1,0 +1,9 @@
+{
+  "approved_at": "2026-10-22T16:04:42.290440+00:00",
+  "user_answer": "Approve those eight redundant parent files",
+  "scope_manifest": "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/palmetto_h200_consolidation_20261022/redundant-parents-review.json",
+  "file_count": 8,
+  "bytes": 129348096607,
+  "authorized_only_exact_manifest_paths": true,
+  "execution_status": "blocked_missing_authenticated_palmetto_socket"
+}

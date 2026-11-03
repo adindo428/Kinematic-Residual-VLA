@@ -1,0 +1,182 @@
+{
+  "source_sha256": "562087215a107ad0f5ce81ed35fa914400bbd0616b5a73b241257c2481f93ed7",
+  "source_and_preparation_files_verified": true,
+  "comparisons": {
+    "pi05_baseline": {
+      "gpu_profile_sha256": "692b48db2c5b2af8bddd45742daaddf9e5c4c76284251f1c3461fc948d168d93",
+      "identity": "fba9738d280eab0c58c19128931f16027cc38ccdc08a50667162c5b17e8a3587",
+      "h200_sustained_samples_per_second": 26.775228732326894,
+      "a100_production_median_samples_per_second": 9.679404292401312,
+      "ratio_to_a100": 2.766206258513908,
+      "threshold": 1.25,
+      "variant_meets_threshold": true,
+      "a100_observations": [
+        {
+          "Train/loss": 0.03778938949108124,
+          "Train/optimizer_updates": 6750,
+          "Train/samples": 216000,
+          "Train/epoch": 0.009655702244248946,
+          "Train/samples_per_second": 9.670233694944875,
+          "Train/lr": 2.2887124818777374e-05
+        },
+        {
+          "Train/loss": 0.0770551860332489,
+          "Train/optimizer_updates": 6760,
+          "Train/samples": 216320,
+          "Train/epoch": 0.0096700069883145,
+          "Train/samples_per_second": 9.737626768707745,
+          "Train/lr": 2.288000950477678e-05
+        },
+        {
+          "Train/loss": 0.0921284407377243,
+          "Train/optimizer_updates": 6770,
+          "Train/samples": 216640,
+          "Train/epoch": 0.009684311732380053,
+          "Train/samples_per_second": 9.688690120324614,
+          "Train/lr": 2.2872883476201482e-05
+        },
+        {
+          "Train/loss": 0.06926402449607849,
+          "Train/optimizer_updates": 6780,
+          "Train/samples": 216960,
+          "Train/epoch": 0.009698616476445607,
+          "Train/samples_per_second": 9.706990874937283,
+          "Train/lr": 2.2865746741414288e-05
+        },
+        {
+          "Train/loss": 0.042484063655138016,
+          "Train/optimizer_updates": 6790,
+          "Train/samples": 217280,
+          "Train/epoch": 0.00971292122051116,
+          "Train/samples_per_second": 9.712912028242222,
+          "Train/lr": 2.285859930879054e-05
+        },
+        {
+          "Train/loss": 0.060565702617168427,
+          "Train/optimizer_updates": 6800,
+          "Train/samples": 217600,
+          "Train/epoch": 0.009727225964576714,
+          "Train/samples_per_second": 9.682401626064225,
+          "Train/lr": 2.285144118671816e-05
+        },
+        {
+          "Train/loss": 0.05589264631271362,
+          "Train/optimizer_updates": 6810,
+          "Train/samples": 217920,
+          "Train/epoch": 0.00974153070864227,
+          "Train/samples_per_second": 9.699588683461256,
+          "Train/lr": 2.2844272383597597e-05
+        },
+        {
+          "Train/loss": 0.06465113162994385,
+          "Train/optimizer_updates": 6820,
+          "Train/samples": 218240,
+          "Train/epoch": 0.009755835452707824,
+          "Train/samples_per_second": 9.697533467355221,
+          "Train/lr": 2.2837092907841846e-05
+        },
+        {
+          "Train/loss": 0.041877858340740204,
+          "Train/optimizer_updates": 6830,
+          "Train/samples": 218560,
+          "Train/epoch": 0.009770140196773377,
+          "Train/samples_per_second": 9.648174168045246,
+          "Train/lr": 2.282990276787641e-05
+        },
+        {
+          "Train/loss": 0.05796535313129425,
+          "Train/optimizer_updates": 6840,
+          "Train/samples": 218880,
+          "Train/epoch": 0.00978444494083893,
+          "Train/samples_per_second": 9.752068253421019,
+          "Train/lr": 2.282270197213933e-05
+        },
+        {
+          "Train/loss": 0.03999175876379013,
+          "Train/optimizer_updates": 6850,
+          "Train/samples": 219200,
+          "Train/epoch": 0.009798749684904485,
+          "Train/samples_per_second": 9.680314548775202,
+          "Train/lr": 2.281549052908114e-05
+        },
+        {
+          "Train/loss": 0.032900139689445496,
+          "Train/optimizer_updates": 6860,
+          "Train/samples": 219520,
+          "Train/epoch": 0.00981305442897004,
+          "Train/samples_per_second": 9.620367525712625,
+          "Train/lr": 2.2808268447164867e-05
+        },
+        {
+          "Train/loss": 0.04671356454491615,
+          "Train/optimizer_updates": 6870,
+          "Train/samples": 219840,
+          "Train/epoch": 0.009827359173035594,
+          "Train/samples_per_second": 9.604442782148475,
+          "Train/lr": 2.2801035734866025e-05
+        },
+        {
+          "Train/loss": 0.04638805240392685,
+          "Train/optimizer_updates": 6880,
+          "Train/samples": 220160,
+          "Train/epoch": 0.009841663917101147,
+          "Train/samples_per_second": 9.697783059892224,
+          "Train/lr": 2.2793792400672608e-05
+        },
+        {
+          "Train/loss": 0.03583370894193649,
+          "Train/optimizer_updates": 6890,
+          "Train/samples": 220480,
+          "Train/epoch": 0.009855968661166701,
+          "Train/samples_per_second": 9.590667389883226,
+          "Train/lr": 2.278653845308507e-05
+        },
+        {
+          "Train/loss": 0.07226008176803589,
+          "Train/optimizer_updates": 6900,
+          "Train/samples": 220800,
+          "Train/epoch": 0.009870273405232255,
+          "Train/samples_per_second": 9.666327908957253,
+          "Train/lr": 2.2779273900616323e-05
+        },
+        {
+          "Train/loss": 0.052938565611839294,
+          "Train/optimizer_updates": 6910,
+          "Train/samples": 221120,
+          "Train/epoch": 0.00988457814929781,
+          "Train/samples_per_second": 9.624530147308471,
+          "Train/lr": 2.2771998751791725e-05
+        },
+        {
+          "Train/loss": 0.09369384497404099,
+          "Train/optimizer_updates": 6920,
+          "Train/samples": 221440,
+          "Train/epoch": 0.009898882893363364,
+          "Train/samples_per_second": 9.643521655541631,
+          "Train/lr": 2.276471301514907e-05
+        },
+        {
+          "Train/loss": 0.03150582313537598,
+          "Train/optimizer_updates": 6930,
+          "Train/samples": 221760,
+          "Train/epoch": 0.009913187637428917,
+          "Train/samples_per_second": 9.58792898988877,
+          "Train/lr": 2.275741669923857e-05
+        },
+        {
+          "Train/loss": 0.05380965396761894,
+          "Train/optimizer_updates": 6940,
+          "Train/samples": 222080,
+          "Train/epoch": 0.009927492381494471,
+          "Train/samples_per_second": 9.678494036027423,
+          "Train/lr": 2.275010981262286e-05
+        }
+      ],
+      "a100_log_modified_at_ns": 1792511848845767212,
+      "gpu_profile_modified_at_ns": 1792510959406488891,
+      "note": "Provisional per-variant comparison. No paired release until both readiness receipts and paired scheduler COMPLETED exit0."
+    }
+  },
+  "paired_release_approved": false,
+  "recorded_at": "2026-10-20T15:58:35.244217+00:00"
+}

@@ -1,5 +1,92 @@
 # Recovered paired DOM training workflow
 
+## Current Palmetto layout and 0.10/0.18 training
+
+The canonical source checkout is
+`/home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA` (underscore; the
+hyphenated `/home/aparame/Research/Dynamic-VLA` does not currently exist).
+DOM data and Hugging Face caches remain under
+`/scratch/aparame/.cache/huggingface`. Checkpoints and generated data stay
+under `/scratch/aparame/Dynamic_VLA/runs`; Slurm and W&B logs go to
+`/home/aparame/Research/Dynamic_VLA/logs`. The training code's `DIR.OUTPUT`
+also puts checkpoints there on scratch; its built-in TensorBoard logs and
+run summaries may share that output root. Scratch is purgeable; back up
+important checkpoints.
+The old scratch source tree is recovery material, not the launch directory.
+
+`configs/dom_speed_ood_0p10_0p18_split.json` contains a reconstructed explicit
+partition of 3,810 train episodes at mean speed <= 0.10 m/s and 119,778 test
+episodes at >= 0.18 m/s. The derived eval split reserves 5,000 OOD validation
+episodes and 114,778 OOD test episodes. `iid_eval` samples 512 training episodes
+and is not held-out. The full-finetune configs now use this split rather than
+rescanning speeds or using the obsolete 0.12/0.13 threshold. Old thresholds
+remain in historical prose only, not active full-finetune configs.
+
+On Palmetto, first ensure the log directory exists **before** `sbatch` opens
+its output files. Submit CPU prefetch, verify its completion and data/video
+availability, then submit one of the GPU profiles:
+
+```bash
+cd /home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA
+mkdir -p /home/aparame/Research/Dynamic_VLA/logs/slurm
+sbatch slurm/preprocess_full_finetune_speed_ood_pair.sbatch
+# Once preprocessing succeeds, check locally before choosing one GPU profile:
+source scripts/palmetto_env.sh
+python scripts/check_train_readiness.py
+sbatch slurm/train_full_finetune_speed_ood_pair_h100.sbatch
+# sbatch slurm/train_full_finetune_speed_ood_pair_a100.sbatch
+# sbatch slurm/train_full_finetune_speed_ood_pair_h200.sbatch
+```
+
+The optional `slurm/train_full_finetune_speed_ood_pair_a100_4gpu.sbatch`
+requests four A100 GPUs, uses batch 8 × accumulation 32 per GPU (effective
+batch 1,024), and writes checkpoints to a separate
+`/scratch/aparame/Dynamic_VLA/runs/a100_4gpu` tree. It may run alongside the
+H100 job without overwriting its checkpoints. Submit the two jobs separately;
+Slurm does not make either an automatic fallback for the other.
+
+The GPU job trains baseline then residual, each for 30 epochs by default.
+Every epoch it logs bounded observed `Eval/iid_eval/*` and `Eval/ood_val/*`
+metrics to W&B and selects the best checkpoint by `ood_val/action_mse`.
+`Eval/*/final_ee_object_proximity_rate_5cm` is only a predicted end-effector
+proximity diagnostic against a constant-velocity object extrapolation, not
+pick/place or closed-loop task success. Older runs logged the same diagnostic
+as `final_success_rate`; do not compare that label to simulator success.
+`EVAL_MAX_BATCHES: 8` limits each validation split per process (up to 2,048
+samples per split with 8 GPUs and per-rank batch size 32); `ood_test`
+remains untouched during training. The nominal `iid_eval` subset overlaps
+training episodes and is not independent validation.
+For a bounded single-H100 smoke run first, submit
+`sbatch slurm/smoke_full_finetune_speed_ood_h100.sbatch` from the same directory.
+It validates (or reconstructs if missing) the full 0.10/0.18 split, checks
+training assets, selects eight deterministic low-speed episodes, disables
+W&B, and writes its isolated config/checkpoint under
+`/scratch/aparame/Dynamic_VLA/runs/smoke/<job-id>`. It does not train on the
+119,778 held-out test episodes or resume a full experiment.
+The three GPU profiles use 8 A100 (16×16), 8 H100 (32×8), or 2 H200 (64×16)
+per-device batch × accumulation, respectively. These sizes are unverified for
+the new split. Preprocessing and GPU jobs must not overlap; training also
+checks the cache and may fetch missing video assets. `RUN_OFFLINE_COMPARE`
+defaults to 0 because the full held-out OOD test is enormous; reserve `ood_val`
+for selection and `ood_test` for final reporting. No training was submitted
+as part of this recovery.
+
+`scripts/palmetto_env.sh` loads `gcc/12.3.0` and `cuda/12.3.0`, then activates
+the existing `dynamicvla` environment. Both modules are needed: CUDA supplies
+`libnppicc.so.12`, while GCC provides the C++ runtime needed by the TorchCodec
+video decoder. A top-level `import torchcodec` alone is insufficient; test
+`import torchcodec.decoders`. No package update was needed for that import.
+`pip check` still reports pre-existing fsspec/datasets and
+rerun-sdk/LeRobot/NumPy version conflicts; do not upgrade them blindly on
+Rocky 8. A cached DOM MP4 decoded successfully on the login node; repeat this
+on an allocated compute node before large training.
+Automatic resume requires `config.json`, `model.safetensors`, and
+`training_state.pt`. No prior trained checkpoints were recovered.
+
+**The remaining instructions below describe the historical paired workflow;
+use the paths and precautions above instead.** From-scratch configs were not
+recovered and their launcher exits rather than training the wrong experiment.
+
 Recovered on 2026-09-22 from the public DynamicVLA repository and surviving local
 development-session records. The original README is preserved in `README.md`;
 use this guide for the recovered paired nominal/residual workflow. Other historical
@@ -28,19 +115,14 @@ The existing environment is `/home/aparame/.conda/envs/dynamicvla`. The cached
 that every video or pretrained-model artifact is available locally.
 
 ```bash
-cd /scratch/aparame/Dynamic_VLA/third_party/DynamicVLA
-conda activate dynamicvla
-export HF_HOME=/scratch/aparame/.cache/huggingface
-export HF_LEROBOT_HOME="$HF_HOME/lerobot"
-mkdir -p runs/slurm_logs
+cd /home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA
+source scripts/palmetto_env.sh
 ```
 
-The full import smoke test on this recovery host is blocked by TorchCodec's
-missing CUDA library `libnppicc.so.12`. Before submitting training, ensure the
-compute-node environment exposes the matching CUDA 12 NPP libraries and that
-`python run.py --help` succeeds. `requirements_rocky8.txt` includes
-`nvidia-npp-cu12`; no packages were installed or changed during recovery.
-Unit tests stub the video decoder and do not validate real video decoding.
+The earlier login-node TorchCodec failure is resolved by loading both GCC 12.3
+and CUDA 12.3 via `scripts/palmetto_env.sh`. `torchcodec.decoders` imports
+successfully. Real video decoding and GPU memory usage still need compute-node
+validation; unit tests stub video decoding.
 
 The deleted low/high-speed split can be reconstructed locally with:
 
@@ -77,8 +159,8 @@ use must be checked on a compute node. `DVLA_BATCH_SIZE`,
 Checkpoint destinations are separate:
 
 ```text
-runs/checkpoints/dynamicvla_dom_paired_velocity/           # nominal
-runs/checkpoints/residual_dynamicvla_dom_paired_velocity/  # residual
+/scratch/aparame/Dynamic_VLA/runs/checkpoints/dynamicvla_dom_paired_velocity/           # nominal
+/scratch/aparame/Dynamic_VLA/runs/checkpoints/residual_dynamicvla_dom_paired_velocity/  # residual
 ```
 
 The job runs both trainings sequentially and then observed IID/OOD evaluation

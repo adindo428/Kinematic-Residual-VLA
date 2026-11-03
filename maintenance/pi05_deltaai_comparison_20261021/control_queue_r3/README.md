@@ -1,0 +1,1 @@
+Queue-controller repair only: removes the premature overall150minute timer while preserving the two-hour allocated GPU cap and exact frozen benchmark. Previous request3429662 must be verified pending before cancellation, then terminal before this one-shot controller runs. No production or benchmark source changes.

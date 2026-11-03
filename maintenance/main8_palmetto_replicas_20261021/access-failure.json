@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-22T00:28:44.984438+00:00",
+  "kind": "expired_authenticated_ssh_master",
+  "message": "Master connection broke after all nine submission receipts and CPU contracts were verified; BatchMode fallback authentication denied. Last verified states retained; no interactive login attempted.",
+  "last_successful_evidence": "CPU preparation17859068 RUNNING; all eight GPU jobs PENDING(Dependency);15 CPU tests and actual four-rank/two-node signal contract passed.",
+  "user_action_required": "Restore authenticated Palmetto SSH master to verify subsequent preparation, readiness and training starts."
+}

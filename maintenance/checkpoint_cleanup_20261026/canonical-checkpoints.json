@@ -1,0 +1,9 @@
+{
+  "pi05_baseline": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+  "pi05_kr": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+  "vlash_baseline": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+  "vlash_kr": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr/runs/vlash_kr/latest.pt",
+  "smolvla_baseline": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+  "smolvla_kr": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+  "domv100": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt"
+}

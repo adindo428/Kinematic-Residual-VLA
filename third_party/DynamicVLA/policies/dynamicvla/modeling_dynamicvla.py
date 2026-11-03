@@ -35,6 +35,7 @@ from policies.dynamicvla.modeling_vlm_with_expert import VLMWithExpertModel
 from proactive_vla.residual_flow import (
     extract_dom_dynamic_fields,
     remove_scheduled_residual_drift,
+    restore_residual_actions,
     scheduled_residual_flow_target,
 )
 
@@ -490,6 +491,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             residual_lookahead_position=residual_lookahead_position,
             residual_lookahead_horizon=residual_lookahead_horizon,
             residual_action_std=residual_action_std,
+            residual_phase_gate=self.prepare_phase_gate(batch, state.device),
         )
 
         # Unpad actions
@@ -522,10 +524,12 @@ class DynamicVLAPolicy(PreTrainedPolicy):
         return batch
 
     def extract_residual_batch_fields(self, batch: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
-        if not self.config.enable_residual_flow:
+        if not (self.config.enable_residual_flow or self.config.condition_on_object_velocity):
             return {}
 
         fields = {}
+        if self.config.residual_phase_gate_key in batch:
+            fields[self.config.residual_phase_gate_key] = batch[self.config.residual_phase_gate_key]
         for key in (
             self.config.residual_position_key,
             self.config.residual_velocity_key,
@@ -566,18 +570,32 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             value = value[:, -1, :]
         return value
 
-    def prepare_residual_velocity(
-        self,
-        batch: dict[str, torch.Tensor],
-        device: torch.device,
-        dtype: torch.dtype,
-    ) -> torch.Tensor | None:
-        return self.prepare_residual_xyz(
-            batch,
-            self.config.residual_velocity_key,
-            device,
-            dtype,
-        )
+    def prepare_phase_gate(self, batch, device):
+        if self.config.residual_phase_gate_mode == "constant":
+            return None
+        value = batch.get(self.config.residual_phase_gate_key)
+        if value is None:
+            raise ValueError("Causal phase gate is missing; provide offline prefix replay or live applied-command history")
+        gate = torch.as_tensor(value, device=device, dtype=torch.float32)
+        expected = (batch[OBS_STATE].shape[0], self.config.chunk_size, 1)
+        if gate.shape != expected:
+            raise ValueError(f"Expected phase gate {expected}, got {tuple(gate.shape)}")
+        return gate
+
+    def prepare_residual_velocity(self, batch, device, dtype):
+        if not self.config.enable_residual_flow:
+            return None
+        value = batch.get(self.config.residual_velocity_key)
+        if value is None:
+            raise ValueError("Residual-coordinate policies require current object velocity")
+        value = torch.as_tensor(value, device=device, dtype=dtype)
+        if value.ndim == 3:
+            if value.shape[1] != self.config.n_obs_steps:
+                raise ValueError("Object velocity must be observation history, never a future trajectory")
+            value = value[:, -1, :]
+        if value.shape != (batch[OBS_STATE].shape[0], 3) or not torch.isfinite(value).all():
+            raise ValueError("Expected finite current object velocity [batch, 3]")
+        return value
 
     def prepare_residual_horizon(
         self,
@@ -605,13 +623,16 @@ class DynamicVLAPolicy(PreTrainedPolicy):
         device: torch.device,
         dtype: torch.dtype,
     ) -> torch.Tensor | None:
-        if not self.config.enable_residual_flow or not self.config.residual_normalize_drift:
+        if not self.config.residual_normalize_drift:
             return None
 
         normalizers = (self.normalize_targets, self.unnormalize_outputs)
         for normalizer in normalizers:
-            if hasattr(normalizer, "named_buffers"):
-                for name, value in normalizer.named_buffers():
+            # LeRobot stores normalization statistics as non-trainable Parameters,
+            # not registered buffers. Read serialized state so fresh and reloaded
+            # policies use the same scale, even when normalizer.stats is None.
+            if hasattr(normalizer, "state_dict"):
+                for name, value in normalizer.state_dict().items():
                     name_l = name.lower()
                     if "action" in name_l and "std" in name_l and torch.is_tensor(value):
                         return value.to(device=device, dtype=dtype).flatten()
@@ -763,7 +784,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             actions.dtype,
         )
         residual_action_std = self.get_action_normalization_std(actions.device, actions.dtype)
-        actions_is_pad = batch.get("actions_id_pad")
+        actions_is_pad = batch.get("action_is_pad", batch.get("actions_id_pad"))
         loss_dict = {}
         losses = self.model.forward(
             images,
@@ -779,24 +800,22 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             residual_lookahead_position=residual_lookahead_position,
             residual_lookahead_horizon=residual_lookahead_horizon,
             residual_action_std=residual_action_std,
+            residual_phase_gate=self.prepare_phase_gate(batch, state.device),
         )
-        loss_dict["losses_after_forward"] = losses.clone()
+        real_dim = int(self.config.action_feature.shape[0])
+        losses = losses[..., :real_dim].float()
+        if actions_is_pad is None:
+            valid = torch.ones(losses.shape[:2], device=losses.device, dtype=torch.bool)
+        else:
+            valid = ~actions_is_pad.to(device=losses.device, dtype=torch.bool)
+        # Average valid steps within each anchor, then anchors; this makes
+        # sample-weighted accumulation exact even at episode and epoch tails.
+        per_sample = (losses * valid[..., None]).sum(dim=(1, 2)) / (valid.sum(1).clamp_min(1) * real_dim)
+        loss = per_sample.mean()
+        loss_dict["loss"] = loss.detach()
+        loss_dict["valid_steps"] = valid.sum().detach()
         if getattr(self.model, "_last_residual_drift_l2", None) is not None:
-            loss_dict["residual_drift_l2"] = self.model._last_residual_drift_l2.item()
-            loss_dict["residual_enabled"] = bool(self.model._last_residual_enabled)
-        if actions_is_pad is not None:
-            in_episode_bound = ~actions_is_pad
-            losses = losses * in_episode_bound.unsqueeze(-1)
-            loss_dict["losses_after_in_ep_bound"] = losses.clone()
-
-        # Remove padding
-        losses = losses[:, :, : self.config.max_action_dim]
-        loss_dict["losses_after_rm_padding"] = losses.clone()
-
-        # For backward pass
-        loss = losses.mean()
-        # For backward pass
-        loss_dict["loss"] = loss.item()
+            loss_dict["residual_drift_l2"] = self.model._last_residual_drift_l2
         return loss, loss_dict
 
     def prepare_images(self, batch):
@@ -911,6 +930,24 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             if batch[OBS_STATE].ndim > 2
             else batch[OBS_STATE]
         )
+        if self.config.condition_on_object_velocity:
+            if state.shape[-1] != 6 or self.config.max_state_dim < 9:
+                raise ValueError("Velocity conditioning requires six pose channels and at least nine state slots")
+            value = batch.get(self.config.residual_velocity_key)
+            if value is None:
+                raise ValueError("Velocity-conditioned policies require current object velocity; missing values cannot default to zero")
+            velocity = torch.as_tensor(value, device=state.device, dtype=state.dtype)
+            if velocity.ndim == 3:
+                if velocity.shape[1] != self.config.n_obs_steps:
+                    raise ValueError("Velocity must be observation history, not future action-horizon values")
+                velocity = velocity[:, -1, :]
+            if velocity.shape != (state.shape[0], 3) or not torch.isfinite(velocity).all():
+                raise ValueError("Expected finite current object velocity [batch, 3]")
+            mean = state.new_tensor(self.config.velocity_input_mean)
+            std = state.new_tensor(self.config.velocity_input_std)
+            if mean.shape != (3,) or std.shape != (3,) or not torch.isfinite(mean).all() or not torch.isfinite(std).all() or (std <= 0).any():
+                raise ValueError("Velocity normalization must contain three finite means and positive scales")
+            state = torch.cat((state, (velocity - mean) / std), dim=-1)
         state = pad_vector(state, self.config.max_state_dim)
         return state
 
@@ -969,6 +1006,7 @@ class VLAFlowMatching(torch.nn.Module):
 
     def __init__(self, config: DynamicVLAConfig):
         super().__init__()
+        config.validate_residual_formulation()
         self.config = config
 
         if config.temporal_fusion == "conv":
@@ -1238,6 +1276,7 @@ class VLAFlowMatching(torch.nn.Module):
         residual_lookahead_position=None,
         residual_lookahead_horizon=None,
         residual_action_std=None,
+        residual_phase_gate=None,
     ) -> torch.Tensor:
         """Do a full training forward pass and compute the loss (batch_size x num_steps x num_motors)"""
         if noise is None:
@@ -1267,7 +1306,12 @@ class VLAFlowMatching(torch.nn.Module):
                 action_dt=self.config.residual_action_dt,
                 lookahead_horizon_default_s=self.config.residual_lookahead_horizon_s,
                 axis_scale_xyz=self.config.residual_axis_scale_xyz,
+                phase_gate=residual_phase_gate,
             )
+            if self.config.residual_flow_formulation == "coordinate":
+                # Interpolate to the residual endpoint, not the raw action.
+                # The target above is noise - (actions - centered_drift).
+                actions = actions - scheduled_drift
             self._last_residual_enabled = True
             self._last_residual_drift_l2 = scheduled_drift.norm(dim=-1).mean().detach()
 
@@ -1332,6 +1376,7 @@ class VLAFlowMatching(torch.nn.Module):
         residual_lookahead_position=None,
         residual_lookahead_horizon=None,
         residual_action_std=None,
+        residual_phase_gate=None,
     ) -> torch.Tensor:
         """Do a full inference forward and compute the action (batch_size x num_steps x num_motors)"""
         bsize = state.shape[0]
@@ -1346,7 +1391,8 @@ class VLAFlowMatching(torch.nn.Module):
         dt = -1.0 / self.config.num_steps
         dt = torch.tensor(dt, dtype=torch.float32, device=device)
 
-        x_t = noise
+        # Euler updates must not mutate caller-owned noise reused for paired inference.
+        x_t = noise.clone()
         time = torch.tensor(1.0, dtype=torch.float32, device=device)
         while time >= -dt / 2:
             expanded_time = time.expand(bsize)
@@ -1356,7 +1402,7 @@ class VLAFlowMatching(torch.nn.Module):
                 x_t,
                 expanded_time,
             )
-            if self.config.enable_residual_flow and residual_velocity is not None:
+            if self.config.enable_residual_flow and residual_velocity is not None and self.config.residual_flow_formulation == "field":
                 v_t, _, _ = remove_scheduled_residual_drift(
                     v_t,
                     expanded_time,
@@ -1373,11 +1419,29 @@ class VLAFlowMatching(torch.nn.Module):
                     action_dt=self.config.residual_action_dt,
                     lookahead_horizon_default_s=self.config.residual_lookahead_horizon_s,
                     axis_scale_xyz=self.config.residual_axis_scale_xyz,
+                    phase_gate=residual_phase_gate,
                 )
             # Euler step
             x_t += dt * v_t
             time += dt
 
+        if self.config.enable_residual_flow and residual_velocity is not None and self.config.residual_flow_formulation == "coordinate":
+            # All denoising occurs in residual coordinates; restore exactly once.
+            x_t, _, _ = restore_residual_actions(
+                x_t, residual_velocity,
+                position_xyz=residual_position,
+                lookahead_position_xyz=residual_lookahead_position,
+                lookahead_horizon_s=residual_lookahead_horizon,
+                action_std=residual_action_std,
+                drift_mean=self.config.residual_drift_mean,
+                center_drift=self.config.residual_center_drift,
+                drift_scale=self.config.residual_drift_scale,
+                drift_mode=self.config.residual_drift_mode,
+                action_dt=self.config.residual_action_dt,
+                lookahead_horizon_default_s=self.config.residual_lookahead_horizon_s,
+                axis_scale_xyz=self.config.residual_axis_scale_xyz,
+                phase_gate=residual_phase_gate,
+            )
         return x_t
 
     def denoise_step(

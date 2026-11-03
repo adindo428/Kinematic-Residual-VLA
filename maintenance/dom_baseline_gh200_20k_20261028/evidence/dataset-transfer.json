@@ -1,0 +1,15 @@
+{
+  "stage": "verified_and_released",
+  "complete": true,
+  "job_id": "3479152",
+  "started_at": "2026-10-28T22:07:44.257123+00:00",
+  "source": "/work/nvme/bivv/aparameshwaran/dynamicvla/huggingface/lerobot/hzxie/DOM",
+  "destination": "/work/nvme/bicn/anayak2/dynamicvla/huggingface/lerobot/hzxie/DOM",
+  "hub_downloads": false,
+  "files": 52119,
+  "bytes_relayed": 20916787200,
+  "elapsed_seconds": 846.233336583,
+  "source_exit": 0,
+  "destination_exit": 0,
+  "completed_at": "2026-10-28T22:23:26.269923+00:00"
+}

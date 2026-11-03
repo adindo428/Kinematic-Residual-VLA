@@ -1,0 +1,15 @@
+{
+  "isaacsim_runtime": [
+    "5.1.0",
+    "rc.19",
+    "5",
+    "1",
+    "0",
+    "rc",
+    "19",
+    "release.26219.9c81211b.gl"
+  ],
+  "isaacsim_version_file": "5.1.0-rc.19+release.26219.9c81211b.gl",
+  "isaaclab_version_file": "2.3.2",
+  "isaaclab_package": "0.54.3"
+}

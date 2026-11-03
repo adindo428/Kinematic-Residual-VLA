@@ -1,0 +1,5 @@
+{
+  "complete": false,
+  "error": "Command '['ssh', '-F', '/dev/null', '-S', '/tmp/delta-krvla.sock', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=15', 'aparameshwaran@login.delta.ncsa.illinois.edu', 'python3 -']' returned non-zero exit status 255.",
+  "seconds": 14391.411494016647
+}

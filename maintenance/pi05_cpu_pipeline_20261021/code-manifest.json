@@ -1,0 +1,10 @@
+{
+  "files": {
+    "benchmark.py": "a152460eeb1d39b25d7bdc6969b263c71aecbfdece8edf816f6c893934beb5b5",
+    "test_candidate.py": "e7d59ee1f5c7d78efec84ccdb24eeac47f6120f543b23af678a056635d357867",
+    "candidate.py": "c8e6f4177eef13e091f269c20c129f1d5991da8c1ae73bd2b3f219f3aad98c34",
+    "config.json": "e4394e7542a6d751d9f668c8d9b6006da2f40b9cacbda37d457f9744f56b0202",
+    "benchmark.sbatch": "800bb1fe62b8d83ef27684c407008fb0a48e9ce18b4ac935eee0090434005f78"
+  },
+  "frozen_diagnostic_source_sha256": "3257b874a483db1cc37bfedab217be39ad68635659086571b232890294365e36"
+}

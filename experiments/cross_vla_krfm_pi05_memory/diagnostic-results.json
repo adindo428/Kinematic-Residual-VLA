@@ -1,0 +1,1497 @@
+[
+  {
+    "name": "control",
+    "returncode": 0,
+    "trim": false,
+    "allocator": "",
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-memory-20261020/logs/control.log",
+    "benchmark": {
+      "runtime": {
+        "microbatch": 4,
+        "workers": 4,
+        "main_threads": 4,
+        "prefetch": 2
+      },
+      "updates": 8,
+      "seconds": 30.936671063303947,
+      "samples_per_second": 8.2749691935555,
+      "peak_gpu_reserved_bytes": 77428948992.0,
+      "total_gpu_bytes": 85093777408,
+      "conservative_node_rss_bytes": 41010925568.0,
+      "mean_gpu_utilization_percent": 65.36538461538461,
+      "identity": "fc80f5bee170adbb5ef8d05fedb07c998bcc106bb71902a3b539937abb0d73e3"
+    },
+    "memory_stages": [
+      {
+        "stage": "policy_loaded",
+        "rank": 1,
+        "allocated": 14483425280,
+        "reserved": 14701035520,
+        "peak_allocated": 14483425280,
+        "peak_reserved": 14701035520,
+        "inactive_split": 217610240,
+        "allocator": ""
+      },
+      {
+        "stage": "policy_loaded",
+        "rank": 0,
+        "allocated": 14483425280,
+        "reserved": 14701035520,
+        "peak_allocated": 14483425280,
+        "peak_reserved": 14701035520,
+        "inactive_split": 217610240,
+        "allocator": ""
+      },
+      {
+        "stage": "ddp_initialized",
+        "rank": 0,
+        "allocated": 29002865152,
+        "reserved": 43297800192,
+        "peak_allocated": 29002865152,
+        "peak_reserved": 43297800192,
+        "inactive_split": 358883840,
+        "allocator": ""
+      },
+      {
+        "stage": "ddp_initialized",
+        "rank": 1,
+        "allocated": 29002865152,
+        "reserved": 43299897344,
+        "peak_allocated": 29002865152,
+        "peak_reserved": 43299897344,
+        "inactive_split": 360980992,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 29023694336,
+        "reserved": 51287949312,
+        "peak_allocated": 48494337536,
+        "peak_reserved": 51287949312,
+        "inactive_split": 562926080,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 29023694336,
+        "reserved": 51285852160,
+        "peak_allocated": 48494312960,
+        "peak_reserved": 51285852160,
+        "inactive_split": 560828928,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704000,
+        "reserved": 55561945088,
+        "peak_allocated": 55032704000,
+        "peak_reserved": 55561945088,
+        "inactive_split": 499880960,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704000,
+        "reserved": 55559847936,
+        "peak_allocated": 55032704000,
+        "peak_reserved": 55559847936,
+        "inactive_split": 497783808,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704000,
+        "reserved": 77428948992,
+        "peak_allocated": 74504929280,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501978112,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704000,
+        "reserved": 77426851840,
+        "peak_allocated": 74504929280,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880960,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704000,
+        "reserved": 77428948992,
+        "peak_allocated": 74504929280,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501978112,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704000,
+        "reserved": 77426851840,
+        "peak_allocated": 74504929280,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880960,
+        "allocator": ""
+      },
+      {
+        "stage": "warmup_complete",
+        "rank": 1,
+        "allocated": 55032702464,
+        "reserved": 77428948992,
+        "peak_allocated": 74504929280,
+        "peak_reserved": 77428948992,
+        "inactive_split": 499882496,
+        "allocator": ""
+      },
+      {
+        "stage": "warmup_complete",
+        "rank": 0,
+        "allocated": 55032702464,
+        "reserved": 77426851840,
+        "peak_allocated": 74504929280,
+        "peak_reserved": 77426851840,
+        "inactive_split": 497785344,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704000,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532160,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501978112,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704000,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532160,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880960,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704000,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532160,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501978112,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704000,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532160,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880960,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55032704512,
+        "reserved": 77428948992,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77428948992,
+        "inactive_split": 501977600,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032704512,
+        "reserved": 77426851840,
+        "peak_allocated": 74501532672,
+        "peak_reserved": 77426851840,
+        "inactive_split": 499880448,
+        "allocator": ""
+      }
+    ]
+  },
+  {
+    "name": "trim",
+    "returncode": 0,
+    "trim": true,
+    "allocator": "",
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-memory-20261020/logs/trim.log",
+    "benchmark": {
+      "runtime": {
+        "microbatch": 4,
+        "workers": 4,
+        "main_threads": 4,
+        "prefetch": 2
+      },
+      "updates": 8,
+      "seconds": 30.89899910055101,
+      "samples_per_second": 8.285058010032268,
+      "peak_gpu_reserved_bytes": 77424754688.0,
+      "total_gpu_bytes": 85093777408,
+      "conservative_node_rss_bytes": 41048309760.0,
+      "mean_gpu_utilization_percent": 66.73076923076923,
+      "identity": "fc80f5bee170adbb5ef8d05fedb07c998bcc106bb71902a3b539937abb0d73e3"
+    },
+    "memory_stages": [
+      {
+        "stage": "policy_loaded",
+        "rank": 0,
+        "allocated": 14483425280,
+        "reserved": 14701035520,
+        "peak_allocated": 14483425280,
+        "peak_reserved": 14701035520,
+        "inactive_split": 217610240,
+        "allocator": ""
+      },
+      {
+        "stage": "policy_loaded",
+        "rank": 1,
+        "allocated": 14483425280,
+        "reserved": 14701035520,
+        "peak_allocated": 14483425280,
+        "peak_reserved": 14701035520,
+        "inactive_split": 217610240,
+        "allocator": ""
+      },
+      {
+        "stage": "ddp_initialized",
+        "rank": 0,
+        "allocated": 28996024320,
+        "reserved": 43037753344,
+        "peak_allocated": 28996024320,
+        "peak_reserved": 43037753344,
+        "inactive_split": 369918976,
+        "allocator": ""
+      },
+      {
+        "stage": "ddp_initialized",
+        "rank": 1,
+        "allocated": 29002865152,
+        "reserved": 43301994496,
+        "peak_allocated": 29002865152,
+        "peak_reserved": 43301994496,
+        "inactive_split": 363078144,
+        "allocator": ""
+      },
+      {
+        "stage": "initial_cache_trimmed",
+        "rank": 0,
+        "allocated": 28996024320,
+        "reserved": 29322379264,
+        "peak_allocated": 28996024320,
+        "peak_reserved": 43037753344,
+        "inactive_split": 326354944,
+        "allocator": ""
+      },
+      {
+        "stage": "initial_cache_trimmed",
+        "rank": 1,
+        "allocated": 29002865152,
+        "reserved": 29322379264,
+        "peak_allocated": 29002865152,
+        "peak_reserved": 43301994496,
+        "inactive_split": 319514112,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 29023694336,
+        "reserved": 51390709760,
+        "peak_allocated": 48472461824,
+        "peak_reserved": 51390709760,
+        "inactive_split": 300782080,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 29016782336,
+        "reserved": 51323600896,
+        "peak_allocated": 48456027136,
+        "peak_reserved": 51323600896,
+        "inactive_split": 307694080,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042026496,
+        "reserved": 58101596160,
+        "peak_allocated": 55042026496,
+        "peak_reserved": 58101596160,
+        "inactive_split": 482169856,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032402944,
+        "reserved": 58034487296,
+        "peak_allocated": 55032402944,
+        "peak_reserved": 58034487296,
+        "inactive_split": 424684544,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032402944,
+        "reserved": 77424754688,
+        "peak_allocated": 74491345920,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781696,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042026496,
+        "reserved": 77397491712,
+        "peak_allocated": 74491059200,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484267008,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032402944,
+        "reserved": 77424754688,
+        "peak_allocated": 74491345920,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781696,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042026496,
+        "reserved": 77397491712,
+        "peak_allocated": 74491059200,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484267008,
+        "allocator": ""
+      },
+      {
+        "stage": "warmup_complete",
+        "rank": 0,
+        "allocated": 55032401408,
+        "reserved": 77424754688,
+        "peak_allocated": 74491345920,
+        "peak_reserved": 77424754688,
+        "inactive_split": 424686080,
+        "allocator": ""
+      },
+      {
+        "stage": "warmup_complete",
+        "rank": 1,
+        "allocated": 55042024960,
+        "reserved": 77397491712,
+        "peak_allocated": 74491059200,
+        "peak_reserved": 77397491712,
+        "inactive_split": 482171392,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032402944,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651072,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781696,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042026496,
+        "reserved": 77397491712,
+        "peak_allocated": 74493531648,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484267008,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032402944,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651072,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781696,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042026496,
+        "reserved": 77397491712,
+        "peak_allocated": 74493531648,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484267008,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 55032403456,
+        "reserved": 77424754688,
+        "peak_allocated": 74483651584,
+        "peak_reserved": 77424754688,
+        "inactive_split": 426781184,
+        "allocator": ""
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 55042027008,
+        "reserved": 77397491712,
+        "peak_allocated": 74493532160,
+        "peak_reserved": 77397491712,
+        "inactive_split": 484266496,
+        "allocator": ""
+      }
+    ]
+  },
+  {
+    "name": "expandable_trim",
+    "returncode": 0,
+    "trim": true,
+    "allocator": "expandable_segments:True",
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-memory-20261020/logs/expandable_trim.log",
+    "benchmark": {
+      "runtime": {
+        "microbatch": 4,
+        "workers": 4,
+        "main_threads": 4,
+        "prefetch": 2
+      },
+      "updates": 8,
+      "seconds": 30.91699040401727,
+      "samples_per_second": 8.280236745383084,
+      "peak_gpu_reserved_bytes": 74721525760.0,
+      "total_gpu_bytes": 85093777408,
+      "conservative_node_rss_bytes": 41083150336.0,
+      "mean_gpu_utilization_percent": 65.98076923076923,
+      "identity": "fc80f5bee170adbb5ef8d05fedb07c998bcc106bb71902a3b539937abb0d73e3"
+    },
+    "memory_stages": [
+      {
+        "stage": "policy_loaded",
+        "rank": 0,
+        "allocated": 14467041280,
+        "reserved": 14470348800,
+        "peak_allocated": 14467041280,
+        "peak_reserved": 14470348800,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "policy_loaded",
+        "rank": 1,
+        "allocated": 14467041280,
+        "reserved": 14470348800,
+        "peak_allocated": 14467041280,
+        "peak_reserved": 14470348800,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "ddp_initialized",
+        "rank": 0,
+        "allocated": 28934080512,
+        "reserved": 42089840640,
+        "peak_allocated": 28934080512,
+        "peak_reserved": 42089840640,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "ddp_initialized",
+        "rank": 1,
+        "allocated": 28934080512,
+        "reserved": 42089840640,
+        "peak_allocated": 28934080512,
+        "peak_reserved": 42089840640,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "initial_cache_trimmed",
+        "rank": 0,
+        "allocated": 28934080512,
+        "reserved": 28982640640,
+        "peak_allocated": 28934080512,
+        "peak_reserved": 42089840640,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "initial_cache_trimmed",
+        "rank": 1,
+        "allocated": 28934080512,
+        "reserved": 28982640640,
+        "peak_allocated": 28934080512,
+        "peak_reserved": 42089840640,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 28953830912,
+        "reserved": 48804921344,
+        "peak_allocated": 48351593984,
+        "peak_reserved": 48804921344,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 28953830912,
+        "reserved": 48742006784,
+        "peak_allocated": 48351593984,
+        "peak_reserved": 48742006784,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942831616,
+        "reserved": 54991519744,
+        "peak_allocated": 54942831616,
+        "peak_reserved": 54991519744,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942831616,
+        "reserved": 54991519744,
+        "peak_allocated": 54942831616,
+        "peak_reserved": 54991519744,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "warmup_complete",
+        "rank": 0,
+        "allocated": 54942830080,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "warmup_complete",
+        "rank": 1,
+        "allocated": 54942830080,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942831616,
+        "reserved": 74721525760,
+        "peak_allocated": 74340594688,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_backward",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 0,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      },
+      {
+        "stage": "after_optimizer",
+        "rank": 1,
+        "allocated": 54942832128,
+        "reserved": 74721525760,
+        "peak_allocated": 74340595200,
+        "peak_reserved": 74721525760,
+        "inactive_split": 0,
+        "allocator": "expandable_segments:True"
+      }
+    ]
+  }
+]

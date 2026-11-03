@@ -1,0 +1,61 @@
+{
+  "previous_attempt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020",
+  "supersedes": {
+    "pi05_baseline_profile": "17713148",
+    "pi05_baseline_train": "17713149",
+    "pi05_kr_profile": "17713150",
+    "pi05_kr_train": "17713151"
+  },
+  "frozen_preparation": {
+    "reused_from": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020",
+    "direct_hash_validation": true
+  },
+  "pi05_baseline_profile": {
+    "job_id": "17716903",
+    "recipe": "pi05_baseline",
+    "command": "profile",
+    "dependency": null,
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T07:14:02.727389+00:00"
+  },
+  "pi05_kr_profile": {
+    "job_id": "17716904",
+    "recipe": "pi05_kr",
+    "command": "profile",
+    "dependency": null,
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T07:14:02.830162+00:00"
+  },
+  "pi05_baseline_train": {
+    "job_id": "17719993",
+    "recipe": "pi05_baseline",
+    "command": "train",
+    "dependency": "17719992",
+    "gpu_profile_job_id": "17716903",
+    "readiness_release_job_id": "17719992",
+    "readiness_release_receipt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_baseline-verified.json",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T09:10:27.768571+00:00",
+    "dependency_retention_recovery": true
+  },
+  "pi05_kr_train": {
+    "job_id": "17720948",
+    "recipe": "pi05_kr",
+    "command": "train",
+    "dependency": "17720947",
+    "gpu_profile_job_id": "17716904",
+    "readiness_release_job_id": "17720947",
+    "readiness_release_receipt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_kr-verified.json",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T09:23:40.871175+00:00",
+    "dependency_retention_recovery": true
+  }
+}

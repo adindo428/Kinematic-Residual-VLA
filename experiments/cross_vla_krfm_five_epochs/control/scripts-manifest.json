@@ -1,0 +1,14 @@
+{
+  "pi05_baseline-train.sbatch": "2fc12bb8139905ab1ff60cc4d3e160b4defa57a958a179683ae259fa538d72b8",
+  "vlash_baseline-train.sbatch": "8cbc54cf6e173fc4ebfff20eeb62ddac2023f12d1ea0a7a70b2f6a31de148863",
+  "pi05_baseline-profile.sbatch": "eaec1bbae7a78801db1dc7c7f5781c39014827c8a272696b27396eb596f2716a",
+  "smolvla_kr-train.sbatch": "92a3ed88a2ba0994ebb515b3802cde7a04cc9b0e908390ac87b8ec5b3efc6533",
+  "smolvla_baseline-train.sbatch": "3ffa2de21ce0d617535b8f3631dc4b93fc21984e048b99977b85f9d4728d51d8",
+  "vlash_baseline-profile.sbatch": "8d9314db0cb07b63ee45728f744e65ef13475fbf2b6ee5ad53b54a870749de85",
+  "vlash_kr-profile.sbatch": "6e454dd4d868a609a613653455d524bf5436149a0d95356c0b889a87fcf3aa1d",
+  "smolvla_baseline-profile.sbatch": "df2d377004af2ef42350300223f70e88fa79648cb7eaa3676501239b94ad06e6",
+  "smolvla_kr-profile.sbatch": "c3844603a367ee548f00876af38c6440f437fd8d66e5c7bf3e36c0bf544a39df",
+  "vlash_kr-train.sbatch": "d46feccbbb8f3b236659716b1b454b2a2d9e2907fdcf50de4042b846e87d6160",
+  "pi05_kr-train.sbatch": "4d50a1c57ba599bc10ee18616e85250b62fa5fec04bf7db58b282ba56ea96ea9",
+  "pi05_kr-profile.sbatch": "e76f7d22b517a3b9c72e4ed9fc9a9178e2e264389eb6ca174f6be1da83ef200a"
+}

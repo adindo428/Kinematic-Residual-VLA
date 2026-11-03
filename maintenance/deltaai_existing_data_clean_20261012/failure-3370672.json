@@ -1,0 +1,36 @@
+{
+  "job_id": "3370672",
+  "scheduler_state": "FAILED",
+  "exit_code": "1:0",
+  "elapsed": "00:11:00",
+  "node": "gh055",
+  "started_edt": "2026-10-14T03:27:05-04:00",
+  "ended_edt": "2026-10-14T03:38:05-04:00",
+  "verification": {
+    "state": "complete",
+    "files": 804900,
+    "errors": 0,
+    "bytes": 188007523506,
+    "elapsed_seconds": 253.6635512
+  },
+  "startup_smoke": {
+    "all_four_ranks_passed": true,
+    "strict_checkpoint_reload": true,
+    "rank_rng_reload": true,
+    "optimizer_updates": 2,
+    "profile_fingerprint": "20e69d9e3b6c788724b625ef64d7db214e392f5b144372449b017b643550706b"
+  },
+  "failure": {
+    "phase": "full-data runtime benchmark",
+    "first_rank": 0,
+    "signal": "SIGSEGV",
+    "worker_exit_code": -11,
+    "other_ranks": "Terminated by torchrun after rank0 exited",
+    "last_logged_benchmark_updates": 2,
+    "native_library_cause": "Not identified by available logs; no Python exception preceding worker crash"
+  },
+  "production_training_started": false,
+  "production_checkpoint_created": false,
+  "restart_submitted": false,
+  "logs": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-audited-20261012/logs/combined-readiness-3370672.log"
+}

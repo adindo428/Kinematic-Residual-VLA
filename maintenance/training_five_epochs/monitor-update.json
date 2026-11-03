@@ -1,0 +1,7 @@
+{
+  "automation_id": "optimize-pi05-h200-and-migrate-if-faster",
+  "status": "PAUSED",
+  "existing_status_preserved": true,
+  "rrule_interval_minutes": 30,
+  "prompt_updated_to_six_five_epoch_runs": true
+}

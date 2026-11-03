@@ -1,0 +1,12 @@
+{
+  "change": "Allow two-GPU launch; identical model and data; batch352; phase gate causal_rules",
+  "manifest": "1c20282239fc9ca6030115b001ef1aaaeb02a8de2e561ebf55fe4fb6609c3ecb",
+  "parent_family": "/scratch/aparame/Dynamic_VLA/dom100-audited-20261012",
+  "parent_manifest": "f0d58f4500e2976f1891c1f0c2595480d76cd086769b4031c04fce929726e0cf",
+  "parent_recipe": "b4b4b6d387866fa062a1db0f334b5c461119458af6c5ec7462ea7331e42b7ffc",
+  "recipe": "01cc40becaa4b460b0d55ca1914bcf543c556d53af27ff37b66fa687eabaf19c",
+  "source": "/scratch/aparame/Dynamic_VLA/third_party/dom100-phase-two-gpu-20261013",
+  "source_sha256": "57d376a05e17dc1c27882c650763f3e6f98a631b01fc726892142a634e83b9fe",
+  "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+  "variant": "krvp100"
+}

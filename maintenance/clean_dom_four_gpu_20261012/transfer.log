@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/clean_dom_four_gpu_20261012/transfer.py", line 21, in <module>
+    if any(x in status for x in ['FAILED','CANCELLED','TIMEOUT','OUT_OF_MEMORY']):raise RuntimeError('Packaging job '+status)
+RuntimeError: Packaging job FAILED
+
+Recovery: original package completed all dataset files; final checkpoint symlink was broken. Job17128271 verifies pinned weights and appends the missing final member.
+Traceback (most recent call last):
+  File "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/clean_dom_four_gpu_20261012/transfer.py", line 21, in <module>
+    if any(x in status for x in ['FAILED','CANCELLED','TIMEOUT','OUT_OF_MEMORY']):raise RuntimeError('Packaging job '+status)
+RuntimeError: Packaging job FAILED
+
+Recovery v2: job17129784 writes missing archive final member and trailer after checking member sequence. Small interrupted archive test passed.

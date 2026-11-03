@@ -2,6 +2,11 @@
 
 # DynamicVLA: A Vision-Language-Action Model for Dynamic Object Manipulation
 
+> Palmetto recovery note: the current Kinematic Residual VLA workflow is in
+> [RECOVERY.md](RECOVERY.md). The historical experiments below are retained for
+> provenance; their 0.12/0.13 and from-scratch commands are not runnable in this
+> recovered checkout. Do not submit them.
+
 [Haozhe Xie](https://haozhexie.com), Beichen Wen, Jiarui Zheng, [Zhaoxi Chen](https://frozenburning.github.io/), [Fangzhou Hong](https://hongfz16.github.io/), [Haiwen Diao](https://paranioar.github.io/), [Ziwei Liu](https://liuziwei7.github.io/)
 
 S-Lab, Nanyang Technological University

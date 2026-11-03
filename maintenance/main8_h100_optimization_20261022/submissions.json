@@ -1,0 +1,20 @@
+{
+  "preparation": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/scripts/prepare.sbatch",
+    "script_sha256": "9c1bc7207f46acb060c537e6fd06d6c9341a42289fa9e708a3ae03996e213d0c",
+    "dependency": null,
+    "intent_at": "2026-10-22T13:33:48.008490+00:00",
+    "state": "submitted",
+    "stdout": "17913477",
+    "job_id": "17913477"
+  },
+  "bounded_h100_profile": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/scripts/profile.sbatch",
+    "script_sha256": "07ae2b8d96fe026899e44ec13a571f0d7153046b56b76517fa3528eae0f5efd0",
+    "dependency": "17913477",
+    "intent_at": "2026-10-22T13:33:50.447169+00:00",
+    "state": "submitted",
+    "stdout": "17913478",
+    "job_id": "17913478"
+  }
+}

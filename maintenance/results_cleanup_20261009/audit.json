@@ -1,0 +1,70 @@
+{
+  "started_at_utc": "2026-10-09T22:25:42.748414+00:00",
+  "authorization": "User requested retaining five-VLA tracking, ongoing tracking Table 1, and DOM manipulation; other RESULTS can be removed.",
+  "retained": [
+    "tracking_comparison_four_75epoch",
+    "tracking_table1_75epoch",
+    "official_dom_table1",
+    "official_dom_diagnostic",
+    "official_dom_friction"
+  ],
+  "preserved_models": {
+    "baseline": "DOM-VLA",
+    "velocity": "DOM-VLA+Velocity",
+    "residual": "KR-VLA-Field",
+    "coordinate": "KR-VLA-Coordinate",
+    "coordinate_velocity": "KR-VLA-Coordinate+Velocity"
+  },
+  "preserved_tracking_trials": 150,
+  "checkpoint_paths": {
+    "baseline": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_baseline_16623336",
+    "velocity": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_velocity/checkpoints/tracking_dom75_full20_velocity_16680047",
+    "residual": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_residual_16623337",
+    "coordinate": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/resume_outputs/checkpoints/tracking_dom75_full20_coordinate_16623338",
+    "coordinate_velocity": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/checkpoints/tracking_dom75_full20_coordinate_velocity_16748131"
+  },
+  "retained_links_into_deleted_roots": [],
+  "removed": [
+    {
+      "name": "paper_backups",
+      "regular_files": 4,
+      "logical_bytes": 330410
+    },
+    {
+      "name": "tracking_comparison_latest",
+      "regular_files": 3724,
+      "logical_bytes": 912626493
+    },
+    {
+      "name": "tracking_coordinate_velocity_verification",
+      "regular_files": 3,
+      "logical_bytes": 1118690728
+    },
+    {
+      "name": "tracking_current_eval",
+      "regular_files": 1,
+      "logical_bytes": 11320
+    },
+    {
+      "name": "tracking_evaluator_verification",
+      "regular_files": 2023,
+      "logical_bytes": 503762846
+    },
+    {
+      "name": "tracking_velocity_verification",
+      "regular_files": 5,
+      "logical_bytes": 2237364227
+    }
+  ],
+  "logical_bytes_removed": 4772786024,
+  "remaining_roots": [
+    "official_dom_diagnostic",
+    "official_dom_friction",
+    "official_dom_table1",
+    "tracking_comparison_four_75epoch",
+    "tracking_table1_75epoch"
+  ],
+  "completed_at_utc": "2026-10-09T22:25:59.725057+00:00",
+  "retained_checkpoint_inventory_unchanged": true,
+  "completed": true
+}

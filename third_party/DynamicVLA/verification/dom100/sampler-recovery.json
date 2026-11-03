@@ -1,0 +1,18 @@
+{
+  "cancelled_jobs": [
+    "16836839",
+    "16836840",
+    "16836841",
+    "16836842",
+    "16836847",
+    "16836848",
+    "16836849",
+    "16836843",
+    "16836844",
+    "16836845",
+    "16836846"
+  ],
+  "local_tests_passed": 72,
+  "parent_family": "/scratch/aparame/Dynamic_VLA/dom100-h20",
+  "reason": "Copy episode lengths out of torch-backed numpy views before spawning DataLoader workers. Previous metrics retained for diagnosis; approvals are recomputed."
+}

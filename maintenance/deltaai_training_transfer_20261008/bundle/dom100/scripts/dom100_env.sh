@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+export DVLA_PROJECT_DIR=${DVLA_PROJECT_DIR:-$PWD}
+source "${DVLA_ENV_SCRIPT:-${DVLA_PROJECT_DIR}/scripts/deltaai_env.sh}"
+export DOM100_ROOT=${DOM100_ROOT:-${DVLA_WORK_ROOT}/dom100}
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
+export TOKENIZERS_PARALLELISM=false MALLOC_ARENA_MAX=4 PYTHONUNBUFFERED=1

@@ -1,0 +1,76 @@
+{
+  "all_variants_verified": true,
+  "block_speedup": 1.0006591716561835,
+  "fingerprint": "9d317ed6bc3ff7a83438241493532bd8035c173232b5f6cb34d51500243f896a",
+  "gpu_key": "d85389bf17ff282b",
+  "hardware": {
+    "capability": [
+      8,
+      0
+    ],
+    "cuda": "12.6",
+    "name": "NVIDIA A100 80GB PCIe",
+    "torch": "2.7.1+cu126",
+    "total_memory": 85093777408
+  },
+  "manifest": "0afd51a49c6b5b4116108708dcf582554daa6c6127026389553687eb6c290cf4",
+  "runtime": {
+    "fused": true,
+    "microbatch": 44,
+    "pin_memory": true,
+    "precision": "bf16",
+    "prefetch": 2,
+    "sampling": "blocks",
+    "workers": 4
+  },
+  "runtimes": {
+    "blocks": {
+      "fused": true,
+      "microbatch": 44,
+      "pin_memory": true,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "blocks",
+      "workers": 4
+    },
+    "frames": {
+      "fused": true,
+      "microbatch": 44,
+      "pin_memory": true,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "frames",
+      "workers": 4
+    }
+  },
+  "selected_measurement": {
+    "complete": true,
+    "data_wait_fraction": 0.0009545960583754584,
+    "epoch_seconds": 463941.4694941792,
+    "first_loss": 0.7576783895492554,
+    "gpu_utilization_percent": 83.70967741935483,
+    "mode": "end_to_end",
+    "peak_gpu_bytes": 46400536576.0,
+    "peak_ram_bytes": 46161444864,
+    "runtime": {
+      "fused": true,
+      "microbatch": 44,
+      "pin_memory": true,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "blocks",
+      "workers": 4
+    },
+    "safe": true,
+    "samples_per_second": 48.21984338755188,
+    "timing_excludes": [
+      "validation",
+      "checkpoint_io",
+      "queue_time"
+    ],
+    "training_100_epoch_seconds": 46394146.94941792,
+    "update_latency_s": 7.303291601128876,
+    "variant": "krvp100"
+  },
+  "version": 1
+}

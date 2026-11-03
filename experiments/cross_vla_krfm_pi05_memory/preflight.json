@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17714676 to start at 2026-10-20T10:02:15 a using 32 processors on nodes node0404 in partition work1\n"
+}

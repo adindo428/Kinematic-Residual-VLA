@@ -1,0 +1,39 @@
+{
+  "lerobot/pi05_base": {
+    "revision": "22c30e5b34f9e7ab738b1b34fc2fc5ecfe2d28f0",
+    "path": "/scratch/aparame/.cache/huggingface/hub/models--lerobot--pi05_base/snapshots/22c30e5b34f9e7ab738b1b34fc2fc5ecfe2d28f0",
+    "files": {
+      ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "README.md": "5660a59c4bc742dbab3b0f8a109442436b8378200cdbdf6ed35045efe16cdfdc",
+      "config.json": "367869712a2847c27e95c431ecb03f17bec4eee01a63995e2fb2d91940752b53",
+      "model.safetensors": "0eb11ca9587678c1d2ef8cf32807c29f8ce53a2bfdfc1aa4a4c96f16fca59b0f",
+      "policy_postprocessor.json": "142c8b622aeac5c14631e057279df058d3005f616d909cfe30a04524de0b0891",
+      "policy_preprocessor.json": "be2cd1acc33229d42be0640cb55b5d5a4bb3e8d8e27ddfcdcf3f99f1fe3beaef",
+      ".eval_results/vlabench.yaml": "3451887789ecd03e62e18469a1d5c79055b351d4f5bb339a119084b0479652c1"
+    }
+  },
+  "lerobot/smolvla_base": {
+    "revision": "5e8d12a6e2975b0e5e5fce7c8caf47c371d257b6",
+    "path": "/scratch/aparame/.cache/huggingface/hub/models--lerobot--smolvla_base/snapshots/5e8d12a6e2975b0e5e5fce7c8caf47c371d257b6",
+    "files": {
+      ".gitattributes": "32949ddb126c25a78e757b890078c46d0c8f8e899e56510a1efef817233149f9",
+      "Finetune_SmolVLA_notebook.ipynb": "7f445c913c508142b632245ae52494c23ac8b96109fe1f9144e34b8b9c60f92d",
+      "README.md": "1c4eab155e159a5fd3fd6c4d5f770c43f056665d73e11c0584e47f8b824d3c98",
+      "collage_small.gif": "c43f022bf1fdfbac82841ef95c7a99a7ead13ea67f2a7202f2fe57148f352c83",
+      "config.json": "650584b56c104720f7a3c91d1ec6bec9e8de8ac11e60c92ba2fa82d93eda147d",
+      "model.safetensors": "7cd549ac2351fb069c0ddb3c34ad2d09cfc92b56a15dccdfc2e41467aaca01eb",
+      "policy_postprocessor.json": "2b78bb742065288df2ec63b0ee35f97a1f6950171cf2272f7e34b1fe3873b17b",
+      "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "490ab239d96e263687c0b2e386a0afbc235a2eceb9857c36ed32f2f162a3e7c8",
+      "policy_preprocessor.json": "7683d648280a72f0d51e869fb8dd1596beed90b7f84849330cf1bc26634a4bd6",
+      "policy_preprocessor_step_5_normalizer_processor.safetensors": "490ab239d96e263687c0b2e386a0afbc235a2eceb9857c36ed32f2f162a3e7c8"
+    }
+  },
+  "google/paligemma-3b-pt-224": {
+    "revision": "35e4f46485b4d07967e7e9935bc3786aad50687c",
+    "path": "/scratch/aparame/.cache/huggingface/hub/models--google--paligemma-3b-pt-224/snapshots/35e4f46485b4d07967e7e9935bc3786aad50687c"
+  },
+  "HuggingFaceTB/SmolVLM2-500M-Video-Instruct": {
+    "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "path": "/scratch/aparame/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+  }
+}

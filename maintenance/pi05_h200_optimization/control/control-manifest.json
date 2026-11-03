@@ -1,0 +1,14 @@
+{
+  "files": {
+    "README.md": "4326e326f2daf1faa3161f5c13cfa615345a82aa4fe18e85c03835e3e59f6dba",
+    "config.json": "d3f4f1c7f7eaea5249585a20a7b9780d442d693f1e464cb302e4160435c6a055",
+    "handoff.py": "db557049687bc22dd638e1f0a02600e36c074494574aa39865cbcf30e33b6ac4",
+    "handoff_guards.py": "3ba645f30f990a9a70b35ccb318243b893bcf7e85949daf5a256ee5686a12580",
+    "pi05_baseline.sbatch": "5e19f782e25ad698e18ebc5a389b736cf6454060fb12fae2327948c6e8a824a0",
+    "pi05_kr.sbatch": "f94d23645740c86e115d4f6fb362257c484797e844f3395c0dc5cf50d341826b",
+    "submit.py": "56763c139552f86501e132b6518cb6e55034a2676524858ddb08a2dc49ec1a13",
+    "test_controller.py": "51382bc54a20ae91eda18ee18a14b55110124bf015291f4facaed28a703a928c",
+    "test_handoff_guards.py": "742f61e45a46881455ecf17e44d81f00e9f19e9907a5c549a8db2f9fe7869aa7",
+    "verify.sbatch": "fd011cbb52ff2e492ea49db92386b7228fe9c7f9e4450fe299cd4d427dec686f"
+  }
+}

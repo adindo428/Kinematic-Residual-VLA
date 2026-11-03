@@ -1,0 +1,466 @@
+{
+  "checked_at": "2026-10-20T22:23:57.104273+00:00",
+  "accounting": "17709588|a100opt_smolvla_baseline-trai|COMPLETED|01:35:05|0:0|Dependency|2026-10-20T00:36:58|2026-10-20T02:12:03|0\n17709590|a100opt_smolvla_kr-trai|COMPLETED|01:41:47|0:0|Dependency|2026-10-20T00:43:13|2026-10-20T02:25:00|0\n17709592|a100opt_vlash_baseline-trai|PREEMPTED|14:02:41|0:0|Dependency|2026-10-20T00:52:34|2026-10-20T14:55:15|0\n17709594|a100opt_vlash_kr-trai|PREEMPTED|13:42:20|0:0|Dependency|2026-10-20T01:12:55|2026-10-20T14:55:15|0\n17719993|a100cache_pi05_baseline-trai|PREEMPTED|10:53:04|0:0|Dependency|2026-10-20T05:20:35|2026-10-20T16:13:39|0\n17720948|a100cache_pi05_kr-trai|RUNNING|12:41:40|0:0|Dependency|2026-10-20T05:42:16|Unknown|0\n17745549|h200_resume_pi05_baseline|PENDING|00:00:00|0:0|Dependency|Unknown|Unknown|0\n17745557|h200_resume_pi05_kr|PENDING|00:00:00|0:0|Dependency|Unknown|Unknown|0\n17709592|a100opt_vlash_baseline-trai|PREEMPTED|00:01:20|0:0|BeginTime|2026-10-20T14:59:15|2026-10-20T15:00:35|1\n17709594|a100opt_vlash_kr-trai|PREEMPTED|00:01:20|0:0|BeginTime|2026-10-20T14:59:15|2026-10-20T15:00:35|1\n17709592|a100opt_vlash_baseline-trai|PREEMPTED|00:53:33|0:0|BeginTime|2026-10-20T15:20:06|2026-10-20T16:13:39|2\n17709594|a100opt_vlash_kr-trai|PREEMPTED|00:53:33|0:0|BeginTime|2026-10-20T15:20:06|2026-10-20T16:13:39|2\n17709592|a100opt_vlash_baseline-trai|COMPLETED|01:29:32|0:0|BeginTime|2026-10-20T16:19:59|2026-10-20T17:49:31|3\n17709594|a100opt_vlash_kr-trai|RUNNING|01:17:32|0:0|BeginTime|2026-10-20T17:06:24|Unknown|3\n17719993|a100cache_pi05_baseline-trai|RUNNING|01:12:32|0:0|BeginTime|2026-10-20T17:11:24|Unknown|1\n",
+  "queue": "17745557|h200_resume_pi05_kr|PENDING|(Resources)\n17745549|h200_resume_pi05_baseline|PENDING|(Resources)\n17720948|a100cache_pi05_kr-trai|RUNNING|node0404\n17719993|a100cache_pi05_baseline-trai|RUNNING|node0287\n17709594|a100opt_vlash_kr-trai|RUNNING|node0377\n",
+  "runs": {
+    "smolvla_baseline": {
+      "latest": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "provenance": {
+        "recipe": {
+          "name": "smolvla_baseline",
+          "method": "smolvla",
+          "kr": false,
+          "lr": 0.0001,
+          "steps": 20000,
+          "weight_decay": 1e-10,
+          "clip": 10.0,
+          "global_batch": 64,
+          "max_delay": 0,
+          "decay_lr": 2.5e-06,
+          "horizon": 20,
+          "fps": 25,
+          "seed": 42,
+          "normalization": "mean_std",
+          "velocity_conditioning": false,
+          "phase_gate": false,
+          "shared_observation": false
+        },
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "job_id": "17709588",
+        "world_size": 2,
+        "readiness": {
+          "approved": true,
+          "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+          "hardware": "NVIDIA A100 80GB PCIe",
+          "runtime": {
+            "microbatch": 32,
+            "workers": 8,
+            "main_threads": 2,
+            "prefetch": 2
+          },
+          "microbatch": 32,
+          "global_batch": 64,
+          "accumulation": 1,
+          "decoded_optimizer_updates": 20,
+          "seconds": 14.29891394637525,
+          "samples_per_second": 89.51728815211716,
+          "peak_gpu_reserved_bytes": 7482638336.0,
+          "node_process_peak_rss_bytes": 36579377152.0,
+          "validation_h20_action_mse": 1.669071912765503,
+          "strict_checkpoint_rng_reload": true,
+          "strict_inference_reload": true,
+          "coordinated_checkpoint_test": true,
+          "mean_gpu_utilization_percent": 16.608695652173914,
+          "source": {
+            "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+            "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+            "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+            "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+            "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+            "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+            "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+            "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+            "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+            "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+            "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+            "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+            "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+          }
+        },
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "wandb_id": "qabxg0en",
+        "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en"
+      },
+      "completed": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "validation_h20_action_mse": 0.7757606506347656,
+        "stop_reason": "official_step_budget"
+      },
+      "stopped": null,
+      "wandb": {
+        "id": "qabxg0en",
+        "url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en"
+      },
+      "out": "epoch\": 0.05630347264202051, \"Train/samples_per_second\": 218.87348374462545, \"Train/lr\": 2.5682237837425974e-06}\n{\"Train/loss\": 0.06741341948509216, \"Train/optimizer_updates\": 19690, \"Train/samples\": 1260160, \"Train/epoch\": 0.056332082130151624, \"Train/samples_per_second\": 218.7164344094645, \"Train/lr\": 2.5640273410862795e-06}\n{\"Train/loss\": 0.10775962471961975, \"Train/optimizer_updates\": 19700, \"Train/samples\": 1260800, \"Train/epoch\": 0.056360691618282735, \"Train/samples_per_second\": 218.5345944526978, \"Train/lr\": 2.5599640040201445e-06}\n{\"Train/loss\": 0.05433671921491623, \"Train/optimizer_updates\": 19710, \"Train/samples\": 1261440, \"Train/epoch\": 0.05638930110641384, \"Train/samples_per_second\": 218.66378643962062, \"Train/lr\": 2.556033783653193e-06}\n{\"Train/loss\": 0.07054965198040009, \"Train/optimizer_updates\": 19720, \"Train/samples\": 1262080, \"Train/epoch\": 0.05641791059454495, \"Train/samples_per_second\": 218.90347230338787, \"Train/lr\": 2.5522366907305e-06}\n{\"Train/loss\": 0.03994067758321762, \"Train/optimizer_updates\": 19730, \"Train/samples\": 1262720, \"Train/epoch\": 0.056446520082676054, \"Train/samples_per_second\": 218.8579260075948, \"Train/lr\": 2.5485727356331782e-06}\n{\"Train/loss\": 0.04072748124599457, \"Train/optimizer_updates\": 19740, \"Train/samples\": 1263360, \"Train/epoch\": 0.056475129570807164, \"Train/samples_per_second\": 219.02924051852952, \"Train/lr\": 2.5450419283783423e-06}\n{\"Train/loss\": 0.06782764941453934, \"Train/optimizer_updates\": 19750, \"Train/samples\": 1264000, \"Train/epoch\": 0.056503739058938275, \"Train/samples_per_second\": 218.82589952798975, \"Train/lr\": 2.541644278619076e-06}\n{\"Train/loss\": 0.06439867615699768, \"Train/optimizer_updates\": 19760, \"Train/samples\": 1264640, \"Train/epoch\": 0.05653234854706938, \"Train/samples_per_second\": 218.616856967128, \"Train/lr\": 2.5383797956444254e-06}\n{\"Train/loss\": 0.050593018531799316, \"Train/optimizer_updates\": 19770, \"Train/samples\": 1265280, \"Train/epoch\": 0.05656095803520049, \"Train/samples_per_second\": 218.9463316048177, \"Train/lr\": 2.535248488379369e-06}\n{\"Train/loss\": 0.06004264950752258, \"Train/optimizer_updates\": 19780, \"Train/samples\": 1265920, \"Train/epoch\": 0.056589567523331594, \"Train/samples_per_second\": 218.82024153505498, \"Train/lr\": 2.5322503653847784e-06}\n{\"Train/loss\": 0.05576397478580475, \"Train/optimizer_updates\": 19790, \"Train/samples\": 1266560, \"Train/epoch\": 0.056618177011462704, \"Train/samples_per_second\": 218.7582562066106, \"Train/lr\": 2.5293854348574e-06}\n{\"Train/loss\": 0.07768981158733368, \"Train/optimizer_updates\": 19800, \"Train/samples\": 1267200, \"Train/epoch\": 0.056646786499593815, \"Train/samples_per_second\": 218.98310560358883, \"Train/lr\": 2.5266537046298555e-06}\n{\"Train/loss\": 0.05150793492794037, \"Train/optimizer_updates\": 19810, \"Train/samples\": 1267840, \"Train/epoch\": 0.05667539598772492, \"Train/samples_per_second\": 218.86915855986823, \"Train/lr\": 2.5240551821705848e-06}\n{\"Train/loss\": 0.06517820060253143, \"Train/optimizer_updates\": 19820, \"Train/samples\": 1268480, \"Train/epoch\": 0.05670400547585603, \"Train/samples_per_second\": 219.00282265524342, \"Train/lr\": 2.5215898745838543e-06}\n{\"Train/loss\": 0.08227770775556564, \"Train/optimizer_updates\": 19830, \"Train/samples\": 1269120, \"Train/epoch\": 0.056732614963987134, \"Train/samples_per_second\": 218.8179674109226, \"Train/lr\": 2.5192577886097133e-06}\n{\"Train/loss\": 0.04524366557598114, \"Train/optimizer_updates\": 19840, \"Train/samples\": 1269760, \"Train/epoch\": 0.056761224452118245, \"Train/samples_per_second\": 218.7222988752853, \"Train/lr\": 2.517058930623998e-06}\n{\"Train/loss\": 0.04668862000107765, \"Train/optimizer_updates\": 19850, \"Train/samples\": 1270400, \"Train/epoch\": 0.056789833940249355, \"Train/samples_per_second\": 218.69543161661232, \"Train/lr\": 2.514993306638309e-06}\n{\"Train/loss\": 0.05632897466421127, \"Train/optimizer_updates\": 19860, \"Train/samples\": 1271040, \"Train/epoch\": 0.05681844342838046, \"Train/samples_per_second\": 218.87205284904445, \"Train/lr\": 2.513060922299972e-06}\n{\"Train/loss\": 0.04577645659446716, \"Train/optimizer_updates\": 19870, \"Train/samples\": 1271680, \"Train/epoch\": 0.05684705291651157, \"Train/samples_per_second\": 218.82976071869336, \"Train/lr\": 2.5112617828920617e-06}\n{\"Train/loss\": 0.06802042573690414, \"Train/optimizer_updates\": 19880, \"Train/samples\": 1272320, \"Train/epoch\": 0.056875662404642674, \"Train/samples_per_second\": 218.8548416018889, \"Train/lr\": 2.509595893333353e-06}\n{\"Train/loss\": 0.04086652398109436, \"Train/optimizer_updates\": 19890, \"Train/samples\": 1272960, \"Train/epoch\": 0.056904271892773785, \"Train/samples_per_second\": 218.8520965037464, \"Train/lr\": 2.5080632581783226e-06}\n{\"Train/loss\": 0.04556906968355179, \"Train/optimizer_updates\": 19900, \"Train/samples\": 1273600, \"Train/epoch\": 0.056932881380904896, \"Train/samples_per_second\": 218.77008089651048, \"Train/lr\": 2.506663881617136e-06}\n{\"Train/loss\": 0.05084019899368286, \"Train/optimizer_updates\": 19910, \"Train/samples\": 1274240, \"Train/epoch\": 0.056961490869036, \"Train/samples_per_second\": 218.81915567982693, \"Train/lr\": 2.5053977674756406e-06}\n{\"Train/loss\": 0.051043715327978134, \"Train/optimizer_updates\": 19920, \"Train/samples\": 1274880, \"Train/epoch\": 0.05699010035716711, \"Train/samples_per_second\": 218.78474890396228, \"Train/lr\": 2.504264919215345e-06}\n{\"Train/loss\": 0.07648937404155731, \"Train/optimizer_updates\": 19930, \"Train/samples\": 1275520, \"Train/epoch\": 0.057018709845298214, \"Train/samples_per_second\": 218.73183348901946, \"Train/lr\": 2.5032653399334036e-06}\n{\"Train/loss\": 0.06361411511898041, \"Train/optimizer_updates\": 19940, \"Train/samples\": 1276160, \"Train/epoch\": 0.057047319333429325, \"Train/samples_per_second\": 218.88143299396742, \"Train/lr\": 2.502399032362632e-06}\n{\"Train/loss\": 0.04158492386341095, \"Train/optimizer_updates\": 19950, \"Train/samples\": 1276800, \"Train/epoch\": 0.05707592882156043, \"Train/samples_per_second\": 218.7251492516493, \"Train/lr\": 2.5016659988714896e-06}\n{\"Train/loss\": 0.06410709768533707, \"Train/optimizer_updates\": 19960, \"Train/samples\": 1277440, \"Train/epoch\": 0.05710453830969154, \"Train/samples_per_second\": 218.78917760872883, \"Train/lr\": 2.5010662414640516e-06}\n{\"Train/loss\": 0.03897115960717201, \"Train/optimizer_updates\": 19970, \"Train/samples\": 1278080, \"Train/epoch\": 0.05713314779782265, \"Train/samples_per_second\": 218.52800197179394, \"Train/lr\": 2.5005997617800336e-06}\n{\"Train/loss\": 0.04871242493391037, \"Train/optimizer_updates\": 19980, \"Train/samples\": 1278720, \"Train/epoch\": 0.057161757285953754, \"Train/samples_per_second\": 218.80231585178362, \"Train/lr\": 2.5002665610947772e-06}\n{\"Train/loss\": 0.05816228687763214, \"Train/optimizer_updates\": 19990, \"Train/samples\": 1279360, \"Train/epoch\": 0.057190366774084865, \"Train/samples_per_second\": 218.91625214886278, \"Train/lr\": 2.5000666403192447e-06}\n{\"Train/loss\": 0.04080217331647873, \"Train/optimizer_updates\": 20000, \"Train/samples\": 1280000, \"Train/epoch\": 0.05721897626221597, \"Train/samples_per_second\": 218.85880885562096, \"Train/lr\": 2.5e-06}\n",
+      "err": "WARNING:lerobot.configs.policies:Device 'None' is not available. Switching to 'cuda'.\nWARNING:lerobot.configs.policies:Device 'None' is not available. Switching to 'cuda'.\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nYou have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.\nYou have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.\nwandb: WARNING `start_method` is deprecated and will be removed in a future version of wandb. This setting is currently non-functional and safely ignored.\nwandb: Currently logged in as: aparame (aparame-clemson-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin\nwandb: creating run\nwandb: Tracking run with wandb version 0.21.4\nwandb: Run data is saved locally in /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/wandb/run-20261020_003743-qabxg0en\nwandb: Run `wandb offline` to turn off syncing.\nwandb: Resuming run smolvla_baseline_a100\nwandb: \u2b50\ufe0f View project at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: \ud83d\ude80 View run at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en\n[rank1]:[W1020 00:38:10.571173551 reducer.cpp:1430] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())\n[rank0]:[W1020 00:38:10.782512166 reducer.cpp:1430] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\nwandb: updating run metadata\nwandb: \nwandb: Run history:\nwandb:              Train/epoch \u2581\u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2585\u2585\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\u2588\nwandb:               Train/loss \u2588\u2587\u2586\u2585\u2585\u2583\u2582\u2584\u2584\u2584\u2583\u2584\u2584\u2583\u2584\u2583\u2584\u2586\u2583\u2581\u2582\u2583\u2583\u2582\u2583\u2585\u2585\u2584\u2582\u2582\u2582\u2583\u2582\u2583\u2582\u2582\u2582\u2583\u2582\u2581\nwandb:                 Train/lr \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2587\u2587\u2587\u2587\u2587\u2586\u2586\u2586\u2586\u2586\u2585\u2585\u2585\u2585\u2585\u2584\u2584\u2584\u2584\u2584\u2583\u2582\u2582\u2582\u2582\u2581\u2581\u2581\u2581\u2581\nwandb:  Train/optimizer_updates \u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2585\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\u2588\u2588\u2588\nwandb:            Train/samples \u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2588\nwandb: Train/samples_per_second \u2588\u2587\u2584\u2583\u2583\u2582\u2582\u2583\u2582\u2581\u2583\u2584\u2583\u2582\u2584\u2585\u2586\u2585\u2585\u2586\u2585\u2586\u2586\u2586\u2587\u2586\u2587\u2587\u2586\u2586\u2587\u2586\u2586\u2587\u2586\u2585\u2584\u2586\u2587\u2588\nwandb: \nwandb: Run summary:\nwandb:              Train/epoch 0.05722\nwandb:               Train/loss 0.0408\nwandb:                 Train/lr 0.0\nwandb:  Train/optimizer_updates 20000\nwandb:            Train/samples 1280000\nwandb: Train/samples_per_second 218.85881\nwandb: \nwandb: \ud83d\ude80 View run smolvla_baseline_a100 at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en\nwandb: \u2b50\ufe0f View project at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)\nwandb: Find logs at: ./runs/smolvla_baseline/wandb/run-20261020_003743-qabxg0en/logs\n"
+    },
+    "smolvla_kr": {
+      "latest": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt"
+      },
+      "provenance": {
+        "recipe": {
+          "name": "smolvla_kr",
+          "method": "smolvla",
+          "kr": true,
+          "lr": 0.0001,
+          "steps": 20000,
+          "weight_decay": 1e-10,
+          "clip": 10.0,
+          "global_batch": 64,
+          "max_delay": 0,
+          "decay_lr": 2.5e-06,
+          "horizon": 20,
+          "fps": 25,
+          "seed": 42,
+          "normalization": "mean_std",
+          "velocity_conditioning": false,
+          "phase_gate": false,
+          "shared_observation": false
+        },
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "job_id": "17709590",
+        "world_size": 2,
+        "readiness": {
+          "approved": true,
+          "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+          "hardware": "NVIDIA A100 80GB PCIe",
+          "runtime": {
+            "microbatch": 32,
+            "workers": 4,
+            "main_threads": 4,
+            "prefetch": 2
+          },
+          "microbatch": 32,
+          "global_batch": 64,
+          "accumulation": 1,
+          "decoded_optimizer_updates": 20,
+          "seconds": 12.76817658636719,
+          "samples_per_second": 100.2492400807394,
+          "peak_gpu_reserved_bytes": 7482638336.0,
+          "node_process_peak_rss_bytes": 23587786752.0,
+          "validation_h20_action_mse": 1.6703147888183594,
+          "strict_checkpoint_rng_reload": true,
+          "strict_inference_reload": true,
+          "coordinated_checkpoint_test": true,
+          "mean_gpu_utilization_percent": 16.333333333333332,
+          "source": {
+            "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+            "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+            "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+            "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+            "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+            "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+            "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+            "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+            "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+            "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+            "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+            "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+            "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+          }
+        },
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "wandb_id": "8npmrzpw",
+        "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw"
+      },
+      "completed": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "validation_h20_action_mse": 0.774071216583252,
+        "stop_reason": "official_step_budget"
+      },
+      "stopped": null,
+      "wandb": {
+        "id": "8npmrzpw",
+        "url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw"
+      },
+      "out": "och\": 0.05630347264202051, \"Train/samples_per_second\": 213.20515793366908, \"Train/lr\": 2.5682237837425974e-06}\n{\"Train/loss\": 0.06095167249441147, \"Train/optimizer_updates\": 19690, \"Train/samples\": 1260160, \"Train/epoch\": 0.056332082130151624, \"Train/samples_per_second\": 213.20506021683906, \"Train/lr\": 2.5640273410862795e-06}\n{\"Train/loss\": 0.1144489049911499, \"Train/optimizer_updates\": 19700, \"Train/samples\": 1260800, \"Train/epoch\": 0.056360691618282735, \"Train/samples_per_second\": 213.49297740644377, \"Train/lr\": 2.5599640040201445e-06}\n{\"Train/loss\": 0.06764186918735504, \"Train/optimizer_updates\": 19710, \"Train/samples\": 1261440, \"Train/epoch\": 0.05638930110641384, \"Train/samples_per_second\": 213.0725666748814, \"Train/lr\": 2.556033783653193e-06}\n{\"Train/loss\": 0.0698256567120552, \"Train/optimizer_updates\": 19720, \"Train/samples\": 1262080, \"Train/epoch\": 0.05641791059454495, \"Train/samples_per_second\": 213.18158527340967, \"Train/lr\": 2.5522366907305e-06}\n{\"Train/loss\": 0.058683738112449646, \"Train/optimizer_updates\": 19730, \"Train/samples\": 1262720, \"Train/epoch\": 0.056446520082676054, \"Train/samples_per_second\": 213.45027983028373, \"Train/lr\": 2.5485727356331782e-06}\n{\"Train/loss\": 0.045716606080532074, \"Train/optimizer_updates\": 19740, \"Train/samples\": 1263360, \"Train/epoch\": 0.056475129570807164, \"Train/samples_per_second\": 213.3430933615868, \"Train/lr\": 2.5450419283783423e-06}\n{\"Train/loss\": 0.10517217218875885, \"Train/optimizer_updates\": 19750, \"Train/samples\": 1264000, \"Train/epoch\": 0.056503739058938275, \"Train/samples_per_second\": 213.5659150156717, \"Train/lr\": 2.541644278619076e-06}\n{\"Train/loss\": 0.060794323682785034, \"Train/optimizer_updates\": 19760, \"Train/samples\": 1264640, \"Train/epoch\": 0.05653234854706938, \"Train/samples_per_second\": 213.38331061900067, \"Train/lr\": 2.5383797956444254e-06}\n{\"Train/loss\": 0.05535171180963516, \"Train/optimizer_updates\": 19770, \"Train/samples\": 1265280, \"Train/epoch\": 0.05656095803520049, \"Train/samples_per_second\": 213.20268777097692, \"Train/lr\": 2.535248488379369e-06}\n{\"Train/loss\": 0.06898732483386993, \"Train/optimizer_updates\": 19780, \"Train/samples\": 1265920, \"Train/epoch\": 0.056589567523331594, \"Train/samples_per_second\": 213.70644254549077, \"Train/lr\": 2.5322503653847784e-06}\n{\"Train/loss\": 0.06646312773227692, \"Train/optimizer_updates\": 19790, \"Train/samples\": 1266560, \"Train/epoch\": 0.056618177011462704, \"Train/samples_per_second\": 213.68880209679764, \"Train/lr\": 2.5293854348574e-06}\n{\"Train/loss\": 0.07910674065351486, \"Train/optimizer_updates\": 19800, \"Train/samples\": 1267200, \"Train/epoch\": 0.056646786499593815, \"Train/samples_per_second\": 213.30069953458505, \"Train/lr\": 2.5266537046298555e-06}\n{\"Train/loss\": 0.05908649042248726, \"Train/optimizer_updates\": 19810, \"Train/samples\": 1267840, \"Train/epoch\": 0.05667539598772492, \"Train/samples_per_second\": 213.1563888741668, \"Train/lr\": 2.5240551821705848e-06}\n{\"Train/loss\": 0.07065694034099579, \"Train/optimizer_updates\": 19820, \"Train/samples\": 1268480, \"Train/epoch\": 0.05670400547585603, \"Train/samples_per_second\": 213.2782222514273, \"Train/lr\": 2.5215898745838543e-06}\n{\"Train/loss\": 0.07844629883766174, \"Train/optimizer_updates\": 19830, \"Train/samples\": 1269120, \"Train/epoch\": 0.056732614963987134, \"Train/samples_per_second\": 213.54527380030856, \"Train/lr\": 2.5192577886097133e-06}\n{\"Train/loss\": 0.06642523407936096, \"Train/optimizer_updates\": 19840, \"Train/samples\": 1269760, \"Train/epoch\": 0.056761224452118245, \"Train/samples_per_second\": 213.58151669687157, \"Train/lr\": 2.517058930623998e-06}\n{\"Train/loss\": 0.054377101361751556, \"Train/optimizer_updates\": 19850, \"Train/samples\": 1270400, \"Train/epoch\": 0.056789833940249355, \"Train/samples_per_second\": 213.41408119062626, \"Train/lr\": 2.514993306638309e-06}\n{\"Train/loss\": 0.05083480849862099, \"Train/optimizer_updates\": 19860, \"Train/samples\": 1271040, \"Train/epoch\": 0.05681844342838046, \"Train/samples_per_second\": 213.86576211947607, \"Train/lr\": 2.513060922299972e-06}\n{\"Train/loss\": 0.047134485095739365, \"Train/optimizer_updates\": 19870, \"Train/samples\": 1271680, \"Train/epoch\": 0.05684705291651157, \"Train/samples_per_second\": 213.30003109301518, \"Train/lr\": 2.5112617828920617e-06}\n{\"Train/loss\": 0.06771382689476013, \"Train/optimizer_updates\": 19880, \"Train/samples\": 1272320, \"Train/epoch\": 0.056875662404642674, \"Train/samples_per_second\": 213.41437523128187, \"Train/lr\": 2.509595893333353e-06}\n{\"Train/loss\": 0.05524957925081253, \"Train/optimizer_updates\": 19890, \"Train/samples\": 1272960, \"Train/epoch\": 0.056904271892773785, \"Train/samples_per_second\": 213.46689758124023, \"Train/lr\": 2.5080632581783226e-06}\n{\"Train/loss\": 0.05496048182249069, \"Train/optimizer_updates\": 19900, \"Train/samples\": 1273600, \"Train/epoch\": 0.056932881380904896, \"Train/samples_per_second\": 213.566130027553, \"Train/lr\": 2.506663881617136e-06}\n{\"Train/loss\": 0.055986449122428894, \"Train/optimizer_updates\": 19910, \"Train/samples\": 1274240, \"Train/epoch\": 0.056961490869036, \"Train/samples_per_second\": 213.32774506412574, \"Train/lr\": 2.5053977674756406e-06}\n{\"Train/loss\": 0.06668568402528763, \"Train/optimizer_updates\": 19920, \"Train/samples\": 1274880, \"Train/epoch\": 0.05699010035716711, \"Train/samples_per_second\": 213.1761721935906, \"Train/lr\": 2.504264919215345e-06}\n{\"Train/loss\": 0.08693587779998779, \"Train/optimizer_updates\": 19930, \"Train/samples\": 1275520, \"Train/epoch\": 0.057018709845298214, \"Train/samples_per_second\": 213.57863166025487, \"Train/lr\": 2.5032653399334036e-06}\n{\"Train/loss\": 0.0790882334113121, \"Train/optimizer_updates\": 19940, \"Train/samples\": 1276160, \"Train/epoch\": 0.057047319333429325, \"Train/samples_per_second\": 213.4985092993078, \"Train/lr\": 2.502399032362632e-06}\n{\"Train/loss\": 0.05330706760287285, \"Train/optimizer_updates\": 19950, \"Train/samples\": 1276800, \"Train/epoch\": 0.05707592882156043, \"Train/samples_per_second\": 213.55688460893327, \"Train/lr\": 2.5016659988714896e-06}\n{\"Train/loss\": 0.07474521547555923, \"Train/optimizer_updates\": 19960, \"Train/samples\": 1277440, \"Train/epoch\": 0.05710453830969154, \"Train/samples_per_second\": 213.4210407733589, \"Train/lr\": 2.5010662414640516e-06}\n{\"Train/loss\": 0.04890017583966255, \"Train/optimizer_updates\": 19970, \"Train/samples\": 1278080, \"Train/epoch\": 0.05713314779782265, \"Train/samples_per_second\": 213.73853872234892, \"Train/lr\": 2.5005997617800336e-06}\n{\"Train/loss\": 0.06623233109712601, \"Train/optimizer_updates\": 19980, \"Train/samples\": 1278720, \"Train/epoch\": 0.057161757285953754, \"Train/samples_per_second\": 213.65321577188277, \"Train/lr\": 2.5002665610947772e-06}\n{\"Train/loss\": 0.0635785236954689, \"Train/optimizer_updates\": 19990, \"Train/samples\": 1279360, \"Train/epoch\": 0.057190366774084865, \"Train/samples_per_second\": 213.42902709063515, \"Train/lr\": 2.5000666403192447e-06}\n{\"Train/loss\": 0.05283635854721069, \"Train/optimizer_updates\": 20000, \"Train/samples\": 1280000, \"Train/epoch\": 0.05721897626221597, \"Train/samples_per_second\": 213.23884243642996, \"Train/lr\": 2.5e-06}\n",
+      "err": "WARNING:lerobot.configs.policies:Device 'None' is not available. Switching to 'cuda'.\nWARNING:lerobot.configs.policies:Device 'None' is not available. Switching to 'cuda'.\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nYou have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.\nYou have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.\nwandb: WARNING `start_method` is deprecated and will be removed in a future version of wandb. This setting is currently non-functional and safely ignored.\nwandb: Currently logged in as: aparame (aparame-clemson-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin\nwandb: creating run\nwandb: Tracking run with wandb version 0.21.4\nwandb: Run data is saved locally in /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/wandb/run-20261020_004356-8npmrzpw\nwandb: Run `wandb offline` to turn off syncing.\nwandb: Syncing run smolvla_kr_a100\nwandb: \u2b50\ufe0f View project at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: \ud83d\ude80 View run at https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw\n[rank1]:[W1020 00:44:10.837022145 reducer.cpp:1430] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())\n[rank0]:[W1020 00:44:10.898672044 reducer.cpp:1430] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\nwandb: updating run metadata\nwandb: \nwandb: Run history:\nwandb:              Train/epoch \u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\nwandb:               Train/loss \u2587\u2588\u2584\u2585\u2583\u2587\u2584\u2584\u2584\u2588\u2582\u2583\u2583\u2584\u2585\u2582\u2582\u2582\u2582\u2584\u2584\u2583\u2582\u2582\u2582\u2581\u2582\u2582\u2582\u2581\u2582\u2584\u2582\u2581\u2583\u2581\u2582\u2582\u2582\u2582\nwandb:                 Train/lr \u2582\u2582\u2583\u2587\u2587\u2588\u2588\u2588\u2588\u2588\u2587\u2587\u2587\u2586\u2586\u2586\u2586\u2586\u2586\u2585\u2585\u2585\u2585\u2585\u2585\u2584\u2584\u2584\u2584\u2583\u2583\u2582\u2582\u2582\u2582\u2581\u2581\u2581\u2581\u2581\nwandb:  Train/optimizer_updates \u2581\u2581\u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2588\nwandb:            Train/samples \u2581\u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2588\u2588\u2588\u2588\u2588\nwandb: Train/samples_per_second \u2581\u2582\u2582\u2584\u2584\u2582\u2581\u2583\u2583\u2585\u2585\u2586\u2586\u2583\u2583\u2586\u2582\u2585\u2585\u2585\u2585\u2585\u2585\u2585\u2586\u2585\u2588\u2585\u2583\u2586\u2585\u2586\u2585\u2585\u2585\u2585\u2584\u2584\u2585\u2584\nwandb: \nwandb: Run summary:\nwandb:              Train/epoch 0.05722\nwandb:               Train/loss 0.05284\nwandb:                 Train/lr 0.0\nwandb:  Train/optimizer_updates 20000\nwandb:            Train/samples 1280000\nwandb: Train/samples_per_second 213.23884\nwandb: \nwandb: \ud83d\ude80 View run smolvla_kr_a100 at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw\nwandb: \u2b50\ufe0f View project at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)\nwandb: Find logs at: ./runs/smolvla_kr/wandb/run-20261020_004356-8npmrzpw/logs\n"
+    },
+    "vlash_baseline": {
+      "latest": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "provenance": {
+        "recipe": {
+          "name": "vlash_baseline",
+          "method": "vlash",
+          "kr": false,
+          "lr": 5e-05,
+          "steps": 30000,
+          "weight_decay": 1e-10,
+          "clip": 1.0,
+          "global_batch": 32,
+          "max_delay": 3,
+          "decay_lr": 2.5e-06,
+          "horizon": 20,
+          "fps": 25,
+          "seed": 42,
+          "normalization": "quantiles",
+          "velocity_conditioning": false,
+          "phase_gate": false,
+          "shared_observation": false
+        },
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "job_id": "17709592",
+        "world_size": 2,
+        "readiness": {
+          "approved": true,
+          "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+          "hardware": "NVIDIA A100 80GB PCIe",
+          "runtime": {
+            "microbatch": 8,
+            "workers": 12,
+            "main_threads": 2,
+            "prefetch": 2
+          },
+          "microbatch": 8,
+          "global_batch": 32,
+          "accumulation": 2,
+          "decoded_optimizer_updates": 20,
+          "seconds": 71.84424838703126,
+          "samples_per_second": 8.908159168876873,
+          "peak_gpu_reserved_bytes": 67607986176.0,
+          "node_process_peak_rss_bytes": 99446624256.0,
+          "validation_h20_action_mse": 2.57668137550354,
+          "strict_checkpoint_rng_reload": true,
+          "strict_inference_reload": true,
+          "coordinated_checkpoint_test": true,
+          "mean_gpu_utilization_percent": 40.094202898550726,
+          "source": {
+            "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+            "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+            "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+            "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+            "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+            "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+            "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+            "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+            "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+            "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+            "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+            "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+            "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+          }
+        },
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "wandb_id": "8m07ro1o",
+        "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8m07ro1o"
+      },
+      "completed": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "validation_h20_action_mse": 0.8325990438461304,
+        "stop_reason": "official_step_budget"
+      },
+      "stopped": null,
+      "wandb": {
+        "id": "8m07ro1o",
+        "url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8m07ro1o"
+      },
+      "out": "ch\": 0.04245648038656425, \"Train/samples_per_second\": 16.904397183079237, \"Train/lr\": 2.5142690096725458e-06}\n{\"Train/loss\": 0.004869518335908651, \"Train/optimizer_updates\": 29690, \"Train/samples\": 950080, \"Train/epoch\": 0.0424707851306298, \"Train/samples_per_second\": 16.89374369957849, \"Train/lr\": 2.5133912136546346e-06}\n{\"Train/loss\": 0.005444797687232494, \"Train/optimizer_updates\": 29700, \"Train/samples\": 950400, \"Train/epoch\": 0.04248508987469536, \"Train/samples_per_second\": 16.73821749710347, \"Train/lr\": 2.5125412738692614e-06}\n{\"Train/loss\": 0.006361581385135651, \"Train/optimizer_updates\": 29710, \"Train/samples\": 950720, \"Train/epoch\": 0.04249939461876091, \"Train/samples_per_second\": 16.90056329395476, \"Train/lr\": 2.5117191913138747e-06}\n{\"Train/loss\": 0.004660002887248993, \"Train/optimizer_updates\": 29720, \"Train/samples\": 951040, \"Train/epoch\": 0.042513699362826465, \"Train/samples_per_second\": 16.908574977316064, \"Train/lr\": 2.5109249669532383e-06}\n{\"Train/loss\": 0.008267495781183243, \"Train/optimizer_updates\": 29730, \"Train/samples\": 951360, \"Train/epoch\": 0.042528004106892024, \"Train/samples_per_second\": 16.896434997987946, \"Train/lr\": 2.5101586017194136e-06}\n{\"Train/loss\": 0.008370665833353996, \"Train/optimizer_updates\": 29740, \"Train/samples\": 951680, \"Train/epoch\": 0.042542308850957576, \"Train/samples_per_second\": 16.898699643585704, \"Train/lr\": 2.5094200965117783e-06}\n{\"Train/loss\": 0.0068127429112792015, \"Train/optimizer_updates\": 29750, \"Train/samples\": 952000, \"Train/epoch\": 0.04255661359502313, \"Train/samples_per_second\": 16.895007295429597, \"Train/lr\": 2.508709452197006e-06}\n{\"Train/loss\": 0.004252653568983078, \"Train/optimizer_updates\": 29760, \"Train/samples\": 952320, \"Train/epoch\": 0.04257091833908868, \"Train/samples_per_second\": 16.912495953405962, \"Train/lr\": 2.5080266696090773e-06}\n{\"Train/loss\": 0.005771285854279995, \"Train/optimizer_updates\": 29770, \"Train/samples\": 952640, \"Train/epoch\": 0.04258522308315424, \"Train/samples_per_second\": 16.89846405059208, \"Train/lr\": 2.50737174954928e-06}\n{\"Train/loss\": 0.005991049110889435, \"Train/optimizer_updates\": 29780, \"Train/samples\": 952960, \"Train/epoch\": 0.04259952782721979, \"Train/samples_per_second\": 16.907588163487336, \"Train/lr\": 2.506744692786193e-06}\n{\"Train/loss\": 0.010669548995792866, \"Train/optimizer_updates\": 29790, \"Train/samples\": 953280, \"Train/epoch\": 0.04261383257128534, \"Train/samples_per_second\": 16.904017189610684, \"Train/lr\": 2.506145500055705e-06}\n{\"Train/loss\": 0.006376833189278841, \"Train/optimizer_updates\": 29800, \"Train/samples\": 953600, \"Train/epoch\": 0.0426281373153509, \"Train/samples_per_second\": 16.91327646206824, \"Train/lr\": 2.5055741720610026e-06}\n{\"Train/loss\": 0.005037043709307909, \"Train/optimizer_updates\": 29810, \"Train/samples\": 953920, \"Train/epoch\": 0.042642442059416454, \"Train/samples_per_second\": 16.735495601705576, \"Train/lr\": 2.5050307094725708e-06}\n{\"Train/loss\": 0.006407863460481167, \"Train/optimizer_updates\": 29820, \"Train/samples\": 954240, \"Train/epoch\": 0.042656746803482005, \"Train/samples_per_second\": 16.91647524917038, \"Train/lr\": 2.5045151129281928e-06}\n{\"Train/loss\": 0.010515964590013027, \"Train/optimizer_updates\": 29830, \"Train/samples\": 954560, \"Train/epoch\": 0.042671051547547564, \"Train/samples_per_second\": 16.90490235610655, \"Train/lr\": 2.5040273830329504e-06}\n{\"Train/loss\": 0.0040885466150939465, \"Train/optimizer_updates\": 29840, \"Train/samples\": 954880, \"Train/epoch\": 0.042685356291613116, \"Train/samples_per_second\": 16.904143790383262, \"Train/lr\": 2.50356752035922e-06}\n{\"Train/loss\": 0.006656898185610771, \"Train/optimizer_updates\": 29850, \"Train/samples\": 955200, \"Train/epoch\": 0.04269966103567867, \"Train/samples_per_second\": 16.90343010602849, \"Train/lr\": 2.5031355254466793e-06}\n{\"Train/loss\": 0.004197911359369755, \"Train/optimizer_updates\": 29860, \"Train/samples\": 955520, \"Train/epoch\": 0.04271396577974422, \"Train/samples_per_second\": 16.89767807338885, \"Train/lr\": 2.5027313988022973e-06}\n{\"Train/loss\": 0.009156165644526482, \"Train/optimizer_updates\": 29870, \"Train/samples\": 955840, \"Train/epoch\": 0.04272827052380978, \"Train/samples_per_second\": 16.894503815943825, \"Train/lr\": 2.5023551409003374e-06}\n{\"Train/loss\": 0.0031454102136194706, \"Train/optimizer_updates\": 29880, \"Train/samples\": 956160, \"Train/epoch\": 0.04274257526787533, \"Train/samples_per_second\": 16.902017415776264, \"Train/lr\": 2.5020067521823605e-06}\n{\"Train/loss\": 0.008546184748411179, \"Train/optimizer_updates\": 29890, \"Train/samples\": 956480, \"Train/epoch\": 0.04275688001194088, \"Train/samples_per_second\": 16.895988943123996, \"Train/lr\": 2.5016862330572205e-06}\n{\"Train/loss\": 0.0063213203102350235, \"Train/optimizer_updates\": 29900, \"Train/samples\": 956800, \"Train/epoch\": 0.04277118475600644, \"Train/samples_per_second\": 16.902505247375732, \"Train/lr\": 2.501393583901064e-06}\n{\"Train/loss\": 0.0060053495690226555, \"Train/optimizer_updates\": 29910, \"Train/samples\": 957120, \"Train/epoch\": 0.042785489500071994, \"Train/samples_per_second\": 16.917053044416313, \"Train/lr\": 2.5011288050573296e-06}\n{\"Train/loss\": 0.0067192488349974155, \"Train/optimizer_updates\": 29920, \"Train/samples\": 957440, \"Train/epoch\": 0.042799794244137546, \"Train/samples_per_second\": 16.898797555989194, \"Train/lr\": 2.500891896836751e-06}\n{\"Train/loss\": 0.016309794038534164, \"Train/optimizer_updates\": 29930, \"Train/samples\": 957760, \"Train/epoch\": 0.042814098988203105, \"Train/samples_per_second\": 16.905342742505923, \"Train/lr\": 2.5006828595173552e-06}\n{\"Train/loss\": 0.0068681081756949425, \"Train/optimizer_updates\": 29940, \"Train/samples\": 958080, \"Train/epoch\": 0.042828403732268656, \"Train/samples_per_second\": 16.8980985588152, \"Train/lr\": 2.500501693344458e-06}\n{\"Train/loss\": 0.007790233474224806, \"Train/optimizer_updates\": 29950, \"Train/samples\": 958400, \"Train/epoch\": 0.04284270847633421, \"Train/samples_per_second\": 16.909648810032124, \"Train/lr\": 2.5003483985306657e-06}\n{\"Train/loss\": 0.011609270237386227, \"Train/optimizer_updates\": 29960, \"Train/samples\": 958720, \"Train/epoch\": 0.04285701322039976, \"Train/samples_per_second\": 16.900165093854596, \"Train/lr\": 2.5002229752558825e-06}\n{\"Train/loss\": 0.006588018499314785, \"Train/optimizer_updates\": 29970, \"Train/samples\": 959040, \"Train/epoch\": 0.04287131796446532, \"Train/samples_per_second\": 16.910306067820095, \"Train/lr\": 2.500125423667297e-06}\n{\"Train/loss\": 0.00972701981663704, \"Train/optimizer_updates\": 29980, \"Train/samples\": 959360, \"Train/epoch\": 0.04288562270853087, \"Train/samples_per_second\": 16.907155473657863, \"Train/lr\": 2.5000557438793893e-06}\n{\"Train/loss\": 0.0069822934456169605, \"Train/optimizer_updates\": 29990, \"Train/samples\": 959680, \"Train/epoch\": 0.04289992745259642, \"Train/samples_per_second\": 16.911066018206444, \"Train/lr\": 2.500013935973937e-06}\n{\"Train/loss\": 0.006545262411236763, \"Train/optimizer_updates\": 30000, \"Train/samples\": 960000, \"Train/epoch\": 0.04291423219666198, \"Train/samples_per_second\": 16.900439453447227, \"Train/lr\": 2.5e-06}\n",
+      "err": "an the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27730 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27740 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27750 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27760 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27770 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27780 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27790 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27800 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27810 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27820 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27830 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27840 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27850 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27860 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27870 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27880 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27890 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27900 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27910 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27920 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27930 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27940 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27950 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 27960 that is less than the current step 27961. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\nwandb: updating run metadata\nwandb: \nwandb: Run history:\nwandb:              Train/epoch \u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\u2588\nwandb:               Train/loss \u2584\u2582\u2585\u2582\u2581\u2584\u2583\u2584\u2583\u2581\u2582\u2583\u2582\u2583\u2584\u2584\u2584\u2586\u2582\u2582\u2581\u2588\u2582\u2583\u2582\u2584\u2582\u2583\u2584\u2582\u2583\u2582\u2582\u2582\u2583\u2584\u2582\u2583\u2583\u2583\nwandb:                 Train/lr \u2588\u2588\u2588\u2588\u2587\u2587\u2587\u2586\u2586\u2586\u2586\u2585\u2585\u2585\u2585\u2584\u2584\u2584\u2584\u2584\u2583\u2583\u2583\u2583\u2583\u2582\u2582\u2582\u2582\u2582\u2581\u2581\u2581\u2581\u2581\u2581\u2581\u2581\u2581\u2581\nwandb:  Train/optimizer_updates \u2581\u2581\u2581\u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2583\u2583\u2583\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\nwandb:            Train/samples \u2581\u2581\u2581\u2582\u2582\u2582\u2582\u2582\u2582\u2583\u2583\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2585\u2585\u2585\u2585\u2585\u2585\u2585\u2586\u2586\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2587\u2588\u2588\u2588\u2588\nwandb: Train/samples_per_second \u2586\u2586\u2587\u2586\u2587\u2586\u2586\u2587\u2587\u2587\u2586\u2587\u2586\u2587\u2586\u2587\u2587\u2586\u2586\u2586\u2587\u2587\u2587\u2587\u2587\u2588\u2588\u2587\u2587\u2588\u2588\u2581\u2587\u2588\u2588\u2587\u2588\u2587\u2587\u2587\nwandb: \nwandb: Run summary:\nwandb:              Train/epoch 0.04291\nwandb:               Train/loss 0.00655\nwandb:                 Train/lr 0.0\nwandb:  Train/optimizer_updates 30000\nwandb:            Train/samples 960000\nwandb: Train/samples_per_second 16.90044\nwandb: \nwandb: \ud83d\ude80 View run vlash_baseline_a100 at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8m07ro1o\nwandb: \u2b50\ufe0f View project at: https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA\nwandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)\nwandb: Find logs at: ./runs/vlash_baseline/wandb/run-20261020_162400-8m07ro1o/logs\n"
+    },
+    "vlash_kr": {
+      "latest": {
+        "progress": {
+          "updates": 28360,
+          "samples": 907520,
+          "epoch": 0,
+          "cursor": 907520
+        },
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt"
+      },
+      "provenance": {
+        "recipe": {
+          "name": "vlash_kr",
+          "method": "vlash",
+          "kr": true,
+          "lr": 5e-05,
+          "steps": 30000,
+          "weight_decay": 1e-10,
+          "clip": 1.0,
+          "global_batch": 32,
+          "max_delay": 3,
+          "decay_lr": 2.5e-06,
+          "horizon": 20,
+          "fps": 25,
+          "seed": 42,
+          "normalization": "quantiles",
+          "velocity_conditioning": false,
+          "phase_gate": false,
+          "shared_observation": false
+        },
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "job_id": "17709594",
+        "world_size": 2,
+        "readiness": {
+          "approved": true,
+          "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+          "hardware": "NVIDIA A100 80GB PCIe",
+          "runtime": {
+            "microbatch": 8,
+            "workers": 12,
+            "main_threads": 2,
+            "prefetch": 2
+          },
+          "microbatch": 8,
+          "global_batch": 32,
+          "accumulation": 2,
+          "decoded_optimizer_updates": 20,
+          "seconds": 76.29112228937447,
+          "samples_per_second": 8.388918406160826,
+          "peak_gpu_reserved_bytes": 67607986176.0,
+          "node_process_peak_rss_bytes": 100690997248.0,
+          "validation_h20_action_mse": 2.580958604812622,
+          "strict_checkpoint_rng_reload": true,
+          "strict_inference_reload": true,
+          "coordinated_checkpoint_test": true,
+          "mean_gpu_utilization_percent": 29.0531914893617,
+          "source": {
+            "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+            "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+            "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+            "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+            "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+            "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+            "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+            "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+            "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+            "submit.py": "cdd2878dd6dbee369efd8eebb606801ce899d647634023c8caebc6267f69f64d",
+            "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+            "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+            "train.py": "17d6c43a23a5b80c7d2a31e715a5c92d21fc852680d251ff3af0e76b1a3b5f0a"
+          }
+        },
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "wandb_id": "qdxs3h1p",
+        "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qdxs3h1p"
+      },
+      "completed": null,
+      "stopped": null,
+      "wandb": {
+        "id": "qdxs3h1p",
+        "url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qdxs3h1p"
+      },
+      "out": "och\": 0.040711301610566665, \"Train/samples_per_second\": 17.071759299457245, \"Train/lr\": 2.8297397469910376e-06}\n{\"Train/loss\": 0.013410218060016632, \"Train/optimizer_updates\": 28470, \"Train/samples\": 911040, \"Train/epoch\": 0.04072560635463222, \"Train/samples_per_second\": 16.902411712936786, \"Train/lr\": 2.825481092729008e-06}\n{\"Train/loss\": 0.013549852184951305, \"Train/optimizer_updates\": 28480, \"Train/samples\": 911360, \"Train/epoch\": 0.04073991109869777, \"Train/samples_per_second\": 17.05028229601427, \"Train/lr\": 2.821249928444656e-06}\n{\"Train/loss\": 0.004786776378750801, \"Train/optimizer_updates\": 28490, \"Train/samples\": 911680, \"Train/epoch\": 0.04075421584276333, \"Train/samples_per_second\": 17.077212436518035, \"Train/lr\": 2.8170462591034914e-06}\n{\"Train/loss\": 0.009074600413441658, \"Train/optimizer_updates\": 28500, \"Train/samples\": 912000, \"Train/epoch\": 0.04076852058682888, \"Train/samples_per_second\": 17.059949597553164, \"Train/lr\": 2.8128700896387543e-06}\n{\"Train/loss\": 0.009456457570195198, \"Train/optimizer_updates\": 28510, \"Train/samples\": 912320, \"Train/epoch\": 0.04078282533089443, \"Train/samples_per_second\": 17.050415533231146, \"Train/lr\": 2.808721424951412e-06}\n{\"Train/loss\": 0.010813374072313309, \"Train/optimizer_updates\": 28520, \"Train/samples\": 912640, \"Train/epoch\": 0.04079713007495999, \"Train/samples_per_second\": 17.06172070680361, \"Train/lr\": 2.804600269910154e-06}\n{\"Train/loss\": 0.013823263347148895, \"Train/optimizer_updates\": 28530, \"Train/samples\": 912960, \"Train/epoch\": 0.04081143481902554, \"Train/samples_per_second\": 17.067094366831146, \"Train/lr\": 2.8005066293513856e-06}\n{\"Train/loss\": 0.008207479491829872, \"Train/optimizer_updates\": 28540, \"Train/samples\": 913280, \"Train/epoch\": 0.040825739563091094, \"Train/samples_per_second\": 17.06762016536934, \"Train/lr\": 2.7964405080792183e-06}\n{\"Train/loss\": 0.006759302690625191, \"Train/optimizer_updates\": 28550, \"Train/samples\": 913600, \"Train/epoch\": 0.04084004430715665, \"Train/samples_per_second\": 17.068667924495625, \"Train/lr\": 2.792401910865481e-06}\n{\"Train/loss\": 0.006128836888819933, \"Train/optimizer_updates\": 28560, \"Train/samples\": 913920, \"Train/epoch\": 0.040854349051222205, \"Train/samples_per_second\": 17.069470222633242, \"Train/lr\": 2.788390842449681e-06}\n{\"Train/loss\": 0.01550358533859253, \"Train/optimizer_updates\": 28570, \"Train/samples\": 914240, \"Train/epoch\": 0.04086865379528776, \"Train/samples_per_second\": 17.06308636322501, \"Train/lr\": 2.784407307539038e-06}\n{\"Train/loss\": 0.0063239228911697865, \"Train/optimizer_updates\": 28580, \"Train/samples\": 914560, \"Train/epoch\": 0.04088295853935331, \"Train/samples_per_second\": 17.062987021613182, \"Train/lr\": 2.780451310808449e-06}\n{\"Train/loss\": 0.013276046141982079, \"Train/optimizer_updates\": 28590, \"Train/samples\": 914880, \"Train/epoch\": 0.04089726328341887, \"Train/samples_per_second\": 17.06283698016351, \"Train/lr\": 2.7765228569004967e-06}\n{\"Train/loss\": 0.0031337635591626167, \"Train/optimizer_updates\": 28600, \"Train/samples\": 915200, \"Train/epoch\": 0.04091156802748442, \"Train/samples_per_second\": 17.049368462130712, \"Train/lr\": 2.7726219504254457e-06}\n{\"Train/loss\": 0.009211504831910133, \"Train/optimizer_updates\": 28610, \"Train/samples\": 915520, \"Train/epoch\": 0.04092587277154997, \"Train/samples_per_second\": 17.047942317686797, \"Train/lr\": 2.7687485959612173e-06}\n{\"Train/loss\": 0.014485896565020084, \"Train/optimizer_updates\": 28620, \"Train/samples\": 915840, \"Train/epoch\": 0.04094017751561553, \"Train/samples_per_second\": 17.06680278886645, \"Train/lr\": 2.7649027980534166e-06}\n{\"Train/loss\": 0.003196168690919876, \"Train/optimizer_updates\": 28630, \"Train/samples\": 916160, \"Train/epoch\": 0.04095448225968108, \"Train/samples_per_second\": 17.062917528590482, \"Train/lr\": 2.7610845612152983e-06}\n{\"Train/loss\": 0.010534406639635563, \"Train/optimizer_updates\": 28640, \"Train/samples\": 916480, \"Train/epoch\": 0.040968787003746635, \"Train/samples_per_second\": 17.063266050954116, \"Train/lr\": 2.7572938899277793e-06}\n{\"Train/loss\": 0.00653570331633091, \"Train/optimizer_updates\": 28650, \"Train/samples\": 916800, \"Train/epoch\": 0.04098309174781219, \"Train/samples_per_second\": 17.062250086141294, \"Train/lr\": 2.753530788639421e-06}\n{\"Train/loss\": 0.009842906147241592, \"Train/optimizer_updates\": 28660, \"Train/samples\": 917120, \"Train/epoch\": 0.040997396491877745, \"Train/samples_per_second\": 17.078052565385775, \"Train/lr\": 2.7497952617664305e-06}\n{\"Train/loss\": 0.01877661794424057, \"Train/optimizer_updates\": 28670, \"Train/samples\": 917440, \"Train/epoch\": 0.0410117012359433, \"Train/samples_per_second\": 17.073904577024987, \"Train/lr\": 2.746087313692658e-06}\n{\"Train/loss\": 0.008285842835903168, \"Train/optimizer_updates\": 28680, \"Train/samples\": 917760, \"Train/epoch\": 0.04102600598000885, \"Train/samples_per_second\": 17.085315934383093, \"Train/lr\": 2.742406948769588e-06}\n{\"Train/loss\": 0.023131657391786575, \"Train/optimizer_updates\": 28690, \"Train/samples\": 918080, \"Train/epoch\": 0.04104031072407441, \"Train/samples_per_second\": 17.071307659876815, \"Train/lr\": 2.738754171316335e-06}\n{\"Train/loss\": 0.013653432950377464, \"Train/optimizer_updates\": 28700, \"Train/samples\": 918400, \"Train/epoch\": 0.04105461546813996, \"Train/samples_per_second\": 17.075058703504926, \"Train/lr\": 2.7351289856196324e-06}\n{\"Train/loss\": 0.01573128253221512, \"Train/optimizer_updates\": 28710, \"Train/samples\": 918720, \"Train/epoch\": 0.04106892021220551, \"Train/samples_per_second\": 17.087754370054483, \"Train/lr\": 2.731531395933843e-06}\n{\"Train/loss\": 0.015437290072441101, \"Train/optimizer_updates\": 28720, \"Train/samples\": 919040, \"Train/epoch\": 0.04108322495627107, \"Train/samples_per_second\": 17.089111475466066, \"Train/lr\": 2.727961406480936e-06}\n{\"Train/loss\": 0.012550648301839828, \"Train/optimizer_updates\": 28730, \"Train/samples\": 919360, \"Train/epoch\": 0.04109752970033662, \"Train/samples_per_second\": 17.075907333337863, \"Train/lr\": 2.724419021450493e-06}\n{\"Train/loss\": 0.008669424802064896, \"Train/optimizer_updates\": 28740, \"Train/samples\": 919680, \"Train/epoch\": 0.041111834444402175, \"Train/samples_per_second\": 17.085686946256015, \"Train/lr\": 2.720904244999698e-06}\n{\"Train/loss\": 0.010689870454370975, \"Train/optimizer_updates\": 28750, \"Train/samples\": 920000, \"Train/epoch\": 0.04112613918846773, \"Train/samples_per_second\": 17.08280128795914, \"Train/lr\": 2.7174170812533396e-06}\n{\"Train/loss\": 0.009685357101261616, \"Train/optimizer_updates\": 28760, \"Train/samples\": 920320, \"Train/epoch\": 0.041140443932533285, \"Train/samples_per_second\": 17.071816427877003, \"Train/lr\": 2.7139575343037995e-06}\n{\"Train/loss\": 0.005368753336369991, \"Train/optimizer_updates\": 28770, \"Train/samples\": 920640, \"Train/epoch\": 0.04115474867659884, \"Train/samples_per_second\": 16.9256720513839, \"Train/lr\": 2.710525608211046e-06}\n{\"Train/loss\": 0.008078387007117271, \"Train/optimizer_updates\": 28780, \"Train/samples\": 920960, \"Train/epoch\": 0.04116905342066439, \"Train/samples_per_second\": 17.073158873845475, \"Train/lr\": 2.707121307002637e-06}\n",
+      "err": "ata out of order.\nwandb: WARNING Tried to log to step 26700 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26710 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26720 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26730 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26740 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26750 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26760 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26770 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26780 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26790 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26800 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26810 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26820 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26830 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26840 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26850 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26860 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26870 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26880 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26890 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26900 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26910 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26920 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26930 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26940 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26950 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26960 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26970 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26980 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\nwandb: WARNING Tried to log to step 26990 that is less than the current step 26991. Steps must be monotonically increasing, so this data will be ignored. See https://wandb.me/define-metric to log data out of order.\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n"
+    }
+  }
+}

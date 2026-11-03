@@ -1,0 +1,65 @@
+{
+  "account": "bivv-delta-gpu",
+  "allocation_hours": 7,
+  "checkpoint_fingerprint": "74e28089ac60a7fd84dae9786445bbcc2204796fdd34d88f60adf117e15b514d",
+  "checkpoint_preserved": "/work/nvme/bivv/aparameshwaran/dynamicvla/transfer-domv-delta-20261020/checkpoint-transfer.json",
+  "cluster": "Delta",
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-scale-ddp-20261014",
+  "files": {
+    "activate.sh": "35c1a7a1d80bdb603b49c75da194d8b6451e3031f0b4152d4bb32532ebbfce93",
+    "check.py": "8c6cf853f19f6040e543f8c9bb8c0ddd6c746d5d5c90e546efed64811b83407f",
+    "entry.py": "814875047980f2f99bf7ef6d9cbb35cb2517d78ac438253876829b0ca58e5943",
+    "launch_ranks.sh": "c5c4e9af9c4343687d547d2b3466ec6a176619a462da2e70845b61f07024f7c8",
+    "native_benchmark.py": "abc69d4b20a5406169fb4b00042f40eb1842b4aa5cb2bf08fd2cdad64021ba7c",
+    "prepare.py": "d28b0693db059f7f204525f08f61376778a1b68c64b55e419099fbba1966507f",
+    "production.sbatch": "1aa8408818e09e6940722b34148cba044c37495ad70b27b383d664dd88ad9ce6",
+    "profile.py": "9d75efeccd86af4205b5eb7af48b9334a3d933912847becbf7109ab5d9d58cdf",
+    "profile.sbatch": "f68c53a051e5a581f406cd17230330663fdb57114b0f96673d059562fae878a2",
+    "sitecustomize.py": "a8e8c8b6fc2acb996baeca3158a8cad63c954dc2a1cf0a0b2aba1bbf74940d20",
+    "speed_probe.py": "9c36a035ebc97c21bb93e4c7e83e954d0eff0264fca54d7742feb4985c2b8a83",
+    "stop_ranks.py": "ebd24f4a66919f998fc7d4ff19bbb8eb1a65dfc786913683ed65273a6c729188"
+  },
+  "fingerprint": "37a795a5b4deccfdf346264d5de81d1442c57a754a7530f58563f8417d83d098",
+  "gpu": "H200141GB",
+  "gpus_per_node": 8,
+  "initial_progress": {
+    "cursor": 9789824,
+    "early_stopped": false,
+    "early_stopping": {
+      "bad_validations": 0,
+      "best_epoch": 3,
+      "last_validation_epoch": 3,
+      "significant_best": 0.1654408333767772
+    },
+    "epoch": 3,
+    "pending_validation": false,
+    "samples": 76900427,
+    "training_seconds": 170063.55180088547,
+    "updates": 218468
+  },
+  "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+  "maximum_charge_units": 168,
+  "node_count": 1,
+  "old_deltaai_job": "3381947",
+  "operational_epoch_cap": 10,
+  "recipe": "0088404fa9bfb7c61959d91fa50da752b783974c7e8db7bb788422f3a751c64a",
+  "runtime": {
+    "fingerprint": "b4771a7b2a619573f3f1e0c0e4cac05dc77fa455359799088c1442f27faa76f1",
+    "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+    "reason": "Same batch/runtime on eight H200s, requiring actual hardware and saved-checkpoint proof",
+    "runtime": {
+      "fused": false,
+      "microbatch": 44,
+      "pin_memory": false,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "frames",
+      "workers": 4
+    }
+  },
+  "scheduler_horizon_epochs": 100,
+  "source": "/work/nvme/bivv/aparameshwaran/dynamicvla/training-sources/delta-domv-f991015a",
+  "source_sha256": "f991015a229476400e0fc772177af33759d1bc3f23901381e2f83c7faaeab921",
+  "variant": "domv100",
+  "world_size": 8
+}

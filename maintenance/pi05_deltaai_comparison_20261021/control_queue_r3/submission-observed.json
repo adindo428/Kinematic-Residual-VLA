@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-21T17:22:01.948882+00:00",
+  "status": "queued_interactive_comparison_waiting_resources",
+  "cluster_access_verified": true,
+  "interactive_allocation_submitted": true,
+  "gpu_comparison_executed": false,
+  "production_changed": false,
+  "private_payload_transferred": true,
+  "auto_review_rejection": {
+    "action": "stream private production checkpoint and pinned implementation from Palmetto to DeltaAI",
+    "reason": "explicit export authorization required"
+  },
+  "prepared_variants": [
+    "control",
+    "cpu_tokens",
+    "cpu_tokens_prefetch",
+    "workers12_prefetch",
+    "autocast_cache",
+    "no_recompute",
+    "control_repeat"
+  ],
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "transformers": "4.53.3",
+    "tokenizers": "0.21.4"
+  },
+  "private_transfer_user_authorized": true,
+  "authorization": "User explicitly selected Approve cluster-to-cluster transfer",
+  "access_failure": {
+    "palmetto_socket": "missing",
+    "deltaai_socket": "missing",
+    "batch_mode_authentication": "failed",
+    "required_action": "Restore authenticated Palmetto and DeltaAI SSH master sessions; then reconcile destination before transfer retry"
+  },
+  "source_manifest_sha256": "591ae5d7af07b30e93a73ceaaadbd90790781cd598dfbbef139c34f7376d8354",
+  "cpu_contracts_passed": 2,
+  "two_rank_collective_passed": true,
+  "pinned_pi05_imports_passed": true,
+  "actual_train_validation_decoding_passed": true,
+  "interactive_controller_started": true,
+  "deltaai_access_verified": true,
+  "palmetto_socket_exists": true,
+  "partial_checkpoint_bytes": 20308901888,
+  "private_payload_partially_transferred": true,
+  "private_transfer_completed": true,
+  "required_action": null,
+  "prefix_verified_bytes": 20308901888,
+  "prefix_sha256": "b9a6df4017406a31e2ed4a08f7bfaa88916b6fbb1d1e64bdb8acc0f8d4acb6da",
+  "page_sequence": 218,
+  "page_exact_readback_verified": true,
+  "job_id": "3429682",
+  "scheduler_state": "PENDING",
+  "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+  "superseded_request": "3429648",
+  "superseded_request_state": "CANCELLED with zero GPU runtime",
+  "scheduler_reason": "Priority",
+  "estimated_start_site_time": null,
+  "estimated_start_america_new_york": null,
+  "estimate_is_not_guaranteed": true,
+  "anchor_order_equivalence_passed": true,
+  "superseded_requests": [
+    {
+      "job_id": "3429648",
+      "state": "CANCELLED",
+      "reason": "immediate resource wait timeout",
+      "gpu_runtime_seconds": 0
+    },
+    {
+      "job_id": "3429662",
+      "state": "CANCELLED",
+      "reason": "replaced pending controller whose overall timer expired before estimated allocation",
+      "gpu_runtime_seconds": 0
+    }
+  ],
+  "queue_wait_limit_minutes": null,
+  "allocation_limit_hours": 2
+}

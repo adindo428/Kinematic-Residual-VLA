@@ -1,0 +1,26 @@
+{
+  "early_stopping": {
+    "enabled": true,
+    "metric": "h20/action_mse",
+    "min_epochs": 5,
+    "patience": 3,
+    "relative_min_delta": 0.005
+  },
+  "effective_batch": 352,
+  "epochs": 100,
+  "evaluation_plan_sha256": "f01ce47d879046e22ffe52b2a0031d1b19abd8f404af78e45612a98733414e48",
+  "fingerprint": "75cdd199006e9efd01e1de5b65cd70920b71cf9fcb960db26d2def967494da71",
+  "lr": 3e-05,
+  "manifest": "195769ab6bbfae3edadbd0ff67b9aa2e75191e06b59c83470f8679ca81a10f51",
+  "precision": "bf16",
+  "sampling": "frames",
+  "scheduler": "cosine",
+  "seed": 42,
+  "selection": "user_fixed_rate_20261009",
+  "simulator_evaluation_mode": "after_training",
+  "supported_world_sizes": [
+    4,
+    8
+  ],
+  "warmup_updates": 1000
+}

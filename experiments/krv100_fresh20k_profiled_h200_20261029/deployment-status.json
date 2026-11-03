@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-29T23:56:31.916472+00:00",
+  "status": "prepared_locally_not_deployed",
+  "blocking_condition": "Existing authenticated SSH master accepts local checks but remote commands time out; fresh BatchMode connection also timed out during banner exchange",
+  "failed_step": "Initial read-only squeue reconciliation timed out after180seconds before staging",
+  "remote_staging_started": false,
+  "existing_jobs_cancelled": false,
+  "new_jobs_submitted": false,
+  "existing_source_modified": false,
+  "last_verified_original_jobs": {
+    "setup": {
+      "job_id": "18663625",
+      "state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    "profile": {
+      "job_id": "18663626",
+      "state": "PENDING Priority"
+    },
+    "train": {
+      "job_id": "18663627",
+      "state": "PENDING Dependency"
+    }
+  },
+  "requested_microbatch_sweep": [
+    16,
+    32,
+    44,
+    64,
+    88,
+    176
+  ],
+  "cpu_worker_thread_cases": [
+    [
+      8,
+      2
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      8,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      8
+    ]
+  ],
+  "fixed_global_batch": 352,
+  "total_epochs": 10,
+  "total_updates": 68380,
+  "gpu_speedup_claimed": false,
+  "recovery": "Restore a responsive Palmetto connection, reconcile current jobs and any checkpoints, then apply the frozen replacement only while original GPU jobs remain unstarted. If training started, use newest complete own production checkpoint and a reviewed fresh resume attempt."
+}

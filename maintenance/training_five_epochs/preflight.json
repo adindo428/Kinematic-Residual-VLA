@@ -1,0 +1,90 @@
+{
+  "passed": true,
+  "at": "2026-10-20T22:42:56.915749+00:00",
+  "control_manifest_sha256": "b3a1272058201cfe48832a7e99d248ba045106e61fc35e6b1aab5bf90639396d",
+  "source_sha256": "2d866bded14ee7d88216d7cfc9f024976a1c5884e105918f7d2fa3e44087b20c",
+  "scripts_manifest_sha256": "8e00055cef5279f7ed4889a53f92df895ad2b8315ec2ac7207aa7eebd426ea5f",
+  "results": {
+    "cpu_contracts": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_actual_optimizer_scheduler_save_continue_at_floor (test_budget.BudgetTests) ... ok\ntest_exact_update_counts_and_same_math (test_budget.BudgetTests) ... ok\ntest_final_boundary_normalized_before_save (test_budget.BudgetTests) ... ok\ntest_original_lr_exact_and_no_rewarm_after_resume (test_budget.BudgetTests) ... ok\ntest_progress_rejects_logged_or_wrong_cursor (test_budget.BudgetTests) ... ok\ntest_real_sampler_resume_across_five_epoch_boundaries (test_budget.BudgetTests) ... ok\ntest_reject_objective_or_schedule_changes (test_budget.BudgetTests) ... ok\ntest_centering_zero_is_identity (test_contract.Contract) ... ok\ntest_ddp_shards_and_resume (test_contract.Contract) ... ok\ntest_dom_rollforward_preserves_pose6 (test_contract.Contract) ... ok\ntest_global_optimizer_anchor_sets_survive_microbatch_change (test_contract.Contract) ... ok\ntest_loader_does_not_consume_training_rng (test_contract.Contract) ... /home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.\n  warnings.warn(warn_msg)\nok\ntest_microbatch_objective_and_gradient_invariance_with_padding (test_contract.Contract) ... ok\ntest_native_padded_channel_loss_option (test_contract.Contract) ... ok\ntest_pad_mask_ignores_invalid_targets_and_padding_dims (test_contract.Contract) ... ok\ntest_physical_roundtrip_and_channels (test_contract.Contract) ... ok\ntest_runtime_cannot_change_effective_batch_or_oversubscribe_cpus (test_contract.Contract) ... ok\ntest_vlash_offset_uses_observation_time (test_contract.Contract) ... ok\ntest_cache_preserves_checkpointed_computation (test_autocast.AutocastContracts) ... ok\ntest_cpu_fused_and_resume (test_optimizer.OptimizerContracts) ... ok\ntest_allocate_source_failure_never_signals_parent (control.test_handoff.HandoffContracts) ... ok\ntest_completed_old_budget_is_valid_continuation_not_completion (control.test_handoff.HandoffContracts) ... ok\ntest_missing_corrupt_incomplete_and_wrong_counters_fail_closed (control.test_handoff.HandoffContracts) ... ok\ntest_stale_signal_or_restarted_allocation_rejected (control.test_handoff.HandoffContracts) ... ok\n\n----------------------------------------------------------------------\nRan 24 tests in 1.674s\n\nOK\n"
+    },
+    "two_rank_collective": {
+      "exit_code": 0,
+      "stdout": "Unequal-rank checkpoint clocks and coordinated stop: PASS\n",
+      "stderr": "\n*****************************************\nSetting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. \n*****************************************\n"
+    },
+    "six_parent_identities_preparation_source_recipe_verified": true,
+    "native_decode": {
+      "exit_code": 0,
+      "stdout": "{\"train_anchors\": 22370201, \"validation_anchors\": 228109, \"train_validation_two_camera_decode\": true}\n",
+      "stderr": ""
+    },
+    "scheduler": {
+      "pi05_baseline-profile.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782806 to start at 2026-10-21T03:09:33 a using 32 processors on nodes nodeai09 in partition work1\n"
+      },
+      "pi05_baseline-train.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782807 to start at 2026-10-21T03:09:33 a using 32 processors on nodes nodeai09 in partition work1\n"
+      },
+      "pi05_kr-profile.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782808 to start at 2026-10-21T03:09:33 a using 32 processors on nodes nodeai09 in partition work1\n"
+      },
+      "pi05_kr-train.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782809 to start at 2026-10-21T03:09:33 a using 32 processors on nodes nodeai09 in partition work1\n"
+      },
+      "smolvla_baseline-profile.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782810 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      },
+      "smolvla_baseline-train.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782811 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      },
+      "smolvla_kr-profile.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782812 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      },
+      "smolvla_kr-train.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782813 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      },
+      "vlash_baseline-profile.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782814 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      },
+      "vlash_baseline-train.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782815 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      },
+      "vlash_kr-profile.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782816 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      },
+      "vlash_kr-train.sbatch": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17782817 to start at 2026-10-20T23:13:24 a using 32 processors on nodes node0406 in partition work1\n"
+      }
+    }
+  },
+  "test_only_not_submitted": true,
+  "schedule_policy": "preserve_original_then_floor",
+  "minimum_epochs": 5
+}

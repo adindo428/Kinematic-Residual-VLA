@@ -1,0 +1,47 @@
+import json,re,statistics,html
+from pathlib import Path
+p=Path(__file__).parent
+x=json.loads((p/'evidence.json').read_text()); live=json.loads((p/'live_counters.json').read_text())
+labels=['π0.5 baseline','π0.5 KR','VLASH baseline','VLASH KR','SmolVLA baseline','SmolVLA KR','DOM + velocity']
+perf=[];params=[]; bandwidth=[]
+for (n,r),label in zip(x['runs'].items(),labels):
+ prof=r['profile']; recipe=r['recipe']; rt=prof['runtime']; samples=[]
+ for s in r['log_tails'].values():
+  for l in s.splitlines():
+   try:v=json.loads(l)
+   except ValueError:continue
+   if 'Train/samples_per_second' in v:samples.append(v['Train/samples_per_second'])
+ recent=statistics.median(samples)
+ raw=live['runs'].get(n,{}).get('stdout','')
+ rows=[list(map(int,l.split())) for l in raw.splitlines() if re.match(r'^\s*\d+(?:\s+\d+){8}\s*$',l)]
+ vals=[statistics.mean(v[i] for v in rows) for i in [1,2,7,8]] if rows else None
+ perf.append([label,f'{recent:.1f}',f"{prof['samples_per_second']:.1f}",f'{vals[0]:.1f}%' if vals else 'Pending',f"{prof['peak_gpu_reserved_bytes']/2**30:.1f}",f"{prof['mean_cpu_busy_cores_per_rank']:.2f}",f"{prof['node_process_peak_rss_bytes']/2**30:.1f}"])
+ if vals:bandwidth.append([label,'NODE / no NVLink shown' if 'NV18' not in raw else 'NV18',f'{vals[1]:.1f}%',f'{vals[2]/1000:.3f}',f'{vals[3]/1000:.3f}'])
+ else:bandwidth.append([label,'Unavailable','—','—','—'])
+ family=recipe['method'];size={'pi05':'~3.62B / 3.249B','vlash':'~3.62B / 3.249B','smolvla':'~450M / 99.9M','dom':'~430M / 420.9M'}[family]
+ precision='FP32 storage + BF16 autocast' if family=='pi05' else 'Mixed FP32/BF16 storage + BF16 autocast'
+ params.append([label,size,precision,str(rt['microbatch']),str(prof['accumulation']),str(recipe['global_batch']),str(rt['workers']),str(recipe['lr']),str(recipe['weight_decay']),str(recipe['clip'])])
+def table(headers,rows):return '<table><thead><tr>'+''.join('<th>'+html.escape(v)+'</th>' for v in headers)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+html.escape(str(v))+'</td>' for v in row)+'</tr>' for row in rows)+'</tbody></table>'
+recommendations=[
+('1. Standardize GPU topology','Prefer GPU pairs with confirmed NVLink connectivity. π0.5-KR and SmolVLA-KR currently show NODE paths and H200 NVL devices; other running pairs show NV18. π0.5-KR averages 14.6/14.2 GB/s PCIe receive/transmit in this short sample. Communication is a strong suspect, not a proven isolated bottleneck. Match hardware before attributing timing differences to KR.'),
+('2. Reduce gradient accumulation where memory permits','VLASH: try microbatch 16 × 2 GPUs × accumulation 1, keeping global batch 32 (currently 8 × 2 × 2). DOM: try 44 × 2 × 4, then 88 × 2 × 2; both preserve global batch 352 (currently 22 × 2 × 8). These are candidates, not measured speedups. DOM may contain batch-dependent layers, so changing microbatch can change behavior even with fixed global batch.'),
+('3. Use SmolVLA GPUs more economically','Try one GPU, microbatch 64, accumulation 1, global batch 64, against the current two-GPU setup. Low memory consumption alone does not prove low computational utilization: live GPU busy time is 89–95%. Measure both samples/s and samples per GPU-second. Larger global batches 128/256 are separate optimization experiments that change training statistics and scheduling.'),
+('4. Trade memory for recomputation on π0.5','At fixed global batch 32, the current microbatch 16 already requires no accumulation. Benchmark gradient checkpointing off, keeping precision fixed, since the observed peak is ~59 GiB. Fit is not guaranteed. Retain BF16 autocast; do not switch to pure FP32 compute. Precision storage changes are a separate numerical experiment.'),
+('5. Tune data loading and CPU placement','Sweep 4/8/12 workers per rank and prefetch 2/4 within the 32-CPU allocation, recording loader wait time and host memory. Saved CPU measurements are rank-0 process-tree averages across readiness, not whole-job production CPU utilization. π0.5/VLASH preparation currently synchronizes GPU state to CPU for state tokenization; moving equivalent work to CPU preprocessing is worth profiling. DOM uses blocking tensor transfers despite pinned loaders; consider nonblocking transfers after measuring copy overlap.'),
+('6. Measure optimizer and orchestration overhead','π0.5 already uses fused AdamW; other families do not. Benchmark fused AdamW separately for SmolVLA, VLASH and DOM. DDP already uses no_sync for intermediate accumulation steps and gradient bucket views. Do not simply disable find_unused_parameters: unused parameter handling must be established first. Compilation is disabled for cross-VLA models; consider it only after higher-priority changes, including compile/startup costs.'),
+('7. Protect continuation and report comparable rates','π0.5 baseline was preempted and pending at the snapshot. Retain requeue/resume and consider a shorter checkpoint interval if preemptions are frequent, balancing write cost. Preserve horizon 20, data split, LR schedule and effective batch for hardware comparisons. Add representative step timing, data wait, HBM/NVLink counters, and disk throughput before declaring bandwidth saturation.')]
+body='''<!doctype html><html><head><meta charset="utf-8"><title>Palmetto H200 training comparison</title><style>body{font:16px/1.55 system-ui;max-width:1500px;margin:40px auto;padding:0 24px;color:#172336}h1,h2,h3{line-height:1.2}table{border-collapse:collapse;width:100%;font-size:14px;margin:20px 0}th,td{border:1px solid #d5dce6;padding:9px;text-align:left}th{background:#edf3fa}p{max-width:1150px}.note{background:#eff6ff;padding:18px;border-left:4px solid #356ac3}</style></head><body><h1>Seven Palmetto H200 training runs</h1>'''
+body+=f'<p>Saved evidence: {x["captured_utc"]}. Live counters: {live["utc"]}. Read-only inspection; no training configuration changed.</p>'
+body+='<p class="note">Priority: standardize GPU connectivity, reduce VLASH/DOM accumulation, and assess one-GPU SmolVLA efficiency. GPU busy time is high in production despite much lower averages in the saved readiness profiles. These runs are not all on equivalent H200 interconnects.</p><h2>Throughput and resources</h2>'
+body+=table(['Run','Recent samples/s','Readiness samples/s','Live GPU busy','Peak GPU GiB','Readiness CPU cores, rank 0','Peak node RSS GiB'],perf)
+body+='<p>Recent throughput is the median of available last-120 log lines, each usually covering ten updates; not full-run wall-clock throughput. π0.5 baseline is historical before preemption. Readiness throughput covers 200 updates including an intermediate checkpoint. Readiness GPU/CPU sampling spans additional save/reload/inference work; CPU includes rank-0 child processes. GPU peak is maximum reserved memory across ranks, not summed; node RSS is conservative and can double-count shared pages. Each job allocates two GPUs (~139.8 GiB each), 32 CPUs and 256 GiB host memory.</p><h2>Bandwidth and topology</h2>'
+body+=table(['Run','GPU pair topology','Memory-active time','PCIe RX GB/s/GPU','PCIe TX GB/s/GPU'],bandwidth)
+body+='<p>Live values average 10 dmon samples over both allocation-visible GPUs, approximately ten seconds. PCIe readings are sampled rates, not a ten-second byte-total integral. Memory-active time is not percent of peak HBM bandwidth. HBM bytes/s, NVLink bytes/s and storage throughput were not captured, so saturation is undetermined. NVLink traffic does not appear in PCIe totals. <a href="https://docs.nvidia.com/deploy/nvidia-smi/index.html">NVIDIA metric definitions</a>.</p><h2>Training parameters</h2>'
+body+=table(['Run','Approx size / Adam-state elements','Precision','Microbatch/GPU','Accumulation','Global batch','Workers/rank','Recipe LR','Weight decay','Clip'],params)
+body+='<p>All: horizon 20, 25 Hz, seed 42, 20,000 episodes / 2,406,773 anchors; ten additional subset epochs from own checkpoints. AdamW betas (0.9,0.95), epsilon 1e-8; main CPU threads/rank 2, prefetch 2, pinned loaders, BF16 autocast cache disabled. Cross-VLA compile disabled. π0.5 gradient checkpointing enabled; VLASH default disabled. SmolVLA trains expert/state projection with vision/backbone freezing. KR subtracts kinematic displacement for training and restores it for inference; DOM+velocity conditions the network on velocity with residual flow disabled. Current logged LR is 2.5e-6 for the six cross-VLA runs and ~2.991e-5 for DOM, because parent schedules are preserved.</p>'
+body+='<p>Model size is approximate: π0.5/VLASH use the same 3.617B-element pretrained checkpoint; SmolVLA ~450M and DOM ~430M. Adam-state counts come from representative baseline checkpoint metadata (π0.5 3,248,572,176; VLASH same; SmolVLA 99,880,992; DOM 420,937,312), excluding parameters without optimizer state. These are not an exact requires_grad census. Precision metadata was inspected on one representative per family. Tied aliases in state dictionaries must not be counted as distinct parameters.</p><h2>Recommended next-run experiments</h2>'
+for title,desc in recommendations:body+='<h3>'+title+'</h3><p>'+desc+'</p>'
+body+='<p>Recommendations have not been benchmarked. Existing readiness checks were inspected; no new tests or training jobs were launched. Short monitoring steps ran inside existing allocations.</p></body></html>'
+(p/'report.html').write_text(body)
+(p/'summary.json').write_text(json.dumps({'performance':perf,'bandwidth':bandwidth,'parameters':params,'recommendations':recommendations},indent=2))
+print(p/'report.html')

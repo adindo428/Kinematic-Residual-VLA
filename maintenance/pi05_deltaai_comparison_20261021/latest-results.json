@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-21T18:27:56.446847+00:00",
+  "job_id": "3429682",
+  "results": {},
+  "exits": {},
+  "errors": {},
+  "production_changed": false,
+  "squeue": {
+    "returncode": 0,
+    "stdout": "3429682|PENDING|0:00|2:00:00|(Priority)\n",
+    "stderr": ""
+  },
+  "sacct": {
+    "returncode": 0,
+    "stdout": "3429682|PENDING|0:0|00:00:00|Unknown|Unknown\n",
+    "stderr": ""
+  },
+  "assessment": {
+    "job_id": "3429682",
+    "production_changed": false,
+    "measurement_only": true,
+    "complete_repeated_controls": false,
+    "eligible_candidates": []
+  }
+}

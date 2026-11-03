@@ -1,0 +1,9 @@
+{
+  "root": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020",
+  "recipe": "pi05_kr",
+  "gpu_profile_job_id": "17716904",
+  "profile_sha256": "a08115f3676fb773d7d0597ac19aeb205ff386d876a436b4eb1fad8022e376d5",
+  "source_sha256": "34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c",
+  "recipe_fingerprint": "2845584d495e6a91af59c215fe3c807e4a4b055aac10e7cda1cfa2f90bd46c5a",
+  "receipt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-release-20261020/pi05_kr-verified.json"
+}

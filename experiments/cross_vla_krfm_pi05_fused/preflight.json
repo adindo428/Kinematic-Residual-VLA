@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/env/bin/python",
+      "-m",
+      "unittest",
+      "test_contract.py",
+      "test_optimizer.py"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "..../home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.\n  warnings.warn(warn_msg)\n........\n----------------------------------------------------------------------\nRan 12 tests in 19.097s\n\nOK\n"
+  },
+  {
+    "command": [
+      "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/env/bin/python",
+      "-m",
+      "torch.distributed.run",
+      "--standalone",
+      "--nproc_per_node=2",
+      "test_collective.py"
+    ],
+    "returncode": 0,
+    "stdout": "Unequal-rank checkpoint clocks and coordinated stop: PASS\n",
+    "stderr": ""
+  },
+  {
+    "script": "pi05_baseline_profile.sbatch",
+    "returncode": 0,
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17713142 to start at 2026-10-20T02:33:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "pi05_baseline_train.sbatch",
+    "returncode": 0,
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17713143 to start at 2026-10-20T02:33:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "pi05_kr_profile.sbatch",
+    "returncode": 0,
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17713144 to start at 2026-10-20T02:33:22 a using 32 processors on nodes node0373 in partition work1\n"
+  },
+  {
+    "script": "pi05_kr_train.sbatch",
+    "returncode": 0,
+    "stderr": "sbatch: Requested Features: gpu_a100_80gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17713145 to start at 2026-10-20T02:33:22 a using 32 processors on nodes node0373 in partition work1\n"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "files": {
+    "common.py": "612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f",
+    "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+    "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+    "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+    "policy.py": "7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9",
+    "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+    "submit.py": "a3f0df74e1723efcbd3808c37f0e735d5baec534fb2777a9cc39a5d956c3fc96",
+    "test_contract.py": "97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d",
+    "train.py": "5e7fe630cec2ed22f5ac0267705a47bb5846a71ac31f0f213f556a2f0297c059"
+  },
+  "source_sha256": "e300c8b31d3fc980eaa0d566410f29fe4f55521d12ee9c65d2c7ac294a85e1e2"
+}

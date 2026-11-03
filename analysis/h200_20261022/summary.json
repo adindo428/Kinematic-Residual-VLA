@@ -1,0 +1,234 @@
+{
+  "performance": [
+    [
+      "\u03c00.5 baseline",
+      "37.1",
+      "27.5",
+      "Pending",
+      "58.8",
+      "0.64",
+      "98.1"
+    ],
+    [
+      "\u03c00.5 KR",
+      "23.1",
+      "19.3",
+      "94.6%",
+      "58.9",
+      "0.87",
+      "96.6"
+    ],
+    [
+      "VLASH baseline",
+      "55.8",
+      "42.9",
+      "96.2%",
+      "61.7",
+      "0.88",
+      "73.6"
+    ],
+    [
+      "VLASH KR",
+      "55.8",
+      "43.7",
+      "96.5%",
+      "61.7",
+      "0.84",
+      "73.7"
+    ],
+    [
+      "SmolVLA baseline",
+      "438.2",
+      "352.2",
+      "88.8%",
+      "6.9",
+      "1.84",
+      "32.6"
+    ],
+    [
+      "SmolVLA KR",
+      "418.6",
+      "268.1",
+      "94.7%",
+      "6.9",
+      "2.61",
+      "32.8"
+    ],
+    [
+      "DOM + velocity",
+      "139.6",
+      "135.5",
+      "83.8%",
+      "24.6",
+      "4.33",
+      "37.3"
+    ]
+  ],
+  "bandwidth": [
+    [
+      "\u03c00.5 baseline",
+      "Unavailable",
+      "\u2014",
+      "\u2014",
+      "\u2014"
+    ],
+    [
+      "\u03c00.5 KR",
+      "NODE / no NVLink shown",
+      "24.4%",
+      "14.585",
+      "14.155"
+    ],
+    [
+      "VLASH baseline",
+      "NV18",
+      "40.2%",
+      "0.383",
+      "0.024"
+    ],
+    [
+      "VLASH KR",
+      "NV18",
+      "40.2%",
+      "0.213",
+      "0.032"
+    ],
+    [
+      "SmolVLA baseline",
+      "NV18",
+      "32.9%",
+      "1.202",
+      "0.132"
+    ],
+    [
+      "SmolVLA KR",
+      "NODE / no NVLink shown",
+      "30.9%",
+      "3.332",
+      "2.251"
+    ],
+    [
+      "DOM + velocity",
+      "NV18",
+      "14.9%",
+      "1.892",
+      "0.026"
+    ]
+  ],
+  "parameters": [
+    [
+      "\u03c00.5 baseline",
+      "~3.62B / 3.249B",
+      "FP32 storage + BF16 autocast",
+      "16",
+      "1",
+      "32",
+      "4",
+      "2.5e-05",
+      "0.01",
+      "1.0"
+    ],
+    [
+      "\u03c00.5 KR",
+      "~3.62B / 3.249B",
+      "FP32 storage + BF16 autocast",
+      "16",
+      "1",
+      "32",
+      "4",
+      "2.5e-05",
+      "0.01",
+      "1.0"
+    ],
+    [
+      "VLASH baseline",
+      "~3.62B / 3.249B",
+      "Mixed FP32/BF16 storage + BF16 autocast",
+      "8",
+      "2",
+      "32",
+      "4",
+      "5e-05",
+      "1e-10",
+      "1.0"
+    ],
+    [
+      "VLASH KR",
+      "~3.62B / 3.249B",
+      "Mixed FP32/BF16 storage + BF16 autocast",
+      "8",
+      "2",
+      "32",
+      "4",
+      "5e-05",
+      "1e-10",
+      "1.0"
+    ],
+    [
+      "SmolVLA baseline",
+      "~450M / 99.9M",
+      "Mixed FP32/BF16 storage + BF16 autocast",
+      "32",
+      "1",
+      "64",
+      "8",
+      "0.0001",
+      "1e-10",
+      "10.0"
+    ],
+    [
+      "SmolVLA KR",
+      "~450M / 99.9M",
+      "Mixed FP32/BF16 storage + BF16 autocast",
+      "32",
+      "1",
+      "64",
+      "8",
+      "0.0001",
+      "1e-10",
+      "10.0"
+    ],
+    [
+      "DOM + velocity",
+      "~430M / 420.9M",
+      "Mixed FP32/BF16 storage + BF16 autocast",
+      "22",
+      "8",
+      "352",
+      "4",
+      "3e-05",
+      "1e-10",
+      "None"
+    ]
+  ],
+  "recommendations": [
+    [
+      "1. Standardize GPU topology",
+      "Prefer GPU pairs with confirmed NVLink connectivity. \u03c00.5-KR and SmolVLA-KR currently show NODE paths and H200 NVL devices; other running pairs show NV18. \u03c00.5-KR averages 14.6/14.2 GB/s PCIe receive/transmit in this short sample. Communication is a strong suspect, not a proven isolated bottleneck. Match hardware before attributing timing differences to KR."
+    ],
+    [
+      "2. Reduce gradient accumulation where memory permits",
+      "VLASH: try microbatch 16 \u00d7 2 GPUs \u00d7 accumulation 1, keeping global batch 32 (currently 8 \u00d7 2 \u00d7 2). DOM: try 44 \u00d7 2 \u00d7 4, then 88 \u00d7 2 \u00d7 2; both preserve global batch 352 (currently 22 \u00d7 2 \u00d7 8). These are candidates, not measured speedups. DOM may contain batch-dependent layers, so changing microbatch can change behavior even with fixed global batch."
+    ],
+    [
+      "3. Use SmolVLA GPUs more economically",
+      "Try one GPU, microbatch 64, accumulation 1, global batch 64, against the current two-GPU setup. Low memory consumption alone does not prove low computational utilization: live GPU busy time is 89\u201395%. Measure both samples/s and samples per GPU-second. Larger global batches 128/256 are separate optimization experiments that change training statistics and scheduling."
+    ],
+    [
+      "4. Trade memory for recomputation on \u03c00.5",
+      "At fixed global batch 32, the current microbatch 16 already requires no accumulation. Benchmark gradient checkpointing off, keeping precision fixed, since the observed peak is ~59 GiB. Fit is not guaranteed. Retain BF16 autocast; do not switch to pure FP32 compute. Precision storage changes are a separate numerical experiment."
+    ],
+    [
+      "5. Tune data loading and CPU placement",
+      "Sweep 4/8/12 workers per rank and prefetch 2/4 within the 32-CPU allocation, recording loader wait time and host memory. Saved CPU measurements are rank-0 process-tree averages across readiness, not whole-job production CPU utilization. \u03c00.5/VLASH preparation currently synchronizes GPU state to CPU for state tokenization; moving equivalent work to CPU preprocessing is worth profiling. DOM uses blocking tensor transfers despite pinned loaders; consider nonblocking transfers after measuring copy overlap."
+    ],
+    [
+      "6. Measure optimizer and orchestration overhead",
+      "\u03c00.5 already uses fused AdamW; other families do not. Benchmark fused AdamW separately for SmolVLA, VLASH and DOM. DDP already uses no_sync for intermediate accumulation steps and gradient bucket views. Do not simply disable find_unused_parameters: unused parameter handling must be established first. Compilation is disabled for cross-VLA models; consider it only after higher-priority changes, including compile/startup costs."
+    ],
+    [
+      "7. Protect continuation and report comparable rates",
+      "\u03c00.5 baseline was preempted and pending at the snapshot. Retain requeue/resume and consider a shorter checkpoint interval if preemptions are frequent, balancing write cost. Preserve horizon 20, data split, LR schedule and effective batch for hardware comparisons. Add representative step timing, data wait, HBM/NVLink counters, and disk throughput before declaring bandwidth saturation."
+    ]
+  ]
+}

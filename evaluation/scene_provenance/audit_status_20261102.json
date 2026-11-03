@@ -1,0 +1,64 @@
+{
+  "audit_date": "2026-11-02",
+  "scope": "Evidence needed to label updated manipulation evaluation tables; no simulator execution",
+  "evaluation_remains_stopped": true,
+  "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+  "split_counts": {
+    "test": 2011,
+    "train": 20000,
+    "validation": 2015
+  },
+  "house_mapping_available_in_examined_local_split_records": false,
+  "exact_training_house_list_established": false,
+  "iid_established": false,
+  "velocity_only_ood_established": false,
+  "source_findings": [
+    {
+      "finding": "Generator selects houses from unsorted os.listdir(scene_dir); filename UUID suffix is not house identity; original same-stem simulator JSON preserves the full scene.",
+      "url": "https://raw.githubusercontent.com/hzxie/DynamicVLA/master/simulations/simulate.py"
+    },
+    {
+      "finding": "LeRobot exporter emits episode_index,filename,cameras but omits the house path. Its published code obtains camera metadata from the first input episode and reuses it; exported camera rows alone are not authoritative evidence of per-episode views.",
+      "url": "https://raw.githubusercontent.com/hzxie/DynamicVLA/master/scripts/create_lerobot_dataset.py"
+    },
+    {
+      "finding": "Replay/translation can replace camera settings and writes same-episode -tr.json. Prefer the JSON that actually produced the exported frames when auditing full conditions.",
+      "url": "https://raw.githubusercontent.com/hzxie/DynamicVLA/master/scripts/translate_dataset_seq.py"
+    }
+  ],
+  "published_tree": "https://huggingface.co/datasets/hzxie/DOM/tree/main",
+  "request_file_on_pc": "/media/ailab-students/Linux_SSD/projects/Dynamic_VLA/scratch/dom45/evaluations/iid-scene-audit-20261102/episode_scene_mapping_request.json",
+  "request_file_accessible_in_this_workspace": false,
+  "minimal_mapping_columns": [
+    "episode_index",
+    "exact_exported_episode_filename",
+    "house_usd_path",
+    "source_scene_json_sha256"
+  ],
+  "mapping_scope": "All20000training episodes; include2015validation and2011test episodes if selecting held-out episodes from those splits. Missing/ambiguous rows remain unresolved; no inference from seed/suffix.",
+  "selected_json_requirement": "Original exact-export-input scene JSON for selected held-out episodes, including translated/replayed configs where applicable; optional corresponding house asset hashes to bind versions. No weights/videos/full dataset needed.",
+  "eval_table_labels_until_verified": [
+    "Official DOM benchmark: train-house overlap unverified",
+    "Seen-house held-out: only after mapping; other distribution axes separately audited",
+    "Velocity-only OOD: only after paired-scene config diff/initial-state/actual-velocity checks"
+  ],
+  "separate_checks": [
+    "house asset identity/version",
+    "episode and duplicate-group disjointness",
+    "object instances and poses",
+    "robot/table layout",
+    "camera intrinsics/extrinsics and preprocessing",
+    "lighting",
+    "task/instruction",
+    "physics/friction/mass",
+    "target velocity and other dynamics",
+    "simulator and inference protocol",
+    "pretrained-weight exposure versus20k fine-tuning membership"
+  ],
+  "paired_velocity_protocol": "Freeze all non-target-velocity conditions and use matched seeds/initialization across pair/model; whitelist only the target velocity field in config diffs; record actual realized velocities and declare OOD thresholds against training support. MG alone is not verification.",
+  "no_external_messages_sent": true,
+  "no_dataset_or_weights_downloaded": true,
+  "no_palmetto_code_executed": true,
+  "chat_history_review": "chat_history_audit_20261102.json",
+  "planning_gap": "Task/speed and duplicate-group selection preserved held-out episodes, but house mapping and scene-controlled IID/velocity-OOD protocol were not validated before launching the20k campaign; earlier explicit warnings were not enforced as experiment launch prerequisites."
+}

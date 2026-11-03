@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Publish a Table 1-style tracking table only after all 7200 trials verify."""
+import argparse
+import csv
+import json
+from pathlib import Path
+import numpy as np
+from tracking_online_common import write_json
+from tracking_benchmark import DIMENSIONS, MODELS
+
+
+def summarize(root):
+    root=Path(root); p=json.loads((root/'protocol.json').read_text())
+    all_records=[]
+    for shard in range(90):
+        folder=root/'full'/f'{shard:03d}'
+        v=json.loads((folder/'verification.json').read_text())
+        assert v['verified'] and v['pairing_valid'] and v['rollouts']==80
+        all_records+=json.loads((folder/'rollouts.json').read_text())
+    assert len(all_records)==p['expected_rollouts']
+    assert len({(r['model'],r['dimension'],r['environment'],r['episode']) for r in all_records})==7200
+    table=[]; details={}
+    for model in MODELS:
+        rows=[r for r in all_records if r['model']==model]
+        assert len(rows)==1800
+        out={'Method':p['model_labels'][model]}
+        details[model]={}
+        for d in DIMENSIONS:
+            group=[r for r in rows if r['dimension']==d]; assert len(group)==200
+            out[d]=100*sum(r['metrics']['success'] for r in group)/200
+            details[model][d]={
+                'successes':sum(r['metrics']['success'] for r in group),'trials':200,
+                'completed':sum(r['metrics']['completed'] for r in group),
+                'mean_object_speed_mps':float(np.mean([r['object_mean_speed_mps'] for r in group])),
+                'mean_post_acquisition_within_2cm_fraction':float(np.mean([r['metrics']['post_acquisition_within_2cm_fraction'] or 0 for r in group])),
+                'completed_mean_hover_rmse_m':float(np.mean([r['metrics']['hover_rmse_m'] for r in group if r['metrics']['completed']])) if any(r['metrics']['completed'] for r in group) else None,
+                'failure_capped_time_s':float(np.mean([r['metrics']['failure_capped_time_s'] for r in group]))}
+        out['Success']=100*sum(r['metrics']['success'] for r in rows)/1800
+        out['Time']=float(np.mean([r['metrics']['failure_capped_time_s'] for r in rows]))
+        successes=[r['metrics']['successful_acquisition_time_s'] for r in rows if r['metrics']['success']]
+        out['Time_successful_only']=float(np.mean(successes)) if successes else None
+        table.append(out)
+    write_json(root/'summary.json',{'complete':True,'pairing_valid':True,'expected_rollouts':7200,
+        'recorded_rollouts':len(all_records),'protocol':p,'table':table,'dimensions':details})
+    columns=['Method',*DIMENSIONS,'Success','Time','Time_successful_only']
+    with (root/'tracking_table1.csv').open('w') as f:
+        w=csv.DictWriter(f,fieldnames=columns);w.writeheader();w.writerows(table)
+    best={k:max(r[k] for r in table) for k in [*DIMENSIONS,'Success']}
+    best['Time']=min(r['Time'] for r in table)
+    md='Table 1-style tracking adaptation (not the DOM manipulation benchmark).\n\n'
+    md+='| Method | '+' | '.join([*DIMENSIONS,'Success ↑','Time ↓'])+' |\n'
+    md+='|---|'+'---:|'*11+'\n'
+    for r in table:
+        values=[]
+        for k in [*DIMENSIONS,'Success','Time']:
+            val=f'{r[k]:.2f}'
+            values.append(f'**{val}**' if r[k]==best[k] else val)
+        md+='| '+r['Method']+' | '+' | '.join(values)+' |\n'
+    md+='\nSuccess: fraction of trials that complete the full horizon and remain within 2 cm at every 200 Hz sample after 1 s, including the final state.\n\n'
+    md+='Time: sustained acquisition time; unsuccessful trials are capped at their horizon (10 s; LS 30 s). Successful-only acquisition time is available in the CSV; undefined when no trials succeed.\n\n'
+    md+=p['scope']+'\n\n'
+    for d,description in DIMENSIONS.items(): md+=f'- {d}: {description}\n'
+    (root/'tracking_table1.md').write_text(md)
+    # A shareable scientific figure, with categories grouped like the paper.
+    import matplotlib;matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    fig,ax=plt.subplots(figsize=(15,4.8));ax.axis('off')
+    cells=[[r['Method'],*[f'{r[k]:.2f}' for k in [*DIMENSIONS,'Success','Time']]] for r in table]
+    t=ax.table(cellText=cells,colLabels=['Method',*DIMENSIONS,'Success ↑','Time ↓'],loc='center',cellLoc='center',colWidths=[.27]+[.065]*9+[.075,.075])
+    t.auto_set_font_size(False);t.set_fontsize(10);t.scale(1,1.9)
+    for (i,j),cell in t.get_celld().items():
+        cell.set_edgecolor('#dddddd')
+        if i==0:cell.set_facecolor('#dde5ef');cell.get_text().set_weight('bold')
+        if i>0 and j>0:
+            key=[*DIMENSIONS,'Success','Time'][j-1]
+            if table[i-1][key]==best[key]:cell.get_text().set_weight('bold')
+    ax.set_title('Closed-loop hover tracking: Table 1-style adaptation',fontsize=15,pad=35)
+    fig.text(.16,.80,'Interaction: CR / DA / LS      Perception: VU / SR / MP      Generalization: VG / MG / DR',fontsize=10)
+    fig.text(.04,.06,'Success: ≤2 cm at every step from 1 s to horizon.  Time: sustained acquisition, failures capped at horizon.\nOne training room; ten seeded setups; VG uses unseen apple meshes. LS horizon 30 s; others 10 s.',fontsize=9)
+    fig.savefig(root/'tracking_table1.png',dpi=180,bbox_inches='tight');plt.close(fig)
+    print('Completed 7200-trial table:',root/'tracking_table1.md')
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--root',required=True,type=Path);a=p.parse_args();summarize(a.root)

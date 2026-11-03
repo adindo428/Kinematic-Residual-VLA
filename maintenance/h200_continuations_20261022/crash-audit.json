@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-10-22T18:41:19.682443+00:00",
+  "affected_job": "17859073",
+  "variant": "pi05_baseline",
+  "cause": "Slurm PREEMPTION at 2026-10-22 14:29:40 America/New_York; no Python training traceback in recent error tail",
+  "current_state": "PENDING Priority",
+  "automatic_requeue": true,
+  "saved_updates": 96531,
+  "last_logged_updates": 97290,
+  "lost_unsaved_updates_up_to": 759,
+  "checkpoint_cpu_contract_previously_passed": true,
+  "continuation_job": "17931273",
+  "continuation_state": "PENDING Dependency",
+  "other_six_productions": "RUNNING with recent positive training logs",
+  "action": "Retain existing automatic requeue and dependent continuation; no duplicate submission or source edit"
+}

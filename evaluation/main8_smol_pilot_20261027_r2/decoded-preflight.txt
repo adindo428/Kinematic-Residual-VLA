@@ -1,0 +1,1 @@
+{'observation.images.opst_cam': [3, 360, 480], 'observation.images.wrist_cam': [3, 360, 480]}

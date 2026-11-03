@@ -1,0 +1,186 @@
+{
+  "artifacts": {
+    "dataset_coverage.json": "f2ccfe56bc575b02e420a69502ec0a25306c6ba46f4299e77308c67b84ea94fe",
+    "dataset_selection.json": "6eafe596da0b1697ef1db3784427cf8571cdd468e1d4f746fc573822a4d2228c",
+    "episodes.json": "54c05acc563ff95904305681b94f6ec77825aa96258b31e288adf57c99b884c6",
+    "horizon_change.json": "71161cd02c5b3efb88ccb7a55cbeca4ec75f9d6d9ad8ef04e4b6327645ea2ca3",
+    "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c",
+    "parquet_hashes.json": "7a4ed0caf4c817e9ed6eec8f7fe67594f333b11e23879d891f0bd2ccfae8061b",
+    "phase_hashes.json": "803035bd133f89c36cd321719fa35668212e3fd11ae4d8261a91a9941f010492",
+    "pilot_episodes.json": "8faecfe8062cba78881f4411d62c8c12a686678b6f483e0a21dea2b253b07c86",
+    "split.json": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+    "test_cases.json": "3fca5ff097b8216d0cc1aaedc0235af172709a6520a72f05001e7dc3795c9fba",
+    "validation_anchors.json": "089d22058f2337cba93a25333c5b7b97994f6c6faefefc33a53187914f9fea63",
+    "validation_cases.json": "d0a5f98549dc8923091a0ffd999d9dc82573b2cc39f2ec83862fe151d9727961",
+    "video_hashes.json": "64f70f8b0282bbf12c9366483cddd0d5076347f6d85c2db3a14203840863ca35"
+  },
+  "counts": {
+    "test": 2011,
+    "train": 197207,
+    "validation": 2015
+  },
+  "coverage": {
+    "episode_fraction": 0.9707051411922472,
+    "excluded_episodes": 6073,
+    "excluded_frames": 723258,
+    "frame_fraction": 0.9692912985643772,
+    "missing_or_empty_files": 12099,
+    "published_episodes": 207306,
+    "published_frames": 23552217,
+    "retained_episodes": 201233,
+    "retained_frames": 22828959,
+    "task_speed_coverage": {
+      "[\"long_horizon\", 0]": {
+        "excluded": 0,
+        "retained": 88
+      },
+      "[\"long_horizon\", 1]": {
+        "excluded": 0,
+        "retained": 1236
+      },
+      "[\"long_horizon\", 2]": {
+        "excluded": 0,
+        "retained": 4428
+      },
+      "[\"long_horizon\", 3]": {
+        "excluded": 0,
+        "retained": 129
+      },
+      "[\"pick\", 1]": {
+        "excluded": 0,
+        "retained": 950
+      },
+      "[\"pick\", 2]": {
+        "excluded": 0,
+        "retained": 32036
+      },
+      "[\"pick\", 3]": {
+        "excluded": 0,
+        "retained": 31692
+      },
+      "[\"pick\", 4]": {
+        "excluded": 0,
+        "retained": 3796
+      },
+      "[\"place\", 0]": {
+        "excluded": 0,
+        "retained": 85
+      },
+      "[\"place\", 1]": {
+        "excluded": 0,
+        "retained": 1451
+      },
+      "[\"place\", 2]": {
+        "excluded": 2574,
+        "retained": 44680
+      },
+      "[\"place\", 3]": {
+        "excluded": 3132,
+        "retained": 72769
+      },
+      "[\"place\", 4]": {
+        "excluded": 367,
+        "retained": 7893
+      }
+    }
+  },
+  "dataset": "hzxie/DOM",
+  "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+  "dataset_root": "/scratch/aparame/.cache/huggingface/lerobot/hzxie/DOM",
+  "dataset_selection_mode": "available_only",
+  "derived_from": {
+    "execution_horizon": 20,
+    "old_prediction_horizon": 20,
+    "parent_family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-20261009",
+    "parent_fingerprint": "048db8b61ee37b5a003c099196d4b35e97e9458b9cd0ca260ffce6dd6a15fcb1",
+    "parent_source_sha256": "cd4ae5d9493f0aa95e01ad63df415a4443b8dad4ecce009c4a1e9901c87f2212",
+    "prediction_horizon": 20,
+    "reason": "User requested matching the paper with 20 predicted and executed actions.",
+    "reused_artifacts": {
+      "dataset_coverage.json": "f2ccfe56bc575b02e420a69502ec0a25306c6ba46f4299e77308c67b84ea94fe",
+      "dataset_selection.json": "6eafe596da0b1697ef1db3784427cf8571cdd468e1d4f746fc573822a4d2228c",
+      "episodes.json": "54c05acc563ff95904305681b94f6ec77825aa96258b31e288adf57c99b884c6",
+      "horizon_change.json": "d6d46c96e20339628dcb00c644f3b6f18edf873424a29701e15ed3c184eb0934",
+      "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c",
+      "parquet_hashes.json": "7a4ed0caf4c817e9ed6eec8f7fe67594f333b11e23879d891f0bd2ccfae8061b",
+      "phase_hashes.json": "803035bd133f89c36cd321719fa35668212e3fd11ae4d8261a91a9941f010492",
+      "pilot_episodes.json": "8faecfe8062cba78881f4411d62c8c12a686678b6f483e0a21dea2b253b07c86",
+      "split.json": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+      "test_cases.json": "3fca5ff097b8216d0cc1aaedc0235af172709a6520a72f05001e7dc3795c9fba",
+      "validation_anchors.json": "089d22058f2337cba93a25333c5b7b97994f6c6faefefc33a53187914f9fea63",
+      "validation_cases.json": "d0a5f98549dc8923091a0ffd999d9dc82573b2cc39f2ec83862fe151d9727961",
+      "video_hashes.json": "64f70f8b0282bbf12c9366483cddd0d5076347f6d85c2db3a14203840863ca35"
+    }
+  },
+  "distributed_study": {
+    "data_parent": "/scratch/aparame/Dynamic_VLA/dom100-ddp-20261009",
+    "early_stopping_authorization": "User requested stopping on nonimproving validation loss; 100 epochs is an estimate and becomes a cap.",
+    "first_variant": "krv100",
+    "frame_sampling": "frames",
+    "global_effective_batch": 352,
+    "learning_rate_selection": "User explicitly selected Start at 3e-5 on 2026-10-09 instead of waiting for pilots.",
+    "preferred_world_size": 8,
+    "shared_learning_rate": 3e-05,
+    "source_parent": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-20261009",
+    "supported_world_sizes": [
+      4,
+      8
+    ]
+  },
+  "episodes": 201233,
+  "execution_horizon": 20,
+  "fingerprint": "195769ab6bbfae3edadbd0ff67b9aa2e75191e06b59c83470f8679ca81a10f51",
+  "fps": 25,
+  "frames": 22828959,
+  "initialization": "/scratch/aparame/Dynamic_VLA/dom100/initialization",
+  "model_revision": "c9609d94c5940eb42436a31927d7e80ae454279e",
+  "normalization": "pretrained_state_action",
+  "parquets_sha256": "96fe9127aef55fe66cdd18527ac4906186bc8d4942f2e62ff17dc6c320e9c5e9",
+  "phase_config": {
+    "close_duration_s": 0.2,
+    "fade_s": 0.2,
+    "history_s": 0.2,
+    "lift_m": 0.02,
+    "loss_duration_s": 0.12,
+    "loss_position_m": 0.03,
+    "loss_speed_m_s": 0.1,
+    "relative_position_m": 0.01,
+    "relative_speed_m_s": 0.05
+  },
+  "prediction_horizon": 20,
+  "profile_recovery": {
+    "cancelled_jobs": [
+      "16836839",
+      "16836840",
+      "16836841",
+      "16836842",
+      "16836847",
+      "16836848",
+      "16836849",
+      "16836843",
+      "16836844",
+      "16836845",
+      "16836846"
+    ],
+    "local_tests_passed": 72,
+    "parent_family": "/scratch/aparame/Dynamic_VLA/dom100-h20",
+    "reason": "Copy episode lengths out of torch-backed numpy views before spawning DataLoader workers. Previous metrics retained for diagnosis; approvals are recomputed."
+  },
+  "published_episodes": 207306,
+  "published_frames": 23552217,
+  "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+  "split_sha256": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+  "train_frames": 22371185,
+  "velocity_mean": [
+    -0.011364248270240618,
+    -0.0031599214577056793,
+    0.011547081950829997
+  ],
+  "velocity_std": [
+    0.1241744187278931,
+    0.1688344493051613,
+    0.20343423337015365
+  ],
+  "version": 1,
+  "weights_sha256": "e3da8b1e0326d7a3ee6873f7fa17cdf7015201251901be5107377cb851ce3af8"
+}

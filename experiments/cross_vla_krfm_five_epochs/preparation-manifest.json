@@ -1,0 +1,15 @@
+{
+  "files": {
+    "prepared.json": "732f79f28b88322e781848a7d41c50f8f452a219e70dc6315299b2cf027c38e2",
+    "statistics.json": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+    "split.json": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+    "checkpoints.json": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+    "implementation-lock.json": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83",
+    "data-provenance.json": "e2b45a2402cfc83dd59daf50c2bc44ae1e03af900fbd602f004d8418a4303696",
+    "parquet_hashes.json": "6c4d642dbee8936ac9f2644a5a73b3b6e81ebcbebcd4bcaf6ab9adc8c0bcac73",
+    "video_hashes.json": "24dcff97988d7a732585a5f9cfa6a5a7ae95807e02dbe50c5fd742cec76beb56"
+  },
+  "parent": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020",
+  "copy_verified": true,
+  "audited_hash_manifests_present": true
+}

@@ -1,0 +1,714 @@
+{
+  "checked_at": "2026-10-20T15:00:13.574420+00:00",
+  "files": {
+    "submissions.json": "{\n  \"purpose\": \"bounded H200 pi05 pair performance/readiness; migration only after sustained25% advantage and exact latest A100 checkpoint verification\",\n  \"production_submitted\": false,\n  \"paired_profile\": {\n    \"job_id\": \"17737992\",\n    \"script\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/profile_pair.sbatch\",\n    \"command\": \"bounded_pair_profile\",\n    \"recipes\": [\n      \"pi05_baseline\",\n      \"pi05_kr\"\n    ],\n    \"gpus\": 2,\n    \"gpu\": \"H200\",\n    \"cpus\": 32,\n    \"memory_gib\": 256,\n    \"time_limit\": \"02:00:00\",\n    \"submitted_at\": \"2026-10-20T14:35:53.256078+00:00\"\n  }\n}\n",
+    "preflight.json": "{\n  \"at\": \"2026-10-20T14:34:54.228639+00:00\",\n  \"source_sha256\": \"7ced7acae17243f8760e5ece930c49091c0329b868711a73b89874028d6529d7\",\n  \"prepared\": {\n    \"complete\": true,\n    \"statistics_sha256\": \"ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e\",\n    \"split_sha256\": \"bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c\",\n    \"checkpoints_sha256\": \"33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860\",\n    \"implementation_sha256\": \"45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83\"\n  },\n  \"recipe_bytes_unchanged\": true,\n  \"passed\": true,\n  \"checks\": [\n    {\n      \"name\": \"cpu-contracts\",\n      \"returncode\": 0,\n      \"log\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/logs/cpu-contracts.log\",\n      \"output\": \"test_centering_zero_is_identity (test_contract.Contract) ... ok\\ntest_ddp_shards_and_resume (test_contract.Contract) ... ok\\ntest_dom_rollforward_preserves_pose6 (test_contract.Contract) ... ok\\ntest_global_optimizer_anchor_sets_survive_microbatch_change (test_contract.Contract) ... ok\\ntest_loader_does_not_consume_training_rng (test_contract.Contract) ... /home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.\\n  warnings.warn(warn_msg)\\nok\\ntest_microbatch_objective_and_gradient_invariance_with_padding (test_contract.Contract) ... ok\\ntest_native_padded_channel_loss_option (test_contract.Contract) ... ok\\ntest_pad_mask_ignores_invalid_targets_and_padding_dims (test_contract.Contract) ... ok\\ntest_physical_roundtrip_and_channels (test_contract.Contract) ... ok\\ntest_runtime_cannot_change_effective_batch_or_oversubscribe_cpus (test_contract.Contract) ... ok\\ntest_vlash_offset_uses_observation_time (test_contract.Contract) ... ok\\ntest_cpu_fused_and_resume (test_optimizer.OptimizerContracts) ... ok\\ntest_cache_preserves_checkpointed_computation (test_autocast.AutocastContracts) ... ok\\ntest_cross_hardware_migration_identity_is_explicit (test_h200.H200Contracts) ... ok\\ntest_hardware_and_global32_anchor_sets (test_h200.H200Contracts) ... ok\\ntest_production_release_requires_sustained_speed_and_headroom (test_h200.H200Contracts) ... ok\\n\\n----------------------------------------------------------------------\\nRan 16 tests in 2.378s\\n\\nOK\\n\"\n    },\n    {\n      \"name\": \"collective\",\n      \"returncode\": 0,\n      \"log\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/logs/collective.log\",\n      \"output\": \"Unequal-rank checkpoint clocks and coordinated stop: PASS\\n\"\n    },\n    {\n      \"name\": \"scheduler-preflight\",\n      \"returncode\": 0,\n      \"log\": \"/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/logs/scheduler-preflight.log\",\n      \"output\": \"sbatch: Requested Features: gpu_h200\\nsbatch: Partition: work1\\nsbatch: Submit checks complete\\nsbatch: Job 17737991 to start at 2026-10-20T18:59:45 a using 32 processors on nodes nodeai09 in partition work1\\n\"\n    }\n  ]\n}\n",
+    "source-manifest.json": "{\n  \"files\": {\n    \"autotune.py\": \"e2a8bd71eaf5d76b67c8b3b84a21c7cd41569a19102f1edd8cf179e745fcd9d1\",\n    \"common.py\": \"f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822\",\n    \"data.py\": \"4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af\",\n    \"instruction_generator.py\": \"f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4\",\n    \"meta-check.py\": \"86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced\",\n    \"migration.py\": \"e816c589956eee92b35c02865c2bde83c56b3fc00ac6c972f2d309fbf425b0fd\",\n    \"policy.py\": \"47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79\",\n    \"runtime.py\": \"b6466491feffee777c07db75a4e8a4741ec73aad1f153eff98d84f8e204eb5c8\",\n    \"submit_profiles.py\": \"05d92e701ff07a94a148a7590e275456fbdc2d81459b9b68d63a7dbf71b884d1\",\n    \"test_autocast.py\": \"b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc\",\n    \"test_collective.py\": \"a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56\",\n    \"test_contract.py\": \"99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6\",\n    \"test_h200.py\": \"b47d832da7936e65144b655f0dd938389cc1f39a70c6c21f873319ac78e60142\",\n    \"test_optimizer.py\": \"dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222\",\n    \"train.py\": \"5afa25a8421c869064b46e08791d0b68a050955f07f011f65000550ae98acb57\"\n  },\n  \"source_sha256\": \"7ced7acae17243f8760e5ece930c49091c0329b868711a73b89874028d6529d7\"\n}\n",
+    "prepared.json": "{\n  \"complete\": true,\n  \"statistics_sha256\": \"ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e\",\n  \"split_sha256\": \"bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c\",\n  \"checkpoints_sha256\": \"33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860\",\n  \"implementation_sha256\": \"45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83\"\n}\n",
+    "README.md": "# Pi05 H200 throughput tuning and conditional checkpoint migration\n\nFresh isolated attempt. The six original duplicate H200 productions were cancelled\nand their outputs deleted by the user; this directory does not recreate those runs.\nOne bounded two-H200,32CPU,256GiB allocation benchmarks microbatches1/2/4/8/16\nand4/8/12 workers for pi05 baseline and KR separately. Global batch32,30k total\nupdates,LR2.5e-5,AdamW(.9,.95),eps1e-8,WD.01,1000warmup,cosinefloor2.5e-6,\nseed42,horizon20 and the audited DOM split/weights/train-only normalizers stay fixed.\nFP32 parameters/moments,BF16 cache disabled,fused AdamW,pinned/nonblocking transfers,\ngradient bucket views and per-anchor padded objective match the current A100 code.\n\nThe benchmark records first-step/startup memory as well as steady peaks. A chosen\nruntime must retain15% GPU/conservative node RAM headroom and pass200 decoded\nupdates with coordinated checkpoint,strict optimizer/scheduler/per-rank RNG reload\nand physical20x7 inference reload. Sampled CPU busy cores and GPU activity are\nreported independently from throughput; checkpoint-inclusive training timing and\nend-to-end readiness timing are separate. Short benchmark ratios use the same-job\noptimized MB1 control,not the retired H200 profile or current A100 production rate.\n\nThe user authorized migration only if clearly faster. Require both variants to\nshow at least25% sustained throughput improvement over verified current A100\nproduction intervals,with the full readiness/memory checks passing. The current\nA100 runs continue while profiling. No production is submitted by submit_profiles.py.\nA production release file must bind the exact GPU receipt SHA and measured advantage.\nOnly then coordinate checkpoint/stop of the two A100 runs,verify newest complete\nsaved production states,freeze immutable migration manifests and submit matching\nH200 continuations. Restore model,optimizer,LR scheduler,per-rank RNG,counters,data\ncursor and original W&B IDs with the same30k TOTAL budget. Never readiness weights,\nlogged-only progress,or fresh initialization. A missing expected checkpoint fails\nclosed. Cross-hardware/microbatch kernels may change numerical trajectories.\n\nShared code/environment/prepared metadata reuse verified bytes from\n/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020.\nNo datasets/weights/checkpoints are stored on the Mac. Do not modify any active\nA100 source or recreate cancelled H200 duplicates. SmolVLA remains completed and\nunchanged; any extra SmolVLA budget needs clarification from the user.\n"
+  },
+  "queue": "17737992|PENDING|(Resources)\n17709592|RUNNING|node0377\n17709594|RUNNING|node0373\n17720948|RUNNING|node0404\n17719993|RUNNING|node0376\n",
+  "accounting": "17709592|RUNNING|10:07:39|0:0\n17709594|RUNNING|09:47:18|0:0\n17719993|RUNNING|05:39:38|0:0\n17720948|RUNNING|05:17:57|0:0\n17737992|PENDING|00:00:00|0:0\n",
+  "artifacts": {},
+  "logs": {},
+  "a100_references": {
+    "pi05_baseline": {
+      "job_id": "17719993",
+      "metrics": [
+        {
+          "Train/loss": 0.050220318138599396,
+          "Train/optimizer_updates": 5640,
+          "Train/samples": 180480,
+          "Train/epoch": 0.008067875652972453,
+          "Train/samples_per_second": 9.636873134979302,
+          "Train/lr": 2.3608450150493468e-05
+        },
+        {
+          "Train/loss": 0.06241308152675629,
+          "Train/optimizer_updates": 5650,
+          "Train/samples": 180800,
+          "Train/epoch": 0.008082180397038006,
+          "Train/samples_per_second": 9.655206985712725,
+          "Train/lr": 2.360257313233951e-05
+        },
+        {
+          "Train/loss": 0.05366791784763336,
+          "Train/optimizer_updates": 5660,
+          "Train/samples": 181120,
+          "Train/epoch": 0.00809648514110356,
+          "Train/samples_per_second": 9.632115927323863,
+          "Train/lr": 2.359668455164219e-05
+        },
+        {
+          "Train/loss": 0.025574851781129837,
+          "Train/optimizer_updates": 5670,
+          "Train/samples": 181440,
+          "Train/epoch": 0.008110789885169114,
+          "Train/samples_per_second": 9.600877823594391,
+          "Train/lr": 2.3590784415312093e-05
+        },
+        {
+          "Train/loss": 0.05232332646846771,
+          "Train/optimizer_updates": 5680,
+          "Train/samples": 181760,
+          "Train/epoch": 0.008125094629234667,
+          "Train/samples_per_second": 9.688385646049843,
+          "Train/lr": 2.3584872730273354e-05
+        },
+        {
+          "Train/loss": 0.03470459580421448,
+          "Train/optimizer_updates": 5690,
+          "Train/samples": 182080,
+          "Train/epoch": 0.008139399373300223,
+          "Train/samples_per_second": 9.587480993530132,
+          "Train/lr": 2.357894950346366e-05
+        },
+        {
+          "Train/loss": 0.030246546491980553,
+          "Train/optimizer_updates": 5700,
+          "Train/samples": 182400,
+          "Train/epoch": 0.008153704117365776,
+          "Train/samples_per_second": 9.659697978948447,
+          "Train/lr": 2.3573014741834258e-05
+        },
+        {
+          "Train/loss": 0.04286497086286545,
+          "Train/optimizer_updates": 5710,
+          "Train/samples": 182720,
+          "Train/epoch": 0.00816800886143133,
+          "Train/samples_per_second": 9.625454532677418,
+          "Train/lr": 2.3567068452349915e-05
+        },
+        {
+          "Train/loss": 0.053185224533081055,
+          "Train/optimizer_updates": 5720,
+          "Train/samples": 183040,
+          "Train/epoch": 0.008182313605496884,
+          "Train/samples_per_second": 9.661879382763653,
+          "Train/lr": 2.3561110641988935e-05
+        },
+        {
+          "Train/loss": 0.05989641323685646,
+          "Train/optimizer_updates": 5730,
+          "Train/samples": 183360,
+          "Train/epoch": 0.008196618349562437,
+          "Train/samples_per_second": 9.689197944665086,
+          "Train/lr": 2.3555141317743136e-05
+        },
+        {
+          "Train/loss": 0.061291784048080444,
+          "Train/optimizer_updates": 5740,
+          "Train/samples": 183680,
+          "Train/epoch": 0.008210923093627993,
+          "Train/samples_per_second": 9.625668567211818,
+          "Train/lr": 2.354916048661786e-05
+        },
+        {
+          "Train/loss": 0.056521352380514145,
+          "Train/optimizer_updates": 5750,
+          "Train/samples": 184000,
+          "Train/epoch": 0.008225227837693546,
+          "Train/samples_per_second": 9.643676137637769,
+          "Train/lr": 2.3543168155631937e-05
+        },
+        {
+          "Train/loss": 0.03454751521348953,
+          "Train/optimizer_updates": 5760,
+          "Train/samples": 184320,
+          "Train/epoch": 0.0082395325817591,
+          "Train/samples_per_second": 9.646435529521836,
+          "Train/lr": 2.3537164331817707e-05
+        },
+        {
+          "Train/loss": 0.06433124095201492,
+          "Train/optimizer_updates": 5770,
+          "Train/samples": 184640,
+          "Train/epoch": 0.008253837325824654,
+          "Train/samples_per_second": 9.663503127283665,
+          "Train/lr": 2.3531149022220988e-05
+        },
+        {
+          "Train/loss": 0.04377122223377228,
+          "Train/optimizer_updates": 5780,
+          "Train/samples": 184960,
+          "Train/epoch": 0.008268142069890207,
+          "Train/samples_per_second": 9.677103314714753,
+          "Train/lr": 2.3525122233901087e-05
+        },
+        {
+          "Train/loss": 0.07054131478071213,
+          "Train/optimizer_updates": 5790,
+          "Train/samples": 185280,
+          "Train/epoch": 0.008282446813955763,
+          "Train/samples_per_second": 9.659018379982651,
+          "Train/lr": 2.3519083973930765e-05
+        },
+        {
+          "Train/loss": 0.049850381910800934,
+          "Train/optimizer_updates": 5800,
+          "Train/samples": 185600,
+          "Train/epoch": 0.008296751558021316,
+          "Train/samples_per_second": 9.680614314598976,
+          "Train/lr": 2.3513034249396264e-05
+        },
+        {
+          "Train/loss": 0.03700563311576843,
+          "Train/optimizer_updates": 5810,
+          "Train/samples": 185920,
+          "Train/epoch": 0.00831105630208687,
+          "Train/samples_per_second": 9.645488679117271,
+          "Train/lr": 2.3506973067397276e-05
+        },
+        {
+          "Train/loss": 0.07437597215175629,
+          "Train/optimizer_updates": 5820,
+          "Train/samples": 186240,
+          "Train/epoch": 0.008325361046152424,
+          "Train/samples_per_second": 9.678403261195418,
+          "Train/lr": 2.350090043504693e-05
+        },
+        {
+          "Train/loss": 0.06325437128543854,
+          "Train/optimizer_updates": 5830,
+          "Train/samples": 186560,
+          "Train/epoch": 0.008339665790217977,
+          "Train/samples_per_second": 9.695618067103535,
+          "Train/lr": 2.34948163594718e-05
+        },
+        {
+          "Train/loss": 0.01946280151605606,
+          "Train/optimizer_updates": 5840,
+          "Train/samples": 186880,
+          "Train/epoch": 0.008353970534283531,
+          "Train/samples_per_second": 9.723972719011572,
+          "Train/lr": 2.3488720847811884e-05
+        },
+        {
+          "Train/loss": 0.055171024054288864,
+          "Train/optimizer_updates": 5850,
+          "Train/samples": 187200,
+          "Train/epoch": 0.008368275278349087,
+          "Train/samples_per_second": 9.70353077993748,
+          "Train/lr": 2.348261390722061e-05
+        },
+        {
+          "Train/loss": 0.0367911234498024,
+          "Train/optimizer_updates": 5860,
+          "Train/samples": 187520,
+          "Train/epoch": 0.00838258002241464,
+          "Train/samples_per_second": 9.713999763909898,
+          "Train/lr": 2.3476495544864813e-05
+        },
+        {
+          "Train/loss": 0.09356782585382462,
+          "Train/optimizer_updates": 5870,
+          "Train/samples": 187840,
+          "Train/epoch": 0.008396884766480194,
+          "Train/samples_per_second": 9.646147543063666,
+          "Train/lr": 2.3470365767924728e-05
+        },
+        {
+          "Train/loss": 0.08103517442941666,
+          "Train/optimizer_updates": 5880,
+          "Train/samples": 188160,
+          "Train/epoch": 0.008411189510545748,
+          "Train/samples_per_second": 9.617527030344053,
+          "Train/lr": 2.3464224583593988e-05
+        },
+        {
+          "Train/loss": 0.06314762681722641,
+          "Train/optimizer_updates": 5890,
+          "Train/samples": 188480,
+          "Train/epoch": 0.008425494254611301,
+          "Train/samples_per_second": 9.688943007162212,
+          "Train/lr": 2.345807199907962e-05
+        },
+        {
+          "Train/loss": 0.055025581270456314,
+          "Train/optimizer_updates": 5900,
+          "Train/samples": 188800,
+          "Train/epoch": 0.008439798998676857,
+          "Train/samples_per_second": 9.621939585715173,
+          "Train/lr": 2.3451908021602024e-05
+        },
+        {
+          "Train/loss": 0.057639122009277344,
+          "Train/optimizer_updates": 5910,
+          "Train/samples": 189120,
+          "Train/epoch": 0.00845410374274241,
+          "Train/samples_per_second": 9.614760022457103,
+          "Train/lr": 2.344573265839497e-05
+        },
+        {
+          "Train/loss": 0.07352910935878754,
+          "Train/optimizer_updates": 5920,
+          "Train/samples": 189440,
+          "Train/epoch": 0.008468408486807964,
+          "Train/samples_per_second": 9.62840091221038,
+          "Train/lr": 2.343954591670559e-05
+        },
+        {
+          "Train/loss": 0.06146105378866196,
+          "Train/optimizer_updates": 5930,
+          "Train/samples": 189760,
+          "Train/epoch": 0.008482713230873518,
+          "Train/samples_per_second": 9.678191674054776,
+          "Train/lr": 2.3433347803794368e-05
+        }
+      ],
+      "latest": {
+        "progress": {
+          "updates": 5410,
+          "samples": 173120,
+          "epoch": 0,
+          "cursor": 173120
+        },
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/latest.pt"
+      },
+      "provenance": {
+        "recipe": {
+          "name": "pi05_baseline",
+          "method": "pi05",
+          "kr": false,
+          "lr": 2.5e-05,
+          "steps": 30000,
+          "weight_decay": 0.01,
+          "clip": 1.0,
+          "global_batch": 32,
+          "max_delay": 0,
+          "decay_lr": 2.5e-06,
+          "horizon": 20,
+          "fps": 25,
+          "seed": 42,
+          "normalization": "quantiles",
+          "velocity_conditioning": false,
+          "phase_gate": false,
+          "shared_observation": false
+        },
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596",
+          "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+          "train.py": "0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "job_id": "17719993",
+        "world_size": 2,
+        "readiness": {
+          "approved": true,
+          "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+          "hardware": "NVIDIA A100 80GB PCIe",
+          "runtime": {
+            "microbatch": 8,
+            "workers": 8,
+            "main_threads": 2,
+            "prefetch": 2,
+            "autocast_cache_enabled": false,
+            "allocator": "expandable_segments:True"
+          },
+          "microbatch": 8,
+          "global_batch": 32,
+          "accumulation": 2,
+          "decoded_optimizer_updates": 20,
+          "seconds": 144.61472610291094,
+          "samples_per_second": 4.425552066838354,
+          "peak_gpu_reserved_bytes": 71798095872.0,
+          "node_process_peak_rss_bytes": 114189242368.0,
+          "validation_h20_action_mse": 4.517374038696289,
+          "strict_checkpoint_rng_reload": true,
+          "strict_inference_reload": true,
+          "coordinated_checkpoint_test": true,
+          "mean_gpu_utilization_percent": 45.182539682539684,
+          "source": {
+            "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+            "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+            "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+            "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+            "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+            "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+            "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+            "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+            "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+            "submit.py": "69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596",
+            "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+            "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+            "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+            "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+            "train.py": "0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d"
+          }
+        },
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "wandb_id": "ifalqwwf",
+        "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/ifalqwwf"
+      }
+    },
+    "pi05_kr": {
+      "job_id": "17720948",
+      "metrics": [
+        {
+          "Train/loss": 0.04951363056898117,
+          "Train/optimizer_updates": 5260,
+          "Train/samples": 168320,
+          "Train/epoch": 0.0075242953784814,
+          "Train/samples_per_second": 9.756574886648911,
+          "Train/lr": 2.3823142099366323e-05
+        },
+        {
+          "Train/loss": 0.08689964562654495,
+          "Train/optimizer_updates": 5270,
+          "Train/samples": 168640,
+          "Train/epoch": 0.007538600122546955,
+          "Train/samples_per_second": 9.772678875465257,
+          "Train/lr": 2.381770944380408e-05
+        },
+        {
+          "Train/loss": 0.06614716351032257,
+          "Train/optimizer_updates": 5280,
+          "Train/samples": 168960,
+          "Train/epoch": 0.007552904866612508,
+          "Train/samples_per_second": 9.741749676779397,
+          "Train/lr": 2.3812264973224035e-05
+        },
+        {
+          "Train/loss": 0.0673522800207138,
+          "Train/optimizer_updates": 5290,
+          "Train/samples": 169280,
+          "Train/epoch": 0.007567209610678062,
+          "Train/samples_per_second": 9.783312093535088,
+          "Train/lr": 2.3806808694015577e-05
+        },
+        {
+          "Train/loss": 0.0444820411503315,
+          "Train/optimizer_updates": 5300,
+          "Train/samples": 169600,
+          "Train/epoch": 0.0075815143547436166,
+          "Train/samples_per_second": 9.714790413074745,
+          "Train/lr": 2.3801340612581954e-05
+        },
+        {
+          "Train/loss": 0.06549118459224701,
+          "Train/optimizer_updates": 5310,
+          "Train/samples": 169920,
+          "Train/epoch": 0.00759581909880917,
+          "Train/samples_per_second": 9.75032145723737,
+          "Train/lr": 2.3795860735340263e-05
+        },
+        {
+          "Train/loss": 0.037421658635139465,
+          "Train/optimizer_updates": 5320,
+          "Train/samples": 170240,
+          "Train/epoch": 0.007610123842874724,
+          "Train/samples_per_second": 9.714135537146413,
+          "Train/lr": 2.3790369068721447e-05
+        },
+        {
+          "Train/loss": 0.040529921650886536,
+          "Train/optimizer_updates": 5330,
+          "Train/samples": 170560,
+          "Train/epoch": 0.007624428586940278,
+          "Train/samples_per_second": 9.774552553844721,
+          "Train/lr": 2.3784865619170284e-05
+        },
+        {
+          "Train/loss": 0.05756929889321327,
+          "Train/optimizer_updates": 5340,
+          "Train/samples": 170880,
+          "Train/epoch": 0.007638733331005832,
+          "Train/samples_per_second": 9.717283569029547,
+          "Train/lr": 2.377935039314537e-05
+        },
+        {
+          "Train/loss": 0.05302494764328003,
+          "Train/optimizer_updates": 5350,
+          "Train/samples": 171200,
+          "Train/epoch": 0.007653038075071387,
+          "Train/samples_per_second": 9.759513906009662,
+          "Train/lr": 2.3773823397119138e-05
+        },
+        {
+          "Train/loss": 0.0551559254527092,
+          "Train/optimizer_updates": 5360,
+          "Train/samples": 171520,
+          "Train/epoch": 0.00766734281913694,
+          "Train/samples_per_second": 9.736654682062674,
+          "Train/lr": 2.3768284637577827e-05
+        },
+        {
+          "Train/loss": 0.06565456092357635,
+          "Train/optimizer_updates": 5370,
+          "Train/samples": 171840,
+          "Train/epoch": 0.007681647563202494,
+          "Train/samples_per_second": 9.771361147921994,
+          "Train/lr": 2.3762734121021474e-05
+        },
+        {
+          "Train/loss": 0.043631747364997864,
+          "Train/optimizer_updates": 5380,
+          "Train/samples": 172160,
+          "Train/epoch": 0.0076959523072680485,
+          "Train/samples_per_second": 9.772372977108606,
+          "Train/lr": 2.375717185396392e-05
+        },
+        {
+          "Train/loss": 0.03436069190502167,
+          "Train/optimizer_updates": 5390,
+          "Train/samples": 172480,
+          "Train/epoch": 0.007710257051333602,
+          "Train/samples_per_second": 9.648188993872065,
+          "Train/lr": 2.3751597842932806e-05
+        },
+        {
+          "Train/loss": 0.07523470371961594,
+          "Train/optimizer_updates": 5400,
+          "Train/samples": 172800,
+          "Train/epoch": 0.007724561795399156,
+          "Train/samples_per_second": 9.709951670790872,
+          "Train/lr": 2.3746012094469526e-05
+        },
+        {
+          "Train/loss": 0.06080925092101097,
+          "Train/optimizer_updates": 5410,
+          "Train/samples": 173120,
+          "Train/epoch": 0.00773886653946471,
+          "Train/samples_per_second": 9.747817269832261,
+          "Train/lr": 2.374041461512928e-05
+        },
+        {
+          "Train/loss": 0.07089840620756149,
+          "Train/optimizer_updates": 5420,
+          "Train/samples": 173440,
+          "Train/epoch": 0.007753171283530264,
+          "Train/samples_per_second": 9.657906039876632,
+          "Train/lr": 2.3734805411481022e-05
+        },
+        {
+          "Train/loss": 0.07003654539585114,
+          "Train/optimizer_updates": 5430,
+          "Train/samples": 173760,
+          "Train/epoch": 0.007767476027595819,
+          "Train/samples_per_second": 3.3999017357172896,
+          "Train/lr": 2.3729184490107455e-05
+        },
+        {
+          "Train/loss": 0.051363490521907806,
+          "Train/optimizer_updates": 5440,
+          "Train/samples": 174080,
+          "Train/epoch": 0.007781780771661372,
+          "Train/samples_per_second": 9.57926945810289,
+          "Train/lr": 2.3723551857605054e-05
+        },
+        {
+          "Train/loss": 0.03728199750185013,
+          "Train/optimizer_updates": 5450,
+          "Train/samples": 174400,
+          "Train/epoch": 0.007796085515726926,
+          "Train/samples_per_second": 9.656664473587178,
+          "Train/lr": 2.371790752058402e-05
+        },
+        {
+          "Train/loss": 0.08472928404808044,
+          "Train/optimizer_updates": 5460,
+          "Train/samples": 174720,
+          "Train/epoch": 0.0078103902597924805,
+          "Train/samples_per_second": 9.581416154105545,
+          "Train/lr": 2.37122514856683e-05
+        },
+        {
+          "Train/loss": 0.05005839467048645,
+          "Train/optimizer_updates": 5470,
+          "Train/samples": 175040,
+          "Train/epoch": 0.007824695003858035,
+          "Train/samples_per_second": 9.58774794063879,
+          "Train/lr": 2.370658375949557e-05
+        },
+        {
+          "Train/loss": 0.06771876662969589,
+          "Train/optimizer_updates": 5480,
+          "Train/samples": 175360,
+          "Train/epoch": 0.007838999747923589,
+          "Train/samples_per_second": 9.610055491788899,
+          "Train/lr": 2.3700904348717213e-05
+        },
+        {
+          "Train/loss": 0.04144084081053734,
+          "Train/optimizer_updates": 5490,
+          "Train/samples": 175680,
+          "Train/epoch": 0.007853304491989142,
+          "Train/samples_per_second": 9.61323023205368,
+          "Train/lr": 2.369521325999834e-05
+        },
+        {
+          "Train/loss": 0.06571856141090393,
+          "Train/optimizer_updates": 5500,
+          "Train/samples": 176000,
+          "Train/epoch": 0.007867609236054696,
+          "Train/samples_per_second": 9.508745084004074,
+          "Train/lr": 2.368951050001776e-05
+        },
+        {
+          "Train/loss": 0.06116820126771927,
+          "Train/optimizer_updates": 5510,
+          "Train/samples": 176320,
+          "Train/epoch": 0.00788191398012025,
+          "Train/samples_per_second": 9.588470248365974,
+          "Train/lr": 2.3683796075467977e-05
+        },
+        {
+          "Train/loss": 0.05497188866138458,
+          "Train/optimizer_updates": 5520,
+          "Train/samples": 176640,
+          "Train/epoch": 0.007896218724185803,
+          "Train/samples_per_second": 9.593852018836182,
+          "Train/lr": 2.367806999305519e-05
+        },
+        {
+          "Train/loss": 0.05581514909863472,
+          "Train/optimizer_updates": 5530,
+          "Train/samples": 176960,
+          "Train/epoch": 0.007910523468251359,
+          "Train/samples_per_second": 9.560264396035446,
+          "Train/lr": 2.367233225949927e-05
+        },
+        {
+          "Train/loss": 0.15380239486694336,
+          "Train/optimizer_updates": 5540,
+          "Train/samples": 177280,
+          "Train/epoch": 0.007924828212316912,
+          "Train/samples_per_second": 9.598140950148318,
+          "Train/lr": 2.3666582881533777e-05
+        },
+        {
+          "Train/loss": 0.03161377087235451,
+          "Train/optimizer_updates": 5550,
+          "Train/samples": 177600,
+          "Train/epoch": 0.007939132956382466,
+          "Train/samples_per_second": 9.545837893713498,
+          "Train/lr": 2.3660821865905915e-05
+        }
+      ],
+      "latest": {
+        "progress": {
+          "updates": 5428,
+          "samples": 173696,
+          "epoch": 0,
+          "cursor": 173696
+        },
+        "identity": "9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/latest.pt"
+      },
+      "provenance": {
+        "recipe": {
+          "name": "pi05_kr",
+          "method": "pi05",
+          "kr": true,
+          "lr": 2.5e-05,
+          "steps": 30000,
+          "weight_decay": 0.01,
+          "clip": 1.0,
+          "global_batch": 32,
+          "max_delay": 0,
+          "decay_lr": 2.5e-06,
+          "horizon": 20,
+          "fps": 25,
+          "seed": 42,
+          "normalization": "quantiles",
+          "velocity_conditioning": false,
+          "phase_gate": false,
+          "shared_observation": false
+        },
+        "identity": "9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972",
+        "source": {
+          "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+          "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+          "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+          "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+          "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+          "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+          "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+          "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+          "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+          "submit.py": "69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596",
+          "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+          "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+          "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+          "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+          "train.py": "0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d"
+        },
+        "hardware": "NVIDIA A100 80GB PCIe",
+        "job_id": "17720948",
+        "world_size": 2,
+        "readiness": {
+          "approved": true,
+          "identity": "9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972",
+          "hardware": "NVIDIA A100 80GB PCIe",
+          "runtime": {
+            "microbatch": 8,
+            "workers": 8,
+            "main_threads": 2,
+            "prefetch": 2,
+            "autocast_cache_enabled": false,
+            "allocator": "expandable_segments:True"
+          },
+          "microbatch": 8,
+          "global_batch": 32,
+          "accumulation": 2,
+          "decoded_optimizer_updates": 20,
+          "seconds": 128.89733602572232,
+          "samples_per_second": 4.96519183198855,
+          "peak_gpu_reserved_bytes": 71798095872.0,
+          "node_process_peak_rss_bytes": 113959604224.0,
+          "validation_h20_action_mse": 4.529112339019775,
+          "strict_checkpoint_rng_reload": true,
+          "strict_inference_reload": true,
+          "coordinated_checkpoint_test": true,
+          "mean_gpu_utilization_percent": 35.26865671641791,
+          "source": {
+            "autotune.py": "c48f1ee4ce3449eb112e140f215f956518b2cdc44bd0105de726d656ccf29794",
+            "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+            "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+            "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+            "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+            "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+            "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+            "prepare_resume.py": "297ac44318fc918e0669e4d2bae0b565d68cf86b7a30c64127bb1aea4325e82d",
+            "runtime.py": "0d6134f9495d262b6be0ff08b35aeab583372364b3ea82ffc7db402319f8f730",
+            "submit.py": "69f62318157247ef23de66861b39219dd389fd5e8b2fcf2bb3f7caeac5ab3596",
+            "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+            "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+            "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+            "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+            "train.py": "0ac3a9a7283d93cda599c3e9bce1863f8e64e7b4a1d9f6e87e7f5bfc2ad2153d"
+          }
+        },
+        "preparation": {
+          "complete": true,
+          "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+          "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+          "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+          "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+        },
+        "wandb_id": "l66vuxv6",
+        "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/l66vuxv6"
+      }
+    }
+  }
+}

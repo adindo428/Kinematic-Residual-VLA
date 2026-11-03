@@ -1,0 +1,10 @@
+{
+  "progress": {
+    "updates": 20000,
+    "samples": 1280000,
+    "epoch": 0,
+    "cursor": 1280000
+  },
+  "validation_h20_action_mse": 0.774071216583252,
+  "stop_reason": "official_step_budget"
+}

@@ -1,0 +1,8 @@
+{
+  "job_id": "3429662",
+  "state": "CANCELLED by 98304",
+  "elapsed": "00:00:00",
+  "start": "None",
+  "reason": "known pending request cancelled before its premature queue-controller deadline; replacement3429682 preserves frozen benchmark and two-hour allocated cap",
+  "production_changed": false
+}

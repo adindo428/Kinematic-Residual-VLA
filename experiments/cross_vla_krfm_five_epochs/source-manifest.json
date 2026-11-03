@@ -1,0 +1,17 @@
+{
+  "files": {
+    "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+    "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+    "budget.py": "76764f455aa1f093f5d78b36f9f5d97afeec7f66b42c7a0729119a3d20c57575",
+    "policy.py": "47951afbc814eebd3b2fa38eccd7c888d6f2a84504cea3417045bb918b709d79",
+    "runtime.py": "b6466491feffee777c07db75a4e8a4741ec73aad1f153eff98d84f8e204eb5c8",
+    "test_contract.py": "99dfd4bfd4123bc0fb8bf372360a892776e44a998c07583829c45430a55e2ce6",
+    "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+    "train.py": "6417e2fd045acd5a4c34287cff967b197ae217b85d98664f5a4a8c25b87d6a02",
+    "test_budget.py": "bfcb64e1c06f8f96747b115574af66023ac1112798dcbd08bc2e1345e9346f7c",
+    "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+    "test_collective.py": "a84a88dd6ad2f1e242973bc6512405b8d30e8056d4b691d04114f5bc2298ae56",
+    "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4"
+  },
+  "source_sha256": "2d866bded14ee7d88216d7cfc9f024976a1c5884e105918f7d2fa3e44087b20c"
+}

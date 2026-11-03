@@ -1,0 +1,624 @@
+{
+  "at": "2026-10-27T15:09:37.025576+00:00",
+  "runs": {
+    "pi05_baseline": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 325297,
+          "samples": 10409504,
+          "epoch": 4,
+          "cursor": 161792
+        },
+        "identity": "2a7c3f2ccf3271fcc36a35a78b515ea11eee363d8f0679e8d4e8d236edd3f5a9",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 325297,
+          "samples": 10409504,
+          "epoch": 4,
+          "cursor": 161792
+        },
+        "reason": "allocation_signal"
+      },
+      "resume-inference.json": {
+        "finite_physical_h20_inference": true,
+        "validation_h20_action_mse": 0.3860763907432556,
+        "progress": {
+          "updates": 144798,
+          "samples": 4633536,
+          "epoch": 1,
+          "cursor": 1606080
+        },
+        "training_rng_restored_after_check": true,
+        "identity": "2a7c3f2ccf3271fcc36a35a78b515ea11eee363d8f0679e8d4e8d236edd3f5a9"
+      }
+    },
+    "pi05_kr": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 301262,
+          "samples": 9640384,
+          "epoch": 3,
+          "cursor": 500000
+        },
+        "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 301262,
+          "samples": 9640384,
+          "epoch": 3,
+          "cursor": 500000
+        },
+        "reason": "allocation_signal"
+      },
+      "resume-inference.json": {
+        "finite_physical_h20_inference": true,
+        "validation_h20_action_mse": 0.19398623704910278,
+        "progress": {
+          "updates": 179040,
+          "samples": 5729280,
+          "epoch": 1,
+          "cursor": 1402400
+        },
+        "training_rng_restored_after_check": true,
+        "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4"
+      }
+    },
+    "vlash_baseline": {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 364331,
+          "samples": 11658592,
+          "epoch": 4,
+          "cursor": 1071584
+        },
+        "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+        "file": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 364331,
+          "samples": 11658592,
+          "epoch": 4,
+          "cursor": 1071584
+        },
+        "reason": "allocation_signal"
+      },
+      "resume-inference.json": {
+        "finite_physical_h20_inference": true,
+        "validation_h20_action_mse": 0.6187735795974731,
+        "progress": {
+          "updates": 155581,
+          "samples": 4978592,
+          "epoch": 1,
+          "cursor": 1611840
+        },
+        "training_rng_restored_after_check": true,
+        "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874"
+      }
+    },
+    "vlash_kr": {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr/runs/vlash_kr/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 508214,
+          "samples": 16262848,
+          "epoch": 6,
+          "cursor": 862336
+        },
+        "identity": "468a3b6fbab9d8ff2e06ccbfbe4b7b3a74ae15001d242e283c13c4e64f7b189d",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt"
+      }
+    },
+    "smolvla_baseline": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt"
+      },
+      "completed.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "validation_h20_action_mse": 0.751673698425293,
+        "stop_reason": "ten_complete_additional_subset_epochs"
+      },
+      "resume-inference.json": {
+        "finite_physical_h20_inference": true,
+        "validation_h20_action_mse": 0.33023595809936523,
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 0
+        },
+        "training_rng_restored_after_check": true,
+        "identity": "e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af"
+      }
+    },
+    "smolvla_kr": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "9267082799c9df91479901c75e478fdc63f5abb79ade007fb5de76ceeab54ed6",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt"
+      },
+      "completed.json": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "validation_h20_action_mse": 0.7740855813026428,
+        "stop_reason": "ten_complete_additional_subset_epochs"
+      },
+      "resume-inference.json": {
+        "finite_physical_h20_inference": true,
+        "validation_h20_action_mse": 0.3369646668434143,
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 0
+        },
+        "training_rng_restored_after_check": true,
+        "identity": "9267082799c9df91479901c75e478fdc63f5abb79ade007fb5de76ceeab54ed6"
+      }
+    },
+    "domv100": {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt",
+      "exists": true,
+      "latest.json": {
+        "progress": {
+          "updates": 286838,
+          "samples": 100966667,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "2dc7b26e5d4e56da990f601e7f456d74b7d52e7cd24d3a0272e8cf1a2b968ddb",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt"
+      },
+      "completed.json": {
+        "progress": {
+          "updates": 286838,
+          "samples": 100966667,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "validation_h20_action_mse": 0.1922149807214737,
+        "stop_reason": "ten_complete_additional_subset_epochs"
+      },
+      "stopped.json": {
+        "progress": {
+          "updates": 245279,
+          "samples": 86337899,
+          "epoch": 3,
+          "cursor": 2217600
+        },
+        "reason": "allocation_signal"
+      },
+      "resume-inference.json": {
+        "finite_physical_h20_inference": true,
+        "validation_h20_action_mse": 0.4477408230304718,
+        "progress": {
+          "updates": 245279,
+          "samples": 86337899,
+          "epoch": 3,
+          "cursor": 2217600
+        },
+        "training_rng_restored_after_check": true,
+        "identity": "2dc7b26e5d4e56da990f601e7f456d74b7d52e7cd24d3a0272e8cf1a2b968ddb"
+      }
+    }
+  },
+  "queue": "17931275|h2-cont-vlash_baseline|PENDING|(Resources)|(null)\n17859073|main8-rep-h200-pi05_baseline|PENDING|(ReqNodeNotAvail, UnavailableNodes:node[0002-0003,0005-0006,0008-0011,0013,0015,0017-0030,0032,0034-0035,0039-0048,0050-0056,0058-0060,0062,0064,0069,0073-0076,0078-0085,0089,0091-0093,0096-0116,0118-0119,0121-0123,0125,0127,0129-0132,0134-0140,0142-0143,0145-0153,0155-0156,0158-0160,0167-0170,0172,0174-0177,0181-0185,0187-0188,0190,0194,0196-0197,0200-0203,0209-0210,0213-0214,0216-0217,0219,0221-0224,0226-0230,0232-0234,0242,0244-0246,0248-0251,0257,0259,0261-0267,0275,0277-0293,0307,0352,0355-0523,0525-0540,0545,0555,0563-0565,0567-0568,0571-0583,0585-0587,0590-0595,0597-0622,0635,0638,0653-0654,0674,0683,0691,0693-0694,0710,0718,0736,0745,0763,0766-0771,0799,0809,0865,0879,0906,0908,0926,0944,0948,0978,1009,1045,1052,1054,1068,1078,1092,1107,1112-1114,1118,1127-1128,1132,1137,1140,1144-1145,1148,1155,1157-1161,1165,1178,1185,1189,1192-1194,1196-1197,1209,1212,1216,1218,1224,1228,1232,1243,1247-1248,1250,1254,1261,1266,1271,1279,1283-1284,1287,1297,1300,1302-1303,1309,1315,1322,1324-1327,1330-1338,1340-1351,1354-1355,1365,1376,1380,1382,1387,1394-1395,1397-1401,1403,1410,1414-1415,1434-1435,1438,1440,1442,1450-1452,1454-1457,1459-1460,1462,1469,1474,1476,1483,1497-1498,1503-1504,1507-1511,1518,1520-1523,1528,1533,1541,1547,1552,1572,1598,1623-1626,1628-1631,1634-1635,1637-1642,1655-1656,1673-1677,1679-1691,1693-1697,1699-1703,1705-1731,1733-1751,1753,1755-1758,1760-1791,1793-1796,1798-1821,1823-2004,2007-2020,2037-2062,2065-2120],nodeai[01-10],nodeau[01-04],nodecchg,nodecgbf,nodecugi,nodegbf[2-3],nodeieng,nodelm[01,03-08],nodevipr,nodewumbo,vnode[001-007])|(null)\n17859078|main8-rep-h200-vlash_kr|PENDING|(ReqNodeNotAvail, UnavailableNodes:node[0002-0003,0005-0006,0008-0011,0013,0015,0017-0030,0032,0034-0035,0039-0048,0050-0056,0058-0060,0062,0064,0069,0073-0076,0078-0085,0089,0091-0093,0096-0116,0118-0119,0121-0123,0125,0127,0129-0132,0134-0140,0142-0143,0145-0153,0155-0156,0158-0160,0167-0170,0172,0174-0177,0181-0185,0187-0188,0190,0194,0196-0197,0200-0203,0209-0210,0213-0214,0216-0217,0219,0221-0224,0226-0230,0232-0234,0242,0244-0246,0248-0251,0257,0259,0261-0267,0275,0277-0293,0307,0352,0355-0523,0525-0540,0545,0555,0563-0565,0567-0568,0571-0583,0585-0587,0590-0595,0597-0622,0635,0638,0653-0654,0674,0683,0691,0693-0694,0710,0718,0736,0745,0763,0766-0771,0799,0809,0865,0879,0906,0908,0926,0944,0948,0978,1009,1045,1052,1054,1068,1078,1092,1107,1112-1114,1118,1127-1128,1132,1137,1140,1144-1145,1148,1155,1157-1161,1165,1178,1185,1189,1192-1194,1196-1197,1209,1212,1216,1218,1224,1228,1232,1243,1247-1248,1250,1254,1261,1266,1271,1279,1283-1284,1287,1297,1300,1302-1303,1309,1315,1322,1324-1327,1330-1338,1340-1351,1354-1355,1365,1376,1380,1382,1387,1394-1395,1397-1401,1403,1410,1414-1415,1434-1435,1438,1440,1442,1450-1452,1454-1457,1459-1460,1462,1469,1474,1476,1483,1497-1498,1503-1504,1507-1511,1518,1520-1523,1528,1533,1541,1547,1552,1572,1598,1623-1626,1628-1631,1634-1635,1637-1642,1655-1656,1673-1677,1679-1691,1693-1697,1699-1703,1705-1731,1733-1751,1753,1755-1758,1760-1791,1793-1796,1798-1821,1823-2004,2007-2020,2037-2062,2065-2120],nodeai[01-10],nodeau[01-04],nodecchg,nodecgbf,nodecugi,nodegbf[2-3],nodeieng,nodelm[01,03-08],nodevipr,nodewumbo,vnode[001-007])|(null)\n17859076|main8-rep-h200-pi05_kr|PENDING|(ReqNodeNotAvail, UnavailableNodes:node[0002-0003,0005-0006,0008-0011,0013,0015,0017-0030,0032,0034-0035,0039-0048,0050-0056,0058-0060,0062,0064,0069,0073-0076,0078-0085,0089,0091-0093,0096-0116,0118-0119,0121-0123,0125,0127,0129-0132,0134-0140,0142-0143,0145-0153,0155-0156,0158-0160,0167-0170,0172,0174-0177,0181-0185,0187-0188,0190,0194,0196-0197,0200-0203,0209-0210,0213-0214,0216-0217,0219,0221-0224,0226-0230,0232-0234,0242,0244-0246,0248-0251,0257,0259,0261-0267,0275,0277-0293,0307,0352,0355-0523,0525-0540,0545,0555,0563-0565,0567-0568,0571-0583,0585-0587,0590-0595,0597-0622,0635,0638,0653-0654,0674,0683,0691,0693-0694,0710,0718,0736,0745,0763,0766-0771,0799,0809,0865,0879,0906,0908,0926,0944,0948,0978,1009,1045,1052,1054,1068,1078,1092,1107,1112-1114,1118,1127-1128,1132,1137,1140,1144-1145,1148,1155,1157-1161,1165,1178,1185,1189,1192-1194,1196-1197,1209,1212,1216,1218,1224,1228,1232,1243,1247-1248,1250,1254,1261,1266,1271,1279,1283-1284,1287,1297,1300,1302-1303,1309,1315,1322,1324-1327,1330-1338,1340-1351,1354-1355,1365,1376,1380,1382,1387,1394-1395,1397-1401,1403,1410,1414-1415,1434-1435,1438,1440,1442,1450-1452,1454-1457,1459-1460,1462,1469,1474,1476,1483,1497-1498,1503-1504,1507-1511,1518,1520-1523,1528,1533,1541,1547,1552,1572,1598,1623-1626,1628-1631,1634-1635,1637-1642,1655-1656,1673-1677,1679-1691,1693-1697,1699-1703,1705-1731,1733-1751,1753,1755-1758,1760-1791,1793-1796,1798-1821,1823-2004,2007-2020,2037-2062,2065-2120],nodeai[01-10],nodeau[01-04],nodecchg,nodecgbf,nodecugi,nodegbf[2-3],nodeieng,nodelm[01,03-08],nodevipr,nodewumbo,vnode[001-007])|(null)\n17931276|h2-cont-vlash_kr|PENDING|(Dependency)|afterany:17859078(unfulfilled)\n17931274|h2-cont-pi05_kr|PENDING|(Dependency)|afterany:17859076(unfulfilled)\n17931273|h2-cont-pi05_baseline|PENDING|(Dependency)|afterany:17859073(unfulfilled)\n18331938|v1bc_iql_training|PENDING|(Dependency)|afterok:18331937(unfulfilled),afterok:18331934(unfulfilled)\n18331937|v1bc_iql_smoke|PENDING|(Dependency)|afterok:18331936(unfulfilled),afterok:18331932(unfulfilled)\n18331935|v1bc_qwen_relabel|PENDING|(Dependency)|afterok:18331930(unfulfilled)\n18331934|v1bc_bc_training|PENDING|(Dependency)|afterok:18331933(unfulfilled)\n18331932|v1bc_bc_sanity|PENDING|(Dependency)|afterok:18331931(unfulfilled)\n18331940|v1bc_final_iql|PENDING|(Dependency)|afterok:18331938(unfulfilled),afterok:18331939(unfulfilled)\n18331939|v1bc_final_bc|PENDING|(Dependency)|afterok:18331934(unfulfilled)\n18331933|v1bc_bc_camera|PENDING|(Dependency)|afterok:18331932(unfulfilled)\n18331936|v1bc_iql_preparation|PENDING|(Dependency)|afterok:18331935(unfulfilled),afterok:18331931(unfulfilled)\n18331931|v1bc_bc_preparation|PENDING|(Dependency)|afterok:18331930(unfulfilled)\n18331930|v1bc_hf_replacement|PENDING|(Dependency)|afterok:18331929(unfulfilled)\n18331929|v1bc_audit|RUNNING|node1626|(null)\n",
+  "accounting": "17912900|COMPLETED|0:0|15:20:32\n17912901|COMPLETED|0:0|16:09:58\n17931273|PENDING|0:0|00:00:00\n17931274|PENDING|0:0|00:00:00\n17931276|PENDING|0:0|00:00:00\n17931278|COMPLETED|0:0|00:00:05\n17931279|COMPLETED|0:0|00:00:05\n17931280|COMPLETED|0:0|00:00:08\n17912902|COMPLETED|0:0|1-07:42:46\n17931275|PENDING|0:0|00:00:00\n17859078|PENDING|0:0|00:00:00\n17859073|PENDING|0:0|00:00:00\n18158208|FAILED|1:0|00:00:57\n17859076|PENDING|0:0|00:00:00\n18232434|COMPLETED|0:0|01:14:16\n",
+  "cleanup": {
+    "scope": "Exact retired run checkpoints and completed readiness files; latest seven, all current parents, source, metadata, datasets and pretrained weights excluded",
+    "plan_sha256": "43c0b7dbe0f113c4b0665a035e946c8812a1160f4b891cc38c77ac32ce740a39",
+    "deleted": [
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt",
+        "bytes": 1610726043,
+        "sha256": "56a16e68243fc153adb658fbff51df3536331ce29824fddc85fe9b09e68295a0",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T14:32:56.109394+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "3eff48e5f37d1b65fd493520cf88cd8d074f187a6b95311f3a13e456cd191f64",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T14:33:05.584370+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt",
+        "bytes": 1610726043,
+        "sha256": "c89d2b6a3859a2193e848d3d54b79dd6ddb22ddf82de4cd43fc3337eb4ed162f",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+        "at": "2026-10-26T14:33:14.989903+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "c100f3b69e27c35676ba6db33a03b3c9263cab279bca83c5499c87a8487b0c37",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+        "at": "2026-10-26T14:33:24.290493+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt",
+        "bytes": 20946855289,
+        "sha256": "eb7dcfbb974dcba23b192389bc2d8f0365870ec8c54827c81cc1006a6465dbea",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+        "at": "2026-10-26T14:35:16.225950+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "66343d8af3605f543c6cbe3337c4331b0c12786908cd0ca0143bf47501ad4873",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+        "at": "2026-10-26T14:37:11.023236+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt",
+        "bytes": 20946855289,
+        "sha256": "64752c521784c0f8942b9ca7fc6a7e02b393b751edf487a279444d29c3fcf0e4",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt",
+        "at": "2026-10-26T14:39:05.767009+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "14d029b51f93b55ab2b09ce3e4e1712c3efec972121e6f3f01418acdda25ac64",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt",
+        "at": "2026-10-26T14:41:02.619097+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/latest.pt",
+        "bytes": 40456772509,
+        "sha256": "ec522d6f1c9243e37575b61cd9068e04384830e36e74f4399a999cef2639ad75",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+        "at": "2026-10-26T14:44:38.800144+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "d64ff53b2a03a80cdcf123c12a77ee85433f84a77e140565fa392742c33ac5b0",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+        "at": "2026-10-26T14:48:19.978179+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/latest.pt",
+        "bytes": 40456772509,
+        "sha256": "5f4e5be3e2a7490cecd520aec5c87553565b171fc40be3a2d0f36282fbd844c9",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+        "at": "2026-10-26T14:51:56.726798+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "a13b99e1b603e5dfb595680031b386ae2946936689faff2d813a0057412b28ee",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+        "at": "2026-10-26T14:55:31.513019+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/pi05_baseline/readiness.pt",
+        "bytes": 40456779663,
+        "sha256": "40d25831e586b1c5be02f839a5eb3672636471980dfc13f0e90388b283d43cbf",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+        "at": "2026-10-26T14:59:06.395148+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/pi05_kr/readiness.pt",
+        "bytes": 40456779663,
+        "sha256": "7fcaa209f37e6935d52cb23e018d3b2422d99d9042ab7a8b519993217aeebecc",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+        "at": "2026-10-26T15:02:43.403542+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt",
+        "bytes": 1610726043,
+        "sha256": "fecc84b315fc8ad48d4711613bdf6b30eabe166b79cf0d86ae44f52f43f8a10d",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T15:02:52.985300+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "eeba5d5eb141cfee1ad6ed399b412de71b1cc665fce42484a1df145dfded3632",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T15:03:02.399782+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_kr/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "9bd163505a12c5363bece162c63597c9a6e750c1f7096298a5f59c4da5fe5391",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+        "at": "2026-10-26T15:03:11.929074+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt",
+        "bytes": 20946855289,
+        "sha256": "5561935e575254650cd790495f083576623979fdffc2f1c9e6f76a8cd77a7a18",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+        "at": "2026-10-26T15:05:06.252616+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "37009550f498a9cc0c83bb92776eb669eb146cfe0db7c2819b8bd4adb76427a9",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+        "at": "2026-10-26T15:06:58.225828+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt",
+        "bytes": 20946855289,
+        "sha256": "788812f150a102566a4367e9ed0445454a197ebbb81071736877f370b550d798",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt",
+        "at": "2026-10-26T15:08:55.210051+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "4bc229d62ab029e3aa56021ca33db3bad5111d4fbe5f8cae6bc395018fd6e79b",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt",
+        "at": "2026-10-26T15:10:46.868491+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_baseline/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "ab8f32b2773cd902dc9f0ee1076e50ed5fd4f52217102fa702e288b697a9a094",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+        "at": "2026-10-26T15:14:33.542383+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/latest.pt",
+        "bytes": 40456772509,
+        "sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+        "at": "2026-10-26T15:18:09.102634+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "a8ff40f83fd3b5ac2d51b32f5fcb56bc8acb582ae5e8db9536beb74c398e8f87",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+        "at": "2026-10-26T15:21:53.450580+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/smolvla_baseline/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "51fc7f8c45bf0a509008ec32e40ef359ffc732d0d73224d19dbc713e6950fb09",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T15:22:02.775689+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/smolvla_kr/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "6d53ca988448c5f62e64a58e93d99e77cab0e8ff98bc246ced5848275c1e8224",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+        "at": "2026-10-26T15:22:12.047949+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/vlash_baseline/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "5b99d33addb774a0de49986819d6c5dfaf714d131aef73a0a9696928e8f56542",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+        "at": "2026-10-26T15:24:08.409378+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/vlash_kr/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "3a4898ea8e8710937b8be7c5f3633e9e31a60546804896b9740eb6762496d568",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt",
+        "at": "2026-10-26T15:26:07.129813+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/runs/pi05_baseline/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "adda810de4d0a7e529977119173f64c7cfaefc5a15c9ac1151378bf5a45e3582",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+        "at": "2026-10-26T15:29:43.236329+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/runs/pi05_kr/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "b6426f08376a6199ab496a3335a546398e2f4ce0b78f5eccb4fa46d0c18baaa8",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+        "at": "2026-10-26T15:33:19.000094+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2/runs/smolvla_baseline/readiness.pt",
+        "bytes": 1610761995,
+        "sha256": "5a0fd159ef82b201daf748db8f02e460235bff954e7a36e5f42d657f87558ec1",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T15:33:30.152185+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/domv100/readiness.pt",
+        "bytes": 3319619136,
+        "sha256": "8aee2e71f429d10fe7730844709cc58e37c4b656db43dc8a3025d9702ecbc968",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt",
+        "at": "2026-10-26T15:33:49.149353+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/pi05_baseline/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "472d7a522f00f5edf9cbd1bb2e9a929360d2e66a89b7e6647fde04c168a5e60f",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+        "at": "2026-10-26T15:37:30.545893+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/pi05_kr/readiness.pt",
+        "bytes": 40456788495,
+        "sha256": "4be60328128833e870bb209a1b44d3d20b238faf3d048281f3ba59bd0809b368",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+        "at": "2026-10-26T15:41:09.599904+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/smolvla_baseline/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "4347c339a0e2f5f634248ccc2bcef76053ffe2f8c82b6ca4b8f733edae41a1cc",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T15:41:18.808209+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/smolvla_kr/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "16aceaea8d61f893a6b0563f6915c3d505696f4cd45860cf816cadccb2bbb1af",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+        "at": "2026-10-26T15:41:27.953960+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/vlash_baseline/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "4c22ab9c1f4c74296a7f1173c667a187da259cf27570f46acebbccf1b74867b4",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+        "at": "2026-10-26T15:43:25.730600+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/vlash_kr/readiness.pt",
+        "bytes": 20946870891,
+        "sha256": "2dd7e5f425c6df02e9cc06408eaf4e10cd2afe838ce7d5058beb6246c66f06a9",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt",
+        "at": "2026-10-26T15:45:21.920702+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/readiness.pt",
+        "bytes": 3319619136,
+        "sha256": "c20afcb52f3384ba8162de013781439d3446a0dbb95b8b706839d30b587643a6",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt",
+        "at": "2026-10-26T15:45:40.188057+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "2621d588f27fb848b7cfd88ff77de616fc9ee307951c4f1d336064ee555dbbf3",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+        "at": "2026-10-26T15:45:49.501743+00:00"
+      },
+      {
+        "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/readiness.pt",
+        "bytes": 1610735243,
+        "sha256": "4e6fc6502c59147c81b2ec194524803bb26ab3d1544d70d318a98d6e36a9d385",
+        "protected_latest": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+        "at": "2026-10-26T15:45:59.106078+00:00"
+      }
+    ],
+    "started_at": "2026-10-26T14:31:54.001204+00:00",
+    "protected_latest_verified": {
+      "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af",
+        "inode": 11897029280736125066,
+        "bytes": 1610726043
+      },
+      "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "9267082799c9df91479901c75e478fdc63f5abb79ade007fb5de76ceeab54ed6",
+        "inode": 12480564892423063504,
+        "bytes": 1610726043
+      },
+      "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt": {
+        "progress": {
+          "updates": 364331,
+          "samples": 11658592,
+          "epoch": 4,
+          "cursor": 1071584
+        },
+        "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+        "inode": 4346509225668448602,
+        "bytes": 20946855289
+      },
+      "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt": {
+        "progress": {
+          "updates": 508214,
+          "samples": 16262848,
+          "epoch": 6,
+          "cursor": 862336
+        },
+        "identity": "468a3b6fbab9d8ff2e06ccbfbe4b7b3a74ae15001d242e283c13c4e64f7b189d",
+        "inode": 17004987497129334518,
+        "bytes": 20946855289
+      },
+      "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt": {
+        "progress": {
+          "updates": 325297,
+          "samples": 10409504,
+          "epoch": 4,
+          "cursor": 161792
+        },
+        "identity": "2a7c3f2ccf3271fcc36a35a78b515ea11eee363d8f0679e8d4e8d236edd3f5a9",
+        "inode": 13982559998395660908,
+        "bytes": 40456772509
+      },
+      "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt": {
+        "progress": {
+          "updates": 301262,
+          "samples": 9640384,
+          "epoch": 3,
+          "cursor": 500000
+        },
+        "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+        "inode": 7949066201619135135,
+        "bytes": 40456772509
+      },
+      "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt": {
+        "progress": {
+          "updates": 286838,
+          "samples": 100966667,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "2dc7b26e5d4e56da990f601e7f456d74b7d52e7cd24d3a0272e8cf1a2b968ddb",
+        "inode": 16426607087912747021,
+        "bytes": 3319603671
+      }
+    },
+    "deleted_bytes": 806490103923,
+    "complete": true,
+    "completed_at": "2026-10-26T15:45:59.124839+00:00"
+  },
+  "cleanup_error": "",
+  "evaluation": {
+    "logs/pilot-18158208.err": "[INFO] 2026-10-25 12:44:12,782 Cuda backend detected, using cuda.\n[WARNING] 2026-10-25 12:44:12,782 Device 'None' is not available. Switching to 'cuda'.\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.\n  warnings.warn(\nYou have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.\nTraceback (most recent call last):\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-20261025/client.py\", line 63, in <module>\n    logging.basicConfig(level=logging.INFO,format='[%(levelname)s] %(asctime)s %(message)s');main()\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-20261025/client.py\", line 47, in main\n    row=next(iter(DataLoader(DOM(root,'validation'),batch_size=1,num_workers=0)))\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py\", line 733, in __next__\n    data = self._next_data()\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py\", line 789, in _next_data\n    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py\", line 52, in fetch\n    data = [self.dataset[idx] for idx in possibly_batched_index]\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py\", line 52, in <listcomp>\n    data = [self.dataset[idx] for idx in possibly_batched_index]\n  File \"/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/data.py\", line 77, in __getitem__\n    values, decoders = self.episode(local)\n  File \"/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/data.py\", line 52, in episode\n    from torchcodec.decoders import VideoDecoder\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torchcodec/__init__.py\", line 10, in <module>\n    from . import decoders, samplers  # noqa\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torchcodec/decoders/__init__.py\", line 7, in <module>\n    from .._core import AudioStreamMetadata, VideoStreamMetadata\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torchcodec/_core/__init__.py\", line 8, in <module>\n    from ._metadata import (\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torchcodec/_core/_metadata.py\", line 16, in <module>\n    from torchcodec._core.ops import (\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torchcodec/_core/ops.py\", line 84, in <module>\n    load_torchcodec_shared_libraries()\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torchcodec/_core/ops.py\", line 69, in load_torchcodec_shared_libraries\n    raise RuntimeError(\nRuntimeError: Could not load libtorchcodec. Likely causes:\n          1. FFmpeg is not properly installed in your environment. We support\n             versions 4, 5, 6 and 7.\n          2. The PyTorch version (2.7.1+cu126) is not compatible with\n             this version of TorchCodec. Refer to the version compatibility\n             table:\n             https://github.com/pytorch/torchcodec?tab=readme-ov-file#installing-torchcodec.\n          3. Another runtime dependency; see exceptions below.\n        The following exceptions were raised as we tried to load libtorchcodec:\n        \n[start of libtorchcodec loading traceback]\nFFmpeg version 7: libnppicc.so.12: cannot open shared object file: No such file or directory\nFFmpeg version 6: libnppicc.so.12: cannot open shared object file: No such file or directory\nFFmpeg version 5: libnppicc.so.12: cannot open shared object file: No such file or directory\nFFmpeg version 4: libnppicc.so.12: cannot open shared object file: No such file or directory\n[end of libtorchcodec loading traceback].\nTraceback (most recent call last):\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-20261025/run.py\", line 92, in <module>\n    a=p.parse_args();run(a.stage,a.root,a.mode,a.index)\n  File \"/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-20261025/run.py\", line 46, in run\n    subprocess.run([sys.executable,str(stage/'client.py'),'--config',str(stage/'config.json'),'--probe','--output',str(folder)],env=environment,cwd=source,check=True,timeout=1200)\n  File \"/home/aparame/.conda/envs/dynamicvla/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/env/bin/python', '/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-20261025/client.py', '--config', '/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-20261025/config.json', '--probe', '--output', '/scratch/aparame/Dynamic_VLA/main8-smol-closedloop-pilot-20261025/results/pilot']' returned non-zero exit status 1.\n",
+    "logs/pilot-18158208.out": "Reducing the number of VLM layers to 16 ...\n"
+  }
+}

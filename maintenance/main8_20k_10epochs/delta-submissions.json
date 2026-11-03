@@ -1,0 +1,24 @@
+{
+  "delta": {
+    "script": "/work/nvme/bivv/aparameshwaran/dynamicvla/main8-20k-10epochs-20261021/scripts/delta-train.sbatch",
+    "script_sha256": "4b26813b96ad1d8a68765a8b5ca863906a191ceb9054a93070bce3773ae407e7",
+    "dependency": null,
+    "held_for_shared_staging": true,
+    "state": "submitted",
+    "stdout": "23100076",
+    "stderr": "",
+    "returncode": 0,
+    "job_id": "23100076"
+  },
+  "deltaai": {
+    "script": "/work/nvme/bivv/aparameshwaran/dynamicvla/main8-20k-10epochs-20261021/scripts/deltaai-train.sbatch",
+    "script_sha256": "642ccc4a2548987f71a371e4a1e9404218ef54281b7cacafb5d0485c2e4e38a3",
+    "dependency": null,
+    "held_for_shared_staging": true,
+    "state": "submitted",
+    "stdout": "3429279",
+    "stderr": "",
+    "returncode": 0,
+    "job_id": "3429279"
+  }
+}

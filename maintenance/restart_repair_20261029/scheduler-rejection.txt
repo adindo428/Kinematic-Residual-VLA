@@ -1,0 +1,1 @@
+Definitive test-only rejection before any submission: Phases cannot be requested on Palmetto 2; Invalid cluster feature specification. No job IDs issued. Repair uses gpu_h200&graphics plus excludes unverified node0102; actual CUDA H200 NVL check remains mandatory.

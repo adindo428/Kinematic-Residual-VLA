@@ -6,32 +6,22 @@
 #SBATCH --gres=gpu:h100:1
 #SBATCH --time=12:00:00
 #SBATCH --mem=128GB
-#SBATCH --output=runs/slurm_logs/%x-%j.out
-#SBATCH --error=runs/slurm_logs/%x-%j.err
+#SBATCH --output=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.out
+#SBATCH --error=/home/aparame/Research/Dynamic_VLA/logs/slurm/%x-%j.err
 
 set -euo pipefail
 
-cd /scratch/aparame/Dynamic_VLA/third_party/DynamicVLA
-mkdir -p runs/slurm_logs runs/proactive_vla/paired_velocity_sweep
-
-if command -v module >/dev/null 2>&1; then
-  module load cuda/12.3.0 || true
-  module load gcc/12.3.0 || true
-fi
-
-if command -v conda >/dev/null 2>&1; then
-  # shellcheck disable=SC1091
-  source "$(conda info --base)/etc/profile.d/conda.sh"
-  conda activate dynamicvla
-fi
+cd /home/aparame/Research/Dynamic_VLA/third_party/DynamicVLA
+source scripts/palmetto_env.sh
+mkdir -p "${DVLA_OUTPUT_ROOT}/proactive_vla/paired_velocity_sweep"
 
 export TOKENIZERS_PARALLELISM=${TOKENIZERS_PARALLELISM:-false}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 
 CFG=${CFG:-configs/residual_dynamicvla_dom_paired_velocity.yaml}
-BASELINE_CKPT=${BASELINE_CKPT:-runs/checkpoints/dynamicvla_dom_paired_velocity}
-RESIDUAL_CKPT=${RESIDUAL_CKPT:-runs/checkpoints/residual_dynamicvla_dom_paired_velocity}
-OUTPUT=${OUTPUT:-runs/proactive_vla/paired_velocity_sweep/report.json}
+BASELINE_CKPT=${BASELINE_CKPT:-${DVLA_OUTPUT_ROOT}/checkpoints/dynamicvla_dom_paired_velocity}
+RESIDUAL_CKPT=${RESIDUAL_CKPT:-${DVLA_OUTPUT_ROOT}/checkpoints/residual_dynamicvla_dom_paired_velocity}
+OUTPUT=${OUTPUT:-${DVLA_OUTPUT_ROOT}/proactive_vla/paired_velocity_sweep/report.json}
 SPLIT=${SPLIT:-train}
 MAX_BATCHES=${MAX_BATCHES:-500}
 BATCH_SIZE=${BATCH_SIZE:-8}

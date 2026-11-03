@@ -1,0 +1,10 @@
+{
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-scale-ddp-20261014",
+  "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+  "previous_failed_job": "3370672",
+  "recipe": "8efd301036247b4ca7bc5e38032dfbeb1503b88e8333e499bf0c61c18363fbb1",
+  "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261012-video-clean/dom100",
+  "source_sha256": "f991015a229476400e0fc772177af33759d1bc3f23901381e2f83c7faaeab921",
+  "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+  "verified_files_reused": 804900
+}

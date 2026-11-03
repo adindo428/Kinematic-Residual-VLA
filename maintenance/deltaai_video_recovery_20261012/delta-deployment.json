@@ -1,0 +1,17 @@
+{
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-video-clean-ddp-20261012",
+  "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261012-video-clean/dom100",
+  "manifest": "bbef5ce50f5b783bd64a741f069b1268484db08f140b461870b5e4431aad5e7c",
+  "source_sha256": "f991015a229476400e0fc772177af33759d1bc3f23901381e2f83c7faaeab921",
+  "recipe": "135a2dc39bcc5f54cd0beaf709024400bd53b0753329ee72af3f8cd8e82e79a0",
+  "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+  "train_frames": 22370523,
+  "counts": {
+    "test": 2011,
+    "train": 197201,
+    "validation": 2015
+  },
+  "retained_frames": 22828297,
+  "retained_episodes": 201227,
+  "coordinator_pid": 1494105
+}

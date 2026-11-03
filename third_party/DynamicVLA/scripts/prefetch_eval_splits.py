@@ -21,13 +21,16 @@ if str(PROJECT_HOME) not in sys.path:
     sys.path.insert(0, str(PROJECT_HOME))
 
 
-DEFAULT_CFG = "configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p12_0p13.yaml"
+DEFAULT_CFG = "configs/residual_dynamicvla_dom_full_finetune_speed_ood_0p10_0p18.yaml"
 SPLIT_ALIASES = {
     "iid": ["train"],
     "in_distribution": ["train"],
     "id": ["train"],
     "train": ["train"],
     "ood": ["test"],
+    "ood_val": ["ood_val"],
+    "ood_test": ["ood_test"],
+    "iid_eval": ["iid_eval"],
     "out_of_distribution": ["test"],
     "test": ["test"],
     "both": ["train", "test"],
@@ -119,7 +122,7 @@ def main() -> None:
         "--splits",
         nargs="+",
         default=["ood"],
-        help="Split aliases to prefetch: iid/train, ood/test, both/all. Default: ood.",
+        help="Split aliases to prefetch: train, iid_eval, ood_val, ood_test, iid/train, ood/test, both/all.",
     )
     parser.add_argument("--dataset", default=None, help="Optional DATASET.NAME override.")
     parser.add_argument("--dry-run", action="store_true", help="Resolve splits without downloading files.")

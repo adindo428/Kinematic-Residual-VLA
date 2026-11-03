@@ -1,0 +1,82 @@
+[
+  {
+    "runtime": {
+      "microbatch": 1,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/tuning/pi05_kr/benchmark-0.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 69.48192293103784,
+    "samples_per_second": 3.684411559163165,
+    "peak_gpu_reserved_bytes": 76768346112.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 40983773184.0,
+    "mean_gpu_utilization_percent": 55.875,
+    "identity": "3918ca5d692ee2f310866e994691117032aad04f6692ed916c5732cd39d30edf",
+    "eligible": false
+  },
+  {
+    "runtime": {
+      "microbatch": 2,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/tuning/pi05_kr/benchmark-1.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 40.189942511729896,
+    "samples_per_second": 6.36975282871538,
+    "peak_gpu_reserved_bytes": 77013712896.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 41294106624.0,
+    "mean_gpu_utilization_percent": 70.81666666666666,
+    "identity": "94bf6d5d98f092079fb48764b7e0e70bc39e36c65f0f6bfc07e9d3d9c8abbda7",
+    "eligible": false
+  },
+  {
+    "runtime": {
+      "microbatch": 4,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/tuning/pi05_kr/benchmark-2.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 30.640506526455283,
+    "samples_per_second": 8.354953263548934,
+    "peak_gpu_reserved_bytes": 77405880320.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 41147863040.0,
+    "mean_gpu_utilization_percent": 72.68,
+    "identity": "adfb68b82e68090725c626e90f2fa7723b24fc5ac9809a8dd1e3d071aeb1c720",
+    "eligible": false
+  },
+  {
+    "runtime": {
+      "microbatch": 8,
+      "workers": 4,
+      "main_threads": 4,
+      "prefetch": 2
+    },
+    "returncode": 0,
+    "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/tuning/pi05_kr/benchmark-3.log",
+    "command": "benchmark",
+    "updates": 8,
+    "seconds": 25.939573457464576,
+    "samples_per_second": 9.869090577753175,
+    "peak_gpu_reserved_bytes": 78836137984.0,
+    "total_gpu_bytes": 85093777408,
+    "conservative_node_rss_bytes": 41305726976.0,
+    "mean_gpu_utilization_percent": 72.5,
+    "identity": "35e6c6f2d64e74cf9604ee396187893ab314a9eecadac8dfb5419258ac12b77e",
+    "eligible": false
+  }
+]

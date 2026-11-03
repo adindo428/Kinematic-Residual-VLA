@@ -1,0 +1,6 @@
+{
+  "command": "scontrol show job17716903 -o",
+  "returncode": 1,
+  "stderr": "slurm_load_jobs error: Invalid job id specified",
+  "meaning": "Completed GPU profile no longer retained in live controller; historical accounting confirms COMPLETEDexit0"
+}

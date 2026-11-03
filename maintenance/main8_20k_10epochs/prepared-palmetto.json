@@ -1,0 +1,25 @@
+{
+  "complete": true,
+  "files": {
+    "split.json": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "subset-report.json": "1da4a6ef7bb8f54acc66df321372aa2b3f2a7356c6e132da4f67fb7d776e2e53",
+    "statistics.json": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+    "data-provenance.json": "a4bf88dbeafd17c87e48368bdb7dc3bbe19ad2c515007c5795c4837d7ad2a226",
+    "checkpoints.json": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+    "implementation-lock-palmetto.json": "14782ca0f37fe0b68529958c904c5f905c9a812b804c4741a5f02e21cff91641",
+    "site.json": "2f5e20613c53aa4cafc5e0ecdba1916d285205448a027c101d89fac182bc8392",
+    "parquet_hashes.json": "6c4d642dbee8936ac9f2644a5a73b3b6e81ebcbebcd4bcaf6ab9adc8c0bcac73",
+    "video_hashes.json": "24dcff97988d7a732585a5f9cfa6a5a7ae95807e02dbe50c5fd742cec76beb56",
+    "role.sh": "54830d54e3dd503bc3f9f5e169608b837c3aef9329b2545138bd3aac2d281560",
+    "recipes/domv100.json": "f18377389ed48540145dd902528ea874adcf6b557fd1a58b48142fb405686c17",
+    "recipes/smolvla_baseline.json": "127e0bde51dbe26e59fb14a7821e1f08d21cf61265ed0311c8a4b4f9dfc7342c",
+    "recipes/smolvla_kr.json": "c9bfc49a6b13ef2ba63186b308a2127ce0009adbe130ab5328d546b768515097",
+    "runtimes/domv100.json": "5f907861f313b39d09f563c14ef27ada2680fbbf0edc7bc03a0db248ddec4ddc",
+    "runtimes/smolvla_baseline.json": "177bcfd8cc31c17268107745611cca89565091e4814da0b7f02012e888f4c98d",
+    "runtimes/smolvla_kr.json": "177bcfd8cc31c17268107745611cca89565091e4814da0b7f02012e888f4c98d",
+    "parents/domv100/migration.json": "e07791b6861f8b3a4a0fda7852948b5eb31a0edc6d9781144738e63f72b06944",
+    "parents/smolvla_baseline/migration.json": "b9a95c46b5ba8aff987c929ca6644721f6e3268939388f394ddc725f2357f340",
+    "parents/smolvla_kr/migration.json": "9eede7b9916d527e792894872af567cd89275952b4679b6289c916bc90784bde"
+  },
+  "source_sha256": "1b9964138eeb1258e3c0b5edc5c89b4ec1f34c3b40d73145fb645bde459f3d7a"
+}

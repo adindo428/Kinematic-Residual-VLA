@@ -1,0 +1,128 @@
+{
+  "source_summary": "/home/aparame/Research/Dynamic_VLA/RESULTS/tracking_comparison_four_75epoch/Coordinate_Conditioned_Velocity/16787490/comparison_with_existing/summary.json",
+  "models": {
+    "baseline": "DOM-VLA",
+    "velocity": "DOM-VLA+Velocity",
+    "coordinate": "KR-VLA-Coordinate",
+    "coordinate_velocity": "KR-VLA-Coordinate+Velocity"
+  },
+  "speed_multipliers": [
+    1.0,
+    1.5,
+    2.0
+  ],
+  "object_speed": {
+    "1x": {
+      "mean_object_speed_mps": 0.09118794699481665,
+      "samples": 20000,
+      "episodes": 10,
+      "duration_seconds_per_episode": 10.0,
+      "physics_hz": 200,
+      "per_episode_mean_object_speed_mps": {
+        "8": 0.08418022336601581,
+        "12": 0.10330198754597451,
+        "13": 0.10150408176327537,
+        "14": 0.09086306908570815,
+        "36": 0.07947976116967004,
+        "47": 0.10348196520105117,
+        "53": 0.0997843084823937,
+        "65": 0.07795736350691665,
+        "66": 0.08132372358357148,
+        "77": 0.0900029862435897
+      },
+      "calculation": "Time average of norm(current robot-base XYZ object velocity); each trajectory counted once, using full baseline telemetry."
+    },
+    "1.5x": {
+      "mean_object_speed_mps": 0.1366781464151163,
+      "samples": 20000,
+      "episodes": 10,
+      "duration_seconds_per_episode": 10.0,
+      "physics_hz": 200,
+      "per_episode_mean_object_speed_mps": {
+        "8": 0.12557731036368047,
+        "12": 0.15237333138239523,
+        "13": 0.15280717503842753,
+        "14": 0.13478254247078136,
+        "36": 0.11781765283850663,
+        "47": 0.1546127594146417,
+        "53": 0.1502309457516824,
+        "65": 0.11644060238413932,
+        "66": 0.12362304881315606,
+        "77": 0.13851609569375195
+      },
+      "calculation": "Time average of norm(current robot-base XYZ object velocity); each trajectory counted once, using full baseline telemetry."
+    },
+    "2x": {
+      "mean_object_speed_mps": 0.18287135794013573,
+      "samples": 20000,
+      "episodes": 10,
+      "duration_seconds_per_episode": 10.0,
+      "physics_hz": 200,
+      "per_episode_mean_object_speed_mps": {
+        "8": 0.16676486337905125,
+        "12": 0.20473326587055934,
+        "13": 0.2042694226366053,
+        "14": 0.1790513004542525,
+        "36": 0.16012043334294948,
+        "47": 0.20782575856707827,
+        "53": 0.2023153053963186,
+        "65": 0.15596017606409956,
+        "66": 0.16688203819143207,
+        "77": 0.18079101549901092
+      },
+      "calculation": "Time average of norm(current robot-base XYZ object velocity); each trajectory counted once, using full baseline telemetry."
+    }
+  },
+  "plotted_values": {
+    "baseline": {
+      "hover_rmse_mm": [
+        87.0653109614232,
+        93.43869889796655,
+        105.90047020429763
+      ],
+      "time_within_2cm_percent": [
+        2.03,
+        2.34,
+        2.0749999999999997
+      ]
+    },
+    "velocity": {
+      "hover_rmse_mm": [
+        46.209275980797564,
+        51.03799431061773,
+        72.50003180055681
+      ],
+      "time_within_2cm_percent": [
+        10.86,
+        9.62,
+        3.2499999999999996
+      ]
+    },
+    "coordinate": {
+      "hover_rmse_mm": [
+        28.956630711533712,
+        51.689704973995205,
+        85.03647808008387
+      ],
+      "time_within_2cm_percent": [
+        30.12,
+        11.840000000000002,
+        3.266666666666666
+      ]
+    },
+    "coordinate_velocity": {
+      "hover_rmse_mm": [
+        30.97429205307685,
+        50.53490707257948,
+        81.7803174070471
+      ],
+      "time_within_2cm_percent": [
+        31.55,
+        12.870000000000001,
+        5.76
+      ]
+    }
+  },
+  "metric_population": "Means over completed rollouts, preserving the original summary denominators.",
+  "other_evaluations_rerun": false
+}

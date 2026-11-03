@@ -1,0 +1,22 @@
+{
+  "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012",
+  "source": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-video-clean-20261012",
+  "manifest": "3560fbea6fb95fa384dea15b18571b6f381af4d636699e45e98ec7d6f6ccc17f",
+  "source_sha256": "182dd497885658c5a355d2ffb29763845d362f1dc1f455507de3b8f717dbc2bb",
+  "recipe": "5fa38b00d845fd5e0db37508aa934b24c23cd224b681cd7fbcd6c833f4423887",
+  "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+  "train_frames": 22370523,
+  "counts": {
+    "test": 2011,
+    "train": 197201,
+    "validation": 2015
+  },
+  "retained_frames": 22828297,
+  "retained_episodes": 201227,
+  "previous_jobs": [
+    "17017544",
+    "17091380",
+    "17091381"
+  ],
+  "stage": "prepared_no_submission_yet"
+}

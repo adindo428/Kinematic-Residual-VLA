@@ -1,0 +1,114 @@
+{
+  "at": "2026-10-29T22:58:24.928382+00:00",
+  "training": {
+    "pi05_baseline": {
+      "job_id": "17859073",
+      "saved_epochs": 5.869620135352542,
+      "progress": {
+        "updates": 460857,
+        "samples": 14747424,
+        "epoch": 5,
+        "cursor": 2092960
+      },
+      "scheduler_state": "RUNNING",
+      "checkpoint_path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+      "checkpoint_exists": true
+    },
+    "pi05_kr": {
+      "job_id": "17859076",
+      "saved_epochs": 3.2077488665221843,
+      "progress": {
+        "updates": 301262,
+        "samples": 9640384,
+        "epoch": 3,
+        "cursor": 500000
+      },
+      "scheduler_state": "FAILED",
+      "checkpoint_path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+      "checkpoint_exists": true
+    },
+    "vlash_baseline": {
+      "job_id": "17931275",
+      "saved_epochs": 4.445240722766616,
+      "progress": {
+        "updates": 364331,
+        "samples": 11658592,
+        "epoch": 4,
+        "cursor": 1071584
+      },
+      "scheduler_state": "FAILED",
+      "checkpoint_path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+      "checkpoint_exists": true
+    },
+    "vlash_kr": {
+      "job_id": "17859078",
+      "saved_epochs": 9.432436744625122,
+      "progress": {
+        "updates": 739423,
+        "samples": 23661536,
+        "epoch": 9,
+        "cursor": 1040768
+      },
+      "scheduler_state": "RUNNING",
+      "checkpoint_path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr/runs/vlash_kr/latest.pt",
+      "checkpoint_exists": true
+    },
+    "smolvla_baseline": {
+      "job_id": "17912900",
+      "saved_epochs": 10.0,
+      "progress": {
+        "updates": 396050,
+        "samples": 25347200,
+        "epoch": 10,
+        "cursor": 0
+      },
+      "scheduler_state": "COMPLETED",
+      "checkpoint_path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+      "checkpoint_exists": true
+    },
+    "smolvla_kr": {
+      "job_id": "17912901",
+      "saved_epochs": 10.0,
+      "progress": {
+        "updates": 396050,
+        "samples": 25347200,
+        "epoch": 10,
+        "cursor": 0
+      },
+      "scheduler_state": "COMPLETED",
+      "checkpoint_path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+      "checkpoint_exists": true
+    },
+    "domv100": {
+      "job_id": "17912902",
+      "saved_epochs": 10.0,
+      "progress": {
+        "updates": 286838,
+        "samples": 100966667,
+        "epoch": 10,
+        "cursor": 0
+      },
+      "scheduler_state": "COMPLETED",
+      "checkpoint_path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt",
+      "checkpoint_exists": true
+    }
+  },
+  "failures": {
+    "pi05_kr": "17859076 and backup17931274 FAILED readiness identity gate",
+    "vlash_baseline": "17931275 FAILED readiness identity gate",
+    "evaluation": "18363872 FAILED legacy RPC import lerobot.constants; checkpoint/probe passed, no completed trials"
+  },
+  "paper_source": "paper/main.tex; last recorded Overleaf sync2026-10-14",
+  "critical_remaining": [
+    "Repair exact-checkpoint training continuations for two failed models; finish ten-epoch stage",
+    "Repair standalone RPC dependency isolation and pass simulator pilot",
+    "Freeze common paired evaluation protocol and populate closed-loop results",
+    "Resolve unmatched workstation DOM+KR vs cluster DOM+velocity training provenance",
+    "Disclose inherited full-data exposure and unequal pi05 parent histories",
+    "Oracle vs estimated/noisy velocity controls; no strict unseen-speed claim from full-DOM parents",
+    "Paired uncertainty, mechanism/variance and inference-latency measurements",
+    "Align method equations and empirical scope; remove unsupported phase/generic joint-space claims and fill manuscript placeholders",
+    "Verify durable backup of current trained checkpoints outside scratch"
+  ],
+  "actions": "Read-only experiment/manuscript audit; no training or evaluation resubmissions this turn"
+}

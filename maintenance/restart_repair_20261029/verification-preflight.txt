@@ -1,0 +1,3 @@
+sbatch: Partition: work1
+sbatch: Submit checks complete
+sbatch: Job 18661720 to start at 2026-10-29T21:37:53 a using 2 processors on nodes node0365 in partition work1

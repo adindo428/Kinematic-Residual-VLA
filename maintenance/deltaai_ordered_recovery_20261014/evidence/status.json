@@ -1,0 +1,48 @@
+{
+  "candidate_files": [
+    "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-ordered-ddp-20261014/runtime-candidates/09386f82804369c3.json"
+  ],
+  "combined_allocation": true,
+  "dependency": null,
+  "error": null,
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-ordered-ddp-20261014",
+  "interactive_check_job": "3381007",
+  "old_training_cancelled": true,
+  "old_training_job": "3379435",
+  "production_held": false,
+  "production_submitted": true,
+  "profile_job": "3381007",
+  "readiness_candidate_limit_minutes": 15,
+  "readiness_complete": true,
+  "readiness_reused": true,
+  "readiness_total_limit_minutes": 15,
+  "recipe_fingerprint": "30372bcdf677c486c305e6c8134045e030540a169078fcc144d67ac0189d9092",
+  "selected_runtime": {
+    "distributed_profile_fingerprint": "d5e22517f66b2655030e0f076bf67ce177d6ada4f37a582d28e7dca95ddde1a9",
+    "fingerprint": "c3e9d6a359c41bb3caec20cbec32c300e046efa9feb1e7a87e87df407d683633",
+    "global_effective_batch": 352,
+    "manifest": "dcb3be84fa47896c4c10416aded492573d34d04d678c5a74d5dd2fdb2d7cf266",
+    "runtime": {
+      "fused": false,
+      "microbatch": 22,
+      "pin_memory": false,
+      "precision": "bf16",
+      "prefetch": 2,
+      "sampling": "frames",
+      "workers": 1
+    },
+    "samples_per_second": 75.4578523705871,
+    "single_gpu_profile_fingerprint": "b0f2678f2a5621fd354bfbfc41aee456939eb550855c42907ba93aef0518c306",
+    "training_epoch_hours_excluding_validation_and_io": 82.34987515552947,
+    "world_size": 4
+  },
+  "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261012-video-clean/dom100",
+  "stage": "production_submitted",
+  "training_job": "3381061",
+  "training_started": false,
+  "updated_utc": "2026-10-14T18:28:24Z",
+  "verification_complete": true,
+  "verification_job": "3370672",
+  "verification_reused": true,
+  "verified_files": 804900
+}

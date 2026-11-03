@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-21T16:44:41.174287+00:00",
+  "verified_prefix_bytes": 20308901888,
+  "prefix_sha256": "b9a6df4017406a31e2ed4a08f7bfaa88916b6fbb1d1e64bdb8acc0f8d4acb6da",
+  "source_checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+  "target_checkpoint": "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/checkpoint.pt",
+  "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+  "production_modified": false,
+  "mac_checkpoint_files_created": false
+}

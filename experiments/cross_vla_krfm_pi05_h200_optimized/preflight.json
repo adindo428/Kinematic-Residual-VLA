@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-20T14:34:54.228639+00:00",
+  "source_sha256": "7ced7acae17243f8760e5ece930c49091c0329b868711a73b89874028d6529d7",
+  "prepared": {
+    "complete": true,
+    "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+    "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+    "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+    "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+  },
+  "recipe_bytes_unchanged": true,
+  "passed": true,
+  "checks": [
+    {
+      "name": "cpu-contracts",
+      "returncode": 0,
+      "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/logs/cpu-contracts.log",
+      "output": "test_centering_zero_is_identity (test_contract.Contract) ... ok\ntest_ddp_shards_and_resume (test_contract.Contract) ... ok\ntest_dom_rollforward_preserves_pose6 (test_contract.Contract) ... ok\ntest_global_optimizer_anchor_sets_survive_microbatch_change (test_contract.Contract) ... ok\ntest_loader_does_not_consume_training_rng (test_contract.Contract) ... /home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.\n  warnings.warn(warn_msg)\nok\ntest_microbatch_objective_and_gradient_invariance_with_padding (test_contract.Contract) ... ok\ntest_native_padded_channel_loss_option (test_contract.Contract) ... ok\ntest_pad_mask_ignores_invalid_targets_and_padding_dims (test_contract.Contract) ... ok\ntest_physical_roundtrip_and_channels (test_contract.Contract) ... ok\ntest_runtime_cannot_change_effective_batch_or_oversubscribe_cpus (test_contract.Contract) ... ok\ntest_vlash_offset_uses_observation_time (test_contract.Contract) ... ok\ntest_cpu_fused_and_resume (test_optimizer.OptimizerContracts) ... ok\ntest_cache_preserves_checkpointed_computation (test_autocast.AutocastContracts) ... ok\ntest_cross_hardware_migration_identity_is_explicit (test_h200.H200Contracts) ... ok\ntest_hardware_and_global32_anchor_sets (test_h200.H200Contracts) ... ok\ntest_production_release_requires_sustained_speed_and_headroom (test_h200.H200Contracts) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 2.378s\n\nOK\n"
+    },
+    {
+      "name": "collective",
+      "returncode": 0,
+      "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/logs/collective.log",
+      "output": "Unequal-rank checkpoint clocks and coordinated stop: PASS\n"
+    },
+    {
+      "name": "scheduler-preflight",
+      "returncode": 0,
+      "log": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/logs/scheduler-preflight.log",
+      "output": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17737991 to start at 2026-10-20T18:59:45 a using 32 processors on nodes nodeai09 in partition work1\n"
+    }
+  ]
+}

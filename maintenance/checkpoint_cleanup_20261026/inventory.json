@@ -1,0 +1,1169 @@
+{
+  "files": [
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt",
+      "bytes": 1610726043,
+      "inode": 17909402309885252018,
+      "mtime": 1792476683.4129386,
+      "metadata": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 10571867775914374501,
+      "mtime": 1792470651.2338104,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 1280,
+          "epoch": 0,
+          "cursor": 1280
+        },
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt",
+      "bytes": 1610726043,
+      "inode": 11534576710175361349,
+      "mtime": 1792477462.3508034,
+      "metadata": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 17649465619515480856,
+      "mtime": 1792470832.3419955,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 1280,
+          "epoch": 0,
+          "cursor": 1280
+        },
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt",
+      "bytes": 20946855289,
+      "inode": 14997689166304777921,
+      "mtime": 1792532925.4303892,
+      "metadata": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 10042013183525038433,
+      "mtime": 1792471306.0608976,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt",
+      "bytes": 20946855289,
+      "inode": 4859381471476873676,
+      "mtime": 1792537368.1864026,
+      "metadata": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 10259895133203189048,
+      "mtime": 1792471857.4450448,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/latest.pt",
+      "bytes": 40456772509,
+      "inode": 4013458581336852483,
+      "mtime": 1792558607.3523815,
+      "metadata": {
+        "progress": {
+          "updates": 19397,
+          "samples": 620704,
+          "epoch": 0,
+          "cursor": 620704
+        },
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 3108686398829769593,
+      "mtime": 1792486606.4760199,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/latest.pt",
+      "bytes": 40456772509,
+      "inode": 2356065145622590919,
+      "mtime": 1792558724.8692462,
+      "metadata": {
+        "progress": {
+          "updates": 20247,
+          "samples": 647904,
+          "epoch": 0,
+          "cursor": 647904
+        },
+        "identity": "9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 5723806012098767946,
+      "mtime": 1792487998.776365,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/pi05_baseline/readiness.pt",
+      "bytes": 40456779663,
+      "inode": 17122483778589567875,
+      "mtime": 1792462662.7367144,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "b6d58dd5ee605ee7cecc2adac7664204b9ec5ba44180f32ae8212fb37894ec6c",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/pi05_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/pi05_kr/readiness.pt",
+      "bytes": 40456779663,
+      "inode": 15576157284397227863,
+      "mtime": 1792462676.4147956,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "0bfd2eca2997b3aed5a4fdb1ca7e06157d305be6da406f7d57f44ad8e1af9957",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/pi05_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt",
+      "bytes": 1610726043,
+      "inode": 1478223010246516306,
+      "mtime": 1792466403.8900092,
+      "metadata": {
+        "progress": {
+          "updates": 956,
+          "samples": 61184,
+          "epoch": 0,
+          "cursor": 61184
+        },
+        "identity": "d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 9427332071064047958,
+      "mtime": 1792463023.6854234,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 1280,
+          "epoch": 0,
+          "cursor": 1280
+        },
+        "identity": "d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_kr/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 2592265099909109838,
+      "mtime": 1792463009.5550768,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 1280,
+          "epoch": 0,
+          "cursor": 1280
+        },
+        "identity": "53e4cd8ddc0a03e5dca7a4b5bb754644244fabfc68ad7a4ec3dd7c49d9fb9abb",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt",
+      "bytes": 20946855289,
+      "inode": 16419357580228262020,
+      "mtime": 1792466431.755979,
+      "metadata": {
+        "progress": {
+          "updates": 745,
+          "samples": 23840,
+          "epoch": 0,
+          "cursor": 23840
+        },
+        "identity": "7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 867072268727633793,
+      "mtime": 1792463194.3752491,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt",
+      "bytes": 20946855289,
+      "inode": 5770691930079572760,
+      "mtime": 1792466434.9048266,
+      "metadata": {
+        "progress": {
+          "updates": 738,
+          "samples": 23616,
+          "epoch": 0,
+          "cursor": 23616
+        },
+        "identity": "e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 13990549729005078035,
+      "mtime": 1792463296.2522185,
+      "metadata": {
+        "progress": {
+          "updates": 20,
+          "samples": 640,
+          "epoch": 0,
+          "cursor": 640
+        },
+        "identity": "e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_baseline/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 17977418215471928007,
+      "mtime": 1792557830.7423084,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 6400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "8b0336b64a88e0a6b8eb731f3017725715f7c29fc971305b70ea0132c47026f3",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/latest.pt",
+      "bytes": 40456772509,
+      "inode": 15794113646399179098,
+      "mtime": 1792594407.9344726,
+      "metadata": {
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 18160536342269334025,
+      "mtime": 1792558405.5486524,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 6400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/smolvla_baseline/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 15090312146822889048,
+      "mtime": 1792538227.1578515,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 12800,
+          "epoch": 0,
+          "cursor": 12800
+        },
+        "identity": "f9631822203cf0b3b5e87a4007f6abd41c8e7a273221b233e8619f11a89477d6",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/smolvla_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/smolvla_kr/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 12792963184500645576,
+      "mtime": 1792538958.3050942,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 12800,
+          "epoch": 0,
+          "cursor": 12800
+        },
+        "identity": "f233647f7fb9d65a341cc6ee9f3253e59e83f9f05615842b3b6bb6ee36c50c6b",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/smolvla_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/vlash_baseline/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 6094907461679866848,
+      "mtime": 1792539567.07757,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 6400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "eba7e412c1c74c079573fef8c2f435af5ab41a5b47ca148dfd2fd516bfa33f33",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/vlash_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/vlash_kr/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 11458834162155803662,
+      "mtime": 1792540260.394271,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 6400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "ce8b902bc749fbe8d9ed413d090a62605969a990fcf7272a71be7ac644de66bf",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/vlash_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/runs/pi05_baseline/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 2233477212045108685,
+      "mtime": 1792510691.6599853,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 6400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "fba9738d280eab0c58c19128931f16027cc38ccdc08a50667162c5b17e8a3587",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/runs/pi05_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/runs/pi05_kr/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 17958685120885477825,
+      "mtime": 1792512108.9517496,
+      "metadata": {
+        "progress": {
+          "updates": 200,
+          "samples": 6400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "c0985b1f3ffd8d637ef1da4d9d23e8de0ee7f47d214adb223cc7edb2eb917ca1",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/runs/pi05_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+      "bytes": 20946855289,
+      "inode": 4346509225668448602,
+      "mtime": 1792906191.6091197,
+      "metadata": {
+        "progress": {
+          "updates": 364331,
+          "samples": 11658592,
+          "epoch": 4,
+          "cursor": 1071584
+        },
+        "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+        "file": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 13495013095383355666,
+      "mtime": 1792734984.7997,
+      "metadata": {
+        "progress": {
+          "updates": 155781,
+          "samples": 4984992,
+          "epoch": 1,
+          "cursor": 1618240
+        },
+        "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+        "file": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/domv100/model.safetensors",
+      "bytes": 1118678424,
+      "inode": 16064325512781306941,
+      "mtime": 1792324344.0,
+      "metadata": null,
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/domv100/training_state.pt",
+      "bytes": 2200710501,
+      "inode": 9701539575679493324,
+      "mtime": 1792324345.0,
+      "metadata": null,
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/pi05_baseline/latest.pt",
+      "bytes": 40456772509,
+      "inode": 4013458581336852483,
+      "mtime": 1792558607.3523815,
+      "metadata": {
+        "progress": {
+          "updates": 19397,
+          "samples": 620704,
+          "epoch": 0,
+          "cursor": 620704
+        },
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/pi05_kr/latest.pt",
+      "bytes": 40456772509,
+      "inode": 15794113646399179098,
+      "mtime": 1792594407.9344726,
+      "metadata": {
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/smolvla_baseline/latest.pt",
+      "bytes": 1610726043,
+      "inode": 17909402309885252018,
+      "mtime": 1792476683.4129386,
+      "metadata": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/smolvla_kr/latest.pt",
+      "bytes": 1610726043,
+      "inode": 11534576710175361349,
+      "mtime": 1792477462.3508034,
+      "metadata": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/vlash_baseline/latest.pt",
+      "bytes": 20946855289,
+      "inode": 14997689166304777921,
+      "mtime": 1792532925.4303892,
+      "metadata": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021/parents/vlash_kr/latest.pt",
+      "bytes": 20946855289,
+      "inode": 4859381471476873676,
+      "mtime": 1792537368.1864026,
+      "metadata": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2/runs/smolvla_baseline/readiness.pt",
+      "bytes": 1610761995,
+      "inode": 5346352544041167927,
+      "mtime": 1792598584.174306,
+      "metadata": {
+        "progress": {
+          "updates": 20200,
+          "samples": 1292800,
+          "epoch": 0,
+          "cursor": 12800
+        },
+        "identity": "8c6e7778ee5b11c4a806d8d547c37a1f3bed396a52ad3df13d6d6f30ef38e317",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2/runs/smolvla_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/domv100/readiness.pt",
+      "bytes": 3319619136,
+      "inode": 10114948903870010416,
+      "mtime": 1792684145.4606404,
+      "metadata": {
+        "progress": {
+          "updates": 218668,
+          "samples": 76970827,
+          "epoch": 0,
+          "cursor": 70400
+        },
+        "identity": "028ecb161363bbdf15ac1cc61a73f2a9b3c6568efd611dbcd4882b554282c6ad",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/domv100/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/pi05_baseline/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 8528550803458011409,
+      "mtime": 1792677882.7878008,
+      "metadata": {
+        "progress": {
+          "updates": 19597,
+          "samples": 627104,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "e64ea71c7474213dce7d7d79fe7236f6701d58b3aef67c5f05cd5ebbe1845e76",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/pi05_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/pi05_kr/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 13970966558833946680,
+      "mtime": 1792679273.5485218,
+      "metadata": {
+        "progress": {
+          "updates": 60204,
+          "samples": 1926528,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "ccc313eba018d9fd11eb27183ad1fe529389c547a7c9d1a1f0718c0fb400c968",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/pi05_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/smolvla_baseline/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 16279952644408271949,
+      "mtime": 1792679777.9638863,
+      "metadata": {
+        "progress": {
+          "updates": 20200,
+          "samples": 1292800,
+          "epoch": 0,
+          "cursor": 12800
+        },
+        "identity": "0e72b61e8db481cadc754534773da8a8fe2e1d6d203ec0a9f8bd631782ba9ca1",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/smolvla_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/smolvla_kr/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 13618913107622130568,
+      "mtime": 1792680189.2899852,
+      "metadata": {
+        "progress": {
+          "updates": 20200,
+          "samples": 1292800,
+          "epoch": 0,
+          "cursor": 12800
+        },
+        "identity": "5b11fd452bcf83d779be68d580c15d45c34fa998d86719ab0f32719697183fd9",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/smolvla_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/vlash_baseline/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 8240787662027362447,
+      "mtime": 1792681162.1570504,
+      "metadata": {
+        "progress": {
+          "updates": 30200,
+          "samples": 966400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "a94d7abcd5a2a76cfe5579ece1921a57fe9b94578e31cb28e845877ee742486b",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/vlash_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/vlash_kr/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 16550094461979505762,
+      "mtime": 1792682201.3028624,
+      "metadata": {
+        "progress": {
+          "updates": 30200,
+          "samples": 966400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "23f7b6b531e7e71217f8051947da5ce6a1c7300c13919f0f3a12b97c1b244587",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022/runs/vlash_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h100-optimization-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt",
+      "bytes": 3319603671,
+      "inode": 16426607087912747021,
+      "mtime": 1792861318.8117359,
+      "metadata": {
+        "progress": {
+          "updates": 286838,
+          "samples": 100966667,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "2dc7b26e5d4e56da990f601e7f456d74b7d52e7cd24d3a0272e8cf1a2b968ddb",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/readiness.pt",
+      "bytes": 3319619136,
+      "inode": 13877768396014963252,
+      "mtime": 1792678665.9302075,
+      "metadata": {
+        "progress": {
+          "updates": 218668,
+          "samples": 76970827,
+          "epoch": 0,
+          "cursor": 70400
+        },
+        "identity": "2dc7b26e5d4e56da990f601e7f456d74b7d52e7cd24d3a0272e8cf1a2b968ddb",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+      "bytes": 1610726043,
+      "inode": 11897029280736125066,
+      "mtime": 1792731037.4503992,
+      "metadata": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 9486006702590854531,
+      "mtime": 1792675904.9972122,
+      "metadata": {
+        "progress": {
+          "updates": 20200,
+          "samples": 1292800,
+          "epoch": 0,
+          "cursor": 12800
+        },
+        "identity": "e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+      "bytes": 1610726043,
+      "inode": 12480564892423063504,
+      "mtime": 1792734197.0194728,
+      "metadata": {
+        "progress": {
+          "updates": 396050,
+          "samples": 25347200,
+          "epoch": 10,
+          "cursor": 0
+        },
+        "identity": "9267082799c9df91479901c75e478fdc63f5abb79ade007fb5de76ceeab54ed6",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/readiness.pt",
+      "bytes": 1610735243,
+      "inode": 1064559392935979309,
+      "mtime": 1792676124.997034,
+      "metadata": {
+        "progress": {
+          "updates": 20200,
+          "samples": 1292800,
+          "epoch": 0,
+          "cursor": 12800
+        },
+        "identity": "9267082799c9df91479901c75e478fdc63f5abb79ade007fb5de76ceeab54ed6",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/parents/domv100/model.safetensors",
+      "bytes": 1118678424,
+      "inode": 14735619277337537328,
+      "mtime": 1792324344.0,
+      "metadata": null,
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/parents/domv100/training_state.pt",
+      "bytes": 2200710501,
+      "inode": 17437748167742579866,
+      "mtime": 1792324345.0,
+      "metadata": null,
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/parents/smolvla_baseline/latest.pt",
+      "bytes": 1610726043,
+      "inode": 5255712258480033310,
+      "mtime": 1792476683.4129386,
+      "metadata": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/parents/smolvla_kr/latest.pt",
+      "bytes": 1610726043,
+      "inode": 3364666816720169322,
+      "mtime": 1792477462.3508034,
+      "metadata": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+      "bytes": 40456772509,
+      "inode": 13982559998395660908,
+      "mtime": 1792918785.8660755,
+      "metadata": {
+        "progress": {
+          "updates": 325297,
+          "samples": 10409504,
+          "epoch": 4,
+          "cursor": 161792
+        },
+        "identity": "2a7c3f2ccf3271fcc36a35a78b515ea11eee363d8f0679e8d4e8d236edd3f5a9",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 11654809258948802339,
+      "mtime": 1792624032.1460917,
+      "metadata": {
+        "progress": {
+          "updates": 19597,
+          "samples": 627104,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "2a7c3f2ccf3271fcc36a35a78b515ea11eee363d8f0679e8d4e8d236edd3f5a9",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+      "bytes": 40456772509,
+      "inode": 7949066201619135135,
+      "mtime": 1793020771.8603919,
+      "metadata": {
+        "progress": {
+          "updates": 301262,
+          "samples": 9640384,
+          "epoch": 3,
+          "cursor": 500000
+        },
+        "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/readiness.pt",
+      "bytes": 40456788495,
+      "inode": 2615301354693783070,
+      "mtime": 1792625721.3247108,
+      "metadata": {
+        "progress": {
+          "updates": 60204,
+          "samples": 1926528,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_baseline/latest.pt",
+      "bytes": 20946855289,
+      "inode": 10281750553480207400,
+      "mtime": 1792701129.4145355,
+      "metadata": {
+        "progress": {
+          "updates": 155581,
+          "samples": 4978592,
+          "epoch": 1,
+          "cursor": 1611840
+        },
+        "identity": "3b052a829d2b24f15719b9eb98d3d2fb0b2f2e6abb780333357feda8879fb68f",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_baseline/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 15800336237919710247,
+      "mtime": 1792627767.0549707,
+      "metadata": {
+        "progress": {
+          "updates": 30200,
+          "samples": 966400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "3b052a829d2b24f15719b9eb98d3d2fb0b2f2e6abb780333357feda8879fb68f",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_baseline/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt",
+      "bytes": 20946855289,
+      "inode": 17004987497129334518,
+      "mtime": 1792918759.2970436,
+      "metadata": {
+        "progress": {
+          "updates": 508214,
+          "samples": 16262848,
+          "epoch": 6,
+          "cursor": 862336
+        },
+        "identity": "468a3b6fbab9d8ff2e06ccbfbe4b7b3a74ae15001d242e283c13c4e64f7b189d",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/readiness.pt",
+      "bytes": 20946870891,
+      "inode": 7987225345634087991,
+      "mtime": 1792638861.474647,
+      "metadata": {
+        "progress": {
+          "updates": 30200,
+          "samples": 966400,
+          "epoch": 0,
+          "cursor": 6400
+        },
+        "identity": "468a3b6fbab9d8ff2e06ccbfbe4b7b3a74ae15001d242e283c13c4e64f7b189d",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/readiness.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/parents/pi05_baseline/latest.pt",
+      "bytes": 40456772509,
+      "inode": 3133667979525991798,
+      "mtime": 1792620354.4105194,
+      "metadata": {
+        "progress": {
+          "updates": 19397,
+          "samples": 620704,
+          "epoch": 0,
+          "cursor": 620704
+        },
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/parents/pi05_kr/latest.pt",
+      "bytes": 40456772509,
+      "inode": 6397241361647483531,
+      "mtime": 1792620644.7658474,
+      "metadata": {
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020/runs/pi05_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/parents/vlash_baseline/latest.pt",
+      "bytes": 20946855289,
+      "inode": 9791620364920438526,
+      "mtime": 1792620872.6097991,
+      "metadata": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/parents/vlash_kr/latest.pt",
+      "bytes": 20946855289,
+      "inode": 15728859969422509311,
+      "mtime": 1792621003.407387,
+      "metadata": {
+        "progress": {
+          "updates": 30000,
+          "samples": 960000,
+          "epoch": 0,
+          "cursor": 960000
+        },
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt"
+      },
+      "family": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021"
+    }
+  ],
+  "symlinks": [
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/domv100/runs/domv100/latest.pt",
+      "target": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt"
+    },
+    {
+      "path": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr/runs/vlash_kr/latest.pt",
+      "target": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt"
+    }
+  ],
+  "queue": "17931275|h2-cont-vlash_baseline|PENDING|(null)\n17859078|main8-rep-h200-vlash_kr|PENDING|(null)\n17859073|main8-rep-h200-pi05_baseline|PENDING|(null)\n17859076|main8-rep-h200-pi05_kr|PENDING|(null)\n17931276|h2-cont-vlash_kr|PENDING|afterany:17859078(unfulfilled)\n17931274|h2-cont-pi05_kr|PENDING|afterany:17859076(unfulfilled)\n17931273|h2-cont-pi05_baseline|PENDING|afterany:17859073(unfulfilled)\n18219028|iql_final_eval|RUNNING|(null)\n"
+}

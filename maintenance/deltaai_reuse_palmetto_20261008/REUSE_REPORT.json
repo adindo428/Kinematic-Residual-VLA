@@ -1,0 +1,18 @@
+{
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/dom100-palmetto-h20",
+  "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261008T201101Z/dom100",
+  "split_sha256": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+  "episode_counts": {
+    "test": 2011,
+    "train": 197207,
+    "validation": 2015
+  },
+  "train_frames": 22371185,
+  "verified_phase_cache_files": 201233,
+  "prediction_horizon": 20,
+  "execution_horizon": 20,
+  "fingerprint": "46253341934d1408da6838d9770b960ae33273762dbf4c3a59ff08fcb5213453",
+  "portable_preparation_ready": true,
+  "dataset_download_still_required": true,
+  "gh200_profiling_still_required": true
+}

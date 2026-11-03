@@ -1,0 +1,20 @@
+{
+  "pi05_baseline": {
+    "old_job_id": "17931273",
+    "parent_job_id": "17859073",
+    "dependency": "afterany:17859073",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-sxm-standbys-20261029/pi05_baseline.sbatch",
+    "script_sha256": "e8814c507159267e85d5ab9a7bd838b4aab4cade6f8ce065da9a488ac17c57aa",
+    "state": "submitted",
+    "job_id": "18661943"
+  },
+  "vlash_kr": {
+    "old_job_id": "17931276",
+    "parent_job_id": "17859078",
+    "dependency": "afterany:17859078",
+    "script": "/scratch/aparame/Dynamic_VLA/h200-sxm-standbys-20261029/vlash_kr.sbatch",
+    "script_sha256": "0a17bc378a64a730a1c0b4ecce2d0499c636644267f249b96d4d5b5df5229e05",
+    "state": "submitted",
+    "job_id": "18661944"
+  }
+}

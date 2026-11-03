@@ -1,0 +1,22 @@
+#!/bin/bash -l
+#SBATCH --job-name=pi05-memory-diag
+#SBATCH --account=cuuser_yue6_vae_verification
+#SBATCH --partition=work1
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --gpus=a100:2
+#SBATCH --constraint=gpu_a100_80gb
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=224G
+#SBATCH --time=00:40:00
+#SBATCH --output=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-memory-20261020/logs/memory-%j.out
+#SBATCH --error=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-memory-20261020/logs/memory-%j.err
+set -euo pipefail
+cd /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-memory-20261020
+export HF_HOME=/scratch/aparame/.cache/huggingface
+export PYTHONPATH=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/upstream-vlash
+export LD_LIBRARY_PATH=/home/aparame/.conda/envs/dynamicvla/lib:${LD_LIBRARY_PATH:-}
+export OMP_NUM_THREADS=4
+export TOKENIZERS_PARALLELISM=false
+export KRFM_MEMORY_DIAGNOSTIC=1
+env/bin/python diagnose.py

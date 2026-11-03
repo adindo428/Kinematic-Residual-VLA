@@ -1,0 +1,10 @@
+{
+  "progress": {
+    "updates": 7396,
+    "samples": 236672,
+    "epoch": 0,
+    "cursor": 236672
+  },
+  "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+  "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt"
+}

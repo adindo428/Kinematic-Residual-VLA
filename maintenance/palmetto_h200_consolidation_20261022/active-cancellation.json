@@ -1,0 +1,10 @@
+{
+  "ids": [
+    "17859069",
+    "17859070"
+  ],
+  "reason": "User explicitly cancelled/deleted independent A100 replicas; matching H200 productions are running with valid newer saved progress",
+  "at": "2026-10-22T13:20:54.563566+00:00",
+  "state": "cancel_requested",
+  "queue": "17859070|main8-rep-a100-pi05_kr|COMPLETING|node[0283,0287]|gres/gpu:a100:2\n17859069|main8-rep-a100-pi05_baseline|COMPLETING|node[0280,0377]|gres/gpu:a100:2\n17859078|main8-rep-h200-vlash_kr|RUNNING|nodeai09|gres/gpu:h200:2\n17859077|main8-rep-h200-vlash_baseline|RUNNING|nodeai09|gres/gpu:h200:2\n17859076|main8-rep-h200-pi05_kr|RUNNING|node0107|gres/gpu:h200:2\n17859073|main8-rep-h200-pi05_baseline|RUNNING|nodeai10|gres/gpu:h200:2\n"
+}

@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "dataset": "hzxie/DOM",
+    "source_file": "dom_speed_ood_0p10_0p18_split.json",
+    "seed": 1234,
+    "iid_eval_sample": 512,
+    "ood_val_sample": 5000,
+    "notes": "Derived strict speed split for pretrained full fine-tune monitoring: train references the full low-speed train split; iid_eval and ood_val are deterministic no-grad monitoring subsets; ood_test is high-speed test excluding ood_val."
+  },
+  "source_file": "dom_speed_ood_0p10_0p18_split.json",
+  "splits": {
+    "train": {
+      "source_split": "train"
+    },
+    "iid_eval": {
+      "source_split": "train",
+      "sample": 512,
+      "seed": 1234
+    },
+    "ood_val": {
+      "source_split": "test",
+      "sample": 5000,
+      "seed": 1234
+    },
+    "ood_test": {
+      "source_split": "test",
+      "exclude_splits": ["ood_val"]
+    },
+    "test": {
+      "source_file": null,
+      "source_split": "ood_test"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "tests": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_prompt_exact_matches_frozen_format_and_bins (test_candidate.CandidateContracts) ... ok\ntest_timing_does_not_change_stream_or_rng (test_candidate.CandidateContracts) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK\n"
+  },
+  "scheduler_test_only": {
+    "stdout": "",
+    "stderr": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17837037 to start at 2026-10-21T11:51:17 a using 32 processors on nodes nodeai09 in partition work1\n"
+  },
+  "manifest_sha256": "8193cd30dcc8d5d732ad45ad68bb96fe673cac407e01476a7a62318269ebe9dc",
+  "script_sha256": "800bb1fe62b8d83ef27684c407008fb0a48e9ce18b4ac935eee0090434005f78",
+  "at": "2026-10-21T15:07:17.193058+00:00",
+  "test_only_is_not_submission": true
+}

@@ -1,0 +1,114 @@
+{
+  "pi05_baseline": {
+    "root": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt",
+    "train_episodes": 20000,
+    "train_anchors": 2406773,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "saved_subset_epochs": 5.897900573054473,
+    "progress": {
+      "updates": 462984,
+      "samples": 14815488,
+      "epoch": 5,
+      "cursor": 2161024
+    },
+    "completed": false,
+    "total_update_cap": 771507
+  },
+  "pi05_kr": {
+    "root": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+    "train_episodes": 20000,
+    "train_anchors": 2406773,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "saved_subset_epochs": 3.2077488665221843,
+    "progress": {
+      "updates": 301262,
+      "samples": 9640384,
+      "epoch": 3,
+      "cursor": 500000
+    },
+    "completed": false,
+    "total_update_cap": 812114
+  },
+  "vlash_baseline": {
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+    "train_episodes": 20000,
+    "train_anchors": 2406773,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "saved_subset_epochs": 4.445240722766616,
+    "progress": {
+      "updates": 364331,
+      "samples": 11658592,
+      "epoch": 4,
+      "cursor": 1071584
+    },
+    "completed": false,
+    "total_update_cap": 782110
+  },
+  "vlash_kr": {
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_kr/runs/vlash_kr/latest.pt",
+    "train_episodes": 20000,
+    "train_anchors": 2406773,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "saved_subset_epochs": 9.474638018374971,
+    "progress": {
+      "updates": 742597,
+      "samples": 23763104,
+      "epoch": 9,
+      "cursor": 1142336
+    },
+    "completed": false,
+    "total_update_cap": 782110
+  },
+  "smolvla_baseline": {
+    "root": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt",
+    "train_episodes": 20000,
+    "train_anchors": 2406773,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "saved_subset_epochs": 10.0,
+    "progress": {
+      "updates": 396050,
+      "samples": 25347200,
+      "epoch": 10,
+      "cursor": 0
+    },
+    "completed": true,
+    "total_update_cap": 396050
+  },
+  "smolvla_kr": {
+    "root": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt",
+    "train_episodes": 20000,
+    "train_anchors": 2406773,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "saved_subset_epochs": 10.0,
+    "progress": {
+      "updates": 396050,
+      "samples": 25347200,
+      "epoch": 10,
+      "cursor": 0
+    },
+    "completed": true,
+    "total_update_cap": 396050
+  },
+  "domv100": {
+    "root": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022",
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt",
+    "train_episodes": 20000,
+    "train_anchors": 2406773,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "saved_subset_epochs": 10.0,
+    "progress": {
+      "updates": 286838,
+      "samples": 100966667,
+      "epoch": 10,
+      "cursor": 0
+    },
+    "completed": true,
+    "total_update_cap": 286838
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "page_id": "page_4ff536c9060081919225467494390460",
+  "sequence": 184,
+  "readback_verified": true,
+  "registered_training_jobs": [
+    "17709584",
+    "17709586",
+    "17709588",
+    "17709590",
+    "17709592",
+    "17709594"
+  ],
+  "checkpoint_preparation_completed": true,
+  "latest_refresh": {
+    "page_id": "page_4ff536c9060081919225467494390460",
+    "sequence": 192,
+    "readback_verified": true,
+    "cancelled_online_rows": 0,
+    "checked_at": "2026-10-20T09:32:00.833171+00:00"
+  }
+}

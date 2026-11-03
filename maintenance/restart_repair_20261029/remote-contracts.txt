@@ -1,0 +1,13 @@
+test_cursor (test_guard.Contracts) ... ok
+test_done (test_guard.Contracts) ... ok
+test_identity (test_guard.Contracts) ... ok
+test_optimizer (test_guard.Contracts) ... ok
+test_resume (test_guard.Contracts) ... ok
+test_rng (test_guard.Contracts) ... ok
+test_samples (test_guard.Contracts) ... ok
+test_scheduler (test_guard.Contracts) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK

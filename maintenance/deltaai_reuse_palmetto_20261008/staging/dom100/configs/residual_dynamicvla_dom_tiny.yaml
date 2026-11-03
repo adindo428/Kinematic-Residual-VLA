@@ -1,0 +1,77 @@
+# Tiny residual-flow fine-tuning config for the Proactive DynamicVLA MVP.
+# Requires a DynamicVLA/LeRobot environment and the hzxie/DOM dataset cache.
+CONST:
+  EXP_NAME: residual_dynamicvla_dom_tiny
+  N_WORKERS: 4
+
+DATASET:
+  NAME: hzxie/DOM
+  PIN_MEMORY: false
+  USE_DELTA_ACTION: true
+  IMG_SIZE:
+  TRAIN_EPISODES: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                   17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+  TEST_EPISODES: [0, 1000, 2000, 3000]
+  DELTA_TIMESTAMPS:
+    observation: [-2, 0]
+  REQUIRED_FEATURES:
+    - observation.images.opst_cam
+    - observation.images.wrist_cam
+    - observation.state
+    - observation.environment_state
+    - action
+
+POLICY:
+  TYPE: dynamicvla
+  CHECKPOINT: hzxie/dynamic-vla-DOM
+  N_OBS_STEPS: 2
+  CHUNK_SIZE: 20
+  N_ACTION_STEPS: 20
+  RESIZE_IMGS_WITH_PADDING: [384, 384]
+  ATTENTION_MODE: cross_attn
+  VLM_MODEL_NAME: HuggingFaceTB/SmolLM2-360M
+  NUM_VLM_LAYERS: 16
+  NUM_EXPERT_SKIP_LAYERS: 0
+  TEMPORAL_FUSION: attn
+  FREEZE_VISION_MODEL: true
+  FREEZE_CONNECTOR: true
+  FREEZE_TEXT_MODEL: true
+  ENABLE_RESIDUAL_FLOW: true
+  RESIDUAL_LAMBDA_TYPE: constant
+  RESIDUAL_DRIFT_SCALE: 1.0
+  RESIDUAL_VELOCITY_KEY: dynamic_object.velocity_xyz
+  RESIDUAL_COVARIANCE_KEY: dynamic_object.covariance_xyz
+  RESIDUAL_NORMALIZE_DRIFT: true
+
+DIR:
+  OUTPUT: ./runs
+
+WANDB:
+  ENABLED: false
+  PROJECT: DynamicVLA
+  ENTITY: haozhexie
+  MODE: online
+  RUN_ID: null
+  LOG_CODE: true
+  SYNC_TENSORBOARD: false
+
+TRAIN:
+  N_EPOCHS: 20
+  BATCH_SIZE: 4
+  GRAD_ACCUM_STEPS: 1
+  CKPT_SAVE_FREQ:
+    EPOCH: 5
+    BATCH: 0
+  OPTIMIZER:
+    LR: 5.0e-5
+    EPS: 1.0e-8
+    WEIGHT_DECAY: 1.0e-10
+    BETAS: [0.9, 0.95]
+  LR_SCHEDULER:
+    NAME: cosine
+    N_WARMUP_STEPS: 100
+  IMAGE_TRANSFORMS:
+    BRIGHTNESS: [0.8, 1.2]
+    CONTRAST: [0.8, 1.2]
+    SATURATION: [0.5, 1.5]
+    HUE: [-0.05, 0.05]

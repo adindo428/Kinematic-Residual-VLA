@@ -1,0 +1,13 @@
+{
+  "approved": true,
+  "gpu_profile_job_id": "17716903",
+  "gpu_profile_state": "COMPLETED",
+  "gpu_profile_sha256": "60b12f7bc07b44dcd11b07190249c9ce5b93962557539009848539bbdbb2a269",
+  "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+  "source_sha256": "34e920a5f55161ec50c98767a6115cb0aed62382457114cfd00ae33d030b076c",
+  "recipe": "pi05_baseline",
+  "actual_gpu_readiness_revalidated": true,
+  "new_gpu_test_performed": false,
+  "job_id": "17719992",
+  "retention_recovery": true
+}

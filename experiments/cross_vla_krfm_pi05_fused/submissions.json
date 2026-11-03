@@ -1,0 +1,53 @@
+{
+  "previous_attempt": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019",
+  "supersedes": {
+    "pi05_baseline_profile": "17709583",
+    "pi05_baseline_train": "17709584",
+    "pi05_kr_profile": "17709585",
+    "pi05_kr_train": "17709586"
+  },
+  "frozen_preparation": {
+    "reused_from": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019",
+    "direct_hash_validation": true
+  },
+  "pi05_baseline_profile": {
+    "job_id": "17713148",
+    "recipe": "pi05_baseline",
+    "command": "profile",
+    "dependency": null,
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/pi05_baseline_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T05:11:53.173116+00:00"
+  },
+  "pi05_baseline_train": {
+    "job_id": "17713149",
+    "recipe": "pi05_baseline",
+    "command": "train",
+    "dependency": "17713148",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/pi05_baseline_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T05:11:53.396214+00:00"
+  },
+  "pi05_kr_profile": {
+    "job_id": "17713150",
+    "recipe": "pi05_kr",
+    "command": "profile",
+    "dependency": null,
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/pi05_kr_profile.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T05:11:53.653844+00:00"
+  },
+  "pi05_kr_train": {
+    "job_id": "17713151",
+    "recipe": "pi05_kr",
+    "command": "train",
+    "dependency": "17713150",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-fused-20261020/pi05_kr_train.sbatch",
+    "gpus": 2,
+    "gpu": "A100 80 GB",
+    "submitted_at": "2026-10-20T05:11:53.866467+00:00"
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "definition": "Secure lift is a diagnostic proxy: object >=5 cm above initial root height, EE within 6 cm, close command, for >=0.20 s continuously. It does not replace official completion.",
+  "finishing_pose_tolerance_m": 0.015,
+  "variants": {
+    "gripper": {
+      "official_successes": 0,
+      "trials": 6,
+      "secure_lift_proxy_trials": 0,
+      "trials_detail": [
+        {
+          "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.01982995867729187,
+          "first_close_step": 54,
+          "first_close_ee_object_distance_m": 0.026686145161510046,
+          "minimum_finger_gap_m": 0.00011399140566936694,
+          "final_ee_finishing_pose_error_m": 0.20189269747161595,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 290,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.00689828023314476,
+          "first_close_step": 27,
+          "first_close_ee_object_distance_m": 0.16584493071100245,
+          "minimum_finger_gap_m": 0.00011388737766537815,
+          "final_ee_finishing_pose_error_m": 0.21044764097820612,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 290,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            2
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0,
+          "first_close_step": 20,
+          "first_close_ee_object_distance_m": 0.22987510087213023,
+          "minimum_finger_gap_m": 0.0001163173365057446,
+          "final_ee_finishing_pose_error_m": 0.18953873728770387,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0,
+          "first_close_step": 20,
+          "first_close_ee_object_distance_m": 0.23435717046179047,
+          "minimum_finger_gap_m": 0.00011529972107382491,
+          "final_ee_finishing_pose_error_m": 0.20581006707181462,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 267,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0025384128093719482,
+          "first_close_step": 160,
+          "first_close_ee_object_distance_m": 0.25787799557138624,
+          "minimum_finger_gap_m": 0.00011668219303828664,
+          "final_ee_finishing_pose_error_m": 0.465028903754423,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.001956850290298462,
+          "first_close_step": 26,
+          "first_close_ee_object_distance_m": 0.23695663570695613,
+          "minimum_finger_gap_m": 0.00011106755664513912,
+          "final_ee_finishing_pose_error_m": 0.3364661361131072,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 290,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        }
+      ]
+    },
+    "gripper_aligned": {
+      "official_successes": 0,
+      "trials": 6,
+      "secure_lift_proxy_trials": 0,
+      "trials_detail": [
+        {
+          "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.005444258451461792,
+          "first_close_step": 61,
+          "first_close_ee_object_distance_m": 0.04294850458023802,
+          "minimum_finger_gap_m": 0.00011418655412853695,
+          "final_ee_finishing_pose_error_m": 0.3081596299528003,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 264,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.00544312596321106,
+          "first_close_step": 56,
+          "first_close_ee_object_distance_m": 0.028020593845025584,
+          "minimum_finger_gap_m": 0.00011134738997498062,
+          "final_ee_finishing_pose_error_m": 0.22426465324970893,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            3
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0,
+          "first_close_step": 21,
+          "first_close_ee_object_distance_m": 0.21178109566488437,
+          "minimum_finger_gap_m": 0.00011560379061847925,
+          "final_ee_finishing_pose_error_m": 0.25004831033028857,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 277,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0,
+          "first_close_step": 21,
+          "first_close_ee_object_distance_m": 0.21224473072157712,
+          "minimum_finger_gap_m": 0.0001132484212575946,
+          "final_ee_finishing_pose_error_m": 0.14127441578823705,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 228,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0021861493587493896,
+          "first_close_step": 63,
+          "first_close_ee_object_distance_m": 0.06601074162316953,
+          "minimum_finger_gap_m": 0.00011836499834316783,
+          "final_ee_finishing_pose_error_m": 0.4670577030450412,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.001956850290298462,
+          "first_close_step": 51,
+          "first_close_ee_object_distance_m": 0.08416537613323224,
+          "minimum_finger_gap_m": 0.00011508119132486172,
+          "final_ee_finishing_pose_error_m": 0.37398672949181266,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        }
+      ]
+    },
+    "original": {
+      "official_successes": 0,
+      "trials": 6,
+      "secure_lift_proxy_trials": 1,
+      "trials_detail": [
+        {
+          "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.005925893783569336,
+          "first_close_step": 48,
+          "first_close_ee_object_distance_m": 0.03253121272234135,
+          "minimum_finger_gap_m": 0.005365703487768769,
+          "final_ee_finishing_pose_error_m": 0.31632523678794505,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 290,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_apple13d_O02_01048988_09b0",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": true,
+          "longest_lifted_close_gripper_time_s": 0.84,
+          "maximum_object_height_change_m": 0.17875096201896667,
+          "first_close_step": 53,
+          "first_close_ee_object_distance_m": 0.019139958408175117,
+          "minimum_finger_gap_m": 0.05379554629325867,
+          "final_ee_finishing_pose_error_m": 0.19389365978068335,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": 0.14565548987988944,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0,
+          "first_close_step": 21,
+          "first_close_ee_object_distance_m": 0.21323173151670208,
+          "minimum_finger_gap_m": 0.0019361916347406805,
+          "final_ee_finishing_pose_error_m": 0.1825329039992756,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            2
+          ]
+        },
+        {
+          "env_name": "1-1_place_franka_wbottle11d_O02_01049082_d8a4",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.0,
+          "first_close_step": 21,
+          "first_close_ee_object_distance_m": 0.2133468610976246,
+          "minimum_finger_gap_m": 0.002107299689669162,
+          "final_ee_finishing_pose_error_m": 0.1737651543006952,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        },
+        {
+          "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+          "trial": 1,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.001956850290298462,
+          "first_close_step": 55,
+          "first_close_ee_object_distance_m": 0.07973739370725344,
+          "minimum_finger_gap_m": 0.004104955587536097,
+          "final_ee_finishing_pose_error_m": 0.23910229805336783,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            5
+          ]
+        },
+        {
+          "env_name": "1-2_place_franka_potato17d_O04_01150021_c37f",
+          "trial": 2,
+          "official_success": false,
+          "secure_lift_proxy": false,
+          "longest_lifted_close_gripper_time_s": 0.0,
+          "maximum_object_height_change_m": 0.001956850290298462,
+          "first_close_step": 51,
+          "first_close_ee_object_distance_m": 0.08585617300458113,
+          "minimum_finger_gap_m": 0.002553330035880208,
+          "final_ee_finishing_pose_error_m": 0.1202507625396948,
+          "minimum_ee_finishing_pose_error_after_first_lift_m": null,
+          "server_applied_action_frames_matched": 291,
+          "server_applied_action_lag_steps_min_median_max": [
+            1,
+            1.0,
+            1
+          ]
+        }
+      ]
+    }
+  }
+}

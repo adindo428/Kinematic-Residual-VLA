@@ -1,0 +1,512 @@
+{
+  "checked_at": "2026-10-20T16:32:53.910165+00:00",
+  "queue": "17745557|PENDING|(Resources)\n17745549|PENDING|(Resources)\n17719993|RUNNING|node0376\n17720948|RUNNING|node0404\n",
+  "accounting": "17719993|RUNNING|07:12:18|0:0\n17720948|RUNNING|06:50:37|0:0\n17745541|COMPLETED|00:00:18|0:0\n17745549|PENDING|00:00:00|0:0\n17745557|PENDING|00:00:00|0:0\n",
+  "state": {
+    "production": {
+      "pi05_baseline": {
+        "job_id": "17745549",
+        "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_baseline.sbatch",
+        "dependency": "17745541",
+        "submitted_at": "2026-10-20T16:31:49.242782+00:00",
+        "gpu_profile_job_id": "17740320",
+        "recipe": "pi05_baseline",
+        "command": "train",
+        "world_size": 2,
+        "gpus": 2,
+        "gpu": "H200",
+        "cpus": 32,
+        "memory_gib": 256,
+        "readiness_release_job_id": "17745541",
+        "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020",
+        "source_sha256": "562087215a107ad0f5ce81ed35fa914400bbd0616b5a73b241257c2481f93ed7",
+        "target_updates": 30000,
+        "lr": 2.5e-05,
+        "method": "pi05 baseline",
+        "variant": "pi05_baseline",
+        "name": "pi05_baseline-h200-continuation",
+        "parent_job_id": "17719993"
+      },
+      "pi05_kr": {
+        "job_id": "17745557",
+        "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_kr.sbatch",
+        "dependency": "17745541",
+        "submitted_at": "2026-10-20T16:31:49.550488+00:00",
+        "gpu_profile_job_id": "17740320",
+        "recipe": "pi05_kr",
+        "command": "train",
+        "world_size": 2,
+        "gpus": 2,
+        "gpu": "H200",
+        "cpus": 32,
+        "memory_gib": 256,
+        "readiness_release_job_id": "17745541",
+        "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020",
+        "source_sha256": "562087215a107ad0f5ce81ed35fa914400bbd0616b5a73b241257c2481f93ed7",
+        "target_updates": 30000,
+        "lr": 2.5e-05,
+        "method": "pi05 + KRFM",
+        "variant": "pi05_kr",
+        "name": "pi05_kr-h200-continuation",
+        "parent_job_id": "17720948"
+      }
+    },
+    "purpose": "User-authorized exact-latest-checkpoint replacements, not parallel duplicate training",
+    "production_training_verified": false,
+    "verification": {
+      "job_id": "17745541",
+      "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/verify.sbatch",
+      "dependency": null,
+      "submitted_at": "2026-10-20T16:31:48.908962+00:00",
+      "gpu_profile_job_id": "17740320"
+    }
+  },
+  "job_details": {
+    "17745541": "JobId=17745541 JobName=pi05_h200_handoff_verify UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=619434 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=COMPLETED Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:18 TimeLimit=00:15:00 TimeMin=N/A SubmitTime=2026-10-20T12:31:48 EligibleTime=2026-10-20T12:31:48 AccrueTime=2026-10-20T12:31:48 StartTime=2026-10-20T12:31:59 EndTime=2026-10-20T12:32:17 Deadline=N/A PreemptEligibleTime=2026-10-20T12:31:59 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T12:31:59 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login01:2323770 ReqNodeList=(null) ExcNodeList=(null) NodeList=node0356 BatchHost=node0356 StepMgrEnabled=Yes NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=2,mem=16G,node=1,billing=6 AllocTRES=cpu=2,mem=16G,node=1,billing=6 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=2 MinMemoryNode=16G MinTmpDiskNode=0 Features=[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/verify.sbatch SubmitLine=sbatch --parsable /scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/verify.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020 StdErr=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/logs/verify-17745541.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/logs/verify-17745541.out TresPerTask=cpu=2\n",
+    "17745549": "JobId=17745549 JobName=h200_resume_pi05_baseline UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=619815 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-20T12:31:49 EligibleTime=2026-10-20T12:32:39 AccrueTime=2026-10-20T12:32:39 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T12:32:40 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login01:2323770 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1-1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=256G,node=1,billing=100,gres/gpu=2,gres/gpu:h200=2 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=256G MinTmpDiskNode=0 Features=gpu_h200&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_baseline.sbatch SubmitLine=sbatch --parsable --dependency=afterok:17745541 /scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_baseline.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020 StdErr=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/logs/pi05_baseline-train-17745549.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/logs/pi05_baseline-train-17745549.out TresPerJob=gres/gpu:h200:2 TresPerTask=cpu=32\n",
+    "17745557": "JobId=17745557 JobName=h200_resume_pi05_kr UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=619815 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-20T12:31:49 EligibleTime=2026-10-20T12:32:39 AccrueTime=2026-10-20T12:32:39 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T12:32:40 Scheduler=Main Partition=work1 AllocNode:Sid=vm-slurm-p-login01:2323770 ReqNodeList=(null) ExcNodeList=(null) NodeList= StepMgrEnabled=Yes NumNodes=1-1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=256G,node=1,billing=100,gres/gpu=2,gres/gpu:h200=2 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=256G MinTmpDiskNode=0 Features=gpu_h200&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_kr.sbatch SubmitLine=sbatch --parsable --dependency=afterok:17745541 /scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020/pi05_kr.sbatch WorkDir=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-control-20261020 StdErr=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/logs/pi05_kr-train-17745557.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-r2-20261020/logs/pi05_kr-train-17745557.out TresPerJob=gres/gpu:h200:2 TresPerTask=cpu=32\n",
+    "17719993": "JobId=17719993 JobName=a100cache_pi05_baseline-trai UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=619826 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=07:12:19 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-20T05:10:27 EligibleTime=2026-10-20T05:12:42 AccrueTime=2026-10-20T05:12:42 StartTime=2026-10-20T05:20:35 EndTime=2026-10-22T05:20:35 Deadline=N/A PreemptEligibleTime=2026-10-20T05:20:35 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T05:20:35 Scheduler=Backfill Partition=work1 AllocNode:Sid=vm-slurm-p-login02:1895930 ReqNodeList=(null) ExcNodeList=(null) NodeList=node0376 BatchHost=node0376 StepMgrEnabled=Yes NumNodes=1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=224G,node=1,billing=92,gres/gpu=2,gres/gpu:a100=2 AllocTRES=cpu=32,mem=224G,node=1,billing=92,gres/gpu=2,gres/gpu:a100=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=224G MinTmpDiskNode=0 Features=gpu_a100_80gb&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_baseline_train.sbatch SubmitLine=sbatch --parsable --dependency=afterok:17719992 /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_baseline_train.sbatch WorkDir=/home/aparame StdErr=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/logs/pi05_baseline-train-17719993.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/logs/pi05_baseline-train-17719993.out TresPerJob=gres/gpu:a100:2 TresPerTask=cpu=32\n",
+    "17720948": "JobId=17720948 JobName=a100cache_pi05_kr-trai UserId=aparame(432600) GroupId=cuuser(10000) MCS_label=N/A Priority=619825 Nice=0 Account=cuuser_yue6_vae_verification QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=06:50:38 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-10-20T05:23:40 EligibleTime=2026-10-20T05:24:43 AccrueTime=2026-10-20T05:24:43 StartTime=2026-10-20T05:42:16 EndTime=2026-10-22T05:42:16 Deadline=N/A PreemptEligibleTime=2026-10-20T05:42:16 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T05:42:16 Scheduler=Backfill Partition=work1 AllocNode:Sid=vm-slurm-p-login02:1910851 ReqNodeList=(null) ExcNodeList=(null) NodeList=node0404 BatchHost=node0404 StepMgrEnabled=Yes NumNodes=1 NumCPUs=32 NumTasks=1 CPUs/Task=32 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=32,mem=224G,node=1,billing=92,gres/gpu=2,gres/gpu:a100=2 AllocTRES=cpu=32,mem=224G,node=1,billing=92,gres/gpu=2,gres/gpu:a100=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=32 MinMemoryNode=224G MinTmpDiskNode=0 Features=gpu_a100_80gb&[interconnect_10ge|interconnect_25ge|interconnect_fdr|interconnect_hdr|interconnect_ndr] DelayBoot=00:00:00 OverSubscribe=NO Exclusive=NO Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_kr_train.sbatch SubmitLine=sbatch --parsable --dependency=afterok:17720947 /scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/pi05_kr_train.sbatch WorkDir=/home/aparame StdErr=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/logs/pi05_kr-train-17720948.err StdIn=/dev/null StdOut=/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/logs/pi05_kr-train-17720948.out TresPerJob=gres/gpu:a100:2 TresPerTask=cpu=32\n"
+  },
+  "control_metadata": {
+    "remote-preflight.json": {
+      "at": "2026-10-20T16:31:06.484330+00:00",
+      "control_manifest_sha256": "828e924ba63c34cd3a1344132ad1fb3fa05dec9a2a5447b4f47e6a659464e14f",
+      "passed": true,
+      "checks": [
+        {
+          "name": "controller-contracts",
+          "returncode": 0,
+          "output": "test_accounting_lag_waits_after_queue_disappearance (test_controller.ControllerTests) ... ok\ntest_allocated_parent_restart_is_detectable (test_controller.ControllerTests) ... ok\ntest_pending_autorequeue_cancel_requires_valid_checkpoint (test_controller.ControllerTests) ... ok\ntest_purged_queue_is_absent_but_access_errors_fail_closed (test_controller.ControllerTests) ... ok\ntest_trusted_synthetic_checkpoint_contains_exact_resume_state (test_controller.ControllerTests) ... ok\ntest_checkpoint_requires_optimizer_scheduler_rng_cursor (test_handoff_guards.GuardContracts) ... ok\ntest_completed_budget_never_repeated (test_handoff_guards.GuardContracts) ... ok\ntest_exact_budget_manifest_and_parent_terminal (test_handoff_guards.GuardContracts) ... ok\ntest_hardware_and_identity_before_signal (test_handoff_guards.GuardContracts) ... ok\ntest_no_parent_action_while_queued (test_handoff_guards.GuardContracts) ... ok\ntest_pair_requires_both_sustained_receipts_and_accounting (test_handoff_guards.GuardContracts) ... ok\ntest_running_parent_requests_checkpoint (test_handoff_guards.GuardContracts) ... ok\ntest_stale_stop_and_autorequeue_fail_closed (test_handoff_guards.GuardContracts) ... ok\ntest_wrong_parent_or_wandb_refused (test_handoff_guards.GuardContracts) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 6.225s\n\nOK\n"
+        },
+        {
+          "name": "frozen-readiness-and-parent-identities",
+          "returncode": 0,
+          "output": "{\"pi05_baseline\": {\"identity\": \"fba9738d280eab0c58c19128931f16027cc38ccdc08a50667162c5b17e8a3587\", \"ratio\": 2.7798669674323495}, \"pi05_kr\": {\"identity\": \"c0985b1f3ffd8d637ef1da4d9d23e8de0ee7f47d214adb223cc7edb2eb917ca1\", \"ratio\": 2.869401219126021}}\n"
+        },
+        {
+          "name": "bash-verify",
+          "returncode": 0,
+          "output": ""
+        },
+        {
+          "name": "scheduler-verify",
+          "returncode": 0,
+          "output": "sbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17745180 to start at 2026-10-20T13:34:13 a using 2 processors on nodes node0356 in partition work1\n"
+        },
+        {
+          "name": "bash-pi05_baseline",
+          "returncode": 0,
+          "output": ""
+        },
+        {
+          "name": "scheduler-pi05_baseline",
+          "returncode": 0,
+          "output": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17745181 to start at 2026-10-20T19:20:45 a using 32 processors on nodes nodeai09 in partition work1\n"
+        },
+        {
+          "name": "bash-pi05_kr",
+          "returncode": 0,
+          "output": ""
+        },
+        {
+          "name": "scheduler-pi05_kr",
+          "returncode": 0,
+          "output": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17745182 to start at 2026-10-20T19:20:45 a using 32 processors on nodes nodeai09 in partition work1\n"
+        }
+      ],
+      "original_gpu_profile_job_id": "17740320",
+      "native_dependency_test": {
+        "original_gpu_profile_job_id": "17740320",
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "sbatch: error: Requested Features: gpu_h200\nsbatch: error: Partition: work1\nsbatch: error: Submit checks complete\nallocation failure: Job dependency problem\n",
+        "test_only_not_submitted": true
+      },
+      "release_strategy": "separate CPU-only exact completed GPU receipt revalidation; own afterok live verifier plus unchanged native matching GPU readiness/release gate"
+    },
+    "expired-native-dependency.json": {
+      "original_gpu_profile_job_id": "17740320",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "sbatch: error: Requested Features: gpu_h200\nsbatch: error: Partition: work1\nsbatch: error: Submit checks complete\nallocation failure: Job dependency problem\n",
+      "test_only_not_submitted": true
+    },
+    "control-manifest.json": {
+      "files": {
+        "README.md": "4326e326f2daf1faa3161f5c13cfa615345a82aa4fe18e85c03835e3e59f6dba",
+        "config.json": "d3f4f1c7f7eaea5249585a20a7b9780d442d693f1e464cb302e4160435c6a055",
+        "handoff.py": "db557049687bc22dd638e1f0a02600e36c074494574aa39865cbcf30e33b6ac4",
+        "handoff_guards.py": "3ba645f30f990a9a70b35ccb318243b893bcf7e85949daf5a256ee5686a12580",
+        "pi05_baseline.sbatch": "5e19f782e25ad698e18ebc5a389b736cf6454060fb12fae2327948c6e8a824a0",
+        "pi05_kr.sbatch": "f94d23645740c86e115d4f6fb362257c484797e844f3395c0dc5cf50d341826b",
+        "submit.py": "56763c139552f86501e132b6518cb6e55034a2676524858ddb08a2dc49ec1a13",
+        "test_controller.py": "51382bc54a20ae91eda18ee18a14b55110124bf015291f4facaed28a703a928c",
+        "test_handoff_guards.py": "742f61e45a46881455ecf17e44d81f00e9f19e9907a5c549a8db2f9fe7869aa7",
+        "verify.sbatch": "fd011cbb52ff2e492ea49db92386b7228fe9c7f9e4450fe299cd4d427dec686f"
+      }
+    }
+  },
+  "verification": {
+    "verified": true,
+    "at": "2026-10-20T16:32:16.379645+00:00",
+    "job_id": "17745541",
+    "config_sha256": "d3f4f1c7f7eaea5249585a20a7b9780d442d693f1e464cb302e4160435c6a055",
+    "controller_sha256": "db557049687bc22dd638e1f0a02600e36c074494574aa39865cbcf30e33b6ac4",
+    "gpu_profile_job_id": "17740320",
+    "gpu_profile_accounting": {
+      "state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    "release_sha256": {
+      "pi05_baseline": "08442402ae407c9a90a2a40b9d84e904d856cd1d175437d892eec9a44a1c703e",
+      "pi05_kr": "cb9e7aefe81a44c23c841380d6f844987e11c8fc817958e1211ea5b336c2148f"
+    },
+    "comparisons": {
+      "pi05_baseline": {
+        "identity": "fba9738d280eab0c58c19128931f16027cc38ccdc08a50667162c5b17e8a3587",
+        "gpu_profile_sha256": "692b48db2c5b2af8bddd45742daaddf9e5c4c76284251f1c3461fc948d168d93",
+        "h200_sustained_samples_per_second": 26.775228732326894,
+        "a100_production_median_samples_per_second": 9.629936349659143,
+        "ratio_to_a100": 2.780415961240971,
+        "a100_observations": [
+          {
+            "Train/loss": 0.05438641458749771,
+            "Train/optimizer_updates": 7350,
+            "Train/samples": 235200,
+            "Train/epoch": 0.010513986888182185,
+            "Train/samples_per_second": 9.660717043627098,
+            "Train/lr": 2.2441533428652138e-05
+          },
+          {
+            "Train/loss": 0.05299726128578186,
+            "Train/optimizer_updates": 7360,
+            "Train/samples": 235520,
+            "Train/epoch": 0.010528291632247739,
+            "Train/samples_per_second": 9.67074623017233,
+            "Train/lr": 2.243379046738952e-05
+          },
+          {
+            "Train/loss": 0.033566005527973175,
+            "Train/optimizer_updates": 7370,
+            "Train/samples": 235840,
+            "Train/epoch": 0.010542596376313293,
+            "Train/samples_per_second": 9.629149235737508,
+            "Train/lr": 2.2426037315215098e-05
+          },
+          {
+            "Train/loss": 0.02763368934392929,
+            "Train/optimizer_updates": 7380,
+            "Train/samples": 236160,
+            "Train/epoch": 0.010556901120378846,
+            "Train/samples_per_second": 9.677832948314464,
+            "Train/lr": 2.241827398122763e-05
+          },
+          {
+            "Train/loss": 0.029973097145557404,
+            "Train/optimizer_updates": 7390,
+            "Train/samples": 236480,
+            "Train/epoch": 0.010571205864444402,
+            "Train/samples_per_second": 9.675842460277503,
+            "Train/lr": 2.2410500474537827e-05
+          },
+          {
+            "Train/loss": 0.05422737076878548,
+            "Train/optimizer_updates": 7400,
+            "Train/samples": 236800,
+            "Train/epoch": 0.010585510608509955,
+            "Train/samples_per_second": 9.65908630125433,
+            "Train/lr": 2.2402716804268326e-05
+          },
+          {
+            "Train/loss": 0.0675056204199791,
+            "Train/optimizer_updates": 7410,
+            "Train/samples": 237120,
+            "Train/epoch": 0.010599815352575509,
+            "Train/samples_per_second": 9.632952853317287,
+            "Train/lr": 2.23949229795537e-05
+          },
+          {
+            "Train/loss": 0.028369080275297165,
+            "Train/optimizer_updates": 7420,
+            "Train/samples": 237440,
+            "Train/epoch": 0.010614120096641063,
+            "Train/samples_per_second": 9.651460132726333,
+            "Train/lr": 2.238711900954044e-05
+          },
+          {
+            "Train/loss": 0.05027972161769867,
+            "Train/optimizer_updates": 7430,
+            "Train/samples": 237760,
+            "Train/epoch": 0.010628424840706616,
+            "Train/samples_per_second": 9.660578021166868,
+            "Train/lr": 2.2379304903386932e-05
+          },
+          {
+            "Train/loss": 0.05311767756938934,
+            "Train/optimizer_updates": 7440,
+            "Train/samples": 238080,
+            "Train/epoch": 0.01064272958477217,
+            "Train/samples_per_second": 9.679339046736162,
+            "Train/lr": 2.237148067026347e-05
+          },
+          {
+            "Train/loss": 0.07678291946649551,
+            "Train/optimizer_updates": 7450,
+            "Train/samples": 238400,
+            "Train/epoch": 0.010657034328837725,
+            "Train/samples_per_second": 9.583144574487921,
+            "Train/lr": 2.236364631935223e-05
+          },
+          {
+            "Train/loss": 0.03268073499202728,
+            "Train/optimizer_updates": 7460,
+            "Train/samples": 238720,
+            "Train/epoch": 0.010671339072903279,
+            "Train/samples_per_second": 9.623566898952445,
+            "Train/lr": 2.235580185984725e-05
+          },
+          {
+            "Train/loss": 0.0331021249294281,
+            "Train/optimizer_updates": 7470,
+            "Train/samples": 239040,
+            "Train/epoch": 0.010685643816968833,
+            "Train/samples_per_second": 9.571391758103953,
+            "Train/lr": 2.2347947300954447e-05
+          },
+          {
+            "Train/loss": 0.039365142583847046,
+            "Train/optimizer_updates": 7480,
+            "Train/samples": 239360,
+            "Train/epoch": 0.010699948561034386,
+            "Train/samples_per_second": 9.623265208623897,
+            "Train/lr": 2.234008265189158e-05
+          },
+          {
+            "Train/loss": 0.06933044642210007,
+            "Train/optimizer_updates": 7490,
+            "Train/samples": 239680,
+            "Train/epoch": 0.01071425330509994,
+            "Train/samples_per_second": 9.600402037946282,
+            "Train/lr": 2.233220792188826e-05
+          },
+          {
+            "Train/loss": 0.03762005269527435,
+            "Train/optimizer_updates": 7500,
+            "Train/samples": 240000,
+            "Train/epoch": 0.010728558049165495,
+            "Train/samples_per_second": 9.630723463580779,
+            "Train/lr": 2.232432312018591e-05
+          },
+          {
+            "Train/loss": 0.0409366637468338,
+            "Train/optimizer_updates": 7510,
+            "Train/samples": 240320,
+            "Train/epoch": 0.01074286279323105,
+            "Train/samples_per_second": 9.586034151424188,
+            "Train/lr": 2.2316428256037794e-05
+          },
+          {
+            "Train/loss": 0.02896159514784813,
+            "Train/optimizer_updates": 7520,
+            "Train/samples": 240640,
+            "Train/epoch": 0.010757167537296603,
+            "Train/samples_per_second": 9.56106146349688,
+            "Train/lr": 2.230852333870897e-05
+          },
+          {
+            "Train/loss": 0.025772135704755783,
+            "Train/optimizer_updates": 7530,
+            "Train/samples": 240960,
+            "Train/epoch": 0.010771472281362156,
+            "Train/samples_per_second": 9.570499848113005,
+            "Train/lr": 2.2300608377476296e-05
+          },
+          {
+            "Train/loss": 0.12237903475761414,
+            "Train/optimizer_updates": 7540,
+            "Train/samples": 241280,
+            "Train/epoch": 0.01078577702542771,
+            "Train/samples_per_second": 9.574902957680907,
+            "Train/lr": 2.2292683381628425e-05
+          }
+        ],
+        "a100_log_modified_at_ns": 1792513900939897244
+      },
+      "pi05_kr": {
+        "identity": "c0985b1f3ffd8d637ef1da4d9d23e8de0ee7f47d214adb223cc7edb2eb917ca1",
+        "gpu_profile_sha256": "c41d282e57239f0ea1b7d03aae0727443798bb368e373fa1f965c431579ad1bc",
+        "h200_sustained_samples_per_second": 27.655606555732007,
+        "a100_production_median_samples_per_second": 9.638110687133363,
+        "ratio_to_a100": 2.869401219126021,
+        "a100_observations": [
+          {
+            "Train/loss": 0.05139683932065964,
+            "Train/optimizer_updates": 6970,
+            "Train/samples": 223040,
+            "Train/epoch": 0.009970406613691134,
+            "Train/samples_per_second": 9.63649457608883,
+            "Train/lr": 2.2728125814356837e-05
+          },
+          {
+            "Train/loss": 0.08162067085504532,
+            "Train/optimizer_updates": 6980,
+            "Train/samples": 223360,
+            "Train/epoch": 0.009984711357756687,
+            "Train/samples_per_second": 9.626906787490958,
+            "Train/lr": 2.2720776730794584e-05
+          },
+          {
+            "Train/loss": 0.041534263640642166,
+            "Train/optimizer_updates": 6990,
+            "Train/samples": 223680,
+            "Train/epoch": 0.009999016101822241,
+            "Train/samples_per_second": 9.631751737683562,
+            "Train/lr": 2.2713417119526163e-05
+          },
+          {
+            "Train/loss": 0.058525994420051575,
+            "Train/optimizer_updates": 7000,
+            "Train/samples": 224000,
+            "Train/epoch": 0.010013320845887795,
+            "Train/samples_per_second": 9.595345850699395,
+            "Train/lr": 2.2706046989188493e-05
+          },
+          {
+            "Train/loss": 0.034345388412475586,
+            "Train/optimizer_updates": 7010,
+            "Train/samples": 224320,
+            "Train/epoch": 0.010027625589953348,
+            "Train/samples_per_second": 9.570647181576868,
+            "Train/lr": 2.2698666348430832e-05
+          },
+          {
+            "Train/loss": 0.08125157654285431,
+            "Train/optimizer_updates": 7020,
+            "Train/samples": 224640,
+            "Train/epoch": 0.010041930334018904,
+            "Train/samples_per_second": 9.539264959694918,
+            "Train/lr": 2.269127520591477e-05
+          },
+          {
+            "Train/loss": 0.04270831495523453,
+            "Train/optimizer_updates": 7030,
+            "Train/samples": 224960,
+            "Train/epoch": 0.010056235078084457,
+            "Train/samples_per_second": 9.604693206563226,
+            "Train/lr": 2.2683873570314223e-05
+          },
+          {
+            "Train/loss": 0.029157623648643494,
+            "Train/optimizer_updates": 7040,
+            "Train/samples": 225280,
+            "Train/epoch": 0.010070539822150011,
+            "Train/samples_per_second": 9.61382793406408,
+            "Train/lr": 2.267646145031543e-05
+          },
+          {
+            "Train/loss": 0.046273425221443176,
+            "Train/optimizer_updates": 7050,
+            "Train/samples": 225600,
+            "Train/epoch": 0.010084844566215565,
+            "Train/samples_per_second": 9.607721127895223,
+            "Train/lr": 2.266903885461692e-05
+          },
+          {
+            "Train/loss": 0.048316098749637604,
+            "Train/optimizer_updates": 7060,
+            "Train/samples": 225920,
+            "Train/epoch": 0.010099149310281118,
+            "Train/samples_per_second": 3.7418169775270176,
+            "Train/lr": 2.2661605791929524e-05
+          },
+          {
+            "Train/loss": 0.05637485533952713,
+            "Train/optimizer_updates": 7070,
+            "Train/samples": 226240,
+            "Train/epoch": 0.010113454054346674,
+            "Train/samples_per_second": 9.724486528463357,
+            "Train/lr": 2.265416227097636e-05
+          },
+          {
+            "Train/loss": 0.037072040140628815,
+            "Train/optimizer_updates": 7080,
+            "Train/samples": 226560,
+            "Train/epoch": 0.010127758798412228,
+            "Train/samples_per_second": 9.716716752602158,
+            "Train/lr": 2.2646708300492805e-05
+          },
+          {
+            "Train/loss": 0.05202537029981613,
+            "Train/optimizer_updates": 7090,
+            "Train/samples": 226880,
+            "Train/epoch": 0.010142063542477781,
+            "Train/samples_per_second": 9.639726798177895,
+            "Train/lr": 2.263924388922652e-05
+          },
+          {
+            "Train/loss": 0.05886964499950409,
+            "Train/optimizer_updates": 7100,
+            "Train/samples": 227200,
+            "Train/epoch": 0.010156368286543335,
+            "Train/samples_per_second": 9.78079717240416,
+            "Train/lr": 2.2631769045937396e-05
+          },
+          {
+            "Train/loss": 0.05792183429002762,
+            "Train/optimizer_updates": 7110,
+            "Train/samples": 227520,
+            "Train/epoch": 0.010170673030608889,
+            "Train/samples_per_second": 9.732484233106073,
+            "Train/lr": 2.2624283779397583e-05
+          },
+          {
+            "Train/loss": 0.08301207423210144,
+            "Train/optimizer_updates": 7120,
+            "Train/samples": 227840,
+            "Train/epoch": 0.010184977774674442,
+            "Train/samples_per_second": 9.701959500480184,
+            "Train/lr": 2.2616788098391463e-05
+          },
+          {
+            "Train/loss": 0.039149604737758636,
+            "Train/optimizer_updates": 7130,
+            "Train/samples": 228160,
+            "Train/epoch": 0.010199282518739998,
+            "Train/samples_per_second": 9.740973398541936,
+            "Train/lr": 2.2609282011715626e-05
+          },
+          {
+            "Train/loss": 0.07926247268915176,
+            "Train/optimizer_updates": 7140,
+            "Train/samples": 228480,
+            "Train/epoch": 0.010213587262805551,
+            "Train/samples_per_second": 9.80911205038657,
+            "Train/lr": 2.260176552817889e-05
+          },
+          {
+            "Train/loss": 0.04886522516608238,
+            "Train/optimizer_updates": 7150,
+            "Train/samples": 228800,
+            "Train/epoch": 0.010227892006871105,
+            "Train/samples_per_second": 9.739802937737553,
+            "Train/lr": 2.2594238656602267e-05
+          },
+          {
+            "Train/loss": 0.0372295044362545,
+            "Train/optimizer_updates": 7160,
+            "Train/samples": 229120,
+            "Train/epoch": 0.010242196750936659,
+            "Train/samples_per_second": 9.715046655204851,
+            "Train/lr": 2.2586701405818955e-05
+          }
+        ],
+        "a100_log_modified_at_ns": 1792513909898285269
+      }
+    },
+    "torch_version": "2.7.1+cu126",
+    "cpu_only_revalidation": true,
+    "not_a_new_gpu_test": true
+  },
+  "errors": {}
+}

@@ -1,0 +1,33 @@
+{
+  "overstrict_precision_check_proven": true,
+  "actual_moment_schemas": {
+    "smolvla_baseline": {
+      "torch.bfloat16": 129,
+      "torch.float32": 26
+    },
+    "smolvla_kr": {
+      "torch.bfloat16": 129,
+      "torch.float32": 26
+    },
+    "vlash_baseline": {
+      "torch.float32": 85,
+      "torch.bfloat16": 720
+    },
+    "vlash_kr": {
+      "torch.float32": 85,
+      "torch.bfloat16": 720
+    },
+    "pi05_baseline": {
+      "torch.float32": 805
+    },
+    "pi05_kr": {
+      "torch.float32": 805
+    }
+  },
+  "repair_requirement": "In a fresh frozen controller, compare moment dtype/shape/group schema against its own approved native GPU readiness checkpoint, rather than requiring all methods to have FP32 moments. Preserve native precision; do not cast saved moments.",
+  "other_recovery_requirements": [
+    "Reconcile terminal REQUEUED accounting only with exact saved stop receipt, checkpoint header/provenance and verified absence from live scheduler; never infer cancellation from a transient REQUEUED status.",
+    "Install cooperative signal capture before expensive pi05 startup imports/loading in a fresh frozen source; prove no update/cursor/RNG loss and rerun source-matching GPU readiness."
+  ],
+  "production_recovery_not_submitted_by_cpu_investigation": true
+}

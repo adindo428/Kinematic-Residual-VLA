@@ -1,0 +1,43 @@
+18661744|nvlfix-vlash_baseline|PENDING|(null)|(Priority)
+18661724|nvlfix-pi05_kr|PENDING|(null)|(Priority)
+18661944|sxm-cont-vlash_kr|PENDING|afterany:17859078(unfulfilled)|(Dependency)
+18661943|sxm-cont-pi05_baseline|PENDING|afterany:17859073(unfulfilled)|(Dependency)
+17859073|main8-rep-h200-pi05_baseline|RUNNING|(null)|nodeai10
+17859078|main8-rep-h200-vlash_kr|RUNNING|(null)|nodeai09
+17931273|CANCELLED by 432600|0:0
+17931276|CANCELLED by 432600|0:0
+18661723|COMPLETED|0:0
+{
+  "pi05_kr": {
+    "name": "pi05_kr",
+    "root": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021",
+    "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+    "progress": {
+      "updates": 301262,
+      "samples": 9640384,
+      "epoch": 3,
+      "cursor": 500000
+    },
+    "complete": false,
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt",
+    "subset_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "torch": "2.7.1+cu126",
+    "approval_sha256": "341533da064af93e0df111a07ef211b82b088c257136b3262bec9af8e9d1c7d6"
+  },
+  "vlash_baseline": {
+    "name": "vlash_baseline",
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline",
+    "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+    "progress": {
+      "updates": 364331,
+      "samples": 11658592,
+      "epoch": 4,
+      "cursor": 1071584
+    },
+    "complete": false,
+    "checkpoint": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt",
+    "subset_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+    "torch": "2.7.1+cu126",
+    "approval_sha256": "eb55dc9d6e20fd6c723c031ae41df28c73b9107aa34ac524497ec122901aba17"
+  }
+}

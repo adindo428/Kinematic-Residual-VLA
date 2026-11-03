@@ -1,0 +1,904 @@
+{
+  "checked_at": "2026-10-21T15:35:51.815867+00:00",
+  "queue": "",
+  "queue_error": "slurm_load_jobs error: Invalid job id specified\n",
+  "accounting": "17837039|COMPLETED|0:0|00:27:06\n",
+  "accounting_error": "",
+  "equivalence.json": {
+    "passed": true,
+    "per_rank": [
+      {
+        "rank": 0,
+        "actual_batch_size": 16,
+        "synthetic_boundary_states": 771,
+        "prepared_tensors_exact": true,
+        "token_mismatches": [],
+        "bin_boundaries_exact": true,
+        "loss_gradient_consistency": true,
+        "candidate_eligible": true,
+        "trainable_gradient_tensors_compared": 805
+      },
+      {
+        "rank": 1,
+        "actual_batch_size": 16,
+        "synthetic_boundary_states": 771,
+        "prepared_tensors_exact": true,
+        "token_mismatches": [],
+        "bin_boundaries_exact": true,
+        "loss_gradient_consistency": true,
+        "candidate_eligible": true,
+        "trainable_gradient_tensors_compared": 805
+      }
+    ],
+    "snapshot": {
+      "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+      "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+      "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+      "progress": {
+        "updates": 60004,
+        "samples": 1920128,
+        "epoch": 0,
+        "cursor": 1920128
+      },
+      "parent_job_id": "17782830",
+      "at": "2026-10-21T15:10:39.482250+00:00",
+      "hard_link_to_atomically_replaced_latest_inode": true,
+      "production_untouched": true
+    },
+    "not_production_readiness": true
+  },
+  "benchmark-results.json": [
+    {
+      "runtime": {
+        "name": "control_workers8",
+        "cpu_prompts": false,
+        "prefetch_gpu": false,
+        "workers": 8,
+        "prefetch": 2
+      },
+      "timed_updates": 200,
+      "global_batch": 32,
+      "seconds_slowest_rank": 171.42429237253964,
+      "samples_per_second": 37.33426523990839,
+      "per_rank_seconds": [
+        171.4226912651211,
+        171.42429237253964
+      ],
+      "per_rank_dataloader_wait_seconds": [
+        0.02372505608946085,
+        0.01995773706585169
+      ],
+      "gpu_peak_reserved_bytes": 76590088192.0,
+      "total_gpu_bytes": 150109880320,
+      "node_conservative_rss_bytes": 95817465856.0,
+      "node_ram_limit_bytes": 274877906944,
+      "fifteen_percent_headroom_pass": true,
+      "mean_gpu_utilization_percent_rank0_sampler": 97.27848101265823,
+      "mean_cpu_busy_cores_rank_local": 1.268276958086412,
+      "same_production_snapshot": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+        "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "parent_job_id": "17782830",
+        "at": "2026-10-21T15:10:39.482250+00:00",
+        "hard_link_to_atomically_replaced_latest_inode": true,
+        "production_untouched": true
+      },
+      "includes_checkpoints": false,
+      "warmup_updates": 10,
+      "not_production_readiness": true
+    },
+    {
+      "runtime": {
+        "name": "worker_prompts8",
+        "cpu_prompts": true,
+        "prefetch_gpu": false,
+        "workers": 8,
+        "prefetch": 2
+      },
+      "timed_updates": 200,
+      "global_batch": 32,
+      "seconds_slowest_rank": 173.58884259313345,
+      "samples_per_second": 36.86872902886191,
+      "per_rank_seconds": [
+        173.58883610647172,
+        173.58884259313345
+      ],
+      "per_rank_dataloader_wait_seconds": [
+        0.022548790089786053,
+        0.025766046717762947
+      ],
+      "gpu_peak_reserved_bytes": 63191384064.0,
+      "total_gpu_bytes": 150109880320,
+      "node_conservative_rss_bytes": 95848251392.0,
+      "node_ram_limit_bytes": 274877906944,
+      "fifteen_percent_headroom_pass": true,
+      "mean_gpu_utilization_percent_rank0_sampler": 96.75,
+      "mean_cpu_busy_cores_rank_local": 1.2980787880020728,
+      "same_production_snapshot": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+        "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "parent_job_id": "17782830",
+        "at": "2026-10-21T15:10:39.482250+00:00",
+        "hard_link_to_atomically_replaced_latest_inode": true,
+        "production_untouched": true
+      },
+      "includes_checkpoints": false,
+      "warmup_updates": 10,
+      "not_production_readiness": true
+    },
+    {
+      "runtime": {
+        "name": "worker_prompts8_cuda_prefetch",
+        "cpu_prompts": true,
+        "prefetch_gpu": true,
+        "workers": 8,
+        "prefetch": 2
+      },
+      "timed_updates": 200,
+      "global_batch": 32,
+      "seconds_slowest_rank": 172.21156491804868,
+      "samples_per_second": 37.16359004719344,
+      "per_rank_seconds": [
+        172.21156491804868,
+        172.21138284169137
+      ],
+      "per_rank_dataloader_wait_seconds": [
+        0.02177787572145462,
+        0.023790063336491585
+      ],
+      "gpu_peak_reserved_bytes": 63403196416.0,
+      "total_gpu_bytes": 150109880320,
+      "node_conservative_rss_bytes": 95849394176.0,
+      "node_ram_limit_bytes": 274877906944,
+      "fifteen_percent_headroom_pass": true,
+      "mean_gpu_utilization_percent_rank0_sampler": 98.3,
+      "mean_cpu_busy_cores_rank_local": 1.2809755267079703,
+      "same_production_snapshot": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+        "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "parent_job_id": "17782830",
+        "at": "2026-10-21T15:10:39.482250+00:00",
+        "hard_link_to_atomically_replaced_latest_inode": true,
+        "production_untouched": true
+      },
+      "includes_checkpoints": false,
+      "warmup_updates": 10,
+      "not_production_readiness": true
+    },
+    {
+      "runtime": {
+        "name": "worker_prompts12_cuda_prefetch",
+        "cpu_prompts": true,
+        "prefetch_gpu": true,
+        "workers": 12,
+        "prefetch": 2
+      },
+      "timed_updates": 200,
+      "global_batch": 32,
+      "seconds_slowest_rank": 169.95615601632744,
+      "samples_per_second": 37.65677072259248,
+      "per_rank_seconds": [
+        169.95576787367463,
+        169.95615601632744
+      ],
+      "per_rank_dataloader_wait_seconds": [
+        0.020967266522347927,
+        0.02151974570006132
+      ],
+      "gpu_peak_reserved_bytes": 63403196416.0,
+      "total_gpu_bytes": 150109880320,
+      "node_conservative_rss_bytes": 95850266624.0,
+      "node_ram_limit_bytes": 274877906944,
+      "fifteen_percent_headroom_pass": true,
+      "mean_gpu_utilization_percent_rank0_sampler": 97.57051282051282,
+      "mean_cpu_busy_cores_rank_local": 1.292441782205819,
+      "same_production_snapshot": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+        "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "parent_job_id": "17782830",
+        "at": "2026-10-21T15:10:39.482250+00:00",
+        "hard_link_to_atomically_replaced_latest_inode": true,
+        "production_untouched": true
+      },
+      "includes_checkpoints": false,
+      "warmup_updates": 10,
+      "not_production_readiness": true
+    },
+    {
+      "runtime": {
+        "name": "control_workers8_repeat",
+        "cpu_prompts": false,
+        "prefetch_gpu": false,
+        "workers": 8,
+        "prefetch": 2
+      },
+      "timed_updates": 200,
+      "global_batch": 32,
+      "seconds_slowest_rank": 169.91638180986047,
+      "samples_per_second": 37.665585459333265,
+      "per_rank_seconds": [
+        169.91638180986047,
+        169.91590167582035
+      ],
+      "per_rank_dataloader_wait_seconds": [
+        0.022537827491760254,
+        0.02231091633439064
+      ],
+      "gpu_peak_reserved_bytes": 63403196416.0,
+      "total_gpu_bytes": 150109880320,
+      "node_conservative_rss_bytes": 96795172864.0,
+      "node_ram_limit_bytes": 274877906944,
+      "fifteen_percent_headroom_pass": true,
+      "mean_gpu_utilization_percent_rank0_sampler": 96.0448717948718,
+      "mean_cpu_busy_cores_rank_local": 1.2846307602658116,
+      "same_production_snapshot": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+        "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "parent_job_id": "17782830",
+        "at": "2026-10-21T15:10:39.482250+00:00",
+        "hard_link_to_atomically_replaced_latest_inode": true,
+        "production_untouched": true
+      },
+      "includes_checkpoints": false,
+      "warmup_updates": 10,
+      "not_production_readiness": true
+    }
+  ],
+  "complete.json": {
+    "complete": true,
+    "job_id": "17837039",
+    "at": "2026-10-21T15:34:35.578683+00:00",
+    "control_samples_per_second_median": 37.499925349620824,
+    "best_candidate": {
+      "runtime": {
+        "name": "worker_prompts12_cuda_prefetch",
+        "cpu_prompts": true,
+        "prefetch_gpu": true,
+        "workers": 12,
+        "prefetch": 2
+      },
+      "timed_updates": 200,
+      "global_batch": 32,
+      "seconds_slowest_rank": 169.95615601632744,
+      "samples_per_second": 37.65677072259248,
+      "per_rank_seconds": [
+        169.95576787367463,
+        169.95615601632744
+      ],
+      "per_rank_dataloader_wait_seconds": [
+        0.020967266522347927,
+        0.02151974570006132
+      ],
+      "gpu_peak_reserved_bytes": 63403196416.0,
+      "total_gpu_bytes": 150109880320,
+      "node_conservative_rss_bytes": 95850266624.0,
+      "node_ram_limit_bytes": 274877906944,
+      "fifteen_percent_headroom_pass": true,
+      "mean_gpu_utilization_percent_rank0_sampler": 97.57051282051282,
+      "mean_cpu_busy_cores_rank_local": 1.292441782205819,
+      "same_production_snapshot": {
+        "checkpoint": "/scratch/aparame/Dynamic_VLA/pi05-cpu-pipeline-20261021/snapshot/checkpoint-1792595272349606763.pt",
+        "checkpoint_sha256": "09c0466b8809bc8e5f0dc248da135bcb186c64bb0759557def0bfdaee9119e6c",
+        "identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+        "progress": {
+          "updates": 60004,
+          "samples": 1920128,
+          "epoch": 0,
+          "cursor": 1920128
+        },
+        "parent_job_id": "17782830",
+        "at": "2026-10-21T15:10:39.482250+00:00",
+        "hard_link_to_atomically_replaced_latest_inode": true,
+        "production_untouched": true
+      },
+      "includes_checkpoints": false,
+      "warmup_updates": 10,
+      "not_production_readiness": true
+    },
+    "candidate_speedup": 1.0041825516053526,
+    "control_drift_ratio": 1.0088744272130663,
+    "production_untouched": true,
+    "production_source_identity_unchanged": true,
+    "not_production_readiness": true,
+    "no_wandb_run_created": true
+  },
+  "profiler-summary.json": [
+    {
+      "name": "enumerate(DataLoader)#_MultiProcessingDataLoaderIter.__next__",
+      "calls": 3,
+      "cpu_total_us": 6543982.569,
+      "self_cpu_us": 6543904.934999995,
+      "device_total_us": 14.014999998733401
+    },
+    {
+      "name": "decoded_update_with_loader_wait",
+      "calls": 3,
+      "cpu_total_us": 9245578.763999999,
+      "self_cpu_us": 1363777.9699999783,
+      "device_total_us": 606165.6610000237
+    },
+    {
+      "name": "Command Buffer Full",
+      "calls": 4525,
+      "cpu_total_us": 726080.7290000496,
+      "self_cpu_us": 726044.9730000515,
+      "device_total_us": 2172.474000000395
+    },
+    {
+      "name": "cudaLaunchKernel",
+      "calls": 47883,
+      "cpu_total_us": 701306.9449999614,
+      "self_cpu_us": 699367.5129999577,
+      "device_total_us": 204.22599999979138
+    },
+    {
+      "name": "cuLaunchKernelEx",
+      "calls": 8811,
+      "cpu_total_us": 160058.38100007828,
+      "self_cpu_us": 159972.61200007796,
+      "device_total_us": 984.0759999994189
+    },
+    {
+      "name": "MulBackward0",
+      "calls": 921,
+      "cpu_total_us": 867544.8999999901,
+      "self_cpu_us": 123824.64600000624,
+      "device_total_us": 818195.7699999698
+    },
+    {
+      "name": "cudaMemsetAsync",
+      "calls": 2970,
+      "cpu_total_us": 116101.44800001103,
+      "self_cpu_us": 115268.8770000115,
+      "device_total_us": 984.0759999994189
+    },
+    {
+      "name": "aten::mm",
+      "calls": 5952,
+      "cpu_total_us": 358262.14799995814,
+      "self_cpu_us": 111168.44599987287,
+      "device_total_us": 957932.4439999787
+    },
+    {
+      "name": "DistributedDataParallel.forward",
+      "calls": 3,
+      "cpu_total_us": 543470.8209999986,
+      "self_cpu_us": 108662.36800010037,
+      "device_total_us": 472389.1769999871
+    },
+    {
+      "name": "aten::mul",
+      "calls": 8058,
+      "cpu_total_us": 302491.5590000069,
+      "self_cpu_us": 85367.09300006554,
+      "device_total_us": 240997.83499998413
+    },
+    {
+      "name": "cudaMemcpyAsync",
+      "calls": 1185,
+      "cpu_total_us": 84303.45299998205,
+      "self_cpu_us": 84303.45299998205,
+      "device_total_us": 0
+    },
+    {
+      "name": "cudaStreamSynchronize",
+      "calls": 60,
+      "cpu_total_us": 75363.80500000436,
+      "self_cpu_us": 75128.98399997596,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::addmm",
+      "calls": 2310,
+      "cpu_total_us": 107609.68400000967,
+      "self_cpu_us": 66891.72300000675,
+      "device_total_us": 75092.73499996029
+    },
+    {
+      "name": "aten::copy_",
+      "calls": 21993,
+      "cpu_total_us": 463799.9819999924,
+      "self_cpu_us": 65954.16699992865,
+      "device_total_us": 377976.8629999161
+    },
+    {
+      "name": "aten::empty_strided",
+      "calls": 17865,
+      "cpu_total_us": 55776.431000013836,
+      "self_cpu_us": 55744.91500001401,
+      "device_total_us": 1.0889999996870756
+    },
+    {
+      "name": "aten::_to_copy",
+      "calls": 16728,
+      "cpu_total_us": 426145.8940000115,
+      "self_cpu_us": 51743.38900001999,
+      "device_total_us": 229834.08999993373
+    },
+    {
+      "name": "AddmmBackward0",
+      "calls": 1101,
+      "cpu_total_us": 303337.6999999946,
+      "self_cpu_us": 44411.986000047065,
+      "device_total_us": 216811.37799996603
+    },
+    {
+      "name": "aten::empty",
+      "calls": 12141,
+      "cpu_total_us": 45902.819999998304,
+      "self_cpu_us": 41420.11499999416,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::linear",
+      "calls": 9156,
+      "cpu_total_us": 954887.6489999378,
+      "self_cpu_us": 35648.44499986712,
+      "device_total_us": 1296501.9599998388
+    },
+    {
+      "name": "aten::add",
+      "calls": 3507,
+      "cpu_total_us": 101331.61099996418,
+      "self_cpu_us": 28923.78199995868,
+      "device_total_us": 119783.48100003786
+    },
+    {
+      "name": "aten::transpose",
+      "calls": 18612,
+      "cpu_total_us": 37190.5079999594,
+      "self_cpu_us": 28847.382999988273,
+      "device_total_us": 0
+    },
+    {
+      "name": "cudaDeviceSynchronize",
+      "calls": 1,
+      "cpu_total_us": 26920.1520000007,
+      "self_cpu_us": 26920.1520000007,
+      "device_total_us": 0
+    },
+    {
+      "name": "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+      "calls": 2415,
+      "cpu_total_us": 124139.43199997582,
+      "self_cpu_us": 25120.808999908157,
+      "device_total_us": 424624.8189999936
+    },
+    {
+      "name": "Unrecognized",
+      "calls": 11,
+      "cpu_total_us": 21758.960000002167,
+      "self_cpu_us": 21758.960000002167,
+      "device_total_us": 44.446999999694526
+    },
+    {
+      "name": "aten::native_layer_norm",
+      "calls": 660,
+      "cpu_total_us": 52002.12299999967,
+      "self_cpu_us": 20744.558000008576,
+      "device_total_us": 36046.08400000166
+    },
+    {
+      "name": "aten::view",
+      "calls": 15534,
+      "cpu_total_us": 18900.302000003867,
+      "self_cpu_us": 18899.650000004098,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::bmm",
+      "calls": 702,
+      "cpu_total_us": 22633.342000005767,
+      "self_cpu_us": 18145.2760000024,
+      "device_total_us": 111548.71600002144
+    },
+    {
+      "name": "autograd::engine::evaluate_function: ToCopyBackward0",
+      "calls": 4542,
+      "cpu_total_us": 119628.117999902,
+      "self_cpu_us": 17820.650999906473,
+      "device_total_us": 104778.51600002497
+    },
+    {
+      "name": "aten::slice",
+      "calls": 6108,
+      "cpu_total_us": 20799.2890000036,
+      "self_cpu_us": 17765.11499999091,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::as_strided",
+      "calls": 37941,
+      "cpu_total_us": 16956.174000039697,
+      "self_cpu_us": 16956.174000039697,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::pow",
+      "calls": 1098,
+      "cpu_total_us": 46743.378000008874,
+      "self_cpu_us": 16618.77700002864,
+      "device_total_us": 20650.460999979638
+    },
+    {
+      "name": "aten::sum",
+      "calls": 1881,
+      "cpu_total_us": 44077.778000001796,
+      "self_cpu_us": 16376.211000035517,
+      "device_total_us": 36813.665000026114
+    },
+    {
+      "name": "aten::t",
+      "calls": 11952,
+      "cpu_total_us": 38505.34499992803,
+      "self_cpu_us": 16117.76499991212,
+      "device_total_us": 0
+    },
+    {
+      "name": "record_param_comms",
+      "calls": 570,
+      "cpu_total_us": 20197.982000010088,
+      "self_cpu_us": 14821.80200005509,
+      "device_total_us": 404944.37699999847
+    },
+    {
+      "name": "aten::matmul",
+      "calls": 2754,
+      "cpu_total_us": 237021.15500001982,
+      "self_cpu_us": 13131.74300000444,
+      "device_total_us": 625644.3630000092
+    },
+    {
+      "name": "aten::reshape",
+      "calls": 10965,
+      "cpu_total_us": 55070.889000108466,
+      "self_cpu_us": 12843.16000007093,
+      "device_total_us": 49986.44700000342
+    },
+    {
+      "name": "aten::to",
+      "calls": 22452,
+      "cpu_total_us": 438857.68200007454,
+      "self_cpu_us": 12711.615000062622,
+      "device_total_us": 229834.08999993373
+    },
+    {
+      "name": "aten::clone",
+      "calls": 4125,
+      "cpu_total_us": 92961.98500000872,
+      "self_cpu_us": 12178.610000000335,
+      "device_total_us": 128547.53299998306
+    },
+    {
+      "name": "aten::_scaled_dot_product_flash_attention",
+      "calls": 324,
+      "cpu_total_us": 26021.54200000502,
+      "self_cpu_us": 11746.4990000166,
+      "device_total_us": 11643.409000001848
+    },
+    {
+      "name": "aten::gelu",
+      "calls": 648,
+      "cpu_total_us": 19639.463999996893,
+      "self_cpu_us": 11410.425999996252,
+      "device_total_us": 46769.1890000077
+    },
+    {
+      "name": "aten::cat",
+      "calls": 1113,
+      "cpu_total_us": 17603.693999971263,
+      "self_cpu_us": 10993.12799996417,
+      "device_total_us": 49434.08200002834
+    },
+    {
+      "name": "autograd::engine::evaluate_function: ViewBackward0",
+      "calls": 3849,
+      "cpu_total_us": 40481.880000060424,
+      "self_cpu_us": 10783.4220000403,
+      "device_total_us": 14140.493000001647
+    },
+    {
+      "name": "aten::rsqrt",
+      "calls": 660,
+      "cpu_total_us": 14398.075000004843,
+      "self_cpu_us": 9171.278999990784,
+      "device_total_us": 675.0150000303984
+    },
+    {
+      "name": "autograd::engine::evaluate_function: AddmmBackward0",
+      "calls": 1101,
+      "cpu_total_us": 332605.89400000125,
+      "self_cpu_us": 8483.094999996014,
+      "device_total_us": 235365.6929999655
+    },
+    {
+      "name": "MmBackward0",
+      "calls": 744,
+      "cpu_total_us": 154026.95599998254,
+      "self_cpu_us": 8353.461999989115,
+      "device_total_us": 324743.7960000094
+    },
+    {
+      "name": "aten::add_",
+      "calls": 2994,
+      "cpu_total_us": 33161.753999964334,
+      "self_cpu_us": 8161.9359999690205,
+      "device_total_us": 46334.45500003174
+    },
+    {
+      "name": "aten::select",
+      "calls": 4884,
+      "cpu_total_us": 9288.844999992289,
+      "self_cpu_us": 7683.140999929979,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::mean",
+      "calls": 663,
+      "cpu_total_us": 35493.9729999993,
+      "self_cpu_us": 7625.187999980524,
+      "device_total_us": 12952.123999983072
+    },
+    {
+      "name": "Optimizer.step#AdamW.step",
+      "calls": 3,
+      "cpu_total_us": 12511.790999998339,
+      "self_cpu_us": 7522.0569999990985,
+      "device_total_us": 91388.5040000137
+    },
+    {
+      "name": "detach",
+      "calls": 10131,
+      "cpu_total_us": 7514.271000012755,
+      "self_cpu_us": 7514.271000012755,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::detach",
+      "calls": 10131,
+      "cpu_total_us": 14023.257999959402,
+      "self_cpu_us": 6508.986999946646,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::unsqueeze",
+      "calls": 3942,
+      "cpu_total_us": 7865.363999948837,
+      "self_cpu_us": 6317.788999910466,
+      "device_total_us": 0
+    },
+    {
+      "name": "autograd::engine::evaluate_function: MulBackward0",
+      "calls": 921,
+      "cpu_total_us": 912727.1730000004,
+      "self_cpu_us": 5977.321000021882,
+      "device_total_us": 833470.1359999906
+    },
+    {
+      "name": "NativeLayerNormBackward0",
+      "calls": 330,
+      "cpu_total_us": 20101.543000003323,
+      "self_cpu_us": 5468.531000011601,
+      "device_total_us": 28729.176999994554
+    },
+    {
+      "name": "aten::empty_like",
+      "calls": 4620,
+      "cpu_total_us": 23080.056999989785,
+      "self_cpu_us": 5420.519000022672,
+      "device_total_us": 0
+    },
+    {
+      "name": "ToCopyBackward0",
+      "calls": 4542,
+      "cpu_total_us": 85486.37400001287,
+      "self_cpu_us": 5246.258000015281,
+      "device_total_us": 85257.69800001569
+    },
+    {
+      "name": "aten::zeros",
+      "calls": 1047,
+      "cpu_total_us": 28015.10799999213,
+      "self_cpu_us": 5211.427999969272,
+      "device_total_us": 9449.615999986509
+    },
+    {
+      "name": "ScaledDotProductFlashAttentionBackward0",
+      "calls": 162,
+      "cpu_total_us": 18008.807999992743,
+      "self_cpu_us": 5041.501999989152,
+      "device_total_us": 24205.4789999919
+    },
+    {
+      "name": "torch.distributed.ddp.reducer::search_unused_parameters",
+      "calls": 3,
+      "cpu_total_us": 4981.250999998301,
+      "self_cpu_us": 4981.250999998301,
+      "device_total_us": 0
+    },
+    {
+      "name": "_NoopSaveInputs",
+      "calls": 135,
+      "cpu_total_us": 5217.429999996908,
+      "self_cpu_us": 4935.281999990344,
+      "device_total_us": 0
+    },
+    {
+      "name": "autograd::engine::evaluate_function: TBackward0",
+      "calls": 1845,
+      "cpu_total_us": 10614.352000019513,
+      "self_cpu_us": 4906.282999982126,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::_unsafe_view",
+      "calls": 3942,
+      "cpu_total_us": 4827.933000000194,
+      "self_cpu_us": 4827.933000000194,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::_foreach_norm",
+      "calls": 3,
+      "cpu_total_us": 6332.019999999553,
+      "self_cpu_us": 4521.811000005342,
+      "device_total_us": 10986.341999997385
+    },
+    {
+      "name": "aten::slice_backward",
+      "calls": 867,
+      "cpu_total_us": 27365.083000000566,
+      "self_cpu_us": 4444.000000020489,
+      "device_total_us": 21891.179999980144
+    },
+    {
+      "name": "autograd::engine::evaluate_function: AddBackward0",
+      "calls": 1245,
+      "cpu_total_us": 13831.698999981396,
+      "self_cpu_us": 4380.447999950498,
+      "device_total_us": 11690.37699998822
+    },
+    {
+      "name": "c10d::allreduce_",
+      "calls": 555,
+      "cpu_total_us": 23933.27800001856,
+      "self_cpu_us": 4310.482000009157,
+      "device_total_us": 404132.62499999814
+    },
+    {
+      "name": "aten::expand",
+      "calls": 1695,
+      "cpu_total_us": 5244.737000020221,
+      "self_cpu_us": 4298.061000070535,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::narrow",
+      "calls": 1605,
+      "cpu_total_us": 7803.640999959782,
+      "self_cpu_us": 3970.951999936253,
+      "device_total_us": 0
+    },
+    {
+      "name": "aten::fill_",
+      "calls": 3525,
+      "cpu_total_us": 13001.758000037229,
+      "self_cpu_us": 3847.122000068739,
+      "device_total_us": 10455.354999992156
+    },
+    {
+      "name": "aten::zero_",
+      "calls": 1074,
+      "cpu_total_us": 15591.255000011071,
+      "self_cpu_us": 3811.526000019574,
+      "device_total_us": 10417.81899998998
+    },
+    {
+      "name": "autograd::engine::evaluate_function: MmBackward0",
+      "calls": 744,
+      "cpu_total_us": 157817.31399996858,
+      "self_cpu_us": 3790.3579999860376,
+      "device_total_us": 324743.7960000094
+    },
+    {
+      "name": "autograd::engine::evaluate_function: CloneBackward0",
+      "calls": 915,
+      "cpu_total_us": 7491.945999996737,
+      "self_cpu_us": 3697.977000001818,
+      "device_total_us": 3438.896000000648
+    },
+    {
+      "name": "ViewBackward0",
+      "calls": 3849,
+      "cpu_total_us": 27253.699000024237,
+      "self_cpu_us": 3612.687999986112,
+      "device_total_us": 13890.986000002362
+    },
+    {
+      "name": "aten::_flash_attention_forward",
+      "calls": 324,
+      "cpu_total_us": 11340.410999982618,
+      "self_cpu_us": 3372.7080000275746,
+      "device_total_us": 11643.409000001848
+    },
+    {
+      "name": "autograd::engine::evaluate_function: NativeLayerNormBackward0",
+      "calls": 330,
+      "cpu_total_us": 27801.676000013947,
+      "self_cpu_us": 3346.379000027664,
+      "device_total_us": 34180.92000001762
+    },
+    {
+      "name": "aten::neg",
+      "calls": 432,
+      "cpu_total_us": 5202.735000004061,
+      "self_cpu_us": 3312.6900000050664,
+      "device_total_us": 7839.013000012375
+    },
+    {
+      "name": "autograd::engine::evaluate_function: TransposeBackward0",
+      "calls": 1086,
+      "cpu_total_us": 6340.254000006244,
+      "self_cpu_us": 2962.9269999861717,
+      "device_total_us": 0
+    },
+    {
+      "name": "autograd::engine::evaluate_function: SliceBackward0",
+      "calls": 867,
+      "cpu_total_us": 32667.600000011735,
+      "self_cpu_us": 2886.3219999996945,
+      "device_total_us": 27314.447999982163
+    },
+    {
+      "name": "aten::native_layer_norm_backward",
+      "calls": 330,
+      "cpu_total_us": 14633.011999991722,
+      "self_cpu_us": 2838.9260000083596,
+      "device_total_us": 28729.176999994554
+    },
+    {
+      "name": "autograd::engine::evaluate_function: UnsafeViewBackward0",
+      "calls": 960,
+      "cpu_total_us": 10678.837999977171,
+      "self_cpu_us": 2821.98499994725,
+      "device_total_us": 5215.860000003129
+    }
+  ],
+  "errors": {},
+  "stderr_tail": "WARNING:root:Vision embedding key might need handling: paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once\n/home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. \n  warnings.warn(  # warn only once"
+}

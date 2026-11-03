@@ -1,0 +1,19 @@
+{
+  "purpose": "bounded H200 pi05 pair performance/readiness; migration only after sustained25% advantage and exact latest A100 checkpoint verification",
+  "production_submitted": false,
+  "paired_profile": {
+    "job_id": "17737992",
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-pi05-h200-opt-20261020/profile_pair.sbatch",
+    "command": "bounded_pair_profile",
+    "recipes": [
+      "pi05_baseline",
+      "pi05_kr"
+    ],
+    "gpus": 2,
+    "gpu": "H200",
+    "cpus": 32,
+    "memory_gib": 256,
+    "time_limit": "02:00:00",
+    "submitted_at": "2026-10-20T14:35:53.256078+00:00"
+  }
+}

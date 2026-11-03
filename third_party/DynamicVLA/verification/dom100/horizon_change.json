@@ -1,0 +1,22 @@
+{
+  "execution_horizon": 20,
+  "old_prediction_horizon": 50,
+  "parent_family": "/scratch/aparame/Dynamic_VLA/dom100",
+  "parent_fingerprint": "d44ebed8cb9550824184eef39f4183bc728986f44b3bba57bc055cf74e60e1b0",
+  "parent_source_sha256": "69b9f0f4fe9df79d41b71c1e344dd9f97df4e1f67f3f5a67f2b50501efb242f5",
+  "prediction_horizon": 20,
+  "reason": "User requested matching the paper with 20 predicted and executed actions.",
+  "reused_artifacts": {
+    "dataset_coverage.json": "f2ccfe56bc575b02e420a69502ec0a25306c6ba46f4299e77308c67b84ea94fe",
+    "dataset_selection.json": "6eafe596da0b1697ef1db3784427cf8571cdd468e1d4f746fc573822a4d2228c",
+    "episodes.json": "54c05acc563ff95904305681b94f6ec77825aa96258b31e288adf57c99b884c6",
+    "initialization/config.json": "d8e89876c30c2c82b4a90f180dd6216612a5860e0df2ba8f43bca14ec4f9b23c",
+    "parquet_hashes.json": "7a4ed0caf4c817e9ed6eec8f7fe67594f333b11e23879d891f0bd2ccfae8061b",
+    "phase_hashes.json": "803035bd133f89c36cd321719fa35668212e3fd11ae4d8261a91a9941f010492",
+    "pilot_episodes.json": "8faecfe8062cba78881f4411d62c8c12a686678b6f483e0a21dea2b253b07c86",
+    "test_cases.json": "3fca5ff097b8216d0cc1aaedc0235af172709a6520a72f05001e7dc3795c9fba",
+    "validation_anchors.json": "089d22058f2337cba93a25333c5b7b97994f6c6faefefc33a53187914f9fea63",
+    "validation_cases.json": "d0a5f98549dc8923091a0ffd999d9dc82573b2cc39f2ec83862fe151d9727961",
+    "video_hashes.json": "64f70f8b0282bbf12c9366483cddd0d5076347f6d85c2db3a14203840863ca35"
+  }
+}

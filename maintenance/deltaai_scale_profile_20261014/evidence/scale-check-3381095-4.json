@@ -1,0 +1,24 @@
+{
+  "benchmark_exit": 1,
+  "benchmark_log": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-scale-ddp-20261014/logs/scale-benchmark-3381095-4.log",
+  "complete": true,
+  "diagnostic_stack_dump_mode": "on-crash only",
+  "error": "benchmark failed: 1",
+  "job_id": "3381095",
+  "manifest": "52f449d9bce4c60a0434d320469338290893f5074ed8b6aedc623c30091ce586",
+  "nodes": 1,
+  "passed": false,
+  "runtime": {
+    "fused": false,
+    "microbatch": 88,
+    "pin_memory": false,
+    "precision": "bf16",
+    "prefetch": 2,
+    "sampling": "frames",
+    "workers": 4
+  },
+  "smoke_exit": 0,
+  "smoke_log": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-scale-ddp-20261014/logs/scale-smoke-3381095-4.log",
+  "training_started": false,
+  "world_size": 4
+}

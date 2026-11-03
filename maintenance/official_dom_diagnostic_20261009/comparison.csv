@@ -1,0 +1,4 @@
+variant,trials,successes,success_percent,late_action_count,maximum_action_lag_steps,exact_index_action_percent
+gripper,6,0,0,0,0,100.0
+gripper_aligned,6,0,0,0,0,100.0
+original,6,0,0,0,0,100.0

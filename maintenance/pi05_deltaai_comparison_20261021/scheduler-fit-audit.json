@@ -1,0 +1,205 @@
+{
+  "at": "2026-10-21T18:24:49.489857+00:00",
+  "job_id": "3429682",
+  "healthy_fitting_nodes": [],
+  "fitting_but_unavailable_candidates": [
+    {
+      "node": "gh001",
+      "state": "IDLE+RESERVED",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh002",
+      "state": "IDLE+RESERVED",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh007",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 272,
+      "free_memory_mib_after_spec": 388704,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh011",
+      "state": "MIXED+PLANNED",
+      "allocated_gpus": 2,
+      "free_cpu": 264,
+      "free_memory_mib_after_spec": 275144,
+      "administratively_or_operationally_unavailable": true,
+      "exclusion": "Scheduler PLANNED state; physically free GPUs are reserved by the scheduler for higher-priority work"
+    },
+    {
+      "node": "gh015",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 272,
+      "free_memory_mib_after_spec": 351840,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh017",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 2,
+      "free_cpu": 271,
+      "free_memory_mib_after_spec": 331360,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh055",
+      "state": "IDLE+DRAIN",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh062",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 272,
+      "free_memory_mib_after_spec": 323168,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh074",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 224,
+      "free_memory_mib_after_spec": 331360,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh081",
+      "state": "IDLE+DRAIN",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh082",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 2,
+      "free_cpu": 271,
+      "free_memory_mib_after_spec": 368224,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh138",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 224,
+      "free_memory_mib_after_spec": 331360,
+      "administratively_or_operationally_unavailable": true
+    }
+  ],
+  "production_changed": false,
+  "fitting_physical_candidates": [
+    {
+      "node": "gh001",
+      "state": "IDLE+RESERVED",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh002",
+      "state": "IDLE+RESERVED",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh007",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 272,
+      "free_memory_mib_after_spec": 388704,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh011",
+      "state": "MIXED+PLANNED",
+      "allocated_gpus": 2,
+      "free_cpu": 264,
+      "free_memory_mib_after_spec": 275144,
+      "administratively_or_operationally_unavailable": true,
+      "exclusion": "Scheduler PLANNED state; physically free GPUs are reserved by the scheduler for higher-priority work"
+    },
+    {
+      "node": "gh015",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 272,
+      "free_memory_mib_after_spec": 351840,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh017",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 2,
+      "free_cpu": 271,
+      "free_memory_mib_after_spec": 331360,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh055",
+      "state": "IDLE+DRAIN",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh062",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 272,
+      "free_memory_mib_after_spec": 323168,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh074",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 224,
+      "free_memory_mib_after_spec": 331360,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh081",
+      "state": "IDLE+DRAIN",
+      "allocated_gpus": 0,
+      "free_cpu": 288,
+      "free_memory_mib_after_spec": 454240,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh082",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 2,
+      "free_cpu": 271,
+      "free_memory_mib_after_spec": 368224,
+      "administratively_or_operationally_unavailable": true
+    },
+    {
+      "node": "gh138",
+      "state": "MIXED+DRAIN",
+      "allocated_gpus": 1,
+      "free_cpu": 224,
+      "free_memory_mib_after_spec": 331360,
+      "administratively_or_operationally_unavailable": true
+    }
+  ],
+  "classification_note": "Exclude PLANNED as well as DRAIN/RESERVED; raw initial classification retained separately"
+}

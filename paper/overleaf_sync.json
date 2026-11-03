@@ -1,0 +1,65 @@
+{
+  "source": "https://www.overleaf.com/project/6ac3ec75eaeece93d3805a68",
+  "synced_date": "2026-10-14",
+  "archive_sha256": "c69ebfa16497d3613767e15e4c7f3c5116eb32f2f434878613a0e10aef1f98ec",
+  "entrypoint": "main.tex",
+  "previous_draft": "legacy_iclr2025/iclr2025_conference.tex",
+  "files": {
+    "README.md": {
+      "bytes": 1552,
+      "sha256": "d91116b58be33154d195012d7d2ef2be310d308ed23f3803aa6baf2aeb441a5e"
+    },
+    "main.brf": {
+      "bytes": 1593,
+      "sha256": "0ed1fcbb207de180665c915b4ab9f11f5d03de5dcede0134c99e5d3ce09a27ad"
+    },
+    "sec/X_suppl.tex": {
+      "bytes": 1123,
+      "sha256": "594291f94cf3b925908dc127a93f3525c1998e96abf37a14f69d6077a7e58bd7"
+    },
+    "sec/3_finalcopy.tex": {
+      "bytes": 360,
+      "sha256": "ae261b3daaff50cf609bb3ca7dfd030bb1e835fd85aa4fda45cdaf53cc35cc1a"
+    },
+    "sec/2_formatting.tex": {
+      "bytes": 7718,
+      "sha256": "bd4233b307bfe3ad791c433e021b00ed4e4017db7adde8ee8e475c267fc7191d"
+    },
+    "sec/1_intro.tex": {
+      "bytes": 10720,
+      "sha256": "55dc0cd862ccfd3c54b63367323669ff1e23d07f76291b35949c7b914c92fbec"
+    },
+    "sec/0_abstract.tex": {
+      "bytes": 497,
+      "sha256": "ac059e9cb8595bab8f7795d088d71e321ee46e8397d5cfb56957107d43c868ed"
+    },
+    "rebuttal.tex": {
+      "bytes": 6795,
+      "sha256": "29e36ddeb5f9eebe5e62c9df74a24f9f49b587ccfb3710209a22f02239b53ebb"
+    },
+    "preamble.tex": {
+      "bytes": 1380,
+      "sha256": "f666a85903f49929395951e7afb620e96d4e208334623f23135298b4d7f06228"
+    },
+    "math_commands.tex": {
+      "bytes": 12284,
+      "sha256": "90473c4d0542070db244cea73ef962d6cddc5b2a746757e6a40ddf5fdfb90ba9"
+    },
+    "main.tex": {
+      "bytes": 62108,
+      "sha256": "c5c47eb359c585aaccb9caa5d21dac2379ef8cd0b6fe2be22e71aa3d8d3cfbe4"
+    },
+    "main.bib": {
+      "bytes": 13147,
+      "sha256": "7d7283afe814912b19577d9cd993a37069a832f6f1ade476b635974c1ad10f9c"
+    },
+    "ieeenat_fullname.bst": {
+      "bytes": 26900,
+      "sha256": "e38e6166bd7b1e6d23a1b79dcdb55c656e4fcdbe91bdf6b50d827e6b5d1aacfc"
+    },
+    "cvpr.sty": {
+      "bytes": 17969,
+      "sha256": "2602473285d1a7df2a445ac89b76e1afa0acab78e056f0369d19770245190153"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "checked_at": "2026-10-22T18:31:35.947549+00:00",
+  "runs": {
+    "pi05_baseline": {
+      "job_id": "17859073",
+      "scheduler": {
+        "state": "PENDING",
+        "elapsed": "0:00",
+        "limit": "2-00:00:00",
+        "node_or_reason": "(BeginTime)"
+      },
+      "checkpoint": {
+        "progress": {
+          "updates": 96531,
+          "samples": 3088992,
+          "epoch": 1,
+          "cursor": 61536
+        },
+        "identity": "2a7c3f2ccf3271fcc36a35a78b515ea11eee363d8f0679e8d4e8d236edd3f5a9",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_baseline/latest.pt"
+      },
+      "completed": null,
+      "family": "main8-replicas-h200-20261021"
+    },
+    "pi05_kr": {
+      "job_id": "17859076",
+      "scheduler": {
+        "state": "RUNNING",
+        "elapsed": "19:08:46",
+        "limit": "2-00:00:00",
+        "node_or_reason": "node0107"
+      },
+      "checkpoint": {
+        "progress": {
+          "updates": 106501,
+          "samples": 3408032,
+          "epoch": 0,
+          "cursor": 1487904
+        },
+        "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt"
+      },
+      "completed": null,
+      "family": "main8-replicas-h200-20261021"
+    },
+    "vlash_baseline": {
+      "job_id": "17859077",
+      "scheduler": {
+        "state": "RUNNING",
+        "elapsed": "18:27:46",
+        "limit": "2-00:00:00",
+        "node_or_reason": "nodeai09"
+      },
+      "checkpoint": {
+        "progress": {
+          "updates": 139914,
+          "samples": 4477248,
+          "epoch": 1,
+          "cursor": 1110496
+        },
+        "identity": "3b052a829d2b24f15719b9eb98d3d2fb0b2f2e6abb780333357feda8879fb68f",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_baseline/latest.pt"
+      },
+      "completed": null,
+      "family": "main8-replicas-h200-20261021"
+    },
+    "vlash_kr": {
+      "job_id": "17859078",
+      "scheduler": {
+        "state": "RUNNING",
+        "elapsed": "15:21:58",
+        "limit": "2-00:00:00",
+        "node_or_reason": "nodeai09"
+      },
+      "checkpoint": {
+        "progress": {
+          "updates": 120920,
+          "samples": 3869440,
+          "epoch": 1,
+          "cursor": 502688
+        },
+        "identity": "468a3b6fbab9d8ff2e06ccbfbe4b7b3a74ae15001d242e283c13c4e64f7b189d",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/vlash_kr/latest.pt"
+      },
+      "completed": null,
+      "family": "main8-replicas-h200-20261021"
+    },
+    "smolvla_baseline": {
+      "job_id": "17912900",
+      "scheduler": {
+        "state": "RUNNING",
+        "elapsed": "5:01:09",
+        "limit": "2-00:00:00",
+        "node_or_reason": "nodeai10"
+      },
+      "checkpoint": {
+        "progress": {
+          "updates": 132815,
+          "samples": 8500160,
+          "epoch": 3,
+          "cursor": 0
+        },
+        "identity": "e71e5215b88c95cafc3d3af4b6d9bf578b43da0af9a49e7ba5500ea54b6eb2af",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline/latest.pt"
+      },
+      "completed": null,
+      "family": "main8-h200-only-20261022"
+    },
+    "smolvla_kr": {
+      "job_id": "17912901",
+      "scheduler": {
+        "state": "RUNNING",
+        "elapsed": "4:57:56",
+        "limit": "2-00:00:00",
+        "node_or_reason": "node0110"
+      },
+      "checkpoint": {
+        "progress": {
+          "updates": 132815,
+          "samples": 8500160,
+          "epoch": 3,
+          "cursor": 0
+        },
+        "identity": "9267082799c9df91479901c75e478fdc63f5abb79ade007fb5de76ceeab54ed6",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr/latest.pt"
+      },
+      "completed": null,
+      "family": "main8-h200-only-20261022"
+    },
+    "domv100": {
+      "job_id": "17912902",
+      "scheduler": {
+        "state": "RUNNING",
+        "elapsed": "4:25:37",
+        "limit": "2-00:00:00",
+        "node_or_reason": "nodeai09"
+      },
+      "checkpoint": {
+        "progress": {
+          "updates": 224155,
+          "samples": 78902251,
+          "epoch": 0,
+          "cursor": 2001824
+        },
+        "identity": "2dc7b26e5d4e56da990f601e7f456d74b7d52e7cd24d3a0272e8cf1a2b968ddb",
+        "file": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100/latest.pt"
+      },
+      "completed": null,
+      "family": "main8-h200-only-20261022"
+    }
+  },
+  "actions": "No submission, cancellation or source change. Existing pi05 baseline automatic requeue retained; checkpoint restore not yet verified after preemption.",
+  "allocation_hours": 48
+}

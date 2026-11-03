@@ -1,0 +1,345 @@
+{
+  "hardware_scope": "Exactly2H100 per model",
+  "diagnostic_job_id": "17913478",
+  "scheduler_result": "COMPLETED exit0;2h09m34s",
+  "production_changes_applied": false,
+  "full_readiness_updates": 200,
+  "models": {
+    "pi05_baseline": {
+      "runtime": {
+        "microbatch": 8,
+        "workers": 8,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "global_batch": 32,
+      "short_eight_update_samples_per_second": 29.499718169789794,
+      "full_200_update_samples_per_second_including_checkpoint": 22.378665135703162,
+      "peak_gpu_reserved_bytes": 71861010432.0,
+      "gpu_headroom_fraction": 0.15475030525783495,
+      "per_node_memory": {
+        "nodeai03.palmetto.clemson.edu": {
+          "rss": 111479607296,
+          "limit": 274877906944
+        }
+      },
+      "identity": "e64ea71c7474213dce7d7d79fe7236f6701d58b3aef67c5f05cd5ebbe1845e76",
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "source": {
+        "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+        "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+        "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+        "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+        "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+        "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+        "placements.py": "8a97f7f1966c150826560caf9be899d4f87d215ec6c020e236db432679833e9f",
+        "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+        "prepare_diagnostic.py": "f2ed2305cd9d358119d210404be134564466106299b7ecb672b627611b79679a",
+        "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+        "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+        "sweep.py": "3d3121171ea5a4d486f9dca73a08a521fa8e374a4ebe890aff2c8d366ae798b3",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "test_placements.py": "8ab3f2630439d0fa428a25f84ac40758b8d707448bde8b1f36978729ff825653",
+        "train.py": "b75098b905c5fd6c393895e2a05841d682dd45b93e917b1683a1553ca066f561",
+        "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+      }
+    },
+    "pi05_kr": {
+      "runtime": {
+        "microbatch": 8,
+        "workers": 8,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "global_batch": 32,
+      "short_eight_update_samples_per_second": 29.22835207843052,
+      "full_200_update_samples_per_second_including_checkpoint": 22.189320406116984,
+      "peak_gpu_reserved_bytes": 71861010432.0,
+      "gpu_headroom_fraction": 0.15475030525783495,
+      "per_node_memory": {
+        "nodeai03.palmetto.clemson.edu": {
+          "rss": 110308282368,
+          "limit": 274877906944
+        }
+      },
+      "identity": "ccc313eba018d9fd11eb27183ad1fe529389c547a7c9d1a1f0718c0fb400c968",
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "source": {
+        "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+        "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+        "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+        "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+        "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+        "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+        "placements.py": "8a97f7f1966c150826560caf9be899d4f87d215ec6c020e236db432679833e9f",
+        "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+        "prepare_diagnostic.py": "f2ed2305cd9d358119d210404be134564466106299b7ecb672b627611b79679a",
+        "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+        "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+        "sweep.py": "3d3121171ea5a4d486f9dca73a08a521fa8e374a4ebe890aff2c8d366ae798b3",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "test_placements.py": "8ab3f2630439d0fa428a25f84ac40758b8d707448bde8b1f36978729ff825653",
+        "train.py": "b75098b905c5fd6c393895e2a05841d682dd45b93e917b1683a1553ca066f561",
+        "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+      }
+    },
+    "smolvla_baseline": {
+      "runtime": {
+        "microbatch": 32,
+        "workers": 8,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "global_batch": 64,
+      "short_eight_update_samples_per_second": 404.25617287969214,
+      "full_200_update_samples_per_second_including_checkpoint": 300.9802429077682,
+      "peak_gpu_reserved_bytes": 7379877888.0,
+      "gpu_headroom_fraction": 0.9131957720248153,
+      "per_node_memory": {
+        "nodeai03.palmetto.clemson.edu": {
+          "rss": 34718633984,
+          "limit": 274877906944
+        }
+      },
+      "identity": "0e72b61e8db481cadc754534773da8a8fe2e1d6d203ec0a9f8bd631782ba9ca1",
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "source": {
+        "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+        "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+        "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+        "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+        "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+        "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+        "placements.py": "8a97f7f1966c150826560caf9be899d4f87d215ec6c020e236db432679833e9f",
+        "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+        "prepare_diagnostic.py": "f2ed2305cd9d358119d210404be134564466106299b7ecb672b627611b79679a",
+        "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+        "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+        "sweep.py": "3d3121171ea5a4d486f9dca73a08a521fa8e374a4ebe890aff2c8d366ae798b3",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "test_placements.py": "8ab3f2630439d0fa428a25f84ac40758b8d707448bde8b1f36978729ff825653",
+        "train.py": "b75098b905c5fd6c393895e2a05841d682dd45b93e917b1683a1553ca066f561",
+        "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+      }
+    },
+    "smolvla_kr": {
+      "runtime": {
+        "microbatch": 32,
+        "workers": 4,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "global_batch": 64,
+      "short_eight_update_samples_per_second": 405.1053784768911,
+      "full_200_update_samples_per_second_including_checkpoint": 325.18030731466257,
+      "peak_gpu_reserved_bytes": 7379877888.0,
+      "gpu_headroom_fraction": 0.9131957720248153,
+      "per_node_memory": {
+        "nodeai03.palmetto.clemson.edu": {
+          "rss": 23757045760,
+          "limit": 274877906944
+        }
+      },
+      "identity": "5b11fd452bcf83d779be68d580c15d45c34fa998d86719ab0f32719697183fd9",
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "source": {
+        "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+        "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+        "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+        "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+        "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+        "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+        "placements.py": "8a97f7f1966c150826560caf9be899d4f87d215ec6c020e236db432679833e9f",
+        "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+        "prepare_diagnostic.py": "f2ed2305cd9d358119d210404be134564466106299b7ecb672b627611b79679a",
+        "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+        "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+        "sweep.py": "3d3121171ea5a4d486f9dca73a08a521fa8e374a4ebe890aff2c8d366ae798b3",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "test_placements.py": "8ab3f2630439d0fa428a25f84ac40758b8d707448bde8b1f36978729ff825653",
+        "train.py": "b75098b905c5fd6c393895e2a05841d682dd45b93e917b1683a1553ca066f561",
+        "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+      }
+    },
+    "vlash_baseline": {
+      "runtime": {
+        "microbatch": 8,
+        "workers": 8,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "global_batch": 32,
+      "short_eight_update_samples_per_second": 51.680000390908184,
+      "full_200_update_samples_per_second_including_checkpoint": 39.82127276087875,
+      "peak_gpu_reserved_bytes": 66261614592.0,
+      "gpu_headroom_fraction": 0.2206119957078898,
+      "per_node_memory": {
+        "nodeai03.palmetto.clemson.edu": {
+          "rss": 87789109248,
+          "limit": 274877906944
+        }
+      },
+      "identity": "a94d7abcd5a2a76cfe5579ece1921a57fe9b94578e31cb28e845877ee742486b",
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "source": {
+        "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+        "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+        "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+        "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+        "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+        "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+        "placements.py": "8a97f7f1966c150826560caf9be899d4f87d215ec6c020e236db432679833e9f",
+        "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+        "prepare_diagnostic.py": "f2ed2305cd9d358119d210404be134564466106299b7ecb672b627611b79679a",
+        "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+        "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+        "sweep.py": "3d3121171ea5a4d486f9dca73a08a521fa8e374a4ebe890aff2c8d366ae798b3",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "test_placements.py": "8ab3f2630439d0fa428a25f84ac40758b8d707448bde8b1f36978729ff825653",
+        "train.py": "b75098b905c5fd6c393895e2a05841d682dd45b93e917b1683a1553ca066f561",
+        "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+      }
+    },
+    "vlash_kr": {
+      "runtime": {
+        "microbatch": 8,
+        "workers": 4,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "global_batch": 32,
+      "short_eight_update_samples_per_second": 51.8337486338997,
+      "full_200_update_samples_per_second_including_checkpoint": 40.18779134924324,
+      "peak_gpu_reserved_bytes": 66261614592.0,
+      "gpu_headroom_fraction": 0.2206119957078898,
+      "per_node_memory": {
+        "nodeai03.palmetto.clemson.edu": {
+          "rss": 78875549696,
+          "limit": 274877906944
+        }
+      },
+      "identity": "23f7b6b531e7e71217f8051947da5ce6a1c7300c13919f0f3a12b97c1b244587",
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "source": {
+        "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+        "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+        "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+        "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+        "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+        "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+        "placements.py": "8a97f7f1966c150826560caf9be899d4f87d215ec6c020e236db432679833e9f",
+        "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+        "prepare_diagnostic.py": "f2ed2305cd9d358119d210404be134564466106299b7ecb672b627611b79679a",
+        "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+        "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+        "sweep.py": "3d3121171ea5a4d486f9dca73a08a521fa8e374a4ebe890aff2c8d366ae798b3",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "test_placements.py": "8ab3f2630439d0fa428a25f84ac40758b8d707448bde8b1f36978729ff825653",
+        "train.py": "b75098b905c5fd6c393895e2a05841d682dd45b93e917b1683a1553ca066f561",
+        "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+      }
+    },
+    "domv100": {
+      "runtime": {
+        "microbatch": 44,
+        "workers": 8,
+        "main_threads": 2,
+        "prefetch": 2,
+        "autocast_cache_enabled": false,
+        "allocator": "expandable_segments:True"
+      },
+      "global_batch": 352,
+      "short_eight_update_samples_per_second": 153.11962263561028,
+      "full_200_update_samples_per_second_including_checkpoint": 149.38544595354801,
+      "peak_gpu_reserved_bytes": 46548385792.0,
+      "gpu_headroom_fraction": 0.45248461377175353,
+      "per_node_memory": {
+        "nodeai03.palmetto.clemson.edu": {
+          "rss": 77304623104,
+          "limit": 274877906944
+        }
+      },
+      "identity": "028ecb161363bbdf15ac1cc61a73f2a9b3c6568efd611dbcd4882b554282c6ad",
+      "strict_checkpoint_rng_reload": true,
+      "strict_inference_reload": true,
+      "source": {
+        "allocation.py": "0ef1902ca3a60b18be1d2ccec581a2adfbbe9ae7e4bc42ae9e7fc246fa62f325",
+        "budget.py": "0dfdfe20f8785f38af65a4657951a24526d8921113b8faf4b63e55d2c9fd65ce",
+        "common.py": "f34ed8c59b81d32d71ed5826fa7422cf43af722ebcc39164338c723a6d320822",
+        "data.py": "6e851a5d909f468eeb5af96b7639be57a219134ee88dba0fd3685fbab2341363",
+        "freeze.py": "c2ab748301f8ff6128f709c5592640f0cdf6af68642cac70c11849a3352c57fe",
+        "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+        "launcher_contract.py": "ac8ca4ba887e9b5363221fc3a4f55ba274454255da7dfffd7a4e351daf173213",
+        "migration.py": "ef3cebb76c63a497c76021907c0e923c1e80f54fed8394fb7bf3513f53c14ff7",
+        "native_dom.py": "2d89229eebf42082f136a5e4badb3315df3384e697198738f630c432a945e3b0",
+        "node_role.py": "2505c87dadf555bb4b742cccb9205ca2f3fdc312fe4932e09ac1c660ab2d6958",
+        "placements.py": "8a97f7f1966c150826560caf9be899d4f87d215ec6c020e236db432679833e9f",
+        "policy.py": "d2d8375ea6fdac709d9b5b3ac3323d8c41764a043a3b0edd9006da28a15f2daa",
+        "prepare_diagnostic.py": "f2ed2305cd9d358119d210404be134564466106299b7ecb672b627611b79679a",
+        "runtime.py": "c348d404df1e2309e3e3f6f8f580fc538be1b064d4197a293c74d391803c2087",
+        "subset.py": "e30ea9e63bc0a4ae3a29703f0a5ef5028afb787c66abcf867d1e2629e666bbfb",
+        "sweep.py": "3d3121171ea5a4d486f9dca73a08a521fa8e374a4ebe890aff2c8d366ae798b3",
+        "test_autocast.py": "b71dd494d9755ac3be572bc94fb52ff284d2d119f20b0b2854abc3232705d0cc",
+        "test_budget.py": "33aa9c6870ec47da016f7e7e204d0556fa99e51fb8c5fa01060c9f2bf71ed0ea",
+        "test_optimizer.py": "dade2b587c31985583f95db2ed09d2d3c0f07ae2dfb3529eb0a61aaf39493222",
+        "test_placements.py": "8ab3f2630439d0fa428a25f84ac40758b8d707448bde8b1f36978729ff825653",
+        "train.py": "b75098b905c5fd6c393895e2a05841d682dd45b93e917b1683a1553ca066f561",
+        "vlash_runtime.py": "a25336a0c9e23b7efb0c47ffeeb939404a9e25529275cf4ec53d37f671a0b8ce"
+      }
+    }
+  }
+}

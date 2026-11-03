@@ -1,0 +1,14 @@
+test_checkpoint_requires_optimizer_scheduler_rng_cursor (test_handoff_guards.GuardContracts) ... ok
+test_completed_budget_never_repeated (test_handoff_guards.GuardContracts) ... ok
+test_exact_budget_manifest_and_parent_terminal (test_handoff_guards.GuardContracts) ... ok
+test_hardware_and_identity_before_signal (test_handoff_guards.GuardContracts) ... ok
+test_no_parent_action_while_queued (test_handoff_guards.GuardContracts) ... ok
+test_pair_requires_both_sustained_receipts_and_accounting (test_handoff_guards.GuardContracts) ... ok
+test_running_parent_requests_checkpoint (test_handoff_guards.GuardContracts) ... ok
+test_stale_stop_and_autorequeue_fail_closed (test_handoff_guards.GuardContracts) ... ok
+test_wrong_parent_or_wandb_refused (test_handoff_guards.GuardContracts) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.034s
+
+OK

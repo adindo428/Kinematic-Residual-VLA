@@ -1,0 +1,12 @@
+{
+  "job_id": "3347563",
+  "state_at_submission_check": "RUNNING",
+  "node": "gh041",
+  "gpu": "NVIDIA GH200 120GB",
+  "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/dom100-palmetto-h20",
+  "log": "/work/nvme/bivv/aparameshwaran/dynamicvla/dom100-palmetto-h20/profiling/gh200-3347563/controller.log",
+  "slurm_log": "/work/nvme/bivv/aparameshwaran/dynamicvla/dom100-palmetto-h20/profiling/gh200-3347563.out",
+  "prediction_horizon": 20,
+  "effective_batch": 352,
+  "production_training_launched": false
+}

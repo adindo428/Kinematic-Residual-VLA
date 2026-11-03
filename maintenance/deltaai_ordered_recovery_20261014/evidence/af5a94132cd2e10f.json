@@ -1,0 +1,59 @@
+{
+  "benchmark_driver_sha256": "ecc492b591fe2aece79a4c27aa087e41e369996de732728e5c9f143ee72ec8be",
+  "benchmark_job_id": "3381007",
+  "benchmark_samples": 6336,
+  "cache_admission": "Reused exact completed804900-file audit",
+  "canonical_checkpoint_buffers": true,
+  "complete": true,
+  "execution_horizon": 20,
+  "fingerprint": "d5e22517f66b2655030e0f076bf67ce177d6ada4f37a582d28e7dca95ddde1a9",
+  "full_data_benchmark": true,
+  "full_update_measurement": {
+    "data_wait_s": 8.476814411580563,
+    "loss": 0.06789906334597617,
+    "samples": 352,
+    "samples_per_second": 32.33934203998896,
+    "update_latency_s": 10.884575189091265
+  },
+  "future_inputs_ignored": true,
+  "global_effective_batch": 352,
+  "hardware": {
+    "capability": [
+      9,
+      0
+    ],
+    "cuda": "13.0",
+    "name": "NVIDIA GH200 120GB",
+    "torch": "2.12.0+cu130",
+    "total_memory": 102087458816
+  },
+  "isolated_process": true,
+  "manifest": "dcb3be84fa47896c4c10416aded492573d34d04d678c5a74d5dd2fdb2d7cf266",
+  "max_gpu_reserved_bytes": 26791116800.0,
+  "measured_updates": 16,
+  "memory_monitor": "host RAM only; CUDA peak from torch.cuda",
+  "optimizer_updates": 2,
+  "peak_gpu_bytes_this_rank": 24425529344,
+  "policy_before_validation_prefetch": true,
+  "prediction_horizon": 20,
+  "rank_rng_reload": true,
+  "runtime": {
+    "fused": false,
+    "microbatch": 22,
+    "pin_memory": false,
+    "precision": "bf16",
+    "prefetch": 2,
+    "sampling": "frames",
+    "workers": 1
+  },
+  "safe": true,
+  "samples": 355,
+  "samples_per_second": 75.4578523705871,
+  "strict_reload": true,
+  "sum_gpu_peak_bytes": 97702117376.0,
+  "sum_peak_ram_bytes": 42319544320.0,
+  "sum_ram_bytes": 29162995712.0,
+  "variant": "domv100",
+  "warmup_updates": 2,
+  "world_size": 4
+}

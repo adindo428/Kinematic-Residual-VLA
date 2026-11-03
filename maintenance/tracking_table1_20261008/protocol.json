@@ -1,0 +1,108 @@
+{
+  "name": "DynamicVLA Table 1 tracking adaptation v1",
+  "paper": "https://arxiv.org/abs/2601.22153",
+  "dimensions": {
+    "CR": "Lateral direction reversals (one cycle per 4 seconds).",
+    "DA": "Smooth time-varying speed, alternating 0.5x and 1.5x.",
+    "LS": "Continuous 30-second tracking with repeated three-axis motion.",
+    "VU": "Exposure/contrast variation and a fixed peripheral visual occluder.",
+    "SR": "Tracking at ten different workspace/depth locations.",
+    "MP": "RGB freezes of 0.24 seconds at t=2 and t=5; state and velocity remain current.",
+    "VG": "Five apple meshes absent from the single-apple training data; same room.",
+    "MG": "Held-out motion speeds from 1.5x to 2x.",
+    "DR": "Two scripted 2.5 cm target displacements over 0.2 seconds (kinematic push proxy)."
+  },
+  "models": {
+    "baseline": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/checkpoints/tracking_dom75_full20_baseline_16623336",
+    "velocity": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_velocity/checkpoints/tracking_dom75_full20_velocity_16680047",
+    "coordinate": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_full20/resume_outputs/checkpoints/tracking_dom75_full20_coordinate_16623338",
+    "coordinate_velocity": "/scratch/aparame/Dynamic_VLA/runs/tracking_dom75_coordinate_velocity/checkpoints/tracking_dom75_full20_coordinate_velocity_16748131"
+  },
+  "model_labels": {
+    "baseline": "DOM-VLA",
+    "velocity": "DOM-VLA+Velocity",
+    "coordinate": "KR-VLA-Coordinate",
+    "coordinate_velocity": "KR-VLA-Coordinate+Velocity"
+  },
+  "checkpoint_metadata": {
+    "baseline": {
+      "weights_sha256": "61a50e3dbc917fd2863625c28ac9b5291304122c814915f9d236bfc90b17faed",
+      "config_sha256": "db82c1f10dfcc874795dfc12f59870bd336c50f12a68fc5d28d607ef7cb58d0d"
+    },
+    "velocity": {
+      "weights_sha256": "615822cf01eb1d1f075f1c9327739344eaf75ed5671543a0632357c9dc213ad7",
+      "config_sha256": "b79a5967a1f0b192aca0ff5c3add313ad9f4c316ccd4dab5a3a5fcd9238da3ba"
+    },
+    "coordinate": {
+      "weights_sha256": "0af6e261eba3f41cbf37af51b13094146656195a911a75b9277ca96e132d33a2",
+      "config_sha256": "28e0faec5185049e13cdabe73dfb63c9eaa17fca14b270241ff7c2a11d2920a5"
+    },
+    "coordinate_velocity": {
+      "weights_sha256": "a9c0ca56e4e51b2dba39cdf02309d4df030782f19883ba350bf0f9514ed727aa",
+      "config_sha256": "b6f463cd6d2c3fbdc08676726115fae6f96ddee1c1c1a49b87b41576bab9d973"
+    }
+  },
+  "dataset_revision": "5c46a9f26b5f85edafa53885187cc03fa8706219",
+  "setups_per_dimension": 10,
+  "trials_per_setup": 20,
+  "expected_rollouts_per_model": 1800,
+  "expected_rollouts": 7200,
+  "dimension_order": [
+    "CR",
+    "DA",
+    "LS",
+    "VU",
+    "SR",
+    "MP",
+    "VG",
+    "MG",
+    "DR"
+  ],
+  "success_definition": "For each episode, calculate 100 times the duration with 3D EE-to-hover-target distance <=0.03 m divided by the episode duration; average episode percentages with equal weight. The entire episode, including the initial second, counts. No binary pass/fail threshold or orientation gate. A policy termination earns no tracking credit for the unexecuted remainder of its requested horizon; completion rate and observed-only coverage are reported separately.",
+  "time_definition": "Time to first entry within 3 cm, capped at the requested horizon if never acquired. This is acquisition time, not task completion time. Simulation time excludes expert warmup and inference pauses.",
+  "duration_seconds": {
+    "default": 10,
+    "LS": 30
+  },
+  "scope": "Ten seeded workspace setups in ONE training room, not ten distinct DOM scenes. VG tests five held-out apple geometries, not held-out scene generalization. LS is continuous long-horizon tracking, not manipulation sequencing. VU/MP/DR are declared tracking proxies.",
+  "inputs": "Two RGB views, fixed tracking instruction, measured robot EE pose; current simulator object velocity for velocity-conditioned models and analytic residual drift. No target pose/future trajectory sent to the neural policy.",
+  "timing": "25 Hz RGB, 200 Hz physics/scoring; fixed 0.8 s replanning, world paused during inference. Same adapter, controller and expert warmup as previous comparison.",
+  "recording": "All trials retain telemetry/action chunks/initial states; three-view videos for trial 0 of each setup (360 recorded trials). Pilot videos for every pilot trial.",
+  "heldout_object_sha256": {
+    "/scratch/aparame/Dynamic_VLA/dom_benchmark/objects/apple/apple02.usd": "e41a477587264b5e62b59e6e97b707af56d3a1799ca17ece0fc3674b0e938c05",
+    "/scratch/aparame/Dynamic_VLA/dom_benchmark/objects/apple/apple03.usd": "bebb45ca246d5ce64014ee080eeda844245816e55d20972b0a40971095b88987",
+    "/scratch/aparame/Dynamic_VLA/dom_benchmark/objects/apple/apple04.usd": "1265ae148045515cd35921a3686a4560c8dd8da01354e89e1cb25ab2d0ee42d3",
+    "/scratch/aparame/Dynamic_VLA/dom_benchmark/objects/apple/apple05.usd": "578a148da778ae3baa2b99e41ffb149c845721d1840534514e4c8298e7265542",
+    "/scratch/aparame/Dynamic_VLA/dom_benchmark/objects/unseen/apple99.usd": "69b0ae09cd4ddaa28a526aaa9713366c13977b5d645aa08f012927e799c51e66"
+  },
+  "pilot_shards": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    61,
+    62,
+    63,
+    64
+  ],
+  "previous_success_definition": "Full horizon; 3D EE-to-hover-target distance <=0.02 m at every 200 Hz sample from t=1.0 s through the final state. Orientation is not a success gate.",
+  "previous_time_definition": "Sustained acquisition time (earliest time after the last tolerance violation); failures receive the requested horizon. Successful-only time is also reported; this is not DOM manipulation completion time.",
+  "scoring_version": 4,
+  "initial_second_counts_for_success": true,
+  "scoring_change_reason": "User requested mean episode coverage within 3 cm, removing the binary 25% rule.",
+  "scoring_history": [
+    {
+      "version": 3,
+      "success_definition": "Complete the full horizon and keep 3D EE-to-hover-target distance <=0.02 m for at least 25% of the entire episode, including the initial second. Intervals need not be consecutive. Orientation is not a success gate.",
+      "time_definition": "Time to accumulate at least 25% of the requested episode duration within 2 cm. Failed/terminated trials receive their full requested horizon; successful-only time is also reported. Simulation time, excluding expert warmup and inference pauses."
+    }
+  ],
+  "success_tolerance_m": 0.03,
+  "success_aggregation": "arithmetic mean of per-episode time percentages",
+  "binary_success_threshold": null
+}

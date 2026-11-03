@@ -1,0 +1,187 @@
+{
+  "as_of_utc": "2026-10-09T15:10:00Z",
+  "status": "proposal_only_no_production_jobs_submitted",
+  "dataset": {
+    "split_sha256": "847c060ff4c99295aebbdc5bea03c30a390d14b54d2ea30253eb4a8189092e3d",
+    "train_episodes": 197207,
+    "validation_episodes": 2015,
+    "test_episodes": 2011,
+    "train_frames": 22371185,
+    "prediction_horizon": 20,
+    "execution_horizon": 20,
+    "effective_batch": 352
+  },
+  "variants": [
+    {
+      "id": "dom100",
+      "analytic_residual": false,
+      "neural_velocity": false,
+      "causal_phase_gate": false,
+      "proposed_server": "DeltaAI",
+      "purpose": "Matched baseline"
+    },
+    {
+      "id": "kr100",
+      "analytic_residual": true,
+      "neural_velocity": false,
+      "causal_phase_gate": false,
+      "proposed_server": "DeltaAI",
+      "purpose": "Analytic residual contribution"
+    },
+    {
+      "id": "domv100",
+      "analytic_residual": false,
+      "neural_velocity": true,
+      "causal_phase_gate": false,
+      "proposed_server": "DeltaAI",
+      "purpose": "Velocity information control"
+    },
+    {
+      "id": "krv100",
+      "analytic_residual": true,
+      "neural_velocity": true,
+      "causal_phase_gate": false,
+      "proposed_server": "DeltaAI",
+      "purpose": "Residual plus velocity interaction"
+    },
+    {
+      "id": "krp100",
+      "analytic_residual": true,
+      "neural_velocity": false,
+      "causal_phase_gate": true,
+      "proposed_server": "Palmetto",
+      "purpose": "Phase gate ablation"
+    },
+    {
+      "id": "krvp100",
+      "analytic_residual": true,
+      "neural_velocity": true,
+      "causal_phase_gate": true,
+      "proposed_server": "Palmetto",
+      "purpose": "Full method"
+    }
+  ],
+  "live_status": {
+    "palmetto_production_running": false,
+    "palmetto_launcher_16844391": "CANCELLED",
+    "palmetto_profiles": {
+      "16844385": "OUT_OF_MEMORY",
+      "16844386": "OUT_OF_MEMORY",
+      "16844384": "ended_after_OOM_events",
+      "16844387": "ended_after_OOM_events"
+    },
+    "palmetto_profile_artifacts": "A10080 and H100 artifacts exist with all_variants_verified; batch exit OOM needs reconciliation before approval",
+    "palmetto_tracking_evaluation": "16830026_38 and 16830026_39 running; later shards pending",
+    "deltaai_old_profile": 3347563,
+    "deltaai_old_profile_state": "CANCELLED for missing sampler fix; measurements preserved",
+    "deltaai_corrected_profile": 3347735,
+    "deltaai_corrected_profile_state": "RUNNING on gh026; manifest accepted on GH200 120GB",
+    "deltaai_account_balance_hours": 583,
+    "deltaai_corrected_manifest": "86b8ea38709c0f37bc9a9b571f738f4a4e3471925d77895d832d2c9461633259"
+  },
+  "budget": {
+    "existing_epoch_target": 100,
+    "epoch_target_changed": false,
+    "reference_h100_end_to_end_samples_per_second": 80.6221258378843,
+    "gpu_hours_one_epoch": 77.078320510317,
+    "gpu_hours_100_epochs_one_model": 7707.8320510317,
+    "throughput_excludes": [
+      "validation",
+      "checkpoint_IO",
+      "queue"
+    ],
+    "illustrative_equal_update_milestones": [
+      {
+        "updates": 10000,
+        "sample_presentations": 3520000,
+        "equivalent_full_epochs": 0.15734526356113904,
+        "reference_h100_gpu_hours_per_model": 12.127908655545776
+      },
+      {
+        "updates": 50000,
+        "sample_presentations": 17600000,
+        "equivalent_full_epochs": 0.7867263178056951,
+        "reference_h100_gpu_hours_per_model": 60.63954327772888
+      },
+      {
+        "updates": 100000,
+        "sample_presentations": 35200000,
+        "equivalent_full_epochs": 1.5734526356113903,
+        "reference_h100_gpu_hours_per_model": 121.27908655545777
+      }
+    ],
+    "warning": "Milestones are a proposal, not an authorized reduction of the 100-epoch target. GH200 approved end-to-end rates pending. Trainer has no DDP."
+  },
+  "paper_experiments": [
+    {
+      "priority": 0,
+      "name": "Full dynamic manipulation",
+      "protocol": "Paired official DOM scenes/tasks; full success and termination time, 9 dimension breakdown, 1800 trials per selected checkpoint when benchmark integration is validated; report successful-only completion time separately",
+      "server": "Palmetto RTX"
+    },
+    {
+      "priority": 0,
+      "name": "Six method ablations",
+      "protocol": "Same frozen split, initialization, optimizer updates, effective batch, sampling, normalization, precision; frozen validation selection"
+    },
+    {
+      "priority": 0,
+      "name": "Practical motion inputs",
+      "protocol": "Causal visual motion estimates at inference, oracle motion as upper bound; all variants get the same motion-information budget; audit phase gate for action-label/future leakage"
+    },
+    {
+      "priority": 0,
+      "name": "Fair streaming execution",
+      "protocol": "Full released DynamicVLA CI+LAAS baseline and corresponding KR wrappers; same inference hardware; add fixed-execution controlled comparison; no training changes needed for wrapper-only conditions"
+    },
+    {
+      "priority": 1,
+      "name": "External models",
+      "protocol": "SmolVLA baseline plus KR-SmolVLA paired training first, then pi0.5 plus RTC execution; OpenVLA-OFT baseline if budget supports; baseline adapters require implementation/readiness checks"
+    },
+    {
+      "priority": 1,
+      "name": "Motion robustness",
+      "protocol": "Static case, speed extrapolation, acceleration, direction changes, occlusion, velocity noise/delay and inference latency; reuse checkpoints"
+    },
+    {
+      "priority": 1,
+      "name": "Learning and mechanism",
+      "protocol": "Success vs equal updates, target variance/covariance, conditional distribution alignment diagnostic; physical-unit target comparison; convergence vs GPU hours separately"
+    },
+    {
+      "priority": 1,
+      "name": "Repeatability",
+      "protocol": "Three training seeds on main baseline vs selected KR variant, paired rollout seeds and scene-group confidence intervals"
+    },
+    {
+      "priority": 2,
+      "name": "Fine-tuning data efficiency",
+      "protocol": "Nested 10/25/50/100 percent train episode subsets only for main pair; equal updates plus equal data-pass views; pretrained DOM overlap prevents claims of unseen pretraining data efficiency"
+    },
+    {
+      "priority": 2,
+      "name": "Real-world",
+      "protocol": "Pending hardware availability; paired main pair plus external baseline on a few dynamic grasp/place tasks, frozen scoring and conditions"
+    }
+  ],
+  "existing_tracking_results": {
+    "path": "results/tracking_table1_partial_20261009/README.md",
+    "scope": "Completed CR/DA/LS tracking adaptations in one room; time-within-3cm coverage is not DOM manipulation success; LS is continuous tracking, not sequencing"
+  },
+  "migration_rule": "One active owner per experiment. Move pending work first. For running work transfer a complete training checkpoint with optimizer/scheduler/RNG/sampler cursor and verify destination resume before stopping source. Do not alter frozen run variables in place.",
+  "sources": {
+    "DynamicVLA": "https://arxiv.org/html/2601.22153v2",
+    "SmolVLA": "https://arxiv.org/html/2506.01844v1",
+    "RTC": "https://arxiv.org/html/2506.07339v1",
+    "OpenVLA-OFT": "https://openvla-oft.github.io/",
+    "PUMA_DOMINO": "https://arxiv.org/abs/2603.15620",
+    "DeltaAI_allocations": "https://delta.ncsa.illinois.edu/deltaai-allocations/"
+  },
+  "open_inputs": [
+    "Experiment deadline",
+    "Physical robot availability",
+    "Approval of any revised training budget after profiling",
+    "Choice of main KR configuration from validation, frozen before test evaluation"
+  ]
+}

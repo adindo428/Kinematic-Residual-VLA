@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-21T16:30:34.818492+00:00",
+  "status": "waiting_for_verified_checkpoint",
+  "partition": "ghx4-interactive",
+  "gpus": 2,
+  "cpus": 32,
+  "memory_gib": 256,
+  "max_hours": 2,
+  "production_changed": false
+}

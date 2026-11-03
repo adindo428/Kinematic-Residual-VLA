@@ -1,0 +1,30 @@
+{
+  "files": {
+    "production.sbatch": "67a45f290d5f974a2fe4fb14d354a8153fa3cf58f84246dbfcbecb38a9b9b928",
+    "preflight.py": "df134f04554ef99ce2d8e2dfaae03802c7cac5b19f34cd986b87301262a18903",
+    "sitecustomize.py": "a8e8c8b6fc2acb996baeca3158a8cad63c954dc2a1cf0a0b2aba1bbf74940d20",
+    "control.json": "1a1e3b5538f2de7c1688d725bf4d1b0649a94956f1122ecb44587993ce9e7dbe"
+  },
+  "manifest": "162b9414badfec47ffde6da6ea58dc597e65112e6eefc878c7a2a25c867e6db6",
+  "recipe": "0088404fa9bfb7c61959d91fa50da752b783974c7e8db7bb788422f3a751c64a",
+  "runtime": "14b8c1ecbae9d5d34f6628098af885294e6d734acda01bcdbb59fef2b80bee0b",
+  "checkpoint_sources": {
+    "core/dom_checkpoint.py": "2f187f78b37bbb9431d33b2139362ecfdbefe0de38e2a6230546e609ea8adf18",
+    "core/dom_distributed_training.py": "336c1ecd5c7f2883cb1dc8d5cbb9934cda983d72fff62ef783e1f91d2263cd73",
+    "core/dom_distributed.py": "cbcb2c77602c278978be6027929133186cb89023ad10cf51eaeb6d4795cd81f7"
+  },
+  "retention_verified": {
+    "latest": true,
+    "best_validation": true,
+    "finite_metric": true,
+    "ties_keep_previous": true,
+    "immutable_generations": true,
+    "pruning_protects_latest_and_best": true,
+    "exact_latest_resume": true
+  },
+  "initial_checkpoints_preserved": true,
+  "world_size": 8,
+  "node_count": 2,
+  "operational_total_epochs": 10,
+  "scheduler_horizon_epochs": 100
+}

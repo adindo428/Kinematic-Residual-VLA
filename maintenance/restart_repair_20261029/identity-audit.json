@@ -1,0 +1,62 @@
+{
+  "pi05_kr": {
+    "root": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021",
+    "approval_identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+    "approval_hardware": "NVIDIA H200 NVL",
+    "calculated_identities": {
+      "NVIDIA H200": "0dd2784b0b52d597f0a4a0dbef914bc8a25fa406445dbcca698e9b2604f14701",
+      "NVIDIA H200 NVL": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4"
+    },
+    "runtime": {
+      "microbatch": 16,
+      "workers": 4,
+      "main_threads": 2,
+      "prefetch": 2,
+      "autocast_cache_enabled": false,
+      "allocator": "expandable_segments:True"
+    },
+    "saved": {
+      "progress": {
+        "updates": 301262,
+        "samples": 9640384,
+        "epoch": 3,
+        "cursor": 500000
+      },
+      "identity": "281f2e13a8fe3f80e71524e33c5c95026ded4b2fcc93ae6cf5524d2f1fb4e0d4",
+      "file": "/scratch/aparame/Dynamic_VLA/main8-replicas-h200-20261021/runs/pi05_kr/latest.pt"
+    },
+    "source_matches_approval": true,
+    "source_matches_manifest": true,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88"
+  },
+  "vlash_baseline": {
+    "root": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline",
+    "approval_identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+    "approval_hardware": "NVIDIA H200 NVL",
+    "calculated_identities": {
+      "NVIDIA H200": "6e4dce68e07ced363412cf7c5082dffb3fa1d6ee22df769a7e7025bb9e08c1b2",
+      "NVIDIA H200 NVL": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874"
+    },
+    "runtime": {
+      "microbatch": 16,
+      "workers": 4,
+      "main_threads": 2,
+      "prefetch": 2,
+      "autocast_cache_enabled": false,
+      "allocator": "expandable_segments:True"
+    },
+    "saved": {
+      "progress": {
+        "updates": 364331,
+        "samples": 11658592,
+        "epoch": 4,
+        "cursor": 1071584
+      },
+      "identity": "e02ca1ddf295d045cab81269cbc5c69420d2ccce2df0151c7650262bb29b9874",
+      "file": "/scratch/aparame/Dynamic_VLA/h200-microbatch-20261022/vlash_baseline/runs/vlash_baseline/latest.pt"
+    },
+    "source_matches_approval": true,
+    "source_matches_manifest": true,
+    "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88"
+  }
+}

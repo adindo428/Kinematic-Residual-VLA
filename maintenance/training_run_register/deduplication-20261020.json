@@ -1,0 +1,249 @@
+{
+  "user_requested_deduplication": true,
+  "at": "2026-10-20T14:16:37.401338+00:00",
+  "reason": "same model/KR variant,seed,official recipe,audited split,normalizers and pinned initialization; retain farther progressed or completed A100 production",
+  "cancelled_job_ids": [
+    "17668718",
+    "17668722",
+    "17668724",
+    "17668726",
+    "17668728",
+    "17668730"
+  ],
+  "scheduler_accounting": "17668718|CANCELLED by 432600|0:0\n17668722|CANCELLED by 432600|0:0\n17668724|CANCELLED by 432600|0:0\n17668726|CANCELLED by 432600|0:0\n17668728|CANCELLED by 432600|0:0\n17668730|CANCELLED by 432600|0:0\n",
+  "retained_runs": {
+    "pi05_baseline": {
+      "job_id": "17719993",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020",
+      "latest": {
+        "progress": {
+          "updates": 4868,
+          "samples": 155776,
+          "epoch": 0,
+          "cursor": 155776
+        },
+        "identity": "ad0f7f297997d3498de18c315e223f6acabc939a0be7095397f93a0b9abcce49",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_baseline/latest.pt"
+      },
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/ifalqwwf"
+    },
+    "pi05_kr": {
+      "job_id": "17720948",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020",
+      "latest": {
+        "progress": {
+          "updates": 4339,
+          "samples": 138848,
+          "epoch": 0,
+          "cursor": 138848
+        },
+        "identity": "9752ad5e11fe12ed25debaca8457a0d1f947d6cfd4327e87d3d9c7a862c22972",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020/runs/pi05_kr/latest.pt"
+      },
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/l66vuxv6"
+    },
+    "smolvla_baseline": {
+      "job_id": "17709588",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019",
+      "latest": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "48235cd5f32ebf0b37f24190ce6e93cbcf01192a3952c7a859a279acee88a8cb",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qabxg0en"
+    },
+    "smolvla_kr": {
+      "job_id": "17709590",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019",
+      "latest": {
+        "progress": {
+          "updates": 20000,
+          "samples": 1280000,
+          "epoch": 0,
+          "cursor": 1280000
+        },
+        "identity": "8dd98c477166244e8f379c07c6fc5bd8603d2dcd9528a7005fae57c392311bf3",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/smolvla_kr/latest.pt"
+      },
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8npmrzpw"
+    },
+    "vlash_baseline": {
+      "job_id": "17709592",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019",
+      "latest": {
+        "progress": {
+          "updates": 17874,
+          "samples": 571968,
+          "epoch": 0,
+          "cursor": 571968
+        },
+        "identity": "880552a1e052cfa4417b53dc95b698c334cfe88feed7811fabf332174eeb8d9d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/8m07ro1o"
+    },
+    "vlash_kr": {
+      "job_id": "17709594",
+      "family": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019",
+      "latest": {
+        "progress": {
+          "updates": 16945,
+          "samples": 542240,
+          "epoch": 0,
+          "cursor": 542240
+        },
+        "identity": "a723ce8a3b50b6e9434204fe819c61fb89984b4d40ac60d6efeed4dd92fdde6d",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-opt-20261019/runs/vlash_kr/latest.pt"
+      },
+      "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/qdxs3h1p"
+    }
+  },
+  "deleted": [
+    {
+      "variant": "pi05_baseline",
+      "job_id": "17668718",
+      "directory": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/runs/pi05_baseline",
+      "existed": true,
+      "bytes": 70155148930,
+      "metadata": {
+        "provenance.json": {
+          "recipe": {
+            "name": "pi05_baseline",
+            "method": "pi05",
+            "kr": false,
+            "lr": 2.5e-05,
+            "steps": 30000,
+            "weight_decay": 0.01,
+            "clip": 1.0,
+            "global_batch": 32,
+            "max_delay": 0,
+            "decay_lr": 2.5e-06,
+            "horizon": 20,
+            "fps": 25,
+            "seed": 42,
+            "normalization": "quantiles",
+            "velocity_conditioning": false,
+            "phase_gate": false,
+            "shared_observation": false
+          },
+          "identity": "0ae617dc44971e07f31c8504b803e8c79881ce1e64a1ff3835303ad20ae40481",
+          "source": {
+            "common.py": "612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f",
+            "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+            "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+            "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+            "policy.py": "7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9",
+            "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+            "submit.py": "0b3391c0d582ad584c9f16cbb66ab11d758a960d119a512e0a65b540da53db94",
+            "test_contract.py": "97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d",
+            "train.py": "193a8201a70eb3c7742d9c7437953a616f8195a492c68211a0cc2cc9b33217f3"
+          },
+          "hardware": "NVIDIA H200",
+          "job_id": "17668718",
+          "world_size": 2,
+          "readiness": {
+            "approved": true,
+            "identity": "0ae617dc44971e07f31c8504b803e8c79881ce1e64a1ff3835303ad20ae40481",
+            "hardware": "NVIDIA H200",
+            "microbatch": 1,
+            "global_batch": 32,
+            "accumulation": 16,
+            "decoded_optimizer_updates": 20,
+            "seconds": 95.26524609234184,
+            "samples_per_second": 6.718084781722389,
+            "peak_gpu_reserved_bytes": 100464066560,
+            "node_process_peak_rss_bytes": 89032929280.0,
+            "validation_h20_action_mse": 4.529008388519287,
+            "strict_checkpoint_rng_reload": true,
+            "strict_inference_reload": true,
+            "source": {
+              "common.py": "612b8c348789dd3c647de1ccb0a427d53ec098745a071ee4d6361bb31bdeb44f",
+              "data.py": "4d9131579bdc3d0a8738565ff6a3cf7df590f1418bdf0f45c95ecab1bcd961af",
+              "instruction_generator.py": "f7dc347973e87148d6e05fa027c6d57e5b648e42ef4c0e11c1e67700dc4deab4",
+              "meta-check.py": "86b0e25efe5ae0e864b81130ccb36d6960f5542694ad9002f21100cde327eced",
+              "policy.py": "7dd31fa1a5a07c13b826b6bc5ea33954aba0cfef04358a897730d8ac363e54c9",
+              "prepare.py": "e9faa51c1fa215d6679224453c6ed650eb92f379f96199c82eb9368f4d55ee5e",
+              "submit.py": "0b3391c0d582ad584c9f16cbb66ab11d758a960d119a512e0a65b540da53db94",
+              "test_contract.py": "97603c418a911930bc0634454b14cdd8fa61713b14ae55414a4e24dd0864885d",
+              "train.py": "193a8201a70eb3c7742d9c7437953a616f8195a492c68211a0cc2cc9b33217f3"
+            }
+          },
+          "preparation": {
+            "complete": true,
+            "statistics_sha256": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+            "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+            "checkpoints_sha256": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+            "implementation_sha256": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83"
+          },
+          "wandb_id": "ulw888ug",
+          "wandb_url": "https://wandb.ai/aparame-clemson-university/Kinematic-Residual-VLA/runs/ulw888ug"
+        }
+      },
+      "deleted_logs": [
+        {
+          "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/logs/pi05_baseline-train-17668718.out",
+          "bytes": 4281
+        },
+        {
+          "path": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/logs/pi05_baseline-train-17668718.err",
+          "bytes": 4289
+        }
+      ]
+    },
+    {
+      "variant": "pi05_kr",
+      "job_id": "17668722",
+      "directory": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/runs/pi05_kr",
+      "existed": true,
+      "bytes": 40456779934,
+      "metadata": {},
+      "deleted_logs": []
+    },
+    {
+      "variant": "smolvla_baseline",
+      "job_id": "17668724",
+      "directory": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/runs/smolvla_baseline",
+      "existed": true,
+      "bytes": 1610735525,
+      "metadata": {},
+      "deleted_logs": []
+    },
+    {
+      "variant": "smolvla_kr",
+      "job_id": "17668726",
+      "directory": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/runs/smolvla_kr",
+      "existed": true,
+      "bytes": 1610735519,
+      "metadata": {},
+      "deleted_logs": []
+    },
+    {
+      "variant": "vlash_baseline",
+      "job_id": "17668728",
+      "directory": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/runs/vlash_baseline",
+      "existed": true,
+      "bytes": 20946871169,
+      "metadata": {},
+      "deleted_logs": []
+    },
+    {
+      "variant": "vlash_kr",
+      "job_id": "17668730",
+      "directory": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20261019/runs/vlash_kr",
+      "existed": true,
+      "bytes": 20946871163,
+      "metadata": {},
+      "deleted_logs": []
+    }
+  ],
+  "shared_source_environment_data_and_pretrained_weights_preserved": true,
+  "wandb_remote_history_deleted": false,
+  "complete": true,
+  "verified_at": "2026-10-20T14:16:37.615722+00:00",
+  "queue_after": "17709594|RUNNING|node0373\n17709592|RUNNING|node0377\n17719993|RUNNING|node0376\n17720948|RUNNING|node0404\n"
+}

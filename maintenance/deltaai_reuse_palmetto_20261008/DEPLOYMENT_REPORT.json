@@ -1,0 +1,14 @@
+{
+  "destination": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261008T201101Z",
+  "verified_at_utc": "2026-10-08T20:11:21.503578+00:00",
+  "verified_files": 138,
+  "source_bytes": 3805857,
+  "archive_sha256": "7b367db3e91e0a8459148be74c3e9fba9811132fd90767a17a997d6bf71dec47",
+  "simulator_payload_present": false,
+  "dataset_or_weight_payload_present": false,
+  "training_submitted": false,
+  "palmetto_source_verification": {
+    "checked_source_files": 137,
+    "changed_or_missing": []
+  }
+}

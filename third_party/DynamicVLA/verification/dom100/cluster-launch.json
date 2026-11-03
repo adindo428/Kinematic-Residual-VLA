@@ -1,0 +1,65 @@
+{
+  "backend": "DDP/NCCL",
+  "created_at_utc": "2026-10-09T15:56:22.939918+00:00",
+  "early_stopping": {
+    "enabled": true,
+    "metric": "h20/action_mse",
+    "min_epochs": 5,
+    "patience": 3,
+    "relative_min_delta": 0.005
+  },
+  "execution_horizon": 20,
+  "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-es-20261009",
+  "first_variant": "krv100",
+  "global_effective_batch": 352,
+  "gpu_authorization": "User explicitly preferred eight GPUs, H200 or H100.",
+  "gpu_selection": "H100 or H200 on one node",
+  "gpu_smoke_status": "queued; executed inside allocation before production",
+  "learning_rate_authorization": "User explicitly selected Start at 3e-5 (Recommended).",
+  "local_tests_passed": 94,
+  "manifest_fingerprint": "195769ab6bbfae3edadbd0ff67b9aa2e75191e06b59c83470f8679ca81a10f51",
+  "max_epochs": 100,
+  "microbatch_per_gpu": 44,
+  "prediction_horizon": 20,
+  "preparation_reused_from": "/scratch/aparame/Dynamic_VLA/dom100-h20-r2",
+  "production_jobs": {
+    "krv100": {
+      "gpu_selection": "auto",
+      "job_id": "16869869",
+      "wandb_name": "krv100",
+      "world_size": 8
+    }
+  },
+  "project": "/scratch/aparame/Dynamic_VLA/third_party/dom100-ddp-es-20261009",
+  "recipe": {
+    "early_stopping": {
+      "enabled": true,
+      "metric": "h20/action_mse",
+      "min_epochs": 5,
+      "patience": 3,
+      "relative_min_delta": 0.005
+    },
+    "effective_batch": 352,
+    "epochs": 100,
+    "evaluation_plan_sha256": "f01ce47d879046e22ffe52b2a0031d1b19abd8f404af78e45612a98733414e48",
+    "fingerprint": "75cdd199006e9efd01e1de5b65cd70920b71cf9fcb960db26d2def967494da71",
+    "lr": 3e-05,
+    "manifest": "195769ab6bbfae3edadbd0ff67b9aa2e75191e06b59c83470f8679ca81a10f51",
+    "precision": "bf16",
+    "sampling": "frames",
+    "scheduler": "cosine",
+    "seed": 42,
+    "selection": "user_fixed_rate_20261009",
+    "simulator_evaluation_mode": "after_training",
+    "supported_world_sizes": [
+      4,
+      8
+    ],
+    "warmup_updates": 1000
+  },
+  "simulator_evaluation_mode": "after_training",
+  "source_sha256": "af7edaae2f529877d3394179ba4e24dee79af7a9c139341ea61627cba9b3c49e",
+  "stopping_authorization": "User requested stopping on nonimproving loss; 100 epochs was an estimate.",
+  "superseded_queued_job_cancelled": "16868574",
+  "world_size": 8
+}

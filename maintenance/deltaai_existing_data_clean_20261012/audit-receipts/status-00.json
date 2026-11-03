@@ -1,0 +1,20 @@
+{
+  "family": "/scratch/aparame/Dynamic_VLA/dom100-ddp-video-clean-20261012",
+  "manifest_fingerprint": "3560fbea6fb95fa384dea15b18571b6f381af4d636699e45e98ec7d6f6ccc17f",
+  "split_sha256": "63ad508c2be409e7cfcdfd68cca2c6a51fe686045913d1df82f1c0f9d50c5f88",
+  "audit_sha256": "318d6d874e6b39146bf1a108ab0e2354426b5c724b24c38537677c8549f39df1",
+  "shard": 0,
+  "shards": 16,
+  "expected_episodes": 12577,
+  "total_retained_episodes": 201227,
+  "metadata_errors": [],
+  "warnings": [
+    "stale manifest episodes field: 201233 versus 201227 retained"
+  ],
+  "completed_episodes": 12577,
+  "failed_episodes": 0,
+  "frames_decoded": 2850002,
+  "state": "complete",
+  "started_unix": 1791842791.0520673,
+  "updated_unix": 1791843355.7916994
+}

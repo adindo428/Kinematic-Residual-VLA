@@ -1,0 +1,14 @@
+{
+  "job_id": "3429648",
+  "partition": "ghx4-interactive",
+  "gpus": 2,
+  "cpus": 32,
+  "memory_gib": 256,
+  "time_limit": "02:00:00",
+  "immediate_seconds": 60,
+  "manifest_sha256": "591ae5d7af07b30e93a73ceaaadbd90790781cd598dfbbef139c34f7376d8354",
+  "script_sha256": "c5edab0056602495b1c1cab62b4fab4ebf885783d5cec785efacc1a8f7b003b3",
+  "observed_at": "2026-10-21T16:59:26.519334+00:00",
+  "source": "durable remote salloc log; allocation not yet verified",
+  "not_production": true
+}

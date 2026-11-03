@@ -1,0 +1,14 @@
+{
+  "training_root": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020",
+  "training_source_sha256": "2d866bded14ee7d88216d7cfc9f024976a1c5884e105918f7d2fa3e44087b20c",
+  "variant": "pi05_kr",
+  "parent_job_id": "17782830",
+  "production_identity": "14ef74c0d9c21b29a25c077fb1e13794d94af2fe9d306729f70b93d9339fe025",
+  "torch_version": "2.7.1+cu126",
+  "gpus": 2,
+  "hardware": "NVIDIA H200",
+  "cpus": 32,
+  "memory_gib": 256,
+  "production_changed": false,
+  "not_a_production_replacement": true
+}

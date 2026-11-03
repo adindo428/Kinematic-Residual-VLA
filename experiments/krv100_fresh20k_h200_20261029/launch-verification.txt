@@ -1,0 +1,8 @@
+             JOBID                           NAME           STATE               NODELIST(REASON)
+          18663627             fresh20k-krv-train         PENDING                   (Dependency)
+          18663626           fresh20k-krv-profile         PENDING                   (Dependency)
+          18663625             fresh20k-krv-setup         PENDING                         (None)
+JobID|State|ExitCode
+18663625|PENDING|0:0
+18663626|PENDING|0:0
+18663627|PENDING|0:0

@@ -1,0 +1,46 @@
+{
+  "staging-palmetto": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2/scripts/staging-palmetto.sbatch",
+    "script_sha256": "12f957f4b6f0fb07eeed46a8338aea83c633e415a9e1e093033bae9a05f11663",
+    "dependency": null,
+    "held_for_shared_staging": false,
+    "state": "submitted",
+    "stdout": "17839145",
+    "stderr": "sbatch: Partition: work1\nsbatch: Submit checks complete",
+    "returncode": 0,
+    "job_id": "17839145"
+  },
+  "smolvla_baseline": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2/scripts/smolvla_baseline-train.sbatch",
+    "script_sha256": "45666afd457058aa176fcba4e834e3e5ae0d22e0cd4fa35d2026a7ed6f2d8d3f",
+    "dependency": "17839145",
+    "held_for_shared_staging": false,
+    "state": "submitted",
+    "stdout": "17839146",
+    "stderr": "sbatch: Requested Features: gpu_a100_40gb\nsbatch: Partition: work1\nsbatch: Submit checks complete",
+    "returncode": 0,
+    "job_id": "17839146"
+  },
+  "smolvla_kr": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2/scripts/smolvla_kr-train.sbatch",
+    "script_sha256": "b3c0bec5c47d53c213a449f19791ab8c9a9f9e480a73e59ab148626451a3220c",
+    "dependency": "17839145",
+    "held_for_shared_staging": false,
+    "state": "submitted",
+    "stdout": "17839147",
+    "stderr": "sbatch: Requested Features: gpu_a100_40gb\nsbatch: Partition: work1\nsbatch: Submit checks complete",
+    "returncode": 0,
+    "job_id": "17839147"
+  },
+  "domv100": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-20k-10epochs-20261021-r2/scripts/domv100-train.sbatch",
+    "script_sha256": "2852c946ea816a1a1893783225a79d5d9c5e77cbca2566f5eb111bd0c1caa887",
+    "dependency": "17839145",
+    "held_for_shared_staging": false,
+    "state": "submitted",
+    "stdout": "17839148",
+    "stderr": "sbatch: Requested Features: gpu_a100_40gb\nsbatch: Partition: work1\nsbatch: Submit checks complete",
+    "returncode": 0,
+    "job_id": "17839148"
+  }
+}

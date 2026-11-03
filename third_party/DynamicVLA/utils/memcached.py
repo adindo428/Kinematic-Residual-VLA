@@ -14,9 +14,6 @@ import os
 import pathlib
 import time
 
-import pylibmc
-
-
 class MCClient:
     def __init__(
         self,
@@ -42,7 +39,9 @@ class MCClient:
         with open(path, "rb") as fp:
             return fp.read()
 
-    def _get_mc_client(self) -> pylibmc.ClientPool:
+    def _get_mc_client(self):
+        import pylibmc
+
         assert self.mc_cfg is not None
         if self.mc_client is None or self.pid != os.getpid():
             self.pid = os.getpid()
@@ -106,6 +105,8 @@ class MCClient:
         return mc_value
 
     def _mc_with_retry(self, fn: callable, *args: tuple) -> any:
+        import pylibmc
+
         N_TRIES = 3
 
         for i in range(N_TRIES):

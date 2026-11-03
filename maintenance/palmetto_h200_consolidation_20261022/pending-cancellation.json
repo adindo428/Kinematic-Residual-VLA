@@ -1,0 +1,14 @@
+{
+  "authorized_action": "Cancel current Palmetto A100 jobs",
+  "ids": [
+    "17859071",
+    "17859072",
+    "17839146",
+    "17839147",
+    "17839148"
+  ],
+  "requested_at": "2026-10-22T13:19:54.060788+00:00",
+  "state": "cancel_requested",
+  "returncode": 0,
+  "stderr": ""
+}

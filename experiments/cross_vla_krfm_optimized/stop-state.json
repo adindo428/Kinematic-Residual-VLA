@@ -1,0 +1,103 @@
+{
+  "started_at": "2026-10-20T03:19:59.382141+00:00",
+  "jobs": {
+    "17692797": {
+      "name": "smolvla_baseline",
+      "initial_state": "RUNNING",
+      "last_checkpoint": {
+        "progress": {
+          "updates": 516,
+          "samples": 33024,
+          "epoch": 0,
+          "cursor": 33024
+        },
+        "identity": "d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "hold_returncode": 1,
+      "hold_stderr": "scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\nUnspecified error for job 17692797\n",
+      "signal_returncode": 0,
+      "finalized": true,
+      "final_scheduler_state": "PENDING",
+      "final_checkpoint": {
+        "progress": {
+          "updates": 956,
+          "samples": 61184,
+          "epoch": 0,
+          "cursor": 61184
+        },
+        "identity": "d2d2c09bb5a05cbad416efbf5634880684d10024ef751fb65cf789a07854292a",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/smolvla_baseline/latest.pt"
+      },
+      "stop_note": "Used last completed checkpoint; scheduler terminated before coordinated stop"
+    },
+    "17692801": {
+      "name": "vlash_baseline",
+      "initial_state": "RUNNING",
+      "last_checkpoint": {
+        "progress": {
+          "updates": 472,
+          "samples": 15104,
+          "epoch": 0,
+          "cursor": 15104
+        },
+        "identity": "7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "hold_returncode": 1,
+      "hold_stderr": "scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\nUnspecified error for job 17692801\n",
+      "signal_returncode": 0,
+      "finalized": true,
+      "final_scheduler_state": "PENDING",
+      "final_checkpoint": {
+        "progress": {
+          "updates": 745,
+          "samples": 23840,
+          "epoch": 0,
+          "cursor": 23840
+        },
+        "identity": "7058b9b0dbb051648d23750f13bfbd6e626f813e13e5eeedee02445ff4a70102",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_baseline/latest.pt"
+      },
+      "stop_note": "Used last completed checkpoint; scheduler terminated before coordinated stop"
+    },
+    "17692803": {
+      "name": "vlash_kr",
+      "initial_state": "RUNNING",
+      "last_checkpoint": {
+        "progress": {
+          "updates": 470,
+          "samples": 15040,
+          "epoch": 0,
+          "cursor": 15040
+        },
+        "identity": "e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt"
+      },
+      "hold_returncode": 1,
+      "hold_stderr": "scontrol: error: Currently users can not modify jobs. Please reach out to RCD for help.\nUnspecified error for job 17692803\n",
+      "signal_returncode": 0,
+      "finalized": true,
+      "final_scheduler_state": "PENDING",
+      "final_checkpoint": {
+        "progress": {
+          "updates": 738,
+          "samples": 23616,
+          "epoch": 0,
+          "cursor": 23616
+        },
+        "identity": "e5ff473085445872cd65c731274041b70b5eb41c1922d4430638977057a88728",
+        "file": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-r2-20261019/runs/vlash_kr/latest.pt"
+      },
+      "stop_note": "Used last completed checkpoint; scheduler terminated before coordinated stop"
+    }
+  },
+  "complete": true,
+  "finished_at": "2026-10-20T03:20:45.034869+00:00",
+  "old_requeued_jobs_cancelled": [
+    "17692797",
+    "17692801",
+    "17692803"
+  ],
+  "note": "Site disallows hold. Batch scripts requeued after saved USR1 checkpoint; pending continuations were explicitly cancelled before replacement submission."
+}

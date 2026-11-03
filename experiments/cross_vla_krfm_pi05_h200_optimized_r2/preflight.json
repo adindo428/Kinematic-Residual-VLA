@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-20T15:17:21.559092+00:00",
+  "source_sha256": "562087215a107ad0f5ce81ed35fa914400bbd0616b5a73b241257c2481f93ed7",
+  "preparation_manifest": {
+    "files": {
+      "prepared.json": "732f79f28b88322e781848a7d41c50f8f452a219e70dc6315299b2cf027c38e2",
+      "statistics.json": "ec5764d61111af0da69b35a16350acc665fae733d1494384aecdf77d8c0e475e",
+      "split.json": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+      "checkpoints.json": "33c8d9ed8e2dbfea30a00f8bea20b2d7eeb9a8a9335fbcc30fe78133159ff860",
+      "implementation-lock.json": "45e453d04706c6d1a5bbad21cf1641a89469978889f76b69d6bb496b9658de83",
+      "data-provenance.json": "e2b45a2402cfc83dd59daf50c2bc44ae1e03af900fbd602f004d8418a4303696",
+      "parquet_hashes.json": "6c4d642dbee8936ac9f2644a5a73b3b6e81ebcbebcd4bcaf6ab9adc8c0bcac73",
+      "video_hashes.json": "24dcff97988d7a732585a5f9cfa6a5a7ae95807e02dbe50c5fd742cec76beb56"
+    },
+    "parent": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-a100-pi05-cache-20261020",
+    "copy_verified": true,
+    "audited_hash_manifests_present": true
+  },
+  "recipe_bytes_unchanged": true,
+  "passed": true,
+  "checks": [
+    {
+      "name": "prepared-data-integration",
+      "returncode": 0,
+      "output": "{\"split\": \"train\", \"anchors\": 22370201, \"action_shape\": [20, 7], \"two_cameras_decoded\": true}\n{\"split\": \"validation\", \"anchors\": 228109, \"action_shape\": [20, 7], \"two_cameras_decoded\": true}\n"
+    },
+    {
+      "name": "cpu-contracts",
+      "returncode": 0,
+      "output": "test_centering_zero_is_identity (test_contract.Contract) ... ok\ntest_ddp_shards_and_resume (test_contract.Contract) ... ok\ntest_dom_rollforward_preserves_pose6 (test_contract.Contract) ... ok\ntest_global_optimizer_anchor_sets_survive_microbatch_change (test_contract.Contract) ... ok\ntest_loader_does_not_consume_training_rng (test_contract.Contract) ... /home/aparame/.conda/envs/dynamicvla/lib/python3.10/site-packages/torch/utils/data/dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.\n  warnings.warn(warn_msg)\nok\ntest_microbatch_objective_and_gradient_invariance_with_padding (test_contract.Contract) ... ok\ntest_native_padded_channel_loss_option (test_contract.Contract) ... ok\ntest_pad_mask_ignores_invalid_targets_and_padding_dims (test_contract.Contract) ... ok\ntest_physical_roundtrip_and_channels (test_contract.Contract) ... ok\ntest_runtime_cannot_change_effective_batch_or_oversubscribe_cpus (test_contract.Contract) ... ok\ntest_vlash_offset_uses_observation_time (test_contract.Contract) ... ok\ntest_cpu_fused_and_resume (test_optimizer.OptimizerContracts) ... ok\ntest_cache_preserves_checkpointed_computation (test_autocast.AutocastContracts) ... ok\ntest_cross_hardware_migration_identity_is_explicit (test_h200.H200Contracts) ... ok\ntest_hardware_and_global32_anchor_sets (test_h200.H200Contracts) ... ok\ntest_production_release_requires_sustained_speed_and_headroom (test_h200.H200Contracts) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 1.112s\n\nOK\n"
+    },
+    {
+      "name": "collective",
+      "returncode": 0,
+      "output": "Unequal-rank checkpoint clocks and coordinated stop: PASS\n"
+    },
+    {
+      "name": "scheduler-preflight",
+      "returncode": 0,
+      "output": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\nsbatch: Job 17740316 to start at 2026-10-20T12:05:43 a using 32 processors on nodes nodeai09 in partition work1\n"
+    }
+  ]
+}

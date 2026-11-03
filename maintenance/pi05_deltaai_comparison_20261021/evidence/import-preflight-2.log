@@ -1,0 +1,22 @@
+/sw/user/python/miniforge3-pytorch-2.12.0/lib/python3.12/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.7.0) or chardet (6.0.0.post1)/charset_normalizer (3.4.1) doesn't match a supported version!
+  warnings.warn(
+WARNING:torchao:Skipping import of cpp extensions due to incompatible torch version 2.12.0+cu130 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+/sw/user/python/miniforge3-pytorch-2.12.0/lib/python3.12/site-packages/torch/cuda/__init__.py:1074: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/pinned/lerobot/policies/__init__.py", line 17, in <module>
+    from .groot.configuration_groot import GrootConfig as GrootConfig
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/pinned/lerobot/policies/groot/__init__.py", line 18, in <module>
+    from .modeling_groot import GrootPolicy
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/pinned/lerobot/policies/groot/modeling_groot.py", line 43, in <module>
+    from lerobot.policies.pretrained import PreTrainedPolicy
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/pinned/lerobot/policies/pretrained.py", line 33, in <module>
+    from lerobot.configs.train import TrainPipelineConfig
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/pinned/lerobot/configs/train.py", line 27, in <module>
+    from lerobot.configs.default import DatasetConfig, EvalConfig, WandBConfig
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/pinned/lerobot/configs/default.py", line 20, in <module>
+    from lerobot.datasets.video_utils import get_safe_default_codec
+  File "/work/nvme/bivv/aparameshwaran/dynamicvla/pi05-comparison-20261021/pinned/lerobot/datasets/video_utils.py", line 27, in <module>
+    import av
+ModuleNotFoundError: No module named 'av'

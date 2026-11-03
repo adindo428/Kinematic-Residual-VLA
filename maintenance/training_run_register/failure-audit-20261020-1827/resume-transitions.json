@@ -1,0 +1,17 @@
+{
+  "pi05_baseline": {
+    "optimizer_update_rollbacks_at_checkpoint_resume": [],
+    "first_logged": 11390,
+    "last_logged": 12610
+  },
+  "vlash_baseline": {
+    "optimizer_update_rollbacks_at_checkpoint_resume": [],
+    "first_logged": 27400,
+    "last_logged": 30000
+  },
+  "vlash_kr": {
+    "optimizer_update_rollbacks_at_checkpoint_resume": [],
+    "first_logged": 26470,
+    "last_logged": 28870
+  }
+}

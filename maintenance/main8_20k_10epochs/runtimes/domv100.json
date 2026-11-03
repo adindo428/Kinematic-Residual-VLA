@@ -1,0 +1,8 @@
+{
+  "microbatch": 4,
+  "workers": 4,
+  "main_threads": 2,
+  "prefetch": 2,
+  "autocast_cache_enabled": false,
+  "allocator": "expandable_segments:True"
+}

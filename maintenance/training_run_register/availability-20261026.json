@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-10-26T15:45:35.974531+00:00",
+  "scope": "Current seven Palmetto VLA/DOM training runs",
+  "remaining": [
+    {
+      "model": "pi05_baseline",
+      "job_id": "17859073",
+      "saved_epochs": 4.067224209224714,
+      "remaining_epochs": 5.932775790775286,
+      "scheduler_state": "PENDING",
+      "reason": "ReqNodeNotAvail",
+      "checkpoint_exists": true
+    },
+    {
+      "model": "pi05_kr",
+      "job_id": "17859076",
+      "saved_epochs": 3.2077488665221843,
+      "remaining_epochs": 6.792251133477816,
+      "scheduler_state": "PENDING",
+      "reason": "ReqNodeNotAvail",
+      "checkpoint_exists": true
+    },
+    {
+      "model": "vlash_baseline",
+      "job_id": "17931275",
+      "saved_epochs": 4.445240722766616,
+      "remaining_epochs": 5.554759277233384,
+      "scheduler_state": "PENDING",
+      "reason": "ReqNodeNotAvail",
+      "checkpoint_exists": true
+    },
+    {
+      "model": "vlash_kr",
+      "job_id": "17859078",
+      "saved_epochs": 6.3582986531225485,
+      "remaining_epochs": 3.6417013468774515,
+      "scheduler_state": "PENDING",
+      "reason": "ReqNodeNotAvail",
+      "checkpoint_exists": true
+    }
+  ],
+  "completed": [
+    "smolvla_baseline",
+    "smolvla_kr",
+    "domv100"
+  ],
+  "node_observations": {
+    "nodeai08": "DRAIN: GPU 0 thermal throttling",
+    "other_sampled_h200_nodes": "MIXED or MIXED/planned; no hardware-fault reason reported"
+  },
+  "actions": "Read-only audit; no job/source changes"
+}

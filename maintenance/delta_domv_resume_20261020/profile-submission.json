@@ -1,0 +1,12 @@
+{
+  "cluster": "Delta",
+  "purpose": "interactive H200 profile only",
+  "world_size": 8,
+  "maximum_minutes": 30,
+  "production_submitted": false,
+  "stdout": "23065239\n",
+  "stderr": "",
+  "returncode": 0,
+  "submitted_utc": "2026-10-20T23:13:40Z",
+  "job_id": "23065239"
+}

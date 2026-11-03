@@ -1,0 +1,77 @@
+CONST:
+  EXP_NAME: dynamicvla_dom_full_finetune_speed_ood_0p10_0p18
+  N_WORKERS: 1
+  CKPT:
+
+DATASET:
+  NAME: hzxie/DOM
+  PIN_MEMORY: false
+  USE_DELTA_ACTION: true
+  IMG_SIZE:
+  EPISODE_SPLIT_FILE: configs/dom_speed_ood_0p10_0p18_eval_split.json
+  DELTA_TIMESTAMPS:
+    observation: [-2, 0]
+  REQUIRED_FEATURES:
+    - observation.images.opst_cam
+    - observation.images.wrist_cam
+    - observation.state
+    - observation.environment_state
+    - action
+
+POLICY:
+  TYPE: dynamicvla
+  CHECKPOINT: hzxie/dynamic-vla-DOM
+  N_OBS_STEPS: 2
+  CHUNK_SIZE: 50
+  N_ACTION_STEPS: 20
+  RESIZE_IMGS_WITH_PADDING: [384, 384]
+  ATTENTION_MODE: cross_attn
+  VLM_MODEL_NAME: HuggingFaceTB/SmolLM2-360M
+  NUM_VLM_LAYERS: 16
+  NUM_EXPERT_SKIP_LAYERS: 0
+  TEMPORAL_FUSION: attn
+  FREEZE_VISION_MODEL: false
+  FREEZE_CONNECTOR: false
+  FREEZE_TEXT_MODEL: false
+  ENABLE_RESIDUAL_FLOW: false
+  USE_CHECKPOINT_NORMALIZATION: true
+
+DIR:
+  OUTPUT: /scratch/aparame/Dynamic_VLA/runs
+
+WANDB:
+  ENABLED: true
+  PROJECT: Kinematic-Residual-VLA
+  ENTITY: aparame-clemson-university
+  MODE: online
+  RUN_ID: null
+  LOG_CODE: true
+  SYNC_TENSORBOARD: false
+
+TRAIN:
+  N_EPOCHS: 30
+  BATCH_SIZE: 16
+  GRAD_ACCUM_STEPS: 16
+  EVAL_TEST_DURING_TRAIN: false
+  EVAL_SPLITS: [iid_eval, ood_val]
+  EVAL_FREQ_EPOCH: 1
+  EVAL_MAX_BATCHES: 8
+  EVAL_PRIMARY_METRIC: action_mse
+  EVAL_PRIMARY_SPLIT: ood_val
+  CKPT_SAVE_FREQ:
+    EPOCH: 1
+    BATCH: 0
+  OPTIMIZER:
+    LR: 1.0e-5
+    EPS: 1.0e-8
+    WEIGHT_DECAY: 1.0e-10
+    BETAS: [0.9, 0.95]
+  LR_SCHEDULER:
+    NAME: cosine
+    STEP_MODE: optimizer
+    N_WARMUP_STEPS: 1000
+  IMAGE_TRANSFORMS:
+    BRIGHTNESS: [0.8, 1.2]
+    CONTRAST: [0.8, 1.2]
+    SATURATION: [0.5, 1.5]
+    HUE: [-0.05, 0.05]

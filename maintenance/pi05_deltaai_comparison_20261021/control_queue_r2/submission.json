@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-21T17:03:13.154254+00:00",
+  "supersedes_definitively_timed_out_request": "3429648",
+  "partition": "ghx4-interactive",
+  "gpus": 2,
+  "cpus": 32,
+  "memory_gib": 256,
+  "allocation_limit_hours": 2,
+  "wall_limit_including_queue_minutes": 150,
+  "production_changed": false,
+  "job_id": "3429662",
+  "last_scheduler_line": "salloc: Pending job allocation 3429662"
+}

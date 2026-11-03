@@ -1,0 +1,42 @@
+{
+  "run_id": "l66vuxv6",
+  "job_id": "17782830",
+  "allocation_end_local": "2026-10-21 10:53:32 America/New_York",
+  "scheduler_end_reason": "REQUEUED; log CANCELLED DUE TO JOB REQUEUE; not final training cancellation",
+  "system_metrics_sampled": true,
+  "sampled_rows_in_h200_window": 514,
+  "metrics": {
+    "system.cpu": {
+      "n": 273,
+      "median": 0.8449534352324087,
+      "mean": 0.8420560030629892
+    },
+    "system.gpu.0.gpu": {
+      "n": 241,
+      "median": 100,
+      "mean": 92.39419087136929
+    },
+    "system.gpu.1.gpu": {
+      "n": 241,
+      "median": 100,
+      "mean": 95.7344398340249
+    },
+    "system.gpu.0.memoryAllocated": {
+      "n": 241,
+      "median": 43.01623762789436,
+      "mean": 43.189751450383
+    },
+    "system.gpu.1.memoryAllocated": {
+      "n": 241,
+      "median": 43.01623762789436,
+      "mean": 43.18912780278024
+    }
+  },
+  "last20_log_samples_per_second_median": 37.29177428139445,
+  "saved_production_progress": {
+    "updates": 60004,
+    "samples": 1920128,
+    "epoch": 0,
+    "cursor": 1920128
+  }
+}

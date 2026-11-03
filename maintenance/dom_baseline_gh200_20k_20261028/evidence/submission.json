@@ -1,0 +1,17 @@
+{
+  "submitted_at": "2026-10-28T21:56:07.699012+00:00",
+  "returncode": 0,
+  "stdout": "3479152\n",
+  "stderr": "",
+  "held_until": "dataset verification and frozen family complete",
+  "account": "bicn-dtai-gh",
+  "user": "anayak2",
+  "cluster": "DeltaAI",
+  "variant": "dom100",
+  "velocity_conditioning": false,
+  "kr": false,
+  "nodes": 2,
+  "gpus": 8,
+  "time_limit_hours": 24,
+  "job_id": "3479152"
+}

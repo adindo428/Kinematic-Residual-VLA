@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "runs": {
+    "pi05_baseline": {
+      "fresh_start": true,
+      "reason": "No saved production checkpoint; failed memory-headroom readiness only"
+    },
+    "pi05_kr": {
+      "fresh_start": true,
+      "reason": "No saved production checkpoint; failed memory-headroom readiness only"
+    }
+  }
+}

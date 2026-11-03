@@ -1,0 +1,6 @@
+{
+  "snapshot_name": "training-20261008T152033Z",
+  "archive": "/Users/aditya/Documents/ChatGPT/Kinematic Residual VLA/maintenance/deltaai_training_transfer_20261008/deltaai-training-only.tar.gz",
+  "destination": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261008T152033Z",
+  "archive_sha256": "9ac7f397ed3dc96788cae9394237dfbecc3e332c89b1088725bf71c1bd9f9c12"
+}

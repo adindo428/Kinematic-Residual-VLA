@@ -13,6 +13,8 @@ import logging
 import math
 import os
 import shutil
+import subprocess
+import sys
 import time
 
 import diffusers.optimization
@@ -32,6 +34,19 @@ _TRAINING_STATE_FILENAME = "training_state.pt"
 
 def _training_state_path(checkpoint_dir: str) -> str:
     return os.path.join(checkpoint_dir, _TRAINING_STATE_FILENAME)
+
+
+def _scheduler_training_steps(n_batches: int, n_epochs: int, grad_accum_steps: int, mode: str) -> int:
+    if mode == "legacy":
+        return n_epochs * n_batches
+    if mode == "optimizer":
+        return n_epochs * math.ceil(n_batches / grad_accum_steps)
+    raise ValueError(f"Unknown LR scheduler step mode: {mode}")
+
+
+def _accumulation_group_size(batch_idx: int, n_batches: int, grad_accum_steps: int) -> int:
+    group_start = (batch_idx // grad_accum_steps) * grad_accum_steps
+    return min(grad_accum_steps, n_batches - group_start)
 
 
 def _load_training_state(
@@ -330,7 +345,9 @@ def _metrics_from_eval_totals(totals: dict[str, float]) -> dict[str, float | int
         "final_object_distance": (
             totals.get("final_object_distance_sum", 0.0) / final_count if final_count > 0 else math.nan
         ),
-        "final_success_rate": (totals.get("final_success_count", 0.0) / final_count if final_count > 0 else math.nan),
+        "final_ee_object_proximity_rate_5cm": (
+            totals.get("final_success_count", 0.0) / final_count if final_count > 0 else math.nan
+        ),
     }
     return metrics
 
@@ -663,7 +680,7 @@ def train(cfg):
     train_dataset = utils.datasets.get_dataset(
         cfg.DATASET.NAME,
         split="train",
-        pin_memory=cfg.DATASET.PIN_MEMORY,
+        pin_memory=bool(cfg.DATASET.get("USE_MEMCACHED", False)),
         delta_action=cfg.DATASET.USE_DELTA_ACTION,
         required_features=cfg.DATASET.REQUIRED_FEATURES,
         episodes=train_episodes,
@@ -697,6 +714,8 @@ def train(cfg):
     train_data_loader = torch.utils.data.DataLoader(
         dataset=train_dataset,
         sampler=train_sampler,
+        shuffle=train_sampler is None,
+        generator=torch.Generator().manual_seed(int(cfg.CONST.get("SEED", 42))),
         **dataloader_kwargs,
     )
 
@@ -709,7 +728,7 @@ def train(cfg):
             eval_dataset = utils.datasets.get_dataset(
                 cfg.DATASET.NAME,
                 split=eval_split,
-                pin_memory=cfg.DATASET.PIN_MEMORY,
+                pin_memory=bool(cfg.DATASET.get("USE_MEMCACHED", False)),
                 delta_action=cfg.DATASET.USE_DELTA_ACTION,
                 required_features=cfg.DATASET.REQUIRED_FEATURES,
                 episodes=eval_episode_map[eval_split],
@@ -822,11 +841,15 @@ def train(cfg):
         weight_decay=cfg.TRAIN.OPTIMIZER.WEIGHT_DECAY,
         betas=cfg.TRAIN.OPTIMIZER.BETAS,
     )
+    grad_accum_steps = int(cfg.TRAIN.GRAD_ACCUM_STEPS)
+    scheduler_step_mode = str(_cfg_get(cfg.TRAIN.LR_SCHEDULER, "STEP_MODE", "legacy"))
     lr_scheduler = diffusers.optimization.get_scheduler(
         name=cfg.TRAIN.LR_SCHEDULER.NAME,
         optimizer=optimizer,
         num_warmup_steps=cfg.TRAIN.LR_SCHEDULER.N_WARMUP_STEPS,
-        num_training_steps=cfg.TRAIN.N_EPOCHS * n_batches,
+        num_training_steps=_scheduler_training_steps(
+            n_batches, cfg.TRAIN.N_EPOCHS, grad_accum_steps, scheduler_step_mode
+        ),
     )
     if checkpoint is not None and not init_only and os.path.isdir(checkpoint):
         init_epoch = _load_training_state(
@@ -865,7 +888,6 @@ def train(cfg):
             eval_desc,
         )
 
-    grad_accum_steps = int(cfg.TRAIN.GRAD_ACCUM_STEPS)
     best_eval_metric = math.inf
     best_eval_checkpoint_name = (
         "model.best_ood_action_mse.safetensors"
@@ -906,7 +928,7 @@ def train(cfg):
                 batch["task"] = batch["task"][0]
 
             loss, _ = policy.forward(batch)
-            loss = loss / grad_accum_steps
+            loss = loss / _accumulation_group_size(batch_idx, n_batches, grad_accum_steps)
             loss.backward()
             should_step = (
                 (batch_idx + 1) % grad_accum_steps == 0
@@ -921,7 +943,10 @@ def train(cfg):
             batch_time.update(time.perf_counter() - batch_end_time)
             batch_end_time = time.perf_counter()
             if utils.distributed.is_master():
-                tb_writer.add_scalars({"Loss/Batch": train_losses.val()}, n_itr)
+                tb_writer.add_scalars(
+                    {"Loss/Batch": train_losses.val(), "epoch": epoch_idx + 1},
+                    n_itr,
+                )
                 # Save the model checkpoint every few batches
                 if (
                     cfg.TRAIN.CKPT_SAVE_FREQ.BATCH != 0
@@ -948,7 +973,10 @@ def train(cfg):
 
         epoch_end_time = time.perf_counter()
         if utils.distributed.is_master():
-            tb_writer.add_scalars({"Loss/Epoch/Train": train_losses.avg()}, epoch_idx)
+                tb_writer.add_scalars(
+                    {"Loss/Epoch/Train": train_losses.avg(), "epoch": epoch_idx + 1},
+                    epoch_idx + 1,
+                )
 
         if utils.distributed.is_local_master():
             logging.info(
@@ -988,19 +1016,20 @@ def train(cfg):
                 )
                 eval_results[eval_split] = metrics
                 if utils.distributed.is_master():
-                    tb_writer.add_scalars(
-                        _finite_scalar_metrics(f"Eval/{eval_split}", metrics),
-                        epoch_idx,
+                    eval_metrics = _finite_scalar_metrics(
+                        f"Eval/{eval_split}", metrics
                     )
+                    eval_metrics["epoch"] = epoch_idx + 1
+                    tb_writer.add_scalars(eval_metrics, epoch_idx + 1)
                 if utils.distributed.is_local_master():
                     logging.info(
-                        "Eval[%s] samples=%s action_mse=%.6g ee_tracking_mse=%.6g final_object_distance=%.6g final_success_rate=%.4f",
+                        "Eval[%s] samples=%s action_mse=%.6g ee_tracking_mse=%.6g final_object_distance=%.6g final_ee_object_proximity_rate_5cm=%.4f",
                         eval_split,
                         metrics.get("samples", 0),
                         float(metrics.get("action_mse", math.nan)),
                         float(metrics.get("ee_tracking_mse", math.nan)),
                         float(metrics.get("final_object_distance", math.nan)),
-                        float(metrics.get("final_success_rate", math.nan)),
+                        float(metrics.get("final_ee_object_proximity_rate_5cm", math.nan)),
                     )
 
             primary_metrics = eval_results.get(eval_primary_split)
@@ -1046,6 +1075,25 @@ def train(cfg):
                 lr_scheduler,
                 epoch_idx + 1,
             )
+            hub_repo = os.environ.get("DVLA_HF_CHECKPOINT_REPO")
+            if hub_repo:
+                variant = os.environ.get("DVLA_HF_VARIANT")
+                if variant not in {"baseline", "residual"}:
+                    raise ValueError("DVLA_HF_VARIANT must be baseline or residual when Hub sync is enabled")
+                subprocess.run(
+                    [
+                        sys.executable,
+                        os.path.join(os.path.dirname(__file__), "..", "scripts", "hub_checkpoints.py"),
+                        "upload",
+                        "--repo",
+                        hub_repo,
+                        "--variant",
+                        variant,
+                        "--checkpoint",
+                        cfg.DIR.CHECKPOINTS,
+                    ],
+                    check=True,
+                )
             if best_eval_improved:
                 shutil.copy(
                     os.path.join(cfg.DIR.CHECKPOINTS, "model.safetensors"),

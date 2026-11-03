@@ -1,0 +1,68 @@
+{
+  "assumptions": [
+    "72 wall-clock hours per model on2H200",
+    "same20k training split; approximately2.407million anchors/epoch",
+    "ten additional subset epoch cap",
+    "15percent throughput allowance; not a new live measurement",
+    "pi05/vlash rates from saved-progress delta across timestamped snapshots; checkpoint cadence adds uncertainty",
+    "Smol rates from verified production logs; DOM checkpoint-inclusive readiness rate"
+  ],
+  "models": [
+    {
+      "model": "pi05_baseline",
+      "observed_samples_per_second": 32.513819538733586,
+      "epochs_in_72h_with_15percent_buffer": 2.976395042270156,
+      "epochs_in_72h_without_buffer": 3.5016412262001837,
+      "hours_to_10_epochs": 205.6178670198346,
+      "hours_to_10_with_buffer": 241.90337296451128
+    },
+    {
+      "model": "pi05_kr",
+      "observed_samples_per_second": 24.16744361156538,
+      "epochs_in_72h_with_15percent_buffer": 2.2123472532691713,
+      "epochs_in_72h_without_buffer": 2.602761474434319,
+      "hours_to_10_epochs": 276.6292674423744,
+      "hours_to_10_with_buffer": 325.4461969910287
+    },
+    {
+      "model": "vlash_baseline",
+      "observed_samples_per_second": 58.55227095791854,
+      "epochs_in_72h_with_15percent_buffer": 5.3600189539464855,
+      "epochs_in_72h_without_buffer": 6.305904651701748,
+      "hours_to_10_epochs": 114.17870072071209,
+      "hours_to_10_with_buffer": 134.32788320083776
+    },
+    {
+      "model": "vlash_kr",
+      "observed_samples_per_second": 58.30633149568568,
+      "epochs_in_72h_with_15percent_buffer": 5.33750505042874,
+      "epochs_in_72h_without_buffer": 6.279417706386752,
+      "hours_to_10_epochs": 114.66031305222664,
+      "hours_to_10_with_buffer": 134.89448594379604
+    },
+    {
+      "model": "smolvla_baseline",
+      "observed_samples_per_second": 440.00589445912,
+      "epochs_in_72h_with_15percent_buffer": 10,
+      "epochs_in_72h_without_buffer": 10,
+      "hours_to_10_epochs": 15.193735851087451,
+      "hours_to_10_with_buffer": 17.874983354220536
+    },
+    {
+      "model": "smolvla_kr",
+      "observed_samples_per_second": 417.0451525805097,
+      "epochs_in_72h_with_15percent_buffer": 10,
+      "epochs_in_72h_without_buffer": 10,
+      "hours_to_10_epochs": 16.03023867312004,
+      "hours_to_10_with_buffer": 18.859104321317695
+    },
+    {
+      "model": "domv100",
+      "observed_samples_per_second": 135.52374146036053,
+      "epochs_in_72h_with_15percent_buffer": 10,
+      "epochs_in_72h_without_buffer": 10,
+      "hours_to_10_epochs": 49.32764248264197,
+      "hours_to_10_with_buffer": 58.03252056781408
+    }
+  ]
+}

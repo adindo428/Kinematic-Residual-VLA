@@ -1,0 +1,30 @@
+{
+  "jobs": {
+    "h2x2": "17169828",
+    "h2": "17169829",
+    "a2": "17169830"
+  },
+  "attempts": [
+    {
+      "label": "h2x2",
+      "time": 1791908258.503781,
+      "returncode": 0,
+      "stdout": "17169828\n",
+      "stderr": "sbatch: Requested Features: gpu_h200\nsbatch: Partition: work1\nsbatch: Submit checks complete\n"
+    },
+    {
+      "label": "h2",
+      "time": 1791908259.2824929,
+      "returncode": 0,
+      "stdout": "17169829\n",
+      "stderr": "sbatch: Requested Features: gpu_h100\nsbatch: Partition: work1\nsbatch: Submit checks complete\n"
+    },
+    {
+      "label": "a2",
+      "time": 1791908260.0186088,
+      "returncode": 0,
+      "stdout": "17169830\n",
+      "stderr": "sbatch: Requested Features: gpu_a100_40gb\nsbatch: Partition: work1\nsbatch: Submit checks complete\n"
+    }
+  ]
+}

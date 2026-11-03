@@ -1,0 +1,64 @@
+"""Delete only retired A100 trained-state files after H200 successor validation."""
+from pathlib import Path
+import json,os,subprocess,time
+from datetime import datetime,timezone
+import torch
+BASE=Path('/scratch/aparame/Dynamic_VLA')
+CONTROL=BASE/'h200-consolidation-control-20261022'
+SUCCESSOR=BASE/'main8-h200-only-20261022'
+RETIRED=['17859069','17859070','17859071','17859072','17839146','17839147','17839148']
+
+def write(name,x):
+ p=CONTROL/name;t=p.with_suffix('.tmp');t.write_text(json.dumps(x,indent=2)+'\n');t.replace(p)
+
+def validate_active_h200():
+ result={};root=BASE/'main8-replicas-h200-20261021'
+ for name in ['pi05_baseline','pi05_kr','vlash_baseline','vlash_kr']:
+  out=root/'runs'/name;profile=json.loads((root/'profiles'/(name+'.json')).read_text())
+  for retry in range(5):
+   receipt=json.loads((out/'latest.json').read_text());state=torch.load(out/'latest.pt',map_location='cpu',mmap=True,weights_only=False)
+   if receipt['progress']==state['progress']:break
+   del state;time.sleep(1)
+  assert receipt['identity']==state['identity']==profile['identity'] and profile['approved']
+  assert state['scheduler']['last_epoch']==state['progress']['updates']
+  assert len(state['rng'])==2 and state['model'] and state['optimizer']['state']
+  assert all('exp_avg' in s and 'exp_avg_sq' in s for s in state['optimizer']['state'].values())
+  result[name]={'progress':state['progress'],'identity':state['identity'],'checkpoint':str(out/'latest.pt'),'bytes':(out/'latest.pt').stat().st_size}
+  del state
+ return result
+
+def targets():
+ families=['main8-replicas-a100-20261021','main8-20k-10epochs-20261021-r2']
+ roots=[BASE/family/folder for family in families for folder in ['runs','parents']]
+ found={}
+ for root in roots:
+  if not root.exists():continue
+  for p in root.rglob('*'):
+   if p.is_symlink() or not p.is_file() or p.suffix not in ('.pt','.safetensors'):continue
+   st=p.stat();assert st.st_uid==os.getuid(),'Unexpected file owner'
+   found[str(p)]={'path':str(p),'bytes':st.st_size,'inode':st.st_ino,'device':st.st_dev}
+ return list(found.values())
+
+def main():
+ CONTROL.mkdir(exist_ok=True)
+ live=subprocess.check_output(['squeue','-h','-j',','.join(RETIRED),'-o','%i'],text=True).strip()
+ assert not live,'Retired A100 job still live: '+live
+ assert json.loads((SUCCESSOR/'prepared-palmetto.json').read_text())['complete']
+ parents=json.loads((SUCCESSOR/'parent-validation.json').read_text());assert parents['passed']
+ for name,spec in parents['models'].items():
+  migration=json.loads((SUCCESSOR/'parents'/name/'migration.json').read_text())
+  assert migration['checkpoint_sha256']==spec['checkpoint_sha256']
+  assert (SUCCESSOR/'parents'/name/migration['checkpoint_file']).is_file()
+ validated=validate_active_h200();write('preserved-h200-state.json',{'verified_at':datetime.now(timezone.utc).isoformat(),'active_h200':validated,'new_h200_parents':parents})
+ files=targets();write('deletion-manifest.json',{'authorized':True,'files':files,'planned_bytes':sum(x['bytes'] for x in files),'scope':'Only seven A100 jobs cancelled on2026-10-22, in their two exact family roots; historical families excluded; datasets, shared initialization, source, JSON/log/failure receipts and all H200 successor checkpoints retained'})
+ removed=[]
+ for spec in files:
+  p=Path(spec['path']);st=p.stat()
+  assert (st.st_ino,st.st_dev,st.st_size)==(spec['inode'],spec['device'],spec['bytes']),'File changed after deletion planning'
+  p.unlink();removed.append(spec)
+  write('deletion-receipt.json',{'removed':removed,'removed_bytes':sum(x['bytes'] for x in removed),'complete':False})
+ assert all(not Path(x['path']).exists() for x in removed)
+ write('deletion-receipt.json',{'removed':removed,'removed_bytes':sum(x['bytes'] for x in removed),'complete':True,'absence_verified':True,'completed_at':datetime.now(timezone.utc).isoformat()})
+ print(json.dumps({'checkpoint_files_removed':len(removed),'removed_bytes':sum(x['bytes'] for x in removed),'absence_verified':True}),flush=True)
+
+if __name__=='__main__':main()

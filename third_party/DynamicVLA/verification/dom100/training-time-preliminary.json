@@ -1,0 +1,39 @@
+{
+  "observed_at_utc": "2026-10-09T15:12:11.563746+00:00",
+  "preliminary": true,
+  "timing_excludes": [
+    "validation",
+    "checkpoint_io",
+    "queue_time"
+  ],
+  "profiles": [
+    {
+      "hardware": "NVIDIA A100 80GB PCIe",
+      "samples_per_second": 48.21984338755188,
+      "training_only_100_epochs_days": 536.9692933960407,
+      "runtime": {
+        "fused": true,
+        "microbatch": 44,
+        "pin_memory": true,
+        "precision": "bf16",
+        "prefetch": 2,
+        "sampling": "blocks",
+        "workers": 4
+      }
+    },
+    {
+      "hardware": "NVIDIA H100 80GB HBM3",
+      "samples_per_second": 80.6221258378843,
+      "training_only_100_epochs_days": 321.15966879298753,
+      "runtime": {
+        "fused": true,
+        "microbatch": 44,
+        "pin_memory": true,
+        "precision": "bf16",
+        "prefetch": 2,
+        "sampling": "blocks",
+        "workers": 4
+      }
+    }
+  ]
+}

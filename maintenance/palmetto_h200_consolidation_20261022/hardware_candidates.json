@@ -1,0 +1,50 @@
+{
+  "smolvla_baseline": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/scripts/smolvla_baseline.sbatch",
+    "script_sha256": "e21d1b2d7c355fb516c8c8e8bf3ceff90f31a6e394fc10817ba0d09936c7921f",
+    "dependency": "17912899",
+    "intent_at": "2026-10-22T13:26:09.311891+00:00",
+    "state": "submitted",
+    "stdout": "17912900",
+    "job_id": "17912900",
+    "variant": "smolvla_baseline",
+    "name": "smolvla_baseline",
+    "world_size": 2,
+    "gpu": "H200",
+    "gpu_count": 2,
+    "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022",
+    "run_directory": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_baseline"
+  },
+  "smolvla_kr": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/scripts/smolvla_kr.sbatch",
+    "script_sha256": "21b7f95e7cf2c6b3878e52ae09dd2224a59159a57fd7df66e5f52262ad51e731",
+    "dependency": "17912899",
+    "intent_at": "2026-10-22T13:26:11.615145+00:00",
+    "state": "submitted",
+    "stdout": "17912901",
+    "job_id": "17912901",
+    "variant": "smolvla_kr",
+    "name": "smolvla_kr",
+    "world_size": 2,
+    "gpu": "H200",
+    "gpu_count": 2,
+    "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022",
+    "run_directory": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/smolvla_kr"
+  },
+  "domv100": {
+    "script": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/scripts/domv100.sbatch",
+    "script_sha256": "c30b6779d10d69b242310df7086d56c843033ec23063a59606a4a34875c0a01a",
+    "dependency": "17912899",
+    "intent_at": "2026-10-22T13:26:13.845504+00:00",
+    "state": "submitted",
+    "stdout": "17912902",
+    "job_id": "17912902",
+    "variant": "domv100",
+    "name": "domv100",
+    "world_size": 2,
+    "gpu": "H200",
+    "gpu_count": 2,
+    "family": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022",
+    "run_directory": "/scratch/aparame/Dynamic_VLA/main8-h200-only-20261022/runs/domv100"
+  }
+}

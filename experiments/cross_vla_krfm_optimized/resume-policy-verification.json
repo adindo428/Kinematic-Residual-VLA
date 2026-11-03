@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-10-20T03:38:20.482255+00:00",
+  "scheduler": "All six tuning jobs pending Priority; all six production jobs pending Dependency",
+  "resume_configuration_verified": true,
+  "actual_restore_verified": false,
+  "reason": "Production has not started; manifests and loader inspected",
+  "saved_parent_updates": {
+    "smolvla_baseline": 956,
+    "vlash_baseline": 745,
+    "vlash_kr": 738
+  },
+  "no_saved_production_checkpoint": [
+    "pi05_baseline",
+    "pi05_kr",
+    "smolvla_kr"
+  ],
+  "restore": [
+    "model",
+    "optimizer",
+    "scheduler",
+    "per_rank_rng",
+    "updates",
+    "samples",
+    "data_cursor"
+  ],
+  "own_latest_checkpoint_precedes_parent": true,
+  "original_total_update_budget_preserved": true,
+  "frozen_source_unchanged": true
+}

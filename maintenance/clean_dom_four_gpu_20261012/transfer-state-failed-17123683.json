@@ -1,0 +1,15 @@
+{
+  "pack_job": "17123683",
+  "delta_audit_cancelled": "3369190",
+  "stage": "error",
+  "pid": 83012,
+  "updated_unix": 1791852297.344828,
+  "pack_progress": {
+    "state": "packing",
+    "files": 804000,
+    "total": 804922,
+    "archive": "/scratch/aparame/Dynamic_VLA/clean-dom-four-gpu-20261012/dom-clean.tar",
+    "updated_unix": 1791852284.183028
+  },
+  "error": "Packaging job FAILED"
+}

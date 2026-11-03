@@ -1,0 +1,34 @@
+{
+  "audit_job": "17119970",
+  "existing_audit_reused": true,
+  "snapshot_checked_episodes": 157323,
+  "total_episodes": 201227,
+  "full_audit_complete": false,
+  "failures_confirmed_on_deltaai": [
+    {
+      "episode": 195674,
+      "camera": "observation.images.wrist_cam",
+      "label_frames": 107,
+      "video_frames": 2,
+      "last_labeled_frame_decodes": false,
+      "hash_matches_frozen": true
+    },
+    {
+      "episode": 195616,
+      "camera": "observation.images.opst_cam",
+      "label_frames": 109,
+      "video_frames": 33,
+      "last_labeled_frame_decodes": false,
+      "hash_matches_frozen": true
+    }
+  ],
+  "delta_training_job": "3367506",
+  "delta_status": "held",
+  "palmetto_training_jobs": [
+    "17099227",
+    "17099228",
+    "17099229"
+  ],
+  "palmetto_status": "cancelled before start; cluster rejects job holds",
+  "new_exclusions_applied": false
+}

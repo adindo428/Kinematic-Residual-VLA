@@ -1,0 +1,35 @@
+{
+  "status": {
+    "archive_transfer": "cancelled",
+    "combined_allocation": true,
+    "dependency": null,
+    "family": "/work/nvme/bivv/aparameshwaran/dynamicvla/domv-audited-20261012",
+    "final_split_applied": true,
+    "manifest_fingerprint": "1bbb8092365ff5376c7b79dc736bdee36aa3dca18097e4cc4eff76968c8ac5c2",
+    "old_training_cancelled": true,
+    "old_training_job": "3367506",
+    "old_verification_cancelled": true,
+    "old_verification_job": "3370057",
+    "production_submitted": true,
+    "readiness_candidate_limit_minutes": 15,
+    "readiness_total_limit_minutes": 15,
+    "source": "/u/aparameshwaran/Kinematic-Residual-VLA/training_snapshots/training-20261012-video-clean/dom100",
+    "split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+    "stage": "combined_allocation_queued",
+    "training_job": "3370672",
+    "updated_utc": "2026-10-13T04:38:30Z",
+    "verification_job": "3370672"
+  },
+  "submission": {
+    "batch": "/work/nvme/bivv/aparameshwaran/dynamicvla/setup-existing-data-domv-20261012/combined.sbatch",
+    "batch_sha256": "9ee9d76635ebf5834a9893f8e9939dee53bffefb9987e01960ad7a450cba72a3",
+    "combined_allocation": true,
+    "dependency": null,
+    "job_id": "3370672",
+    "old_verification_job": "3370057",
+    "returncode": 0,
+    "stage": "submitted",
+    "stderr": "",
+    "stdout": "3370672\n"
+  }
+}
