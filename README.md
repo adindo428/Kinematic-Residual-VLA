@@ -50,3 +50,9 @@ CPU verification instructions and the limits of the workstation validation are i
 The base implementation is [DynamicVLA](https://github.com/hzxie/DynamicVLA), associated with [the paper](https://arxiv.org/abs/2601.22153), [DOM](https://huggingface.co/datasets/hzxie/DOM), and [released weights](https://huggingface.co/hzxie/dynamic-vla-DOM). Retain the upstream [license](third_party/DynamicVLA/LICENSE); included forks keep their original license files. Data/assets/model distributions have their own terms.
 
 The paper draft and [knowledge base](KNOWLEDGE_BASE.md) are research material, not a claim of reproduced published results. The previous recovery-oriented README is retained as [historical context](docs/RESEARCH_HISTORY.md).
+
+## Real-data post-training on another computer
+
+Use [the post-training handoff](post_training/README.md) for the pinned dataset,
+unchanged physical metrics, destination profiling and architecture-preserving
+velocity conditioning for SmolVLA, VLASH and pi0.5 with/without KR.

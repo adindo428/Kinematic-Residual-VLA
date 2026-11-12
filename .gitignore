@@ -43,8 +43,14 @@ paper/*.synctex.gz
 *.so
 *.egg-info/
 .venv/
+.venv-finetune/
 venv/
 /third_party/EfficientTAM/
 
 # Linux workstation paths and credentials stay local
 /workstation/env.local.sh
+
+.venv-post-training/
+
+# Private migration payload: transfer directly; never publish dataset labels/results.
+/post_training/frozen/

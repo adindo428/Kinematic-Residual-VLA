@@ -1,0 +1,10 @@
+{
+  "files": {
+    "transformers/models/siglip/check.py": "1a65172a75eff216773771159c1968c190a29ac7248960eb0afc62001603888c",
+    "transformers/models/siglip/modeling_siglip.py": "ef2e99500f263fdd78db9d4d9a255e29d844eb92f53c25ad640f8056700ef84b",
+    "transformers/models/paligemma/modeling_paligemma.py": "c945d330b829264f927f3ee5339f977238631772de07a28e855e265bb85fd53c",
+    "transformers/models/gemma/configuration_gemma.py": "26fd0d0f52730ab32b6f337eb73ae9a26cb71ae0915bc49eced1d0e2ed8d0ec6",
+    "transformers/models/gemma/modeling_gemma.py": "17eeb54e277939e58cd6f8a92719a275e36baf0c9f463b2754227d42f87aedde"
+  },
+  "version_check_adjustment": "OpenPI support marker 4.53.2 -> required checkpoint runtime 4.53.3; model code unchanged from pinned OpenPI source"
+}

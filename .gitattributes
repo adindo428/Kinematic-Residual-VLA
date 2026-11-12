@@ -1,0 +1,3 @@
+
+# Preserve SHA-pinned upstream OpenPI files byte for byte.
+post_training/compat/transformers-replacement/** -text whitespace=-blank-at-eol
