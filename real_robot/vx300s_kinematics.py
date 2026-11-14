@@ -15,6 +15,14 @@ LOWER = np.deg2rad([-180, -106, -101, -180, -107, -180])
 UPPER = np.deg2rad([180, 72, 92, 180, 128, 180])
 
 
+def joints_from_raw_ticks(raw_ticks):
+    """Canonical collection/deployment encoder mapping, all nine motor IDs."""
+    raw=np.asarray(raw_ticks,dtype=np.int64)
+    if raw.shape!=(9,):raise ValueError('Expected nine follower encoder values in motor-ID order')
+    raw=(raw+2**31)%2**32-2**31
+    return (raw[np.asarray(MOTOR_IDS)-1]-2048)*2*np.pi/4096
+
+
 def forward(q, tcp_offset_m=None):
     """Return T_base_gripper, or T_base_tcp with explicit gripper-frame offset."""
     q = np.asarray(q, dtype=float)

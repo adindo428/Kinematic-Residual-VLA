@@ -108,6 +108,25 @@ class ControlTests(unittest.TestCase):
         self.assertTrue(control.stop.wait(1))
         self.assertIn('heartbeat', control.error)
 
+    def test_feedback_overrun_keeps_150ms_guard_and_sends_no_late_goal(self):
+        io,control=self.start_control()
+        control.toggle()
+        entered=threading.Event()
+        original_read=io.read
+        def slow_read():
+            entered.set()
+            time.sleep(.16)
+            return original_read()
+        io.read=slow_read
+        self.assertTrue(entered.wait(timeout=1))
+        count=len(io.writes)
+        wait_until(lambda:control.error is not None)
+        self.assertIn('Motor feedback read exceeded 150 ms',control.error)
+        self.assertIn('state',control.error)
+        self.assertGreaterEqual(control.feedback_timing['state_ms'],150.)
+        self.assertEqual(len(io.writes),count)
+        self.assertFalse(control.enabled)
+
     def test_log_overflow_stops_instead_of_silently_dropping(self):
         io, control = self.start_control()
         control.toggle()

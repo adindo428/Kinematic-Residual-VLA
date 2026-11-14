@@ -63,14 +63,24 @@ class FramePairer:
 
 class CameraPair:
     """Independent read threads prevent one camera wait from blocking the other."""
-    def __init__(self, front=FRONT_SERIAL, side=SIDE_SERIAL, fps=15, max_skew_s=.035):
+    def __init__(self, front=FRONT_SERIAL, side=SIDE_SERIAL, fps=15, max_skew_s=.035, reconnect_attempts=0, front_only=False, depth_corrections=None,color_formats=None):
         if front == side: raise ValueError('Need two different cameras')
-        self.serials = {'front': front, 'side': side}; self.fps = fps
+        self.front_only=bool(front_only)
+        self.serials = {'front': front} if self.front_only else {'front': front, 'side': side}
+        self.fps = fps
+        self.depth_corrections = depth_corrections or {}
+        self.color_formats=color_formats or {}
         self.pairer = FramePairer(max_skew_s)
         self.stop = threading.Event(); self.lock = threading.Lock()
         self.pending = {'front': deque(maxlen=30), 'side': deque(maxlen=30)}
         self.latest = {}; self.errors = {}; self.overruns = {'front': 0, 'side': 0}
         self.threads = []
+        if type(reconnect_attempts) is not int or reconnect_attempts < 0:raise ValueError('Invalid camera reconnect limit')
+        self.reconnect_attempts=reconnect_attempts
+        self.restarts={r:0 for r in self.serials}
+        self.states={r:'starting' for r in self.serials}
+        self.events=[]
+        self.flush_pairer=False
 
     def start(self):
         for role in self.serials:
@@ -80,33 +90,92 @@ class CameraPair:
 
     def _read(self, role):
         from .camera import RGBDCamera
-        camera = None; previous = None; domain = None
-        try:
-            camera = RGBDCamera(self.serials[role], fps=self.fps)
-            while not self.stop.is_set():
-                bgr, depth, timing, deproject = camera.read()
-                stamp = timing['sensor_timestamp_s']
-                if ((previous is not None and stamp <= previous)
-                        or (domain is not None and timing['timestamp_domain'] != domain)):
-                    raise RuntimeError('Camera clock repeated or changed domain')
-                previous, domain = stamp, timing['timestamp_domain']
-                frame = dict(bgr=bgr, depth=depth, timing=timing, deproject=deproject)
+        while not self.stop.is_set():
+            camera=None;previous=None;domain=None;retry=False
+            try:
+                options = {'depth_correction': self.depth_corrections[role]} if role in self.depth_corrections else {}
+                if role in self.color_formats:options['color_format']=self.color_formats[role]
+                camera=RGBDCamera(self.serials[role],fps=self.fps,**options)
+                while not self.stop.is_set():
+                    bgr,depth,timing,deproject=camera.read()
+                    stamp=timing['sensor_timestamp_s']
+                    if ((previous is not None and stamp<=previous) or
+                            (domain is not None and timing['timestamp_domain']!=domain)):
+                        raise RuntimeError('Camera clock repeated or changed domain')
+                    previous,domain=stamp,timing['timestamp_domain']
+                    frame=dict(bgr=bgr,depth=depth,timing=timing,deproject=deproject)
+                    with self.lock:
+                        if self.states[role]!='running':
+                            self.events.append(dict(role=role,event='stream_ready',host_monotonic_s=time.monotonic(),restart=self.restarts[role]))
+                        self.states[role]='running'
+                        if len(self.pending[role])==self.pending[role].maxlen:self.overruns[role]+=1
+                        self.pending[role].append(frame);self.latest[role]=frame
+            except Exception as exc:
                 with self.lock:
-                    if len(self.pending[role]) == self.pending[role].maxlen: self.overruns[role] += 1
-                    self.pending[role].append(frame); self.latest[role] = frame
-        except BaseException as exc:
-            with self.lock: self.errors[role] = f'{type(exc).__name__}: {exc}'
-        finally:
-            if camera is not None: camera.close()
+                    reason=f'{type(exc).__name__}: {exc}'
+                    retry=not self.stop.is_set() and self.restarts[role]<self.reconnect_attempts
+                    self.latest.pop(role,None);self.pending[role].clear();self.flush_pairer=True
+                    self.states[role]='reconnecting' if retry else 'failed'
+                    if retry:self.restarts[role]+=1
+                    else:self.errors[role]=reason
+                    self.events.append(dict(role=role,event=self.states[role],error=reason,
+                                            host_monotonic_s=time.monotonic(),restart=self.restarts[role]))
+            finally:
+                if camera is not None:
+                    try:camera.close()
+                    except Exception as exc:
+                        with self.lock:self.errors[role]='Camera shutdown failed: '+str(exc)
+                        retry=False
+            if not retry:return
+            self.stop.wait(.5)
+
+    def health(self, max_age=.75):
+        now=time.monotonic()
+        with self.lock:
+            views={role:dict(state=self.states[role],restarts=self.restarts[role],
+                            frame_age_s=None if role not in self.latest else now-self.latest[role]['timing']['host_arrival_monotonic_s'])
+                   for role in self.serials}
+            return dict(ready=all(v['state']=='running' and v['frame_age_s'] is not None and v['frame_age_s']<=max_age for v in views.values()),
+                        views=views,errors=dict(self.errors))
+
+    def take_events(self):
+        with self.lock:
+            events=self.events;self.events=[]
+        return events
 
     def poll(self):
         with self.lock:
             errors = dict(self.errors)
+            flush=getattr(self,'flush_pairer',False)
+            self.flush_pairer=False
             drained = {r: list(q) for r, q in self.pending.items()}
             for q in self.pending.values(): q.clear()
         if errors: raise RuntimeError(str(errors))
+        if getattr(self,'front_only',False):
+            frames=drained['front']
+            if not frames:return None
+            self.pairer.dropped['front']+=len(frames)-1
+            frame=frames[-1];timing=frame['timing']
+            span=abs(timing['sensor_timestamp_s']-timing['color_timestamp_s'])
+            if span>self.pairer.max_skew:
+                self.pairer.dropped['front']+=1;return None
+            return frame,None,{'span_s':span,'timestamp_s':max(timing['sensor_timestamp_s'],timing['color_timestamp_s'])}
+        if flush:
+            for queue in self.pairer.queues.values():queue.clear()
         for role, frames in drained.items(): self.pairer.add(role, frames)
         return self.pairer.pop(time.monotonic())
+
+    def poll_latest(self):
+        """Collection prefers current frames over replaying a processing backlog."""
+        latest = self.poll()
+        while True:
+            newer = self.pairer.pop(time.monotonic())
+            if newer is None:
+                return latest
+            if latest is not None:
+                for role in ('front','side'):
+                    self.pairer.dropped[role] += 1
+            latest = newer
 
     def views(self):
         with self.lock: return dict(self.latest)
@@ -118,8 +187,8 @@ class CameraPair:
             raise RuntimeError('Camera reader has not stopped; do not open another pipeline')
 
 
-def charuco_detector(square_m=.05, marker_m=.0375):
-    board = cv2.aruco.CharucoBoard((6, 6), square_m, marker_m,
+def charuco_detector(square_m=.05, marker_m=.0375, squares=(6,6)):
+    board = cv2.aruco.CharucoBoard(tuple(squares), square_m, marker_m,
                                  cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50))
     params = cv2.aruco.DetectorParameters(); params.detectInvertedMarker = True
     return board, cv2.aruco.CharucoDetector(board, detectorParams=params)
@@ -128,7 +197,9 @@ def charuco_detector(square_m=.05, marker_m=.0375):
 def estimate_board(frame, board, detector, min_corners=12):
     cc, ci, mc, mi = detector.detectBoard(frame['bgr'])
     result = {'corner_count': 0 if ci is None else len(ci), 'valid': False,
-              'reason': 'not_enough_corners'}
+              'reason': 'not_enough_corners',
+              'marker_count': 0 if mi is None else len(mi),
+              'marker_ids': [] if mi is None else mi.ravel().astype(int).tolist()}
     if ci is not None:
         result.update(ids=ci.ravel().astype(int).tolist(), pixels=cc.reshape(-1, 2).tolist())
     if ci is None or len(ci) < min_corners: return result

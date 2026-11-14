@@ -32,12 +32,36 @@ import torchvision.transforms.v2
 import torchvision.transforms.v2.functional as F
 from huggingface_hub import hf_hub_download, snapshot_download
 
+from utils.real_robot_contract import base_calibration_status, delta_pose, explicit_split, usable_anchor_indices
 import utils.memcached
 from utils.instruction_generator import InstructionGenerator
 from proactive_vla.residual_flow import extract_dom_dynamic_fields
 
 
 LEROBOT_MAIN_REVISION = "main"
+KRVLA_REPO = "ailab-Clemson/KRVLA-dataset"
+KRVLA_META_PATTERNS = ["meta/splits.json", "meta/quality_policy.json", "meta/camera.jsonl",
+                       "meta/train_stats.json", "meta/sources.jsonl"]
+
+
+def _dataset_revision(repo_id, revision=None):
+    return revision or ("training" if repo_id == KRVLA_REPO else LEROBOT_MAIN_REVISION)
+
+
+def _dataset_cache_root(repo_id, root=None, revision=None):
+    if root is not None:
+        return pathlib.Path(root)
+    resolved = _dataset_revision(repo_id, revision)
+    if repo_id == KRVLA_REPO and resolved != "main":
+        # Pin each run and isolate revisions so a later collection cannot leave
+        # new metadata paired with previously cached labels or quality masks.
+        if len(resolved) != 40 or any(c not in '0123456789abcdef' for c in resolved):
+            from huggingface_hub import HfApi
+            resolved = HfApi().repo_info(repo_id=repo_id, repo_type='dataset', revision=resolved).sha
+        return lerobot.constants.HF_LEROBOT_HOME / (repo_id + '--training') / resolved
+    return lerobot.constants.HF_LEROBOT_HOME / repo_id
+
+
 LEROBOT_META_PATTERNS = [
     "meta/info.json",
     "meta/tasks.jsonl",
@@ -131,7 +155,7 @@ def _snapshot_allow_patterns(
         return patterns
 
     chunks = sorted({_episode_chunk(ep_idx) for ep_idx in unique_episodes})
-    allow_patterns = list(LEROBOT_META_PATTERNS)
+    allow_patterns = [p for p in patterns if not p.startswith(("data/", "videos/"))]
     allow_patterns.extend(f"data/{chunk}/*.parquet" for chunk in chunks)
     logging.info(
         "Using %d chunk-level data allow patterns instead of %d per-episode "
@@ -588,6 +612,10 @@ def _ensure_lerobot_subset_cached(
     """Download metadata and the selected episode files used by the tiny MVP."""
 
     patterns = _subset_download_patterns(episodes, required_features)
+    if repo_id == KRVLA_REPO:
+        patterns.extend(KRVLA_META_PATTERNS)
+        if episodes is not None:
+            patterns.extend(f"quality/episode_{ep:06d}.jsonl" for ep in sorted(set(episodes)))
     missing = [
         pattern for pattern in patterns if _safe_stat(root / pattern) is None
     ]
@@ -644,11 +672,12 @@ def ensure_lerobot_episodes_cached(
     episodes: list[int] | None,
     required_features: list[str] | None,
     root: str | pathlib.Path | None = None,
-    revision: str = LEROBOT_MAIN_REVISION,
+    revision: str | None = None,
 ) -> None:
-    cache_root = (
-        pathlib.Path(root) if root else lerobot.constants.HF_LEROBOT_HOME / repo_id
-    )
+    revision = _dataset_revision(repo_id, revision)
+    cache_root = _dataset_cache_root(repo_id, root, revision)
+    if root is None and repo_id == KRVLA_REPO and revision != "main":
+        revision = cache_root.name
     _ensure_lerobot_subset_cached(
         repo_id,
         cache_root,
@@ -666,9 +695,7 @@ def filter_cached_lerobot_episodes(
 ) -> tuple[list[int], dict[str, typing.Any]]:
     """Return episodes whose required parquet and video files are already local."""
 
-    cache_root = (
-        pathlib.Path(root) if root else lerobot.constants.HF_LEROBOT_HOME / repo_id
-    )
+    cache_root = _dataset_cache_root(repo_id, root)
     missing_meta = [
         pattern for pattern in LEROBOT_META_PATTERNS if _safe_stat(cache_root / pattern) is None
     ]
@@ -1044,7 +1071,7 @@ def _apply_episode_speed_split(
     if not repo_id:
         raise ValueError("DATASET.NAME is required when DATASET.SPEED_SPLIT is enabled.")
     root_cfg = _cfg_get(dataset_cfg, "ROOT")
-    root = pathlib.Path(root_cfg) if root_cfg else lerobot.constants.HF_LEROBOT_HOME / repo_id
+    root = _dataset_cache_root(repo_id, root_cfg)
     velocity_key = _cfg_get(speed_cfg, "VELOCITY_KEY", "observation.environment_state")
     velocity_slice_raw = _cfg_get(speed_cfg, "VELOCITY_SLICE", [6, 9])
     if len(velocity_slice_raw) != 2:
@@ -1120,12 +1147,14 @@ def get_dataset(
     episodes: list[int] | None = None,
     image_transforms: typing.Callable | None = None,
     delta_timestamps: dict[str, list[float]] | None = None,
+    euler_delta_convention: str = "legacy",
 ) -> torch.utils.data.Dataset:
     return LeRobotDataset(
         dataset_name,
         split=split,
         pin_memory=pin_memory,
         delta_action=delta_action,
+        euler_delta_convention=euler_delta_convention,
         required_features=required_features,
         episodes=episodes,
         image_transforms=image_transforms,
@@ -1224,21 +1253,24 @@ class LeRobotDataset(torch.utils.data.Dataset):
         image_transforms: typing.Callable | None = None,
         delta_timestamps: dict[str, list[float]] | None = None,
         tolerance_s: float = 1e-4,
-        revision: str = LEROBOT_MAIN_REVISION,
+        revision: str | None = None,
+        euler_delta_convention: str = "legacy",
     ):
         super().__init__()
         self._memcached = utils.memcached.MCClient(enabled=pin_memory)
         self.repo_id = repo_id
-        self.root = (
-            pathlib.Path(root) if root else lerobot.constants.HF_LEROBOT_HOME / repo_id
-        )
+        self.root = _dataset_cache_root(repo_id, root, revision)
         self.delta_action = delta_action
+        self.euler_delta_convention = euler_delta_convention
+        self.quality_indices = None
         self.required_features = required_features or []
         self.episodes = episodes
         self.image_transforms = image_transforms
         self.tolerance_s = tolerance_s
         self.delta_indices = None
-        self.revision = revision
+        self.revision = _dataset_revision(repo_id, revision)
+        if root is None and repo_id == KRVLA_REPO and self.revision != "main":
+            self.revision = self.root.name
 
         # Load metadata
         _ensure_lerobot_subset_cached(
@@ -1248,6 +1280,8 @@ class LeRobotDataset(torch.utils.data.Dataset):
             self.required_features,
             revision=self.revision,
         )
+        if repo_id == KRVLA_REPO and not (self.root / "meta/quality_policy.json").exists():
+            raise ValueError("Use the processed training revision with meta/quality_policy.json")
         logging.info("Loading LeRobot metadata for %s from %s ...", self.repo_id, self.root)
         self.meta = lerobot.datasets.lerobot_dataset.LeRobotDatasetMetadata(
             self.repo_id, self.root, revision=self.revision
@@ -1263,13 +1297,25 @@ class LeRobotDataset(torch.utils.data.Dataset):
             key for key in self.meta.camera_keys if key in self.required_features
         ]
         if self.episodes is None:
-            self.episodes = [ep_idx for ep_idx in range(self.meta.total_episodes)]
-            if split == "train":
-                self.episodes = [e for e in self.episodes if e % 1000 != 0]
-            elif split == "test":
-                self.episodes = [e for e in self.episodes if e % 1000 == 0]
-            else:
-                raise ValueError(f"Unknown split {split}.")
+            self.episodes = explicit_split(self.root, split, self.meta.total_episodes)
+            if self.episodes is None:
+                self.episodes = [ep for ep in range(self.meta.total_episodes)
+                                 if (ep % 1000 != 0 if split == "train" else ep % 1000 == 0)]
+        if not self.episodes:
+            raise ValueError(f"No episodes in requested split {split}")
+        if repo_id == KRVLA_REPO:
+            _ensure_lerobot_subset_cached(self.repo_id, self.root, self.episodes,
+                                         self.required_features, revision=self.revision)
+        quality_path = self.root / "meta/quality_policy.json"
+        self.quality_policy = json.loads(quality_path.read_text()) if quality_path.exists() else None
+        if self.quality_policy and delta_action and self.quality_policy["angle_delta"] != euler_delta_convention:
+            raise ValueError("Set dataset and saved policy euler_delta_convention=wrapped_xyz_v1 for this real-robot version")
+        if "observation.environment_state" in self.required_features:
+            if (self.root / "quality").exists() and not self.quality_policy:
+                raise ValueError("Real-robot quality sidecars require offline dataset_quality processing before velocity-conditioned training")
+            if self.quality_policy:
+                self.base_calibration_status = base_calibration_status(self.root, self.quality_policy)
+                logging.info("Real-robot base calibration status: %s", self.base_calibration_status)
 
         # Compute dataset stats
         self.stats = lerobot.datasets.compute_stats.aggregate_stats(
@@ -1313,6 +1359,12 @@ class LeRobotDataset(torch.utils.data.Dataset):
                 ds_delta_timestamps, self.meta.fps
             )
 
+        if self.quality_policy and "observation.environment_state" in self.required_features:
+            offsets = (self.delta_indices or {}).get("observation.environment_state", [0])
+            self.quality_indices = usable_anchor_indices(
+                self.episodes, self.episode_data_index["length"].tolist(),
+                self.quality_policy["usable_frames"], offsets)
+
     def __repr__(self) -> str:
         feature_keys = list(self.meta.features.keys())
         return (
@@ -1325,6 +1377,8 @@ class LeRobotDataset(torch.utils.data.Dataset):
         )
 
     def __len__(self) -> int:
+        if self.quality_indices is not None:
+            return len(self.quality_indices)
         return torch.sum(self.episode_data_index["length"]).item()
 
     def _get_episode(self, ep_idx: int) -> dict[str, torch.Tensor | bytes]:
@@ -1341,6 +1395,12 @@ class LeRobotDataset(torch.utils.data.Dataset):
             else:
                 episode[col] = torch.tensor(np.stack(data_frame[col].values))
 
+        if self.quality_policy:
+            from real_robot.static_object import quality_valid as static_quality_valid
+            quality = [json.loads(line) for line in (self.root / f"quality/episode_{ep_idx:06d}.jsonl").read_text().splitlines() if line.strip()]
+            episode["dynamic_object.velocity_required"] = torch.tensor([q["velocity_required"] for q in quality])
+            episode["dynamic_object.velocity_valid"] = torch.tensor([bool(q["velocity_estimated"] and not q["velocity_zero_filled"]) or q.get("velocity_repaired", False) or static_quality_valid(q) for q in quality])
+
         # Load video data
         for video_key in self.video_keys:
             episode[video_key] = self._get_video_bytes(ep_idx, video_key)
@@ -1352,6 +1412,8 @@ class LeRobotDataset(torch.utils.data.Dataset):
         return self._memcached.get(video_path)
 
     def __getitem__(self, idx) -> dict:
+        if self.quality_indices is not None:
+            idx = self.quality_indices[idx]
         ep_idx = self._get_episode_index(
             idx, self.episode_data_index["from"], self.episode_data_index["to"]
         )
@@ -1412,7 +1474,12 @@ class LeRobotDataset(torch.utils.data.Dataset):
                 curr_state = item["observation.state"][..., :act_dim]
 
             # Only delta the XYZ and rotation components of the action
-            item["action"][..., :act_dim] -= curr_state
+            item["action"] = delta_pose(item["action"], curr_state, self.euler_delta_convention)
+
+        if self.quality_policy and "observation.environment_state" in item:
+            history = (query_indices or {}).get("observation.environment_state", frame_idx)
+            for key in ("dynamic_object.velocity_required", "dynamic_object.velocity_valid"):
+                item[key] = episode[key][history]
 
         if "observation.environment_state" in item:
             item.update(extract_dom_dynamic_fields(item["observation.environment_state"]))

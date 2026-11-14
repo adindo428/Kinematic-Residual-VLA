@@ -2,10 +2,17 @@
 
 Commands for the right VX300 ALOHA arm and blue tape on this workstation.
 
+For manual data collection, run **`.venv/bin/python -m real_robot.collect`**.
+It starts perception, reuses your saved tape masks, clutches leader motion at the
+current follower pose, records attempts and exports DOM data when finished.
+No separate LeRobot preparation command or five-degree leader matching is needed.
+
 | Task | Guide |
 |---|---|
 | Prepare the arm, track rolling tape, stop/shutdown | [Tracking](README_TRACKING.md) |
 | Teach grasps and run moving/stationary pick-and-place | [Manipulation](README_MANIPULATION.md) |
+| Plan five-task real post-training data and held-out trials | [Real data collection](README_DATA_COLLECTION.md) |
+| Record leader demonstrations and export DOM v2.1 datasets | [DOM collection runbook](README_DOM_COLLECTION.md) |
 
 Run from `/home/ailab/Desktop/Kinematic-Residual-VLA` using `.venv/bin/python`.
 Leader teleoperation uses the separate LeRobot environment shown in the tracking guide.

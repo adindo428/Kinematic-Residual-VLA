@@ -118,6 +118,8 @@ class FusionTests(unittest.TestCase):
                 f.update(bgr=np.zeros((480, 640, 3), np.uint8), depth=np.ones((480, 640)), deproject=None)
                 self.latest = {'front': f, 'side': f}
                 return f, f, {'timestamp_s': 100+self.i*.067, 'span_s': .01}
+            def take_events(self): return []
+            def health(self): return {'ready':True}
             def views(self): return self.latest
             def close(self): self.closed = True
         camera = Cameras()

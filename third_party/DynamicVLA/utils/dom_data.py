@@ -70,12 +70,17 @@ class EpochBatchSampler:
 
 class DOMData(torch.utils.data.Dataset):
     def __init__(self, base, horizon=PREDICTION_HORIZON, seed=42, phase_config=None, cache_bytes=512*1024**2,
-                 deterministic_eval=False, phase_cache=None, frozen_files=None):
+                 deterministic_eval=False, phase_cache=None, frozen_files=None, phase_gate_mode="constant"):
         self.base, self.horizon, self.seed = base, horizon, seed
+        if phase_gate_mode not in ("constant", "causal_rules"):raise ValueError("Unknown phase gate mode")
+        self.phase_gate_mode=phase_gate_mode
         self.phase_config = PhaseGateConfig(**(phase_config or {}))
         self.cache_bytes, self.bytes = cache_bytes, 0
         self.episodes, self.meta = base.episodes, base.meta
         self.lengths = base.episode_data_index["length"].numpy().copy()
+        if getattr(base, "quality_indices", None) is not None:
+            ends = base.episode_data_index["to"].numpy()
+            self.lengths = np.bincount(np.searchsorted(ends, base.quality_indices, side="right"), minlength=len(self.episodes))
         self.cache, self.decoders, self.phases = OrderedDict(), OrderedDict(), OrderedDict()
         self.batched_frames = {}
         self.deterministic_eval = deterministic_eval
@@ -101,6 +106,12 @@ class DOMData(torch.utils.data.Dataset):
 
     def __len__(self):
         return len(self.base)
+
+    def __getstate__(self):
+        state=dict(self.__dict__)
+        for key in ['cache','decoders','phases']:state[key]=OrderedDict()
+        state['batched_frames']={};state['bytes']=0
+        return state
 
     def _episode(self, episode_id):
         if episode_id in self.cache:
@@ -160,6 +171,11 @@ class DOMData(torch.utils.data.Dataset):
         key = int.from_bytes(hashlib.sha256(f"{self.seed}:{epoch}:{idx}".encode()).digest()[:8], "little") % (2**63-1)
         with sample_seed(key):
             batch = self.base[int(idx)]
+        if "dynamic_object.velocity_required" in batch and self.phase_gate_mode=="constant":
+            required = bool(batch["dynamic_object.velocity_required"].reshape(-1)[-1])
+            batch["dynamic_object.phase_gate"] = torch.full((self.horizon, 1), float(required))
+            batch["dynamic_object.phase_id"] = torch.tensor(0 if required else 3)
+            return batch
         ep = int(batch["episode_index"])
         if ep not in self.phases:
             if self.phase_cache is not None:
@@ -191,15 +207,17 @@ class DOMData(torch.utils.data.Dataset):
         groups = {}
         for i, item in enumerate(items):
             idx = item[1] if isinstance(item, tuple) else item
-            local = int(torch.searchsorted(self.base.episode_data_index["to"], torch.tensor(idx), right=True))
+            raw_idx = self.base.quality_indices[idx] if getattr(self.base, "quality_indices", None) is not None else idx
+            local = int(torch.searchsorted(self.base.episode_data_index["to"], torch.tensor(raw_idx), right=True))
             groups.setdefault(local, []).append((i, idx))
         result = [None]*len(items)
         for local, anchors in groups.items():
             ep = int(self.episodes[local]); episode = self._episode(ep)
             timestamps = {key: set() for key in self.base.video_keys}
             for _, idx in anchors:
-                frame = int(idx-self.base.episode_data_index["from"][local])
-                queries, _ = self.base._get_query_indices(frame, int(self.lengths[local]), self.base.delta_indices)
+                raw_idx = self.base.quality_indices[idx] if getattr(self.base, "quality_indices", None) is not None else idx
+                frame = int(raw_idx-self.base.episode_data_index["from"][local])
+                queries, _ = self.base._get_query_indices(frame, int(self.base.episode_data_index["length"][local]), self.base.delta_indices)
                 values = self.base._get_query_timestamps(episode["timestamp"], float(episode["timestamp"][frame]), queries)
                 for key, ts in values.items():
                     timestamps[key].update(map(float, ts))

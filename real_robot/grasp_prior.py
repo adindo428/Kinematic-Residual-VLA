@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from .geometry import validate_transform
-from .vx300s_kinematics import forward, MOTOR_IDS
+from .vx300s_kinematics import forward, MOTOR_IDS,joints_from_raw_ticks
 
 EVENTS = ('pregrasp', 'before_close', 'closed', 'lifted', 'above_box', 'release', 'placed')
 MASTER_INDICES = np.array(MOTOR_IDS)-1
@@ -29,11 +29,7 @@ def follower_pose(raw_ticks, tcp_offset):
 
     This deliberately does not use LeRobot's calibrated angle conventions.
     """
-    raw = np.asarray(raw_ticks, dtype=np.int64)
-    if raw.shape != (9,):
-        raise ValueError('Expected all nine follower encoder values in motor-ID order')
-    raw = (raw + 2**31) % 2**32 - 2**31
-    q = (raw[MASTER_INDICES]-2048)*2*np.pi/4096
+    q = joints_from_raw_ticks(raw_ticks)
     return q, forward(q, tcp_offset)
 
 

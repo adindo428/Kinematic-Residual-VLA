@@ -12,13 +12,14 @@ DEFAULT_SERVO=dict(workspace_min_m=[.20,-.30,.09],workspace_max_m=[.58,.30,.35],
     experimental_current_guard=False,
     seconds=600,control_hz=30,collision_model='scratch/real_robot/right-handeye/hover-plan/offline-collision-model.xml')
 
-def validate_servo(values=None):
+def validate_servo(values=None,*,minimum_tcp_z=.07):
     if values is None: values={}
     if not isinstance(values,dict) or set(values)-set(DEFAULT_SERVO): raise ValueError('Unknown continuous servo setting')
     c={**DEFAULT_SERVO,**values}
     lo,hi=np.asarray(c['workspace_min_m'],float),np.asarray(c['workspace_max_m'],float)
     if lo.shape!=(3,) or hi.shape!=(3,) or not np.isfinite([*lo,*hi]).all() or np.any(lo>=hi): raise ValueError('Invalid TCP workspace')
-    if np.any(lo<[.15,-.35,.07]) or np.any(hi>[.60,.35,.45]): raise ValueError('Workspace exceeds the tabletop tracking envelope')
+    if not np.isfinite(minimum_tcp_z) or not .02<=minimum_tcp_z<=.07:raise ValueError('Invalid minimum TCP workspace floor')
+    if np.any(lo<[.15,-.35,minimum_tcp_z]) or np.any(hi>[.60,.35,.45]): raise ValueError('Workspace exceeds the tabletop tracking envelope')
     bounds=dict(hover_height_m=(.03,.10),surface_top_offset_m=(0.,.08),kp=(.1,4.),ki=(0.,1.),kd=(0.,.3),
         integral_limit_m_s=(0.,.03),max_tcp_speed_mps=(.001,.5),max_tcp_acceleration_mps2=(.005,5.),
         max_joint_speed_deg_s=(.1,360.),max_command_lead_m=(.02,.20),max_observation_age_s=(.05,.25),target_smoothing_s=(0.,.5),

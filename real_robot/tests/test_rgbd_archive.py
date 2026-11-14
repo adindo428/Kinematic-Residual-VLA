@@ -13,6 +13,37 @@ from real_robot.rgbd_archive import RGBDArchiveWriter, save_rgbd
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_parallel_workers_flush_all_jobs_and_report_completion(self):
+        barrier=threading.Barrier(2)
+        calls=[]
+        lock=threading.Lock()
+        def save(path,*args):
+            barrier.wait(timeout=1)
+            with lock:
+                calls.append(Path(path).name)
+        with tempfile.TemporaryDirectory() as d,patch('real_robot.rgbd_archive.save_rgbd',side_effect=save):
+            writer=RGBDArchiveWriter(d,workers=2)
+            frame={'bgr':None,'depth':None}
+            writer.submit({'front':'one.npz'},{'front':frame})
+            writer.submit({'front':'two.npz'},{'front':frame})
+            writer.close()
+            self.assertEqual(sorted(calls),['one.npz','two.npz'])
+            self.assertEqual(writer.stats()['submitted_pairs'],2)
+            self.assertEqual(writer.stats()['completed_pairs'],2)
+
+    def test_opt_in_compression_retains_the_same_arrays(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'compressed.npz'
+            rng=np.random.default_rng(42)
+            bgr=rng.integers(0,256,(30,40,3),dtype=np.uint8)
+            depth=rng.random((30,40),dtype=np.float32)
+            save_rgbd(path,bgr,depth,compressed=True)
+            with zipfile.ZipFile(path) as archive:
+                self.assertTrue(all(i.compress_type == zipfile.ZIP_DEFLATED for i in archive.infolist()))
+            with np.load(path) as data:
+                np.testing.assert_array_equal(data['depth_m'],depth)
+                np.testing.assert_array_equal(data['bgr'],bgr)
+
     def test_complete_compatible_npz_is_published_atomically(self):
         with tempfile.TemporaryDirectory() as d:
             path = Path(d)/'frame.npz'

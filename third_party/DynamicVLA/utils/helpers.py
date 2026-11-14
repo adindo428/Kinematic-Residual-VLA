@@ -190,9 +190,21 @@ def get_policy(
         img_size=img_size,
     )
 
+    quality_path = pathlib.Path(getattr(dataset_metadata, "root", None) or ".") / "meta/quality_policy.json"
+    if quality_path.exists() and policy_cfg.TYPE == "dynamicvla":
+        contract = json.loads(quality_path.read_text())
+        if cfg.euler_delta_convention != contract["angle_delta"]:
+            raise ValueError("Policy and real-robot dataset Euler conventions must match")
+        cfg.require_tracking_quality = True
+
+    dataset_stats = dataset_metadata.stats
+    if quality_path.exists():
+        dataset_stats = {key:{name:np.asarray(value) for name,value in values.items()}
+                         for key,values in json.loads((quality_path.parent / "train_stats.json").read_text()).items()}
+
     policy_class = get_policy_class(policy_cfg.TYPE)
     return policy_class(
-        cfg, dataset_stats=fix_0std_dataset_stats(dataset_metadata.stats)
+        cfg, dataset_stats=fix_0std_dataset_stats(dataset_stats)
     )
 
 

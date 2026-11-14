@@ -19,25 +19,31 @@ from .perception import depth_measurement
 
 
 class EfficientTAMTracker:
-    def __init__(self, checkpoint, output, config='configs/efficienttam/efficienttam_ti_512x512.yaml', device='cuda'):
+    def __init__(self, checkpoint, output, config='configs/efficienttam/efficienttam_ti_512x512.yaml', device='cuda', generic_recovery=False, min_mask_pixels=80):
         import torch
         from efficient_track_anything.build_efficienttam import build_efficienttam_video_predictor
         import efficient_track_anything.efficienttam_video_predictor as predictor_module
         # Suppress one progress bar per live frame, without hiding warnings.
         predictor_module.tqdm = partial(predictor_module.tqdm, disable=True)
+        if type(min_mask_pixels) is not int or min_mask_pixels < 20:
+            raise ValueError('min_mask_pixels must be an integer >= 20')
+        self.min_mask_pixels=min_mask_pixels
         self.torch = torch; self.device = device
         torch.set_num_threads(4)
         self.predictor = build_efficienttam_video_predictor(config, str(checkpoint), device=device,
             apply_postprocessing=False, hydra_overrides_extra=['++model.compile_image_encoder=false', '++model.fill_hole_area=0'])
         self.output = Path(output); self.states = {}; self.indices = {}; self.stamps = {}
         self.seed_boxes = {}; self.seed_depths = {}; self.last_recovery = {}
+        self.generic_recovery=generic_recovery; self.reference_hists={}
         self.provenance = {'tracker': 'EfficientTAM', 'upstream': 'https://github.com/yformer/EfficientTAM',
             'upstream_commit': 'abcd061ebd3cc6e7527d152d75b890126aaa53f6', 'config': config,
             'checkpoint_sha256': hashlib.sha256(Path(checkpoint).read_bytes()).hexdigest(),
-            'torch_version': torch.__version__, 'device': device, 'retained_nonconditioning_frames': 32,
+            'min_mask_pixels':min_mask_pixels, 'torch_version': torch.__version__, 'device': device, 'retained_nonconditioning_frames': 32,
             'online_forward_only': True, 'model_shared_between_views': True,
             'inference_states_shared_between_views': False, 'color_threshold_mask_propagation': False,
             'recovery': 'Other-view 3D guided box re-prompt, at most 1 Hz. Require >=30% blue pixels and <=60 mm cross-view depth agreement; rejected proposals leave model memory unchanged.'}
+        if generic_recovery:
+            self.provenance['recovery']='Other-view 3D guided prompt; reference-mask hue/saturation histogram intersection >=0.5 and depth agreement <=60 mm. No blue-only gate.'
 
     def _context(self):
         return self.torch.autocast('cuda', dtype=self.torch.bfloat16) if self.device.startswith('cuda') else nullcontext()
@@ -51,23 +57,34 @@ class EfficientTAMTracker:
         std = tensor.new_tensor([.229, .224, .225])[:, None, None]
         return (tensor-mean)/std
 
-    def seed(self, role, bgr, stamp, box):
+    def seed(self, role, bgr, stamp, box, seed_mask=None):
         x, y, w, h = map(int, box); height, width = bgr.shape[:2]
         if x < 0 or y < 0 or min(w, h) < 5 or x+w > width or y+h > height:
-            raise ValueError('Select a nonempty box around the tape within the image')
+            raise ValueError('Select a nonempty box around the object within the image')
         folder = self.output/('prompt_'+role); folder.mkdir(parents=True, exist_ok=True)
         cv2.imwrite(str(folder/'00000.jpg'), bgr)
+        cv2.imwrite(str(folder/'reference.png'), bgr)
         with self.torch.inference_mode(), self._context():
             state = self.predictor.init_state(str(folder))
             # Keep upstream initialization, but infer from the uncompressed live
             # frame and retain only the current image tensor from now onward.
             state['images'] = {0: self._tensor(bgr)}; state['cached_features'].clear()
-            self.predictor.add_new_points_or_box(state, frame_idx=0, obj_id=1, box=np.array([x, y, x+w, y+h], np.float32))
+            if seed_mask is None:
+                self.predictor.add_new_points_or_box(state, frame_idx=0, obj_id=1, box=np.array([x, y, x+w, y+h], np.float32))
+            else:
+                if seed_mask.shape != bgr.shape[:2] or np.count_nonzero(seed_mask)<self.min_mask_pixels:
+                    raise ValueError('Invalid saved object mask')
+                self.predictor.add_new_mask(state,frame_idx=0,obj_id=1,mask=seed_mask>0)
             _, _, logits = next(self.predictor.propagate_in_video(state, start_frame_idx=0, max_frame_num_to_track=0))
             self.states[role] = state; self.indices[role] = 0; self.stamps[role] = stamp
             mask, info = self._mask(role, logits)
         info.update(prompt_box_xywh=[x, y, w, h], seed=True)
         self.seed_boxes[role] = [x, y, w, h]
+        if mask is not None:
+            # Retain the un-eroded reference mask rather than eroding it on each restart.
+            reference=(logits[0,0]>0).to('cpu').numpy().astype(np.uint8)*255
+            cv2.imwrite(str(folder/'mask.png'),reference)
+            self.reference_hists[role]=appearance_hist(bgr,reference)
         return mask, info
 
     def track(self, role, bgr, stamp):
@@ -118,11 +135,17 @@ class EfficientTAMTracker:
                 hsv = cv2.cvtColor(frames[role]['bgr'], cv2.COLOR_BGR2HSV)
                 blue = cv2.inRange(hsv, np.array([90, 60, 25], np.uint8), np.array([135, 255, 255], np.uint8))
                 blue_fraction = float(np.mean(blue[mask > 0] > 0))
-                point, quality = depth_measurement(mask, frames[role]['depth'], frames[role]['deproject'],
-                                                   .1 if role == 'front' else .07, 1.5 if role == 'front' else .5)
+                bounds=getattr(self,'recovery_depth_ranges',{}).get(role,
+                            (.1,1.5) if role=='front' else (.07,.5))
+                point, quality = depth_measurement(mask, frames[role]['depth'], frames[role]['deproject'],*bounds)
                 if point is not None:
                     distance = float(np.linalg.norm(point-predicted))
-                    accepted = blue_fraction >= .3 and distance <= .06
+                    appearance_ok = blue_fraction >= .3
+                    if getattr(self,'generic_recovery',False):
+                        reference=self.reference_hists.get(role)
+                        appearance_ok=(reference is not None and
+                                       float(np.minimum(reference,appearance_hist(frames[role]['bgr'],mask)).sum()) >= .5)
+                    accepted = appearance_ok and info.get('object_probability',1.) >= .5 and distance <= .06
                 if accepted:
                     self.states[role] = proposal
                     candidates[role] = [{'point': point, 'quality': quality, 'mask': mask, 'candidate_index': 0}]
@@ -165,9 +188,9 @@ class EfficientTAMTracker:
         # Preserve model holes. Erode only the boundary used for metric depth.
         mask = cv2.erode(mask, np.ones((3, 3), np.uint8))
         area = int(np.count_nonzero(mask))
-        reason = 'model_object_not_visible' if score < .5 else ('model_mask_too_small' if area < 80 else None)
+        reason = 'model_object_not_visible' if score < .5 else ('model_mask_too_small' if area < self.min_mask_pixels else None)
         return (None if reason else mask), {'tracker': 'EfficientTAM', 'frame_index': index,
-            'object_probability': score, 'mask_pixels': area, 'mask_reason': reason}
+            'object_probability': score, 'mask_pixels': area, 'min_mask_pixels':self.min_mask_pixels, 'mask_reason': reason}
 
 
 def prune_state(state, index, retain=32):
@@ -187,6 +210,12 @@ def copy_buffers(value):
     if isinstance(value, list): return [copy_buffers(v) for v in value]
     if isinstance(value, tuple): return tuple(copy_buffers(v) for v in value)
     return value
+
+
+def appearance_hist(bgr, mask):
+    hsv=cv2.cvtColor(bgr,cv2.COLOR_BGR2HSV)
+    hist=cv2.calcHist([hsv],[0,1],mask.astype(np.uint8),[18,8],[0,180,0,256])
+    return hist/max(float(hist.sum()),1.)
 
 
 def project_native_pixel(point, frame):

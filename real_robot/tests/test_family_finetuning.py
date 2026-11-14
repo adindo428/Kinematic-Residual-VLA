@@ -78,3 +78,30 @@ def test_sampling_temporarily_disables_checkpointing_without_disabling_gradients
             raise RuntimeError('fixture')
     assert model.gradient_checkpointing_enabled and model[0].gradient_checkpointing
     assert original_ids==[id(p) for p in model.parameters()]
+
+
+def test_upstream_initialization_rejects_continuation_and_wrong_weights(tmp_path):
+    import pytest
+    from family_policy import load_upstream_smolvla
+    source=dict(repo_id='lerobot/smolvla_base',dom_adapted=False,real_robot_finetuned=False,
+        path=str(tmp_path/'weights'),weight_sha256='invalid')
+    entry=dict(family='smolvla_baseline',upstream_pretrained=source,continuation_checkpoint={'path':'dom-trained.pt'})
+    with pytest.raises(ValueError,match='fresh SmolVLA'):load_upstream_smolvla(tmp_path,entry)
+    del entry['continuation_checkpoint'];(tmp_path/'weights').write_bytes(b'wrong weights')
+    with pytest.raises(ValueError,match='weights changed'):load_upstream_smolvla(tmp_path,entry)
+
+
+def test_recorded_prompt_and_lossless_family_cache(tmp_path):
+    import numpy as np
+    from family_data import CachedRGBFrames
+    pixels=np.arange(2*3*4*4,dtype=np.uint8).reshape(2,3,4,4);np.save(tmp_path/'frames.npy',pixels)
+    cache=CachedRGBFrames(tmp_path/'frames.npy');assert len(cache)==2
+    torch.testing.assert_close(cache.get_frame_at(1).data,torch.from_numpy(pixels[1]))
+    d=RealFamilyDataset.__new__(RealFamilyDataset);d.anchors=[(5,0)];d.max_delay=0;d.contract={'instruction_mode':'recorded'}
+    instruction='Pick up the rolling orange and place it in the box.'
+    import json
+    d.metadata={5:{'tasks':[json.dumps(dict(task='place',objects='rolling orange',containers='box',instruction=instruction))]}}
+    arrays={'action':torch.zeros(20,7),'observation.state':torch.zeros(20,6),'observation.environment_state':torch.zeros(20,9)}
+    quality=[dict(velocity_required=False,velocity_estimated=False,velocity_zero_filled=True)]*20
+    d.episode=lambda ep:(arrays,quality,{'observation.images.opst_cam':cache,'observation.images.wrist_cam':cache})
+    assert d[0]['task']==instruction

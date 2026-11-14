@@ -62,6 +62,35 @@ def enable_sampler_gradients(model):
         model.sample_actions=types.MethodType(namespace['sample_actions'],model)
 
 
+def load_upstream_smolvla(root,entry):
+    """Load the pinned official SmolVLA weights; never open a DOM checkpoint."""
+    import importlib.util
+    root=Path(root).resolve();source=entry['upstream_pretrained']
+    if source.get('repo_id')!='lerobot/smolvla_base' or source.get('dom_adapted') is not False or source.get('real_robot_finetuned') is not False:
+        raise ValueError('Expected original upstream SmolVLA provenance')
+    if entry['family']!='smolvla_baseline' or entry.get('continuation_checkpoint'):
+        raise ValueError('Upstream initialization must be a fresh SmolVLA baseline')
+    weights=Path(source['path']);digest=hashlib.sha256()
+    with weights.open('rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024),b''):digest.update(block)
+    if digest.hexdigest()!=source['weight_sha256']:raise ValueError('Upstream pretrained weights changed')
+    code=root/'hub'/entry['checkpoint']['code'];sys.path.insert(0,str(code))
+    refs=json.loads((code/'checkpoints.local.json').read_text())
+    refs['lerobot/smolvla_base']['path']=str(weights.parent)
+    for name in refs:
+        if name!='lerobot/smolvla_base':refs[name]['path']=str(root/'hub/assets'/name)
+    original=Path.read_text
+    def local_refs(path,*args,**kwargs):
+        if path.resolve() in [(code/'checkpoints.json').resolve(),(code/'checkpoints.local.json').resolve()]:return json.dumps(refs)
+        return original(path,*args,**kwargs)
+    spec=importlib.util.spec_from_file_location('upstream_smolvla_training_adapter',code/'policy.py')
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    with patch.object(Path,'read_text',local_refs):
+        native=module.Policy(str(code),dict(name='smolvla_baseline',method='smolvla',kr=False),device='cpu')
+    native.train()
+    return native
+
+
 def load_released_policy(root,entry,stats,device='cuda'):
     root=Path(root).resolve();sys.path.insert(0,str(root/'hub'))
     sys.path.insert(0,str(root/'hub/code/vlash'))
@@ -88,8 +117,21 @@ def load_released_policy(root,entry,stats,device='cuda'):
     # loader copies tensors into existing modules (assign=False); mapped source
     # tensors are never trained or mutated.
     mapping=torch.serialization.set_default_mmap_options(mmap.MAP_SHARED) if method=='pi05' else nullcontext()
-    with context,mapping:native,_=load_model(root/'hub',entry['checkpoint']['id'],device='cpu',train=True)
+    with context,mapping:
+        if entry.get('upstream_pretrained'):native=load_upstream_smolvla(root,entry)
+        else:native,_=load_model(root/'hub',entry['checkpoint']['id'],device='cpu',train=True)
     fingerprint=signature(native)
+    continuation=entry.get('continuation_checkpoint')
+    if continuation:
+        path=Path(continuation['path']);digest=hashlib.sha256()
+        with path.open('rb') as stream:
+            for block in iter(lambda:stream.read(1024*1024),b''):digest.update(block)
+        if digest.hexdigest()!=continuation['sha256']:raise ValueError('Continuation checkpoint changed')
+        state=torch.load(path,map_location='cpu',mmap=True,weights_only=False)
+        if state['architecture_signature']!=fingerprint or state['entry']['family']!=family:
+            raise ValueError('Continuation architecture/family mismatch')
+        native.load_state_dict(state['model'],strict=True)
+        del state
     # Training-set-only normalization, preserving each family's native affine convention.
     native.stats=stats['statistics']
     native.velocity_mean.copy_(torch.tensor(stats['velocity_mean']))

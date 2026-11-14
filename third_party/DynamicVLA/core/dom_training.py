@@ -56,6 +56,7 @@ def build_dataset(root, episodes, training=False):
     base = LeRobotDataset("hzxie/DOM", root=manifest["dataset_root"], episodes=episodes,
         revision=manifest["dataset_revision"],
         pin_memory=False, delta_action=True, required_features=FEATURES,
+        euler_delta_convention=manifest.get("euler_delta_convention", "legacy"),
         image_transforms=ImageTransforms(None, transforms),
         delta_timestamps={"observation": [-2, 0], "action": list(range(horizon))})
     return DOMData(base, horizon=horizon, phase_config=manifest["phase_config"], phase_cache=root/"phase_cache", frozen_files=root)
@@ -75,6 +76,8 @@ def build_policy(root, variant, device="cuda"):
         "num_steps": 10, "resize_imgs_with_padding": (384, 384), "temporal_fusion": "attn",
         "freeze_vision_model": False, "freeze_connector": False, "freeze_text_model": False,
         "train_state_proj": True, "enable_streaming": False, "use_delta_action": True,
+        "euler_delta_convention": manifest.get("euler_delta_convention", "legacy"),
+        "require_tracking_quality": (Path(manifest["dataset_root"])/"meta/quality_policy.json").exists(),
         "enable_residual_flow": residual, "residual_flow_formulation": "coordinate",
         "condition_on_object_velocity": velocity, "residual_lambda_type": "constant",
         "residual_phase_gate_mode": phase, "residual_phase_gate_config": manifest["phase_config"],

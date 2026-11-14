@@ -39,6 +39,7 @@ def test(cfg, test_data_loader=None, policy=None):
             split="test",
             pin_memory=cfg.DATASET.PIN_MEMORY,
             delta_action=cfg.DATASET.USE_DELTA_ACTION,
+            euler_delta_convention=cfg.POLICY.get("EULER_DELTA_CONVENTION", "legacy"),
             required_features=cfg.DATASET.REQUIRED_FEATURES,
             episodes=utils.datasets.resolve_episode_selection(cfg.DATASET, "test"),
             image_transforms=utils.datasets.ImageTransforms(cfg.DATASET.IMG_SIZE),

@@ -50,6 +50,12 @@ venv/
 # Linux workstation paths and credentials stay local
 /workstation/env.local.sh
 
+# Generated experiment ledgers and machine-local calibration/protocol state
+/experiments/real_robot_tracker/
+/real_robot/calibration/*.json
+/real_robot/base_transform_acceptance.json
+/real_robot/remaining_collection_plan.json
+
 .venv-post-training/
 
 # Private migration payload: transfer directly; never publish dataset labels/results.

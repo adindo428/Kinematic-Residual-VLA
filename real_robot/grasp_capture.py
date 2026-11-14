@@ -25,6 +25,7 @@ from .aloha_charuco_capture import calibrated_positions, following_target
 from .grasp_prior import EVENTS, follower_pose, fresh_observation, tape_frame
 from .tracking_config import load_config
 from .rgbd_archive import save_rgbd
+from .relative_target import normalize_relative_target
 
 PROJECT = Path(__file__).resolve().parent.parent
 WRIST_SERIAL = '218622278247'
@@ -112,13 +113,15 @@ class RobotIO:
 
 class TeachingControl:
     """Serial owner. Logging/camera work stays off the command thread."""
-    def __init__(self, io, execute, tcp_offset, fps=30):
+    def __init__(self, io, execute, tcp_offset, fps=30, max_relative_target=5.):
         self.io, self.execute, self.tcp_offset, self.fps = io, execute, tcp_offset, fps
+        self.max_relative_target = normalize_relative_target(max_relative_target)
         self.lock = threading.Lock()
         self.stop = threading.Event()
         self.enabled = False
         self.error = None
         self.latest = None
+        self.feedback_timing = None
         self.history = deque(maxlen=40)
         self.pending = queue.Queue(maxsize=256)
         self.heartbeat = time.monotonic()
@@ -148,13 +151,20 @@ class TeachingControl:
                     if started-last_cycle > .20:
                         raise RuntimeError('Teleoperation interval exceeded 200 ms')
                     last_cycle = started
+                    health_ms = 0.
                     if started-last_health >= .25:
                         health = self.io.health()
                         last_health = time.monotonic()
+                        health_ms = (last_health-started)*1000
+                    state_started = time.monotonic()
                     row = self.io.read()
                     read_end = time.monotonic()
+                    self.feedback_timing = dict(total_ms=(read_end-started)*1000,
+                                                health_ms=health_ms,state_ms=(read_end-state_started)*1000)
                     if read_end-started > .15:
-                        raise RuntimeError('Motor feedback read exceeded 150 ms')
+                        raise RuntimeError(f'Motor feedback read exceeded 150 ms '
+                                           f'(health {health_ms:.1f} ms, state {(read_end-state_started)*1000:.1f} ms, '
+                                           f'total {(read_end-started)*1000:.1f} ms)')
                     if max(row['temperatures_c']) >= 55:
                         raise RuntimeError('Follower temperature guard')
                     if self.enabled and not np.all(health['torque'] == 1):
@@ -168,7 +178,7 @@ class TeachingControl:
                         torque=health['torque'].tolist(), hardware_errors=health['hardware_errors'].tolist(),
                         following=self.enabled, commanded_calibrated=None)
                     if self.enabled:
-                        target = following_target(leader, actual)
+                        target = following_target(leader, actual, self.max_relative_target)
                         self.io.goal(target)
                         row['commanded_calibrated'] = target.tolist()
                     row['host_cycle_end_monotonic_s'] = time.monotonic()

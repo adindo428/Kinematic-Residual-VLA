@@ -1,0 +1,2 @@
+# Additional dependency for local jerk-limited joint trajectories in policy_eval.
+ruckig==0.12.2

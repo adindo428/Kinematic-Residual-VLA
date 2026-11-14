@@ -4,14 +4,16 @@ from pathlib import Path
 from types import SimpleNamespace
 import pytest,torch
 from proactive_vla.residual_flow import extract_dom_dynamic_fields
+from utils.real_robot_contract import checked_velocity
 source=Path(__file__).resolve().parents[1]/'policies/dynamicvla/modeling_dynamicvla.py'
 tree=ast.parse(source.read_text());cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=='DynamicVLAPolicy')
-ns={'torch':torch,'OBS_STATE':'observation.state','extract_dom_dynamic_fields':extract_dom_dynamic_fields}
+ns={'torch':torch,'OBS_STATE':'observation.state','extract_dom_dynamic_fields':extract_dom_dynamic_fields,
+    'checked_velocity':checked_velocity}
 for node in [next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='pad_vector')]+[n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name in ('prepare_state','extract_residual_batch_fields')]:
  exec(compile(ast.Module(body=[node],type_ignores=[]),str(source),'exec'),ns)
 
 def policy(enabled=True):
- c=SimpleNamespace(enable_residual_flow=False,condition_on_object_velocity=enabled,max_state_dim=32,n_obs_steps=2,
+ c=SimpleNamespace(enable_residual_flow=False,condition_on_object_velocity=enabled,max_state_dim=32,n_obs_steps=2,require_tracking_quality=False,
    velocity_input_mean=[1,2,3],velocity_input_std=[2,4,8],residual_velocity_key='dynamic_object.velocity_xyz',
    residual_phase_gate_key='dynamic_object.phase_gate', residual_position_key='dynamic_object.position_xyz',residual_covariance_key='dynamic_object.covariance_xyz',
    residual_lookahead_position_key='dynamic_object.lookahead_position_xyz',residual_lookahead_horizon_key='dynamic_object.lookahead_horizon_s')

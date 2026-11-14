@@ -41,3 +41,18 @@ def test_matching_pose_has_zero_loss_and_finite_gradients():
     loss.backward()
     assert loss.item()==0
     assert torch.isfinite(a.grad).all()
+
+
+def test_completed_progress_tracks_action_score_against_untouched_initialization(tmp_path):
+    import ast,json
+    from pathlib import Path
+    source=Path(__file__).resolve().parents[2]/'workstation/train_real_finetune.py'
+    node=next(n for n in ast.parse(source.read_text()).body if isinstance(n,ast.FunctionDef) and n.name=='completed_progress')
+    namespace={'json':json,'math':math}
+    exec(compile(ast.Module(body=[node],type_ignores=[]),str(source),'exec'),namespace)
+    (tmp_path/'baseline_selection.json').write_text(json.dumps({'selection_score':2.}))
+    for epoch,flow,score in [(1,.1,3.),(2,.2,1.5),(3,.05,1.6)]:
+        path=tmp_path/f'epoch-{epoch:03d}';path.mkdir()
+        (path/'provenance.json').write_text(json.dumps(dict(epoch=epoch,completed_epoch=True,validation_loss=flow,selection_score=score)))
+    latest,best,stale=namespace['completed_progress'](tmp_path)
+    assert latest[1]['epoch']==3 and best==1.5 and stale==1

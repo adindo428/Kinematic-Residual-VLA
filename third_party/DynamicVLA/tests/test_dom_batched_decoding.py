@@ -9,6 +9,7 @@ import torch
 
 from proactive_vla.residual_flow import extract_dom_dynamic_fields
 from utils.dom_data import DOMData
+from utils.real_robot_contract import delta_pose
 
 
 def test_union_decoding_preserves_frames_and_reproducible_augmentation(monkeypatch):
@@ -26,7 +27,7 @@ def test_union_decoding_preserves_frames_and_reproducible_augmentation(monkeypat
     monkeypatch.setitem(sys.modules,'torchcodec',codec);monkeypatch.setitem(sys.modules,'torchcodec.decoders',decoders)
     source=Path(__file__).resolve().parents[1]/'utils/datasets.py'
     cls=next(n for n in ast.parse(source.read_text()).body if isinstance(n,ast.ClassDef) and n.name=='LeRobotDataset')
-    ns={'torch':torch,'torchcodec':codec,'extract_dom_dynamic_fields':extract_dom_dynamic_fields,
+    ns={'torch':torch,'torchcodec':codec,'extract_dom_dynamic_fields':extract_dom_dynamic_fields,'delta_pose':delta_pose,
         'InstructionGenerator':SimpleNamespace(generate_instruction=lambda x:str(float(torch.rand(()))))}
     methods=('__getitem__','_get_episode_index','_get_query_indices','_query_episode','_get_query_timestamps','_get_video_frames')
     attrs={}
@@ -41,6 +42,7 @@ def test_union_decoding_preserves_frames_and_reproducible_augmentation(monkeypat
         b.video_keys=['opst','wrist'];b.camera_keys=b.video_keys;b.image_keys=[]
         b.required_features=['observation.state','observation.environment_state','action']
         b.tolerance_s=.02;b.delta_action=True
+        b.quality_indices=None;b.quality_policy=None;b.euler_delta_convention='legacy'
         b.delta_indices={'observation.state':[-2,0],'observation.environment_state':[-2,0],
             'action':list(range(20)),'opst':[-2,0],'wrist':[-2,0]}
         b.episode_data_index={'from':torch.tensor([0,20]),'to':torch.tensor([20,40]),'length':torch.tensor([20,20])}

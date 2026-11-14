@@ -682,6 +682,7 @@ def train(cfg):
         split="train",
         pin_memory=bool(cfg.DATASET.get("USE_MEMCACHED", False)),
         delta_action=cfg.DATASET.USE_DELTA_ACTION,
+        euler_delta_convention=cfg.POLICY.get("EULER_DELTA_CONVENTION", "legacy"),
         required_features=cfg.DATASET.REQUIRED_FEATURES,
         episodes=train_episodes,
         image_transforms=utils.datasets.ImageTransforms(
@@ -730,6 +731,7 @@ def train(cfg):
                 split=eval_split,
                 pin_memory=bool(cfg.DATASET.get("USE_MEMCACHED", False)),
                 delta_action=cfg.DATASET.USE_DELTA_ACTION,
+                euler_delta_convention=cfg.POLICY.get("EULER_DELTA_CONVENTION", "legacy"),
                 required_features=cfg.DATASET.REQUIRED_FEATURES,
                 episodes=eval_episode_map[eval_split],
                 image_transforms=utils.datasets.ImageTransforms(cfg.DATASET.IMG_SIZE),

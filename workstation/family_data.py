@@ -8,6 +8,15 @@ import numpy as np
 import torch
 
 
+class CachedRGBFrames:
+    """Read lossless native training RGB frames without video decoding."""
+    def __init__(self,path):self.array=np.load(path,mmap_mode='r')
+    def __len__(self):return len(self.array)
+    def get_frame_at(self,index):
+        from types import SimpleNamespace
+        return SimpleNamespace(data=torch.from_numpy(np.array(self.array[index],copy=True)))
+
+
 class RealFamilyDataset(torch.utils.data.Dataset):
     def __init__(self,campaign,family,split='train'):
         self.family=family;self.training=split=='train';self.max_delay=3 if family.startswith('vlash') and self.training else 0
@@ -39,8 +48,11 @@ class RealFamilyDataset(torch.utils.data.Dataset):
                 columns=['observation.state','action','observation.environment_state'])
             arrays={k:torch.tensor(np.asarray(table[k].to_pylist()),dtype=torch.float32) for k in table.column_names}
             quality=[json.loads(x) for x in (self.root/f'quality/episode_{ep:06d}.jsonl').read_text().splitlines()]
-            decoders={k:VideoDecoder((self.root/f'videos/chunk-{ep//1000:03d}/{k}/episode_{ep:06d}.mp4').read_bytes(),num_ffmpeg_threads=1)
-                for k in ['observation.images.opst_cam','observation.images.wrist_cam']}
+            keys=['observation.images.opst_cam','observation.images.wrist_cam']
+            if self.contract.get('decoded_video_cache'):
+                decoders={k:CachedRGBFrames(Path(self.contract['decoded_video_cache'])/k/f'{ep:06d}.npy') for k in keys}
+            else:
+                decoders={k:VideoDecoder((self.root/f'videos/chunk-{ep//1000:03d}/{k}/episode_{ep:06d}.mp4').read_bytes(),num_ffmpeg_threads=1) for k in keys}
             if any(len(decoder)!=len(quality) for decoder in decoders.values()):raise ValueError('Video and label frame counts differ')
             self.cache[ep]=(arrays,quality,decoders)
             while len(self.cache)>getattr(self,'cache_limit',2):self.cache.popitem(last=False)
@@ -58,6 +70,8 @@ class RealFamilyDataset(torch.utils.data.Dataset):
         q=quality[frame];required=bool(q['velocity_required'])
         velocity=arrays['observation.environment_state'][frame,6:9].clone()
         valid_velocity=bool(q['velocity_estimated'] and not q['velocity_zero_filled']) or q.get('velocity_repaired',False)
+        from real_robot.static_object import quality_valid as static_quality_valid
+        valid_velocity=valid_velocity or static_quality_valid(q)
         if required and not valid_velocity:raise ValueError('Invalid required velocity')
         if not required:velocity.zero_()
         item={key:decoder.get_frame_at(frame).data.float()/255 for key,decoder in decoders.items()}
@@ -65,7 +79,8 @@ class RealFamilyDataset(torch.utils.data.Dataset):
             'action':delta_pose(absolute,reference[None,:],'wrapped_xyz_v1'),
             'action_is_pad':positions>=n, 'velocity':velocity,
             'velocity_required':torch.tensor(required),'offset':delay,
-            'task':InstructionGenerator.generate_instruction(self.metadata[ep]['tasks'][0]),
+            'task':(json.loads(self.metadata[ep]['tasks'][0])['instruction'] if getattr(self,'contract',{}).get('instruction_mode')=='recorded'
+                    else InstructionGenerator.generate_instruction(self.metadata[ep]['tasks'][0])),
             'episode_index':torch.tensor(ep),'frame_index':torch.tensor(frame)})
         return item
 

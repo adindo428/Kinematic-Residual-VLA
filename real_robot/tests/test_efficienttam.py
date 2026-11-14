@@ -5,6 +5,30 @@ from real_robot.efficienttam_tracker import EfficientTAMTracker, prune_state, co
 
 
 class StreamingMemoryTests(unittest.TestCase):
+    def test_small_object_threshold_does_not_bypass_missing_depth(self):
+        import torch
+        from real_robot.perception import depth_measurement
+        tracker=EfficientTAMTracker.__new__(EfficientTAMTracker)
+        tracker.indices={'front':0}
+        tracker.states={'front':{'output_dict_per_obj':{0:{'cond_frame_outputs':{
+            0:{'object_score_logits':torch.tensor(10.)}},'non_cond_frame_outputs':{}}}}}
+        logits=torch.full((1,1,20,20),-10.)
+        logits[0,0,4:15,4:13]=10.
+        tracker.min_mask_pixels=80
+        mask,info=tracker._mask('front',logits)
+        self.assertIsNone(mask)
+        self.assertEqual(info['mask_reason'],'model_mask_too_small')
+        tracker.min_mask_pixels=25
+        mask,info=tracker._mask('front',logits)
+        self.assertEqual(info['mask_pixels'],63)
+        self.assertIsNotNone(mask)
+        project=lambda pixel,z:[pixel[0]*.001,pixel[1]*.001,z]
+        point,_=depth_measurement(mask,np.full((20,20),.6),project)
+        self.assertIsNotNone(point)
+        point,quality=depth_measurement(mask,np.zeros((20,20)),project)
+        self.assertIsNone(point)
+        self.assertEqual(quality['reason'],'insufficient_depth')
+
     def test_native_projection_inverts_distorted_deprojection(self):
         intr = {'width': 640, 'height': 480, 'fx': 300., 'fy': 300., 'ppx': 320., 'ppy': 240.}
         def deproject(pixel, z):

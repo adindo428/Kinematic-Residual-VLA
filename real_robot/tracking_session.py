@@ -25,6 +25,8 @@ def main():
     parser.add_argument('--execute',action='store_true',help='Enable continuous-follow motor goals')
     parser.add_argument('--record-rgbd', action='store_true',
                         help='Perception: save every processed front/side RGB-D pair for grasp recording')
+    parser.add_argument('--recording-lease', help='Perception: record compressed RGB-D only while this lease is active')
+    parser.add_argument('--camera-fps', type=int, choices=(15,30), help='Default: 30 for dynamic lease recording, otherwise 15')
     parser.add_argument('--front-seed-box',type=int,nargs=4,metavar=('X','Y','W','H'))
     parser.add_argument('--side-seed-box',type=int,nargs=4,metavar=('X','Y','W','H'))
     args=parser.parse_args(); config=load_config(args.config)
@@ -38,8 +40,11 @@ def main():
               '--mask-tracker','efficienttam',
               '--seconds',str(section['seconds']),'--max-skew',str(section['max_skew_s']),
               '--save-every',str(section['save_every']),'--observation-max-age',str(section.get('observation_max_age_s',.20))]
-        if args.record_rgbd:
+        argv += ['--camera-fps', str(args.camera_fps or (30 if args.recording_lease else 15))]
+        if args.record_rgbd or args.recording_lease:
             argv[argv.index('--save-every')+1] = '1'
+        if args.recording_lease:
+            argv += ['--recording-lease', str(resolve(args.recording_lease)), '--compress-rgbd']
         for role in ('front', 'side'):
             if role+'_depth_range_m' in section:
                 argv += ['--'+role+'-depth-range', *map(str, section[role+'_depth_range_m'])]
@@ -56,6 +61,8 @@ def main():
         pointer.with_suffix('.tmp').replace(pointer)
         from .multiview_track import main as run
     elif args.mode=='follow':
+        if args.camera_fps: parser.error('--camera-fps belongs to perception mode')
+        if args.recording_lease: parser.error('--recording-lease belongs to perception mode')
         if args.record_rgbd: parser.error('--record-rgbd belongs to perception mode')
         if args.front_seed_box is not None or args.side_seed_box is not None:parser.error('Seed boxes belong to perception mode')
         if args.observation:observation=resolve(args.observation)

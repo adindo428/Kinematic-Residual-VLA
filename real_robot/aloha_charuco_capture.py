@@ -22,6 +22,7 @@ from collections import deque
 
 import cv2
 import numpy as np
+from .relative_target import normalize_relative_target
 
 
 def following_target(leader, follower, max_relative_target=5.):
@@ -29,9 +30,10 @@ def following_target(leader, follower, max_relative_target=5.):
     leader, follower = np.asarray(leader), np.asarray(follower)
     if not np.isfinite(leader).all() or not np.isfinite(follower).all():
         raise ValueError('Nonfinite joint reading')
-    if not np.isfinite(max_relative_target) or max_relative_target <= 0:
-        raise ValueError('Relative target bound must be positive and finite')
-    return follower + np.clip(leader-follower, -max_relative_target, max_relative_target)
+    limits=np.asarray(normalize_relative_target(max_relative_target))
+    if leader.shape!=follower.shape or (limits.ndim and limits.shape!=leader.shape):
+        raise ValueError('Joint readings and per-motor relative targets must have matching shapes')
+    return follower + np.clip(leader-follower, -limits, limits)
 
 
 def raw_positions(bus):

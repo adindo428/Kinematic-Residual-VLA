@@ -23,6 +23,8 @@ def frames(color_ms, depth_ms):
 
 class CameraTests(unittest.TestCase):
     def camera(self):
+        version=patch('real_robot.camera.importlib.metadata.version',return_value='test')
+        version.start();self.addCleanup(version.stop)
         cam = RGBDCamera.__new__(RGBDCamera)
         cam.serial, cam.scale, cam.frames_started = 'test', .001, False
         cam.pipeline, cam.align = Mock(), Mock()
@@ -38,6 +40,7 @@ class CameraTests(unittest.TestCase):
         self.assertEqual(metadata['capture_wait_timeouts'], 1)
         self.assertEqual(metadata['skipped_unsynchronized_pairs'], 1)
         self.assertAlmostEqual(metadata['rgb_depth_skew_s'], .01)
+        self.assertEqual(metadata['raw_depth_nonzero_fraction'],1.)
         np.testing.assert_allclose(depth, 1.)
         self.assertTrue(cam.frames_started)
 
@@ -56,3 +59,17 @@ class CameraTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class PackedColorTests(unittest.TestCase):
+    def test_yuyv_byte_and_word_buffers_decode_identically(self):
+        import cv2
+        from real_robot.camera import decode_color
+        packed=np.array([[[90,128],[120,128],[130,140],[180,120]],
+                         [[100,128],[110,128],[120,140],[170,120]]],dtype=np.uint8)
+        expected=cv2.cvtColor(packed,cv2.COLOR_YUV2BGR_YUY2)
+        np.testing.assert_array_equal(decode_color(packed,4,2,'yuyv'),expected)
+        np.testing.assert_array_equal(decode_color(packed.reshape(2,8),4,2,'yuyv'),expected)
+        words=packed.reshape(2,8).view(np.uint16)
+        np.testing.assert_array_equal(decode_color(words,4,2,'yuyv'),expected)
+        with self.assertRaises(ValueError):decode_color(words[:,:2],4,2,'yuyv')

@@ -1,0 +1,109 @@
+{
+  "protocol_version": "right-arm-dom-real-v1",
+  "seed": 42,
+  "training_fps": 25,
+  "native_control_hz": 30,
+  "split_blocks_per_task": {
+    "train": 8,
+    "validation": 1,
+    "test": 1
+  },
+  "speed_bins": {
+    "static": {
+      "min_mps": 0.0,
+      "max_mps": 0.01,
+      "slots_per_block": 2
+    },
+    "slow": {
+      "min_mps": 0.01,
+      "max_mps": 0.04,
+      "slots_per_block": 8
+    },
+    "medium": {
+      "min_mps": 0.04,
+      "max_mps": 0.08,
+      "slots_per_block": 8
+    },
+    "brisk": {
+      "min_mps": 0.08,
+      "max_mps": 0.12,
+      "slots_per_block": 2
+    }
+  },
+  "tasks": [
+    {
+      "id": "blue_tape",
+      "instruction": "Pick up the rolling blue tape and place it in the box.",
+      "geometry": "upright_annulus",
+      "orientation": "axis_only_if_validated"
+    },
+    {
+      "id": "tennis_ball",
+      "instruction": "Pick up the moving green tennis ball and place it in the box.",
+      "geometry": "sphere",
+      "orientation": "unobservable"
+    },
+    {
+      "id": "orange",
+      "instruction": "Pick up the rolling orange and place it in the box.",
+      "geometry": "near_sphere",
+      "orientation": "unobservable"
+    },
+    {
+      "id": "ping_pong_ball",
+      "instruction": "Pick up the moving white ping pong ball and place it in the box.",
+      "geometry": "sphere",
+      "orientation": "unobservable"
+    },
+    {
+      "id": "small_container",
+      "instruction": "Pick up the rolling small cylindrical container and place it in the box.",
+      "geometry": "opaque_cylinder",
+      "orientation": "axis_only_if_validated"
+    },
+    {
+      "id": "striped_ball",
+      "instruction": "Pick up the moving orange and white striped ball and place it in the box.",
+      "geometry": "sphere",
+      "orientation": "unobservable"
+    },
+    {
+      "id": "marker",
+      "instruction": "Pick up the moving green marker and place it in the box.",
+      "geometry": "opaque_cylinder",
+      "orientation": "axis_only_if_validated"
+    },
+    {
+      "id": "blue_bottle",
+      "instruction": "Pick up the rolling blue bottle.",
+      "task_type": "pick",
+      "objects": "rolling blue bottle",
+      "success_criterion": "Operator confirms the bottle has been grasped and lifted; release and placement are not required.",
+      "geometry": "opaque_cylinder",
+      "orientation": "axis_only_if_validated"
+    }
+  ],
+  "evaluation": {
+    "trials_per_task_per_condition_per_model": 20,
+    "conditions": [
+      {
+        "id": "iid_slow",
+        "min_mps": 0.01,
+        "max_mps": 0.04
+      },
+      {
+        "id": "iid_medium",
+        "min_mps": 0.04,
+        "max_mps": 0.08
+      },
+      {
+        "id": "speed_ood",
+        "min_mps": 0.12,
+        "max_mps": 0.18
+      }
+    ],
+    "timeout_s": 30,
+    "placement_dwell_s": 2,
+    "minimum_motion_after_response_m": 0.02
+  }
+}

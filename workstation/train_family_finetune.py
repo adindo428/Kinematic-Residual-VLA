@@ -129,14 +129,17 @@ def train(args,campaign,entry,model,data,stats):
     if hashlib.sha256(Path(c['sampling_weights']).read_bytes()).hexdigest()!=c['sampling_weights_sha256']:
         raise RuntimeError('Balanced sampler weights changed')
     if len(weights)!=len(data):raise RuntimeError('Balanced sampler anchor layout differs')
-    sampler=torch.utils.data.WeightedRandomSampler(weights,len(data),replacement=True,generator=torch.Generator().manual_seed(42))
+    if c.get('sampling')=='uniform_permutation':
+        if args.resume:raise ValueError('Uniform-permutation resume is not implemented; use a fresh isolated run')
+        sampler=torch.utils.data.RandomSampler(data,generator=torch.Generator().manual_seed(42))
+    else:sampler=torch.utils.data.WeightedRandomSampler(weights,len(data),replacement=True,generator=torch.Generator().manual_seed(42))
     settings=performance_settings(campaign,model.method,family)
     micro=settings['flow_microbatch'];accumulation=16//micro
     loader_generator=torch.Generator().manual_seed(42)
     loader=training_loader(data,sampler,micro,settings,loader_generator)
     parameters=[p for p in model.parameters() if p.requires_grad]
-    optimizer=torch.optim.AdamW(parameters,lr=c['learning_rate'],betas=(.9,.95),weight_decay=c['weight_decay'])
-    scheduler=torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,mode='min',factor=.5,patience=2,min_lr=3e-7)
+    optimizer=torch.optim.AdamW(parameters,lr=c['learning_rate'],betas=(.9,.95),weight_decay=c['weight_decay'],**({'fused':True} if c.get('fused_adamw') else {}))
+    scheduler=torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,mode='min',factor=.5,patience=c.get('scheduler',{}).get('patience',2),min_lr=c.get('scheduler',{}).get('min_lr',3e-7))
     ema=TrainingEMA(model,campaign['ema']['decay']);step=0;best=float('inf');stale=0
     start_epoch=1;partial_order=None;resume_path=None;resume_id=None
     if args.resume:
@@ -170,7 +173,7 @@ def train(args,campaign,entry,model,data,stats):
             note='Sample order/cursor, model, optimizer, scheduler, EMA and RNG restored. Microbatch grouping, worker RNG and floating-point reduction order may differ.'))
         write(events_path,events);del snapshot
         print(f'{family} resumed step={step} epoch={start_epoch} remaining={None if partial_order is None else len(partial_order)} performance={settings}',flush=True)
-    run=wandb.init(entity=c['wandb']['entity'],project=c['wandb']['project'],name=campaign.get('run_name_prefix','real-v6-')+family,
+    run=wandb.init(entity=c['wandb']['entity'],project=c['wandb']['project'],name=campaign.get('run_name_prefix',campaign.get('run_prefix','real-v6')+'-')+family,
         id=resume_id,resume='must' if args.resume else None,allow_val_change=True,
         dir=str(output),config=dict(campaign=campaign,family=family,microbatch=micro,effective_batch=16,
         architecture_signature=model.architecture_signature,trainable_parameters=sum(p.numel() for p in parameters)))
@@ -211,8 +214,9 @@ def train(args,campaign,entry,model,data,stats):
                 group=list(itertools.islice(iterator,accumulation))
                 if not group:break
                 total=sum(len(b['action']) for b in group);optimizer.zero_grad(set_to_none=True)
-                if step<200:
-                    for g in optimizer.param_groups:g['lr']=c['learning_rate']*(step+1)/200
+                warmup=c.get('scheduler',{}).get('warmup_steps',200)
+                if step<warmup:
+                    for g in optimizer.param_groups:g['lr']=c['learning_rate']*(step+1)/warmup
                 example_pool=[];loss_sum=0.
                 for batch in group:
                     batch=cuda(batch);batch,_=(augment_family_batch if settings['vectorized_photometric'] else augment_training_batch)(batch,c['augmentation'])
@@ -243,11 +247,15 @@ def train(args,campaign,entry,model,data,stats):
                     status(state='training',epoch=epoch,flow_loss=loss_sum,samples_per_second=rate,performance=settings)
                     print(f'{family} epoch={epoch} step={step} flow={loss_sum:.6f} samples_per_second={rate:.2f}',flush=True)
                     window_started=time.perf_counter();window_samples=0
-                if step==100 or step%500==0:
+                if step==c.get('first_recovery_checkpoint_step',100) or step%c.get('checkpoint_every_steps',500)==0:
                     path=save('recovery.pt',epoch,'raw');write(output/'latest_checkpoint.json',dict(path=str(path.resolve()),completed_epoch=False,step=step))
             del iterator
             if partial_loader is not None:del partial_loader
             raw=validate(model,val,indices,objective)
+            if c.get('train_action_validation_indices') is not None:
+                training_actions=validate(model,data,c['train_action_validation_indices'],objective)
+                write(output/f'training-action-epoch-{epoch:03d}.json',dict(raw=training_actions,split='train',independent_validation=False))
+                run.log({'training_actions_raw/'+k:v for k,v in training_actions.items()},step=step)
             with ema.apply(model):averaged=validate(model,val,indices,objective)
             kind,chosen=('ema',averaged) if averaged['selection_score']<raw['selection_score'] else ('raw',raw)
             score=chosen['selection_score'];scheduler.step(score)

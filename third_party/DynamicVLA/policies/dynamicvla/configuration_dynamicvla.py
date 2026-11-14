@@ -47,6 +47,8 @@ class DynamicVLAConfig(PreTrainedConfig):
     use_delta_joint_actions_aloha: bool = False
     # Use delta action prediction (relative to the current robot state)
     use_delta_action: bool = True
+    euler_delta_convention: str = "legacy"
+    require_tracking_quality: bool = False
     # Streaming inference
     enable_streaming: bool = False
     # Multi-timestep fusion ("conv" or "attn")

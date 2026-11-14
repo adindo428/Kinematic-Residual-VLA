@@ -26,6 +26,7 @@ from lerobot.utils.utils import get_safe_dtype
 from transformers import AutoConfig, SmolVLMForConditionalGeneration
 
 from policies.dynamicvla.configuration_dynamicvla import DynamicVLAConfig
+from utils.real_robot_contract import absolute_pose, checked_velocity
 from policies.dynamicvla.modeling_fastvlm import (
     FastViTConfig,
     FastVLMConfig,
@@ -418,8 +419,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
 
             actions = vla_model._get_action_chunk(batch, noise)
             if vla_model.config.use_delta_action:
-                action_dim = actions.shape[-1] - 1
-                actions[..., :action_dim] += latest_state[..., :action_dim]
+                actions = absolute_pose(actions, latest_state, vla_model.config.euler_delta_convention)
 
             if q_out.full():
                 logging.warning("The output queue is full. Skipping an action.")
@@ -528,6 +528,9 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             return {}
 
         fields = {}
+        for key in ("dynamic_object.velocity_required", "dynamic_object.velocity_valid"):
+            if key in batch:
+                fields[key] = batch[key]
         if self.config.residual_phase_gate_key in batch:
             fields[self.config.residual_phase_gate_key] = batch[self.config.residual_phase_gate_key]
         for key in (
@@ -571,8 +574,16 @@ class DynamicVLAPolicy(PreTrainedPolicy):
         return value
 
     def prepare_phase_gate(self, batch, device):
+        quality_gate = None
+        if "dynamic_object.velocity_required" in batch:
+            required = torch.as_tensor(batch["dynamic_object.velocity_required"], device=device, dtype=torch.bool)
+            if required.ndim == 2:
+                required = required[:, -1]
+            if required.shape != (batch[OBS_STATE].shape[0],):
+                raise ValueError("Velocity-required flags must match the observation batch")
+            quality_gate = required[:, None, None].float().expand(-1, self.config.chunk_size, 1)
         if self.config.residual_phase_gate_mode == "constant":
-            return None
+            return quality_gate
         value = batch.get(self.config.residual_phase_gate_key)
         if value is None:
             raise ValueError("Causal phase gate is missing; provide offline prefix replay or live applied-command history")
@@ -580,7 +591,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
         expected = (batch[OBS_STATE].shape[0], self.config.chunk_size, 1)
         if gate.shape != expected:
             raise ValueError(f"Expected phase gate {expected}, got {tuple(gate.shape)}")
-        return gate
+        return gate if quality_gate is None else gate * quality_gate
 
     def prepare_residual_velocity(self, batch, device, dtype):
         if not self.config.enable_residual_flow:
@@ -595,7 +606,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             value = value[:, -1, :]
         if value.shape != (batch[OBS_STATE].shape[0], 3) or not torch.isfinite(value).all():
             raise ValueError("Expected finite current object velocity [batch, 3]")
-        return value
+        return checked_velocity(value, batch, self.config.require_tracking_quality)
 
     def prepare_residual_horizon(
         self,
@@ -741,8 +752,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             # torch.Tensor, but the queue effectively has shape (n_action_steps, batch_size, *),
             # hence the transpose.
             if self.config.use_delta_action:
-                action_dim = actions.shape[-1] - 1
-                actions[..., :action_dim] += latest_state[..., :action_dim]
+                actions = absolute_pose(actions, latest_state, self.config.euler_delta_convention)
 
             self._queues[ACTION].extend(
                 actions.transpose(0, 1)[: self.config.n_action_steps]
@@ -751,7 +761,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
         return self._queues[ACTION].popleft()
 
     def forward(
-        self, batch: dict[str, torch.Tensor], noise=None, time=None
+        self, batch: dict[str, torch.Tensor], noise=None, time=None, horizon_weights=None
     ) -> dict[str, torch.Tensor]:
         """Do a full training forward pass to compute the loss"""
         if self.config.adapt_to_pi_aloha:
@@ -810,7 +820,14 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             valid = ~actions_is_pad.to(device=losses.device, dtype=torch.bool)
         # Average valid steps within each anchor, then anchors; this makes
         # sample-weighted accumulation exact even at episode and epoch tails.
-        per_sample = (losses * valid[..., None]).sum(dim=(1, 2)) / (valid.sum(1).clamp_min(1) * real_dim)
+        if horizon_weights is None:
+            weights = valid.to(losses.dtype)
+        else:
+            horizon_weights = torch.as_tensor(horizon_weights, device=losses.device, dtype=losses.dtype)
+            if horizon_weights.shape != (losses.shape[1],) or not torch.isfinite(horizon_weights).all() or (horizon_weights <= 0).any():
+                raise ValueError('Expected a finite positive weight for every action timestep')
+            weights = valid.to(losses.dtype) * horizon_weights
+        per_sample = (losses * weights[..., None]).sum(dim=(1, 2)) / (weights.sum(1).clamp_min(1) * real_dim)
         loss = per_sample.mean()
         loss_dict["loss"] = loss.detach()
         loss_dict["valid_steps"] = valid.sum().detach()
@@ -943,6 +960,7 @@ class DynamicVLAPolicy(PreTrainedPolicy):
                 velocity = velocity[:, -1, :]
             if velocity.shape != (state.shape[0], 3) or not torch.isfinite(velocity).all():
                 raise ValueError("Expected finite current object velocity [batch, 3]")
+            velocity = checked_velocity(velocity, batch, self.config.require_tracking_quality)
             mean = state.new_tensor(self.config.velocity_input_mean)
             std = state.new_tensor(self.config.velocity_input_std)
             if mean.shape != (3,) or std.shape != (3,) or not torch.isfinite(mean).all() or not torch.isfinite(std).all() or (std <= 0).any():
@@ -1422,7 +1440,7 @@ class VLAFlowMatching(torch.nn.Module):
                     phase_gate=residual_phase_gate,
                 )
             # Euler step
-            x_t += dt * v_t
+            x_t = x_t + dt * v_t
             time += dt
 
         if self.config.enable_residual_flow and residual_velocity is not None and self.config.residual_flow_formulation == "coordinate":

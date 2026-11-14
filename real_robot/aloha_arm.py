@@ -7,7 +7,7 @@ import subprocess
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
 import numpy as np
-from .vx300s_kinematics import MOTOR_IDS
+from .vx300s_kinematics import MOTOR_IDS,joints_from_raw_ticks
 
 
 class RightArm:
@@ -134,7 +134,7 @@ class TapeArm(RightArm):
                 raise RuntimeError('Incomplete motor telemetry')
             raw[motor] = signed(r.getData(motor, 132, 4), 32)
             currents.append(signed(r.getData(motor, 126, 2), 16)*.00269)
-        q = (np.array([raw[i] for i in MOTOR_IDS])-2048)*2*np.pi/4096
+        q = joints_from_raw_ticks([raw[i] for i in range(1,10)])
         return q, np.array(currents), raw
 
     def check_health(self):
