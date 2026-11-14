@@ -58,6 +58,55 @@ if evaluation_request:
     evaluation_status=read(Path(evaluation_request['results'])/'suite_status.json')
     print('Epoch-one Table 1 evaluation:', evaluation_status.get('state','queued'))
     print('Epoch-one Table 1 results:', evaluation_request['results'])
+continuation=read(work/'training/krv100-full-20261010/post_eval_resume_request.json')
+transition=read(work/'training/krv100-full-20261010/dataset_transition_request.json')
+if transition:
+    print('Dataset transition: complete epoch 2 on the current split; use the 20k split from epoch 3')
+    print('New split confirmed:', transition['new_split_confirmed'],
+          '; requested total epoch cap:', transition['maximum_total_epochs_requested'])
+    print('W&B run:',transition['wandb_id'])
+    if transition.get('next_stage'):
+        stage=Path(transition['next_stage'])
+        stage_status=read(stage/'training_status.json')
+        finish_request=read(stage/'finish_epoch10_request.json')
+        if finish_request:
+            stopped=read(stage/'stop_for_evaluation_receipt.json')
+            print('Current override:', 'training stopped; evaluate validation-best epoch '+str(stopped['selected_epoch'])
+                  if stopped else 'finish total epoch 10; validation early stopping disabled')
+            evaluation=(read(stage/'active_task_evaluation_request.json')
+                        or read(stage/'epoch10_task_evaluation_request.json')
+                        or read(stage/'epoch10_validation_evaluation_request.json'))
+            if evaluation:
+                eval_status=read(Path(evaluation['results'])/'suite_status.json')
+                print('Task evaluation:',eval_status.get('state','queued'),
+                      '; planned trials:',evaluation['expected_trials'])
+                if eval_status.get('missing_scene_episode_ids'):
+                    print('Validation scene configurations missing:',len(eval_status['missing_scene_episode_ids']))
+            later=read(stage/'latest_checkpoint_evaluation_request.json')
+            if later:
+                later_status=read(Path(later['results'])/'suite_status.json')
+                print('Additional checkpoint evaluation:',later['checkpoint_label'],
+                      ';',later_status.get('state','queued'))
+        print('20k handoff:',stage_status.get('phase','prepared; service not started'))
+        print('20k stage folder:',stage)
+        if stage_status.get('error'):
+            print('20k handoff error:',stage_status['error'])
+        if stage_status.get('phase') in ('training','resuming_training','complete','failed'):
+            training=stage_status
+            active_training_root=stage
+        else:
+            active_training_root=work/'training/krv100-full-20261010'
+    else:
+        active_training_root=work/'training/krv100-full-20261010'
+elif continuation:
+    continuation_status=read(work/'training/krv100-full-20261010/post_eval_resume_status.json')
+    print('Training continuation dependency:', continuation_status.get('phase','queued'))
+    print('Continuation budget:', continuation['stop_after_completed_epochs'],
+          'total epochs with existing early stopping; W&B run',continuation['wandb_id'])
+    if continuation.get('evaluation_stop_rule'):
+        rule=continuation['evaluation_stop_rule']
+        print('Evaluation stop rule: finish all 200 LS trials; resume if LS success <=',
+              str(rule['success_threshold_percent'])+'%; otherwise finish the full suite')
 if training.get('phase') == 'freezing_dataset_and_training_statistics':
     preparation_log = work/'training/krv100-full-20261010/dataset-preparation.log'
     if preparation_log.exists():
@@ -78,8 +127,9 @@ if training.get('exclusion_approval_pending'):
     print('Awaiting approval for additional short-video episodes:',
           ', '.join(map(str, training['proposed_additional_exclusions'])))
 if training.get('phase') in ('training', 'failed'):
-    progress_log = work/'training/krv100-full-20261010/training.log'
-    checkpoint = read(work/'training/krv100-full-20261010/family/runs/krv100/latest.json')
+    active_training_root=locals().get('active_training_root',work/'training/krv100-full-20261010')
+    progress_log = active_training_root/'training.log'
+    checkpoint = read(active_training_root/'family/runs/krv100/latest.json')
     if progress_log.exists():
         with progress_log.open('rb') as log:
             log.seek(max(0, progress_log.stat().st_size-128*1024))

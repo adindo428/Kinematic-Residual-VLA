@@ -102,6 +102,9 @@ class DynamicVLAConfig(PreTrainedConfig):
     # DOM+Velocity: current robot-base XYZ velocity occupies unused state slots
     # 6:9. The existing state projection learns its contribution; no drift.
     condition_on_object_velocity: bool = False
+    # Old checkpoints retain current-only conditioning. History uses the same
+    # causal timestamps as the observation clip, newest first in state padding.
+    velocity_conditioning_mode: str = "current"
     velocity_input_mean: list[float] = field(default_factory=lambda: [0., 0., 0.])
     velocity_input_std: list[float] = field(default_factory=lambda: [1., 1., 1.])
     # field: legacy Case 1; coordinate: train/sample in A - centered drift.
@@ -163,6 +166,11 @@ class DynamicVLAConfig(PreTrainedConfig):
             )
 
     def validate_residual_formulation(self) -> None:
+        if self.velocity_conditioning_mode not in {"current", "history"}:
+            raise ValueError("velocity_conditioning_mode must be current or history")
+        if self.condition_on_object_velocity and self.velocity_conditioning_mode == "history":
+            if self.n_obs_steps < 1 or self.max_state_dim < 6 + 3 * self.n_obs_steps:
+                raise ValueError("State padding cannot hold the observation velocity clip")
         if self.residual_flow_formulation not in {"field", "coordinate"}:
             raise ValueError("residual_flow_formulation must be field or coordinate")
         if self.enable_residual_flow and self.residual_flow_formulation == "coordinate" and self.residual_lambda_type != "constant":

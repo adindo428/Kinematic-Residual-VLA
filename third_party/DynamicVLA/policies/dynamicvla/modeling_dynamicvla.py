@@ -937,6 +937,25 @@ class DynamicVLAPolicy(PreTrainedPolicy):
             if value is None:
                 raise ValueError("Velocity-conditioned policies require current object velocity; missing values cannot default to zero")
             velocity = torch.as_tensor(value, device=state.device, dtype=state.dtype)
+            mode = getattr(self.config, "velocity_conditioning_mode", "current")
+            if mode not in {"current", "history"}:
+                raise ValueError("Unknown velocity conditioning mode")
+            if mode == "history":
+                expected = (state.shape[0], self.config.n_obs_steps, 3)
+                if velocity.shape != expected or not torch.isfinite(velocity).all():
+                    raise ValueError("Velocity history must match the finite observation clip [batch, n_obs_steps, 3]")
+                if batch[OBS_STATE].ndim != 3 or batch[OBS_STATE].shape[1] != self.config.n_obs_steps:
+                    raise ValueError("Robot and velocity observation clips must align")
+                if self.config.max_state_dim < 6 + 3 * self.config.n_obs_steps:
+                    raise ValueError("State padding cannot hold the observation velocity clip")
+                mean = state.new_tensor(self.config.velocity_input_mean)
+                std = state.new_tensor(self.config.velocity_input_std)
+                if mean.shape != (3,) or std.shape != (3,) or not torch.isfinite(mean).all() or not torch.isfinite(std).all() or (std <= 0).any():
+                    raise ValueError("Invalid velocity normalization")
+                # Keep the existing current-velocity slots 6:9; append older
+                # samples in reverse chronological order, normalized per axis.
+                history = ((velocity - mean) / std).flip(1).reshape(state.shape[0], -1)
+                return pad_vector(torch.cat((state, history), dim=-1), self.config.max_state_dim)
             if velocity.ndim == 3:
                 if velocity.shape[1] != self.config.n_obs_steps:
                     raise ValueError("Velocity must be observation history, not future action-horizon values")

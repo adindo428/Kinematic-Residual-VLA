@@ -18,6 +18,9 @@ def inference_loop(pretrained_model, cfg, q_in, q_out):
             # Real observations never receive a missing-velocity fallback.
             batch={**batch,'observation.environment_state':torch.zeros(
                 1,cfg.n_obs_steps,9,device=next(policy.parameters()).device)}
+            # This internal call bypasses _prepare_batch, which normally
+            # extracts the explicit position/velocity keys from object state.
+            batch.update(policy.extract_residual_batch_fields(batch))
         return original_chunk(policy,batch,*args,**kwargs)
 
     DynamicVLAPolicy._get_action_chunk=chunk

@@ -92,7 +92,7 @@ def main():
         result = worker.distributed_smoke(args.family_root, 'krv100', args.runtime, torch.device('cuda',local))
         hardware = [None]*dist.get_world_size()
         dist.all_gather_object(hardware, result['hardware'])
-        common_key = digest({'hardware':hardware[0], 'world_size':2,
+        common_key = digest({'hardware':hardware[0], 'world_size':dist.get_world_size(),
                              'runtime':args.runtime, 'variant':'krv100'})[:16]
         result.update(hardware_by_rank=hardware, shared_checkpoint_root=shared_checkpoint['root'],
                       readiness_adapter_sha256=file_digest(Path(__file__)))

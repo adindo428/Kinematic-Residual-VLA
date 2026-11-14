@@ -77,6 +77,7 @@ def build_policy(root, variant, device="cuda"):
         "train_state_proj": True, "enable_streaming": False, "use_delta_action": True,
         "enable_residual_flow": residual, "residual_flow_formulation": "coordinate",
         "condition_on_object_velocity": velocity, "residual_lambda_type": "constant",
+        "velocity_conditioning_mode": manifest.get("velocity_conditioning_mode", "current"),
         "residual_phase_gate_mode": phase, "residual_phase_gate_config": manifest["phase_config"],
         "residual_drift_mode": "trajectory", "residual_drift_scale": 1.,
         "residual_action_dt": .04, "residual_axis_scale_xyz": (1., 1., 1.),

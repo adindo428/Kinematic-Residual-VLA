@@ -10,7 +10,23 @@ class EpochLimitReached(Exception):
 
 def install_epoch_limit(training, destination, control, control_sha):
     original_save = training.save_distributed
+    original_load = training.load_generation
     limit = control['stop_after_completed_epochs']
+
+    def load(*args, **kwargs):
+        state = original_load(*args, **kwargs)
+        progress = state['progress']
+        if (progress.get('completion_reason') == 'user_epoch_limit'
+                and progress['epoch'] < limit):
+            # A newly authorized larger budget resumes the same optimizer,
+            # schedule, sampler and RNG. Clear only the previous budget marker.
+            progress.setdefault('epoch_limit_extensions', []).append({
+                'from_completed_epoch': progress['epoch'],
+                'previous_control_sha256': progress.get('epoch_limit_control_sha256'),
+                'new_epoch_limit': limit, 'new_control_sha256': control_sha})
+            for key in ('completion_reason', 'user_epoch_limit', 'epoch_limit_control_sha256'):
+                progress.pop(key, None)
+        return state
 
     def save(root, policy, optimizer, scheduler, progress, fingerprint, wandb_id,
              best=None, milestone=False, device='cuda', final_checkpoint=False):
@@ -29,6 +45,7 @@ def install_epoch_limit(training, destination, control, control_sha):
         return path
 
     training.save_distributed = save
+    training.load_generation = load
 
 
 def load_control(root, manifest, recipe, file_digest):
