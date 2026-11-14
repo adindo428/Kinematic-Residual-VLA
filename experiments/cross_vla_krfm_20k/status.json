@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-20T23:28:05.928928+00:00",
+  "remote_root": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20k-20261020",
+  "preparation_job_id": "17786749",
+  "preparation_accounting": "17786749|COMPLETED|0:0|00:01:50",
+  "preparation_complete": true,
+  "all_prepared_hashes_verified": true,
+  "all_training_source_hashes_verified": true,
+  "train_episodes": 20000,
+  "train_anchors": 2406773,
+  "frame_work_reduction": 9.294686702900522,
+  "task_quotas": {
+    "pick": 9000,
+    "place": 9000,
+    "long_horizon": 2000
+  },
+  "local_contract_tests_passed": 6,
+  "gpu_readiness_completed": false,
+  "gpu_training_submitted": false
+}

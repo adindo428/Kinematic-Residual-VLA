@@ -1,0 +1,21 @@
+{
+  "parent": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020",
+  "manifest": "f0d58f4500e2976f1891c1f0c2595480d76cd086769b4031c04fce929726e0cf",
+  "split_sha256": "98436815f85fbfc78d48e4332e8603684f6bae1620400b181767bab1c5736d88",
+  "dataset_root": "/scratch/aparame/.cache/huggingface/lerobot/hzxie/DOM",
+  "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+  "velocity_source": "privileged current simulator velocity, analytic KR only",
+  "velocity_mean": [
+    -0.012337089571103266,
+    -0.0028381792549408494,
+    0.0165055323457251
+  ],
+  "fps": 25,
+  "audit_reused": true,
+  "per_access_byte_checks": true,
+  "normalization": "subset train only; deterministic uniform anchors; original physical actions",
+  "statistics_anchors": 200000,
+  "statistics_seed": 42,
+  "velocity_mean_source": "all selected training frames",
+  "initialization": "released_pretrained; no full-DOM trained checkpoint inheritance"
+}

@@ -1,0 +1,13 @@
+{
+  "dataset-prepare": {
+    "script": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-20k-20261020/scripts/dataset-prepare.sbatch",
+    "script_sha256": "c5583db7bd00b5db401af19a074b379641ef7265247d40301baf1f1566332abd",
+    "dependency": null,
+    "status": "submitted",
+    "name": "dataset-prepare",
+    "returncode": 0,
+    "stdout": "17786749",
+    "stderr": "sbatch: Partition: work1\nsbatch: Submit checks complete",
+    "job_id": "17786749"
+  }
+}

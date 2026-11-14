@@ -49,3 +49,12 @@ CPU verification instructions and the limits of the workstation validation are i
 The base implementation is [DynamicVLA](https://github.com/hzxie/DynamicVLA), associated with [the paper](https://arxiv.org/abs/2601.22153), [DOM](https://huggingface.co/datasets/hzxie/DOM), and [released weights](https://huggingface.co/hzxie/dynamic-vla-DOM). Retain the upstream [license](third_party/DynamicVLA/LICENSE); included forks keep their original license files. Data/assets/model distributions have their own terms.
 
 The paper draft and [knowledge base](KNOWLEDGE_BASE.md) are research material, not a claim of reproduced published results. The previous recovery-oriented README is retained as [historical context](docs/RESEARCH_HISTORY.md).
+
+## 20k episode dataset and training
+
+The shared split contains 20,000 training episodes (9,000 pick, 9,000 place,
+2,000 long horizon), with the original validation and test partitions retained.
+
+- [Exact dataset split](experiments/main8_20k_10epochs/split.json)
+- [Main eight runs: checkpoint continuation for at least ten additional epochs](experiments/main8_20k_10epochs/README.md)
+- [Subset selection, preparation, and fresh initialization workflow](experiments/cross_vla_krfm_20k/README.md)

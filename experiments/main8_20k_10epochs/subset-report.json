@@ -1,0 +1,53 @@
+{
+  "seed": 42,
+  "task_quotas": {
+    "pick": 9000,
+    "place": 9000,
+    "long_horizon": 2000
+  },
+  "train_episodes": 20000,
+  "train_anchors": 2406773,
+  "parent_train_episodes": 197198,
+  "parent_train_anchors": 22370201,
+  "task_speed_episodes": {
+    "[\"long_horizon\", 0]": 86,
+    "[\"long_horizon\", 1]": 618,
+    "[\"long_horizon\", 2]": 1169,
+    "[\"long_horizon\", 3]": 127,
+    "[\"pick\", 1]": 617,
+    "[\"pick\", 2]": 3584,
+    "[\"pick\", 3]": 3565,
+    "[\"pick\", 4]": 1234,
+    "[\"place\", 0]": 83,
+    "[\"place\", 1]": 558,
+    "[\"place\", 2]": 3100,
+    "[\"place\", 3]": 3956,
+    "[\"place\", 4]": 1303
+  },
+  "task_speed_anchors": {
+    "[\"long_horizon\", 0]": 13187,
+    "[\"long_horizon\", 1]": 127236,
+    "[\"long_horizon\", 2]": 236309,
+    "[\"long_horizon\", 3]": 15848,
+    "[\"pick\", 1]": 115162,
+    "[\"pick\", 2]": 346431,
+    "[\"pick\", 3]": 326180,
+    "[\"pick\", 4]": 117282,
+    "[\"place\", 0]": 15129,
+    "[\"place\", 1]": 104614,
+    "[\"place\", 2]": 384643,
+    "[\"place\", 3]": 454664,
+    "[\"place\", 4]": 150088
+  },
+  "validation_episodes": 2015,
+  "test_episodes": 2011,
+  "excluded_task_families": [],
+  "duplicate_groups_preserved": true,
+  "held_out_membership_preserved": true,
+  "parent": "/scratch/aparame/Dynamic_VLA/cross-vla-krfm-five-epochs-20261020",
+  "parent_prepared_sha256": "732f79f28b88322e781848a7d41c50f8f452a219e70dc6315299b2cf027c38e2",
+  "parent_split_sha256": "bbeca518e7f6ee85c39e5863a4d6745c36de53f13b8831595ca36c304ff9950c",
+  "audited_episodes_sha256": "73af9b523c9b290a0f845ca9d4841fbf35905805a558569fdb9746e162d19a5c",
+  "dataset_revision": "bbf6baa15f7253746d271a6e958e037afa537b1e",
+  "min_epochs": 5
+}
