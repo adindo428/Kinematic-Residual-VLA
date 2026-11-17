@@ -28,6 +28,23 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2) + '\n')
 
 
+def training_metrics():
+    """Snapshot training loss, validation and generation pointers, excluding logs."""
+    stage = OUT / 'training-metrics'
+    for p in (WORK / 'training').rglob('*.json'):
+        if not (p.name.startswith(('epoch-', 'validation-')) or p.name in
+                {'best.json', 'latest.json', 'final.json', 'training_complete.json'}):
+            continue
+        if not p.is_file() or p.stat().st_size > 10 * 1024**2:
+            continue
+        target = stage / p.relative_to(WORK / 'training')
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(clean(p.read_text()))
+    api = HfApi(token=(WORK / 'cache/huggingface/token').read_text().strip())
+    api.upload_folder(repo_id=REPO, folder_path=stage, path_in_repo='updates/20261117/training-metrics',
+                      commit_message='Back up training and validation metric snapshots')
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     api = HfApi(token=(WORK / 'cache/huggingface/token').read_text().strip())
@@ -103,6 +120,7 @@ def main():
         lfs = f.lfs
         assert f.size == r['bytes'] and (lfs['sha256'] if isinstance(lfs, dict) else lfs.sha256) == r['sha256']
     write(OUT / 'complete.json', {'verified_checkpoints': len(records), 'repo_id': REPO, 'snapshot': 'updates/20261117'})
+    training_metrics()
     print('Complete:', len(records), 'verified checkpoint files', flush=True)
 
 
